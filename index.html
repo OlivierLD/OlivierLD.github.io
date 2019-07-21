@@ -6,7 +6,7 @@
 </head>
 <body class="bg-gradient">
   <h1 title="The background is dynamic!">OlivierLD</h1>
-  <ul>
+  <ul id="the-list" style="background: rgba(128, 128, 128, 0.25); width: 50%; margin: 10px; padfding: 10px; border-radius: 10px;">
     <li>Java & JVM</li>
     <li>Raspberry Pi</li>
     <li>HTML5</li>
@@ -26,6 +26,22 @@
   let v2 = 55; let dir2 = -0.1;
   let green1 = 255; greenInc1 = -1;
   let blue2 = 114; blueInc2 = -1;
+
+  let red = 127;
+  let green = 127;
+  let blue = 127;
+
+  function changeColor(color) {
+    let sign = Math.round(2 * Math.random());
+    color += Math.round(10 * Math.random() * (sign % 2 === 0 ? 1 : -1));
+    if (color < 0) {
+      color = 0;
+    }
+    if (color > 255) {
+      color = 255;
+    }
+    return color;
+  }
 
   (() => {
     setInterval(() => {
@@ -48,7 +64,14 @@
       // let content = `radial-gradient(at top, rgba(255, 255, 0, 0.5) 20%, rgba(1, 67, 114, 0.60) 55%)`;
       let content = `radial-gradient(at top, rgba(255, ${green1}, 0, 0.5) ${v1}%, rgba(1, 67, ${blue2}, 0.60) ${v2}%)`;
       dom.style.background = content;
-    }, 100);
+
+      red = changeColor(red);
+      green = changeColor(green);
+      blue = changeColor(blue);
+      dom.style.color = `rgba(${red}, ${green}, ${blue}, 1)`;
+      let list = document.getElementById('the-list');
+      list.style.background = `rgba(${255 - red}, ${255 - green}, ${255 - blue}, 0.25)`;
+    }, 500);
     console.log('pouet');
   })();
 </script>
