@@ -5,7 +5,7 @@
   <link rel="stylesheet" href="css/stylesheet.css" type="text/css"/>
 </head>
 <body class="bg-gradient">
-  <h1 title="The background is dynamic!">OlivierLD</h1>
+  <h1 title="The background is dynamic!&#013;Move the mouse to change the list background color.">OlivierLD</h1>
   <ul id="the-list" style="background: rgba(128, 128, 128, 0.25); width: 50%; margin: 10px; padfding: 10px; border-radius: 10px;">
     <li>Java & JVM</li>
     <li>Raspberry Pi</li>
@@ -66,14 +66,43 @@
       dom.style.background = content;
     }, 100);
 
-    setInterval(() => {
-      red = changeColor(red);
-      green = changeColor(green);
-      blue = changeColor(blue);
+    // setInterval(() => {
+    //   red = changeColor(red);
+    //   green = changeColor(green);
+    //   blue = changeColor(blue);
+    //
+    //   let list = document.getElementById('the-list');
+    //   list.style.background = `rgba(${255 - red}, ${255 - green}, ${255 - blue}, 0.25)`;
+    // }, 500);
 
-      let list = document.getElementById('the-list');
-      list.style.background = `rgba(${255 - red}, ${255 - green}, ${255 - blue}, 0.25)`;
-    }, 500);
+    document.onmousemove = handleMouseMove;
+    function handleMouseMove(event) {
+        var eventDoc, doc, body;
+
+        event = event || window.event; // IE-ism
+
+        // If pageX/Y aren't available and clientX/Y are,
+        // calculate pageX/Y - logic taken from jQuery.
+        // (This is to support old IE)
+        if (event.pageX === null && event.clientX !== null) {
+            eventDoc = (event.target && event.target.ownerDocument) || document;
+            doc = eventDoc.documentElement;
+            body = eventDoc.body;
+
+            event.pageX = event.clientX +
+              (doc && doc.scrollLeft || body && body.scrollLeft || 0) -
+              (doc && doc.clientLeft || body && body.clientLeft || 0);
+            event.pageY = event.clientY +
+              (doc && doc.scrollTop  || body && body.scrollTop  || 0) -
+              (doc && doc.clientTop  || body && body.clientTop  || 0 );
+
+        }
+        // console.log("X: %d, Y: %d", event.pageX, event.pageY);
+        // console.log("Width:%d, Height:%d", window.innerWidth, window.innerHeight);
+        let list = document.getElementById('the-list');
+        list.style.background = `rgba(${Math.round(255 * (event.pageX / window.innerWidth))}, ${Math.round(255 * (event.pageY / window.innerHeight))}, 255, 0.25)`;
+
+    }
     console.log('pouet');
   })();
 </script>
