@@ -7,7 +7,7 @@
 .neuron-frame {
 	display: grid;
 	justify-self: start;
-	grid-template-columns: var(--cell-width) var(--cell-width) var(--cell-width) var(--cell-width) var(--cell-width);
+	grid-template-columns: var(--cell-width) var(--cell-width) var(--cell-width) var(--cell-width) var(--cell-width) var(--cell-width) var(--cell-width);
 	grid-template-rows: auto;
 	justify-items: center;
 	grid-gap: 3px;
@@ -45,23 +45,35 @@
 }
 
 table .left-right {
-    width: auto;
-    text-align: right;
-    white-space: nowrap;
+	width: auto;
+	text-align: right;
+	white-space: nowrap;
 }
 
 table .content {
-    width: 100%;
+	width: 100%;
 }
 
 table {
-    border-collapse: collapse;
-    border-spacing: 0;
-    width: 100%;
-    border: 1px solid silver;
-		border-radius: 10px;
-		padding: 10px;
-		margin: 10px;
+	border-collapse: collapse;
+	border-spacing: 5px;
+	width: 100%;
+	border: 1px solid silver;
+	border-radius: 10px;
+	padding: 10px;
+	margin: 10px;
+}
+
+select {
+	font-size: calc(var(--cell-font-size) / 6);
+}
+
+input {
+	font-size: calc(var(--cell-font-size) / 4);
+	color: blue;
+	width: calc(var(--cell-width) * 0.8);
+	text-align: center;
+	border: none;
 }
 
 knob-and-display:focus {
