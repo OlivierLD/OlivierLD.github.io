@@ -3,10 +3,17 @@
 <head>
   <title>Olivier LD</title>
   <link rel="stylesheet" href="css/stylesheet.css" type="text/css"/>
+  <style>
+  li {
+    font-size: 20px;
+    text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px silver;
+  }
+  </style>
 </head>
 <body class="bg-gradient">
-  <h1 title="The background is dynamic!&#013;Move the mouse to change the list background color.">OlivierLD</h1>
-  <ul id="the-list" style="background: rgba(128, 128, 128, 0.25); width: 50%; margin: 10px; padfding: 10px; border-radius: 10px;">
+  <h1 title="The background is dynamic!&#013;Move the mouse to change the list background color."
+      style="text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px silver;">OlivierLD</h1>
+  <ul id="the-list" style="background: rgba(128, 128, 128, 0.0); width: 50%; margin: 10px; padding: -10px; border-radius: 10px;">
     <li>Java & JVM</li>
     <li>Raspberry Pi</li>
     <li>HTML5</li>
@@ -101,8 +108,8 @@
         // console.log("X: %d, Y: %d", event.pageX, event.pageY);
         // console.log("Width:%d, Height:%d", window.innerWidth, window.innerHeight);
         let list = document.getElementById('the-list');
-        list.style.background = `rgba(${Math.round(255 * (event.pageX / window.innerWidth))}, ${Math.round(255 * (event.pageY / window.innerHeight))}, 255, 0.25)`;
-
+        // list.style.background = `rgba(${Math.round(255 * (event.pageX / window.innerWidth))}, ${Math.round(255 * (event.pageY / window.innerHeight))}, 255, ${1 - (event.pageX / window.innerWidth)})`;
+        list.style.background = `rgba(64, 64, 255, ${1 - (event.pageX / window.innerWidth)})`;
     }
     console.log('pouet');
   })();
