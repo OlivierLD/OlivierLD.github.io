@@ -71,6 +71,7 @@
       let dom = document.body;
       // let content = `radial-gradient(at top, rgba(255, 255, 0, 0.5) 20%, rgba(1, 67, 114, 0.60) 55%)`;
       let content = `radial-gradient(at top, rgba(255, ${green1}, 0, 0.5) ${v1}%, rgba(1, 67, ${blue2}, 0.60) ${v2}%)`;
+      content += ', url("./neuralnetwork.jpg") no-repeat center';
       dom.style.background = content;
     }, 100);
 
