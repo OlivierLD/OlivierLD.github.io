@@ -20,25 +20,25 @@
       style="text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px silver;">OlivierLD</h1>
   <ul id="the-list" style="background: rgba(128, 128, 128, 0.0); width: 50%; margin: 10px; padding: -10px; border-radius: 10px;">
     <li>Java & JVM</li>
-    <li>Raspberry Pi</li>
+    <li>Raspberry Pi: <a href="http://raspberrypi.lediouris.net/" target="new">Oliv on Pi</a></li>
     <li>HTML5</li>
     <li>CSS3</li>
     <li>ES6</li>
-    <li>WebComponents</li>
+    <li>WebComponents: <a href="http://raspberrypi.lediouris.net/webcomponents/gallery.html" target="new">Oliv's gallery (WIP)</a></li>
     <li>WebSockets</li>
     <li>NodeJS</li>
     <li>Small boards (Arduinos, Huzzah, Feather, etc)</li>
     <li>Jupyter Notebooks (Python & Java)</li>
     <li>OpenCV, in Python & Java</li>
-    <li><a href="nn/one.neuron.webcomp.html">One Neuron</a></li>
+    <li><a href="./nn/one.neuron.webcomp.html">One Neuron</a></li>
     <li>And more (to come...)</li>
   </ul>
 </body>
 <script type="text/javascript">
   let v1 = 20; let dir1 = -0.25;
   let v2 = 55; let dir2 = -0.1;
-  let green1 = 255; greenInc1 = -1;
-  let blue2 = 114; blueInc2 = -1;
+  let green1 = 255, greenInc1 = -1;
+  let blue2 = 114, blueInc2 = -1;
 
   let red = 127;
   let green = 127;
@@ -117,7 +117,7 @@
         // list.style.background = `rgba(${Math.round(255 * (event.pageX / window.innerWidth))}, ${Math.round(255 * (event.pageY / window.innerHeight))}, 255, ${1 - (event.pageX / window.innerWidth)})`;
         list.style.background = `rgba(64, 64, 255, ${1 - (event.pageX / window.innerWidth)})`;
     }
-    console.log('pouet');
+    console.log('pouet!');
   })();
 </script>
 </html>
