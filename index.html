@@ -118,7 +118,7 @@
         let list = document.getElementById('the-list');
         // list.style.background = `rgba(${Math.round(255 * (event.pageX / window.innerWidth))}, ${Math.round(255 * (event.pageY / window.innerHeight))}, 255, ${1 - (event.pageX / window.innerWidth)})`;
         // list.style.background = `rgba(64, 64, 255, ${1 - (event.pageX / window.innerWidth)})`;
-        let scaleX = Math.min(1, 2 * Math.max(0, (0.95 - (event.pageX / window.innerWidth))));
+        let scaleX = Math.min(1, 2 * Math.max(0, (0.85 - (event.pageX / window.innerWidth))));
         list.style.transform = `scaleX(${scaleX})`;
         let listWidth = list.offsetWidth * scaleX;
         let listLeftMargin = (list.offsetWidth - listWidth) / 2;
