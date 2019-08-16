@@ -4454,11 +4454,17 @@
 				"longitude": -122.5166988
 			};
 
+			const moonPos = {
+				he: 4.75,
+				z: 249.12
+			};
+
 			function setSunPathData() {
 				let elem1 = document.getElementById('sun-path-01');
 				elem1.sunPath = sunPath1;
 				elem1.sunData = sunData1;
 				elem1.userPos = userPosition1;
+				elem1.moonPos = moonPos;
 				elem1.repaint();
 
 				let elem2 = document.getElementById('sun-path-02');
