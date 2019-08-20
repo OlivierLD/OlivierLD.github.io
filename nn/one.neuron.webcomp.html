@@ -7,6 +7,7 @@
 	<link rel="stylesheet" href="./one-neuron.css"/>
 
 	<script type="module" src="webcomp/KnobAndDisplay.js"></script>
+	<script type="text/javascript" src="js/draw.on.graph.js"></script>
 </head>
 
 <body>
@@ -33,6 +34,7 @@
 		<td class="left-right"><output name="fontsize" id="fontsize01">3em</output></td>
 	</tr>
 </table>
+
 <div class="neuron-frame">
 	<div class="neuron-input"> <!-- Values -->
 		<div id="input-one" class="neuron-input-cell neuron-cell"><input type="number" step="0.01" value="8.5" id="v1" onchange="recompute();"></div>
@@ -125,6 +127,22 @@
 
 	<div id="final-result" class="neuron-input-cell neuron-cell">Final Result</div>
 </div>
+<div style="width: 90%;">
+	<table border="0" style=" border: none;">
+		<tr>
+			<td valign="top" width="400">
+				<div id="graph" style="max-height: 400px; max-width: 400px; border: 1px silver solid; border-radius: 5px; margin: 10px; overflow: scroll;">
+					<canvas id="the-graph" height="400" width="400"></canvas>
+				</div>
+			</td>
+			<td valign="top">
+				<button onclick="zoomIn();">Zoom In</button>
+				<br/>
+				<button onclick="zoomOut();">Zoom Out</button>
+			</td>
+		</tr>
+	</table>
+</div>
 <hr/>
 Modify weights and bias to see the result.
 <br/>
@@ -187,6 +205,27 @@ Modify weights and bias to see the result.
 				break;
 		}
 		document.getElementById("final-result").innerText = final.toFixed(2);
+
+		let newData = {
+			neurons: [
+				{x: v1, w: w1},
+				{x: v2, w: w2},
+				{x: v3, w: w3}
+			], bias: bias,
+			minX: -10,
+			maxX: 10,
+			minY: -10,
+			maxY: 10
+		};
+		functionGraph.repaint(newData);
+	}
+
+	function zoomIn() {
+		functionGraph.zoomIn();
+	}
+
+	function zoomOut() {
+		functionGraph.zoomOut();
 	}
 
 	function setRadius(range) {
@@ -212,7 +251,23 @@ Modify weights and bias to see the result.
 		document.documentElement.style.setProperty("--cell-font-size", v + "em");
 	}
 
+	let functionGraph;
+	let defaultGraphData = {
+		neurons: [
+			{ x: parseFloat(document.getElementById("v1").value), w: Number(parseFloat(document.getElementById("w-1").value || 0.1)) },
+			{ x: parseFloat(document.getElementById("v2").value), w: Number(parseFloat(document.getElementById("w-2").value || 0.2)) },
+			{ x: parseFloat(document.getElementById("v3").value), w: Number(parseFloat(document.getElementById("w-3").value || 0.0)) }
+		],
+		bias: Number(parseFloat(document.getElementById("bias").value || 0.0)),
+		minX: -10,
+		maxX: 10,
+		minY: -10,
+		maxY: 10
+	};
 	(() => {
+
+		functionGraph = new Graph("the-graph", defaultGraphData);
+
 		let wgt1 = document.getElementById("w-1");
 		let wgt2 = document.getElementById("w-2");
 		let wgt3 = document.getElementById("w-3");
