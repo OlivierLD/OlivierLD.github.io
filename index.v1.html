@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Olivier LD</title>
+  <link rel="icon" type="image/jpg" href="palm.04.jpg">
+  <link rel="stylesheet" href="css/stylesheet.css" type="text/css"/>
+  <style>
+  li {
+    color: white;
+    font-size: 20px;
+    text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px silver;
+  }
+
+  a:hover {
+    font-size: 24px;
+  }
+</style>
+</head>
+<body class="bg-gradient">
+  <h1 title="The background is dynamic!&#013;Move the mouse to change the list background color."
+      style="text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px silver;">OlivierLD</h1>
+  <ul id="the-list" style="background: rgba(128, 128, 128, 0.0); width: 50%; margin: 10px; padding: -10px; border-radius: 10px; transform: scaleX(1);">
+    <li>Raspberry Pi: <a href="http://raspberrypi.lediouris.net/" target="new">Oliv on Pi</a>
+      <ul>
+        <li>Java & JVM</li>
+        <li>HTML5/CSS3/ES6</li>
+        <li>WebSockets</li>
+        <li>NodeJS</li>
+      </ul>
+    </li>
+    <li>WebComponents: 
+      <ul>
+        <li><a href="./webcomponents/index.html" target="new">Index</a></li>
+        <li><a href="./webcomponents/gallery.html" target="new">Oliv's gallery (WIP)</a></li>
+      </ul>  
+    </li>
+    <li>Small boards (Arduinos, Huzzah, Feather, etc)</li>
+    <li>Jupyter Notebooks (Python & Java)</li>
+    <li>OpenCV, in Python & Java</li>
+    <li>AI & Co
+      <ul>
+        <li><a href="https://github.com/OlivierLD/raspberry-coffee/blob/master/JupyterNotebooks/deep.learning.crash.course/README.md">Neural Network and Deep Learning</a></li>
+        <li><a href="./nn/one.neuron.webcomp.html">One Neuron</a></li>
+      </ul>
+    </li>
+    <li><a href="./web.stuff/gps/GPS.api.html" target="new">GPS</a></li>
+    <li>And more (to come...)</li>
+  </ul>
+</body>
+<script type="text/javascript">
+  let v1 = 20; let dir1 = -0.25;
+  let v2 = 55; let dir2 = -0.1;
+  let green1 = 255, greenInc1 = -1;
+  let blue2 = 114, blueInc2 = -1;
+
+  let red = 127;
+  let green = 127;
+  let blue = 127;
+
+  function changeColor(color) {
+    let sign = Math.round(2 * Math.random());
+    color += Math.round(10 * Math.random() * (sign % 2 === 0 ? 1 : -1));
+    if (color < 0) {
+      color = 0;
+    }
+    if (color > 255) {
+      color = 255;
+    }
+    return color;
+  }
+
+  (() => {
+    setInterval(() => {
+      v1 += dir1;
+      if (v1 > 20 || v1 < -20) {
+        dir1 *= -1;
+        v1 += dir1;
+      }
+      green1 += greenInc1;
+      if (green1 > 255 || green1 < 0) {
+        greenInc1 *= -1;
+        green1 += greenInc1;
+      }
+      blue2 += blueInc2;
+      if (blue2 > 255 || blue2 < 0) {
+        blueInc2 *= -1;
+        blue2 += blueInc2;
+      }
+      let dom = document.body;
+      // let content = `radial-gradient(at top, rgba(255, 255, 0, 0.5) 20%, rgba(1, 67, 114, 0.60) 55%)`;
+      let content = `radial-gradient(at top, rgba(255, ${green1}, 0, 0.5) ${v1}%, rgba(1, 67, ${blue2}, 0.60) ${v2}%)`;
+      content += ', url("./neuralnetwork.jpg") no-repeat center';
+      dom.style.background = content;
+    }, 100);
+
+    // setInterval(() => {
+    //   red = changeColor(red);
+    //   green = changeColor(green);
+    //   blue = changeColor(blue);
+    //
+    //   let list = document.getElementById('the-list');
+    //   list.style.background = `rgba(${255 - red}, ${255 - green}, ${255 - blue}, 0.25)`;
+    // }, 500);
+
+    document.onmousemove = handleMouseMove;
+    function handleMouseMove(event) {
+        var eventDoc, doc, body;
+
+        event = event || window.event; // IE-ism
+
+        // If pageX/Y aren't available and clientX/Y are,
+        // calculate pageX/Y - logic taken from jQuery.
+        // (This is to support old IE)
+        if (event.pageX === null && event.clientX !== null) {
+            eventDoc = (event.target && event.target.ownerDocument) || document;
+            doc = eventDoc.documentElement;
+            body = eventDoc.body;
+
+            event.pageX = event.clientX +
+              (doc && doc.scrollLeft || body && body.scrollLeft || 0) -
+              (doc && doc.clientLeft || body && body.clientLeft || 0);
+            event.pageY = event.clientY +
+              (doc && doc.scrollTop  || body && body.scrollTop  || 0) -
+              (doc && doc.clientTop  || body && body.clientTop  || 0 );
+
+        }
+        // console.log("X: %d, Y: %d", event.pageX, event.pageY);
+        // console.log("Width:%d, Height:%d", window.innerWidth, window.innerHeight);
+        let list = document.getElementById('the-list');
+        // list.style.background = `rgba(${Math.round(255 * (event.pageX / window.innerWidth))}, ${Math.round(255 * (event.pageY / window.innerHeight))}, 255, ${1 - (event.pageX / window.innerWidth)})`;
+        // list.style.background = `rgba(64, 64, 255, ${1 - (event.pageX / window.innerWidth)})`;
+        let scaleX = Math.min(1, 2 * Math.max(0, (0.85 - (event.pageX / window.innerWidth))));
+        list.style.transform = `scaleX(${scaleX})`;
+        let listWidth = list.offsetWidth * scaleX;
+        let listLeftMargin = (list.offsetWidth - listWidth) / 2;
+        // console.log('Margin left:' + `${10 - listLeftMargin}px`);
+        list.style.marginLeft = `${10 - listLeftMargin}px`;
+    }
+    console.log('pouet!');
+  })();
+</script>
+</html>

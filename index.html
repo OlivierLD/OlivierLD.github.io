@@ -14,40 +14,138 @@
   a:hover {
     font-size: 24px;
   }
+
+  html {
+    height: 100%;
+  }
+
+  body {
+    font-family: "Lato", sans-serif;
+    color: cyan;
+  }
+
+  .sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    /*  background-color: rgba(0, 0, 0, 0.6); */
+    background-image: linear-gradient(rgba(0, 0, 255, 0.6), rgba(0, 0, 0, 0.6));
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+  }
+
+  .sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 18px;
+    color: white; /* #818181; */
+    display: block;
+    transition: 0.3s;
+  }
+
+  .sidenav a:hover, .offcanvas a:focus {
+    color: cyan; /* #f1f1f1; */
+  }
+
+  .sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 24px;
+    margin-left: 50px;
+  }
+
+  .sub-section {
+    /* display: none; */
+    visibility: hidden;
+    opacity: 0;
+    height: 0;
+    transition: opacity 0.5s linear, height 0.5s ease-in-out;
+    margin-left: 24px;
+  }
+
+  @media screen and (max-height: 450px) {
+    .sidenav {
+      padding-top: 15px;
+    }
+
+    .sidenav a {
+      font-size: 18px;
+    }
+  }
+
+  #wrap {
+    position: fixed;
+    left: 0;
+    width: 100%;
+    top: 40px;
+    height: 100%;
+  }
+
 </style>
 </head>
 <body class="bg-gradient">
   <h1 title="The background is dynamic!&#013;Move the mouse to change the list background color."
-      style="text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px silver;">OlivierLD</h1>
-  <ul id="the-list" style="background: rgba(128, 128, 128, 0.0); width: 50%; margin: 10px; padding: -10px; border-radius: 10px; transform: scaleX(1);">
-    <li>Raspberry Pi: <a href="http://raspberrypi.lediouris.net/" target="new">Oliv on Pi</a>
-      <ul>
-        <li>Java & JVM</li>
-        <li>HTML5/CSS3/ES6</li>
-        <li>WebSockets</li>
-        <li>NodeJS</li>
-      </ul>
-    </li>
-    <li>WebComponents: 
-      <ul>
-        <li><a href="./webcomponents/index.html" target="new">Index</a></li>
-        <li><a href="./webcomponents/gallery.html" target="new">Oliv's gallery (WIP)</a></li>
-      </ul>  
-    </li>
-    <li>Small boards (Arduinos, Huzzah, Feather, etc)</li>
-    <li>Jupyter Notebooks (Python & Java)</li>
-    <li>OpenCV, in Python & Java</li>
-    <li>AI & Co
-      <ul>
-        <li><a href="https://github.com/OlivierLD/raspberry-coffee/blob/master/JupyterNotebooks/deep.learning.crash.course/README.md">Neural Network and Deep Learning</a></li>
-        <li><a href="./nn/one.neuron.webcomp.html">One Neuron</a></li>
-      </ul>
-    </li>
-    <li><a href="./web.stuff/gps/GPS.api.html" target="new">GPS</a></li>
-    <li>And more (to come...)</li>
-  </ul>
+      style="font-style: normal; text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px silver;"><span style="cursor: pointer;" title="Click for menu" onclick="openNav()" onmouseover="openNav()">&nbsp; &#9776; OlivierLD</span></h1>
+  <div id="side-nav" class="sidenav" onmouseleave="closeNav()">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>    
+    <div onmouseover="showSection('section-1');" onmouseleave="hideSection('section-1');">
+      <a href="http://raspberrypi.lediouris.net/" target="new">Raspberry Pi: Oliv on Pi</a>
+      <div id="section-1" class="sub-section">
+        <a href="javascript:void(0)">Java & JVM</a>
+        <a href="javascript:void(0)">HTML5/CSS3/ES6</a>
+        <a href="javascript:void(0)">WebSockets</a>
+        <a href="javascript:void(0)">NodeJS</a>
+      </div>
+    </div>
+    <div onmouseover="showSection('section-2');" onmouseleave="hideSection('section-2');">
+      <a href="javascript:void(0)">WebComponents</a>
+      <div id="section-2" class="sub-section">
+        <a href="./webcomponents/index.html" target="new">Index</a>
+        <a href="./webcomponents/gallery.html" target="new">Oliv's gallery (WIP)</a>
+      </div>
+    </div>
+    <a href="javascript:void(0)">Small boards (Arduinos, Huzzah, Feather, etc)</a>
+    <a href="javascript:void(0)">Jupyter Notebooks (Python & Java)</a>
+    <a href="javascript:void(0)">OpenCV, in Python & Java</a>
+    <div onmouseover="showSection('section-3');" onmouseleave="hideSection('section-3');">
+      <a href="javascript:void(0)">AI & Co</a>
+      <div id="section-3" class="sub-section">
+          <a href="https://github.com/OlivierLD/raspberry-coffee/blob/master/JupyterNotebooks/deep.learning.crash.course/README.md">Neural Network and Deep Learning</a>
+          <a href="./nn/one.neuron.webcomp.html">One Neuron</a>
+      </div>
+    </div>
+      <a href="./web.stuff/gps/GPS.api.html" target="new">GPS</a>
+      <a href="javascript:void(0)">And more (to come...)</a>
+  </div>
 </body>
 <script type="text/javascript">
+  function openNav() {
+      document.getElementById("side-nav").style.width = "350px";
+  }
+
+  function closeNav() {
+      document.getElementById("side-nav").style.width = "0";
+  }
+
+  function showSection(id) {
+  //document.getElementById(id).style.display = 'inline-block';
+    document.getElementById(id).style.visibility = 'visible';
+    document.getElementById(id).style.opacity = 1;
+    document.getElementById(id).style.height = 'auto';
+  }
+
+  function hideSection(id) {
+  //document.getElementById(id).style.display = 'none';
+    document.getElementById(id).style.visibility = 'hidden';
+    document.getElementById(id).style.opacity = 0;
+    document.getElementById(id).style.height = 0;
+  }
+
   let v1 = 20; let dir1 = -0.25;
   let v2 = 55; let dir2 = -0.1;
   let green1 = 255, greenInc1 = -1;
@@ -93,49 +191,6 @@
       dom.style.background = content;
     }, 100);
 
-    // setInterval(() => {
-    //   red = changeColor(red);
-    //   green = changeColor(green);
-    //   blue = changeColor(blue);
-    //
-    //   let list = document.getElementById('the-list');
-    //   list.style.background = `rgba(${255 - red}, ${255 - green}, ${255 - blue}, 0.25)`;
-    // }, 500);
-
-    document.onmousemove = handleMouseMove;
-    function handleMouseMove(event) {
-        var eventDoc, doc, body;
-
-        event = event || window.event; // IE-ism
-
-        // If pageX/Y aren't available and clientX/Y are,
-        // calculate pageX/Y - logic taken from jQuery.
-        // (This is to support old IE)
-        if (event.pageX === null && event.clientX !== null) {
-            eventDoc = (event.target && event.target.ownerDocument) || document;
-            doc = eventDoc.documentElement;
-            body = eventDoc.body;
-
-            event.pageX = event.clientX +
-              (doc && doc.scrollLeft || body && body.scrollLeft || 0) -
-              (doc && doc.clientLeft || body && body.clientLeft || 0);
-            event.pageY = event.clientY +
-              (doc && doc.scrollTop  || body && body.scrollTop  || 0) -
-              (doc && doc.clientTop  || body && body.clientTop  || 0 );
-
-        }
-        // console.log("X: %d, Y: %d", event.pageX, event.pageY);
-        // console.log("Width:%d, Height:%d", window.innerWidth, window.innerHeight);
-        let list = document.getElementById('the-list');
-        // list.style.background = `rgba(${Math.round(255 * (event.pageX / window.innerWidth))}, ${Math.round(255 * (event.pageY / window.innerHeight))}, 255, ${1 - (event.pageX / window.innerWidth)})`;
-        // list.style.background = `rgba(64, 64, 255, ${1 - (event.pageX / window.innerWidth)})`;
-        let scaleX = Math.min(1, 2 * Math.max(0, (0.85 - (event.pageX / window.innerWidth))));
-        list.style.transform = `scaleX(${scaleX})`;
-        let listWidth = list.offsetWidth * scaleX;
-        let listLeftMargin = (list.offsetWidth - listWidth) / 2;
-        // console.log('Margin left:' + `${10 - listLeftMargin}px`);
-        list.style.marginLeft = `${10 - listLeftMargin}px`;
-    }
     console.log('pouet!');
   })();
 </script>
