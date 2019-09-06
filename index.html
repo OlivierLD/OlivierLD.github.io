@@ -5,15 +5,6 @@
   <link rel="icon" type="image/jpg" href="palm.04.jpg">
   <link rel="stylesheet" href="css/stylesheet.css" type="text/css"/>
   <style>
-  .active-link {
-    color: white;
-    font-size: 20px;
-    text-shadow: 2px 2px 4px black, 0 0 25px white, 0 0 10px orange;
-  }
-
-  a:hover {
-    font-size: 24px;
-  }
 
   html {
     height: 100%;
@@ -22,6 +13,17 @@
   body {
     font-family: "Lato", sans-serif;
     color: cyan;
+  }
+
+  .active-link {
+    color: white;
+    font-size: 20px;
+    text-shadow: 2px 2px 4px black, 0 0 25px white, 0 0 10px orange;
+  }
+
+  a:hover {
+    font-size: 24px;
+  /*  color: cyan; */
   }
 
   .sidenav {
@@ -47,8 +49,12 @@
     transition: 0.3s;
   }
 
-  .sidenav a:hover, .offcanvas a:focus {
-    color: cyan; /* #f1f1f1; */
+  .sidenav a:hover, .offcanvas a:focus { 
+    color: white; /* #f1f1f1; */
+  }
+
+  a.active-link:hover {
+    color: cyan;
   }
 
   .sidenav .closebtn {
