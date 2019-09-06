@@ -13,12 +13,26 @@
 	</style>
 </head>
 <body>
-	<h1 class="gps-text">Geolocation Api Demo</h1>
+	<h1 class="gps-text">Geolocation Api Demo &nbsp;<span id="working" title="Traffic">&#11044;</span></h1>
 	<hr/>
   <div id="textbox" class="gps-text"></div>
 	<hr/>
 </body>
 <script type="text/javascript">
+
+	let status = 'tick';
+	// Activity witness
+	function flipLight() {
+		var element = document.getElementById('working');
+		if (status === 'tick') {
+			status = 'tock';
+			element.style.color = 'red';
+		} else {
+			status = 'tick';
+			element.style.color = 'green';
+		}
+		element.title = new Date().toString();
+	}
 
 	let options = {
 		enableHighAccuracy: true,
@@ -48,6 +62,7 @@
 				'SPD = ' + speed + ' m/s';
 		let box = document.querySelector('#textbox');
 		box.innerHTML = newContent;
+		flipLight();
 	}
 
 	// Called from navigator.geolocation.getCurrentPosition
