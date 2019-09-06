@@ -5,10 +5,10 @@
   <link rel="icon" type="image/jpg" href="palm.04.jpg">
   <link rel="stylesheet" href="css/stylesheet.css" type="text/css"/>
   <style>
-  li {
+  .active-link {
     color: white;
     font-size: 20px;
-    text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px silver;
+    text-shadow: 2px 2px 4px black, 0 0 25px white, 0 0 10px orange;
   }
 
   a:hover {
@@ -94,7 +94,7 @@
   <div id="side-nav" class="sidenav" onmouseleave="closeNav()">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>    
     <div onmouseover="showSection('section-1');" onmouseleave="hideSection('section-1');">
-      <a href="http://raspberrypi.lediouris.net/" target="new">Raspberry Pi: Oliv on Pi</a>
+      <a class="active-link" href="http://raspberrypi.lediouris.net/" target="new">Raspberry Pi: Oliv on Pi</a>
       <div id="section-1" class="sub-section">
         <a href="javascript:void(0)">Java & JVM</a>
         <a href="javascript:void(0)">HTML5/CSS3/ES6</a>
@@ -105,8 +105,8 @@
     <div onmouseover="showSection('section-2');" onmouseleave="hideSection('section-2');">
       <a href="javascript:void(0)">WebComponents</a>
       <div id="section-2" class="sub-section">
-        <a href="./webcomponents/index.html" target="new">Index</a>
-        <a href="./webcomponents/gallery.html" target="new">Oliv's gallery (WIP)</a>
+        <a class="active-link" href="./webcomponents/index.html" target="new">Index</a>
+        <a class="active-link" href="./webcomponents/gallery.html" target="new">Oliv's gallery (WIP)</a>
       </div>
     </div>
     <a href="javascript:void(0)">Small boards (Arduinos, Huzzah, Feather, etc)</a>
@@ -115,11 +115,11 @@
     <div onmouseover="showSection('section-3');" onmouseleave="hideSection('section-3');">
       <a href="javascript:void(0)">AI & Co</a>
       <div id="section-3" class="sub-section">
-          <a href="https://github.com/OlivierLD/raspberry-coffee/blob/master/JupyterNotebooks/deep.learning.crash.course/README.md">Neural Network and Deep Learning</a>
-          <a href="./nn/one.neuron.webcomp.html">One Neuron</a>
+          <a class="active-link" href="https://github.com/OlivierLD/raspberry-coffee/blob/master/JupyterNotebooks/deep.learning.crash.course/README.md">Neural Network and Deep Learning</a>
+          <a class="active-link" ref="./nn/one.neuron.webcomp.html">One Neuron</a>
       </div>
     </div>
-      <a href="./web.stuff/gps/GPS.api.html" target="new">GPS</a>
+      <a class="active-link" href="./web.stuff/gps/GPS.api.html" target="new">GPS</a>
       <a href="javascript:void(0)">And more (to come...)</a>
   </div>
 </body>
