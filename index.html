@@ -23,7 +23,6 @@
 
   a:hover {
     font-size: 24px;
-  /*  color: cyan; */
   }
 
   .sidenav {
@@ -102,7 +101,7 @@
   <div id="side-nav" class="sidenav" onmouseleave="closeNav()">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>    
     <div onmouseover="showSection('section-1');" onmouseleave="hideSection('section-1');">
-      <a class="active-link" href="http://raspberrypi.lediouris.net/" target="new">Raspberry Pi: Oliv on Pi</a>
+      <a class="active-link" href="http://raspberrypi.lediouris.net/" target="new">Raspberry Pi: <i>Oliv on Pi</i></a>
       <div id="section-1" class="sub-section">
         <a href="javascript:void(0)">Java & JVM</a>
         <a href="javascript:void(0)">HTML5/CSS3/ES6</a>
@@ -123,8 +122,8 @@
     <div onmouseover="showSection('section-3');" onmouseleave="hideSection('section-3');">
       <a href="javascript:void(0)">AI & Co</a>
       <div id="section-3" class="sub-section">
-          <a class="active-link" href="https://github.com/OlivierLD/raspberry-coffee/blob/master/JupyterNotebooks/deep.learning.crash.course/README.md">Neural Network and Deep Learning</a>
-          <a class="active-link" href="./nn/one.neuron.webcomp.html">One Neuron at work</a>
+        <a class="active-link" href="https://github.com/OlivierLD/raspberry-coffee/blob/master/JupyterNotebooks/deep.learning.crash.course/README.md">Neural Network and Deep Learning</a>
+        <a class="active-link" href="./nn/one.neuron.webcomp.html">One Neuron at work</a>
       </div>
     </div>
       <a class="active-link" href="./web.stuff/gps/GPS.api.html" target="new">GPS</a>
@@ -132,6 +131,7 @@
   </div>
 </body>
 <script type="text/javascript">
+
   function openNav() {
       document.getElementById("side-nav").style.width = "350px";
   }
@@ -201,5 +201,6 @@
 
     console.log('pouet!');
   })();
+
 </script>
 </html>
