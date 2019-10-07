@@ -54,12 +54,14 @@
 		try {
 			hdg = pos.coords.heading.toFixed(0);
 			speed = pos.coords.speed.toFixed(2);
+			acc = pos.coords.accuracy;
 		} catch (err) {}
 		let newContent =
 				'LAT = ' + decToSex(pos.coords.latitude, 'NS') + "<br/>" +
 				'LNG = ' + decToSex(pos.coords.longitude, 'EW') + "<br/>" +
 				'HDG = ' + hdg + '<br/>' +
-				'SPD = ' + speed + ' m/s';
+				'SPD = ' + speed + ' m/s' + '<br/>' +
+				'accuracy: ' + acc + ' meters';
 		let box = document.querySelector('#textbox');
 		box.innerHTML = newContent;
 		flipLight();
