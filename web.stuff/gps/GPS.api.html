@@ -53,9 +53,9 @@
 		let speed = 0.0;
 		let acc = -1;
 		try {
+			acc = pos.coords.accuracy;
 			hdg = pos.coords.heading.toFixed(0);
 			speed = pos.coords.speed.toFixed(2);
-			acc = pos.coords.accuracy;
 		} catch (err) {}
 		let newContent =
 				'LAT = ' + decToSex(pos.coords.latitude, 'NS') + "<br/>" +
