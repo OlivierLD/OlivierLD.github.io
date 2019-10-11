@@ -89,13 +89,56 @@
     height: 100%;
   }
 
+.w3-modal {
+  z-index: 3;
+  display: none;
+  padding-top: 100px;
+  padding-left: 200px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  /*width: 100%;*/
+  /*height: 100%;*/
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.0);
+}
+
+.w3-modal-content {
+  margin: auto;
+  background-color: 000;
+  position: relative;
+  padding: 0;
+  outline: 0;
+  width: auto;
+}
+
+.close-icon {
+  position: absolute;
+  right: 0;
+  top: 3;
+  cursor: pointer;
+}
+
 </style>
 </head>
 <body class="bg-gradient">
+
+  <div id="id01" class="w3-modal">
+    <div class="w3-modal-content">
+      <div class="w3-container">
+        <span onclick="document.getElementById('id01').style.display='none'"
+              class="close-icon">&times;</span>
+        <img src="bonus.jpg"/>
+      </div>
+    </div>
+  </div>
+
   <h1 title="The background is dynamic!&#013;Move the mouse to change the list background color."
       style="font-style: normal; text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px silver;"><span style="cursor: pointer;" title="Click for menu" onclick="openNav()" onmouseover="openNav()">&nbsp; &#9776; OlivierLD</span></h1>
   <div id="side-nav" class="sidenav" onmouseleave="closeNav()">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>    
+    <a href="javascript:void(0)" class="active-link" onclick="showAbout()">About me</a>    
     <div onmouseover="showSection('section-1');" onmouseleave="hideSection('section-1');">
       <a class="active-link" href="http://raspberrypi.lediouris.net/" target="new">Raspberry Pi: <i>Oliv on Pi</i></a>
       <div id="section-1" class="sub-section">
@@ -133,6 +176,10 @@
   </div>
 </body>
 <script type="text/javascript">
+
+  function showAbout() {
+    document.getElementById('id01').style.display ='block' ;
+  }
 
   function openNav() {
       document.getElementById("side-nav").style.width = "350px";
