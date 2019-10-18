@@ -305,14 +305,14 @@
       // Change image in the dark
       bgIndex += 1;
       bgIndex %= BG_IMAGES.length;
-      setTimeout(lightenBackground, 50);
+      setTimeout(lightenBackground, 1);
     }
   }
   function lightenBackground() {
     opacity -= 1;
     currentBackground = `radial-gradient(at top, rgba(255, 255, 255, ${(opacity / 100).toFixed(2)}) 20%, rgba(10, 10, 0, ${(opacity / 100).toFixed(2)}) 55%)`;
     if (opacity > 0) {
-      setTimeout(lightenBackground, 100);
+      setTimeout(lightenBackground, 50);
     }
   }
 
