@@ -280,6 +280,19 @@
     return color;
   }
 
+  const BG_IMAGES = [
+    "neuralnetwork.jpg",
+    "NorthernLight.2.jpeg",
+    "cloud.jpeg",
+    "creative-computing-resizedjpg.jpeg",
+    "ag6.jpg",
+    "clouds.2.jpg",
+    "hexagon-2-wallpapers.jpg",
+    "sky.above.Czechia.jpeg"
+  ];
+
+  let bgIndex = 0;
+
   (() => {
     setInterval(() => {
       v1 += dir1;
@@ -300,12 +313,23 @@
       let dom = document.body;
       // let content = `radial-gradient(at top, rgba(255, 255, 0, 0.5) 20%, rgba(1, 67, 114, 0.60) 55%)`;
       let content = `radial-gradient(at top, rgba(255, ${green1}, 0, 0.5) ${v1}%, rgba(1, 67, ${blue2}, 0.60) ${v2}%)`;
-      content += ', url("./neuralnetwork.jpg") repeat top';
+      content += `, url("./backgbrounds/${BG_IMAGES[bgIndex]}") no-repeat top`;
 
-      console.log("Content:" + content);
+      // console.log("Content:" + content);
 
       dom.style.background = content;
+
+      let docElem = document.documentElement;
+      let body = document.getElementsByTagName('body')[0];
+      let w = window.innerWidth || docElem.clientWidth || body.clientWidth;
+      let h = window.innerHeight|| docElem.clientHeight|| body.clientHeight;
+      dom.style.backgroundSize = `${w}px ${h}px`;
     }, 100);
+
+    setInterval(() => {
+      bgIndex += 1;
+      bgIndex %= BG_IMAGES.length;
+    }, 30000);
 
     console.log('pouet!');
   })();
