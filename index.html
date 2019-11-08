@@ -409,7 +409,9 @@
       setTimeout(darkenBackground, 1);
     }, 2 * 60 * 1000); // in ms. 
 
-    marquee('marquee-panel-01'); // Marquee animation
+    setTimeout(() => {
+      marquee('marquee-panel-01'); // Marquee animation
+    }, 1000);
 
     console.log('pouet!');
   })();
