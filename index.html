@@ -178,7 +178,7 @@
                    height="125"
                    nb-cols="128"
                    nb-lines="16"
-                   display-data='{ "text": "Hello Web Components!", "x": 4, "y": 12 }'/>
+                   display-data='{ "text": "Raspberry Pi, Web Components, Java, NodeJS, and other toys...", "x": 4, "y": 12 }'/>
   </div>
 
 
@@ -248,6 +248,34 @@
 
 </body>
 <script type="text/javascript">
+
+  let marqueeAnimationInterval;
+  let defaultMarqueeText = 'Raspberry Pi, Web Components, Java, NodeJS, and other toys...';
+  function marquee(marqueeId, txtFieldId) {
+    if (marqueeAnimationInterval !== undefined) {
+      window.clearInterval(marqueeAnimationInterval); // Stop.
+      marqueeAnimationInterval = undefined;
+    } else {
+      let txt = defaultMarqueeText;
+      if (txtFieldId !== undefined) {
+        txt = document.getElementById(txtFieldId).value;
+      }
+      let marqueeObj = document.getElementById(marqueeId);
+      let x = marqueeObj.nbCols;
+      let y = 12;
+      marqueeAnimationInterval = window.setInterval(function() { // Start
+        let luc = marqueeObj.lastUsedColumn;
+        if (luc > 0) {
+          x -= 1;
+        } else {
+          x = marqueeObj.nbCols; // Reset text on the right.
+        }
+        let data = { text: txt, x: x, y: y };
+        marqueeObj.displayData = JSON.stringify(data);
+        marqueeObj.repaint();
+      }, 20);
+    }
+  }
 
   function showAbout() {
     document.getElementById('id01').style.display = 'block';
@@ -374,6 +402,8 @@
     setInterval(() => {
       setTimeout(darkenBackground, 1);
     }, 2 * 60 * 1000); // in ms. 
+
+    marquee('marquee-01'); // Marquee animation
 
     console.log('pouet!');
   })();
