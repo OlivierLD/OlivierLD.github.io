@@ -278,7 +278,12 @@
           } else {
             x = marqueeObj.nbCols; // Reset text on the right.
           }
-          let data = { text: txt, x: x, y: y };
+          let toDisplay = new Date() + ' ' + txt;
+          let data = { 
+            text: toDisplay, 
+            x: x, 
+            y: y 
+          };
           marqueeObj.displayData = JSON.stringify(data);
           marqueeObj.repaint();
         }, 20);
