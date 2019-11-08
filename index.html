@@ -144,8 +144,8 @@
 }
 
 .marquee-01 {
-  --bg-color-from: rgba(0,0,0,0);
-  --bg-color-to: rgba(0,0,0,0);
+  --bg-color-from: rgba(0, 0, 0, 0);
+  --bg-color-to: rgba(0, 0, 0, 0);
   --fg-color-from: red;
   --fg-color-to: orange;
 }
@@ -185,6 +185,7 @@
   <div id="side-nav" class="sidenav" onmouseleave="closeNav()">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>    
     <a href="javascript:void(0)" class="active-link" onclick="showAbout()">About me</a>    
+    <a href="javascript:void(0)" class="active-link" onclick="marqueeOnOff()">Marquee Panel (on or off)</a>    
     <div onmouseover="showSection('section-1');" onmouseleave="hideSection('section-1');">
       <a class="active-link" href="http://raspberrypi.lediouris.net/" target="new">Raspberry Pi: <i>Oliv on Pi</i></a>
       <div id="section-1" class="sub-section">
@@ -293,6 +294,10 @@
     document.getElementById('id01').style.transform = 'scaleX(0)';
   }
 
+  function marqueeOnOff() {
+    marquee('marquee-panel-01'); // Marquee animation
+  }
+
   function openNav() {
       document.getElementById("side-nav").style.width = "350px";
   }
@@ -399,7 +404,7 @@
       dom.style.background = content;
 
       let docElem = document.documentElement;
-      let body = document.getElementsByTagName('body')[0];
+      let body = document.getElementsByTagName('body')[0]; // could use document.body
       let w = window.innerWidth || docElem.clientWidth || body.clientWidth;
       let h = window.innerHeight|| docElem.clientHeight|| body.clientHeight;
       dom.style.backgroundSize = `${w}px ${h}px`;
@@ -415,7 +420,7 @@
 
     setTimeout(() => {
       document.getElementById('marquee-panel-01').width = document.body.clientWidth;
-      marquee('marquee-panel-01'); // Marquee animation
+      // marquee('marquee-panel-01'); // Marquee animation
     }, 1000);
 
     console.log('pouet!');
