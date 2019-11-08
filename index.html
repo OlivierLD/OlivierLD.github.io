@@ -254,6 +254,7 @@
   function marquee(marqueeId, txtFieldId) {
     if (marqueeAnimationInterval !== undefined) {
       window.clearInterval(marqueeAnimationInterval); // Stop.
+      console.log('Stopped Marquee Animation');
       marqueeAnimationInterval = undefined;
     } else {
       let txt = defaultMarqueeText;
@@ -261,19 +262,24 @@
         txt = document.getElementById(txtFieldId).value;
       }
       let marqueeObj = document.getElementById(marqueeId);
-      let x = marqueeObj.nbCols;
-      let y = 12;
-      marqueeAnimationInterval = window.setInterval(function() { // Start
-        let luc = marqueeObj.lastUsedColumn;
-        if (luc > 0) {
-          x -= 1;
-        } else {
-          x = marqueeObj.nbCols; // Reset text on the right.
-        }
-        let data = { text: txt, x: x, y: y };
-        marqueeObj.displayData = JSON.stringify(data);
-        marqueeObj.repaint();
-      }, 20);
+      if (marqueeObj !== undefined) {
+        let x = marqueeObj.nbCols;
+        let y = 12;
+        marqueeAnimationInterval = window.setInterval(function() { // Start
+          let luc = marqueeObj.lastUsedColumn;
+          if (luc > 0) {
+            x -= 1;
+          } else {
+            x = marqueeObj.nbCols; // Reset text on the right.
+          }
+          let data = { text: txt, x: x, y: y };
+          marqueeObj.displayData = JSON.stringify(data);
+          marqueeObj.repaint();
+        }, 20);
+        console.log('Marquee Animation started');
+      } else {
+        console.log('marqueeObj not found...');
+      }
     }
   }
 
