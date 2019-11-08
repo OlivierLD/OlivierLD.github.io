@@ -143,6 +143,13 @@
   border-radius: 5px;
 }
 
+.marquee-01 {
+  --bg-color-from: rgba(0,0,0,0);
+  --bg-color-to: rgba(0,0,0,0);
+  --fg-color-from: red;
+  --fg-color-to: orange;
+}
+
 </style>
 
 <script type="module" src="webcomponents/widgets/marquee/MarqueePanel.js"></script>
@@ -162,17 +169,18 @@
   </div>
 
   <h1 title="The background is dynamic, its color is changing!&#013;Use the hamburger on the left to reach the menu."
-      style="font-style: normal; text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px silver;"><span style="cursor: pointer;" onclick="openNav()" onmouseover="openNav()">&nbsp; &#9776;</span> OlivierLD
+      style="font-style: normal; text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px silver;"><span style="cursor: pointer;" onclick="openNav()" onmouseover="openNav()">&nbsp; &#9776;</span> OlivierLD</h1>
 
-  <marquee-panel id="marquee-panel-01"
-                 class="marquee-01"
-                 width="1000"
-                 height="125"
-                 nb-cols="128"
-                 nb-lines="16"
-                 display-data='{ "text": "Hello Web Components!", "x": 4, "y": 12 }'/>
+  <div style="text-align: center">
+    <marquee-panel id="marquee-panel-01"
+                   class="marquee-01"
+                   width="1000"
+                   height="125"
+                   nb-cols="128"
+                   nb-lines="16"
+                   display-data='{ "text": "Hello Web Components!", "x": 4, "y": 12 }'/>
+  </div>
 
-  </h1>
 
   <div id="side-nav" class="sidenav" onmouseleave="closeNav()">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>    
