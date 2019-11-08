@@ -72,7 +72,11 @@
   }
 
   .sub-section-desc {
-    margin-left: 24px;
+    margin-left: 30px;
+    font-size: 14px;
+    color: orange;
+    font-style: italic;
+    text-shadow: 2px 2px 4px black, 0 0 25px white, 0 0 7px cyan;
   }
 
   @media screen and (max-height: 450px) {
@@ -228,20 +232,20 @@
       <div id="section-3" class="sub-section">
         <a class="active-link" href="https://github.com/OlivierLD/raspberry-coffee/blob/master/JupyterNotebooks/deep.learning.crash.course/README.md">Neural Network and Deep Learning</a>
         <a class="active-link" href="./nn/one.neuron.webcomp.html">One Neuron at work</a>
-        <div class="sub-section-desc"><small>A small tool, used in the presentation above...</small></div>
+        <div class="sub-section-desc">A small tool, used in the presentation above...</div>
       </div>
     </div>
     <div onmouseover="showSection('section-4');" onmouseleave="hideSection('section-4');">
       <a class="active-link" href="./web.stuff/gps/GPS.api.html" target="new">GPS</a>
       <div id="section-4" class="sub-section">
         <a class="active-link" href="https://github.com/OlivierLD/raspberry-coffee/tree/master/Serial.IO#wiring-for-adafruit-ultimate-gps" target="new">Read a GPS from Java</a>
-        <div class="sub-section-desc"><small>Just reads the serial port and displays NMEA Sentences</small></div>
+        <div class="sub-section-desc">Just reads the serial port and displays NMEA Sentences</div>
         <a class="active-link" href="https://github.com/OlivierLD/raspberry-coffee/tree/master/JupyterNotebooks/nmea" target="new">Read a GPS from Python</a>
-        <div class="sub-section-desc"><small>Reads the Serial Port, parses <code>RMC</code> and <code>GLL</code> sentences, feeds a cache accessible through REST requests</small></div>
+        <div class="sub-section-desc">Reads the Serial Port, parses <code>RMC</code> and <code>GLL</code> sentences, feeds a cache accessible through REST requests</div>
         <a class="active-link" href="https://github.com/OlivierLD/raspberry-coffee/tree/master/Processing/src/processing/NMEA" target="new">Read a GPS from Processing</a>
-        <div class="sub-section-desc"><small>Java, simpler than Java...</small></div>
+        <div class="sub-section-desc">Java, simpler than Java...</div>
         <a class="active-link" href="https://github.com/OlivierLD/node.pi#read-gps-data-through-a-serial-port" target="new">Read a GPS from JavaScript (NodeJS)</a>
-        <div class="sub-section-desc"><small>Reads the Serial Port, parses <code>RMC</code> and <code>GLL</code> sentences</small></div>
+        <div class="sub-section-desc">Reads the Serial Port, parses <code>RMC</code> and <code>GLL</code> sentences</div>
       </div>
     </div>
       <a href="javascript:void(0)">And more (to come...)</a>
