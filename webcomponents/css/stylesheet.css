@@ -116,6 +116,13 @@ img {
   vertical-align: middle;
 }
 
+.marquee-01 {
+  --bg-color-from: rgba(0,0,0,0);
+  --bg-color-to: rgba(0,0,0,0);
+  --fg-color-from: red;
+  --fg-color-to: orange;
+}
+
 a:link { color : #0000A0}
 a:active { color: #8080FF}
 a:visited { color : #8080FF}
