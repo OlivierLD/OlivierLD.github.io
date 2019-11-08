@@ -156,6 +156,7 @@
 
 </style>
 
+<script type="text/javascript" src="date.proto.js"></script>
 <script type="module" src="webcomponents/widgets/marquee/MarqueePanel.js"></script>
 
 </head>
@@ -278,7 +279,7 @@
           } else {
             x = marqueeObj.nbCols; // Reset text on the right.
           }
-          let toDisplay = new Date() + ' ' + txt;
+          let toDisplay = new Date().format('d-M-Y') + ' ' + txt;
           let data = { 
             text: toDisplay, 
             x: x, 
