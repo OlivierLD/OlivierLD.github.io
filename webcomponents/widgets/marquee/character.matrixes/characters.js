@@ -490,7 +490,9 @@ characters.push({
 		"XX XX ",
 		"   XX ",
 		"X  XX ",
-		"XXXX  "]
+		"XXXX  ",
+		"      ",
+		"      "]
 });
 
 characters.push({
@@ -514,7 +516,9 @@ characters.push({
 		"  XX  ",
 		"  XX  ",
 		" XX   ",
-		"XX    "]
+		"XX    ",
+		"      ",
+		"      "]
 });
 
 characters.push({
