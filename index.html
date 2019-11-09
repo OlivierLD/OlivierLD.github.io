@@ -478,7 +478,7 @@ Date.prototype.format = function (dateFormat) {
           } else {
             x = marqueeObj.nbCols; // Reset text on the right.
           }
-          let toDisplay = new Date().format('d-M-Y') + ' ' + txt;
+          let toDisplay = new Date().format('d M Y') + ', ' + txt;
           let data = { 
             text: toDisplay, 
             x: x, 
