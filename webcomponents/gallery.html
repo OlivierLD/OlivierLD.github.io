@@ -4679,11 +4679,11 @@
 							<slide-show-image src="./images/tongareva.jpg" title="Tongareva"></slide-show-image>
 							<slide-show-image src="./images/banian.jpg" title="Banian"></slide-show-image>
 						</slide-show>
-						<script type="text/javascript">
+						<!--script type="text/javascript">
 							window.onload = () => { // Important: window.onload
 								document.getElementById("slide-show-01").slideclick = onSlideShowClick;
-							}
-						</script>
+							};
+						</script-->
 					</div>
 				</td>
 				<td valign="top">
@@ -4702,7 +4702,8 @@
 						<script type="text/javascript">
 							window.onload = () => { // Important: window.onload
 								document.getElementById("slide-show-02").slideclick = onSlideShowClick;
-							}
+								document.getElementById("slide-show-01").slideclick = onSlideShowClick;
+							};
 						</script>
 					</div>
 				</td>
