@@ -494,6 +494,41 @@ Date.prototype.format = function (dateFormat) {
     }
   }
 
+  let marqueeScrollUpAnimationInterval;
+  let defaultMarqueeTextArray = [ 'Raspberry Pi', 'Web Components', 'Java', 'NodeJS', 'and other toys...' ];
+  function marqueeScrollUp(marqueeId) {
+    if (marqueeScrollUpAnimationInterval !== undefined) {
+      window.clearInterval(marqueeScrollUpAnimationInterval); // Stop.
+      marqueeScrollUpAnimationInterval = undefined;
+    } else {
+      let marqueeObj = document.getElementById(marqueeId);
+      let x = marqueeObj.nbCols;
+      let yOffset = marqueeObj.yOffset;
+      let y = 12;
+      marqueeScrollUpAnimationInterval = window.setInterval(function() { // Start
+        let data = JSON.parse(marqueeObj.displayData); // { text-array: txt, x: x, y: y };
+        let arrayCardinality = 1;
+        if (data['text-array'] !== undefined) {
+          arrayCardinality = data['text-array'].length;
+        }
+        yOffset -= 1;
+        if (yOffset < -(arrayCardinality * 12)) {
+          yOffset = marqueeObj.nbLines;
+        }
+        marqueeObj.yOffset = yOffset; 
+
+        let toDisplay = [];
+        toDisplay.push(new Date().format('d M Y H:i:s'));
+        defaultMarqueeTextArray.forEach(item => {
+          toDisplay.push(item);
+        });
+        data['text-array'] = toDisplay;
+        marqueeObj.displayData = JSON.stringify(data);
+        marqueeObj.repaint();
+      }, 30);
+    }
+  }
+
   function showAbout() {
     document.getElementById('id01').style.display = 'block';
     document.getElementById('id01').style.transform = 'scaleX(1)';
@@ -505,7 +540,8 @@ Date.prototype.format = function (dateFormat) {
   }
 
   function marqueeOnOff() {
-    marquee('marquee-panel-01'); // Marquee animation
+    // marquee('marquee-panel-01'); // Marquee animation
+    marqueeScrollUp('marquee-panel-01'); // Marquee animation
   }
 
   function openNav() {
@@ -629,7 +665,7 @@ Date.prototype.format = function (dateFormat) {
     }, 2 * 60 * 1000); // in ms. 
 
     setTimeout(() => {
-      document.getElementById('marquee-panel-01').width = document.body.clientWidth;
+      // document.getElementById('marquee-panel-01').width = document.body.clientWidth;
       // marquee('marquee-panel-01'); // Marquee animation
     }, 1000);
 
