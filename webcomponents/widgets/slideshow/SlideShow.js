@@ -429,6 +429,7 @@ class SlideShow extends HTMLElement {
 							slide.appendChild(image);
 							// On Slide Click:
 							slide.addEventListener('click', () => {
+								console.log(`${src} was clicked`);
 								self._onclick(src);
 							});
 
