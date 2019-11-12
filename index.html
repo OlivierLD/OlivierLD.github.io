@@ -379,16 +379,16 @@ Date.prototype.format = function (dateFormat) {
     <marquee-panel id="marquee-panel-01"
                    class="marquee-01"
                    width="1000"
-                   height="125"
+                   height="500"
                    nb-cols="128"
-                   nb-lines="16"
+                   nb-lines="64"
                    title="To start or stop the marquee&#13;Use the hamburger collapsible menu&#13;on the top left"
-                   display-data='{ "text": "Raspberry Pi, Web Components, Java, NodeJS, and other toys...", "x": 4, "y": 12 }'/>
+                   display-data='{ "text-array": ["Raspberry Pi", "Web Components", "Java", "NodeJS", "and other toys..."], "x": 4, "y": 12 }'/>
   </div>
 
 
   <div id="side-nav" class="sidenav" onmouseleave="closeNav()">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>    
+    <a href="javascript:void(0)" class="closebtn" onclic[k="closeNav()">&times;</a>    
     <a href="javascript:void(0)" class="active-link" onclick="showAbout()">About me</a>    
     <a href="javascript:void(0)" class="active-link" onclick="marqueeOnOff()">Marquee Panel (start or stop)</a>    
     <div onmouseover="showSection('section-1');" onmouseleave="hideSection('section-1');">

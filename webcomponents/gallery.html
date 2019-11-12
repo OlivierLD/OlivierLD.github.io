@@ -839,6 +839,34 @@
 			}
 		}
 
+		let marqueeScrollUpAnimationInterval;
+		function marqueeScrollUp(marqueeId) {
+			if (marqueeScrollUpAnimationInterval !== undefined) {
+				window.clearInterval(marqueeScrollUpAnimationInterval); // Stop.
+				marqueeScrollUpAnimationInterval = undefined;
+			} else {
+				let marqueeObj = document.getElementById(marqueeId);
+				let x = marqueeObj.nbCols;
+				let yOffset = marqueeObj.yOffset;
+				let y = 12;
+				marqueeScrollUpAnimationInterval = window.setInterval(function() { // Start
+					let data = JSON.parse(marqueeObj.displayData); // { text-array: txt, x: x, y: y };
+					let arrayCardinality = 1;
+					if (data['text-array'] !== undefined) {
+						arrayCardinality = data['text-array'].length;
+					}
+					yOffset -= 1;
+					if (yOffset < -(arrayCardinality * 12)) {
+						yOffset = marqueeObj.nbLines;
+					}
+					marqueeObj.yOffset = yOffset;	
+
+					marqueeObj.displayData = JSON.stringify(data);
+					marqueeObj.repaint();
+				}, 30);
+			}
+		}
+
 		function applyClass(id, classList) {
 			let widget = document.getElementById(id);
 			let cssClass = classList.value;
@@ -2889,6 +2917,28 @@
 						<button onclick="marquee('marquee-text-02', 'marquee-panel-02');"
 										title="Go!"
 										style="margin-top: 3px;">Scroll</button>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td valign="top">
+					<div class="black-frame centered">
+						<marquee-panel id="marquee-panel-03"
+									   class="marquee-01"
+									   width="1000"
+									   height="500"
+									   nb-cols="128"
+									   nb-lines="64"
+									   display-data='{ "text-array": ["Raspberry Pi", "Web Components", "Java", "NodeJS"], "x": 4, "y": 12 }'/>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<div class="black-frame">
+						<button onclick="marqueeScrollUp('marquee-panel-03');"
+										title="Go!"
+										style="margin-top: 3px;">Scroll Up</button>
 					</div>
 				</td>
 			</tr>

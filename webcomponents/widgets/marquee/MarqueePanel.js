@@ -74,6 +74,7 @@ class MarqueePanel extends HTMLElement {
 		this._displayData = {};
 
 		this._lastUsedColumn;
+		this._yOffset = 0;
 
 	}
 
@@ -143,6 +144,9 @@ class MarqueePanel extends HTMLElement {
 	set displayData(val) {
 		this.setAttribute("display-data", val);
 	}
+	set yOffset(val) {
+		this._yOffset = val;
+	}
 
 	set shadowRoot(val) {
 		this._shadowRoot = val;
@@ -161,10 +165,13 @@ class MarqueePanel extends HTMLElement {
 		return this._h;
 	}
 	get displayData() {
-		return JSON.parse(this._displayData);
+		return JSON.stringify(this._displayData);
 	}
 	get lastUsedColumn() {
 		return this._lastUsedColumn;
+	}
+	get yOffset() {
+		return this._yOffset;
 	}
 
 	get shadowRoot() {
@@ -309,6 +316,14 @@ class MarqueePanel extends HTMLElement {
 		if (this._displayData.text !== undefined) {
 			// Fill the screen matrix
 			this._lastUsedColumn = this.displayText(this._displayData.text, this._displayData.x, this._displayData.y);
+		} else if (this._displayData['text-array'] !== undefined) {
+			let textArray = this._displayData['text-array'];
+			// console.log(textArray);
+			let deltaY = 0;
+			for (let idx in textArray) {
+				this._lastUsedColumn = this.displayText(textArray[idx], this._displayData.x, this._yOffset + this._displayData.y + deltaY);
+				deltaY += 10;
+			}
 		}
 
 		let xStep = Math.round(this.width / this._w);
