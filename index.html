@@ -630,11 +630,11 @@ Date.prototype.format = function (dateFormat) {
 
   const ABOUT_DATA = [
     "Raspberry Pi", 
-    "Web Components", 
-    "Java & Processing", 
-    "HTML5, CSS3, ES6, NodeJS", 
+    "Web&nbsp;Components", 
+    "Java&nbsp;&amp;&nbsp;Processing", 
+    "HTML5,&nbsp;CSS3,&nbsp;ES6,&nbsp;NodeJS", 
     "Python", 
-    "Arduino & Co"
+    "Arduino&nbsp;&amp;&nbsp;Co"
   ];
   let aboutDiv = undefined;
 
@@ -658,7 +658,7 @@ Date.prototype.format = function (dateFormat) {
       if (currentAboutIndex > (ABOUT_DATA.length - 1)) {
         currentAboutIndex = 0;
       }
-      aboutDiv.innerText = ABOUT_DATA[currentAboutIndex];
+      aboutDiv.innerHTML = ABOUT_DATA[currentAboutIndex];
       currentLeftMargin = 100;
       setTimeout(leftNewContent, 10);
     }
