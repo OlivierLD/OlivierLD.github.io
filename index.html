@@ -356,7 +356,7 @@ Date.prototype.format = function (dateFormat) {
 };
 
 </script>
-<script type="module" src="./webcomponents/widgets/marquee/MarqueePanel.js"></script>
+<!--script type="module" src="./webcomponents/widgets/marquee/MarqueePanel.js"></script-->
 
 </head>
 <body class="bg-gradient">
@@ -375,7 +375,11 @@ Date.prototype.format = function (dateFormat) {
   <h1 title="The background is dynamic, its color is changing!&#013;Use the hamburger on the left to reach the menu."
       style="font-style: normal; text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px silver;"><span style="cursor: pointer;" onclick="openNav()" onmouseover="openNav()">&nbsp; &#9776;</span> OlivierLD</h1>
 
-  <div style="text-align: center">
+  <div style="font-size: 48px; color: yellow; text-align: center;" id="about-div">
+    Raspberry Pi
+  </div>
+
+  <!--div style="text-align: center">
     <marquee-panel id="marquee-panel-01"
                    class="marquee-01"
                    width="1200"
@@ -384,13 +388,13 @@ Date.prototype.format = function (dateFormat) {
                    nb-lines="64"
                    title="To start or stop the marquee&#13;Use the hamburger collapsible menu&#13;on the top left"
                    display-data='{ "text-array": ["Raspberry Pi", "Web Components", "Java & Processing", "HTML5, CSS3, ES6, NodeJS", "Python", "Arduino & Co", "and other toys..."], "x": 4, "y": 12 }'/>
-  </div>
+  </div-->
 
 
   <div id="side-nav" class="sidenav" onmouseleave="closeNav()">
     <a href="javascript:void(0)" class="closebtn" onclic[k="closeNav()">&times;</a>    
     <a href="javascript:void(0)" class="active-link" onclick="showAbout()">About me</a>    
-    <a href="javascript:void(0)" class="active-link" onclick="marqueeOnOff()">Marquee Panel (start or stop)</a>    
+    <!--a href="javascript:void(0)" class="active-link" onclick="marqueeOnOff()">Marquee Panel (start or stop)</a-->    
     <div onmouseover="showSection('section-1');" onmouseleave="hideSection('section-1');">
       <a class="active-link" href="http://raspberrypi.lediouris.net/" target="new">Raspberry Pi: <i>Oliv on Pi</i></a>
       <div id="section-1" class="sub-section">
@@ -624,6 +628,47 @@ Date.prototype.format = function (dateFormat) {
     }
   }
 
+  const ABOUT_DATA = [
+    "Raspberry Pi", 
+    "Web Components", 
+    "Java & Processing", 
+    "HTML5, CSS3, ES6, NodeJS", 
+    "Python", 
+    "Arduino & Co"
+  ];
+  let aboutDiv = undefined;
+
+  let currentAboutIndex = 0;
+  let currentLeftMargin = 0;
+
+  function leftNewContent() {
+    if (currentLeftMargin > 0) {
+      currentLeftMargin -= 1;
+      aboutDiv.style.marginLeft = `${currentLeftMargin}%`;
+      setTimeout(leftNewContent, 10);
+    }
+  }
+  function leftOldContent() {
+    if (currentLeftMargin > -100) {
+      currentLeftMargin -= 1;
+      aboutDiv.style.marginLeft = `${currentLeftMargin}%`;
+      setTimeout(leftOldContent, 10);
+    } else {
+      currentAboutIndex += 1;
+      if (currentAboutIndex > (ABOUT_DATA.length - 1)) {
+        currentAboutIndex = 0;
+      }
+      aboutDiv.innerText = ABOUT_DATA[currentAboutIndex];
+      currentLeftMargin = 100;
+      setTimeout(leftNewContent, 10);
+    }
+  }
+  function swipeTitle() {
+    aboutDiv = document.getElementById('about-div');
+    // console.log(`About-Div, margin left: ${aboutDiv.style.marginLeft}`);
+    setTimeout(leftOldContent, 10);
+  }
+
   (() => {
     setInterval(() => {
       v1 += dir1;
@@ -658,14 +703,19 @@ Date.prototype.format = function (dateFormat) {
     }, 100);
 
     window.addEventListener("resize", () => {
-      document.getElementById('marquee-panel-01').width = document.body.clientWidth;
+      // document.getElementById('marquee-panel-01').width = document.body.clientWidth;
     });
 
     setInterval(() => {
       setTimeout(darkenBackground, 1);
     }, 2 * 60 * 1000); // in ms. 
 
+    setInterval(() => {
+      swipeTitle();
+    }, 10 * 1000); // Every 45 s
+
     setTimeout(() => {
+      // NOOP
       // document.getElementById('marquee-panel-01').width = document.body.clientWidth;
       // marquee('marquee-panel-01'); // Marquee animation
     }, 1000);
