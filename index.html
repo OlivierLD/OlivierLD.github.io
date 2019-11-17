@@ -9,6 +9,7 @@
   :root {
     --slide-width: 500px;
     --slide-height: 400px;
+    --expanded-nav-width: 450px;
   }
 
   html {
@@ -31,6 +32,10 @@
     color: white;
     font-size: 20px;
     text-shadow: 2px 2px 4px black, 0 0 25px white, 0 0 10px orange;
+  }
+
+  .bold-link {
+     font-weight: bold;
   }
 
   a:hover {
@@ -739,13 +744,14 @@ Date.prototype.format = function (dateFormat) {
       <div id="section-5" class="sub-section">
         <a class="active-link" href="http://navigation.lediouris.net/celest/NavigationSansElectricite.pdf" target="new">Naviguer sans &eacute;lectricit&eacute;</a>
         <div class="sub-section-desc">In French / En fran&ccedil;ais</div>
+        <a class="active-link" href="http://raspberrypi.lediouris.net/_Articles/readme.html" target="new">Enriching Marine Electronics</a>
         <a class="active-link" href="https://github.com/OlivierLD/raspberry-coffee/blob/master/Project.Trunk/System.Languages/LanguageComparison.md" target="new">Languages Comparison</a>
         <div class="sub-section-desc">Solve a System of equations, in more than 10 languages (Java, Python, Scala, C, etc)</div>
         <a class="active-link" href="https://github.com/OlivierLD/raspberry-coffee/tree/master/RESTNavServer" target="new">A Navigation Server</a>
         <ul style="margin: 0;">
-          <li><a class="active-link" style="padding-left: 0;" href="https://github.com/OlivierLD/raspberry-coffee/blob/master/Papers/happy.navserver/HappyNavserver.md" target="new">Happy Navigation Server</a></li>
-          <li><a class="active-link" style="padding-left: 0;" href="http://raspberrypi.lediouris.net/_Articles/data.logging/datalogging.html" target="new">Boat Data 101 (interactive)</a></li>
-          <li><a class="active-link" style="padding-left: 0;" href="https://github.com/OlivierLD/raspberry-coffee/blob/master/NMEA.multiplexer/casestudy.md" target="new">Case Study. Nav Server implementation</a></li>
+          <li><a class="active-link bold-link" style="padding-left: 0;" href="https://github.com/OlivierLD/raspberry-coffee/blob/master/Papers/happy.navserver/HappyNavserver.md" target="new">Happy Navigation Server</a></li>
+          <li><a class="active-link bold-link" style="padding-left: 0;" href="http://raspberrypi.lediouris.net/_Articles/data.logging/datalogging.html" target="new">Boat Data 101 (interactive)</a></li>
+          <li><a class="active-link bold-link" style="padding-left: 0;" href="https://github.com/OlivierLD/raspberry-coffee/blob/master/NMEA.multiplexer/casestudy.md" target="new">Case Study. Nav Server implementation</a></li>
         </ul>
       </div>
     </div>
@@ -884,7 +890,7 @@ Date.prototype.format = function (dateFormat) {
   }
 
   function openNav() {
-      document.getElementById("side-nav").style.width = "350px";
+      document.getElementById("side-nav").style.width =  getComputedStyle(document.documentElement).getPropertyValue('--expanded-nav-width'); // "450px";
   }
 
   function closeNav() {
