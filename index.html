@@ -199,7 +199,7 @@ a.active-link:hover {
 .slideshow-container {
   max-width: calc(var(--slide-width) + 100px);
   margin: auto;
-  margin-top: 20px;
+  margin-top: -100px;
   text-align: center;
   display: grid;
   grid-template-areas:
@@ -261,16 +261,17 @@ a.active-link:hover {
   height: 13px;
   width: 13px;
   margin: 0 0;
-  background-color: #bbb;
+  background-color: rgba(0, 0, 0, 0.5); /*#bbb;*/
   border-radius: 50%;
   display: inline-block;
-  border: 1px solid blue;
+  border: 1px solid cyan;
   transition: background-color 0.6s ease;
 }
 
 .active, .dot:hover {
-  background-color: cyan; /*#717171;*/
+  /*background-color: cyan; /*#717171;*/*/
   border: 1px solid cyan;
+  background-image: radial-gradient(blue, cyan);
 }
 
 .dots {
