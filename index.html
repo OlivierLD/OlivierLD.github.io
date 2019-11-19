@@ -707,7 +707,10 @@ Date.prototype.format = function (dateFormat) {
   </div>
 
   <div style="margin-left: 30px; margin-top: 10px;">
-  <button id="change-bg" onclick="changeBGNow();" title="Change backgbround image&#13;with transition effects 👍">Change BG now</button>
+    <button id="change-bg" onclick="changeBGNow();" title="Change backgbround image&#13;with transition effects 👍">Change BG now</button>
+  </div>
+  <div id="date-time-container" style="margin-left: 30px; margin-top: 10px;">
+
   </div>
 
   <div class="slideshow-container">
@@ -1251,6 +1254,12 @@ Date.prototype.format = function (dateFormat) {
       // NOOP
       // document.getElementById('marquee-panel-01').width = document.body.clientWidth;
       // marquee('marquee-panel-01'); // Marquee animation
+    }, 1000);
+
+    setInterval(() => {
+      let now = new Date();
+      let timeData = now.format('D d M Y') + '<br/>' + now.format('H:i:s Z'); 
+      document.getElementById('date-time-container').innerHTML = timeData;
     }, 1000);
 
     console.log('pouet!');
