@@ -125,8 +125,8 @@ a.active-link:hover {
 
 .w3-modal {
   z-index: 3;
-  display: none;
-  transform: 'scaleX(0)';
+  display: block;
+  transform: scaleX(0);
   padding-top: 100px;
   padding-left: 200px;
   position: fixed;
@@ -151,8 +151,8 @@ a.active-link:hover {
 
 .floating-menu {
   z-index: 3;
-  display: none;
-  transform: 'scaleY(0)';
+  display: block;
+  transform: scaleY(0);
   margin-top: 80px;
   margin-right: 50px;
   padding-right: 30px;
@@ -167,6 +167,7 @@ a.active-link:hover {
   background-color: rgba(255, 255, 255, 0.85);
   color: darkblue;
   transition: transform 0.5s ease-out;
+  transform-origin: top;
 }
 
 .floating-menu a:link, .floating-menu a:visited {
@@ -715,7 +716,7 @@ Date.prototype.format = function (dateFormat) {
 
 </head>
 <body class="bg-gradient">
-  <smnall style="margin-left: 5px;">Use the hamburger below to display the menu. See kebab on the right.</smnall>
+  <smnall style="margin-left: 5px;">Work in Progress. Use the hamburger below to display the menu. See kebab on the right.</smnall>
 
   <div id="id01" class="w3-modal">
     <div class="w3-modal-content">
@@ -875,6 +876,7 @@ Date.prototype.format = function (dateFormat) {
     <div onmouseover="showSection('section-2.0');" onmouseleave="hideSection('section-2.0');">
       <a class="active-link" href="http://raspberrypi.lediouris.net/" target="new">Other code repositories</a>
       <div id="section-2.0" class="sub-section">
+        <div class="sub-section-desc">Some git repos I own</div>
         <a class="active-link" href="https://github.com/OlivierLD/raspberry-coffee" target="new">Raspberry Coffee</a>
         <a class="active-link" href="https://github.com/OlivierLD/small-boards" target="new">Small boards (Arduinos, Huzzah, Feather, M5Stick, etc)</a>
         <a class="active-link" href="https://github.com/OlivierLD/SmartWatches" target="new">Smart Watches</a>
@@ -895,6 +897,7 @@ Date.prototype.format = function (dateFormat) {
       <a href="javascript:void(0)" title="Artificial Intelligence, Machine Learning, Deep Learning...">AI, ML, DL & Co</a>
       <div id="section-3" class="sub-section">
         <a class="active-link" href="https://github.com/OlivierLD/raspberry-coffee/blob/master/JupyterNotebooks/deep.learning.crash.course/README.md">Neural Network and Deep Learning</a>
+        <div class="sub-section-desc">An Artificial Intelligence Crash Course, from training a network to real hand-written digits recognition.</div>
         <a class="active-link" href="./nn/one.neuron.webcomp.html">One Neuron at work</a>
         <div class="sub-section-desc">A small tool, used in the presentation above...</div>
       </div>
@@ -938,7 +941,7 @@ Date.prototype.format = function (dateFormat) {
 </body>
 <script type="text/javascript">
 
-  // Left-right swipe gesture management
+  // Left-right swipe gesture management on the slides
   let xDown = null;
   let yDown = null;
 
@@ -1052,7 +1055,7 @@ Date.prototype.format = function (dateFormat) {
   }
 
   function showAbout() {
-    document.getElementById('id01').style.display = 'block';
+    // document.getElementById('id01').style.display = 'block';
     document.getElementById('id01').style.transform = 'scaleX(1)';
   }
 
@@ -1062,7 +1065,7 @@ Date.prototype.format = function (dateFormat) {
   }
 
   function showKebabMenu() {
-    document.getElementById('id02').style.display = 'block';
+    // document.getElementById('id02').style.display = 'block';
     document.getElementById('id02').style.transform = 'scaleY(1)';
   }
 
