@@ -372,6 +372,9 @@ a.active-link:hover {
       'top' 'middle' 'bottom';
   grid-gap: 0;
   padding: 0;
+  /* Use those for swipe effect */
+  position: relative;
+  left: 0;
 }
 
 .display-data {
@@ -774,7 +777,7 @@ Date.prototype.format = function (dateFormat) {
   </div>
 
   <div style="margin-left: 30px; margin-top: 10px;">
-    <button id="change-bg" onclick="changeBGNow();" title="Change background image&#13;with transition effects 👍">Change BG now</button>
+    <button id="change-bg" onclick="changeBGNow();" title="Change background image immediatly&#13;with transition effects 👍">Change BG now</button>
   </div>
   <div id="date-time-container" style="margin-left: 30px; margin-top: 10px;">
 
@@ -813,7 +816,7 @@ Date.prototype.format = function (dateFormat) {
           If Python is a sand-box, Java is a football field!
         </span>
         <span class="display-data">Java and<br/>Processing</span>
-        <span class="display-unit">Processing.org</span>
+        <span class="display-unit"><a href="http://processing.org" target="processing">Processing.org</a></span>
       </div>
       <div class="text">THREE</div>
     </div>
@@ -1203,7 +1206,7 @@ Date.prototype.format = function (dateFormat) {
     }
   }
 
-  const ABOUT_DATA = [
+  const ABOUT_DATA = [ // Use with innerHTML
     "Raspberry Pi", 
     "Web&nbsp;Components", 
     "Java&nbsp;&amp;&nbsp;Processing", 
@@ -1350,7 +1353,7 @@ Date.prototype.format = function (dateFormat) {
       let docElem = document.documentElement;
       let body = document.getElementsByTagName('body')[0]; // could use document.body
       let w = window.innerWidth || docElem.clientWidth || body.clientWidth;
-      let h = window.innerHeight|| docElem.clientHeight|| body.clientHeight;
+      let h = window.innerHeight || docElem.clientHeight || body.clientHeight;
       dom.style.backgroundSize = `${w}px ${h}px`;
     }, 100);
 
