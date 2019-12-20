@@ -5038,16 +5038,37 @@
 
 			let elmt = document.getElementById(graphId);
 
-			elmt.setHGridLabelsCallback(function(value) {
-				return (value > 0 ? "+" : "") + value.toFixed(0);
-			});
+			if (graphId === 'graph-01') {
+				elmt.setHGridLabelsCallback(function (value) {
+					return (value > 0 ? "+" : "") + value.toFixed(0);
+				});
+			} else {
+				elmt.setVGridLabelsCallback(function (value) {
+					return (value > 0 ? "+" : "") + value.toFixed(0);
+				});
+			}
 
 			if (from === undefined) {
 				elmt.data = graphData;
 			} else {
 				elmt.data = getViscousDampingData(from, to, step, expFact, cosFact);
 				elmt.value = 'null';
-				elmt.hgrid = "-150:50";
+				if (graphId === 'graph-01') {
+					elmt.hgrid = "-150:50";
+				} else {
+					elmt.data.withXLabels = true;
+					elmt.data.withYLabels =false;
+					elmt.vgrid = "-150:50";
+					elmt.setDoAfter((elmt, context) => {
+						context.beginPath();
+						context.lineWidth = 3;
+						context.strokeStyle = 'red';
+						context.moveTo(0, elmt._height / 2);
+						context.lineTo(elmt._width, elmt._height / 2);
+						context.stroke();
+						context.closePath();
+					});
+				}
         elmt.label = "Viscous Damping";
 			}
 			elmt.repaint();
@@ -5059,9 +5080,15 @@
 		function animateGraph(graphId) {
 			let elmt = document.getElementById(graphId);
 
-			elmt.setHGridLabelsCallback(function(value) {
-				return (value > 0 ? "+" : "") + value.toFixed(0);
-			});
+			if (graphId === 'graph-01') {
+				elmt.setHGridLabelsCallback(function (value) {
+					return (value > 0 ? "+" : "") + value.toFixed(0);
+				});
+			} else {
+				elmt.setVGridLabelsCallback(function (value) {
+					return (value > 0 ? "+" : "") + value.toFixed(0);
+				});
+			}
 			elmt.value = 'null';
 			elmt.hgrid = "null";
 			elmt.label = "Viscous Damping";
@@ -5091,9 +5118,15 @@
 		function animateGraph2(graphId) {
 			let elmt = document.getElementById(graphId);
 
-			elmt.setHGridLabelsCallback(function(value) {
-				return (value > 0 ? "+" : "") + value.toFixed(0);
-			});
+			if (graphId === 'graph-01') {
+				elmt.setHGridLabelsCallback(function (value) {
+					return (value > 0 ? "+" : "") + value.toFixed(0);
+				});
+			} else {
+				elmt.setVGridLabelsCallback(function (value) {
+					return (value > 0 ? "+" : "") + value.toFixed(0);
+				});
+			}
 			elmt.value = 'null';
 			elmt.hgrid = "null";
 			elmt.label = "Viscous Damping";
@@ -5166,6 +5199,39 @@
 
 					</script>
 				</td>
+				<td valign="top">
+				<script type="text/javascript">
+
+				</script>
+				<style>
+					graph-display:focus {
+						outline: none;
+					}
+				</style>
+				<div class="black-frame centered">
+					<graph-display id="graph-02"
+												 tabindex="-1"
+												 class="graph-02"
+												 width="200"
+												 height="400"
+												 orientation="vertical"
+												 padding="5"
+												 value="23.45"
+												 hgrid="0:0.5"
+												 vgrid="0:1"
+												 label="Work in Progress"
+												 title="Aaaaah!"/>
+				</div>
+				<div style="padding: 5px;">
+					<button onclick="plotGraph('graph-02');">Plot Graph</button>
+					<button onclick="plotGraph('graph-02', 0, 10, 0.025, 2, 10);" title="With a callback After">Viscous Damping</button>
+					<button onclick="animateGraph('graph-02');">Viscous Damping, animated (v1)</button>
+					<button onclick="animateGraph2('graph-02');">Viscous Damping, animated (v2)</button>
+				</div>
+				<script type="text/javascript">
+
+				</script>
+			</td>
 			</tr>
 		</table>
 	</div>
