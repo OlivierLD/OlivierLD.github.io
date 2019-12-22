@@ -5017,6 +5017,8 @@
 				withGrid: true,
 				withXLabels: false,
 				withYLabels: true,
+				thickX: 2,
+				thickY: 0,
 				minX: 0,
 				maxX: 10,
 				minY: values.mini,
@@ -5223,9 +5225,9 @@
 												 title="Aaaaah!"/>
 				</div>
 				<div style="padding: 5px;">
-					<button onclick="plotGraph('graph-02');">Plot Graph</button>
-					<button onclick="plotGraph('graph-02', 0, 10, 0.025, 2, 10);" title="With a callback After">Viscous Damping</button>
-					<button onclick="animateGraph('graph-02');">Viscous Damping, animated (v1)</button>
+					<button onclick="plotGraph('graph-02');">Plot Graph</button><br/>
+					<button onclick="plotGraph('graph-02', 0, 10, 0.025, 2, 10);" title="With a callback After">Viscous Damping</button><br/>
+					<button onclick="animateGraph('graph-02');">Viscous Damping, animated (v1)</button><br/>
 					<button onclick="animateGraph2('graph-02');">Viscous Damping, animated (v2)</button>
 				</div>
 				<script type="text/javascript">
