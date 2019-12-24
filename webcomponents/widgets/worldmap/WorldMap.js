@@ -1583,7 +1583,7 @@ class WorldMap extends HTMLElement {
 		let first = 0;
 		let smallestDiff = Number.MAX_VALUE;
 		for (let x=0; x<nightRim.length; x++) {
-			let lng = WorldMap.toRealLng(Utilities.toDegrees(nightRim[x].lng));
+			let lng = WorldMap.toRealLng(Math.toDegrees(nightRim[x].lng));
 			// console.log(`Night lng (x=${x}): Comparing ${this._west} and  ${lng} (actually ${WorldMap.lngOn360(this._west)} to ${WorldMap.lngOn360(lng)})`);
 			let deltaLng = WorldMap.deltaLng(WorldMap.lngOn360(lng), WorldMap.lngOn360(this._west));
 			if (deltaLng < smallestDiff) {
