@@ -1587,7 +1587,7 @@ class WorldMap extends HTMLElement {
 			// console.log(`Night lng (x=${x}): Comparing ${this._west} and  ${lng} (actually ${WorldMap.lngOn360(this._west)} to ${WorldMap.lngOn360(lng)})`);
 			let deltaLng = WorldMap.deltaLng(WorldMap.lngOn360(lng), WorldMap.lngOn360(this._west));
 			if (deltaLng < smallestDiff) {
-				first = x;
+				first = Math.max(0, x - 1);
 				smallestDiff = deltaLng;
 			}
 		}
