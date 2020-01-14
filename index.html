@@ -792,7 +792,7 @@ Date.prototype.format = function (dateFormat) {
 
   </div>
   <div id="bg-countdown-container" style="margin-left: 30px; margin-top: 10px; font-weight: normal; font-size: 12px;">
-    Change BG in <span id="count-down">00</span> sec
+    Change BG in <span id="count-down">00 s</span>
   </div>
 
   <div class="slideshow-container">
@@ -1380,10 +1380,15 @@ Date.prototype.format = function (dateFormat) {
       setTimeout(darkenBackground, 1);
     }, BG_INTERVAL); 
 
+    function secToMinSec(sec) {
+      let min = Math.floor(sec / 60);
+      let secLeft = sec - (min * 60);
+      return (min > 0 ? `${min} m ` : '') + (secLeft > 0 ? `${secLeft} s` : '');
+    }
     let countDown = setInterval(() => {
       secondLeft -= 1;
       // console.log(`CountDown: SecondLeft: ${secondLeft}`);
-      document.getElementById('count-down').innerText = secondLeft;
+      document.getElementById('count-down').innerText = secToMinSec(secondLeft);
     }, 1000);    
 
     // setInterval(() => {
