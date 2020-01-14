@@ -1381,9 +1381,13 @@ Date.prototype.format = function (dateFormat) {
     }, BG_INTERVAL); 
 
     function secToMinSec(sec) {
-      let min = Math.floor(sec / 60);
-      let secLeft = sec - (min * 60);
-      return (min > 0 ? `${min} m ` : '') + (secLeft > 0 ? `${secLeft} s` : '');
+      if (sec > 0) {
+        let min = Math.floor(sec / 60);
+        let secLeft = sec - (min * 60);
+        return (min > 0 ? `${min} m ` : '') + (secLeft > 0 ? `${secLeft} s` : '');
+      } else {
+        return '...';      
+      }
     }
     let countDown = setInterval(() => {
       secondLeft -= 1;
