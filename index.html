@@ -90,6 +90,11 @@ h1, h2, h3, h4, h5, h6 {
   cursor: not-allowed;
 }
 
+#close-nav-button:hover {
+  color: cyan;
+  cursor: pointer;
+}
+
 a.active-link:hover {
   color: cyan;
   cursor: pointer;
@@ -885,8 +890,8 @@ Date.prototype.format = function (dateFormat) {
   </div-->
 
 
-  <div id="side-nav" class="sidenav" onmouseleave="closeNav()">
-    <a href="javascript:void(0)" class="closebtn" onclic[k="closeNav()">&times;</a>    
+  <div id="side-nav" class="sidenav"> <!-- onmouseleave="closeNav()"> -->
+    <a href="javascript:void(0)" id="close-nav-button" class="closebtn" onclick="closeNav()">&times;</a>    
     <a href="javascript:void(0)" class="active-link" onclick="showAbout()">About me</a>    
     <!--a href="javascript:void(0)" class="active-link" onclick="marqueeOnOff()">Marquee Panel (start or stop)</a-->    
     <div onmouseover="showSection('section-1');" onmouseleave="hideSection('section-1');">
