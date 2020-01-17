@@ -82,7 +82,7 @@
 	// Called from navigator.geolocation.getCurrentPosition
 	function onPosError(err) {
 		let errMess = '';
-		if (err.code == err.PERMISSION_DENIED) {
+		if (err.code === err.PERMISSION_DENIED) {
 			errMess = 'Location access was denied by the user.';
 		} else {
 			errMess = 'location error (' + err.code + '): ' + err.message;
