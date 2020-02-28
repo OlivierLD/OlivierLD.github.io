@@ -25,9 +25,10 @@
 			window.open(src, '_blank'); // This is an example
 		}
 	</script>
-		<small>You can click on the slides...</small>
-		<br/>
-		Caldera
+	<small>You can click on the slides...</small>
+	<br/>
+	<div style="margin: 3px;">Caldera</div>
+	<div style="height: 360px; margin: 2px;">
 		<slide-show id="slide-show-01"
 					width="640"
 					height="360">
@@ -39,8 +40,8 @@
 			<slide-show-image src="./caldera/20200215_095342.jpg" title="Caldera 6"></slide-show-image>
 		</slide-show>
 	</div>
+	<div style="margin: 3px;">Lava</div>
 	<div style="height: 640px; margin: 2px;">
-		Lava
 		<slide-show id="slide-show-02"
 					width="360"
 					height="640">
@@ -86,8 +87,8 @@
 		</tr>
 	</table>
 
-	<div style="height: 640px; margin: 2px;">
-		Lapakahi
+	<div style="margin: 3px;">Lapakahi</div>
+	<div style="height: 360px; margin: 2px;">
 		<slide-show id="slide-show-05"
 					width="640"
 					height="360">
@@ -99,6 +100,22 @@
 		</slide-show>
 	</div>
 
+	<div style="margin: 3px;">Kalopa</div>
+	<div style="height: 360px; margin: 2px;">
+		<slide-show id="slide-show-06"
+					width="640"
+					height="360">
+			<slide-show-image src="./hike.2.kalopa/20200219_144136.jpg" title="One"></slide-show-image>
+			<slide-show-image src="./hike.2.kalopa/20200219_144710.jpg" title="Two"></slide-show-image>
+			<slide-show-image src="./hike.2.kalopa/20200219_144712.jpg" title="Three"></slide-show-image>
+			<slide-show-image src="./hike.2.kalopa/20200219_144800.jpg" title="Four"></slide-show-image>
+			<slide-show-image src="./hike.2.kalopa/20200219_144803.jpg" title="Five"></slide-show-image>
+			<slide-show-image src="./hike.2.kalopa/20200219_144806.jpg" title="Six"></slide-show-image>
+			<slide-show-image src="./hike.2.kalopa/20200219_144810.jpg" title="Seven"></slide-show-image>
+			<slide-show-image src="./hike.2.kalopa/20200219_144814.jpg" title="PEight"></slide-show-image>
+		</slide-show>
+	</div>
+
 	<script type="text/javascript">
 		window.onload = () => { // Important: window.onload
 			document.getElementById("slide-show-01").slideclick = onSlideShowClick;
@@ -106,6 +123,7 @@
 			document.getElementById("slide-show-03").slideclick = onSlideShowClick;
 			document.getElementById("slide-show-04").slideclick = onSlideShowClick;
 			document.getElementById("slide-show-05").slideclick = onSlideShowClick;
+			document.getElementById("slide-show-06").slideclick = onSlideShowClick;
 		}
 	</script>
 
