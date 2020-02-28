@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en_US">
+  <head>
+  	<link rel="icon" type="image/jpg" href="../palm.04.jpg">
+  	<link rel="stylesheet" href="../css/stylesheet.css" type="text/css"/>
+	<script type="module" src="../webcomponents/widgets/slideshow/SlideShow.js"></script>
+	<style type="text/css">
+		body {
+			background: black;
+			color: cyan;
+		}
+	</style>
+  </head>
+  <body>
+  	<h1>Hawai'i, Feb 2020</h1>
+  	<div style="overflow: auto;">
+  		<small>Scroll on the image below, it's a wide one.</small>
+  		<img src="./panorama_01_fused.png" alt="Cinder Cone"/>
+  	</div>
+
+  	<script type="text/javascript">
+		function onSlideShowClick(src) {
+			console.log(">> Client side!! Slide " + src + " was clicked.");
+			window.open(src, '_blank'); // This is an example
+		}
+	</script>
+	You can click on the slides...
+	<div style="height: 360px; margin: 2px;">
+		<slide-show id="slide-show-01"
+					width="640"
+					height="360">
+			<slide-show-image src="./caldera/20200215_094107.jpg" title="Caldera 1"></slide-show-image>
+			<slide-show-image src="./caldera/20200215_094131.jpg" title="Caldera 2"></slide-show-image>
+			<slide-show-image src="./caldera/20200215_094134.jpg" title="Caldera 3"></slide-show-image>
+			<slide-show-image src="./caldera/20200215_094137.jpg" title="Caldera 4"></slide-show-image>
+			<slide-show-image src="./caldera/20200215_094306.jpg" title="Caldera 5"></slide-show-image>
+			<slide-show-image src="./caldera/20200215_095342.jpg" title="Caldera 6"></slide-show-image>
+		</slide-show>
+	</div>
+	<div style="height: 640px; margin: 2px;">
+		<slide-show id="slide-show-02"
+					width="360"
+					height="640">
+			<slide-show-image src="./lava/20200216_094528.jpg" title="Lava 1"></slide-show-image>
+			<slide-show-image src="./lava/20200216_104410.jpg" title="Lava 2"></slide-show-image>
+			<slide-show-image src="./lava/20200216_104412.jpg" title="Lava 3"></slide-show-image>
+			<slide-show-image src="./lava/20200216_112312.jpg" title="Lava 4"></slide-show-image>
+			<slide-show-image src="./lava/20200216_112317.jpg" title="Lava 5"></slide-show-image>
+		</slide-show>
+	</div>
+	<table style="margin: auto;">
+		<tr>
+			<td valign="middle">
+				<div style="height: 640px; margin: 2px;">
+					<slide-show id="slide-show-03"
+								width="640"
+								height="360">
+						<slide-show-image src="./petroglyphs/20200216_124541.jpg" title="Petroglyphs 1"></slide-show-image>
+						<slide-show-image src="./petroglyphs/20200216_124601.jpg" title="Petroglyphs 2"></slide-show-image>
+						<slide-show-image src="./petroglyphs/20200216_124710.jpg" title="Petroglyphs 3"></slide-show-image>
+						<slide-show-image src="./petroglyphs/20200216_124739.jpg" title="Petroglyphs 4"></slide-show-image>
+						<slide-show-image src="./petroglyphs/20200216_124748.jpg" title="Petroglyphs 5"></slide-show-image>
+						<slide-show-image src="./petroglyphs/20200216_124812.jpg" title="Petroglyphs 6"></slide-show-image>
+					</slide-show>
+				</div>
+			</td>
+			<td valign="middle">
+				<div style="height: 640px; margin: 2px;">
+					<slide-show id="slide-show-04"
+								width="360"
+								height="640">
+						<slide-show-image src="./petroglyphs/20200216_124821.jpg" title="Petroglyphs 7"></slide-show-image>
+						<slide-show-image src="./petroglyphs/20200216_124830.jpg" title="Petroglyphs 8"></slide-show-image>
+						<slide-show-image src="./petroglyphs/20200216_124837.jpg" title="Petroglyphs 9"></slide-show-image>
+						<slide-show-image src="./petroglyphs/20200216_124900.jpg" title="Petroglyphs 10"></slide-show-image>
+						<slide-show-image src="./petroglyphs/20200216_124917.jpg" title="Petroglyphs 11"></slide-show-image>
+						<slide-show-image src="./petroglyphs/20200216_124928.jpg" title="Petroglyphs 12"></slide-show-image>
+					</slide-show>
+				</div>
+			</td>
+		</tr>
+	</table>
+
+	<script type="text/javascript">
+		window.onload = () => { // Important: window.onload
+			document.getElementById("slide-show-01").slideclick = onSlideShowClick;
+			document.getElementById("slide-show-02").slideclick = onSlideShowClick;
+			document.getElementById("slide-show-03").slideclick = onSlideShowClick;
+			document.getElementById("slide-show-04").slideclick = onSlideShowClick;
+		}
+	</script>
+
+  <hr/>
+  <span style="font-style: italic; font-weight: normal;">Oliv did it, 2020.</span>
+  </body>
+</html>
