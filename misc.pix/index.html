@@ -39,7 +39,10 @@
 	</script>
 	<small>You can click on the slides...</small>
 	<br/>
-	<div style="margin: 3px;">Caldera</div>
+	<div style="margin: 3px;">
+		Caldera<br/>
+		<input type="checkbox" onchange="setAuto('slide-show-01', this);">Auto-Scroll</input>
+	</div>
 	<div style="height: 360px; margin: 2px;">
 		<slide-show id="slide-show-01"
 					width="640"
@@ -51,7 +54,7 @@
 			<slide-show-image src="./caldera/20200215_094306.jpg" title="Caldera 5"></slide-show-image>
 			<slide-show-image src="./caldera/20200215_095342.jpg" title="Caldera 6"></slide-show-image>
 		</slide-show>
-		<input type="checkbox" onchange="setAuto('slide-show-01', this);">Auto</input>
+		
 	</div>
 	<div style="margin: 3px;">Lava</div>
 	<div style="height: 640px; margin: 2px;">
