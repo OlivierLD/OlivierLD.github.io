@@ -183,6 +183,7 @@
 		.switch-container {
 			display: grid;
 			grid-template-columns: 26px calc(var(--slider-scale) * 64px) 26px;
+			vertical-align: middle;
 		}
 		.switch-element {
 			place-self: center;
@@ -1005,7 +1006,7 @@
 				<input type="radio" name="page-bg" value="LIGHT" onchange="changeBG(this.value);">Light
 				-->
 				<div class="switch-container">
-					<span class="switch-element" style="font-size: 24px; font-weight: bold; padding-bottom: 6px;">&#9789</span>
+					<span class="switch-element" style="font-size: 24px; font-weight: bold; padding-bottom: 0px;">&#9790</span>
 					<label class="switch switch-element">
 						<input id="bg-slider" type="checkbox" onchange="onThemeChange(this);">
 						<span class="slider round"></span>
