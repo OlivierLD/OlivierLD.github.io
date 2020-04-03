@@ -39,6 +39,7 @@
 	<script type="module" src="widgets/satelliteplotter/SatellitePlotter.js"></script>
 	<script type="module" src="widgets/knob/KnobAndDisplay.js"></script>
 	<script type="module" src="widgets/graph/GraphDisplay.js"></script>
+	<script type="module" src="widgets/moonphase/MoonPhase.js"></script>
 
 	<script type="text/javascript" src="utils/NavigationHelper.js"></script>
 
@@ -261,6 +262,14 @@
 			}
 		}
 
+		function setPhase(from, to) {
+			let elem = document.getElementById(to);
+			let value = document.getElementById(from).value; // Field to read to get the value
+			if (value.length !== 0) {
+				elem.phase = value;                            // value corresponds to the 'set phase(val) { ...', invokes the setter in the HTMLElement class
+			}
+		}
+
 		let animation = false; // Not more than one animation at a given time, for this demo.
 		let currentValue;
 		let incr;
@@ -274,6 +283,27 @@
 				webComp.value = to;
 				window.clearInterval(intervalId);
 				animation = false;
+			}
+		}
+
+		function doAnimateMoon(moonComp) {
+			if (animation) {
+				window.clearInterval(intervalId);
+				intervalId = undefined;
+				animation = false;
+			} else {
+				let webComp = document.getElementById(moonComp);
+				let startFrom = webComp.phase;
+				animation = true;
+				currentValue = startFrom;
+				intervalId = window.setInterval(function () {
+					currentValue += 1;
+					if (currentValue >= 360) {
+						currentValue = 0;
+					}
+					webComp.phase = currentValue;
+					webComp.repaint();
+				}, 10);
 			}
 		}
 
@@ -5235,6 +5265,46 @@
 
 				</script>
 			</td>
+			</tr>
+		</table>
+	</div>
+	<hr/>
+
+	<!--
+	  MOON PHASE
+   +-->
+	<div style="cursor: pointer;" onclick="showHide('moon-phase');" tabindex="0"><b><u>Moon Phase</u></b></div>
+	<div id="moon-phase" class="smooth">
+		<pre style="font-weight: bold; text-align: left; color: white; vertical-align: top; margin-top: 6px;">
+	&lt;moon-phase id="moon-phase-01"
+						title="Moon Phase"/>
+		</pre>
+
+		<table>
+			<tr>
+				<td valign="top">
+					<div class="black-frame centered">
+						<moon-phase id="moon-phase-01"
+												title="Moon Phase"
+												phase="45"/>
+					</div>
+					<div class="black-frame centered">
+						Phase Value:
+						<input type="number"
+									 id="phase-value-01"
+									 placeholder="Phase"
+									 title="No unit"
+									 style="width: 50px; text-align: right;"
+									 value="45"/>
+						<br/>
+						<button onclick="setPhase('phase-value-01', 'moon-phase-01');"
+										title="Set Moon Phase value above"
+										style="margin-top: 3px;">Set phase</button>
+						<button onclick="doAnimateMoon('moon-phase-01');"
+										title="Keep turning"
+										style="margin-top: 3px;">Animate</button>
+					</div>
+				</td>
 			</tr>
 		</table>
 	</div>
