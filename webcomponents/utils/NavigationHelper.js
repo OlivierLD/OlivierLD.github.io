@@ -162,7 +162,7 @@ let NavigationHelper = {
 		return hdg;
 	},
 
-	vmgCalulator: function(sog, cog, twd, twa, bsp, hdg, b2wp) {
+	vmgCalculator: function(sog, cog, twd, twa, bsp, hdg, b2wp) {
 		let vmgWind = null;
 		let vmgWayPoint = null;
 		try {
