@@ -270,6 +270,14 @@
 			}
 		}
 
+		function setTilt(from, to) {
+			let elem = document.getElementById(to);
+			let value = document.getElementById(from).value; // Field to read to get the value
+			if (value.length !== 0) {
+				elem.tilt = value;                            // value corresponds to the 'set tilt(val) { ...', invokes the setter in the HTMLElement class
+			}
+		}
+
 		let animation = false; // Not more than one animation at a given time, for this demo.
 		let currentValue;
 		let incr;
@@ -5289,17 +5297,28 @@
 												phase="45"/>
 					</div>
 					<div class="black-frame centered">
-						Phase Value:
+						Tilt:
+						<input type="number"
+									 id="tilt-value-01"
+									 placeholder="Phase"
+									 title="Tilt value"
+									 style="width: 50px; text-align: right;"
+									 value="-10"/>
+						<button onclick="setTilt('tilt-value-01', 'moon-phase-01');"
+										title="Set Moon Phase value above"
+										style="margin-top: 3px;">Set</button>
+						<br/>
+						Phase:
 						<input type="number"
 									 id="phase-value-01"
 									 placeholder="Phase"
-									 title="No unit"
+									 title="Phase value"
 									 style="width: 50px; text-align: right;"
 									 value="45"/>
-						<br/>
 						<button onclick="setPhase('phase-value-01', 'moon-phase-01');"
 										title="Set Moon Phase value above"
-										style="margin-top: 3px;">Set phase</button>
+										style="margin-top: 3px;">Set</button>
+						<br/>
 						<button onclick="doAnimateMoon('moon-phase-01');"
 										title="Keep turning"
 										style="margin-top: 3px;">Animate</button>
