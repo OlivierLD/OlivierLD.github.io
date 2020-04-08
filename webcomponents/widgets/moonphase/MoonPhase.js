@@ -309,13 +309,13 @@ class MoonPhaseDisplay extends HTMLElement {
 
 		// For debug, draw tilt axis
 		context.beginPath();
-		context.moveTo(0, - radius);
+		context.moveTo(0, - (radius * 1.2));
 		// context.moveTo(center.x + (radius * Math.sin(Math.toRadians(this.tilt))),
 		// 		center.y - (radius * Math.cos(Math.toRadians(this.tilt))));
-		context.lineTo(0, radius);
+		context.lineTo(0, (radius * 1.2));
 		// context.lineTo(center.x - (radius * Math.sin(Math.toRadians(this.tilt))),
 		// 		center.y + (radius * Math.cos(Math.toRadians(this.tilt))));
-		context.strokeStyle = 'orange';  // this.graphDisplayColorConfig.gridColor;
+		context.strokeStyle = 'rgb(255,250,205)'; //  'orange';  // this.graphDisplayColorConfig.gridColor;
 		context.stroke();
 		context.closePath();
 

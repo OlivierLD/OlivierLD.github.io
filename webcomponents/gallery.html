@@ -274,7 +274,14 @@
 			let elem = document.getElementById(to);
 			let value = document.getElementById(from).value; // Field to read to get the value
 			if (value.length !== 0) {
+				value = parseFloat(value);
 				elem.tilt = value;                            // value corresponds to the 'set tilt(val) { ...', invokes the setter in the HTMLElement class
+				if (value > 90) {
+					value -= 180;
+				} else if (value < -90) {
+					value += 180;
+				}
+				elem.title = `${value>=0?"R":"L"}${Math.abs(value).toFixed(0)}°`;
 			}
 		}
 
