@@ -85,7 +85,7 @@ h1, h2, h3, h4, h5, h6 {
   transition: 0.3s;
 }
 
-.sidenav a:hover, .offcanvas a:focus { 
+.sidenav a:hover, .offcanvas a:focus {
   color: white; /* #f1f1f1; */
   cursor: not-allowed;
 }
@@ -766,7 +766,7 @@ Date.prototype.format = function (dateFormat) {
   </div>
 
   <div id="id02" class="floating-menu no-shadow" onmouseleave="hideKebabMenu()">
-    <div> 
+    <div>
       <h4 style="margin-left: 10px;">More links</h4>
       <ul>
         <li><a href="index.2.html" title="See what 'cascading' actually means...">Other index...</a></li>
@@ -926,9 +926,9 @@ Date.prototype.format = function (dateFormat) {
 
 
   <div id="side-nav" class="sidenav"> <!-- onmouseleave="closeNav()"> -->
-    <a href="javascript:void(0)" id="close-nav-button" class="closebtn" onclick="closeNav()">&times;</a>    
-    <a href="javascript:void(0)" class="active-link" onclick="showAbout()">About me</a>    
-    <!--a href="javascript:void(0)" class="active-link" onclick="marqueeOnOff()">Marquee Panel (start or stop)</a-->    
+    <a href="javascript:void(0)" id="close-nav-button" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="javascript:void(0)" class="active-link" onclick="showAbout()">About me</a>
+    <!--a href="javascript:void(0)" class="active-link" onclick="marqueeOnOff()">Marquee Panel (start or stop)</a-->
     <div onmouseover="showSection('section-1');" onmouseleave="hideSection('section-1');">
       <a class="active-link" href="http://raspberrypi.lediouris.net/" target="new">Raspberry Pi: <i>Oliv on Pi</i></a>
       <div id="section-1" class="sub-section">
@@ -1011,7 +1011,7 @@ Date.prototype.format = function (dateFormat) {
       <div id="section-6" class="sub-section">
         <a class="active-link" href="http://donpedro.lediouris.net/software/html5/spot/spot.parser.html" target="SPOT">Online SPOT parser</a>
       </div>
-    </div>    
+    </div>
     <a href="javascript:void(0)">And more (to come...)</a>
   </div>
 
@@ -1092,10 +1092,10 @@ Date.prototype.format = function (dateFormat) {
             x = marqueeObj.nbCols; // Reset text on the right.
           }
           let toDisplay = new Date().format('d M Y H:i:s') + ', ' + txt;
-          let data = { 
-            text: toDisplay, 
-            x: x, 
-            y: y 
+          let data = {
+            text: toDisplay,
+            x: x,
+            y: y
           };
           marqueeObj.displayData = JSON.stringify(data);
           marqueeObj.repaint();
@@ -1128,7 +1128,7 @@ Date.prototype.format = function (dateFormat) {
         if (yOffset < -(arrayCardinality * 12)) {
           yOffset = marqueeObj.nbLines;
         }
-        marqueeObj.yOffset = yOffset; 
+        marqueeObj.yOffset = yOffset;
 
         let toDisplay = [];
         toDisplay.push(new Date().format('d M Y H:i:s'));
@@ -1210,7 +1210,7 @@ Date.prototype.format = function (dateFormat) {
     return color;
   }
 
-  const BG_INTERVAL = ((2 * 60) + 1) * 1000; // in ms. 
+  const BG_INTERVAL = ((2 * 60) + 1) * 1000; // in ms.
   const BG_IMAGES = [
     "neuralnetwork.jpg",
     "NorthernLight.2.jpeg",
@@ -1220,7 +1220,8 @@ Date.prototype.format = function (dateFormat) {
     "rpi.jpg",
     "clouds.2.jpg",
     "hexagon-2-wallpapers.jpg",
-    "sky.above.Czechia.jpeg"
+    "sky.above.Czechia.jpeg",
+    "pcb.jpg"
   ];
 
   let secondLeft = BG_INTERVAL / 1000;
@@ -1242,7 +1243,7 @@ Date.prototype.format = function (dateFormat) {
       } else {
         let newBgIndex = Math.floor((Math.random() * BG_IMAGES.length));
         if (bgIndex === newBgIndex) {
-          bgIndex += 1; 
+          bgIndex += 1;
           bgIndex %= BG_IMAGES.length;
         } else {
           bgIndex = newBgIndex;
@@ -1263,11 +1264,11 @@ Date.prototype.format = function (dateFormat) {
   }
 
   const ABOUT_DATA = [ // Use with innerHTML
-    "Raspberry Pi", 
-    "Web&nbsp;Components", 
-    "Java&nbsp;&amp;&nbsp;Processing", 
-    "HTML5,&nbsp;CSS3,&nbsp;ES6,&nbsp;NodeJS", 
-    "Python", 
+    "Raspberry Pi",
+    "Web&nbsp;Components",
+    "Java&nbsp;&amp;&nbsp;Processing",
+    "HTML5,&nbsp;CSS3,&nbsp;ES6,&nbsp;NodeJS",
+    "Python",
     "Arduino&nbsp;&amp;&nbsp;Co"
   ];
   let aboutDiv = undefined;
@@ -1377,7 +1378,7 @@ Date.prototype.format = function (dateFormat) {
     setTimeout(darkenBackground, 1);
     bgAnimation = setInterval(() => {
       setTimeout(darkenBackground, 1);
-    }, BG_INTERVAL); // in ms. 
+    }, BG_INTERVAL); // in ms.
   }
 
   (() => {
@@ -1419,7 +1420,7 @@ Date.prototype.format = function (dateFormat) {
 
     bgAnimation = setInterval(() => {
       setTimeout(darkenBackground, 1);
-    }, BG_INTERVAL); 
+    }, BG_INTERVAL);
 
     function secToMinSec(sec) {
       if (sec > 0) {
@@ -1427,14 +1428,14 @@ Date.prototype.format = function (dateFormat) {
         let secLeft = sec - (min * 60);
         return (min > 0 ? `${min} m ` : '') + (secLeft > 0 ? `${secLeft} s` : '');
       } else {
-        return '...';      
+        return '...';
       }
     }
     let countDown = setInterval(() => {
       secondLeft -= 1;
       // console.log(`CountDown: SecondLeft: ${secondLeft}`);
       document.getElementById('count-down').innerText = secToMinSec(secondLeft);
-    }, 1000);    
+    }, 1000);
 
     // setInterval(() => {
     //   swipeTitle();
@@ -1448,7 +1449,7 @@ Date.prototype.format = function (dateFormat) {
 
     setInterval(() => {
       let now = new Date();
-      let timeData = now.format('D d M Y') + '<br/>' + now.format('H:i:s Z'); 
+      let timeData = now.format('D d M Y') + '<br/>' + now.format('H:i:s Z');
       document.getElementById('date-time-container').innerHTML = timeData;
     }, 1000);
 
