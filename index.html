@@ -803,6 +803,14 @@ Date.prototype.format = function (dateFormat) {
     <span class="switch-element">Random BG order</span>
   </div>
 
+  <div class="switch-container" style="margin-left: 30px;" title="Backgrounds change in random order">
+    <label class="switch switch-element">
+      <input id="fast-bg-slider" type="checkbox" onchange="manageFastBGClick(this);">
+      <span class="slider round"></span>
+    </label>
+    <span class="switch-element">Change BG faster</span>
+  </div>
+
   <div style="margin-left: 30px; margin-top: 10px;">
     <button id="change-bg" onclick="changeBGNow();" title="Change background image immediatly&#13;with transition effects 👍">Change BG now</button>
   </div>
@@ -1210,7 +1218,9 @@ Date.prototype.format = function (dateFormat) {
     return color;
   }
 
-  const BG_INTERVAL = ((2 * 60) + 1) * 1000; // in ms.
+  const SLOW_BG_INTERVAL = ((2 * 60) + 1) * 1000; // in ms.
+  const FAST_BG_INTERVAL = ((1 * 60) + 1) * 1000; // in ms.
+  let BG_INTERVAL = SLOW_BG_INTERVAL;
   const BG_IMAGES = [
     "neuralnetwork.jpg",
     "NorthernLight.2.jpeg",
@@ -1316,6 +1326,10 @@ Date.prototype.format = function (dateFormat) {
   let randomOrder = false;
   function manageBGClick(cb) {
     randomOrder = cb.checked;
+  }
+
+  function manageFastBGClick(cb) {
+    BG_INTERVAL = (cb.checked ? FAST_BG_INTERVAL : SLOW_BG_INTERVAL);
   }
 
   let slideIndex = 1;
