@@ -932,6 +932,17 @@ Date.prototype.format = function (dateFormat) {
                    display-data='{ "text-array": ["Raspberry Pi", "Web Components", "Java & Processing", "HTML5, CSS3, ES6, NodeJS", "Python", "Arduino & Co", "and other toys..."], "x": 4, "y": 12 }'/>
   </div-->
 
+  <dialog id="weather-links-dialog">
+    <h3>Some Weather links...</h3>
+    <ul>
+      <li><a href="https://www.windy.com/-Show---add-more-layers/overlays?36.769,-124.508,7" target="weather">Windy</a></li>
+      <li><a href="https://tgftp.nws.noaa.gov/fax/PYBA90.gif" target="weather">East Pacific Surface Chart</a></li>
+      <li><a href="https://darksky.net/forecast/37.7489,-122.5072/ca12/en" target="weather">Dark Sky</a></li>
+      <li><a href="http://www.oceanbeach.org/webcam.html" target="weather">Ocean Beach WebCam</a></li>
+      <li><a href="https://marine.weather.gov/MapClick.php?lon=-122.51095&lat=37.73344" target="weather">NOAA, for Ocean Beach</a></li>
+    </ul>
+    <button id="exit-weather-link">Close</button>
+  </dialog>
 
   <div id="side-nav" class="sidenav"> <!-- onmouseleave="closeNav()"> -->
     <a href="javascript:void(0)" id="close-nav-button" class="closebtn" onclick="closeNav()">&times;</a>
@@ -1018,6 +1029,7 @@ Date.prototype.format = function (dateFormat) {
       <a href="javascript:void(0)">Weather etc...</a>
       <div id="section-6" class="sub-section">
         <a class="active-link" href="http://donpedro.lediouris.net/software/html5/spot/spot.parser.html" target="SPOT">Online SPOT parser</a>
+        <a class="active-link" href="#" onclick="showWeatherDialog();">Misc Weather Links</a>
       </div>
     </div>
     <a href="javascript:void(0)">And more (to come...)</a>
@@ -1395,6 +1407,11 @@ Date.prototype.format = function (dateFormat) {
     }, BG_INTERVAL); // in ms.
   }
 
+  function showWeatherDialog() {
+    let weatherDialog = document.getElementById("weather-links-dialog");
+    weatherDialog.show();
+  }
+
   (() => {
     setInterval(() => {
       v1 += dir1;
@@ -1466,6 +1483,10 @@ Date.prototype.format = function (dateFormat) {
       let timeData = now.format('D d M Y') + '<br/>' + now.format('H:i:s Z');
       document.getElementById('date-time-container').innerHTML = timeData;
     }, 1000);
+
+    // Dialog management
+    let weatherDialog = document.getElementById("weather-links-dialog");
+    document.getElementById('exit-weather-link').onclick = () => { weatherDialog.close(); };
 
     console.log('pouet!');
   })();

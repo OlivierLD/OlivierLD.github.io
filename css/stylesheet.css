@@ -15,6 +15,15 @@ body {
 	background-repeat: repeat
 }
 
+dialog {
+	background: rgba(0, 0, 0, 0.5);
+	color: silver;
+	width: 400px;
+	top: 50px;
+	border: 2px solid orange;
+	border-radius: 10px;
+}
+
 h1 {
 	color: silver;
 	font-style: italic;
