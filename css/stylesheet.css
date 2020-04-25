@@ -16,7 +16,7 @@ body {
 }
 
 dialog {
-	background: rgba(0, 0, 0, 0.5);
+	background: rgba(0, 63, 63, 0.5);
 	color: silver;
 	width: 400px;
 	top: 50px;
