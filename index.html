@@ -87,6 +87,11 @@ h1, h2, h3, h4, h5, h6 {
 
 .sidenav a:hover, .offcanvas a:focus {
   color: white; /* #f1f1f1; */
+  /*cursor: not-allowed;*/
+}
+
+a.no-click {
+  color: white; /* #f1f1f1; */
   cursor: not-allowed;
 }
 
@@ -953,8 +958,9 @@ Date.prototype.format = function (dateFormat) {
     <button id="exit-weather-link">Close</button>
   </dialog>
 
-  <!-- The Big Main Manu on the left -->
-  <!--
+  <!-- 
+    The Big Main Menu on the left
+
     ◄ = &#9668;
     ► = &#9658;
     ▼ = &#9660;
@@ -965,7 +971,7 @@ Date.prototype.format = function (dateFormat) {
     <a href="javascript:void(0)" class="active-link" onclick="showAbout()">About me</a>
     <!--a href="javascript:void(0)" class="active-link" onclick="marqueeOnOff()">Marquee Panel (start or stop)</a-->
     <div> <!-- onmouseover="showSection('section-1');" onmouseleave="hideSection('section-1');"> -->
-      <a href="javascript:void(0)"><span class="expand-collapse" onclick="showHideSection(this, 'section-1');">&#9658;&nbsp;</span>Raspberry Pi: <i>Oliv on Pi</i></a>
+      <a href="javascript:void(0)" onclick="showHideSection(this, 'section-1');"><span class="expand-collapse">&#9658;&nbsp;</span>Raspberry Pi: <i>Oliv on Pi</i></a>
       <div id="section-1" class="sub-section">
         <a class="active-link" href="http://raspberrypi.lediouris.net/" target="new">Java &amp; JVM</a>
         <a href="javascript:void(0)">HTML5/CSS3/ES6</a>
@@ -975,7 +981,7 @@ Date.prototype.format = function (dateFormat) {
       </div>
     </div>
     <div> <!-- onmouseover="showSection('section-2');" onmouseleave="hideSection('section-2');"> -->
-      <a href="javascript:void(0)"><span class="expand-collapse" onclick="showHideSection(this, 'section-2');">&#9658;&nbsp;</span>WebComponents</a>
+      <a href="javascript:void(0)" onclick="showHideSection(this, 'section-2');"><span class="expand-collapse">&#9658;&nbsp;</span>WebComponents</a>
       <div id="section-2" class="sub-section">
         <a class="active-link" href="./webcomponents/index.html" target="new">Index</a>
         <a class="active-link" href="./webcomponents/gallery.html" target="new">Oliv's gallery (WIP)</a>
@@ -983,7 +989,7 @@ Date.prototype.format = function (dateFormat) {
     </div>
 
     <div> <!-- onmouseover="showSection('section-2.0');" onmouseleave="hideSection('section-2.0');"> -->
-      <a href="javascript:void(0)"><span class="expand-collapse" onclick="showHideSection(this, 'section-2.0');">&#9658;&nbsp;</span>Other code repositories</a>
+      <a href="javascript:void(0)" onclick="showHideSection(this, 'section-2.0');"><span class="expand-collapse">&#9658;&nbsp;</span>Other code repositories</a>
       <div id="section-2.0" class="sub-section">
         <div class="sub-section-desc">Some git repos I own</div>
         <a class="active-link" href="https://github.com/OlivierLD/raspberry-coffee" target="new">Raspberry Coffee</a>
@@ -996,15 +1002,15 @@ Date.prototype.format = function (dateFormat) {
     </div>
 
 
-    <a href="javascript:void(0)">Jupyter Notebooks (Python & Java)</a>
+    <a href="javascript:void(0)" class="no-click">Jupyter Notebooks (Python & Java)</a>
     <div> <!-- onmouseover="showSection('section-2.1');" onmouseleave="hideSection('section-2.1');"> -->
-      <a href="javascript:void(0)"><span class="expand-collapse" onclick="showHideSection(this, 'section-2.1');">&#9658;&nbsp;</span>OpenCV, in Python & Java</a>
+      <a href="javascript:void(0)" onclick="showHideSection(this, 'section-2.1');"><span class="expand-collapse">&#9658;&nbsp;</span>OpenCV, in Python & Java</a>
       <div id="section-2.1" class="sub-section">
         <a class="active-link" href="https://github.com/OlivierLD/oliv-ai/blob/master/opencv/README.md" target="new">OpenCV examples</a>
       </div>
     </div>
     <div> <!-- onmouseover="showSection('section-3');" onmouseleave="hideSection('section-3');"> -->
-      <a href="javascript:void(0)" title="Artificial Intelligence, Machine Learning, Deep Learning..."><span onclick="showHideSection(this, 'section-3');">&#9658;&nbsp;</span>AI, ML, DL & Co</a>
+      <a href="javascript:void(0)" title="Artificial Intelligence, Machine Learning, Deep Learning..." onclick="showHideSection(this, 'section-3');"><span class="expand-collapse">&#9658;&nbsp;</span>AI, ML, DL & Co</a>
       <div id="section-3" class="sub-section">
         <a class="active-link" href="https://github.com/OlivierLD/oliv-ai/blob/master/JupyterNotebooks/deep.learning.crash.course/README.md">Neural Network and Deep Learning</a>
         <div class="sub-section-desc">An Artificial Intelligence Crash Course, from training a network to real hand-written digits recognition.</div>
@@ -1013,7 +1019,7 @@ Date.prototype.format = function (dateFormat) {
       </div>
     </div>
     <div> <!-- onmouseover="showSection('section-4');" onmouseleave="hideSection('section-4');"> -->
-      <a href="javascript:void(0)" title="GPS"><span class="expand-collapse" onclick="showHideSection(this, 'section-4');">&#9658;&nbsp;</span>GPS</a>
+      <a href="javascript:void(0)" title="GPS" onclick="showHideSection(this, 'section-4');"><span class="expand-collapse">&#9658;&nbsp;</span>GPS</a>
       <div id="section-4" class="sub-section">
         <a class="active-link" href="./web.stuff/gps/GPS.api.html" target="new">GPS 101</a>
         <a class="active-link" href="https://github.com/OlivierLD/raspberry-coffee/tree/master/Serial.IO#wiring-for-adafruit-ultimate-gps" target="new">Read a GPS from Java</a>
@@ -1027,7 +1033,7 @@ Date.prototype.format = function (dateFormat) {
       </div>
     </div>
     <div> <!-- onmouseover="showSection('section-5');" onmouseleave="hideSection('section-5');"> -->
-      <a href="javascript:void(0)" title="Books, articles, papers, etc."><span class="expand-collapse" onclick="showHideSection(this, 'section-5');">&#9658;&nbsp;</span>Books & Articles</a>
+      <a href="javascript:void(0)" title="Books, articles, papers, etc." onclick="showHideSection(this, 'section-5');"><span class="expand-collapse">&#9658;&nbsp;</span>Books & Articles</a>
       <div id="section-5" class="sub-section">
         <a class="active-link" href="http://navigation.lediouris.net/celest/NavigationSansElectricite.pdf" target="new">Naviguer sans &eacute;lectricit&eacute;</a>
         <div class="sub-section-desc">In French / En fran&ccedil;ais</div>
@@ -1043,13 +1049,13 @@ Date.prototype.format = function (dateFormat) {
       </div>
     </div>
     <div> <!-- onmouseover="showSection('section-6');" onmouseleave="hideSection('section-6');"> -->
-      <a href="javascript:void(0)"><span class="expand-collapse" onclick="showHideSection(this, 'section-6');">&#9658;&nbsp;</span>Weather etc...</a>
+      <a href="javascript:void(0)" onclick="showHideSection(this, 'section-6');"><span class="expand-collapse">&#9658;&nbsp;</span>Weather etc...</a>
       <div id="section-6" class="sub-section">
         <a class="active-link" href="http://donpedro.lediouris.net/software/html5/spot/spot.parser.html" target="SPOT">Online SPOT parser</a>
         <a class="active-link" href="#" onclick="showWeatherDialog();">Misc Weather Links</a>
       </div>
     </div>
-    <a href="javascript:void(0)">And more (to come...)</a>
+    <a href="javascript:void(0)" class="no-click">And more (to come...)</a>
   </div>
 
   <div style="width: 100%; position: fixed; bottom: 5px; left: 0;">
@@ -1230,11 +1236,12 @@ Date.prototype.format = function (dateFormat) {
   const EXPANDED_LINE = "&#9660;&nbsp;";
 
   function showHideSection(obj, id) {
+    let innerSpan = obj.querySelector('.expand-collapse');
     if (document.getElementById(id).style.visibility === 'visible') {  // Then hide it
-      obj.innerHTML = COLLAPSED_LINE;
+      innerSpan.innerHTML = COLLAPSED_LINE;
       hideSection(id);
     } else { // Show it
-      obj.innerHTML = EXPANDED_LINE;
+      innerSpan.innerHTML = EXPANDED_LINE;
       showSection(id);
     }
   }
