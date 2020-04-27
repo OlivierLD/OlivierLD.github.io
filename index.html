@@ -226,6 +226,19 @@ span.expand-collapse:hover {
   text-shadow: 2px 2px 4px grey, 0 0 25px white, 0 0 7px cyan;
 }
 
+.shadow-menu a:link, .shadow-menu a:visited {
+  color: darkblue;
+  text-decoration: none;
+}
+.shadow-menu a:hover {
+  color: navy;
+  text-shadow: 2px 2px 4px grey, 0 0 25px white, 0 0 7px cyan;
+}
+.shadow-menu a:active {
+  color: DarkOrange;
+  text-shadow: 2px 2px 4px grey, 0 0 25px white, 0 0 7px cyan;
+}
+
 .close-icon {
   position: absolute;
   right: 0;
@@ -942,7 +955,7 @@ Date.prototype.format = function (dateFormat) {
                    display-data='{ "text-array": ["Raspberry Pi", "Web Components", "Java & Processing", "HTML5, CSS3, ES6, NodeJS", "Python", "Arduino & Co", "and other toys..."], "x": 4, "y": 12 }'/>
   </div-->
 
-  <dialog id="weather-links-dialog">
+  <dialog id="weather-links-dialog"  class="shadow-menu">
     <h3>Some Weather links...</h3>
     <ul>
       <li><a href="https://www.windy.com/-Show---add-more-layers/overlays?36.769,-124.508,7" target="weather" title="Windy">Windy</a></li>
@@ -954,8 +967,13 @@ Date.prototype.format = function (dateFormat) {
       <li><a href="https://darksky.net/forecast/37.7489,-122.5072/ca12/en" target="weather" title="Dark Sky">Dark Sky</a></li>
       <li><a href="http://www.oceanbeach.org/webcam.html" target="weather" title="Ocean Beach WebCam">Ocean Beach WebCam</a></li>
       <li><a href="https://marine.weather.gov/MapClick.php?lon=-122.51095&lat=37.73344" target="weather" title="NOAA, OB">NOAA, for Ocean Beach</a></li>
+    </ul> 
+    <ul>
+      <li><a href="http://arbor-studios.com/thirdavecam.html" target="weather" title="3rd Ave Web Cam">3rd Ave Web Cam</a></li>
+      <li><a href="https://www.windguru.cz/208860" target="weather" title="WindGuru, Ocean Beach">WindGuru, Ocean Beach</a></li>
+      <li><a href="https://www.windguru.cz/208863" target="weather" title="WindGuru, #rd Ave">WindGuru, 3rd Avenue</a></li>
     </ul>
-    <button id="exit-weather-link">Close</button>
+    <button id="exit-weather-link" title="Close dialog">Close</button>
   </dialog>
 
   <!-- 
