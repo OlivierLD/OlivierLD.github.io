@@ -183,6 +183,23 @@ span.expand-collapse:hover {
   transition: transform 0.5s ease-out;
 }
 
+.w3-full-page-modal {
+  z-index: 10;
+  display: block;
+  transform: scaleY(0);
+  padding-top: 0;
+  padding-left: 0;
+  position: fixed;
+  left: 0;
+  top: 0;
+  /*width: 100%;*/
+  /*height: 100%;*/
+  overflow: auto;
+  /* background-color: rgb(0, 0, 0); */
+  /* background-color: rgba(0, 0, 0, 0.0); */
+  transition: transform 0.5s ease-out;
+}
+
 .w3-modal-content {
   margin: auto;
   background-color: 000;
@@ -788,6 +805,35 @@ Date.prototype.format = function (dateFormat) {
     </div>
   </div>
 
+  <div id="id00" class="w3-full-page-modal" style="width: 100%; min-height: 100%;">
+    <div class="" style="background-color: rgba(255, 255, 255, 1.0);"> <!-- w3-modal-content -->
+      <div class="">
+        <span onclick="hidePage00();"
+              class="close-icon">&times;</span>
+        <div style="border: 2px solid red; border-radius: 5px;">
+          <h1>A Full Modal Page example</h1>
+
+          <div>
+<p>
+Lorem ipsum dolor sit amet, ultrices cras ac, porta nec fringilla in rhoncus, accumsan tempor. Iaculis ornare diam nec vel id, dignissim scelerisque tincidunt tincidunt et ut in, in sapien maecenas pellentesque. Iaculis risus velit enim laoreet vestibulum diam, velit consectetuer mauris ipsum pharetra arcu vestibulum. Lorem maecenas ut nisl ut nisl lorem, arcu massa donec dolor suscipit nec, felis tincidunt pellentesque velit eget dignissim rutrum, nunc donec. Blandit aliquam, in id tortor vel orci amet tincidunt, ipsum in, aenean diam, mauris suspendisse wisi morbi penatibus sapien posuere.
+</p>
+<p>
+Sed in lacinia nulla sapien, etiam sit porta scelerisque. Placerat pulvinar urna adipiscing rutrum quis. Nunc enim, malesuada nulla turpis, quis at iaculis in, et quam ornare pellentesque dolor duis. Ut tempor leo mauris, tellus suspendisse semper cras, maecenas ac consectetuer eu. Porttitor ac scelerisque sollicitudin sed voluptate. Velit iaculis luctus cras tincidunt quis, quis quis nulla diam fames ullamcorper, magna quis a eget consectetuer, in integer, tristique duis orci convallis scelerisque aliquam sit. Neque lobortis nulla elit, vel leo ut donec sapien nullam pede, in duis, excepturi turpis et est proin, pulvinar fermentum metus vel.
+</p>
+<p>
+Est nulla ultrices placerat. Nam elit nec, fringilla inceptos lacus nonummy, vivamus accumsan elit eu in. In fringilla ac a scelerisque. At porta rutrum quis vestibulum quam eu. Praesent pellentesque elementum ac consequat, proin natoque sit varius blandit, placerat ullamcorper mauris sed aenean nulla augue, nibh nisl pellentesque nulla luctus, elit at aliquam at turpis vestibulum. Amet orci volutpat aliquam et cum, distinctio venenatis, amet eu feugiat, gravida ad leo qui wisi, nunc quis interdum massa est et. Urna maecenas eu eu class, consectetuer vivamus, urna et cursus consectetuer phasellus in, nulla tincidunt eleifend. Eros wisi. Dignissim sagittis imperdiet malesuada, non est consectetuer est rhoncus, vestibulum class malesuada felis tincidunt nostra sodales, nunc et vivamus vel luctus sem. Est morbi quis, nec eget libero erat, integer ut vitae ipsum litora libero adipiscing.
+</p>
+<p>
+Placerat felis at lectus amet. Volutpat congue primis dictum elit nunc, accumsan purus facilisis sit ut. Quisque urna lobortis lobortis et vestibulum vel. Nulla nullam massa vivamus, ut nec orci volutpat elit facilisis. Ut risus in vulputate sed semper. Nec scelerisque duis ipsum sed, ipsum nulla turpis pulvinar sed enim, pretium cras erat diam curabitur vestibulum risus, velit a facilisis fermentum occaecati, nonummy ipsum id enim et consectetuer. Nec aliquet erat urna diam dolor, posuere quam, ultricies erat scelerisque magna vitae, sociis quis velit, quis arcu vestibulum leo eget malesuada. Risus purus ut, morbi etiam luctus, ullamcorper sit nisl, maecenas accumsan tellus lacus tempus scelerisque sed, imperdiet blandit pretium dignissim placerat. Aliquam in purus sed, enim lacus velit iaculis orci. Elit ac nunc quis, purus pellentesque ut eleifend, facilisis ac massa nisi lorem, donec ac adipiscing viverra sed nec, in mattis fames massa curabitur mauris.
+</p>
+          </div>
+          <hr/>
+          <span style="font-style: italic;">This is a full modal page</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div id="id02" class="floating-menu no-shadow" onmouseleave="hideKebabMenu()">
     <div>
       <h4 style="margin-left: 10px;">More links</h4>
@@ -987,6 +1033,9 @@ Date.prototype.format = function (dateFormat) {
   <div id="side-nav" class="sidenav"> <!-- onmouseleave="closeNav()"> -->
     <a href="javascript:void(0)" id="close-nav-button" class="closebtn" onclick="closeNav()">&times;</a>
     <a href="javascript:void(0)" class="active-link" onclick="showAbout()">About me</a>
+
+    <a href="javascript:void(0)" class="active-link" onclick="showPage00()">A Full Page</a>
+
     <!--a href="javascript:void(0)" class="active-link" onclick="marqueeOnOff()">Marquee Panel (start or stop)</a-->
     <div> <!-- onmouseover="showSection('section-1');" onmouseleave="hideSection('section-1');"> -->
       <a href="javascript:void(0)" onclick="showHideSection(this, 'section-1');"><span class="expand-collapse">&#9658;&nbsp;</span>Raspberry Pi: <i>Oliv on Pi</i></a>
@@ -1217,6 +1266,16 @@ Date.prototype.format = function (dateFormat) {
   function hideAbout() {
     // document.getElementById('id01').style.display = 'none';
     document.getElementById('id01').style.transform = 'scaleX(0)';
+  }
+
+  function showPage00() {
+    // document.getElementById('id01').style.display = 'block';
+    document.getElementById('id00').style.transform = 'scaleY(1)';
+  }
+
+  function hidePage00() {
+    // document.getElementById('id01').style.display = 'none';
+    document.getElementById('id00').style.transform = 'scaleY(0)';
   }
 
   function showKebabMenu() {
