@@ -844,7 +844,7 @@ Date.prototype.format = function (dateFormat) {
     <div class="" style="background-color: black;">
       <div class="" style="background: black;">
         <span onclick="hidePage001();"
-              class="close-icon">&times;</span>
+              class="close-icon" style="margin-right: 20px;">&times;</span>
         <div style="overflow-y: auto;">
            <iframe src="./misc.pix/2020.02.Hawaii/index.html" width="100%" style="min-height: 1000px;"></iframe> 
         </div>  
@@ -1052,9 +1052,6 @@ Date.prototype.format = function (dateFormat) {
     <a href="javascript:void(0)" id="close-nav-button" class="closebtn" onclick="closeNav()">&times;</a>
     <a href="javascript:void(0)" class="active-link" onclick="showAbout()">About me</a>
 
-    <a href="javascript:void(0)" class="active-link" onclick="showPage00()">A Full Modal Page (div)</a>
-    <a href="javascript:void(0)" class="active-link" onclick="showPage001()">A Full Modal Page (iframe)</a>
-
     <!--a href="javascript:void(0)" class="active-link" onclick="marqueeOnOff()">Marquee Panel (start or stop)</a-->
     <div> <!-- onmouseover="showSection('section-1');" onmouseleave="hideSection('section-1');"> -->
       <a href="javascript:void(0)" onclick="showHideSection(this, 'section-1');"><span class="expand-collapse">&#9658;&nbsp;</span>Raspberry Pi: <i>Oliv on Pi</i></a>
@@ -1078,6 +1075,12 @@ Date.prototype.format = function (dateFormat) {
         <a class="active-link" href="./webcomponents/index.html" target="new">Index</a>
         <a class="active-link" href="./webcomponents/gallery.html" target="new">Oliv's gallery (WIP)</a>
       </div>
+    </div>
+
+    <a href="javascript:void(0)" onclick="showHideSection(this, 'section-00');" title="Modal pages examples"><span class="expand-collapse">&#9658;&nbsp;</span>Single Page App stuff</a>
+    <div id="section-00" class="sub-section">
+      <a href="javascript:void(0)" class="active-link" onclick="showPage00()">A Full Modal Page, with a &lt;div&gt;</a>
+      <a href="javascript:void(0)" class="active-link" onclick="showPage001()">A Full Modal Page, with an &lt;iframe&gt;</a>
     </div>
 
     <div> <!-- onmouseover="showSection('section-2.0');" onmouseleave="hideSection('section-2.0');"> -->
