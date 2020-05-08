@@ -817,8 +817,8 @@ Date.prototype.format = function (dateFormat) {
         <div style="overflow-y: auto;">
           <h1>Turning a small birch cup</h1>
           <div style="margin: 15px;">
-          <small>Click on the images to enlarge them</small>
-        </div>
+            <small>Click on the images to enlarge them</small>
+          </div>
           <table style="margin: auto;">
             <tr>
               <td style="text-align: center; padding: 5px; border: 1px solid cyan; border-radius: 5px;"><a href="misc.pix/birch.cup/20200229_164736.jpg" target="new"><img src="misc.pix/birch.cup/20200229_164736.jpg" width="360" height="640"/></a></td>
@@ -832,15 +832,25 @@ Date.prototype.format = function (dateFormat) {
               <td style="text-align: center; padding: 5px; border: 1px solid cyan; border-radius: 5px;"><a href="misc.pix/birch.cup/20200304_154020.jpg" target="new"><img src="misc.pix/birch.cup/20200304_154020.jpg" width="360" height="640"/></a></td>
             </tr>
           </table>
-
           <hr/>
           <span style="font-style: italic; font-weight: normal;">Oliv did it, 2020.</span>
         </div>
-
-
       </div>
     </div>
   </div>
+
+  <div id="id00-1" class="w3-full-page-modal" style="width: 100%;">
+    <!-- An example of a modal FULL page -->
+    <div class="" style="background-color: black;">
+      <div class="" style="background: black;">
+        <span onclick="hidePage001();"
+              class="close-icon">&times;</span>
+        <div style="overflow-y: auto;">
+           <iframe src="./misc.pix/2020.02.Hawaii/index.html" width="100%" style="min-height: 1000px;"></iframe> 
+        </div>  
+      </div>
+    </div>
+  </div>    
 
   <div id="id02" class="floating-menu no-shadow" onmouseleave="hideKebabMenu()">
     <div>
@@ -1042,7 +1052,8 @@ Date.prototype.format = function (dateFormat) {
     <a href="javascript:void(0)" id="close-nav-button" class="closebtn" onclick="closeNav()">&times;</a>
     <a href="javascript:void(0)" class="active-link" onclick="showAbout()">About me</a>
 
-    <a href="javascript:void(0)" class="active-link" onclick="showPage00()">A Full Modal Page</a>
+    <a href="javascript:void(0)" class="active-link" onclick="showPage00()">A Full Modal Page (div)</a>
+    <a href="javascript:void(0)" class="active-link" onclick="showPage001()">A Full Modal Page (iframe)</a>
 
     <!--a href="javascript:void(0)" class="active-link" onclick="marqueeOnOff()">Marquee Panel (start or stop)</a-->
     <div> <!-- onmouseover="showSection('section-1');" onmouseleave="hideSection('section-1');"> -->
@@ -1285,6 +1296,16 @@ Date.prototype.format = function (dateFormat) {
   function hidePage00() {
     // document.getElementById('id01').style.display = 'none';
     document.getElementById('id00').style.transform = 'scaleY(0)';
+  }
+
+  function showPage001() {
+    // document.getElementById('id01').style.display = 'block';
+    document.getElementById('id00-1').style.transform = 'scaleY(1)';
+  }
+
+  function hidePage001() {
+    // document.getElementById('id01').style.display = 'none';
+    document.getElementById('id00-1').style.transform = 'scaleY(0)';
   }
 
   function showKebabMenu() {
