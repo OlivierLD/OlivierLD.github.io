@@ -600,7 +600,7 @@
 
 		// Example of callback on WorldMap
 		function callBefore(id) {
-			document.getElementById(id).setDoBefore(function(worldMap, context) {
+			document.getElementById(id).setDoBefore((worldMap, context) => {
 				context.fillStyle = 'pink';
 				let fontBackup = context.font;
 				context.font = "bold 48px Verdana";
@@ -769,7 +769,7 @@
 
 		// Example of callback on WorldMap
 		function callAfter(id) {
-			document.getElementById(id).setDoAfter(function(worldMap, context) {
+			document.getElementById(id).setDoAfter((worldMap, context) => {
 				if (Object.keys(worldMap.userPosition).length > 0) {
 					let userPos = worldMap.getPanelPoint(worldMap.userPosition.latitude, worldMap.userPosition.longitude);
 					/*
