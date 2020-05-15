@@ -282,6 +282,7 @@
 					value += 180;
 				}
 				elem.title = `${value>=0?"R":"L"}${Math.abs(value).toFixed(0)}°`;
+				elem.smallLabel = `Tilt: ${value>=0?"R.":"L."}${Math.abs(value).toFixed(0)}°`;
 			}
 		}
 
@@ -5301,7 +5302,10 @@
 					<div class="black-frame centered">
 						<moon-phase id="moon-phase-01"
 												title="Moon Phase"
-												phase="45"/>
+												phase="45"
+												tilt="-10"
+												label="The Moon!"
+												small-label=" - "/>
 					</div>
 					<div class="black-frame centered">
 						Tilt:
