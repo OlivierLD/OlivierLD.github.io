@@ -1102,7 +1102,7 @@ Date.prototype.format = function (dateFormat) {
     <div id="section-00" class="sub-section">
       <a href="javascript:void(0)" class="active-link" onclick="showPage00()">A Full Modal Page, with a &lt;div&gt;</a>
       <a href="javascript:void(0)" class="active-link" onclick="showPage001()">A Full Modal Page, with an &lt;iframe&gt;</a>
-      <a href="javascript:void(0)" class="active-link" onclick="showPage002()">A Full Modal Page, with an &lt;iframe&gt;, external.</a>
+      <a href="javascript:void(0)" class="active-link" onclick="showPage002()">A Full Modal Page, with an &lt;iframe&gt;, (external not allowed... CORS)</a>
     </div>
 
     <div> <!-- onmouseover="showSection('section-2.0');" onmouseleave="hideSection('section-2.0');"> -->
@@ -1333,8 +1333,10 @@ Date.prototype.format = function (dateFormat) {
   }
 
   function showPage002() {
-    // CORS Work around, use URL https://github.com/OlivierLD/raspberry-coffee/blob/master/NMEA-mux-WebUI/full-server-extended-v2/README.md
-    let corsUrl = "https://github.com/OlivierLD/raspberry-coffee/blob/master/NMEA-mux-WebUI/full-server-extended-v2/README.md";
+    // CORS, use URL https://github.com/OlivierLD/raspberry-coffee/blob/master/NMEA-mux-WebUI/full-server-extended-v2/README.md
+    let corsUrl = "./index.2.html";
+      // "http://olivier.lediouris.net/";
+      // "https://github.com/OlivierLD/raspberry-coffee/blob/master/NMEA-mux-WebUI/full-server-extended-v2/README.md";
     document.getElementById('cors-work-around').src = corsUrl;
     // document.getElementById('id01').style.display = 'block';
     document.getElementById('id00-2').style.transform = 'scaleY(1)';
