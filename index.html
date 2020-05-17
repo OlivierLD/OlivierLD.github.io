@@ -860,6 +860,19 @@ Date.prototype.format = function (dateFormat) {
     </div>
   </div>    
 
+  <div id="id00-2" class="w3-full-page-modal" style="width: 100%;">
+    <!-- An example of a modal FULL page -->
+    <div class="" style="background-color: black;">
+      <div class="" style="background: black;">
+        <span onclick="hidePage002();"
+              class="close-icon bigger-close-icon" style="margin-right: 20px;">&times;</span>
+        <div style="overflow-y: auto;">
+           <iframe id="cors-work-around" src="" width="100%" style="min-height: 1000px;"></iframe> 
+        </div>  
+      </div>
+    </div>
+  </div>    
+
   <div id="id02" class="floating-menu no-shadow" onmouseleave="hideKebabMenu()">
     <div>
       <h4 style="margin-left: 10px;">More links</h4>
@@ -1089,6 +1102,7 @@ Date.prototype.format = function (dateFormat) {
     <div id="section-00" class="sub-section">
       <a href="javascript:void(0)" class="active-link" onclick="showPage00()">A Full Modal Page, with a &lt;div&gt;</a>
       <a href="javascript:void(0)" class="active-link" onclick="showPage001()">A Full Modal Page, with an &lt;iframe&gt;</a>
+      <a href="javascript:void(0)" class="active-link" onclick="showPage002()">A Full Modal Page, with an &lt;iframe&gt;, external.</a>
     </div>
 
     <div> <!-- onmouseover="showSection('section-2.0');" onmouseleave="hideSection('section-2.0');"> -->
@@ -1316,6 +1330,19 @@ Date.prototype.format = function (dateFormat) {
   function hidePage001() {
     // document.getElementById('id01').style.display = 'none';
     document.getElementById('id00-1').style.transform = 'scaleY(0)';
+  }
+
+  function showPage002() {
+    // CORS Work around, use URL https://github.com/OlivierLD/raspberry-coffee/blob/master/NMEA-mux-WebUI/full-server-extended-v2/README.md
+    let corsUrl = "https://github.com/OlivierLD/raspberry-coffee/blob/master/NMEA-mux-WebUI/full-server-extended-v2/README.md";
+    document.getElementById('cors-work-around').src = corsUrl;
+    // document.getElementById('id01').style.display = 'block';
+    document.getElementById('id00-2').style.transform = 'scaleY(1)';
+  }
+
+  function hidePage002() {
+    // document.getElementById('id01').style.display = 'none';
+    document.getElementById('id00-2').style.transform = 'scaleY(0)';
   }
 
   function showKebabMenu() {
