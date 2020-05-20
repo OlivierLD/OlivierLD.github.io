@@ -28,6 +28,8 @@ let workDir = process.cwd();
 
 console.log("----------------------------------------------------");
 console.log("Usage: node " + __filename + " --verbose:true|false --port:XXXX --wdir:path/to/working/dir");
+console.log("Example:");
+console.log("    node " + __filename + " --wdir:.");
 console.log("----------------------------------------------------");
 
 for (let i=0; i<process.argv.length; i++) {

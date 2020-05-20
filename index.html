@@ -294,8 +294,8 @@ span.expand-collapse:hover {
 .marquee-01 {
   --bg-color-from: rgba(0, 0, 0, 0);
   --bg-color-to: rgba(0, 0, 0, 0);
-  --fg-color-from: red;
-  --fg-color-to: orange;
+  --fg-color-from: lime;
+  --fg-color-to: cyan;
 }
 
 .the-slides {
@@ -799,7 +799,7 @@ Date.prototype.format = function (dateFormat) {
 };
 
 </script>
-<!--script type="module" src="./webcomponents/widgets/marquee/MarqueePanel.js"></script-->
+<script type="module" src="./webcomponents/widgets/marquee/MarqueePanel.js"></script>
 
 </head>
 <body class="bg-gradient">
@@ -1014,6 +1014,21 @@ Date.prototype.format = function (dateFormat) {
       <div class="text">EIGHT</div>
     </div>
 
+    <div class="the-slides fade">
+      <div class="number-text">Bonus</div>
+      <div class="display">
+        <marquee-panel id="marquee-panel-01"
+                       class="marquee-01"
+                       width="480"
+                       height="350"
+                       nb-cols="128"
+                       nb-lines="64"
+                       title="To start or stop the marquee&#13;Use the link below"
+                       display-data='{ "text-array": ["Raspberry Pi", "Web Components", "Java & Processing", "HTML5, CSS3, ES6", "NodeJS", "Python", "Arduino & Co", "3D printing", "and other toys..."], "x": 4, "y": 12 }'/>
+      </div>
+      <div class="text"><a href="javascript:void(0)" class="active-link" style="font-style: italic; font-size: 12px;" onclick="marqueeOnOff()">Marquee Panel (start or stop)</a></div>
+    </div>
+
     <div class="prev" onclick="plusSlides(-1);">&#10094;</div>
     <div class="next" onclick="plusSlides(1);">&#10095;</div>
 
@@ -1026,6 +1041,7 @@ Date.prototype.format = function (dateFormat) {
       <span class="dot" onclick="currentSlide(6);" title="Web 2.0"></span>
       <span class="dot" onclick="currentSlide(7);" title="Sailing"></span>
       <span class="dot" onclick="currentSlide(8);" title="3D Print"></span>
+      <span class="dot" onclick="currentSlide(9);" title="Marquee"></span>
     </div>
   </div>
 
@@ -1268,7 +1284,7 @@ Date.prototype.format = function (dateFormat) {
   }
 
   let marqueeScrollUpAnimationInterval;
-  let defaultMarqueeTextArray = [ 'Raspberry Pi', 'Web Components', 'Java & Processing', 'HTML5, CSS3, ES6, NodeJS', 'Python', 'Arduino & Co', 'and other toys...' ];
+  let defaultMarqueeTextArray = [ 'Raspberry Pi', 'Web Components', 'Java & Processing', 'HTML5, CSS3, ES6', 'NodeJS', 'Python', '3D Printing', 'Arduino & Co', 'and other toys...' ];
   function marqueeScrollUp(marqueeId) {
     if (marqueeScrollUpAnimationInterval !== undefined) {
       window.clearInterval(marqueeScrollUpAnimationInterval); // Stop.
@@ -1481,8 +1497,10 @@ Date.prototype.format = function (dateFormat) {
     "Raspberry Pi",
     "Web&nbsp;Components",
     "Java&nbsp;&amp;&nbsp;Processing",
-    "HTML5,&nbsp;CSS3,&nbsp;ES6,&nbsp;NodeJS",
+    "HTML5,&nbsp;CSS3,&nbsp;ES6",
+    "NodeJS",
     "Python",
+    "3D Printing",
     "Arduino&nbsp;&amp;&nbsp;Co"
   ];
   let aboutDiv = undefined;
