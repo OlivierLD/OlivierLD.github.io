@@ -597,6 +597,19 @@ button:hover, button:focus {
   border: 2px solid #dad9d8;
 }
 
+.dialog-header {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.dialog-header-close {
+  float: right;
+}
+.dialog-header-close:hover {
+  color: cyan;
+  cursor: pointer;
+}
+
 </style>
 
 <script type="text/javascript">
@@ -1047,7 +1060,10 @@ Date.prototype.format = function (dateFormat) {
   </div>
 
   <dialog id="weather-links-dialog" class="shadow-menu">
-    <h3>Some Weather links...</h3>
+    <div class="dialog-header">
+      <span>Some Weather links...</span>
+      <span class="dialog-header-close" onclick="weatherDialog.close();">&times</span>
+    </div>
     <ul>
       <li><a href="https://www.windy.com/-Show---add-more-layers/overlays?36.769,-124.508,7" target="weather" title="Windy">Windy</a></li>
       <li><a href="https://earth.nullschool.net/#current/wind/surface/level/orthographic=-128.63,17.95,339" target="weather" title="Earth Wind Map">EarthWindMap</a></li>
@@ -1064,7 +1080,7 @@ Date.prototype.format = function (dateFormat) {
       <li><a href="https://www.windguru.cz/208860" target="weather" title="WindGuru, Ocean Beach">WindGuru, Ocean Beach</a></li>
       <li><a href="https://www.windguru.cz/208863" target="weather" title="WindGuru, #rd Ave">WindGuru, 3rd Avenue</a></li>
     </ul>
-    <button id="exit-weather-link" title="Close dialog">Close</button>
+    <!--button id="exit-weather-link" title="Close dialog">Close</button-->
   </dialog>
 
   <!--
@@ -1697,7 +1713,10 @@ Date.prototype.format = function (dateFormat) {
 
     // Dialog management
     let weatherDialog = document.getElementById("weather-links-dialog");
-    document.getElementById('exit-weather-link').onclick = () => { weatherDialog.close(); };
+    try {
+      document.getElementById('exit-weather-link').onclick = () => { weatherDialog.close(); };
+    } catch (err) {
+    }
 
     console.log('Loaded! Pouet!');
   })();
