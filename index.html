@@ -1062,7 +1062,7 @@ Date.prototype.format = function (dateFormat) {
   <dialog id="weather-links-dialog" class="shadow-menu">
     <div class="dialog-header">
       <span>Some Weather links...</span>
-      <span class="dialog-header-close" onclick="weatherDialog.close();">&times</span>
+      <span class="dialog-header-close" onclick="closeWeatherDialog();">&times</span>
     </div>
     <ul>
       <li><a href="https://www.windy.com/-Show---add-more-layers/overlays?36.769,-124.508,7" target="weather" title="Windy">Windy</a></li>
@@ -1637,6 +1637,11 @@ Date.prototype.format = function (dateFormat) {
   function showWeatherDialog() {
     let weatherDialog = document.getElementById("weather-links-dialog");
     weatherDialog.show();
+  }
+
+  function closeWeatherDialog() {
+    let weatherDialog = document.getElementById("weather-links-dialog");
+    weatherDialog.close();
   }
 
   (() => {
