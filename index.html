@@ -886,6 +886,19 @@ Date.prototype.format = function (dateFormat) {
     </div>
   </div>
 
+  <div id="id00-3" class="w3-full-page-modal" style="width: 100%;">
+    <!-- An example of a modal FULL page -->
+    <div class="" style="background-color: black;">
+      <div class="" style="background: black;">
+        <span onclick="hidePage003();"
+              class="close-icon bigger-close-icon" style="margin-right: 20px;">&times;</span>
+        <div style="overflow-y: auto;">
+           <iframe src="./systems/smoothing.spray.html" width="100%" style="min-height: 1000px;"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div id="id02" class="floating-menu no-shadow" onmouseleave="hideKebabMenu()">
     <div>
       <h4 style="margin-left: 10px;">More links</h4>
@@ -1126,6 +1139,7 @@ Date.prototype.format = function (dateFormat) {
       <a href="javascript:void(0)" class="active-link" onclick="showPage00()">A Full Modal Page, with a &lt;div&gt;</a>
       <a href="javascript:void(0)" class="active-link" onclick="showPage001()">A Full Modal Page, with an &lt;iframe&gt;</a>
       <a href="javascript:void(0)" class="active-link" onclick="showPage002()">A Full Modal Page, with an &lt;iframe&gt;, (external not allowed... CORS)</a>
+      <a href="javascript:void(0)" class="active-link" onclick="showPage003()">A Full Modal Page, with an &lt;iframe&gt;, linear regression</a>
     </div>
 
     <div> <!-- onmouseover="showSection('section-2.0');" onmouseleave="hideSection('section-2.0');"> -->
@@ -1378,6 +1392,16 @@ Date.prototype.format = function (dateFormat) {
   function hidePage002() {
     // document.getElementById('id01').style.display = 'none';
     document.getElementById('id00-2').style.transform = 'scaleY(0)';
+  }
+
+  function showPage003() {
+    // document.getElementById('id01').style.display = 'block';
+    document.getElementById('id00-3').style.transform = 'scaleY(1)';
+  }
+
+  function hidePage003() {
+    // document.getElementById('id01').style.display = 'none';
+    document.getElementById('id00-3').style.transform = 'scaleY(0)';
   }
 
   function showKebabMenu() {
