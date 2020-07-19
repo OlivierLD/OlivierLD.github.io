@@ -208,15 +208,19 @@ function leastSquares(requiredDegree, data) {
 
 let fromNode = false;
 
-if (process !== undefined) {
-	for (let i = 0; i < process.argv.length; i++) {
-		console.log("arg #%d: %s", i, process.argv[i]);
-		if (process.argv[i] === 'from-node') {
-			fromNode = true;
+try {
+	if (process !== undefined) {
+		for (let i = 0; i < process.argv.length; i++) {
+			console.log("arg #%d: %s", i, process.argv[i]);
+			if (process.argv[i] === 'from-node') {
+				fromNode = true;
+			}
 		}
+		console.log("Usage is:");
+		console.log("\tnode matrix.js from-node");
 	}
-	console.log("Usage is:");
-	console.log("\tnode matrix.js from-node");
+} catch (err) {
+	console.log("Not on Node...");
 }
 
 if (fromNode) {
