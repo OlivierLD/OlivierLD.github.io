@@ -1,6 +1,6 @@
 /**
  * Utilities for system resolution, least squares, etc.
- * This follows the ES5 standard.
+ * This follows the ES6 standard.
  *
  * @param dim
  * @constructor
