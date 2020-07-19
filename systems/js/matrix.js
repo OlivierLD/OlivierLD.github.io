@@ -10,7 +10,7 @@ function SquareMatrix(dim) {
 	let matrixElements = [];
 	for (let row = 0; row < dim; row++) {
 		let line = [];
-		for (var col = 0; col < dim; col++) {
+		for (let col = 0; col < dim; col++) {
 			line.push(0);
 		}
 		matrixElements.push(line);
@@ -41,7 +41,7 @@ function minor(m, row, col) {
 	let small = new SquareMatrix(m.getDimension() - 1);
 	for (let c = 0; c < m.getDimension(); c++) {
 		if (c !== col) {
-			for (var r = 0; r < m.getDimension(); r++) {
+			for (let r = 0; r < m.getDimension(); r++) {
 				if (r !== row) {
 					small.setElementAt(((r < row) ? r : (r - 1)), ((c < col) ? c : (c - 1)), m.getElementAt(r, c));
 				}
