@@ -51,7 +51,7 @@ OpenSource JavaScript map API at <a href="https://leafletjs.com/" target="leafle
             <!--div id="mapid" style="width: 1200px; height: 800px;"></div-->
             <div id="mapid" style="width: 1200px; height: 600px;"></div>
         </td>
-        <td valign="top">
+        <td valign="top" align="right">
             <div id="curr-pos"></div>
         </td>
     </tr>
@@ -65,7 +65,11 @@ OpenSource JavaScript map API at <a href="https://leafletjs.com/" target="leafle
         let dec = absVal - intValue;
         let i = intValue;
         dec *= 60;
-        let s = i + "°" + dec.toFixed(4) + "'";
+        let min = dec.toFixed(4);
+        while (min.length < 7) {
+            min = '0' + min;
+        }
+        let s = i + "°" + min + "'";
 
         if (val < 0) {
             s += (ns_ew === 'NS' ? 'S' : 'W');
