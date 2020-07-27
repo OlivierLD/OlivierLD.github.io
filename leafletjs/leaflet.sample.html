@@ -4,10 +4,6 @@
  | Requires the leafletjs resources to be in a "leaflet" directory under "web".
  | Available from http://leafletjs.com/
  | Tutorials and examples at https://leafletjs.com/examples.html
- |
- | Clickable map
- |
- | TODO: "Drive" mode on a track.
  | Note: No native way to change orientation
  +-->
 <head>
@@ -32,9 +28,15 @@
 </head>
 <body style='font-family: "Source Code Pro", "Courier New", Helvetica, Geneva; font-weight: bold;'>
 
+OpenSource JavaScript map API at <a href="https://leafletjs.com/" target="leaflet">leafletjs.com</a>
+
 <!--div id="mapid" style="width: 600px; height: 400px;"></div-->
 <div style="margin: 5px;">
-    <span id="point-card" style="margin: 10px;"></span><button onclick="drive();">Follow Path</button>
+    <span id="curr-point" style="margin: 10px;"></span><span id="point-card" style="margin: 10px;"></span>
+    <button id="start-path" onclick="pathIdx = 0; drive();">Follow Path</button>
+    <button id="cancel-path" onclick="cancelDrive();" disabled>Cancel</button>
+    <button id="stop-path" onclick="stopDriving();" disabled>Pause</button>
+    <button id="resume-path" onclick="resumeDriving();" disabled>Resume</button>
 </div>
 <!--
  | Try
@@ -43,8 +45,18 @@
  | - map.flyTo(new L.LatLng(40.737, -73.923));
  +-->
 
-<!--div id="mapid" style="width: 1200px; height: 800px;"></div-->
-<div id="mapid" style="width: 1200px; height: 600px;"></div>
+<table>
+    <tr>
+        <td valign="top">
+            <!--div id="mapid" style="width: 1200px; height: 800px;"></div-->
+            <div id="mapid" style="width: 1200px; height: 600px;"></div>
+        </td>
+        <td valign="top">
+            <div id="curr-pos"></div>
+        </td>
+    </tr>
+</table>    
+
 <script>
 
     function decToSex(val, ns_ew) {
@@ -53,7 +65,7 @@
         let dec = absVal - intValue;
         let i = intValue;
         dec *= 60;
-        let s = i + "°" + dec.toFixed(2) + "'";
+        let s = i + "°" + dec.toFixed(4) + "'";
 
         if (val < 0) {
             s += (ns_ew === 'NS' ? 'S' : 'W');
@@ -79,7 +91,18 @@
     // zoom the map to the polyline
     map.fitBounds(polyline.getBounds());
 
-    let i = 0;
+    let pathIdx = 0;
+    let keepDriving = true;
+    let cancelDriving = true;
+
+    map.addEventListener('mousemove', (event) => {
+        // let lat = Math.round(event.latlng.lat * 100000) / 100000;
+        // let lng = Math.round(event.latlng.lng * 100000) / 100000;
+        if (cancelDriving) {
+            document.getElementById('curr-pos').innerHTML = `${decToSex(event.latlng.lat, "NS")}<br/>${decToSex(event.latlng.lng, "EW")}`;
+        }
+    });
+
     let circle = null;
     let marker = null;
 
@@ -94,36 +117,77 @@
     // on button click
     function drive() {
 
+        cancelDriving = false;
+
+        document.getElementById('start-path').disabled = true;
+        document.getElementById('cancel-path').disabled = false;
+        document.getElementById('stop-path').disabled = false;
+        document.getElementById('resume-path').disabled = true;
         // Recurse it that one.
         function moveTo(j) {
-            if (j < latlngs.length) {
-                let pos = latlngs[i];
-                window.setTimeout(() => {
-                    console.log(`${i}/${latlngs.length}: ${decToSex(pos[0], "NS")}, ${decToSex(pos[1], "EW")}`);
-                    // map.setZoom(20);
-                    map.panTo(new L.LatLng(pos[0], pos[1]));
+            if (j < latlngs.length && !cancelDriving) {
+                let pos = latlngs[j];
+                if (keepDriving) {
+                    window.setTimeout(() => {
+                        document.getElementById('curr-pos').innerHTML = `${decToSex(pos[0], "NS")}<br/>${decToSex(pos[1], "EW")}`;
+                        document.getElementById('curr-point').innerText = `${j} /`;
+                        // map.setZoom(20);
+                        map.panTo(new L.LatLng(pos[0], pos[1]));
 
-                    if (circle !== null) {
-                        map.removeLayer(circle);
-                    }
-                    if (marker !== null) {
-                        map.removeLayer(marker);
-                    }
-                    circle = L.circle([pos[0], pos[1]], 50, {
-                        color: 'green',
-                        fillColor: '#30f',
-                        fillOpacity: 0.25
-                    });
-                    marker = L.marker([pos[0], pos[1]]);
-                    circle.addTo(map);
-                    marker.addTo(map)
+                        if (circle !== null) {
+                            map.removeLayer(circle);
+                        }
+                        if (marker !== null) {
+                            map.removeLayer(marker);
+                        }
+                        circle = L.circle([pos[0], pos[1]], 50, {
+                            color: 'green',
+                            fillColor: '#30f',
+                            fillOpacity: 0.25
+                        });
+                        marker = L.marker([pos[0], pos[1]]);
+                        circle.addTo(map);
+                        marker.addTo(map)
 
-                    i += 1; // 5;
-                    moveTo(i);
-                }, 50);
+                        pathIdx += 1; // 5;
+                        moveTo(pathIdx);
+                    }, 50);
+                }
+            } else {
+                document.getElementById('start-path').disabled = false;
+                document.getElementById('cancel-path').disabled = true;
+                document.getElementById('stop-path').disabled = true;
+                document.getElementById('resume-path').disabled = true;
+                document.getElementById('curr-point').innerText = "";
+                document.getElementById('curr-pos').innerHTML = "";
+                if (circle !== null) {
+                    map.removeLayer(circle);
+                }
+                if (marker !== null) {
+                    map.removeLayer(marker);
+                }
+                pathIdx = 0;
             }
         }
-        moveTo(i);
+        moveTo(pathIdx);
+    }
+
+    function cancelDrive() {
+        cancelDriving = true;
+        pathIdx = 0;
+    }
+
+    function stopDriving() {
+        keepDriving = !keepDriving;
+        document.getElementById('stop-path').disabled = true;
+        document.getElementById('resume-path').disabled = false;
+    }
+
+    function resumeDriving() {
+        keepDriving = !keepDriving;
+        drive();
+        document.getElementById('stop-path').disabled = false;
+        document.getElementById('resume-path').disabled = true;
     }
 
     window.onload = () => {
