@@ -83,6 +83,14 @@
     let circle = null;
     let marker = null;
 
+    let imageLocation = "../misc.pix/2020.02.Hawaii/bird.feeding/20200218_082659.jpg";
+    let imgWidth = 1228;
+    let imgHeight = 691;
+
+    L.marker([38.054876666666665,-122.94698666666666]).addTo(map)
+        .bindPopup(`<b>Birds!</b><br /><img src='${imageLocation}' width='${(imgWidth / 4).toFixed(0)}' height='${(imgHeight / 4).toFixed(0)}'>`)
+        .bindTooltip("Birds"); // .openPopup();
+
     // on button click
     function drive() {
 
