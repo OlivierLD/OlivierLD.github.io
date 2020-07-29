@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<gpx version="1.1" creator="WeatherWizard"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xmlns="http://www.topografix.com/GPX/1/1"
+     xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+    <trk>
+        <number>1289786857</number>
+        <trkseg>
+            <!--trkpt lat="" lon="">
+                <time>2010-10-02T04:30:00Z</time>
+                <name>00002</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt-->
+            <trkpt lat='1.98716666666667' lon='-157.481666666667'>
+                <time>2011-02-28T10:30:00-10:00</time>
+                <name>1</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+            <trkpt lat='3.34566666666667' lon='-157.28'>
+                <time>2011-02-28T23:00:00-10:00</time>
+                <name>2</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+            <trkpt lat='3.93566666666667' lon='-157.185333333333'>
+                <time>2011-03-01T05:00:00-10:00</time>
+                <name>3</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+            <trkpt lat='4.473' lon='-157.142'>
+                <time>2011-03-01T11:10:00-10:00</time>
+                <name>4</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+            <trkpt lat='5.063' lon='-157.118666666667'>
+                <time>2011-03-01T23:45:00-10:00</time>
+                <name>5</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+            <trkpt lat='5.14833333333333' lon='-157.116'>
+                <time>2011-03-02T01:30:00-10:00</time>
+                <name>6</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+            <trkpt lat='5.90433333333333' lon='-156.635333333333'>
+                <time>2011-03-02T11:00:00-10:00</time>
+                <name>7</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+            <trkpt lat='6.87833333333333' lon='-156.283166666667'>
+                <time>2011-03-03T01:40:00-10:00</time>
+                <name>8</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+            <trkpt lat='7.67133333333333' lon='-156.075'>
+                <time>2011-03-03T15:05:00-10:00</time>
+                <name>9</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+            <trkpt lat='8.64516666666667' lon='-155.903833333333'>
+                <time>2011-03-04T06:00:00-10:00</time>
+                <name>10</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+            <trkpt lat='10.1791666666667' lon='-155.720333333333'>
+                <time>2011-03-05T00:35:00-10:00</time>
+                <name>11</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+            <trkpt lat='10.8866666666667' lon='-155.746166666667'>
+                <time>2011-03-05T10:40:00-10:00</time>
+                <name>12</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+            <trkpt lat='11.725' lon='-155.81'>
+                <time>2011-03-06T00:10:00-10:00</time>
+                <name>13</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+            <trkpt lat='12.5048333333333' lon='-155.893333333333'>
+                <time>2011-03-06T12:00:00-10:00</time>
+                <name>14</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+            <trkpt lat='13.1603333333333' lon='-155.8175'>
+                <time>2011-03-06T20:05:00-10:00</time>
+                <name>15</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+            <trkpt lat='14.3081666666667' lon='-155.554'>
+                <time>2011-03-07T10:00:00-10:00</time>
+                <name>16</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+            <trkpt lat='15.5366666666667' lon='-155.422'>
+                <time>2011-03-08T01:40:00-10:00</time>
+                <name>17</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+            <trkpt lat='16.1831666666667' lon='-155.458333333333'>
+                <time>2011-03-08T11:00:00-10:00</time>
+                <name>18</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+            <trkpt lat='16.9366666666667' lon='-155.511833333333'>
+                <time>2011-03-08T21:15:00-10:00</time>
+                <name>19</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+            <trkpt lat='17.9096666666667' lon='-155.795333333333'>
+                <time>2011-03-09T07:10:00-10:00</time>
+                <name>20</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+            <trkpt lat='19.3655' lon='-156.656833333333'>
+                <time>2011-03-10T07:55:00-10:00</time>
+                <name>21</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+            <trkpt lat='21.01' lon='-157.720333333333'>
+                <time>2011-03-11T07:40:00-10:00</time>
+                <name>22</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+			<trkpt lat='21.277697764222257' lon='-157.84709930419922'>
+                <time>2011-03-11T07:40:00-10:00</time>
+                <name>22</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+				<!-- Ala Wai -->
+				<extension>
+				  <marker>
+				    <html-text lang='EN'>
+					<![CDATA[
+					  <a href='12.html'>Ala Wai</a>
+					]]>
+					</html-text>
+				    <html-text lang='FR'>
+					<![CDATA[
+					  <a href='12_fr.html'>Ala Wai</a>
+					]]>
+					</html-text>
+				  </marker>
+				</extension>
+            </trkpt>
+			<trkpt lat='21.28793482617045' lon='-157.89928436279297'>
+                <time>2011-03-11T07:40:00-10:00</time>
+                <name>22</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+			<trkpt lat='21.314323963891045' lon='-157.89361953735352'>
+                <time>2011-03-11T07:40:00-10:00</time>
+                <name>22</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+			<trkpt lat='21.314803722522186' lon='-157.89310455322266'>
+                <time>2011-03-11T07:40:00-10:00</time>
+                <name>22</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+			<trkpt lat='21.32088052950409' lon='-157.89722442626953'>
+                <time>2011-03-11T07:40:00-10:00</time>
+                <name>22</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+			<trkpt lat='21.318161989050616' lon='-157.8987693786621'>
+                <time>2011-03-11T07:40:00-10:00</time>
+                <name>22</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+				<extension>
+				  <marker>
+				    <html-text lang='EN'>
+					<![CDATA[
+					  <a href='12.html'>Outer Ke&apos;ehi Lagoon</a>
+					]]>
+					</html-text>
+				    <html-text lang='FR'>
+					<![CDATA[
+					  <a href='12_fr.html'>Lagon de Ke&apos;ehi, &agrave; l&apos;ext&eacute;rieur</a>
+					]]>
+					</html-text>
+				  </marker>
+				</extension>
+            </trkpt>
+			<trkpt lat='21.32088052950409' lon='-157.89722442626953'>
+                <time>2011-03-11T07:40:00-10:00</time>
+                <name>22</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+			<trkpt lat='21.31590590376941' lon='-157.89173126220703'>
+                <time>2011-03-11T07:40:00-10:00</time>
+                <name>22</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+				<extension>
+				  <marker>
+				    <html-text lang='EN'>
+					<![CDATA[
+					  <a href='12.html'>Ke'ehi Lagoon</a>
+					]]>
+					</html-text>
+				    <html-text lang='FR'>
+					<![CDATA[
+					  <a href='12_fr.html'>Lagon de Ke'ehi</a>
+					]]>
+					</html-text>
+				  </marker>
+				</extension>
+            </trkpt>
+			
+        </trkseg>
+    </trk>
+</gpx>

@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<gpx version="1.1" creator="WeatherWizard"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xmlns="http://www.topografix.com/GPX/1/1"
+     xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+    <trk>
+        <number>1289786857</number>
+        <trkseg>
+            <!--trkpt lat="" lon="">
+                <time>2010-10-02T04:30:00Z</time>
+                <name>00002</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt-->
+            <trkpt lat='21.316' lon='-157.891533333333'>
+                <time>2011-04-23T10:40:00-10:00</time>
+                <name>1</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+				<extension>
+				  <wind>
+				    <direction>135</direction>
+					<force>4</force>
+				  </wind>
+				</extension>
+            </trkpt>
+            <trkpt lat='21.3963333333333' lon='-158.375333333333'>
+                <time>2011-04-23T18:20:00-10:00</time>
+                <name>2</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+            <trkpt lat='21.743' lon='-158.431'>
+                <time>2011-04-24T00:00:00-10:00</time>
+                <name>3</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+				<extension>
+				  <wind>
+				    <direction>113</direction>
+					<force>4</force>
+				  </wind>
+				</extension>
+            </trkpt>
+            <trkpt lat='23.8625' lon='-157.8775'>
+                <time>2011-04-25T00:00:00-10:00</time>
+                <name>4</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+				<extension>
+				  <wind>
+				    <direction>158</direction>
+					<force>4</force>
+				  </wind>
+				</extension>
+            </trkpt>
+            <trkpt lat='25.3873333333333' lon='-156.965833333333'>
+                <time>2011-04-26T00:00:00-10:00</time>
+                <name>5</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+				<extension>
+				  <wind>
+				    <direction>45</direction>
+					<force>1</force>
+				  </wind>
+				</extension>
+            </trkpt>
+            <trkpt lat='25.5946666666667' lon='-156.716666666667'>
+                <time>2011-04-27T00:00:00-10:00</time>
+                <name>6</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+				<extension>
+				  <wind>
+				    <direction>68</direction>
+					<force>4</force>
+				  </wind>
+				</extension>
+            </trkpt>
+            <trkpt lat='26.535' lon='-156.446'>
+                <time>2011-04-28T00:00:00-10:00</time>
+                <name>7</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+				<extension>
+				  <wind>
+				    <direction>113</direction>
+					<force>2</force>
+				  </wind>
+				</extension>
+            </trkpt>
+            <trkpt lat='27.9156666666667' lon='-155.101666666667'>
+                <time>2011-04-29T00:00:00-10:00</time>
+                <name>8</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+				<extension>
+				  <wind>
+				    <direction>113</direction>
+					<force>3</force>
+				  </wind>
+				</extension>
+            </trkpt>
+            <trkpt lat='28.9243333333333' lon='-153.999'>
+                <time>2011-04-30T00:00:00-10:00</time>
+                <name>9</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+				<extension>
+				  <wind>
+				    <direction>45</direction>
+					<force>1</force>
+				  </wind>
+				</extension>
+            </trkpt>
+            <trkpt lat='28.6533333333333' lon='-153.089166666667'>
+                <time>2011-05-01T00:00:00-10:00</time>
+                <name>10</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+				<extension>
+				  <wind>
+				    <direction>68</direction>
+					<force>3</force>
+				  </wind>
+				</extension>
+            </trkpt>
+            <trkpt lat='28.7086666666667' lon='-152.083333333333'>
+                <time>2011-05-02T00:00:00-10:00</time>
+                <name>11</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+				<extension>
+				  <wind>
+				    <direction>135</direction>
+					<force>4</force>
+				  </wind>
+				</extension>
+            </trkpt>
+            <trkpt lat='30.3995' lon='-150.410666666667'>
+                <time>2011-05-03T00:00:00-10:00</time>
+                <name>12</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+				<extension>
+				  <wind>
+				    <direction>135</direction>
+					<force>4</force>
+				  </wind>
+				</extension>
+            </trkpt>
+            <trkpt lat='31.8503333333333' lon='-148.951166666667'>
+                <time>2011-05-04T00:00:00-10:00</time>
+                <name>13</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+				<extension>
+				  <wind>
+				    <direction>146</direction>
+					<force>3</force>
+				  </wind>
+				</extension>
+            </trkpt>
+            <trkpt lat='33.5713333333333' lon='-148.5595'>
+                <time>2011-05-05T00:00:00-10:00</time>
+                <name>14</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+				<extension>
+				  <wind>
+				    <direction>158</direction>
+					<force>3</force>
+				  </wind>
+				</extension>
+            </trkpt>
+            <trkpt lat='34.3343333333333' lon='-147.626166666667'>
+                <time>2011-05-06T02:50:00-10:00</time>
+                <name>15</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+				<extension>
+				  <wind>
+				    <direction>281</direction>
+					<force>2</force>
+				  </wind>
+				</extension>
+            </trkpt>
+            <trkpt lat='35.138' lon='-146.058666666667'>
+                <time>2011-05-07T00:00:00-10:00</time>
+                <name>16</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+				<extension>
+				  <wind>
+				    <direction>0</direction>
+					<force>3</force>
+				  </wind>
+				</extension>
+            </trkpt>
+            <trkpt lat='36.085' lon='-144.013333333333'>
+                <time>2011-05-08T00:00:00-10:00</time>
+                <name>17</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+				<extension>
+				  <wind>
+				    <direction>349</direction>
+					<force>4</force>
+				  </wind>
+				</extension>
+            </trkpt>
+            <trkpt lat='36.7523333333333' lon='-141.563666666667'>
+                <time>2011-05-09T00:00:00-10:00</time>
+                <name>18</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+				<extension>
+				  <wind>
+				    <direction>45</direction>
+					<force>3</force>
+				  </wind>
+				</extension>
+            </trkpt>
+            <trkpt lat='37.1918333333333' lon='-141.1605'>
+                <time>2011-05-10T00:00:00-10:00</time>
+                <name>19</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+				<extension>
+				  <wind>
+				    <direction>270</direction>
+					<force>1</force>
+				  </wind>
+				</extension>
+            </trkpt>
+            <trkpt lat='37.5395' lon='-139.783666666667'>
+                <time>2011-05-11T00:00:00-10:00</time>
+                <name>20</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+				<extension>
+				  <wind>
+				    <direction>349</direction>
+					<force>5</force>
+				  </wind>
+				</extension>
+            </trkpt>
+            <trkpt lat='38.3166666666667' lon='-137.306333333333'>
+                <time>2011-05-12T00:00:00-10:00</time>
+                <name>21</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+				<extension>
+				  <wind>
+				    <direction>304</direction>
+					<force>4</force>
+				  </wind>
+				</extension>
+            </trkpt>
+            <trkpt lat='38.6903333333333' lon='-135.571'>
+                <time>2011-05-13T00:00:00-10:00</time>
+                <name>22</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+				<extension>
+				  <wind>
+				    <direction>270</direction>
+					<force>5</force>
+				  </wind>
+				</extension>
+            </trkpt>
+            <trkpt lat='38.9433333333333' lon='-133.144833333333'>
+                <time>2011-05-14T00:00:00-10:00</time>
+                <name>23</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+				<extension>
+				  <wind>
+				    <direction>349</direction>
+					<force>4</force>
+				  </wind>
+				</extension>
+            </trkpt>
+            <trkpt lat='38.7901666666667' lon='-130.513166666667'>
+                <time>2011-05-15T00:00:00-10:00</time>
+                <name>24</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+				<extension>
+				  <wind>
+				    <direction>0</direction>
+					<force>7</force>
+				  </wind>
+				</extension>
+            </trkpt>
+            <trkpt lat='38.3146666666667' lon='-128.630833333333'>
+                <time>2011-05-16T00:00:00-10:00</time>
+                <name>25</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+				<extension>
+				  <marker>
+				    <html-text lang='EN'>
+					<![CDATA[
+					  <!--a href='01.html#01'>San Francisco - Marquesas</a>
+					  <br-->
+					  Lying Ahull
+					]]>
+					</html-text>
+				    <html-text lang='FR'>
+					<![CDATA[
+					  <!--a href='01_fr.html#01'>San Francisco - Marquises</a>
+					  <br-->
+					  &Agrave; la cape s&egrave;che
+					]]>
+					</html-text>
+				  </marker>
+				  <wind>
+				    <force>8</force>
+					<direction>115.0</direction>
+				  </wind>
+				</extension>
+            </trkpt>
+            <trkpt lat='38.543' lon='-127.936'>
+                <time>2011-05-17T00:00:00-10:00</time>
+                <name>26</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+				<extension>
+				  <wind>
+				    <direction>315</direction>
+					<force>6</force>
+				  </wind>
+				</extension>
+            </trkpt>
+            <trkpt lat='38.4408333333333' lon='-126.333666666667'>
+                <time>2011-05-18T00:00:00-10:00</time>
+                <name>27</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+				<extension>
+				  <wind>
+				    <direction>304</direction>
+					<force>5</force>
+				  </wind>
+				</extension>
+            </trkpt>
+            <trkpt lat='38.0705' lon='-123.612666666667'>
+                <time>2011-05-19T00:00:00-10:00</time>
+                <name>28</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+				<extension>
+				  <wind>
+				    <direction>315</direction>
+					<force>4</force>
+				  </wind>
+				</extension>
+            </trkpt>
+            <trkpt lat='38' lon='-122.975'>
+                <time>2011-05-19T13:20:00-10:00</time>
+                <name>29</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+        </trkseg>
+    </trk>
+</gpx>

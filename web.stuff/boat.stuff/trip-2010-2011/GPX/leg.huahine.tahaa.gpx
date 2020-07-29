@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<gpx version="1.1" creator="WeatherWizard"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xmlns="http://www.topografix.com/GPX/1/1"
+     xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+    <trk>
+        <number>1289786857</number>
+        <trkseg>
+            <!-- Huahine - Tahaa -->
+			<trkpt lat='-16.711959182783108' lon='-151.03872621057235'>
+                <time>2011-02-28T10:30:00-10:00</time>
+                <name>01</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+				<extension>
+				  <marker>
+				    <html-text lang='EN'>
+					<![CDATA[
+					  <a href='06.html#06'>Huahin&eacute; - Taha&apos;a</a>
+					  <br>
+					  A small leg, from lagoon to lagoon...
+					]]>
+					</html-text>
+				    <html-text lang='FR'>
+					<![CDATA[
+					  <a href='06_fr.html#06'>Huahin&eacute; - Taha&apos;a</a>
+					  <br>
+					  Une petite &eacute;tape, de lagon &agrave; lagon...
+					]]>
+					</html-text>
+				  </marker>
+				</extension>
+            </trkpt>
+			<trkpt lat='-16.708547627599017' lon='-151.0471858974779'>
+                <time>2011-02-28T10:30:00-10:00</time>
+                <name>02</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+			
+			<trkpt lat='-16.646306883205195' lon='-151.43002223951044'>
+                <time>2011-02-28T10:30:00-10:00</time>
+                <name>03</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+			<trkpt lat='-16.642030686136767' lon='-151.4308805463952'>
+                <time>2011-02-28T10:30:00-10:00</time>
+                <name>04</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+				<extension>
+				  <marker>
+				    <html-text lang='EN'>
+					<![CDATA[
+					  <a href='06.html#06'>Taha&apos;a</a>
+					  <br>
+					  <img src='P1181288.JPG' width='256' height='192' alt='Tautau Motu' title='Tautau Motu'>
+					  <br>
+					  First anchorage, close to the entrance of the lagoon.
+					]]>
+					</html-text>
+				    <html-text lang='FR'>
+					<![CDATA[
+					  <a href='06_fr.html#06'>Taha&apos;a</a>
+					  <br>
+					  <img src='P1181288.JPG' width='256' height='192' alt='Tautau Motu' title='Tautau Motu'>
+					  <br>
+					  Premier mouillage, pr&egrave;s de l'entr&eacute;e du lagon.
+					]]>
+					</html-text>
+				  </marker>
+				</extension>
+            </trkpt>
+			<trkpt lat='-16.615631281382715' lon='-151.4317073818529'>
+                <time>2011-02-28T10:30:00-10:00</time>
+                <name>05</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+			<trkpt lat='-16.582894268770183' lon='-151.4588298794115'>
+                <time>2011-02-28T10:30:00-10:00</time>
+                <name>06</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+			<trkpt lat='-16.57318724915783' lon='-151.53333091700915'>
+                <time>2011-02-28T10:30:00-10:00</time>
+                <name>2</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+			<trkpt lat='-16.61086090810098' lon='-151.56234168971423'>
+                <time>2011-02-28T10:30:00-10:00</time>
+                <name>07</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+				<extension>
+				  <marker>
+				    <html-text lang='EN'>
+					<![CDATA[
+					  <a href='06.html#06'>Taha&apos;a</a>
+					  <br>
+					  Second anchorage, close to the hotel, facing Tapuamu.
+					]]>
+					</html-text>
+				    <html-text lang='FR'>
+					<![CDATA[
+					  <a href='06_fr.html#06'>Taha&apos;a</a>
+					  <br>
+					  Deuxi&egrave;me mouillage, pr&egrave;s de l'h&ocirc;tel, en face de Tapuamu.
+					]]>
+					</html-text>
+				  </marker>
+				</extension>
+            </trkpt>
+			<trkpt lat='-16.616289254603952' lon='-151.5444889065111'>
+                <time>2011-02-28T10:30:00-10:00</time>
+                <name>08</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+				<extension>
+				  <marker>
+				    <html-text lang='EN'>
+					<![CDATA[
+					  <a href='06.html#06'>Taha&apos;a</a>
+					  <br>
+					  <img src='P1201324.JPG' width='256' height='192' alt='Tapuamu Anchorage' title='Tapuamu Anchorage'>
+					  <br>
+					  Tapuamu Bay, for us alone.
+					]]>
+					</html-text>
+				    <html-text lang='FR'>
+					<![CDATA[
+					  <a href='06_fr.html#06'>Taha&apos;a</a>
+					  <br>
+					  <img src='P1201324.JPG' width='256' height='192' alt='Mouillage de Tapuamu' title='Mouillage de Tapuamu'>
+					  <br>
+					  Baie de Tapuamu, pour nous tout seuls.
+					]]>
+					</html-text>
+				  </marker>
+				</extension>
+            </trkpt>
+			<trkpt lat='-16.617111717959556' lon='-151.55084037745837'>
+                <time>2011-02-28T10:30:00-10:00</time>
+                <name>09</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+			<trkpt lat='-16.64967843284739' lon='-151.54981040919665'>
+                <time>2011-02-28T10:30:00-10:00</time>
+                <name>10</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+			<trkpt lat='-16.684048404852177' lon='-151.48715400660876'>
+                <time>2011-02-28T10:30:00-10:00</time>
+                <name>11</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+				<extension>
+				  <marker>
+				    <html-text lang='EN'>
+					<![CDATA[
+					  <a href='06.html#06'>Taha&apos;a</a>
+					  <br>
+					  Taravana Yacht Club.
+					]]>
+					</html-text>
+				    <html-text lang='FR'>
+					<![CDATA[
+					  <a href='06_fr.html#06'>Taha&apos;a</a>
+					  <br>
+					  Taravana Yacht Club.
+					]]>
+					</html-text>
+				  </marker>
+				</extension>
+            </trkpt>
+			
+		</trkseg>
+    </trk>
+</gpx>
+		

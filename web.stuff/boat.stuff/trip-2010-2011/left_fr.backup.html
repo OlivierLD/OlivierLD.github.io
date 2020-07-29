@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>Polyn&eacute;asie</title>
+    <link rel="stylesheet" href="./print.css" type="text/css">
+    <script type="text/javascript">
+// Framebuster script to relocate browser when MSIE bookmarks this
+// page instead of the parent frameset.  Set variable relocateURL to
+// the index document of your website (relative URLs are ok):
+var relocateURL = "/";
+if (parent.frames.length == 0) 
+{
+  if (document.images) 
+  {
+    location.replace(relocateURL);
+  } 
+  else 
+  {
+    location = relocateURL;
+  }
+}
+    </script>
+    <script type="text/javascript" src="mtmcode.js"></script>
+    <script type="text/javascript">
+// Morten's JavaScript Tree Menu
+// version 2.3.2-macfriendly, dated 2002-06-10
+// http://www.treemenu.com/
+// Copyright (c) 2001-2002, Morten Wang & contributors
+// All rights reserved.
+// This software is released under the BSD License which should accompany
+// it in the file "COPYING".  If you do not have this file you can access
+// the license through the WWW at http://www.treemenu.com/license.txt
+// Nearly all user-configurable options are set to their default values.
+// Have a look at the section "Setting options" in the installation guide
+// for description of each option and their possible values.
+MTMDefaultTarget = "text";
+MTMenuText       = "Sommaire&nbsp;:";
+MTMBackground    = "bground.jpg";
+MTMLinkedSS      = "true";
+MTMSSHREF        = "print.css"
+//MTMRootIcon      = "camel.gif";
+//MTMTextColor     = "#FFFF00";
+//MTMBGColor       = "#004080";
+/******************************************************************************
+* User-configurable list of icons.                                            *
+******************************************************************************/
+var MTMIconList = null;
+MTMIconList = new IconList();
+MTMIconList.addIcon(new MTMIcon("menu_link_external.gif", "http://", "pre"));
+MTMIconList.addIcon(new MTMIcon("menu_link_pdf.gif", ".pdf", "post"));
+/******************************************************************************
+* User-configurable menu.                                                     *
+******************************************************************************/
+// Main menu.
+var menu = null;
+menu = new MTMenu();
+  menu.addItem("Introduction",    "00_fr.html", "text", "Introduction", "heading.gif");
+  menu.addItem("Carte",           "map.html?full=y&lang=FR&scale=3", "text", "La carte du voyage", "heading.gif");
+  menu.addItem("Earth",           "GPX/the.full.trip.kml", "text", "La carte du voyage, dans Google Earth", "ge.jpg");
+  menu.addItem("Calendrier",      "calendar_fr.html", "text", "Calendrier du voyage", "heading.gif");
+  menu.addItem("Premi&egrave;re &eacute;tape",  "javascript:parent.text.location='01_fr.html';", "text", "San Francisco - Marquises, du 2 octobre 2010 au 27 octobre 2010"); // , "heading.gif");
+    var firstLeg = null;
+    firstLeg = new MTMenu();
+    firstLeg.addItem("Earth",     "GPX/leg.one.kml", "text", "La carte de la premi&egrave;re &eacute;tape, dans Google Earth", "ge.jpg");
+    firstLeg.addItem("San Francisco - Tropique du Cancer", "01_fr.html#01", "text", "De San Francisco au tropique du Cancer", "heading.gif");
+    firstLeg.addItem("Tropique du Cancer - ITCZ", "01_fr.html#02", "text", "Du tropique du Cancer &agrave; l'ITCZ", "heading.gif");
+    firstLeg.addItem("ITCZ - &Eacute;quateur", "01_fr.html#03", "text", "De l'ITCZ &agrave; l'&Eacute;quateur", "heading.gif");
+    firstLeg.addItem("&Eacute;quateur - Nuku-Hiva", "01_fr.html#04", "text", "De l'&Eacute;quateur &agrave; Nuku-Hiva", "heading.gif");
+    firstLeg.addItem("Bilan de la premi&egrave;re etape", "01_fr.html#05", "text", "Bilan de la premi&egrave;re etape", "heading.gif");
+  menu.makeLastSubmenu(firstLeg, false, 'red_arrow_right.gif','red_arrow_down.gif');
+//menu.addItem("Marquises",                     "02_fr.html", "text", "Marquises, du 27 octobre 2010 au 21 novembre 2010",                                           "heading.gif");
+  menu.addItem("Marquises",       "javascript:parent.text.location='02_fr.html';", "text", "Marquises, du 27 octobre 2010 au 21 novembre 2010"); //, "heading.gif");
+    var marquesasIslands = null;
+    marquesasIslands = new MTMenu();
+    marquesasIslands.addItem("Earth",     "GPX/stop.one.kml", "text", "Carte de la premi&egrave;re escale, dans Google Earth", "ge.jpg");
+    marquesasIslands.addItem("Taiohae", "02_fr.html#01", "text", "Nuku-Hive, Taiohae", "heading.gif");
+    marquesasIslands.addItem("Hakatea", "02_fr.html#02", "text", "Hakatea", "heading.gif");
+    marquesasIslands.addItem("Ua Pou", "02_fr.html#03", "text", "Ua Pou", "heading.gif");
+    marquesasIslands.addItem("Taipivai", "02_fr.html#04", "text", "Taipivai", "heading.gif");
+    marquesasIslands.addItem("Baie d'Anaho", "02_fr.html#05", "text", "Baie d'Anaho", "heading.gif");
+  menu.makeLastSubmenu(marquesasIslands, false, 'red_arrow_right.gif','red_arrow_down.gif');
+  menu.addItem("Deuxi&egrave;me &eacute;tape",  "03_fr.html", "text", "Marquises - Tuamotu, du 21 novembre 2010 au 26 novembre 2010",                                "heading.gif");
+  menu.addItem("Tuamotu",                       "04_fr.html", "text", "Rangiroa, du 26 novembre 2010 au 4 d&eacute;cembre 2010",                                     "heading.gif");
+  menu.addItem("Troisi&egrave;me &eacute;tape", "05_fr.html", "text", "Tuamotu - Tahiti, du 4 d&eacute;cembre 2010 au 5 d&eacute;cembre 2010",                       "heading.gif");
+//menu.addItem("&Icirc;les de la Soci&eacute;t&eacute;", "06_fr.html", "text"); //, "&Icirc;les de la Soci&eacute;t&eacute;, du 5 d&eacute;cembre 2010 au xx xxxxx xxxx", "heading.gif");
+  menu.addItem("&Icirc;les de la Soci&eacute;t&eacute;", "javascript:parent.text.location='06_fr.html';", "text", "&Icirc;les de la Soci&eacute;t&eacute;, du 5 d&eacute;cembre 2010 au 3 f&eacute;vrier 2011"); //, "heading.gif");
+    var societyIslands = null;
+    societyIslands = new MTMenu();
+    societyIslands.addItem("Tahiti", "06_fr.html#01", "text", "Tahiti", "heading.gif");
+    societyIslands.addItem("Moor&eacute;a", "06_fr.html#02", "text", "Moor&eacute;a", "heading.gif");
+    societyIslands.addItem("Tahiti", "06_fr.html#03", "text", "Tahiti", "heading.gif");
+    societyIslands.addItem("Moor&eacute;a", "06_fr.html#04", "text", "Moor&eacute;a", "heading.gif");
+    societyIslands.addItem("Huahin&eacute;", "06_fr.html#05", "text", "Huahin&eacute;", "heading.gif");
+    societyIslands.addItem("Taha'a", "06_fr.html#06", "text", "Taha'a", "heading.gif");
+    societyIslands.addItem("Raiat&eacute;a", "06_fr.html#07", "text", "Raiat&eacute;a", "heading.gif");
+    societyIslands.addItem("Bora-Bora", "06_fr.html#08", "text", "Bora-Bora", "heading.gif");
+  menu.makeLastSubmenu(societyIslands, false, 'red_arrow_right.gif','red_arrow_down.gif');
+  menu.addItem("Quatri&egrave;me &eacute;tape", "07_fr.html", "text", "Bora-Bora - Tongareva, du 3 f&eacute;vrier 2011 au 8 f&eacute;vrier 2011", "heading.gif");
+  menu.addItem("Tongareva",                     "08_fr.html", "text", "Northern Cook Islands, du 8 f&eacute;vrier 2011 au 12 f&eacute;vrier 2011",  "heading.gif");
+  menu.addItem("Cinqui&egrave;me &eacute;tape", "09_fr.html", "text", "Tongareva - Kiritimati, du 12 f&eacute;vrier 2011 au 18 f&eacute;vrier 2011",  "heading.gif");
+  menu.addItem("Kiritimati",                    "10_fr.html", "text", "Kiribati, du 18 f&eacute;vrier 2011 au 28 f&eacute;vrier 2011",  "heading.gif");
+//menu.addItem("Sixi&egrave;me &eacute;tape",   "11_fr.html", "text", "Kiritimati - Honolulu, du 28 f&eacute;vrier 2011 au 11 mars 2011",  "heading.gif");
+  menu.addItem("Sixi&egrave;me &eacute;tape",   "javascript:parent.text.location='11_fr.html';", "text", "Kiritimati - Honolulu, 28 f&eacute;vrier 2011 au 11 mars 2011"); //, "heading.gif");
+    var leg6 = null;
+    leg6 = new MTMenu();
+    leg6.addItem("Jusqu'&agrave; l'ITCZ",   "11_fr.html#01", "text", "Jusqu'&agrave; l'ITCZ", "heading.gif");
+    leg6.addItem("ITCZ",                    "11_fr.html#02", "text", "ITCZ", "heading.gif");
+    leg6.addItem("Vers Hawai'i",            "11_fr.html#03", "text", "Vers Hawai'i", "heading.gif");
+    leg6.addItem("Vers O'ahu",              "11_fr.html#04", "text", "Vers O'ahu", "heading.gif");
+  menu.makeLastSubmenu(leg6, false, 'red_arrow_right.gif','red_arrow_down.gif');
+  menu.addItem("Hawai'i",                      "12_fr.html", "text", "Hawai'i, du 11 mars 2011 au 23 avril 2011", "heading.gif"); 
+  menu.addItem("Septi&egrave;me &eacute;tape", "13_fr.html", "text", "Honolulu - Drakes Bay, du 23 avril 2011 au 19 mai 2011",  "heading.gif");
+  menu.addItem("&Eacute;pilogue",              "14_fr.html", "text", "Retour dans la Baie de San Francisco",  "heading.gif");
+  menu.addItem("R&eacute;sum&eacute; technique", "ts_fr.html", "text", "D&eacute;tails sur les &eacute;tapes et escales", "heading.gif"); 
+  menu.addItem("Appendices",                   "appendix_fr.html", "text", "Suppl&eacute;ment au Voyage de Don Pedro"); 
+  menu.addItem("Archives m&eacute;t&eacute;o", "weather.archives/weather.archive_fr.html", "text", "Archives",  "heading.gif");
+  menu.addItem("Vid&eacute;os",               "video_fr.html", "text", "Vid&eacute;os, edit&eacute;es", "camera.png"); 
+  menu.addItem("Le bouquin",               "book_fr.html", "text", "Version reli&eacute;e", "book-closed.gif"); 
+    </script>
+  </head>rr
+  <body onload="MTMStartMenu(true)" 
+        background="bground.jpg"
+        bgcolor="#000033" 
+        text="#ffffcc" 
+        link="yellow" 
+        vlink="lime" 
+        alink="red">
+  </body>
+</html>

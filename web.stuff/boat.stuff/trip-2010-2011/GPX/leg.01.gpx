@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<gpx version="1.1" creator="WeatherWizard"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xmlns="http://www.topografix.com/GPX/1/1"
+     xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+    <trk>
+        <number>1289786857</number>
+        <trkseg>
+            <trkpt lat="37.4833333" lon="-122.7333333">
+                <time>2010-10-02T10:40:00Z</time>
+                <name>00003</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+				<extension>
+				  <marker>
+				    <html-text lang='EN'>
+					<![CDATA[
+                    <div style='height: 10em; width: 20em;'> 
+					  <a href='01.html#01'>San Francisco - Marquesas</a>
+					  <br>
+					  South to the Tropic
+                    </div>
+					]]>
+					</html-text>
+				    <html-text lang='FR'>
+					<![CDATA[
+					  <a href='01_fr.html#01'>San Francisco - Marquises</a>
+					  <br>
+					  Vers le tropique du Cancer
+					]]>
+					</html-text>
+				  </marker>
+				  <wind>
+				    <direction>282</direction>
+					<force>2</force>
+				  </wind>
+				</extension>
+            </trkpt>
+            <trkpt lat="36.8166667" lon="-123.8000000">
+                <time>2010-10-02T22:45:00Z</time>
+                <name>00004</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+            <trkpt lat="35.2666667" lon="-125.3000000">
+                <time>2010-10-03T19:40:00Z</time>
+                <name>00005</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+				<extension>
+				  <wind>
+				    <direction>315</direction>
+					<force>2</force>
+				  </wind>
+				</extension>
+            </trkpt>
+            <trkpt lat="33.8000000" lon="-126.0833333">
+                <time>2010-10-04T10:35:00Z</time>
+                <name>00006</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+				<extension>
+				  <wind>
+				    <direction>315</direction>
+					<force>3</force>
+				  </wind>
+				</extension>
+            </trkpt>
+            <trkpt lat="32.8333333" lon="-126.7000000">
+                <time>2010-10-04T21:20:00Z</time>
+                <name>00007</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+            <trkpt lat="31.9500000" lon="-127.3000000">
+                <time>2010-10-05T07:20:00Z</time>
+                <name>00008</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+				<extension>
+				  <wind>
+				    <direction>0</direction>
+					<force>6</force>
+				  </wind>
+				</extension>
+            </trkpt>
+            <trkpt lat="31.3333333" lon="-127.5833333">
+                <time>2010-10-05T13:35:00Z</time>
+                <name>00009</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+            <trkpt lat="30.3166667" lon="-128.0833333">
+                <time>2010-10-06T00:40:00Z</time>
+                <name>00010</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+				<extension>
+				  <wind>
+				    <direction>0</direction>
+					<force>2</force>
+				  </wind>
+				</extension>
+            </trkpt>
+            <trkpt lat="29.2833333" lon="-128.5000000">
+                <time>2010-10-06T14:00:00Z</time>
+                <name>00011</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+            <trkpt lat="28.9166667" lon="-128.6666667">
+                <time>2010-10-06T23:10:00Z</time>
+                <name>00012</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+            <trkpt lat="28.6666667" lon="-128.8666667">
+                <time>2010-10-07T07:00:00Z</time>
+                <name>00013</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+				<extension>
+				  <wind>
+				    <direction>22</direction>
+					<force>0</force>
+				  </wind>
+				</extension>
+            </trkpt>
+            <trkpt lat="27.4666667" lon="-129.2166667">
+                <time>2010-10-08T00:20:00Z</time>
+                <name>00014</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+				<extension>
+				  <wind>
+				    <direction>90</direction>
+					<force>2</force>
+				  </wind>
+				</extension>
+            </trkpt>
+            <trkpt lat="26.4066667" lon="-129.2366667">
+                <time>2010-10-08T14:05:00Z</time>
+                <name>00015</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+            <trkpt lat="25.7000000" lon="-129.4333333">
+                <time>2010-10-08T21:35:00Z</time>
+                <name>00016</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+            <trkpt lat='25.7' lon='-129.433333333333'>
+                <time>2010-10-09T04:35:00-10:00</time>
+                <name>10</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+				<extension>
+				  <marker>
+				    <html-text lang='EN'>
+					<![CDATA[
+					  <a href='01.html#02'>San Francisco - Marquesas</a>
+					  <br>
+					  South to the ITCZ
+					]]>
+					</html-text>
+				    <html-text lang='FR'>
+					<![CDATA[
+					  <a href='01_fr.html#02'>San Francisco - Marquises</a>
+					  <br>
+					  Vers l'ITCZ
+					]]>
+					</html-text>
+				  </marker>
+				  <wind>
+				    <direction>45</direction>
+					<force>4</force>
+				  </wind>
+				</extension>
+            </trkpt>
+            <trkpt lat="19.9666667" lon="-129.6500000">
+                <time>2010-10-11T10:50:00Z</time>
+                <name>00017</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+				<extension>
+				  <wind>
+				    <direction>68</direction>
+					<force>3</force>
+				  </wind>
+				</extension>
+            </trkpt>
+            <trkpt lat="18.6333333" lon="-129.6000000">
+                <time>2010-10-12T02:15:00Z</time>
+                <name>00018</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+				<extension>
+				  <wind>
+				    <direction>68</direction>
+					<force>4</force>
+				  </wind>
+				</extension>
+            </trkpt>
+            <trkpt lat="16.4833333" lon="-129.1666667">
+                <time>2010-10-13T01:55:00Z</time>
+                <name>00019</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+				<extension>
+				  <wind>
+				    <direction>45</direction>
+					<force>3</force>
+				  </wind>
+				</extension>
+            </trkpt>
+            <trkpt lat="13.4333333" lon="-129.6833333">
+                <time>2010-10-14T14:00:00Z</time>
+                <name>00020</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+            <trkpt lat="11.6166667" lon="-130.3333333">
+                <time>2010-10-15T09:25:00Z</time>
+                <name>00021</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+				<extension>
+				  <wind>
+				    <direction>90</direction>
+					<force>2</force>
+				  </wind>
+				</extension>
+            </trkpt>
+            <trkpt lat="10.3666667" lon="-130.5333333">
+                <time>2010-10-15T21:30:00Z</time>
+                <name>00022</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+				<extension>
+				  <wind>
+				    <direction>90</direction>
+					<force>5</force>
+				  </wind>
+				</extension>
+            </trkpt>
+            <trkpt lat="8.7333333" lon="-130.6166667">
+                <time>2010-10-16T22:30:00Z</time>
+                <name>00023</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+				<extension>
+				  <wind>
+				    <direction>180</direction>
+					<force>6</force>
+				  </wind>
+				</extension>
+            </trkpt>
+            <trkpt lat="7.7000000" lon="-131.18">
+                <time>2010-10-17T17:40:00Z</time>
+                <name>00024</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+				<extension>
+				  <marker>
+				    <html-text lang='EN'>
+					<![CDATA[
+					  <a href='01.html#03'>San Francisco - Marquesas</a>
+					  <br>
+					  South to the Equator
+					]]>
+					</html-text>
+				    <html-text lang='FR'>
+					<![CDATA[
+					  <a href='01_fr.html#03'>San Francisco - Marquises</a>
+					  <br>
+					  Vers l'&Eacute;quateur
+					]]>
+					</html-text>
+				  </marker>
+				  <wind>
+				    <direction>135</direction>
+					<force>3</force>
+				  </wind>
+				</extension>
+            </trkpt>
+            <trkpt lat='7.4' lon='-131.22'>
+                <time>2010-10-18T00:40:00-10:00</time>
+                <name>21</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+				<extension>
+				  <wind>
+				    <direction>68</direction>
+					<force>5</force>
+				  </wind>
+				</extension>
+            </trkpt>
+            <trkpt lat="4.7166667" lon="-133.1166667">
+                <time>2010-10-19T08:00:00Z</time>
+                <name>00025</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+            <trkpt lat="4.6333333" lon="-133.2333333">
+                <time>2010-10-19T09:20:00Z</time>
+                <name>00026</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+				<extension>
+				  <wind>
+				    <direction>135</direction>
+					<force>6</force>
+				  </wind>
+				</extension>
+            </trkpt>
+            <trkpt lat="3.6833333" lon="-135.1833333">
+                <time>2010-10-20T08:45:00Z</time>
+                <name>00027</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+				<extension>
+				  <wind>
+				    <direction>124</direction>
+					<force>3</force>
+				  </wind>
+				</extension>
+            </trkpt>
+            <trkpt lat="3.4000000" lon="-137.3666667">
+                <time>2010-10-21T09:00:00Z</time>
+                <name>00028</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+				<extension>
+				  <wind>
+				    <direction>112</direction>
+					<force>3</force>
+				  </wind>
+				</extension>
+            </trkpt>
+            <trkpt lat="1.5500000" lon="-138.0000000">
+                <time>2010-10-22T07:15:00Z</time>
+                <name>00029</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+				<extension>
+				  <wind>
+				    <direction>112</direction>
+					<force>5</force>
+				  </wind>
+				</extension>
+            </trkpt>
+            <trkpt lat="0.0000000" lon="-138.1833333">
+                <time>2010-10-22T23:52:00Z</time>
+                <name>00030</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+				<extension>
+				  <wind>
+				    <direction>112</direction>
+					<force>4</force>
+				  </wind>
+				</extension>
+            </trkpt>
+            <trkpt lat="-0.7166667" lon="-138.2083333">
+                <time>2010-10-23T07:10:00Z</time>
+                <name>00031</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+            <trkpt lat="-1.9666667" lon="-138.3000000">
+                <time>2010-10-23T19:10:00Z</time>
+                <name>00032</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+            <trkpt lat="-3.2166667" lon="-138.5500000">
+                <time>2010-10-24T07:30:00Z</time>
+                <name>00033</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+				<extension>
+				  <marker>
+				    <html-text lang='EN'>
+					<![CDATA[
+					  <a href='01.html#04'>San Francisco - Marquesas</a>
+					  <br>
+					  South to Nuku-Hiva
+					  <br>
+					  <img src="PA250185.jpg" width="102" height="77">
+					]]>
+					</html-text>
+				    <html-text lang='FR'>
+					<![CDATA[
+					  <a href='01_fr.html#04'>San Francisco - Marquises</a>
+					  <br>
+					  Vers Nuku-Hiva
+					  <br>
+					  <img src="PA250185.jpg" width="102" height="77">
+					]]>
+					</html-text>
+				  </marker>
+				  <wind>
+				    <direction>112</direction>
+					<force>4</force>
+				  </wind>
+				</extension>
+            </trkpt>
+            <trkpt lat="-3.7500000" lon="-138.7500000">
+                <time>2010-10-24T12:55:00Z</time>
+                <name>00034</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+            <trkpt lat="-5.0166667" lon="-139.1333333">
+                <time>2010-10-25T00:50:00Z</time>
+                <name>00035</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+            <trkpt lat="-6.1666667" lon="-139.4166667">
+                <time>2010-10-25T12:00:00Z</time>
+                <name>00036</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+				<extension>
+				  <wind>
+				    <direction>101</direction>
+					<force>5</force>
+				  </wind>
+				</extension>
+            </trkpt>
+            <trkpt lat="-7.5000000" lon="-139.4833333">
+                <time>2010-10-26T01:50:00Z</time>
+                <name>00037</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+				<extension>
+				  <wind>
+				    <direction>90</direction>
+					<force>3</force>
+				  </wind>
+				</extension>
+            </trkpt>
+            <trkpt lat="-8.9166667" lon="-140.1000000">
+                <time>2010-10-27T01:50:00Z</time>
+                <name>00038</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+				<extension>
+				  <wind>
+				    <direction>90</direction>
+					<force>2</force>
+				  </wind>
+				</extension>
+            </trkpt>
+        </trkseg>
+    </trk>
+</gpx>

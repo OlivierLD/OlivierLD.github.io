@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<gpx version="1.1" creator="WeatherWizard"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xmlns="http://www.topografix.com/GPX/1/1"
+     xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+    <trk>
+        <number>1289786857</number>
+        <trkseg>
+            <!-- Tahaa - Raiatea -->
+			<trkpt lat='-16.684048404852177' lon='-151.48715400660876'>
+                <time>2011-02-28T10:30:00-10:00</time>
+                <name>01</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+				<extension>
+				  <marker>
+				    <html-text lang='EN'>
+					<![CDATA[
+					  <a href='06.html#07'>Taha&apos;a to Raiatea</a>
+					  <br>
+					  Without leaving the lagoon.
+					]]>
+					</html-text>
+				    <html-text lang='FR'>
+					<![CDATA[
+					  <a href='06_fr.html#07'>Taha&apos;a &agrave; Raiatea</a>
+					  <br>
+					  Sans quitter le lagon.
+					]]>
+					</html-text>
+				  </marker>
+				</extension>
+            </trkpt>
+			
+			<trkpt lat='-16.704766073491175' lon='-151.47743225097656'>
+                <time>2011-02-28T10:30:00-10:00</time>
+                <name>02</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+			<trkpt lat='-16.71438422709454' lon='-151.46799087524414'>
+                <time>2011-02-28T10:30:00-10:00</time>
+                <name>03</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+			<trkpt lat='-16.721864678061696' lon='-151.44880771636963'>
+                <time>2011-02-28T10:30:00-10:00</time>
+                <name>04</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+			<trkpt lat='-16.725265720149352' lon='-151.44207000732422'>
+                <time>2011-02-28T10:30:00-10:00</time>
+                <name>05</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+			<trkpt lat='-16.72807076359288' lon='-151.4423704147339'>
+                <time>2011-02-28T10:30:00-10:00</time>
+                <name>05</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+			<trkpt lat='-16.728779724083232' lon='-151.443110704422'>
+                <time>2011-02-28T10:30:00-10:00</time>
+                <name>05</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+			<trkpt lat='-16.728789998853564' lon='-151.44348621368408'>
+                <time>2011-02-28T10:30:00-10:00</time>
+                <name>01</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+				<extension>
+				  <marker>
+				    <html-text lang='EN'>
+					<![CDATA[
+					  <a href='06.html#07'>Raiatea public Marina</a>
+					  <br>
+					  Right downtown.
+					]]>
+					</html-text>
+				    <html-text lang='FR'>
+					<![CDATA[
+					  <a href='06_fr.html#07'>Marina publique, Raiat&eacute;a</a>
+					  <br>
+					  Plein centre ville.
+					]]>
+					</html-text>
+				  </marker>
+				</extension>
+            </trkpt>
+			
+		</trkseg>
+    </trk>
+</gpx>
+		

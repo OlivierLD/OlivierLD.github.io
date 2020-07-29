@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<gpx version="1.1" creator="WeatherWizard"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xmlns="http://www.topografix.com/GPX/1/1"
+     xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+    <trk>
+        <number>1289786857</number>
+        <trkseg>
+            <!--trkpt lat="" lon="">
+                <time>2010-10-02T04:30:00Z</time>
+                <name>00002</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt-->
+            <trkpt lat='-14.9685' lon='-147.636833333333'>
+                <time>2010-12-04T08:00:00-10:00</time>
+                <name>1</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+				<extension>
+				  <marker>
+				    <html-text lang='EN'>
+					<![CDATA[
+					  <a href='04.html'>Tuamotu Archipelago, Rangiroa Atoll</a>
+					  <br>
+					  <br>
+					  <a href='05.html'>Tuamotu (Rangiroa) - Tahiti</a>
+					  <br>
+					  <img src="PC040821.jpg" width="102" height="77">
+					]]>
+					</html-text>
+				    <html-text lang='FR'>
+					<![CDATA[
+					  <a href='04_fr.html'>Archipel des Tuamotu, Atoll de Rangiroa</a>
+					  <br>
+					  <br>
+					  <a href='05_fr.html'>Tuamotu (Rangiroa) - Tahiti</a>
+					  <br>
+					  <img src="PC040821.jpg" width="102" height="77">
+					]]>
+					</html-text>
+				  </marker>
+				</extension>
+            </trkpt>
+            <trkpt lat='-14.945555' lon='-147.710616666667'>
+                <time>2010-12-04T09:00:00-10:00</time>
+                <name>2</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+            <trkpt lat='-14.933655' lon='-147.713243333333'>
+                <time>2010-12-04T09:30:00-10:00</time>
+                <name>3</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+            <trkpt lat='-14.8755' lon='-147.787666666667'>
+                <time>2010-12-04T10:00:00-10:00</time>
+                <name>2</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+            <trkpt lat='-14.9188666666667' lon='-147.869556666667'>
+                <time>2010-12-04T11:30:00-10:00</time>
+                <name>3</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+            <trkpt lat='-15.134' lon='-148.044666666667'>
+                <time>2010-12-04T13:00:00-10:00</time>
+                <name>2</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+            <trkpt lat='-15.4248333333333' lon='-148.208'>
+                <time>2010-12-04T16:00:00-10:00</time>
+                <name>3</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+            <trkpt lat='-15.7958333333333' lon='-148.4745'>
+                <time>2010-12-04T20:15:00-10:00</time>
+                <name>4</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+            <trkpt lat='-16.41' lon='-148.863166666667'>
+                <time>2010-12-05T03:00:00-10:00</time>
+                <name>5</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+            <trkpt lat='-16.62' lon='-149.066666666667'>
+                <time>2010-12-05T05:30:00-10:00</time>
+                <name>6</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+            <trkpt lat='-17.0076666666667' lon='-149.260666666667'>
+                <time>2010-12-05T09:40:00-10:00</time>
+                <name>7</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+            <trkpt lat='-17.326' lon='-149.400166666667'>
+                <time>2010-12-05T13:00:00-10:00</time>
+                <name>8</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+            <trkpt lat='-17.4992333333333' lon='-149.496766666667'>
+                <time>2010-12-05T15:15:00-10:00</time>
+                <name>9</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+        </trkseg>
+    </trk>
+</gpx>

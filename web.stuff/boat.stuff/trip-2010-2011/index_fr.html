@@ -1,0 +1,56 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Frameset//EN"
+		  "http://www.w3.org/TR/REC-html40/frame.dtd">
+<html>
+  <head>
+    <title>Don Pedro en Polyn&eacute;sie</title>
+    <meta name="keywords" content="Don Pedro,Alfaroubeira,project,sailing,Le Diouris,schooner,ketch,Cheoy Lee,Apollinaire,camels,dromadary,dromadaries,techniques">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="onecamel.png" type="image/png" />
+    <script language="JavaScript1.1">
+function getView()
+{
+  var loc = document.location.toString();
+  var i = loc.indexOf("view=");
+  var defaultView = '00_fr.html';
+  if (i > -1)
+  {
+    defaultView = loc.substr(5+i);
+//  alert('View:' + defaultView);
+  }
+  else
+    defaultView = '00_fr.html';
+      
+  return defaultView;
+}      
+    </script>
+  </head>
+  <script language="JavaScript1.1">
+// <![CDATA[
+	  txt =
+	  '<frameset frameborder="0" border="0" cols="*" rows="162,*,18">\n' +
+	  '	 <frame marginwidth="0" marginheight="0" src="top_fr.html" name="heading" noresize scrolling="no">\n' +
+	  '	 <frameset frameborder="0" border="0" cols="255,*" rows="*">\n' +
+	  '	   <!--frameset frameborder="0" border="0" cols="*" rows="0,*"-->\n' +
+	  '	     <frame marginwidth="0" marginheight="0" src="left_fr.html" name="code" noresize scrolling="yes" frameborder="0">\n' +
+	  '	     <!--frame marginwidth="5" marginheight="5" src="menu_empty.html" name="menu" noresize scrolling="auto" frameborder="0"-->\n' +
+	  '	   <!--/frameset-->\n' +
+	  '	   <!--frame marginwidth="0" marginheight="0" src="inter.html" name="inter" noresize scrolling="no"-->\n' +
+	  '    <frame marginwidth="5" marginheight="5" src="' + getView() + '" name="text" noresize >\n' +
+	  '  </frameset>\n' +
+	  '  <frame marginwidth="0" marginheight="0" src="bottom.html" name="bottom" noresize scrolling="no">\n' +
+      '  <noframes>\n' +
+      '    <p>\n' +
+      '      The <code>NOFRAMES</code> element is to be used to give useful content to people with browsers \n' +
+      '      that cannot display frames.  One example is Lynx, a text-based browser.\n' +
+      '    </p> \n' +
+      '    <a href="top.html">Top</a>\n' +
+      '    <a href="left.html">Left</a>\n' +
+      '    <a href="menu_empty.html">Menu</a>\n' +
+      '    <a href="right.html">Right</a>\n' +
+      '    <a href="mission.html">Mission</a>\n' +
+      '  </noframes>\n' +
+      '</frameset>\n';
+  document.write(txt);
+// ]]>
+  </script>
+</html>

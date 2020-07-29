@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<gpx version="1.1" creator="WeatherWizard"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xmlns="http://www.topografix.com/GPX/1/1"
+     xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+    <trk>
+        <number>1289786857</number>
+        <trkseg>
+            <!--trkpt lat="" lon="">
+                <time>2010-10-02T04:30:00Z</time>
+                <name>00002</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt-->
+            <trkpt lat='-8.91516666666667' lon='-140.0995'>
+                <time>2010-11-21T13:00:00-10:00</time>
+                <name>1</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+				<extension>
+				  <marker>
+				    <html-text lang='EN'>
+					<![CDATA[
+					  <a href='02.html#01'>Marquesas - Taiohae</a>
+					  <br>
+					  <a href='02.html#02'>Marquesas - Hakatea</a>
+					  <br>
+					  <a href='02.html#03'>Marquesas - Ua Pou</a>
+					  <br>
+					  <a href='02.html#05'>Marquesas - Taipivai</a>
+					  <br>
+					  <a href='02.html#05'>Marquesas - Anaho</a>
+					  <br>
+					  <br>
+					  <a href='03.html'>Marquesas - Tuamotu (Rangiroa)</a>
+					]]>
+					</html-text>
+				    <html-text lang='FR'>
+					<![CDATA[
+					  <a href='02_fr.html#01'>Marquises - Taiohae</a>
+					  <br>
+					  <a href='02_fr.html#02'>Marquises - Hakatea</a>
+					  <br>
+					  <a href='02_fr.html#03'>Marquises - Ua Pou</a>
+					  <br>
+					  <a href='02_fr.html#05'>Marquises - Taipivai</a>
+					  <br>
+					  <a href='02_fr.html#05'>Marquises - Anaho</a>
+					  <br>
+					  <br>
+					  <a href='03_fr.html'>Marquises - Tuamotu (Rangiroa)</a>
+					]]>
+					</html-text>
+				  </marker>
+				</extension>
+            </trkpt>
+            <trkpt lat='-9.5185' lon='-140.592833333333'>
+                <time>2010-11-21T20:15:00-10:00</time>
+                <name>2</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+            <trkpt lat='-10.3066666666667' lon='-141.492'>
+                <time>2010-11-22T08:20:00-10:00</time>
+                <name>3</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+            <trkpt lat='-10.8888333333333' lon='-142.221166666667'>
+                <time>2010-11-22T18:15:00-10:00</time>
+                <name>4</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+            <trkpt lat='-11.6116666666667' lon='-143.055'>
+                <time>2010-11-23T05:55:00-10:00</time>
+                <name>5</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+            <trkpt lat='-12.302' lon='-144.319166666667'>
+                <time>2010-11-23T23:55:00-10:00</time>
+                <name>6</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+            <trkpt lat='-12.8466666666667' lon='-145.196666666667'>
+                <time>2010-11-24T11:00:00-10:00</time>
+                <name>7</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+            <trkpt lat='-14.1791666666667' lon='-146.742'>
+                <time>2010-11-25T13:10:00-10:00</time>
+                <name>8</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+            <trkpt lat='-14.638' lon='-147.343666666667'>
+                <time>2010-11-26T00:00:00-10:00</time>
+                <name>9</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+            <trkpt lat='-14.96855' lon='-147.636883333333'>
+                <time>2010-11-26T08:40:00-10:00</time>
+                <name>10</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+        </trkseg>
+    </trk>
+</gpx>

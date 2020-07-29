@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<gpx version="1.1" creator="WeatherWizard"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xmlns="http://www.topografix.com/GPX/1/1"
+     xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+    <trk>
+        <number>1289786857</number>
+        <trkseg>
+            <!-- Raiatea - Bora -->
+			<trkpt lat='-16.728789998853564' lon='-151.44348621368408'>
+                <time>2011-02-28T10:30:00-10:00</time>
+                <name>08</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+			<trkpt lat='-16.728779724083232' lon='-151.443110704422'>
+                <time>2011-02-28T10:30:00-10:00</time>
+                <name>07</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+			<trkpt lat='-16.72807076359288' lon='-151.4423704147339'>
+                <time>2011-02-28T10:30:00-10:00</time>
+                <name>06</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+			<trkpt lat='-16.725265720149352' lon='-151.44207000732422'>
+                <time>2011-02-28T10:30:00-10:00</time>
+                <name>05</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+			<trkpt lat='-16.721864678061696' lon='-151.44880771636963'>
+                <time>2011-02-28T10:30:00-10:00</time>
+                <name>04</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+			<trkpt lat='-16.71438422709454' lon='-151.46799087524414'>
+                <time>2011-02-28T10:30:00-10:00</time>
+                <name>03</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+			<trkpt lat='-16.685528312822967' lon='-151.49288177490234'>
+                <time>2011-02-28T10:30:00-10:00</time>
+                <name>03</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+			<trkpt lat='-16.655270140469216' lon='-151.5373420715332'>
+                <time>2011-02-28T10:30:00-10:00</time>
+                <name>03</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+			<trkpt lat='-16.669330918956142' lon='-151.54077529907227'>
+                <time>2011-02-28T10:30:00-10:00</time>
+                <name>03</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+			<trkpt lat='-16.553936288252135' lon='-151.79946899414062'>
+                <time>2011-02-28T10:30:00-10:00</time>
+                <name>03</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+			<trkpt lat='-16.5081869804345' lon='-151.79655075073242'>
+                <time>2011-02-28T10:30:00-10:00</time>
+                <name>03</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+			<trkpt lat='-16.491974644151643' lon='-151.7849636077881'>
+                <time>2011-02-28T10:30:00-10:00</time>
+                <name>03</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+			<trkpt lat='-16.498476201085552' lon='-151.7709732055664'>
+                <time>2011-02-28T10:30:00-10:00</time>
+                <name>03</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+			<trkpt lat='-16.50826927309085' lon='-151.77191734313965'>
+                <time>2011-02-28T10:30:00-10:00</time>
+                <name>03</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+			<trkpt lat='-16.515346310475657' lon='-151.77440643310547'>
+                <time>2011-02-28T10:30:00-10:00</time>
+                <name>03</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+				<extension>
+				  <marker>
+				    <html-text lang='EN'>
+					<![CDATA[
+					  <a href='06.html#08'>Bora-Bora</a>
+					]]>
+					</html-text>
+				    <html-text lang='FR'>
+					<![CDATA[
+					  <a href='06_fr.html#08'>Bora-Bora</a>
+					]]>
+					</html-text>
+				  </marker>
+				</extension>
+            </trkpt>
+			<trkpt lat='-16.520941923998112' lon='-151.77449226379395'>
+                <time>2011-02-28T10:30:00-10:00</time>
+                <name>03</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+			<trkpt lat='-16.526125950703136' lon='-151.7706298828125'>
+                <time>2011-02-28T10:30:00-10:00</time>
+                <name>03</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+				<extension>
+				  <marker>
+				    <html-text lang='EN'>
+					<![CDATA[
+					  <a href='06.html#08'>Bora-Bora</a>
+					  <br>
+					  Our second anchorage
+					]]>
+					</html-text>
+				    <html-text lang='FR'>
+					<![CDATA[
+					  <a href='06_fr.html#08'>Bora-Bora</a>
+					  <br>
+					  Deuxi&egrave;me mouillage
+					]]>
+					</html-text>
+				  </marker>
+				</extension>
+            </trkpt>
+			<trkpt lat='-16.529170472951307' lon='-151.77414894104004'>
+                <time>2011-02-28T10:30:00-10:00</time>
+                <name>03</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+			<trkpt lat='-16.530116733600334' lon='-151.77384853363037'>
+                <time>2011-02-28T10:30:00-10:00</time>
+                <name>03</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+			<trkpt lat='-16.533078910862997' lon='-151.76208972930908'>
+                <time>2011-02-28T10:30:00-10:00</time>
+                <name>03</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+			<trkpt lat='-16.531844675860977' lon='-151.76067352294922'>
+                <time>2011-02-28T10:30:00-10:00</time>
+                <name>03</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+			<trkpt lat='-16.494443615551045' lon='-151.76223993301392'>
+                <time>2011-02-28T10:30:00-10:00</time>
+                <name>03</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+            </trkpt>
+			<trkpt lat='-16.48959822943036' lon='-151.7599868774414'>
+                <time>2011-02-28T10:30:00-10:00</time>
+                <name>03</name>
+                <sym>empty</sym>
+                <type>WPT</type>
+				<extension>
+				  <marker>
+				    <html-text lang='EN'>
+					<![CDATA[
+					  <a href='06.html#08'>Bora-Bora</a>
+					  <br>
+					  Bora-Bora Yacht Club
+					  <br>
+					  <br>
+					  <a href='07.html'>Bora-Bora to Tongareva</a>
+					]]>
+					</html-text>
+				    <html-text lang='FR'>
+					<![CDATA[
+					  <a href='06_fr.html#08'>Bora-Bora</a>
+					  <br>
+					  Bora-Bora Yacht Club
+					  <br>
+					  <br>
+					  <a href='07_fr.html'>Bora-Bora &agrave; Tongareva</a>
+					]]>
+					</html-text>
+				  </marker>
+				</extension>
+            </trkpt>
+		</trkseg>
+    </trk>
+</gpx>
+		

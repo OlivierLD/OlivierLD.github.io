@@ -1,0 +1,274 @@
+<?xml version='1.0' encoding='utf-8'?>
+<package xmlns="http://www.idpf.org/2007/opf" unique-identifier="uuid_id" version="2.0">
+  <metadata xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:opf="http://www.idpf.org/2007/opf" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:calibre="http://calibre.kovidgoyal.net/2009/metadata" xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <dc:language>en</dc:language>
+    <dc:creator>Corine &amp; Olivier Le Diouris</dc:creator>
+    <dc:description>Eight months and 10,000 miles in the Pacific Ocean</dc:description>
+    <dc:publisher>OlivSoft</dc:publisher>
+    <dc:date>June 2013</dc:date>
+    <meta name="calibre:timestamp" content="2013-07-02T17:34:16.626000+00:00"/>
+    <dc:title>Don Pedro in Polynesia</dc:title>
+    <meta name="cover" content="cover"/>
+    <dc:identifier id="uuid_id" opf:scheme="uuid">fc1bf915-0b7d-4721-87f7-632c4bb6d26b</dc:identifier>
+  </metadata>
+  <manifest>
+    <item href="cover_image.jpg" id="cover" media-type="image/jpeg"/>
+    <item href="00.html" id="html1" media-type="application/xhtml+xml"/>
+    <item href="01.html" id="html3" media-type="application/xhtml+xml"/>
+    <item href="02.html" id="html4" media-type="application/xhtml+xml"/>
+    <item href="03.html" id="html5" media-type="application/xhtml+xml"/>
+    <item href="04.html" id="html6" media-type="application/xhtml+xml"/>
+    <item href="05.html" id="html7" media-type="application/xhtml+xml"/>
+    <item href="06.html" id="html8" media-type="application/xhtml+xml"/>
+    <item href="07.html" id="html9" media-type="application/xhtml+xml"/>
+    <item href="08.html" id="html10" media-type="application/xhtml+xml"/>
+    <item href="09.html" id="html11" media-type="application/xhtml+xml"/>
+    <item href="10.html" id="html12" media-type="application/xhtml+xml"/>
+    <item href="11.html" id="html13" media-type="application/xhtml+xml"/>
+    <item href="12.html" id="html14" media-type="application/xhtml+xml"/>
+    <item href="13.html" id="html15" media-type="application/xhtml+xml"/>
+    <item href="14.html" id="html16" media-type="application/xhtml+xml"/>
+    <item href="2010-10-02.png" id="added55" media-type="image/png"/>
+    <item href="2010-10-03.png" id="added57" media-type="image/png"/>
+    <item href="2010-10-04.png" id="added59" media-type="image/png"/>
+    <item href="2010-10-05.png" id="added61" media-type="image/png"/>
+    <item href="2010-10-06.png" id="added62" media-type="image/png"/>
+    <item href="2010-10-07.png" id="added64" media-type="image/png"/>
+    <item href="2010-10-08.png" id="added66" media-type="image/png"/>
+    <item href="2010-10-09.png" id="added68" media-type="image/png"/>
+    <item href="2010-10-10.png" id="added69" media-type="image/png"/>
+    <item href="2010-10-11.png" id="added71" media-type="image/png"/>
+    <item href="2010-10-12.png" id="added72" media-type="image/png"/>
+    <item href="2010-10-13.png" id="added73" media-type="image/png"/>
+    <item href="2010-10-14.png" id="added75" media-type="image/png"/>
+    <item href="2010-10-15.png" id="added76" media-type="image/png"/>
+    <item href="2010-10-16.png" id="added78" media-type="image/png"/>
+    <item href="2010-10-17.png" id="added79" media-type="image/png"/>
+    <item href="2010-10-18.png" id="added80" media-type="image/png"/>
+    <item href="2010-10-19.png" id="added81" media-type="image/png"/>
+    <item href="2010-10-20.png" id="added82" media-type="image/png"/>
+    <item href="2010-10-21.png" id="added84" media-type="image/png"/>
+    <item href="2010-10-22.png" id="added85" media-type="image/png"/>
+    <item href="2010-10-23.png" id="added87" media-type="image/png"/>
+    <item href="2010-10-24.png" id="added89" media-type="image/png"/>
+    <item href="2010-10-25.png" id="added90" media-type="image/png"/>
+    <item href="2010-10-26.png" id="added92" media-type="image/png"/>
+    <item href="2010-10-27.png" id="added94" media-type="image/png"/>
+    <item href="2010-11-21.png" id="added111" media-type="image/png"/>
+    <item href="2010-11-22.png" id="added112" media-type="image/png"/>
+    <item href="2010-11-23.png" id="added113" media-type="image/png"/>
+    <item href="2010-11-24.png" id="added114" media-type="image/png"/>
+    <item href="2010-11-25.png" id="added116" media-type="image/png"/>
+    <item href="2010-11-26.png" id="added118" media-type="image/png"/>
+    <item href="2010-12-04.png" id="added121" media-type="image/png"/>
+    <item href="2010-12-05.png" id="added122" media-type="image/png"/>
+    <item href="2011-02-03.png" id="added134" media-type="image/png"/>
+    <item href="2011-02-08.png" id="added135" media-type="image/png"/>
+    <item href="2011-02-12.png" id="added138" media-type="image/png"/>
+    <item href="2011-02-13.png" id="added140" media-type="image/png"/>
+    <item href="2011-02-14.png" id="added141" media-type="image/png"/>
+    <item href="2011-02-15.png" id="added142" media-type="image/png"/>
+    <item href="2011-02-17.png" id="added143" media-type="image/png"/>
+    <item href="2011-02-18.png" id="added144" media-type="image/png"/>
+    <item href="2011-02-28.png" id="added153" media-type="image/png"/>
+    <item href="2011-03-01.png" id="added154" media-type="image/png"/>
+    <item href="2011-03-02.png" id="added155" media-type="image/png"/>
+    <item href="2011-03-03.png" id="added156" media-type="image/png"/>
+    <item href="2011-03-04.png" id="added157" media-type="image/png"/>
+    <item href="2011-03-05.png" id="added159" media-type="image/png"/>
+    <item href="2011-03-06.png" id="added162" media-type="image/png"/>
+    <item href="2011-03-07.png" id="added164" media-type="image/png"/>
+    <item href="2011-03-08.png" id="added166" media-type="image/png"/>
+    <item href="2011-03-09.png" id="added168" media-type="image/png"/>
+    <item href="2011-03-10.png" id="added169" media-type="image/png"/>
+    <item href="2011-03-11.png" id="added170" media-type="image/png"/>
+    <item href="2011-04-23.png" id="added175" media-type="image/png"/>
+    <item href="2011-04-24.png" id="added176" media-type="image/png"/>
+    <item href="2011-04-25.png" id="added178" media-type="image/png"/>
+    <item href="2011-04-26.png" id="added180" media-type="image/png"/>
+    <item href="2011-04-27.png" id="added181" media-type="image/png"/>
+    <item href="2011-04-28.png" id="added182" media-type="image/png"/>
+    <item href="2011-04-29.png" id="added183" media-type="image/png"/>
+    <item href="2011-04-30.png" id="added184" media-type="image/png"/>
+    <item href="2011-05-01.png" id="added186" media-type="image/png"/>
+    <item href="2011-05-02.png" id="added187" media-type="image/png"/>
+    <item href="2011-05-03.png" id="added188" media-type="image/png"/>
+    <item href="2011-05-04.png" id="added189" media-type="image/png"/>
+    <item href="2011-05-05.png" id="added190" media-type="image/png"/>
+    <item href="2011-05-06.png" id="added191" media-type="image/png"/>
+    <item href="2011-05-07.png" id="added192" media-type="image/png"/>
+    <item href="2011-05-08.png" id="added193" media-type="image/png"/>
+    <item href="2011-05-09.png" id="added194" media-type="image/png"/>
+    <item href="2011-05-10.png" id="added195" media-type="image/png"/>
+    <item href="2011-05-11.png" id="added196" media-type="image/png"/>
+    <item href="2011-05-12.png" id="added197" media-type="image/png"/>
+    <item href="2011-05-13.png" id="added198" media-type="image/png"/>
+    <item href="2011-05-14.png" id="added199" media-type="image/png"/>
+    <item href="2011-05-15.png" id="added200" media-type="image/png"/>
+    <item href="2011-05-16.png" id="added201" media-type="image/png"/>
+    <item href="2011-05-17.png" id="added203" media-type="image/png"/>
+    <item href="2011-05-18.png" id="added204" media-type="image/png"/>
+    <item href="2011-05-19.png" id="added206" media-type="image/png"/>
+    <item href="appendix.html" id="html18" media-type="application/xhtml+xml"/>
+    <item href="calendar.html" id="html2" media-type="application/xhtml+xml"/>
+    <item href="dsc03961.jpg" id="added172" media-type="image/jpeg"/>
+    <item href="index.html" id="html" media-type="application/xhtml+xml"/>
+    <item href="p1021057.jpg" id="added127" media-type="image/jpeg"/>
+    <item href="p1031066.jpg" id="added128" media-type="image/jpeg"/>
+    <item href="p1061140.jpg" id="added27" media-type="image/jpeg"/>
+    <item href="p1121174.jpg" id="added129" media-type="image/jpeg"/>
+    <item href="p1131195.jpg" id="added28" media-type="image/jpeg"/>
+    <item href="p1181276.jpg" id="added29" media-type="image/jpeg"/>
+    <item href="p1181288.jpg" id="added130" media-type="image/jpeg"/>
+    <item href="p1201323.jpg" id="added131" media-type="image/jpeg"/>
+    <item href="p1201324.jpg" id="added1" media-type="image/jpeg"/>
+    <item href="p1221342.jpg" id="added132" media-type="image/jpeg"/>
+    <item href="p1241389.jpg" id="added30" media-type="image/jpeg"/>
+    <item href="p1251428.jpg" id="added31" media-type="image/jpeg"/>
+    <item href="p1271479.jpg" id="added133" media-type="image/jpeg"/>
+    <item href="p1281497.jpg" id="added32" media-type="image/jpeg"/>
+    <item href="p2031543.jpg" id="added33" media-type="image/jpeg"/>
+    <item href="p2081575.jpg" id="added34" media-type="image/jpeg"/>
+    <item href="p2081577.jpg" id="added136" media-type="image/jpeg"/>
+    <item href="p2090009.jpg" id="added35" media-type="image/jpeg"/>
+    <item href="p2100022.jpg" id="added139" media-type="image/jpeg"/>
+    <item href="p2170030.jpg" id="added36" media-type="image/jpeg"/>
+    <item href="p2180033.jpg" id="added145" media-type="image/jpeg"/>
+    <item href="p2180049.jpg" id="added146" media-type="image/jpeg"/>
+    <item href="p2200082.jpg" id="added147" media-type="image/jpeg"/>
+    <item href="p2200113.jpg" id="added148" media-type="image/jpeg"/>
+    <item href="p2220139.jpg" id="added149" media-type="image/jpeg"/>
+    <item href="p2220147.jpg" id="added37" media-type="image/jpeg"/>
+    <item href="p2240176.jpg" id="added38" media-type="image/jpeg"/>
+    <item href="p2240178.jpg" id="added150" media-type="image/jpeg"/>
+    <item href="p2260236.jpg" id="added137" media-type="image/jpeg"/>
+    <item href="p2270241.jpg" id="added151" media-type="image/jpeg"/>
+    <item href="p2270250.jpg" id="added152" media-type="image/jpeg"/>
+    <item href="p2280254.jpg" id="added39" media-type="image/jpeg"/>
+    <item href="p3040259.jpg" id="added40" media-type="image/jpeg"/>
+    <item href="p3040263.jpg" id="added158" media-type="image/jpeg"/>
+    <item href="p3060265.jpg" id="added165" media-type="image/jpeg"/>
+    <item href="p3060273.jpg" id="added167" media-type="image/jpeg"/>
+    <item href="p3060280.jpg" id="added41" media-type="image/jpeg"/>
+    <item href="p3080284.jpg" id="added160" media-type="image/jpeg"/>
+    <item href="p3090289.jpg" id="added161" media-type="image/jpeg"/>
+    <item href="p3090290.jpg" id="added163" media-type="image/jpeg"/>
+    <item href="p3110300.jpg" id="added42" media-type="image/jpeg"/>
+    <item href="p3160315.jpg" id="added171" media-type="image/jpeg"/>
+    <item href="p4010326.jpg" id="added44" media-type="image/jpeg"/>
+    <item href="p4150481.jpg" id="added43" media-type="image/jpeg"/>
+    <item href="p4160485.jpg" id="added173" media-type="image/jpeg"/>
+    <item href="p4180496.jpg" id="added45" media-type="image/jpeg"/>
+    <item href="p4180501.jpg" id="added174" media-type="image/jpeg"/>
+    <item href="p4240540.jpg" id="added177" media-type="image/jpeg"/>
+    <item href="p4280545.jpg" id="added179" media-type="image/jpeg"/>
+    <item href="p4290555.jpg" id="added185" media-type="image/jpeg"/>
+    <item href="p5050564.jpg" id="added47" media-type="image/jpeg"/>
+    <item href="p5050569.jpg" id="added46" media-type="image/jpeg"/>
+    <item href="p5050573.jpg" id="added48" media-type="image/jpeg"/>
+    <item href="p5120577.jpg" id="added49" media-type="image/jpeg"/>
+    <item href="p5130591.jpg" id="added50" media-type="image/jpeg"/>
+    <item href="p5150597.jpg" id="added202" media-type="image/jpeg"/>
+    <item href="p5160601.jpg" id="added51" media-type="image/jpeg"/>
+    <item href="p5170604.jpg" id="added52" media-type="image/jpeg"/>
+    <item href="p5180609.jpg" id="added205" media-type="image/jpeg"/>
+    <item href="p5190653.jpg" id="added53" media-type="image/jpeg"/>
+    <item href="p5190660.jpg" id="added207" media-type="image/jpeg"/>
+    <item href="p5210676.jpg" id="added208" media-type="image/jpeg"/>
+    <item href="p5210704.jpg" id="added54" media-type="image/jpeg"/>
+    <item href="pa020003.jpg" id="added2" media-type="image/jpeg"/>
+    <item href="pa040008.jpg" id="added58" media-type="image/jpeg"/>
+    <item href="pa060017.jpg" id="added63" media-type="image/jpeg"/>
+    <item href="pa070020.jpg" id="added65" media-type="image/jpeg"/>
+    <item href="pa080038.jpg" id="added67" media-type="image/jpeg"/>
+    <item href="pa090039.jpg" id="added3" media-type="image/jpeg"/>
+    <item href="pa110047.jpg" id="added70" media-type="image/jpeg"/>
+    <item href="pa120060.jpg" id="added4" media-type="image/jpeg"/>
+    <item href="pa120071.jpg" id="added60" media-type="image/jpeg"/>
+    <item href="pa130079.jpg" id="added74" media-type="image/jpeg"/>
+    <item href="pa150085.jpg" id="added77" media-type="image/jpeg"/>
+    <item href="pa160108.jpg" id="added5" media-type="image/jpeg"/>
+    <item href="pa190128.jpg" id="added56" media-type="image/jpeg"/>
+    <item href="pa200135.jpg" id="added83" media-type="image/jpeg"/>
+    <item href="pa210155.jpg" id="added6" media-type="image/jpeg"/>
+    <item href="pa220159.jpg" id="added86" media-type="image/jpeg"/>
+    <item href="pa230172.jpg" id="added88" media-type="image/jpeg"/>
+    <item href="pa230178.jpg" id="added7" media-type="image/jpeg"/>
+    <item href="pa250185.jpg" id="added91" media-type="image/jpeg"/>
+    <item href="pa260190.jpg" id="added96" media-type="image/jpeg"/>
+    <item href="pa260202.jpg" id="added93" media-type="image/jpeg"/>
+    <item href="pa270215.jpg" id="added8" media-type="image/jpeg"/>
+    <item href="pa270228.jpg" id="added9" media-type="image/jpeg"/>
+    <item href="pa300276.jpg" id="added95" media-type="image/jpeg"/>
+    <item href="page_styles.css" id="page_css" media-type="text/css"/>
+    <item href="pb010291.jpg" id="added10" media-type="image/jpeg"/>
+    <item href="pb030306.jpg" id="added97" media-type="image/jpeg"/>
+    <item href="pb030308.jpg" id="added11" media-type="image/jpeg"/>
+    <item href="pb030315.jpg" id="added98" media-type="image/jpeg"/>
+    <item href="pb030321.jpg" id="added101" media-type="image/jpeg"/>
+    <item href="pb040325.jpg" id="added102" media-type="image/jpeg"/>
+    <item href="pb040338.jpg" id="added99" media-type="image/jpeg"/>
+    <item href="pb040339.jpg" id="added100" media-type="image/jpeg"/>
+    <item href="pb060358.jpg" id="added12" media-type="image/jpeg"/>
+    <item href="pb060390.jpg" id="added13" media-type="image/jpeg"/>
+    <item href="pb100413.jpg" id="added14" media-type="image/jpeg"/>
+    <item href="pb110419.jpg" id="added103" media-type="image/jpeg"/>
+    <item href="pb110438.jpg" id="added104" media-type="image/jpeg"/>
+    <item href="pb120463.jpg" id="added15" media-type="image/jpeg"/>
+    <item href="pb120481.jpg" id="added105" media-type="image/jpeg"/>
+    <item href="pb160578.jpg" id="added107" media-type="image/jpeg"/>
+    <item href="pb170600.jpg" id="added106" media-type="image/jpeg"/>
+    <item href="pb180629.jpg" id="added16" media-type="image/jpeg"/>
+    <item href="pb180647.jpg" id="added109" media-type="image/jpeg"/>
+    <item href="pb180656.jpg" id="added110" media-type="image/jpeg"/>
+    <item href="pb180664.jpg" id="added108" media-type="image/jpeg"/>
+    <item href="pb200668.jpg" id="added124" media-type="image/jpeg"/>
+    <item href="pb240682.jpg" id="added115" media-type="image/jpeg"/>
+    <item href="pb250686.jpg" id="added17" media-type="image/jpeg"/>
+    <item href="pb250689.jpg" id="added117" media-type="image/jpeg"/>
+    <item href="pb260709.jpg" id="added18" media-type="image/jpeg"/>
+    <item href="pb270723.jpg" id="added19" media-type="image/jpeg"/>
+    <item href="pb300770.jpg" id="added20" media-type="image/jpeg"/>
+    <item href="pb300793.jpg" id="added120" media-type="image/jpeg"/>
+    <item href="pc010812.jpg" id="added119" media-type="image/jpeg"/>
+    <item href="pc040821.jpg" id="added21" media-type="image/jpeg"/>
+    <item href="pc050832.jpg" id="added22" media-type="image/jpeg"/>
+    <item href="pc050837.jpg" id="added123" media-type="image/jpeg"/>
+    <item href="pc160897.jpg" id="added125" media-type="image/jpeg"/>
+    <item href="pc190956.jpg" id="added24" media-type="image/jpeg"/>
+    <item href="pc200959.jpg" id="added25" media-type="image/jpeg"/>
+    <item href="pc281030.jpg" id="added23" media-type="image/jpeg"/>
+    <item href="pc291031.jpg" id="added126" media-type="image/jpeg"/>
+    <item href="pc311035.jpg" id="added26" media-type="image/jpeg"/>
+    <item href="reefing.png" id="added209" media-type="image/png"/>
+    <item href="stylesheet.css" id="css" media-type="text/css"/>
+    <item href="titlepage.xhtml" id="titlepage" media-type="application/xhtml+xml"/>
+    <item href="ts.html" id="html17" media-type="application/xhtml+xml"/>
+    <item href="toc.ncx" id="ncx" media-type="application/x-dtbncx+xml"/>
+  </manifest>
+  <spine toc="ncx">
+    <itemref idref="titlepage"/>
+    <itemref idref="html"/>
+    <itemref idref="html1"/>
+    <itemref idref="html2"/>
+    <itemref idref="html3"/>
+    <itemref idref="html4"/>
+    <itemref idref="html5"/>
+    <itemref idref="html6"/>
+    <itemref idref="html7"/>
+    <itemref idref="html8"/>
+    <itemref idref="html9"/>
+    <itemref idref="html10"/>
+    <itemref idref="html11"/>
+    <itemref idref="html12"/>
+    <itemref idref="html13"/>
+    <itemref idref="html14"/>
+    <itemref idref="html15"/>
+    <itemref idref="html16"/>
+    <itemref idref="html17"/>
+    <itemref idref="html18"/>
+  </spine>
+  <guide>
+    <reference href="titlepage.xhtml" title="Title Page" type="cover"/>
+  </guide>
+</package>
