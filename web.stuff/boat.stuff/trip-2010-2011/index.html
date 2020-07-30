@@ -1,55 +1,108 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Frameset//EN"
-		  "http://www.w3.org/TR/REC-html40/frame.dtd">
-<html>
+<!DOCTYPE html>
+<!--
+  HTML5, CSS3, ES6
+ +-->
+<html lang="en-US">
   <head>
     <title>Don Pedro in Polynesia</title>
     <meta name="keywords" content="Don Pedro,Alfaroubeira,project,sailing,Le Diouris,schooner,ketch,Cheoy Lee,Apollinaire,camels,dromadary,dromadaries,techniques">
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-    <link rel="apple-touch-icon" href="onecamel.png" type="image/png" />
-    <script language="JavaScript1.1">
-function getView()
-{
-  var loc = document.location.toString();
-  var i = loc.indexOf("view=");
-  var defaultView = '00.html';
-  if (i > -1) {
-    defaultView = loc.substr(5+i);
-//  alert('View:' + defaultView);
-  } else {
-    defaultView = '00.html';
-  }
-      
-  return defaultView;
-}      
-    </script>
+    <link rel="icon" type="image/jpg" href="../../../palm.04.jpg">
+    <link rel="stylesheet" href="css/dp.css" type="text/css"/>
+    <script type="text/javascript" src="js/utils.js"></script>
   </head>
-  <script language="JavaScript1.1">
-// <![CDATA[
-	  txt =
-	  '<frameset frameborder="0" border="0" cols="*" rows="162,*,18">\n' +
-	  '	 <frame marginwidth="0" marginheight="0" src="top.html" name="heading" noresize scrolling="no">\n' +
-	  '	 <frameset frameborder="0" border="0" cols="255,*" rows="*">\n' +
-	  '	   <!--frameset frameborder="0" border="0" cols="*" rows="0,*"-->\n' +
-	  '	     <frame marginwidth="0" marginheight="0" src="left.html" name="code" noresize scrolling="yes" frameborder="0">\n' +
-	  '	     <!--frame marginwidth="5" marginheight="5" src="menu_empty.html" name="menu" noresize scrolling="auto" frameborder="0"-->\n' +
-	  '	   <!--/frameset-->\n' +
-	  '	   <!--frame marginwidth="0" marginheight="0" src="inter.html" name="inter" noresize scrolling="no"-->\n' +
-	  '    <frame marginwidth="5" marginheight="5" src="' + getView() + '" name="text" noresize >\n' +
-	  '  </frameset>\n' +
-	  '  <frame marginwidth="0" marginheight="0" src="bottom.html" name="bottom" noresize scrolling="no">\n' +
-      '  <noframes>\n' +
-      '    <p>\n' +
-      '      The <code>NOFRAMES</code> element is to be used to give useful content to people with browsers \n' +
-      '      that cannot display frames.  One example is Lynx, a text-based browser.\n' +
-      '    </p> \n' +
-      '    <a href="top.html">Top</a>\n' +
-      '    <a href="left.html">Left</a>\n' +
-      '    <a href="menu_empty.html">Menu</a>\n' +
-      '    <a href="right.html">Right</a>\n' +
-      '    <a href="mission.html">Mission</a>\n' +
-      '  </noframes>\n' +
-      '</frameset>\n';
-  document.write(txt);
-// ]]>
-    </script>
+    <body>
+      <!--small style="margin-left: 5px;">&gt; &nbsp;Work in Progress. Use the hamburger below to display the menu. See kebab on the right.</small-->
+      <h1 title="Polynesian Trip, 2010-2011."
+            style="width: 100%; font-style: normal; text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px silver;"><span style="cursor: pointer; font-size: 48px; vertical-align: middle;" onclick="openNav()" onmouseover="openNav()" title="Hamburger, Nav Menu">&nbsp; &#8801;</span> <span style="font-size: 16px;" title="&#8678; Menu on the hambuger">Don Pedro in Polynesia, 2010-2011</span></h1>
+      <div style="overflow-y: auto;/* min-height:  calc(100% - 100px);*/">
+           <iframe id="main-frame" class="resp-iframe" src="./00.html" frameborder="no"></iframe>
+      </div>
+
+      <!--
+        The Big Main Menu on the left
+
+        ◄ = &#9668;
+        ► = &#9658;
+        ▼ = &#9660;
+        ▲ = &#9650;
+      -->
+      <div id="side-nav" class="sidenav"> <!-- onmouseleave="closeNav()"> -->
+        <a href="javascript:void(0)" id="close-nav-button" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="javascript:void(0)" class="active-link" onclick="showPage('./00.html', 'main-frame');">Introduction</a>
+        <!--a href="javascript:void(0)" class="active-link" onclick="showPage('./map.html', 'main-frame');">Map of the Trip</a-->
+        <a href="javascript:void(0)" class="active-link" onclick="showPage('./leaflet.map.html', 'main-frame');">Map of the Trip</a>
+        <a href="javascript:void(0)" class="active-link" onclick="showPage('./calendar.html', 'main-frame');">Calendar of the tip</a>
+
+        <!--a href="javascript:void(0)" class="active-link" onclick="marqueeOnOff()">Marquee Panel (start or stop)</a-->
+        <div> <!-- onmouseover="showSection('section-1');" onmouseleave="hideSection('section-1');"> -->
+          <a href="javascript:void(0)" onclick="showHideSection(this, 'section-1');"><span class="expand-collapse">&#9658;&nbsp;</span>First Leg</a>
+          <div id="section-1" class="sub-section">
+            <a class="active-link" href="http://raspberrypi.lediouris.net/" target="new">Map</a>
+            <a href="javascript:void(0)" class="active-link" onclick="showPage('./01.html#01', 'main-frame');">From San Francisco to the Tropic of Cancer</a>
+            <a href="javascript:void(0)" class="active-link" onclick="showPage('./01.html#02', 'main-frame');">From the Tropic of Cancer to the ITCZ</a>
+            <a href="javascript:void(0)" class="active-link" onclick="showPage('./01.html#03', 'main-frame');">From the ITCZ to the Equator</a>
+            <a href="javascript:void(0)" class="active-link" onclick="showPage('./01.html#04', 'main-frame');">From the Equator to Nuku-Hiva</a>
+            <a href="javascript:void(0)" class="active-link" onclick="showPage('./01.html#05', 'main-frame');">Summary of the first leg</a>
+          </div>
+        </div>
+        <div> <!-- onmouseover="showSection('section-2');" onmouseleave="hideSection('section-2');"> -->
+          <a href="javascript:void(0)" onclick="showHideSection(this, 'section-2');"><span class="expand-collapse">&#9658;&nbsp;</span>Marquesas</a>
+          <div id="section-2" class="sub-section">
+            <a href="javascript:void(0)" class="active-link" onclick="showPage('./stop.one.kml', 'main-frame');">Map</a>
+            <a href="javascript:void(0)" class="active-link" onclick="showPage('./02.html#01', 'main-frame');">Nuku-Hiva, Taiohae</a>
+            <a href="javascript:void(0)" class="active-link" onclick="showPage('./02.html#02', 'main-frame');">Hakatea</a>
+            <a href="javascript:void(0)" class="active-link" onclick="showPage('./02.html#03', 'main-frame');">Ua Pou</a>
+            <a href="javascript:void(0)" class="active-link" onclick="showPage('./02.html#04', 'main-frame');">Taipivai</a>
+            <a href="javascript:void(0)" class="active-link" onclick="showPage('./02.html#05', 'main-frame');">Anaho Bay</a>
+          </div>
+        </div>
+        <a href="javascript:void(0)" class="active-link" onclick="showPage('./03.html', 'main-frame');">Second Leg</a>
+        <a href="javascript:void(0)" class="active-link" onclick="showPage('./04.html', 'main-frame');">Rangiroa</a>
+        <a href="javascript:void(0)" class="active-link" onclick="showPage('./05.html', 'main-frame');">Third Leg</a>
+        <div> 
+          <a href="javascript:void(0)" onclick="showHideSection(this, 'section-6');"><span class="expand-collapse">&#9658;&nbsp;</span>Society Islands</a>
+          <div id="section-6" class="sub-section">
+            <a href="javascript:void(0)" class="active-link" onclick="showPage('./06.html#01', 'main-frame');">Tahiti</a>
+            <a href="javascript:void(0)" class="active-link" onclick="showPage('./06.html#02', 'main-frame');">Moorea</a>
+            <a href="javascript:void(0)" class="active-link" onclick="showPage('./06.html#03', 'main-frame');">Tahiti</a>
+            <a href="javascript:void(0)" class="active-link" onclick="showPage('./06.html#04', 'main-frame');">Moorea</a>
+            <a href="javascript:void(0)" class="active-link" onclick="showPage('./06.html#05', 'main-frame');">Huahine</a>
+            <a href="javascript:void(0)" class="active-link" onclick="showPage('./06.html#06', 'main-frame');">Taha'a</a>
+            <a href="javascript:void(0)" class="active-link" onclick="showPage('./06.html#07', 'main-frame');">Raiatea</a>
+            <a href="javascript:void(0)" class="active-link" onclick="showPage('./06.html#08', 'main-frame');">Bora-Bora</a>
+          </div>
+        </div>
+        <a href="javascript:void(0)" class="active-link" onclick="showPage('./07.html', 'main-frame');">Fourth Leg</a>
+        <a href="javascript:void(0)" class="active-link" onclick="showPage('./08.html', 'main-frame');">Tongareva</a>
+        <a href="javascript:void(0)" class="active-link" onclick="showPage('./09.html', 'main-frame');">Fifth Leg</a>
+        <a href="javascript:void(0)" class="active-link" onclick="showPage('./10.html', 'main-frame');">Kiribati</a>
+        <div> 
+          <a href="javascript:void(0)" onclick="showHideSection(this, 'section-11');"><span class="expand-collapse">&#9658;&nbsp;</span>Sixth Leg</a>
+          <div id="section-11" class="sub-section">
+            <a href="javascript:void(0)" class="active-link" onclick="showPage('./11.html#01', 'main-frame');">Up to the ITCZ</a>
+            <a href="javascript:void(0)" class="active-link" onclick="showPage('./11.html#02', 'main-frame');">ITCZ</a>
+            <a href="javascript:void(0)" class="active-link" onclick="showPage('./11.html#03', 'main-frame');">Up North to Hawai'i</a>
+            <a href="javascript:void(0)" class="active-link" onclick="showPage('./11.html#04', 'main-frame');">North West to Oahu</a>
+          </div>
+        </div>
+        <a href="javascript:void(0)" class="active-link" onclick="showPage('./12.html', 'main-frame');">Hawai'i</a>
+        <a href="javascript:void(0)" class="active-link" onclick="showPage('./13.html', 'main-frame');">Seventh Leg</a>
+        <a href="javascript:void(0)" class="active-link" onclick="showPage('./14.html', 'main-frame');">Back to San Francisco Bay</a>
+
+        <a href="javascript:void(0)" class="active-link" onclick="showPage('./ts.html', 'main-frame');">Technical Summary</a>
+        <a href="javascript:void(0)" class="active-link" onclick="showPage('./appendix.html', 'main-frame');">Appendix</a>
+        <a href="javascript:void(0)" class="active-link" onclick="showPage('./weather.archives/weather.archive.html', 'main-frame');">Weather Archives</a>
+        <a href="javascript:void(0)" class="active-link" onclick="showPage('./video.html', 'main-frame');">Edited Videos</a>
+        <a href="javascript:void(0)" class="active-link" onclick="showPage('./book.html', 'main-frame');">Book, Binded Versions</a>
+
+        <!--a href="javascript:void(0)" class="no-click">And more (to come...)</a-->
+      </div>
+
+      <!-- Bottom -->
+      <div style="width: 100%; position: fixed; bottom: 5px; left: 0;">
+        <hr style="border: 1px solid blue; width: 98%;"/>
+        <span style="margin: 3px; font-style: italic; font-size: 0.75em;">&copy; 2010-2011, Le Diouris &amp; Co.</span>
+      </div>
+
+    </body>
 </html>

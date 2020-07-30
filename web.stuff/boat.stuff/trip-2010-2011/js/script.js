@@ -2,23 +2,23 @@
  * Copyright and left, tamere
  */
 const oneDay = 1000 * 60 * 60 * 24;
-var startDate = setDate(2010, 10, 2);
+let startDate = setDate(2010, 10, 2);
 
-var nbAnchors = 0;
+let nbAnchors = 0;
 
 function displayDate(year, month, day, lng) {
   document.write(formatDateHeader(year, month, day, lng));
 }
 
-var weekDaysEN = new Array ( "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" );
-var weekDaysFR = new Array ( "Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi" );
+let weekDaysEN = [ "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" ];
+let weekDaysFR = [ "Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi" ];
 
-var monthEN    = new Array ( "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" );
-var monthFR    = new Array ( "janvier", "f&eacute;vrier", "mars", "avril", "mai", "juin", "juillet", "ao&ucirc;t", "septembre", "octobre", "novembre", "d&eacute;cembre" );
+let monthEN    = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
+let monthFR    = [ "janvier", "f&eacute;vrier", "mars", "avril", "mai", "juin", "juillet", "ao&ucirc;t", "septembre", "octobre", "novembre", "d&eacute;cembre" ];
 
 function formatDateHeader(year, month, day, lng) {
-  var currentDate = setDate(year, month, day);
-  var str = "<h4><a name='" + formatDateAnchor(nbAnchors) + "'>"
+  let currentDate = setDate(year, month, day);
+  let str = "<h4><a name='" + formatDateAnchor(nbAnchors) + "'>"
   str = str + formatDate(currentDate, lng) + "&nbsp;&nbsp<small>(" + (lng=="EN"?"day":"jour") + " " + (diffDateInDays(startDate, currentDate) + 1) + ")</small>";
   str = str + "</a>" + "&nbsp;&nbsp;&nbsp;";
   if (!getPrint()) {
@@ -33,7 +33,7 @@ function formatDateHeader(year, month, day, lng) {
 }
 
 function previous(lng) {
-  var str = "previous";
+  let str = "previous";
   if (lng === "FR") {
     str = "pr&eacute;c&eacute;dent";
   }
@@ -41,7 +41,7 @@ function previous(lng) {
 }
 
 function next(lng) {
-  var str = "next";
+  let str = "next";
   if (lng === "FR") {
     str = "suivant";
   }
@@ -53,7 +53,7 @@ function formatDateAnchor(idx) {
 }
 
 function lpad(i, padStr, len) {
-  var s = i.toString();
+  let s = i.toString();
   while (s.length < len) {
     s = padStr + s;
   }
@@ -61,18 +61,18 @@ function lpad(i, padStr, len) {
 }
 
 function setDate(year, month, day) {
-  var date = new Date();
+  let date = new Date();
   date.setFullYear(year, month - 1, day);
   return date;
 }
 
 function formatDate(date, lng) {
-  var dayInMonth = date.getDate();   // 1-31
-  var dayOfWeek  = date.getDay();    // 0-6
-  var month      = date.getMonth();  // 0-11
-  var year       = date.getFullYear();
+  let dayInMonth = date.getDate();   // 1-31
+  let dayOfWeek  = date.getDay();    // 0-6
+  let month      = date.getMonth();  // 0-11
+  let year       = date.getFullYear();
   
-  var formattedDate = "";
+  let formattedDate = "";
   if (lng === "EN") {
     formattedDate = weekDaysEN[dayOfWeek] + ", " + monthEN[month] + " " + dayInMonth + ", " + year;
   } else if (lng === "FR") {
@@ -82,14 +82,14 @@ function formatDate(date, lng) {
 }	
 
 function diffDateInDays(dateFrom, dateTo) {
-  var diff = (dateTo.getTime() - dateFrom.getTime()) / oneDay;
+  let diff = (dateTo.getTime() - dateFrom.getTime()) / oneDay;
   return Math.floor(diff);
 }
 
 function getPrint() {
-  var loc = document.location.toString();
-  var i = loc.indexOf("?print");
-  var print = false;
+  let loc = document.location.toString();
+  let i = loc.indexOf("?print");
+  let print = false;
   if (i > -1) {
     print = true;
   }
@@ -124,7 +124,7 @@ function sailTag(text, nodeName, jib, ss, main, mizzen, mss, spi) {
 }
 
 function sails(nodeName, jib, ss, main, mizzen, mss, spi) {
-  var imgName = "CheoyLee42.";
+  let imgName = "CheoyLee42.";
   if (mss === undefined) {
     mss = NONE;
   }
@@ -208,8 +208,8 @@ function sails(nodeName, jib, ss, main, mizzen, mss, spi) {
   }
 		
   try { 
-    var elmt = document.getElementById(nodeName);
-    var txt = document.createTextNode(elmt); 
+    let elmt = document.getElementById(nodeName);
+    let txt = document.createTextNode(elmt); 
     elmt.innerHTML = "<img src='sails/" + imgName + "' width='171' height='169' align='left' valign='top' alt='" + imgName + "' title='" + imgName + "'>"; 
   } catch (ex) { 
     alert("Exception! " + ex.toString()); 
@@ -229,10 +229,10 @@ function stripTag(text, nodeName) {
 }
 
 function strip(nodeName) {
-  var imgName = "filmstrip.png";
+  let imgName = "filmstrip.png";
   try { 
-    var elmt = document.getElementById(nodeName); //    
-    var txt = document.createTextNode(elmt); 
+    let elmt = document.getElementById(nodeName); //    
+    let txt = document.createTextNode(elmt); 
     elmt.innerHTML = "<img src='" + imgName + "' align='left' valign='top' width='203' height='8' alt='" + imgName + "' title='" + imgName + "'>"; 
   } catch (ex) { 
     alert("Exception! " + ex.toString()); 
@@ -241,8 +241,8 @@ function strip(nodeName) {
 
 function reset(nodeName) { 
   try { 
-    var elmt = document.getElementById(nodeName); //    
-    var txt = document.createTextNode(elmt); 
+    let elmt = document.getElementById(nodeName); //    
+    let txt = document.createTextNode(elmt); 
     elmt.innerHTML = ""; 
   } catch (ex) { 
     alert("Exception! " + ex.toString()); 
