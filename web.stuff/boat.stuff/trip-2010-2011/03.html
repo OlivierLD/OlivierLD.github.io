@@ -8,9 +8,8 @@
   <body> <!-- background="bground.jpg" -->
     <p>
       <table width="98%">
-				<script language="JavaScript1.1">
-				if (!getPrint())
-				{
+				<script type="text/javascript">
+				if (!getPrint()) {
 					prevNext(3, true, 'EN');
 				}
 				</script>
@@ -124,7 +123,7 @@
 			</script>
 			<tr>
 			  <td colspan="2">
-			    <a href="PB240682.JPG" target="BigPic"><img border="0" hspace="10" vspace="5" align="right" src="PB240682.JPG" width="256" height="192" alt="Another sunset" title="Another sunset"></a>
+			    <a href="PB240682.JPG" target="BigPic"><img border="0" hspace="10" vspace="5" align="right" src="PB240682.JPG" width="425" height="319" alt="Another sunset" title="Another sunset"></a>
 			    <script type="text/javascript">sailTag('All sails out', 'div_24_11_10', YANKEE, STAYSAIL, FULL, FULL, NONE, NONE);</script>, port tack at 1am. Everything's OK!
 				<br>
 				At noon, we set <script type="text/javascript">sailTag('the kite', 'div_24_11_10', NONE, NONE, FULL, FULL, NONE, FULL);</script>, but it was a bit too sharp in the puffs..., it went back in its bag at 12:30pm.
@@ -150,8 +149,8 @@
 			</script>
 			<tr>
 			  <td colspan="2">
-			    <a href="PB250686.JPG" target="BigPic"><img border="0" hspace="10" vspace="5" align="left" src="PB250686.JPG" width="256" height="192" alt="Genoa" title="Genoa"></a>
-			    <a href="PB250689.JPG" target="BigPic"><img border="0" hspace="10" vspace="5" align="right" src="PB250689.JPG" width="256" height="192" alt="Uninvited guest" title="Uninvited guest"></a>
+			    <a href="PB250686.JPG" target="BigPic"><img border="0" hspace="10" vspace="5" align="left" src="PB250686.JPG" width="425" height="319" alt="Genoa" title="Genoa"></a>
+			    <a href="PB250689.JPG" target="BigPic"><img border="0" hspace="10" vspace="5" align="right" src="PB250689.JPG" width="425" height="319" alt="Uninvited guest" title="Uninvited guest"></a>
 			    We replaced <script type="text/javascript">sailTag('the yankee with the genoa', 'div_25_11_10', GENOA, NONE, FULL, FULL, NONE, NONE);</script> (and also replaced the jib sheets - new ones were waiting, the previous ones were a
 				bit too short for the genoa).
 				<br>
@@ -183,67 +182,58 @@
 			</script>
 			<tr>
 			  <td colspan="2">
-                <table border="1" align="left" hspace="5">
+                <table border="1" align="left" hspace="5" style="margin-right: 10px; margin-left: 10px;">
                   <tr>
                     <td align="center">
-                      <script type="text/javascript" language="JavaScript1.1">
+                      <script type="text/javascript">
                         // Several pictures
-                        var ratio_11_26 = 8;
+                        var ratio_11_26 = 4.82; // 8;
                         var idname_11_26 = '2010-11-26-pic';
                         var lnkidname_11_26 = '2010-11-26-lnk';
                         var current_11_26 = 0;
-                        var picarray_11_26 = new Array
-                                                 (
-                                                   {
-                                                     name:"Tiputa Pass",
-                                                     location:"PB260709.JPG",
-                                                     width:2048,
-                                                     height:1536
-                                                   },
-                                                   {
-                                                     name:"Morning sky in Rangiroa",
-                                                     location:"PB260710.JPG",
-                                                     width:2048,
-                                                     height:1536
-                                                   }
-                                                 );
-                        function displayDefault_11_26()
-                        {
+						var picarray_11_26 = [{
+								name: "Tiputa Pass",
+								location: "PB260709.JPG",
+								width: 2048,
+								height: 1536
+							}, {
+								name: "Morning sky in Rangiroa",
+								location: "PB260710.JPG",
+								width: 2048,
+								height: 1536
+							}];
+                        function displayDefault_11_26() {
                           var idx = picarray_11_26.length - 1;
                           current_11_26 = idx;
                           str = '<div id="' + idname_11_26 + '"><img src="filmstrip.png" align="center" width="' + (picarray_11_26[idx].width/ratio_11_26) + '"><br><a href="' + picarray_11_26[idx].location + '" target="photo"><img src="' + picarray_11_26[idx].location + '" alt="' + picarray_11_26[idx].name + '" title="' + picarray_11_26[idx].name + '" align="center" width="' + (picarray_11_26[idx].width/ratio_11_26) + '" height="' + (picarray_11_26[idx].height/ratio_11_26) + '" border="0" hspace="5" vspace="0"></a><br><img src="filmstrip.png" align="center" width="' + (picarray_11_26[idx].width/ratio_11_26) + '"></div>';
                        // alert("Writing:" + str);
                           document.write(str);
-                          if (picarray_11_26.length > 0)
-                          {
+                          if (picarray_11_26.length > 0) {
                             document.write('<div id="' + lnkidname_11_26 + '">');
                             document.write(displayLinks_11_26());
                             document.write('</div>');
                           }
                         }
 
-                        function displayLinks_11_26()
-                        {
-                          str = "";
-                          for (i=0; i<picarray_11_26.length; i++)
-                          {
-                            if (i == current_11_26)
+                        function displayLinks_11_26() {
+                          let str = "";
+                          for (let i=0; i<picarray_11_26.length; i++) {
+                            if (i === current_11_26) {
                               str += ((i+1) + '&nbsp;');
-                            else
+                            } else {
                               str += ('<a href="javascript:updatePic_11_26(' + i + ');">' + (i+1) + '</a>&nbsp;');
+                            }
                           }
                           return str;
                         }
 
-                        function updatePic_11_26(i)
-                        {
-                          str = '<img src="filmstrip.png" align="center" width="' + (picarray_11_26[i].width/ratio_11_26) + '"><br><a href="' + picarray_11_26[i].location + '" target="photo"><img src="' + picarray_11_26[i].location + '" alt="' + picarray_11_26[i].name + '" title="' + picarray_11_26[i].name + '" align="center" width="' + (picarray_11_26[i].width/ratio_11_26) + '" height="' + (picarray_11_26[i].height/ratio_11_26) + '" border="0" hspace="5" vspace="0"></a><br><img src="filmstrip.png" align="center" width="' + (picarray_11_26[i].width/ratio_11_26) + '">';
+                        function updatePic_11_26(i) {
+                          let str = '<img src="filmstrip.png" align="center" width="' + (picarray_11_26[i].width/ratio_11_26) + '"><br><a href="' + picarray_11_26[i].location + '" target="photo"><img src="' + picarray_11_26[i].location + '" alt="' + picarray_11_26[i].name + '" title="' + picarray_11_26[i].name + '" align="center" width="' + (picarray_11_26[i].width/ratio_11_26) + '" height="' + (picarray_11_26[i].height/ratio_11_26) + '" border="0" hspace="5" vspace="0"></a><br><img src="filmstrip.png" align="center" width="' + (picarray_11_26[i].width/ratio_11_26) + '">';
                           document.getElementById(idname_11_26).innerHTML = str;
                           current_11_26 = i;
                           str = displayLinks_11_26();
                           document.getElementById(lnkidname_11_26).innerHTML = str;
                         }
-
                         displayDefault_11_26();
                       </script>
                     </td>
@@ -279,14 +269,13 @@
       </p>		 
     </p>
     <table width="98%">
-			<script language="JavaScript1.1">
-			if (!getPrint())
-			{
+			<script type="text/javascript">
+			if (!getPrint()) {
 				prevNext(3, false, 'EN');
 			}
 			</script>
     </table>
     <hr> 
-    &copy; 2010-now, Don Pedro and the crew.
+
   </body>
 </html>

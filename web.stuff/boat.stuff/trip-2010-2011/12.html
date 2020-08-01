@@ -8,9 +8,8 @@
   <body> <!-- background="bground.jpg" -->
     <p>
       <table width="98%">
-				<script language="JavaScript1.1">
-				if (!getPrint())
-				{
+				<script type="text/javascript">
+				if (!getPrint()) {
 					prevNext(12, true, 'EN');
 				}
 				</script>
@@ -31,7 +30,7 @@
 			</tr>
 			<tr>
 			  <td>			    
-                <!--a href="P2081575.JPG" target="BigPic"><img border="0" hspace="10" vspace="5" align="left" src="P2081575.JPG" width="256" height="192" alt="Motu in Tongareva" title="Motu in Tongareva"></a-->
+                <!--a href="P2081575.JPG" target="BigPic"><img border="0" hspace="10" vspace="5" align="left" src="P2081575.JPG" width="425" height="319" alt="Motu in Tongareva" title="Motu in Tongareva"></a-->
 				After spending two nights anchored next to the entrance of Ala Wai Harbor, the Ke'ehi Lagoon re-opened.
 				We went there, and we saw some whales on the way, big ones!
 				<br>
@@ -47,7 +46,7 @@
 			</tr>
 			<tr>
 			  <td>			    
-                <a href="P4150481.JPG" target="BigPic"><img border="0" hspace="10" vspace="5" align="right" src="P4150481.JPG" width="256" height="192" alt="Ke'ehi Lagoon" title="Ke'ehi Lagoon"></a>
+                <a href="P4150481.JPG" target="BigPic"><img border="0" hspace="10" vspace="5" align="right" src="P4150481.JPG" width="425" height="319" alt="Ke'ehi Lagoon" title="Ke'ehi Lagoon"></a>
 				Yesterday was US Customs day, and today, Agriculture inspection. The officer was a very clean guy.
 				He put gloves on to watch Corine cleaning the fridge. We are now "domestic".
 				<br>
@@ -84,7 +83,7 @@
 			</tr>
 			<tr>
 			  <td>			    
-                <a href="P3160315.JPG" target="BigPic"><img border="0" hspace="10" vspace="5" align="left" src="P3160315.JPG" width="256" height="192" alt="The yankee's clew" title="The yankee's clew"></a>
+                <a href="P3160315.JPG" target="BigPic"><img border="0" hspace="10" vspace="5" align="left" src="P3160315.JPG" width="425" height="319" alt="The yankee's clew" title="The yankee's clew"></a>
 				We went to see the sailmaker with the two damaged jibs today.
 				<br>
 				For the yankee, it's probably because the thread has been damaged by the UVs. For the staysail, well, it's probably because it's as old as the boat...
@@ -100,7 +99,7 @@
 			</tr>
 			<tr>
 			  <td>			    
-                <a href="P4010326.JPG" target="BigPic"><img border="0" hspace="10" vspace="5" align="right" src="P4010326.JPG" width="256" height="192" alt="Bling &amp; Blang" title="Bling &amp; Blang"></a>
+                <a href="P4010326.JPG" target="BigPic"><img border="0" hspace="10" vspace="5" align="right" src="P4010326.JPG" width="425" height="319" alt="Bling &amp; Blang" title="Bling &amp; Blang"></a>
 				Sky and his family came to visit us. He's growing like a mushroom!
 				<br>
 				Check <a href="http://chloeandbrendan.blogspot.com/2011/04/hawaii.html" target="Sky">this</a> out!
@@ -114,7 +113,7 @@
 			</tr>
 			<tr>
 			  <td>			    
-                <a href="DSC03961.JPG" target="BigPic"><img border="0" hspace="10" vspace="5" align="left" src="DSC03961.JPG" width="256" height="144" alt="Cockpit" title="Cockpit"></a>
+                <a href="DSC03961.JPG" target="BigPic"><img border="0" hspace="10" vspace="5" align="left" src="DSC03961.JPG" width="425" height="240" alt="Cockpit" title="Cockpit"></a>
 			    We've discovered a fuel leak under the diesel tank... Ah shit.
 				We'll have to replace the tank.
 				<br>
@@ -147,7 +146,7 @@
 			</tr>
 			<tr>
 			  <td>
-                <a href="P4160485.JPG" target="BigPic"><img border="0" hspace="10" vspace="5" align="left" src="P4160485.JPG" width="256" height="192" alt="Albatross chick" title="Albatross chick"></a>
+                <a href="P4160485.JPG" target="BigPic"><img border="0" hspace="10" vspace="5" align="left" src="P4160485.JPG" width="425" height="319" alt="Albatross chick" title="Albatross chick"></a>
                 Hike at the west point of O'Ahu (Ka'ena Point), there are many birds nesting there, shearwaters and <a href="http://www.allaboutbirds.org/guide/Black-footed_Albatross/lifehistory" target="birds">albatross</a>.			    
 			  </td>
 			</tr>
@@ -161,15 +160,14 @@
                 <table border="1" align="right" hspace="5" vspace="10">
 				  <tr>
 					<td align="center">
-					  <script type="text/javascript" language="JavaScript1.1">
+					  <script type="text/javascript">
 							// Several pictures
-							var ratio_04_18 = 8;
+							var ratio_04_18 = 4.82;
 							var idname_04_18 = '2011-04_18-pic';
 							var lnkidname_04_18 = '2011-04_18-lnk';
 							var current_04_18 = 0;
 							var intervalID_04_18;
-							var picarray_04_18 = new Array
-													 (
+							var picarray_04_18 = [
 													   {
 														 name:"Malaekahana convex beach",
 														 location:"P4180501.JPG",
@@ -187,75 +185,68 @@
 														 location:"P4180497.JPG",
 														 width:2048,
 														 height:1536
-													   }
-													 );
-							function displayDefault_04_18()
-							{
+													   }];
+							function displayDefault_04_18() {
 							  var idx = 0; // picarray_04_18.length - 1;
 							  current_04_18 = idx;
-  					          str = '<div id="' + idname_04_18 + '">' + picarray_04_18[idx].name + '<br><img src="filmstrip.png" align="center" height="8" width="' + (picarray_04_18[idx].width/ratio_04_18) + '"><br><a href="' + picarray_04_18[idx].location + '" target="photo"><img src="' + picarray_04_18[idx].location + '" alt="' + picarray_04_18[idx].name + '" title="' + picarray_04_18[idx].name + '" align="center" width="' + (picarray_04_18[idx].width/ratio_04_18) + '" height="' + (picarray_04_18[idx].height/ratio_04_18) + '" border="0" hspace="5" vspace="0"></a><br><img src="filmstrip.png" align="center" height="8" width="' + (picarray_04_18[idx].width/ratio_04_18) + '"></div>';
+  					          let str = '<div id="' + idname_04_18 + '">' + picarray_04_18[idx].name + '<br><img src="filmstrip.png" align="center" height="8" width="' + (picarray_04_18[idx].width/ratio_04_18) + '"><br><a href="' + picarray_04_18[idx].location + '" target="photo"><img src="' + picarray_04_18[idx].location + '" alt="' + picarray_04_18[idx].name + '" title="' + picarray_04_18[idx].name + '" align="center" width="' + (picarray_04_18[idx].width/ratio_04_18) + '" height="' + (picarray_04_18[idx].height/ratio_04_18) + '" border="0" hspace="5" vspace="0"></a><br><img src="filmstrip.png" align="center" height="8" width="' + (picarray_04_18[idx].width/ratio_04_18) + '"></div>';
 							  // alert("Writing:" + str);
 							  document.write(str);
-							  if (picarray_04_18.length > 0)
-							  {
+							  if (picarray_04_18.length > 0) {
 								document.write('<div id="' + lnkidname_04_18 + '">');
 								document.write(displayLinks_04_18());
 								document.write('</div>');
 							  }
 							}
 
-							function displayLinks_04_18()
-							{
-							  str = "";
-							  for (i=0; i<picarray_04_18.length; i++)
-							  {
-								if (i == current_04_18)
+							function displayLinks_04_18() {
+							  let str = "";
+							  for (let i=0; i<picarray_04_18.length; i++) {
+								if (i == current_04_18) {
 								  str += ((i+1) + '&nbsp;');
-								else
+								} else {
 								  str += ('<a href="javascript:updatePic_04_18(' + i + ');">' + (i+1) + '</a>&nbsp;');
+								}
 							  }
 							  // for animation
 							  str += '&nbsp;&nbsp;<a href="javascript:animate();" title="Animate"><img src="camera.png" border="0" align="top" alt="Animate" title="Animate"></a>';
 							  return str;
 							}
 
-							function updatePic_04_18(i)
-							{
-							  str = picarray_04_18[i].name + '<br><img src="filmstrip.png" align="center" height="8" width="' + (picarray_04_18[i].width/ratio_04_18) + '"><br><a href="' + picarray_04_18[i].location + '" target="photo"><img src="' + picarray_04_18[i].location + '" alt="' + picarray_04_18[i].name + '" title="' + picarray_04_18[i].name + '" align="center" width="' + (picarray_04_18[i].width/ratio_04_18) + '" height="' + (picarray_04_18[i].height/ratio_04_18) + '" border="0" hspace="5" vspace="0"></a><br><img src="filmstrip.png" align="center" width="' + (picarray_04_18[i].width/ratio_04_18) + '">';
+							function updatePic_04_18(i) {
+							  let str = picarray_04_18[i].name + '<br><img src="filmstrip.png" align="center" height="8" width="' + (picarray_04_18[i].width/ratio_04_18) + '"><br><a href="' + picarray_04_18[i].location + '" target="photo"><img src="' + picarray_04_18[i].location + '" alt="' + picarray_04_18[i].name + '" title="' + picarray_04_18[i].name + '" align="center" width="' + (picarray_04_18[i].width/ratio_04_18) + '" height="' + (picarray_04_18[i].height/ratio_04_18) + '" border="0" hspace="5" vspace="0"></a><br><img src="filmstrip.png" align="center" width="' + (picarray_04_18[i].width/ratio_04_18) + '">';
 							  document.getElementById(idname_04_18).innerHTML = str;
 							  current_04_18 = i;
 							  str = displayLinks_04_18();
 							  document.getElementById(lnkidname_04_18).innerHTML = str;
 							}
-                            
+
 							// For animation
-					        function animate()
-							{
+					        function animate() {
 							  current_04_18 = 0;
 							  intervalID_04_18 = setInterval("slideShow()", 2000);
 							}
-							
-							function slideShow()
-							{
-                              if (current_04_18 == (picarray_04_18.length)) // finished
-							  {
+
+							function slideShow() {
+                              if (current_04_18 == (picarray_04_18.length)) {
                                 clearInterval(intervalID_04_18);
 								current_04_18--;
 							  }
 					          updatePic_04_18(current_04_18);
-                              current_04_18++;								
-	                        } 
-							
+                              current_04_18++;
+	                        }
+
 							displayDefault_04_18();
 					  </script>
 					</td>
 				  </tr>
 				</table>
 				<script type="text/javascript">
-				if (!getPrint())
-				  document.writeln('<a href="GPX/plotter.html?latitude=21.661257185590806&longitude=-157.92737281313748&scale=15&label=Malaekahana Bay" target="GoogleMaps">Malaekahana Bay</a>');
-			    else
-				  document.write('Malaekahana Bay');
+				if (!getPrint()) {
+					document.writeln('<a href="GPX/plotter.html?latitude=21.661257185590806&longitude=-157.92737281313748&scale=15&label=Malaekahana Bay" target="GoogleMaps">Malaekahana Bay</a>');
+				} else {
+					document.write('Malaekahana Bay');
+				}
 				</script>
                 , north of Kane'ohe, probably one of the nicest of the island...			    
 			    <br>
@@ -281,14 +272,13 @@
 	  </p>
 	</p>
     <table width="98%">
-			<script language="JavaScript1.1">
-			if (!getPrint())
-			{
+			<script type="text/javascript">
+			if (!getPrint()) {
 				prevNext(12, false, 'EN');
 			}
 			</script>
     </table>
     <hr> 
-    &copy; 2010-now, Don Pedro and the crew.
+
   </body>
 </html>

@@ -8,9 +8,8 @@
   <body> <!-- background="bground.jpg" -->
     <p>
       <table width="98%">
-				<script language="JavaScript1.1">
-				if (!getPrint())
-				{
+				<script type="text/javascript">
+				if (!getPrint()) {
 					prevNext(10, true, 'EN');
 				}
 				</script>
@@ -35,18 +34,17 @@
 			</script>
 			<tr>
 			  <td>			    
-                <!--a href="P2081575.JPG" target="BigPic"><img border="0" hspace="10" vspace="5" align="left" src="P2081575.JPG" width="256" height="192" alt="Motu in Tongareva" title="Motu in Tongareva"></a-->
- 			    <table border="1" align="right" hspace="5">
+                <!--a href="P2081575.JPG" target="BigPic"><img border="0" hspace="10" vspace="5" align="left" src="P2081575.JPG" width="425" height="319" alt="Motu in Tongareva" title="Motu in Tongareva"></a-->
+ 			    <table border="1" align="right" hspace="5" style="margin-right: 10px; margin-left: 10px;">
 				  <tr>
 					<td align="center">
-					  <script type="text/javascript" language="JavaScript1.1">
+					  <script type="text/javascript">
 							// Several pictures
-							var ratio_02_18 = 8;
+							var ratio_02_18 = 4.82;
 							var idname_02_18 = '2011-02_18-pic';
 							var lnkidname_02_18 = '2011-02_18-lnk';
 							var current_02_18 = 0;
-							var picarray_02_18 = new Array
-													 (
+							var picarray_02_18 = [
 													   {
 														 name:"Flying Fish",
 														 location:"P2180049.JPG",
@@ -64,39 +62,34 @@
 														 location:"P2200083.JPG",
 														 width:2048,
 														 height:1536
-													   }
-													 );
-							function displayDefault_02_18()
-							{
+													   }];
+							function displayDefault_02_18() {
 							  var idx = picarray_02_18.length - 1;
 							  current_02_18 = idx;
-							  str = '<div id="' + idname_02_18 + '"><img src="filmstrip.png" align="center" width="' + (picarray_02_18[idx].width/ratio_02_18) + '"><br><a href="' + picarray_02_18[idx].location + '" target="photo"><img src="' + picarray_02_18[idx].location + '" alt="' + picarray_02_18[idx].name + '" title="' + picarray_02_18[idx].name + '" align="center" width="' + (picarray_02_18[idx].width/ratio_02_18) + '" height="' + (picarray_02_18[idx].height/ratio_02_18) + '" border="0" hspace="5" vspace="0"></a><br><img src="filmstrip.png" align="center" width="' + (picarray_02_18[idx].width/ratio_02_18) + '"></div>';
+							  let str = '<div id="' + idname_02_18 + '"><img src="filmstrip.png" align="center" width="' + (picarray_02_18[idx].width/ratio_02_18) + '"><br><a href="' + picarray_02_18[idx].location + '" target="photo"><img src="' + picarray_02_18[idx].location + '" alt="' + picarray_02_18[idx].name + '" title="' + picarray_02_18[idx].name + '" align="center" width="' + (picarray_02_18[idx].width/ratio_02_18) + '" height="' + (picarray_02_18[idx].height/ratio_02_18) + '" border="0" hspace="5" vspace="0"></a><br><img src="filmstrip.png" align="center" width="' + (picarray_02_18[idx].width/ratio_02_18) + '"></div>';
 							  // alert("Writing:" + str);
 							  document.write(str);
-							  if (picarray_02_18.length > 0)
-							  {
+							  if (picarray_02_18.length > 0) {
 								document.write('<div id="' + lnkidname_02_18 + '">');
 								document.write(displayLinks_02_18());
 								document.write('</div>');
 							  }
 							}
 
-							function displayLinks_02_18()
-							{
-							  str = "";
-							  for (i=0; i<picarray_02_18.length; i++)
-							  {
-								if (i == current_02_18)
+							function displayLinks_02_18() {
+							  let str = "";
+							  for (let i=0; i<picarray_02_18.length; i++) {
+								if (i == current_02_18) {
 								  str += ((i+1) + '&nbsp;');
-								else
+								} else {
 								  str += ('<a href="javascript:updatePic_02_18(' + i + ');">' + (i+1) + '</a>&nbsp;');
+								}
 							  }
 							  return str;
 							}
 
-							function updatePic_02_18(i)
-							{
-							  str = '<img src="filmstrip.png" align="center" width="' + (picarray_02_18[i].width/ratio_02_18) + '"><br><a href="' + picarray_02_18[i].location + '" target="photo"><img src="' + picarray_02_18[i].location + '" alt="' + picarray_02_18[i].name + '" title="' + picarray_02_18[i].name + '" align="center" width="' + (picarray_02_18[i].width/ratio_02_18) + '" height="' + (picarray_02_18[i].height/ratio_02_18) + '" border="0" hspace="5" vspace="0"></a><br><img src="filmstrip.png" align="center" width="' + (picarray_02_18[i].width/ratio_02_18) + '">';
+							function updatePic_02_18(i) {
+							  let str = '<img src="filmstrip.png" align="center" width="' + (picarray_02_18[i].width/ratio_02_18) + '"><br><a href="' + picarray_02_18[i].location + '" target="photo"><img src="' + picarray_02_18[i].location + '" alt="' + picarray_02_18[i].name + '" title="' + picarray_02_18[i].name + '" align="center" width="' + (picarray_02_18[i].width/ratio_02_18) + '" height="' + (picarray_02_18[i].height/ratio_02_18) + '" border="0" hspace="5" vspace="0"></a><br><img src="filmstrip.png" align="center" width="' + (picarray_02_18[i].width/ratio_02_18) + '">';
 							  document.getElementById(idname_02_18).innerHTML = str;
 							  current_02_18 = i;
 							  str = displayLinks_02_18();
@@ -120,7 +113,7 @@
 				<br>
 				So you know what, we'll go ashore with the dinghy, and check how it looks like from the land.
 				<br>
-				Diving to check the anchor, I noticed it was just put on the hard (the reef) - no sand - and the chain was going around a couple of 
+				Diving to check the anchor, I noticed it was just put on the hard (the reef) - no sand - and the chain was going around a couple of
 				coral patches. That was what was holding the boat still. 
 				<br>
 				Corine went ashore to see if the immigration office was open, and on the way, we checked some sand patches with the dinghy, nice places to
@@ -153,7 +146,7 @@
 			</tr>
 			<tr>
 			  <td>			    
-                <a href="P2200082.JPG" target="BigPic"><img border="0" hspace="10" vspace="5" align="left" src="P2200082.JPG" width="256" height="192" alt="Fishing gear for coconuts" title="Fishing gear for coconuts"></a>
+                <a href="P2200082.JPG" target="BigPic"><img border="0" hspace="10" vspace="5" align="left" src="P2200082.JPG" width="425" height="319" alt="Fishing gear for coconuts" title="Fishing gear for coconuts"></a>
 				Ta'are came on the boat this morning, with two bags of coconuts. We presented him some fishing gear in return.
 				He was specially interested in the small hooks, and the small thin fishing lines.
 				<br>
@@ -177,7 +170,7 @@
 			</tr>
 			<tr>
 			  <td>			    
-                <a href="P2200113.JPG" target="BigPic"><img border="0" hspace="10" vspace="5" align="right" src="P2200113.JPG" width="256" height="192" alt="XMas sunset" title="XMas sunset"></a>
+                <a href="P2200113.JPG" target="BigPic"><img border="0" hspace="10" vspace="5" align="right" src="P2200113.JPG" width="425" height="319" alt="XMas sunset" title="XMas sunset"></a>
 				Custom &amp; Administration day. Ashore again, for custom and immigration. We need a visa, it's AUD 40 per person. The custom guy was not here,
 				and he took the stamp with him; apparently there is only one on the island. We'll try again later.
 				<br>
@@ -207,17 +200,16 @@
 			</tr>
 			<tr>
 			  <td>			    
- 			    <table border="1" align="left" hspace="5">
+ 			    <table border="1" align="left" hspace="5" style="margin-right: 10px; margin-left: 10px;">
 				  <tr>
 					<td align="center">
-					  <script type="text/javascript" language="JavaScript1.1">
+					  <script type="text/javascript">
 							// Several pictures
-							var ratio_02_22 = 8;
+							var ratio_02_22 = 4.82;
 							var idname_02_22 = '2011-02_22-pic';
 							var lnkidname_02_22 = '2011-02_22-lnk';
 							var current_02_22 = 0;
-							var picarray_02_22 = new Array
-													 (
+							var picarray_02_22 = [
 													   {
 														 name:"The Kiritimati Lagoon",
 														 location:"P2220139.JPG",
@@ -247,39 +239,34 @@
 														 location:"P2220147.JPG",
 														 width:2048,
 														 height:1536
-													   }
-													 );
-							function displayDefault_02_22()
-							{
+													   }];
+							function displayDefault_02_22() {
 							  var idx = picarray_02_22.length - 1;
 							  current_02_22 = idx;
-							  str = '<div id="' + idname_02_22 + '"><img src="filmstrip.png" align="center" width="' + (picarray_02_22[idx].width/ratio_02_22) + '"><br><a href="' + picarray_02_22[idx].location + '" target="photo"><img src="' + picarray_02_22[idx].location + '" alt="' + picarray_02_22[idx].name + '" title="' + picarray_02_22[idx].name + '" align="center" width="' + (picarray_02_22[idx].width/ratio_02_22) + '" height="' + (picarray_02_22[idx].height/ratio_02_22) + '" border="0" hspace="5" vspace="0"></a><br><img src="filmstrip.png" align="center" width="' + (picarray_02_22[idx].width/ratio_02_22) + '"></div>';
+							  let str = '<div id="' + idname_02_22 + '"><img src="filmstrip.png" align="center" width="' + (picarray_02_22[idx].width/ratio_02_22) + '"><br><a href="' + picarray_02_22[idx].location + '" target="photo"><img src="' + picarray_02_22[idx].location + '" alt="' + picarray_02_22[idx].name + '" title="' + picarray_02_22[idx].name + '" align="center" width="' + (picarray_02_22[idx].width/ratio_02_22) + '" height="' + (picarray_02_22[idx].height/ratio_02_22) + '" border="0" hspace="5" vspace="0"></a><br><img src="filmstrip.png" align="center" width="' + (picarray_02_22[idx].width/ratio_02_22) + '"></div>';
 							  // alert("Writing:" + str);
 							  document.write(str);
-							  if (picarray_02_22.length > 0)
-							  {
+							  if (picarray_02_22.length > 0) {
 								document.write('<div id="' + lnkidname_02_22 + '">');
 								document.write(displayLinks_02_22());
 								document.write('</div>');
 							  }
 							}
 
-							function displayLinks_02_22()
-							{
-							  str = "";
-							  for (i=0; i<picarray_02_22.length; i++)
-							  {
-								if (i == current_02_22)
+							function displayLinks_02_22() {
+							  let str = "";
+							  for (let i=0; i<picarray_02_22.length; i++) {
+								if (i == current_02_22) {
 								  str += ((i+1) + '&nbsp;');
-								else
+								} else {
 								  str += ('<a href="javascript:updatePic_02_22(' + i + ');">' + (i+1) + '</a>&nbsp;');
+								}
 							  }
 							  return str;
 							}
 
-							function updatePic_02_22(i)
-							{
-							  str = '<img src="filmstrip.png" align="center" width="' + (picarray_02_22[i].width/ratio_02_22) + '"><br><a href="' + picarray_02_22[i].location + '" target="photo"><img src="' + picarray_02_22[i].location + '" alt="' + picarray_02_22[i].name + '" title="' + picarray_02_22[i].name + '" align="center" width="' + (picarray_02_22[i].width/ratio_02_22) + '" height="' + (picarray_02_22[i].height/ratio_02_22) + '" border="0" hspace="5" vspace="0"></a><br><img src="filmstrip.png" align="center" width="' + (picarray_02_22[i].width/ratio_02_22) + '">';
+							function updatePic_02_22(i) {
+							  let str = '<img src="filmstrip.png" align="center" width="' + (picarray_02_22[i].width/ratio_02_22) + '"><br><a href="' + picarray_02_22[i].location + '" target="photo"><img src="' + picarray_02_22[i].location + '" alt="' + picarray_02_22[i].name + '" title="' + picarray_02_22[i].name + '" align="center" width="' + (picarray_02_22[i].width/ratio_02_22) + '" height="' + (picarray_02_22[i].height/ratio_02_22) + '" border="0" hspace="5" vspace="0"></a><br><img src="filmstrip.png" align="center" width="' + (picarray_02_22[i].width/ratio_02_22) + '">';
 							  document.getElementById(idname_02_22).innerHTML = str;
 							  current_02_22 = i;
 							  str = displayLinks_02_22();
@@ -303,7 +290,7 @@
 				<script type="text/javascript">
 				  if (!getPrint())
 //	                document.writeln('<a href="KiribatiAquarium.MP4" target="BigPic"><img border="0" width="425" height="344" hspace="10" vspace="5" align="left" src="KiribatiAquarium.MP4" alt="Kiribati Aquarium" title="Kiribati Aquarium"></a>');				
- 		            document.writeln('<object width="425" height="344" valign="top" align="left" hspace="10" vspace="5"><param name="movie" value="http://www.youtube.com/v/jhuXoX36w0E?hl=en&fs=1"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/jhuXoX36w0E?hl=en&fs=1" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="344"></embed></object>');				
+ 		            document.writeln('<object width="425" height="344" valign="top" align="left" hspace="10" vspace="5"><param name="movie" value="http://www.youtube.com/v/jhuXoX36w0E?hl=en&fs=1"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/jhuXoX36w0E?hl=en&fs=1" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="344"></embed></object>');
 				</script>
 			  </td>
 			</tr>
@@ -319,17 +306,16 @@
 			</script>
 			<tr>
 			  <td>			    
- 			    <table border="1" align="right" hspace="5">
+ 			    <table border="1" align="right" hspace="5" style="margin-right: 10px; margin-left: 10px;">
 				  <tr>
-					<td align="center">
-					  <script type="text/javascript" language="JavaScript1.1">
+					<td align="center" style="margin-right: 10px; margin-left: 10px;">
+					  <script type="text/javascript">
 							// Several pictures
-							var ratio_02_24 = 8;
+							var ratio_02_24 = 4.82;
 							var idname_02_24 = '2011-02_24-pic';
 							var lnkidname_02_24 = '2011-02_24-lnk';
 							var current_02_24 = 0;
-							var picarray_02_24 = new Array
-													 (
+							var picarray_02_24 = [
 													   {
 														 name:"Motu Tabu, in the Kiritimati lagoon",
 														 location:"P2240178.JPG",
@@ -347,39 +333,34 @@
 														 location:"P2240176.JPG",
 														 width:2048,
 														 height:1536
-													   }
-													 );
-							function displayDefault_02_24()
-							{
+													   }];
+							function displayDefault_02_24() {
 							  var idx = picarray_02_24.length - 1;
 							  current_02_24 = idx;
-							  str = '<div id="' + idname_02_24 + '"><img src="filmstrip.png" align="center" width="' + (picarray_02_24[idx].width/ratio_02_24) + '"><br><a href="' + picarray_02_24[idx].location + '" target="photo"><img src="' + picarray_02_24[idx].location + '" alt="' + picarray_02_24[idx].name + '" title="' + picarray_02_24[idx].name + '" align="center" width="' + (picarray_02_24[idx].width/ratio_02_24) + '" height="' + (picarray_02_24[idx].height/ratio_02_24) + '" border="0" hspace="5" vspace="0"></a><br><img src="filmstrip.png" align="center" width="' + (picarray_02_24[idx].width/ratio_02_24) + '"></div>';
+							  let str = '<div id="' + idname_02_24 + '"><img src="filmstrip.png" align="center" width="' + (picarray_02_24[idx].width/ratio_02_24) + '"><br><a href="' + picarray_02_24[idx].location + '" target="photo"><img src="' + picarray_02_24[idx].location + '" alt="' + picarray_02_24[idx].name + '" title="' + picarray_02_24[idx].name + '" align="center" width="' + (picarray_02_24[idx].width/ratio_02_24) + '" height="' + (picarray_02_24[idx].height/ratio_02_24) + '" border="0" hspace="5" vspace="0"></a><br><img src="filmstrip.png" align="center" width="' + (picarray_02_24[idx].width/ratio_02_24) + '"></div>';
 							  // alert("Writing:" + str);
 							  document.write(str);
-							  if (picarray_02_24.length > 0)
-							  {
+							  if (picarray_02_24.length > 0) {
 								document.write('<div id="' + lnkidname_02_24 + '">');
 								document.write(displayLinks_02_24());
 								document.write('</div>');
 							  }
 							}
 
-							function displayLinks_02_24()
-							{
-							  str = "";
-							  for (i=0; i<picarray_02_24.length; i++)
-							  {
-								if (i == current_02_24)
+							function displayLinks_02_24() {
+							  let str = "";
+							  for (i=0; i<picarray_02_24.length; i++) {
+								if (i == current_02_24) {
 								  str += ((i+1) + '&nbsp;');
-								else
+								} else {
 								  str += ('<a href="javascript:updatePic_02_24(' + i + ');">' + (i+1) + '</a>&nbsp;');
+								}
 							  }
 							  return str;
 							}
 
-							function updatePic_02_24(i)
-							{
-							  str = '<img src="filmstrip.png" align="center" width="' + (picarray_02_24[i].width/ratio_02_24) + '"><br><a href="' + picarray_02_24[i].location + '" target="photo"><img src="' + picarray_02_24[i].location + '" alt="' + picarray_02_24[i].name + '" title="' + picarray_02_24[i].name + '" align="center" width="' + (picarray_02_24[i].width/ratio_02_24) + '" height="' + (picarray_02_24[i].height/ratio_02_24) + '" border="0" hspace="5" vspace="0"></a><br><img src="filmstrip.png" align="center" width="' + (picarray_02_24[i].width/ratio_02_24) + '">';
+							function updatePic_02_24(i) {
+							  let str = '<img src="filmstrip.png" align="center" width="' + (picarray_02_24[i].width/ratio_02_24) + '"><br><a href="' + picarray_02_24[i].location + '" target="photo"><img src="' + picarray_02_24[i].location + '" alt="' + picarray_02_24[i].name + '" title="' + picarray_02_24[i].name + '" align="center" width="' + (picarray_02_24[i].width/ratio_02_24) + '" height="' + (picarray_02_24[i].height/ratio_02_24) + '" border="0" hspace="5" vspace="0"></a><br><img src="filmstrip.png" align="center" width="' + (picarray_02_24[i].width/ratio_02_24) + '">';
 							  document.getElementById(idname_02_24).innerHTML = str;
 							  current_02_24 = i;
 							  str = displayLinks_02_24();
@@ -422,8 +403,8 @@
 			</tr>
 			<tr>
 			  <td>			    
-                <a href="P2270241.JPG" target="BigPic"><img border="0" hspace="10" vspace="5" align="left" src="P2270241.JPG" width="192" height="256" alt="Ta'are's fish" title="Ta'are's fish"></a>
-                <a href="P2270250.JPG" target="BigPic"><img border="0" hspace="10" vspace="5" align="right" src="P2270250.JPG" width="256" height="192" alt="Last XMas sunset" title="Last XMas sunset"></a>
+                <a href="P2270241.JPG" target="BigPic"><img border="0" hspace="10" vspace="5" align="left" src="P2270241.JPG" width="319" height="425" alt="Ta'are's fish" title="Ta'are's fish"></a>
+                <a href="P2270250.JPG" target="BigPic"><img border="0" hspace="10" vspace="5" align="right" src="P2270250.JPG" width="425" height="319" alt="Last XMas sunset" title="Last XMas sunset"></a>
 				Our last day in Kiritimati. We go this morning to the custom and immigration to get the clearance.
 				We land on the beach we used the first time, it's much shorter. We managed to sneak between the breakers on the beach.
 				But this morning, the office is closed (here, today's Monday). We've also be told that we could get some supplies at
@@ -436,7 +417,7 @@
 				We're back at about 1:30pm, the custom office is open! We got the clearance, and we got the passports stamped by the immigration as well.
 				Done! We're good to go.
 				<br>
-				And we cought a bus to go to JMB. These are small buses, 15 seats. But at some point, we were 23 people in the bus! 
+				And we caught a bus to go to JMB. These are small buses, 15 seats. But at some point, we were 23 people in the bus!
 				And I'm pretty sure it was far from full... Funny.
 				We got some beer at JMB (some "XXXX", from Queensland, Australia). That should be OK until our next stop, Hawaii.
 				<br>
@@ -451,14 +432,13 @@
 	  </p>
 	</p>
     <table width="98%">
-			<script language="JavaScript1.1">
-			if (!getPrint())
-			{
+			<script type="text/javascript">
+			if (!getPrint()) {
 				prevNext(10, false, 'EN');
 			}
 			</script>
     </table>
     <hr> 
-    &copy; 2010-now, Don Pedro and the crew.
+
   </body>
 </html>
