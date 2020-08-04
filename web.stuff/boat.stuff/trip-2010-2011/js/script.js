@@ -317,7 +317,7 @@ function drawWindArrow(divId, dir, force) {
   let label = '';
   let fillColor = 'lime';
   if (force !== undefined) {
-    label = `F ${force}, `;
+    label = `F${force}, `;
     fillColor = getWindColor(force);
   }
   let direction;  // = dir; //  + 180;
