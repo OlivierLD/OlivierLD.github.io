@@ -134,7 +134,7 @@ function loadData() {
     let plot = getPrm('plot');
 
     let upToDate = null;
-    if (upTo !== undefined) {
+    if (upTo !== undefined && upTo.trim().length > 0) {
         upToDate = durationToDate(upTo);
         // console.log('UpTo', upToDate);
     }

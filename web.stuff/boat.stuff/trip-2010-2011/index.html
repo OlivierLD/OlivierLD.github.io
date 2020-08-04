@@ -44,11 +44,11 @@
     <a href="javascript:void(0)" class="active-link" onclick="showPage('./calendar.html', 'main-frame');">Calendar of
         the tip</a>
 
-    <!--a href="javascript:void(0)" class="active-link" onclick="marqueeOnOff()">Marquee Panel (start or stop)</a-->
     <div> <!-- onmouseover="showSection('section-1');" onmouseleave="hideSection('section-1');"> -->
         <a href="javascript:void(0)" onclick="showHideSection(this, 'section-1');"><span class="expand-collapse">&#9658;&nbsp;</span>First
             Leg</a>
         <div id="section-1" class="sub-section">
+            <a href="javascript:void(0)" class="active-link" onclick="showPage('./GPX/LeafletGPX.html?track=leg.01.gpx.json', 'main-frame');">Map</a>
             <a href="javascript:void(0)" class="active-link" onclick="showPage('./01.html#01', 'main-frame');">From San
                 Francisco to the Tropic of Cancer</a>
             <a href="javascript:void(0)" class="active-link" onclick="showPage('./01.html#02', 'main-frame');">From the
@@ -120,7 +120,15 @@
         </div>
     </div>
     <a href="javascript:void(0)" class="active-link" onclick="showPage('./12.html', 'main-frame');">Hawai'i</a>
-    <a href="javascript:void(0)" class="active-link" onclick="showPage('./13.html', 'main-frame');">Seventh Leg</a>
+
+    <div> <!-- onmouseover="showSection('section-1');" onmouseleave="hideSection('section-1');"> -->
+        <a href="javascript:void(0)" onclick="showHideSection(this, 'section-13');"><span class="expand-collapse">&#9658;&nbsp;</span>Seventh
+            Leg</a>
+        <div id="section-13" class="sub-section">
+            <a href="javascript:void(0)" class="active-link" onclick="showPage('./GPX/LeafletGPX.html?track=leg.07.gpx.json', 'main-frame');">Map</a>
+            <a href="javascript:void(0)" class="active-link" onclick="showPage('./13.html', 'main-frame');">Hawai'i - Drakes Bay</a>
+        </div>
+    </div>
     <a href="javascript:void(0)" class="active-link" onclick="showPage('./14.html', 'main-frame');">Back to San
         Francisco Bay</a>
 
