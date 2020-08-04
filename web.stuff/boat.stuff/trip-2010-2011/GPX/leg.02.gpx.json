@@ -1,0 +1,110 @@
+{
+  "gpx": {
+    "trk": {
+      "number": "1289786857",
+      "trkseg": {
+        "trkpt": [
+          {
+            "time": "2010-11-21T13:00:00-10:00",
+            "name": "1",
+            "sym": "empty",
+            "type": "WPT",
+            "extension": {
+              "marker": {
+                "html-text": [
+                  {
+                    "_lang": "EN",
+                    "__cdata": "\n\t\t\t\t\t  <a href='02.html#01'>Marquesas - Taiohae</a>\n\t\t\t\t\t  <br>\n\t\t\t\t\t  <a href='02.html#02'>Marquesas - Hakatea</a>\n\t\t\t\t\t  <br>\n\t\t\t\t\t  <a href='02.html#03'>Marquesas - Ua Pou</a>\n\t\t\t\t\t  <br>\n\t\t\t\t\t  <a href='02.html#05'>Marquesas - Taipivai</a>\n\t\t\t\t\t  <br>\n\t\t\t\t\t  <a href='02.html#05'>Marquesas - Anaho</a>\n\t\t\t\t\t  <br>\n\t\t\t\t\t  <br>\n\t\t\t\t\t  <a href='03.html'>Marquesas - Tuamotu (Rangiroa)</a>\n\t\t\t\t\t"
+                  },
+                  {
+                    "_lang": "FR",
+                    "__cdata": "\n\t\t\t\t\t  <a href='02_fr.html#01'>Marquises - Taiohae</a>\n\t\t\t\t\t  <br>\n\t\t\t\t\t  <a href='02_fr.html#02'>Marquises - Hakatea</a>\n\t\t\t\t\t  <br>\n\t\t\t\t\t  <a href='02_fr.html#03'>Marquises - Ua Pou</a>\n\t\t\t\t\t  <br>\n\t\t\t\t\t  <a href='02_fr.html#05'>Marquises - Taipivai</a>\n\t\t\t\t\t  <br>\n\t\t\t\t\t  <a href='02_fr.html#05'>Marquises - Anaho</a>\n\t\t\t\t\t  <br>\n\t\t\t\t\t  <br>\n\t\t\t\t\t  <a href='03_fr.html'>Marquises - Tuamotu (Rangiroa)</a>\n\t\t\t\t\t"
+                  }
+                ]
+              }
+            },
+            "_lat": "-8.91516666666667",
+            "_lon": "-140.0995"
+          },
+          {
+            "time": "2010-11-21T20:15:00-10:00",
+            "name": "2",
+            "sym": "empty",
+            "type": "WPT",
+            "_lat": "-9.5185",
+            "_lon": "-140.592833333333"
+          },
+          {
+            "time": "2010-11-22T08:20:00-10:00",
+            "name": "3",
+            "sym": "empty",
+            "type": "WPT",
+            "_lat": "-10.3066666666667",
+            "_lon": "-141.492"
+          },
+          {
+            "time": "2010-11-22T18:15:00-10:00",
+            "name": "4",
+            "sym": "empty",
+            "type": "WPT",
+            "_lat": "-10.8888333333333",
+            "_lon": "-142.221166666667"
+          },
+          {
+            "time": "2010-11-23T05:55:00-10:00",
+            "name": "5",
+            "sym": "empty",
+            "type": "WPT",
+            "_lat": "-11.6116666666667",
+            "_lon": "-143.055"
+          },
+          {
+            "time": "2010-11-23T23:55:00-10:00",
+            "name": "6",
+            "sym": "empty",
+            "type": "WPT",
+            "_lat": "-12.302",
+            "_lon": "-144.319166666667"
+          },
+          {
+            "time": "2010-11-24T11:00:00-10:00",
+            "name": "7",
+            "sym": "empty",
+            "type": "WPT",
+            "_lat": "-12.8466666666667",
+            "_lon": "-145.196666666667"
+          },
+          {
+            "time": "2010-11-25T13:10:00-10:00",
+            "name": "8",
+            "sym": "empty",
+            "type": "WPT",
+            "_lat": "-14.1791666666667",
+            "_lon": "-146.742"
+          },
+          {
+            "time": "2010-11-26T00:00:00-10:00",
+            "name": "9",
+            "sym": "empty",
+            "type": "WPT",
+            "_lat": "-14.638",
+            "_lon": "-147.343666666667"
+          },
+          {
+            "time": "2010-11-26T08:40:00-10:00",
+            "name": "10",
+            "sym": "empty",
+            "type": "WPT",
+            "_lat": "-14.96855",
+            "_lon": "-147.636883333333"
+          }
+        ]
+      }
+    },
+    "_xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
+    "_xmlns": "http://www.topografix.com/GPX/1/1",
+    "_version": "1.1",
+    "_creator": "WeatherWizard",
+    "_xsi:schemaLocation": "http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd"
+  }
+}

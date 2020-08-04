@@ -10,10 +10,9 @@
 <p>
 <table width="98%">
     <script type="text/javascript">
-				if (!getPrint()) {
-					prevNext(7, true, 'EN');
-				}
-
+    if (!getPrint()) {
+        prevNext(7, true, 'EN');
+    }
     </script>
     <tr>
         <td valign="top" align="left">
@@ -25,17 +24,19 @@
 <p>
 <table width="100%">
     <tr>
-        <td>
+        <td valign="bottom">
             <!--h4>Thursday, February 3<sup><small>rd</small></sup>, 2011</h4-->
             <script type="text/javascript">displayDate(2011, 2, 3, "EN");</script>
         </td>
-        <td align="right">
-            <img src="wind/2011-02-03.png">
+        <td align="right" valign="bottom">
+            <!--img src="wind/2011-02-03.png"-->
+            <div id="wind-2011-02-03"></div>
+            <script type="text/javascript">drawWindArrow('wind-2011-02-03', EAST, 4);</script>
         </td>
     </tr>
     <script type="text/javascript">
         if (!getPrint())
-            document.writeln('<tr><td colspan="2"><small><a href="GPX/GmGPX.html?track=leg.04.gpx&scale=5&upTo=2011-02-03T19:00:00-10:00" target="GoogleMaps">See in Google Maps</a></small></td></tr>');
+            document.writeln('<tr><td colspan="2"><small><a href="GPX/GmGPX.html?track=leg.04.gpx&scale=5&upTo=2011-02-03T19:00:00-10:00" target="GoogleMaps">See Map</a></small></td></tr>');
     </script>
     <tr>
         <td colspan="2">
@@ -97,19 +98,21 @@
         </td>
     </tr>
     <tr>
-        <td>
+        <td valign="bottom">
             <!--h4>Tuesday, February 8<sup><small>th</small></sup>, 2011</h4-->
             <script type="text/javascript">displayDate(2011, 2, 8, "EN");</script>
         </td>
-        <td align="right">
-            <img src="wind/2011-02-08.png">
+        <td align="right" valign="bottom">
+            <!--img src="wind/2011-02-08.png"-->
+            <div id="wind-2011-02-08"></div>
+            <script type="text/javascript">drawWindArrow('wind-2011-02-08', NORTH_EAST, 3);</script>
         </td>
     </tr>
     <tr>
         <td colspan="2">
             <script type="text/javascript">
                 if (!getPrint())
-                    document.writeln('<a href="GPX/GmGPX.html?track=leg.04.gpx&scale=5&upTo=2011-02-08T06:50:00-10:00" target="GoogleMaps">See in Google Maps</a></small><br>');
+                    document.writeln('<a href="GPX/GmGPX.html?track=leg.04.gpx&scale=5&upTo=2011-02-08T06:50:00-10:00" target="GoogleMaps">See Map</a></small><br>');
             </script>
             We were again a bit early..., but only tacked twice before anchoring at 6:50 am south of the Taruia Pass,
             waiting
@@ -133,10 +136,9 @@
 </p>
 <table width="98%">
     <script type="text/javascript">
-			if (!getPrint()) {
-				prevNext(7, false, 'EN');
-			}
-
+    if (!getPrint()) {
+        prevNext(7, false, 'EN');
+    }
     </script>
 </table>
 <hr>

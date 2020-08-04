@@ -10,10 +10,9 @@
 <p>
 <table width="98%">
     <script type="text/javascript">
-				if (!getPrint()) {
-					prevNext(11, true, 'EN');
-				}
-
+    if (!getPrint()) {
+        prevNext(11, true, 'EN');
+    }
     </script>
     <tr>
         <td valign="top" align="left">
@@ -25,19 +24,21 @@
 <p>
 <table width="100%">
     <tr>
-        <td>
+        <td valign="bottom">
             <!--h4><a name="01">Monday, February 28<sup><small>th</small></sup>, 2011</a></h4-->
             <a name="01">
                 <script type="text/javascript">displayDate(2011, 2, 28, "EN");</script>
             </a>
         </td>
-        <td align="right">
-            <img src="wind/2011-02-28.png">
+        <td align="right" valign="bottom">
+            <!--img src="wind/2011-02-28.png"-->
+            <div id="wind-2011-02-28"></div>
+            <script type="text/javascript">drawWindArrow('wind-2011-02-28', SOUTH_EAST, 5);</script>
         </td>
     </tr>
     <script type="text/javascript">
         if (!getPrint())
-            document.writeln('<tr><td colspan="2"><small><a href="GPX/GmGPX.html?track=leg.06.gpx&scale=5&upTo=2011-02-28T23:00:00-10:00" target="GoogleMaps">See in Google Maps</a></small></td></tr>');
+            document.writeln('<tr><td colspan="2"><small><a href="GPX/LeafletGPX.html?track=leg.06.gpx.json&scale=5&upTo=2011-02-28T23:00:00-10:00" target="GoogleMaps">See Map</a></small></td></tr>');
     </script>
     <tr>
         <td colspan="2">
@@ -67,12 +68,12 @@
                     <td align="center">
                         <script type="text/javascript">
                             // Several pictures
-                            var ratio_03_01 = 2;
-                            var idname_03_01 = '2011-03_01-pic';
-                            var lnkidname_03_01 = '2011-03_01-lnk';
-                            var current_03_01 = 0;
-                            var intervalID_03_01;
-                            var picarray_03_01 = [
+                            let ratio_03_01 = 2;
+                            let idname_03_01 = '2011-03_01-pic';
+                            let lnkidname_03_01 = '2011-03_01-lnk';
+                            let current_03_01 = 0;
+                            let intervalID_03_01;
+                            let picarray_03_01 = [
                                 {
                                     name: "March 1st at 0000 UTC",
                                     location: "ITCZ/2011-03-01_00.png",
@@ -129,7 +130,7 @@
                                 }];
 
                             function displayDefault_03_01() {
-                                var idx = 0; // picarray_03_01.length - 1;
+                                let idx = 0; // picarray_03_01.length - 1;
                                 current_03_01 = idx;
                                 let str = '<div id="' + idname_03_01 + '">' + picarray_03_01[idx].name + '<br><img src="filmstrip.png" align="center" height="8" width="' + (picarray_03_01[idx].width / ratio_03_01) + '"><br><a href="' + picarray_03_01[idx].location + '" target="photo"><img src="' + picarray_03_01[idx].location + '" alt="' + picarray_03_01[idx].name + '" title="' + picarray_03_01[idx].name + '" align="center" width="' + (picarray_03_01[idx].width / ratio_03_01) + '" height="' + (picarray_03_01[idx].height / ratio_03_01) + '" border="0" hspace="5" vspace="0"></a><br><img src="filmstrip.png" align="center" height="8" width="' + (picarray_03_01[idx].width / ratio_03_01) + '"></div>';
                                 // alert("Writing:" + str);
@@ -186,17 +187,19 @@
         </td>
     </tr>
     <tr>
-        <td>
+        <td valign="bottom">
             <!--h4>Tuesday, March 1<sup><small>st</small></sup>, 2011</h4-->
             <script type="text/javascript">displayDate(2011, 3, 1, "EN");</script>
         </td>
-        <td align="right">
-            <img src="wind/2011-03-01.png">
+        <td align="right" valign="bottom">
+            <!--img src="wind/2011-03-01.png"-->
+            <div id="wind-2011-03-01"></div>
+            <script type="text/javascript">drawWindArrow('wind-2011-03-01', SOUTH_EAST, 4);</script>
         </td>
     </tr>
     <script type="text/javascript">
         if (!getPrint())
-            document.writeln('<tr><td colspan="2"><small><a href="GPX/GmGPX.html?track=leg.06.gpx&scale=5&upTo=2011-03-01T23:45:00-10:00" target="GoogleMaps">See in Google Maps</a></small></td></tr>');
+            document.writeln('<tr><td colspan="2"><small><a href="GPX/LeafletGPX.html?track=leg.06.gpx.json&scale=5&upTo=2011-03-01T23:45:00-10:00" target="GoogleMaps">See Map</a></small></td></tr>');
     </script>
     <tr>
         <td colspan="2">
@@ -224,17 +227,19 @@
         </td>
     </tr>
     <tr>
-        <td>
+        <td valign="bottom">
             <!--h4>Wednesday, March 2<sup><small>nd</small></sup>, 2011</h4-->
             <script type="text/javascript">displayDate(2011, 3, 2, "EN");</script>
         </td>
-        <td align="right">
-            <img src="wind/2011-03-02.png">
+        <td align="right" valign="bottom">
+            <!--img src="wind/2011-03-02.png"-->
+            <div id="wind-2011-03-02"></div>
+            <script type="text/javascript">drawWindArrow('wind-2011-03-02', SOUTH_EAST, 5);</script>
         </td>
     </tr>
     <script type="text/javascript">
         if (!getPrint())
-            document.writeln('<tr><td colspan="2"><small><a href="GPX/GmGPX.html?track=leg.06.gpx&scale=5&upTo=2011-03-02T11:00:00-10:00" target="GoogleMaps">See in Google Maps</a></small></td></tr>');
+            document.writeln('<tr><td colspan="2"><small><a href="GPX/LeafletGPX.html?track=leg.06.gpx.json&scale=5&upTo=2011-03-02T11:00:00-10:00" target="GoogleMaps">See Map</a></small></td></tr>');
     </script>
     <tr>
         <td colspan="2">
@@ -253,17 +258,19 @@
         </td>
     </tr>
     <tr>
-        <td>
+        <td valign="bottom">
             <!--h4>Thursday, March 3<sup><small>rd</small></sup>, 2011</h4-->
             <script type="text/javascript">displayDate(2011, 3, 3, "EN");</script>
         </td>
-        <td align="right">
-            <img src="wind/2011-03-03.png">
+        <td align="right" valign="bottom">
+            <!--img src="wind/2011-03-03.png"-->
+            <div id="wind-2011-03-03"></div>
+            <script type="text/javascript">drawWindArrow('wind-2011-03-03', SOUTH_EAST, 3);</script>
         </td>
     </tr>
     <script type="text/javascript">
         if (!getPrint())
-            document.writeln('<tr><td colspan="2"><small><a href="GPX/GmGPX.html?track=leg.06.gpx&scale=5&upTo=2011-03-03T15:05:00-10:00" target="GoogleMaps">See in Google Maps</a></small></td></tr>');
+            document.writeln('<tr><td colspan="2"><small><a href="GPX/LeafletGPX.html?track=leg.06.gpx.json&scale=5&upTo=2011-03-03T15:05:00-10:00" target="GoogleMaps">See Map</a></small></td></tr>');
     </script>
     <tr>
         <td colspan="2">
@@ -278,17 +285,19 @@
         </td>
     </tr>
     <tr>
-        <td>
+        <td valign="bottom">
             <!--h4>Friday, March 4<sup><small>th</small></sup>, 2011</h4-->
             <script type="text/javascript">displayDate(2011, 3, 4, "EN");</script>
         </td>
-        <td align="right">
-            <img src="wind/2011-03-04.png">
+        <td align="right" valign="bottom">
+            <!--img src="wind/2011-03-04.png"-->
+            <div id="wind-2011-03-04"></div>
+            <script type="text/javascript">drawWindArrow('wind-2011-03-04', EAST, 5);</script>
         </td>
     </tr>
     <script type="text/javascript">
         if (!getPrint())
-            document.writeln('<tr><td colspan="2"><small><a href="GPX/GmGPX.html?track=leg.06.gpx&scale=5&upTo=2011-03-04T06:00:00-10:00" target="GoogleMaps">See in Google Maps</a></small></td></tr>');
+            document.writeln('<tr><td colspan="2"><small><a href="GPX/LeafletGPX.html?track=leg.06.gpx.json&scale=5&upTo=2011-03-04T06:00:00-10:00" target="GoogleMaps">See Map</a></small></td></tr>');
     </script>
     <tr>
         <td colspan="2">
@@ -314,19 +323,21 @@
         </td>
     </tr>
     <tr>
-        <td>
+        <td valign="bottom">
             <!--h4><a name="03">Saturday, March 5<sup><small>th</small></sup>, 2011</a></h4-->
             <a name="03">
                 <script type="text/javascript">displayDate(2011, 3, 5, "EN");</script>
             </a>
         </td>
-        <td align="right">
-            <img src="wind/2011-03-05.png">
+        <td align="right" valign="bottom">
+            <!--img src="wind/2011-03-05.png"-->
+            <div id="wind-2011-03-05"></div>
+            <script type="text/javascript">drawWindArrow('wind-2011-03-05', EAST, 5);</script>
         </td>
     </tr>
     <script type="text/javascript">
         if (!getPrint())
-            document.writeln('<tr><td colspan="2"><small><a href="GPX/GmGPX.html?track=leg.06.gpx&scale=5&upTo=2011-03-05T10:40:00-10:00" target="GoogleMaps">See in Google Maps</a></small></td></tr>');
+            document.writeln('<tr><td colspan="2"><small><a href="GPX/LeafletGPX.html?track=leg.06.gpx.json&scale=5&upTo=2011-03-05T10:40:00-10:00" target="GoogleMaps">See Map</a></small></td></tr>');
     </script>
     <tr>
         <td colspan="2">
@@ -359,17 +370,19 @@
         </td>
     </tr>
     <tr>
-        <td>
+        <td valign="bottom">
             <!--h4>Sunday, March 6<sup><small>th</small></sup>, 2011</h4-->
             <script type="text/javascript">displayDate(2011, 3, 6, "EN");</script>
         </td>
-        <td align="right">
-            <img src="wind/2011-03-06.png">
+        <td align="right" valign="bottom">
+            <!--img src="wind/2011-03-06.png"-->
+            <div id="wind-2011-03-06"></div>
+            <script type="text/javascript">drawWindArrow('wind-2011-03-06', EAST_1_4_NORTH_EAST, 5);</script>
         </td>
     </tr>
     <script type="text/javascript">
         if (!getPrint())
-            document.writeln('<tr><td colspan="2"><small><a href="GPX/GmGPX.html?track=leg.06.gpx&scale=5&upTo=2011-03-06T20:05:00-10:00" target="GoogleMaps">See in Google Maps</a></small></td></tr>');
+            document.writeln('<tr><td colspan="2"><small><a href="GPX/LeafletGPX.html?track=leg.06.gpx.json&scale=5&upTo=2011-03-06T20:05:00-10:00" target="GoogleMaps">See Map</a></small></td></tr>');
     </script>
     <tr>
         <td colspan="2">
@@ -393,17 +406,19 @@
         </td>
     </tr>
     <tr>
-        <td>
+        <td valign="bottom">
             <!--h4>Monday, March 7<sup><small>th</small></sup>, 2011</h4-->
             <script type="text/javascript">displayDate(2011, 3, 7, "EN");</script>
         </td>
-        <td align="right">
-            <img src="wind/2011-03-07.png">
+        <td align="right" valign="bottom">
+            <!--img src="wind/2011-03-07.png"-->
+            <div id="wind-2011-03-07"></div>
+            <script type="text/javascript">drawWindArrow('wind-2011-03-07', EAST_1_4_SOUTH_EAST, 6);</script>
         </td>
     </tr>
     <script type="text/javascript">
         if (!getPrint())
-            document.writeln('<tr><td colspan="2"><small><a href="GPX/GmGPX.html?track=leg.06.gpx&scale=5&upTo=2011-03-07T10:00:00-10:00" target="GoogleMaps">See in Google Maps</a></small></td></tr>');
+            document.writeln('<tr><td colspan="2"><small><a href="GPX/LeafletGPX.html?track=leg.06.gpx.json&scale=5&upTo=2011-03-07T10:00:00-10:00" target="GoogleMaps">See Map</a></small></td></tr>');
     </script>
     <tr>
         <td colspan="2">
@@ -426,19 +441,21 @@
         </td>
     </tr>
     <tr>
-        <td>
+        <td valign="bottom">
             <!--h4><a name="04">Tuesday, March 8<sup><small>th</small></sup>, 2011</a></h4-->
             <a name="04">
                 <script type="text/javascript">displayDate(2011, 3, 8, "EN");</script>
             </a>
         </td>
-        <td align="right">
-            <img src="wind/2011-03-08.png">
+        <td align="right" valign="bottom">
+            <!--img src="wind/2011-03-08.png"-->
+            <div id="wind-2011-03-08"></div>
+            <script type="text/javascript">drawWindArrow('wind-2011-03-08', EAST_1_4_NORTH_EAST, 6);</script>
         </td>
     </tr>
     <script type="text/javascript">
         if (!getPrint())
-            document.writeln('<tr><td colspan="2"><small><a href="GPX/GmGPX.html?track=leg.06.gpx&scale=5&upTo=2011-03-08T21:15:00-10:00" target="GoogleMaps">See in Google Maps</a></small></td></tr>');
+            document.writeln('<tr><td colspan="2"><small><a href="GPX/LeafletGPX.html?track=leg.06.gpx.json&scale=5&upTo=2011-03-08T21:15:00-10:00" target="GoogleMaps">See Map</a></small></td></tr>');
     </script>
     <tr>
         <td colspan="2">
@@ -471,17 +488,19 @@
         </td>
     </tr>
     <tr>
-        <td>
+        <td valign="bottom">
             <!--h4>Wednesday, March 9<sup><small>th</small></sup>, 2011</h4-->
             <script type="text/javascript">displayDate(2011, 3, 9, "EN");</script>
         </td>
-        <td align="right">
-            <img src="wind/2011-03-09.png">
+        <td align="right" valign="bottom">
+            <!--img src="wind/2011-03-09.png"-->
+            <div id="wind-2011-03-09"></div>
+            <script type="text/javascript">drawWindArrow('wind-2011-03-09', EAST_1_4_NORTH_EAST, 5);</script>
         </td>
     </tr>
     <script type="text/javascript">
         if (!getPrint())
-            document.writeln('<tr><td colspan="2"><small><a href="GPX/GmGPX.html?track=leg.06.gpx&scale=5&upTo=2011-03-09T07:10:00-10:00" target="GoogleMaps">See in Google Maps</a></small></td></tr>');
+            document.writeln('<tr><td colspan="2"><small><a href="GPX/LeafletGPX.html?track=leg.06.gpx.json&scale=5&upTo=2011-03-09T07:10:00-10:00" target="GoogleMaps">See Map</a></small></td></tr>');
     </script>
     <tr>
         <td colspan="2">
@@ -512,17 +531,19 @@
         </td>
     </tr>
     <tr>
-        <td>
+        <td valign="bottom">
             <!--h4>Thursday, March 10<sup><small>th</small></sup>, 2011</h4-->
             <script type="text/javascript">displayDate(2011, 3, 10, "EN");</script>
         </td>
-        <td align="right">
-            <img src="wind/2011-03-10.png">
+        <td align="right" valign="bottom">
+            <!--img src="wind/2011-03-10.png"-->
+            <div id="wind-2011-03-10"></div>
+            <script type="text/javascript">drawWindArrow('wind-2011-03-10', EAST_NORTH_EAST, 4);</script>
         </td>
     </tr>
     <script type="text/javascript">
         if (!getPrint())
-            document.writeln('<tr><td colspan="2"><small><a href="GPX/GmGPX.html?track=leg.06.gpx&scale=5&upTo=2011-03-10T07:55:00-10:00" target="GoogleMaps">See in Google Maps</a></small></td></tr>');
+            document.writeln('<tr><td colspan="2"><small><a href="GPX/LeafletGPX.html?track=leg.06.gpx.json&scale=5&upTo=2011-03-10T07:55:00-10:00" target="GoogleMaps">See Map</a></small></td></tr>');
     </script>
     <tr>
         <td colspan="2">
@@ -553,17 +574,19 @@
         </td>
     </tr>
     <tr>
-        <td>
+        <td valign="bottom">
             <!--h4>Friday, March 11<sup><small>th</small></sup>, 2011</h4-->
             <script type="text/javascript">displayDate(2011, 3, 11, "EN");</script>
         </td>
-        <td align="right">
-            <img src="wind/2011-03-11.png">
+        <td align="right" valign="bottom">
+            <!--img src="wind/2011-03-11.png"-->
+            <div id="wind-2011-03-11"></div>
+            <script type="text/javascript">drawWindArrow('wind-2011-03-11', EAST_NORTH_EAST, 5);</script>
         </td>
     </tr>
     <script type="text/javascript">
         if (!getPrint())
-            document.writeln('<tr><td colspan="2"><small><a href="GPX/GmGPX.html?track=leg.06.gpx&scale=5&upTo=2011-03-11T07:40:00-10:00" target="GoogleMaps">See in Google Maps</a></small></td></tr>');
+            document.writeln('<tr><td colspan="2"><small><a href="GPX/LeafletGPX.html?track=leg.06.gpx.json&scale=5&upTo=2011-03-11T07:40:00-10:00" target="GoogleMaps">See Map</a></small></td></tr>');
     </script>
     <tr>
         <td colspan="2">
@@ -598,10 +621,9 @@
 </p>
 <table width="98%">
     <script type="text/javascript">
-			if (!getPrint()) {
-				prevNext(11, false, 'EN');
-			}
-
+    if (!getPrint()) {
+        prevNext(11, false, 'EN');
+    }
     </script>
 </table>
 <hr>

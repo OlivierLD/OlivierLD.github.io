@@ -1,0 +1,134 @@
+{
+  "gpx": {
+    "trk": {
+      "number": "1289786857",
+      "trkseg": {
+        "trkpt": [
+          {
+            "time": "2010-12-04T08:00:00-10:00",
+            "name": "1",
+            "sym": "empty",
+            "type": "WPT",
+            "extension": {
+              "marker": {
+                "html-text": [
+                  {
+                    "_lang": "EN",
+                    "__cdata": "\n\t\t\t\t\t  <a href='04.html'>Tuamotu Archipelago, Rangiroa Atoll</a>\n\t\t\t\t\t  <br>\n\t\t\t\t\t  <br>\n\t\t\t\t\t  <a href='05.html'>Tuamotu (Rangiroa) - Tahiti</a>\n\t\t\t\t\t  <br>\n\t\t\t\t\t  <img src=\"PC040821.jpg\" width=\"102\" height=\"77\">\n\t\t\t\t\t"
+                  },
+                  {
+                    "_lang": "FR",
+                    "__cdata": "\n\t\t\t\t\t  <a href='04_fr.html'>Archipel des Tuamotu, Atoll de Rangiroa</a>\n\t\t\t\t\t  <br>\n\t\t\t\t\t  <br>\n\t\t\t\t\t  <a href='05_fr.html'>Tuamotu (Rangiroa) - Tahiti</a>\n\t\t\t\t\t  <br>\n\t\t\t\t\t  <img src=\"PC040821.jpg\" width=\"102\" height=\"77\">\n\t\t\t\t\t"
+                  }
+                ]
+              }
+            },
+            "_lat": "-14.9685",
+            "_lon": "-147.636833333333"
+          },
+          {
+            "time": "2010-12-04T09:00:00-10:00",
+            "name": "2",
+            "sym": "empty",
+            "type": "WPT",
+            "_lat": "-14.945555",
+            "_lon": "-147.710616666667"
+          },
+          {
+            "time": "2010-12-04T09:30:00-10:00",
+            "name": "3",
+            "sym": "empty",
+            "type": "WPT",
+            "_lat": "-14.933655",
+            "_lon": "-147.713243333333"
+          },
+          {
+            "time": "2010-12-04T10:00:00-10:00",
+            "name": "2",
+            "sym": "empty",
+            "type": "WPT",
+            "_lat": "-14.8755",
+            "_lon": "-147.787666666667"
+          },
+          {
+            "time": "2010-12-04T11:30:00-10:00",
+            "name": "3",
+            "sym": "empty",
+            "type": "WPT",
+            "_lat": "-14.9188666666667",
+            "_lon": "-147.869556666667"
+          },
+          {
+            "time": "2010-12-04T13:00:00-10:00",
+            "name": "2",
+            "sym": "empty",
+            "type": "WPT",
+            "_lat": "-15.134",
+            "_lon": "-148.044666666667"
+          },
+          {
+            "time": "2010-12-04T16:00:00-10:00",
+            "name": "3",
+            "sym": "empty",
+            "type": "WPT",
+            "_lat": "-15.4248333333333",
+            "_lon": "-148.208"
+          },
+          {
+            "time": "2010-12-04T20:15:00-10:00",
+            "name": "4",
+            "sym": "empty",
+            "type": "WPT",
+            "_lat": "-15.7958333333333",
+            "_lon": "-148.4745"
+          },
+          {
+            "time": "2010-12-05T03:00:00-10:00",
+            "name": "5",
+            "sym": "empty",
+            "type": "WPT",
+            "_lat": "-16.41",
+            "_lon": "-148.863166666667"
+          },
+          {
+            "time": "2010-12-05T05:30:00-10:00",
+            "name": "6",
+            "sym": "empty",
+            "type": "WPT",
+            "_lat": "-16.62",
+            "_lon": "-149.066666666667"
+          },
+          {
+            "time": "2010-12-05T09:40:00-10:00",
+            "name": "7",
+            "sym": "empty",
+            "type": "WPT",
+            "_lat": "-17.0076666666667",
+            "_lon": "-149.260666666667"
+          },
+          {
+            "time": "2010-12-05T13:00:00-10:00",
+            "name": "8",
+            "sym": "empty",
+            "type": "WPT",
+            "_lat": "-17.326",
+            "_lon": "-149.400166666667"
+          },
+          {
+            "time": "2010-12-05T15:15:00-10:00",
+            "name": "9",
+            "sym": "empty",
+            "type": "WPT",
+            "_lat": "-17.4992333333333",
+            "_lon": "-149.496766666667"
+          }
+        ]
+      }
+    },
+    "_xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
+    "_xmlns": "http://www.topografix.com/GPX/1/1",
+    "_version": "1.1",
+    "_creator": "WeatherWizard",
+    "_xsi:schemaLocation": "http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd"
+  }
+}

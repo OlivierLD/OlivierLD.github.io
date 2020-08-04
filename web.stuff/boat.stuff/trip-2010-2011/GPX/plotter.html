@@ -1,65 +1,31 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 
-1.0 Strict//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<!--html xmlns="http://www.w3.org/1999/xhtml"-->
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml">
-  <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-    <title>Don Pedro location</title>
-    <link rel="stylesheet" href="../print.css" type="text/css"/>
-    <style type="text/css">
-    v\:* {
-      behavior:url(#default#VML);
-    }
-    </style>
-    <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAoODkN4W0YAhwwPkCTFcO6xR3muO_BFLsQuvpyhewujSGiI0udBTa4ayEoK33Wss9zbwycXcGhn309Q"
-            type="text/javascript"></script>
-    <script src="script_GPX.js" type="text/javascript"></script>
-    <script type="text/javascript">
-window.onresize = resize;
+<!DOCTYPE html>
+<!--
+ ! Use like:
+ ! plotter.html?latitude=-8.927639155051756&longitude=-140.01693534781225&scale=11&label=Cape%20Martin
+ +-->
+<html lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+  <title>Don Pedro Sailing</title>
+  <!--link rel="stylesheet" href="../print.css" type="text/css"-->
 
-function resize()
-{
-  var winW = 630, winH = 460;
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
 
-  if (parseInt(navigator.appVersion) > 3) 
-  {
-    if (navigator.appName == "Netscape") 
-    {
-      winW = window.innerWidth;
-      winH = window.innerHeight;
-
-      document.getElementById('map').style.height = (winH - 25) + "px";
-      document.getElementById('map').style.width  = (winW * 0.95) + "px";
-    }
-    if (navigator.appName.indexOf("Microsoft") != -1) 
-    {
-      winW = document.documentElement.clientWidth;
-      winH = document.documentElement.clientHeight;
-
-      document.getElementById('map').style.height = (winH - 25) + "px";
-      document.getElementById('map').style.width  = (winW * 0.95) + "px";
-    }
+  <script src="script_GPX.js" type="text/javascript"></script>
+</head>
+<body>
+<table width="98%" height="98%" border="0" align="center">
+  <tr>
+    <td valign="top" rowspan="1" colspan="1">
+      <div id="mapid" style="width: 1200px; height: 600px;"></div>
+    </td>
+  </tr>
+</table>
+</body>
+<script type="text/javascript">
+  window.onload = () => {
+    loadPlotterData();
   }
-}    
-
-function onStartup()
-{
-  plotTrackASAP = true;
-  debug         = false;
-  
-  load();
-  resize();  
-}
-    </script>
-  </head>
-  <body onload="onStartup();" onunload="GUnload()">
-    <table width="98%" height="98%" border="0" align="center">
-      <tr>
-        <td valign="top" rowspan="1" colspan="1">
-          <div id="map" style="width: 850px; height: 550px"></div>
-        </td>
-      </tr>
-    </table>
-  </body>
+</script>
 </html>

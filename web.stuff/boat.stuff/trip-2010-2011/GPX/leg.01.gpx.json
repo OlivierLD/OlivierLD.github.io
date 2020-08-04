@@ -1,0 +1,518 @@
+{
+  "gpx": {
+    "trk": {
+      "number": "1289786857",
+      "trkseg": {
+        "trkpt": [
+          {
+            "time": "2010-10-02T10:40:00Z",
+            "name": "00003",
+            "sym": "empty",
+            "type": "WPT",
+            "extension": {
+              "marker": {
+                "html-text": [
+                  {
+                    "_lang": "EN",
+                    "__cdata": "\n                    <div style='height: 10em; width: 20em;'> \n\t\t\t\t\t  <a href='01.html#01'>San Francisco - Marquesas</a>\n\t\t\t\t\t  <br>\n\t\t\t\t\t  South to the Tropic\n                    </div>\n\t\t\t\t\t"
+                  },
+                  {
+                    "_lang": "FR",
+                    "__cdata": "\n\t\t\t\t\t  <a href='01_fr.html#01'>San Francisco - Marquises</a>\n\t\t\t\t\t  <br>\n\t\t\t\t\t  Vers le tropique du Cancer\n\t\t\t\t\t"
+                  }
+                ]
+              },
+              "wind": {
+                "direction": "282",
+                "force": "2"
+              }
+            },
+            "_lat": "37.4833333",
+            "_lon": "-122.7333333"
+          },
+          {
+            "time": "2010-10-02T22:45:00Z",
+            "name": "00004",
+            "sym": "empty",
+            "type": "WPT",
+            "_lat": "36.8166667",
+            "_lon": "-123.8000000"
+          },
+          {
+            "time": "2010-10-03T19:40:00Z",
+            "name": "00005",
+            "sym": "empty",
+            "type": "WPT",
+            "extension": {
+              "wind": {
+                "direction": "315",
+                "force": "2"
+              }
+            },
+            "_lat": "35.2666667",
+            "_lon": "-125.3000000"
+          },
+          {
+            "time": "2010-10-04T10:35:00Z",
+            "name": "00006",
+            "sym": "empty",
+            "type": "WPT",
+            "extension": {
+              "wind": {
+                "direction": "315",
+                "force": "3"
+              }
+            },
+            "_lat": "33.8000000",
+            "_lon": "-126.0833333"
+          },
+          {
+            "time": "2010-10-04T21:20:00Z",
+            "name": "00007",
+            "sym": "empty",
+            "type": "WPT",
+            "_lat": "32.8333333",
+            "_lon": "-126.7000000"
+          },
+          {
+            "time": "2010-10-05T07:20:00Z",
+            "name": "00008",
+            "sym": "empty",
+            "type": "WPT",
+            "extension": {
+              "wind": {
+                "direction": "0",
+                "force": "6"
+              }
+            },
+            "_lat": "31.9500000",
+            "_lon": "-127.3000000"
+          },
+          {
+            "time": "2010-10-05T13:35:00Z",
+            "name": "00009",
+            "sym": "empty",
+            "type": "WPT",
+            "_lat": "31.3333333",
+            "_lon": "-127.5833333"
+          },
+          {
+            "time": "2010-10-06T00:40:00Z",
+            "name": "00010",
+            "sym": "empty",
+            "type": "WPT",
+            "extension": {
+              "wind": {
+                "direction": "0",
+                "force": "2"
+              }
+            },
+            "_lat": "30.3166667",
+            "_lon": "-128.0833333"
+          },
+          {
+            "time": "2010-10-06T14:00:00Z",
+            "name": "00011",
+            "sym": "empty",
+            "type": "WPT",
+            "_lat": "29.2833333",
+            "_lon": "-128.5000000"
+          },
+          {
+            "time": "2010-10-06T23:10:00Z",
+            "name": "00012",
+            "sym": "empty",
+            "type": "WPT",
+            "_lat": "28.9166667",
+            "_lon": "-128.6666667"
+          },
+          {
+            "time": "2010-10-07T07:00:00Z",
+            "name": "00013",
+            "sym": "empty",
+            "type": "WPT",
+            "extension": {
+              "wind": {
+                "direction": "22",
+                "force": "0"
+              }
+            },
+            "_lat": "28.6666667",
+            "_lon": "-128.8666667"
+          },
+          {
+            "time": "2010-10-08T00:20:00Z",
+            "name": "00014",
+            "sym": "empty",
+            "type": "WPT",
+            "extension": {
+              "wind": {
+                "direction": "90",
+                "force": "2"
+              }
+            },
+            "_lat": "27.4666667",
+            "_lon": "-129.2166667"
+          },
+          {
+            "time": "2010-10-08T14:05:00Z",
+            "name": "00015",
+            "sym": "empty",
+            "type": "WPT",
+            "_lat": "26.4066667",
+            "_lon": "-129.2366667"
+          },
+          {
+            "time": "2010-10-08T21:35:00Z",
+            "name": "00016",
+            "sym": "empty",
+            "type": "WPT",
+            "_lat": "25.7000000",
+            "_lon": "-129.4333333"
+          },
+          {
+            "time": "2010-10-09T04:35:00-10:00",
+            "name": "10",
+            "sym": "empty",
+            "type": "WPT",
+            "extension": {
+              "marker": {
+                "html-text": [
+                  {
+                    "_lang": "EN",
+                    "__cdata": "\n\t\t\t\t\t  <a href='01.html#02'>San Francisco - Marquesas</a>\n\t\t\t\t\t  <br>\n\t\t\t\t\t  South to the ITCZ\n\t\t\t\t\t"
+                  },
+                  {
+                    "_lang": "FR",
+                    "__cdata": "\n\t\t\t\t\t  <a href='01_fr.html#02'>San Francisco - Marquises</a>\n\t\t\t\t\t  <br>\n\t\t\t\t\t  Vers l'ITCZ\n\t\t\t\t\t"
+                  }
+                ]
+              },
+              "wind": {
+                "direction": "45",
+                "force": "4"
+              }
+            },
+            "_lat": "25.7",
+            "_lon": "-129.433333333333"
+          },
+          {
+            "time": "2010-10-11T10:50:00Z",
+            "name": "00017",
+            "sym": "empty",
+            "type": "WPT",
+            "extension": {
+              "wind": {
+                "direction": "68",
+                "force": "3"
+              }
+            },
+            "_lat": "19.9666667",
+            "_lon": "-129.6500000"
+          },
+          {
+            "time": "2010-10-12T02:15:00Z",
+            "name": "00018",
+            "sym": "empty",
+            "type": "WPT",
+            "extension": {
+              "wind": {
+                "direction": "68",
+                "force": "4"
+              }
+            },
+            "_lat": "18.6333333",
+            "_lon": "-129.6000000"
+          },
+          {
+            "time": "2010-10-13T01:55:00Z",
+            "name": "00019",
+            "sym": "empty",
+            "type": "WPT",
+            "extension": {
+              "wind": {
+                "direction": "45",
+                "force": "3"
+              }
+            },
+            "_lat": "16.4833333",
+            "_lon": "-129.1666667"
+          },
+          {
+            "time": "2010-10-14T14:00:00Z",
+            "name": "00020",
+            "sym": "empty",
+            "type": "WPT",
+            "_lat": "13.4333333",
+            "_lon": "-129.6833333"
+          },
+          {
+            "time": "2010-10-15T09:25:00Z",
+            "name": "00021",
+            "sym": "empty",
+            "type": "WPT",
+            "extension": {
+              "wind": {
+                "direction": "90",
+                "force": "2"
+              }
+            },
+            "_lat": "11.6166667",
+            "_lon": "-130.3333333"
+          },
+          {
+            "time": "2010-10-15T21:30:00Z",
+            "name": "00022",
+            "sym": "empty",
+            "type": "WPT",
+            "extension": {
+              "wind": {
+                "direction": "90",
+                "force": "5"
+              }
+            },
+            "_lat": "10.3666667",
+            "_lon": "-130.5333333"
+          },
+          {
+            "time": "2010-10-16T22:30:00Z",
+            "name": "00023",
+            "sym": "empty",
+            "type": "WPT",
+            "extension": {
+              "wind": {
+                "direction": "180",
+                "force": "6"
+              }
+            },
+            "_lat": "8.7333333",
+            "_lon": "-130.6166667"
+          },
+          {
+            "time": "2010-10-17T17:40:00Z",
+            "name": "00024",
+            "sym": "empty",
+            "type": "WPT",
+            "extension": {
+              "marker": {
+                "html-text": [
+                  {
+                    "_lang": "EN",
+                    "__cdata": "\n\t\t\t\t\t  <a href='01.html#03'>San Francisco - Marquesas</a>\n\t\t\t\t\t  <br>\n\t\t\t\t\t  South to the Equator\n\t\t\t\t\t"
+                  },
+                  {
+                    "_lang": "FR",
+                    "__cdata": "\n\t\t\t\t\t  <a href='01_fr.html#03'>San Francisco - Marquises</a>\n\t\t\t\t\t  <br>\n\t\t\t\t\t  Vers l'&Eacute;quateur\n\t\t\t\t\t"
+                  }
+                ]
+              },
+              "wind": {
+                "direction": "135",
+                "force": "3"
+              }
+            },
+            "_lat": "7.7000000",
+            "_lon": "-131.18"
+          },
+          {
+            "time": "2010-10-18T00:40:00-10:00",
+            "name": "21",
+            "sym": "empty",
+            "type": "WPT",
+            "extension": {
+              "wind": {
+                "direction": "68",
+                "force": "5"
+              }
+            },
+            "_lat": "7.4",
+            "_lon": "-131.22"
+          },
+          {
+            "time": "2010-10-19T08:00:00Z",
+            "name": "00025",
+            "sym": "empty",
+            "type": "WPT",
+            "_lat": "4.7166667",
+            "_lon": "-133.1166667"
+          },
+          {
+            "time": "2010-10-19T09:20:00Z",
+            "name": "00026",
+            "sym": "empty",
+            "type": "WPT",
+            "extension": {
+              "wind": {
+                "direction": "135",
+                "force": "6"
+              }
+            },
+            "_lat": "4.6333333",
+            "_lon": "-133.2333333"
+          },
+          {
+            "time": "2010-10-20T08:45:00Z",
+            "name": "00027",
+            "sym": "empty",
+            "type": "WPT",
+            "extension": {
+              "wind": {
+                "direction": "124",
+                "force": "3"
+              }
+            },
+            "_lat": "3.6833333",
+            "_lon": "-135.1833333"
+          },
+          {
+            "time": "2010-10-21T09:00:00Z",
+            "name": "00028",
+            "sym": "empty",
+            "type": "WPT",
+            "extension": {
+              "wind": {
+                "direction": "112",
+                "force": "3"
+              }
+            },
+            "_lat": "3.4000000",
+            "_lon": "-137.3666667"
+          },
+          {
+            "time": "2010-10-22T07:15:00Z",
+            "name": "00029",
+            "sym": "empty",
+            "type": "WPT",
+            "extension": {
+              "wind": {
+                "direction": "112",
+                "force": "5"
+              }
+            },
+            "_lat": "1.5500000",
+            "_lon": "-138.0000000"
+          },
+          {
+            "time": "2010-10-22T23:52:00Z",
+            "name": "00030",
+            "sym": "empty",
+            "type": "WPT",
+            "extension": {
+              "wind": {
+                "direction": "112",
+                "force": "4"
+              }
+            },
+            "_lat": "0.0000000",
+            "_lon": "-138.1833333"
+          },
+          {
+            "time": "2010-10-23T07:10:00Z",
+            "name": "00031",
+            "sym": "empty",
+            "type": "WPT",
+            "_lat": "-0.7166667",
+            "_lon": "-138.2083333"
+          },
+          {
+            "time": "2010-10-23T19:10:00Z",
+            "name": "00032",
+            "sym": "empty",
+            "type": "WPT",
+            "_lat": "-1.9666667",
+            "_lon": "-138.3000000"
+          },
+          {
+            "time": "2010-10-24T07:30:00Z",
+            "name": "00033",
+            "sym": "empty",
+            "type": "WPT",
+            "extension": {
+              "marker": {
+                "html-text": [
+                  {
+                    "_lang": "EN",
+                    "__cdata": "\n\t\t\t\t\t  <a href='01.html#04'>San Francisco - Marquesas</a>\n\t\t\t\t\t  <br>\n\t\t\t\t\t  South to Nuku-Hiva\n\t\t\t\t\t  <br>\n\t\t\t\t\t  <img src=\"PA250185.jpg\" width=\"102\" height=\"77\">\n\t\t\t\t\t"
+                  },
+                  {
+                    "_lang": "FR",
+                    "__cdata": "\n\t\t\t\t\t  <a href='01_fr.html#04'>San Francisco - Marquises</a>\n\t\t\t\t\t  <br>\n\t\t\t\t\t  Vers Nuku-Hiva\n\t\t\t\t\t  <br>\n\t\t\t\t\t  <img src=\"PA250185.jpg\" width=\"102\" height=\"77\">\n\t\t\t\t\t"
+                  }
+                ]
+              },
+              "wind": {
+                "direction": "112",
+                "force": "4"
+              }
+            },
+            "_lat": "-3.2166667",
+            "_lon": "-138.5500000"
+          },
+          {
+            "time": "2010-10-24T12:55:00Z",
+            "name": "00034",
+            "sym": "empty",
+            "type": "WPT",
+            "_lat": "-3.7500000",
+            "_lon": "-138.7500000"
+          },
+          {
+            "time": "2010-10-25T00:50:00Z",
+            "name": "00035",
+            "sym": "empty",
+            "type": "WPT",
+            "_lat": "-5.0166667",
+            "_lon": "-139.1333333"
+          },
+          {
+            "time": "2010-10-25T12:00:00Z",
+            "name": "00036",
+            "sym": "empty",
+            "type": "WPT",
+            "extension": {
+              "wind": {
+                "direction": "101",
+                "force": "5"
+              }
+            },
+            "_lat": "-6.1666667",
+            "_lon": "-139.4166667"
+          },
+          {
+            "time": "2010-10-26T01:50:00Z",
+            "name": "00037",
+            "sym": "empty",
+            "type": "WPT",
+            "extension": {
+              "wind": {
+                "direction": "90",
+                "force": "3"
+              }
+            },
+            "_lat": "-7.5000000",
+            "_lon": "-139.4833333"
+          },
+          {
+            "time": "2010-10-27T01:50:00Z",
+            "name": "00038",
+            "sym": "empty",
+            "type": "WPT",
+            "extension": {
+              "wind": {
+                "direction": "90",
+                "force": "2"
+              }
+            },
+            "_lat": "-8.9166667",
+            "_lon": "-140.1000000"
+          }
+        ]
+      }
+    },
+    "_xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
+    "_xmlns": "http://www.topografix.com/GPX/1/1",
+    "_version": "1.1",
+    "_creator": "WeatherWizard",
+    "_xsi:schemaLocation": "http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd"
+  }
+}

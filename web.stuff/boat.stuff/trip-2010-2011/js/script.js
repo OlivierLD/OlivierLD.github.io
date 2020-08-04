@@ -1,6 +1,8 @@
 /**
  * Copyright and left, tamere
  */
+const DEBUG = false;
+
 const oneDay = 1000 * 60 * 60 * 24;
 let startDate = setDate(2010, 10, 2);
 
@@ -264,7 +266,7 @@ const NORTH_EAST_1_4_NORTH = { value: 33.75, label: "N\u00BCNE" };
 const NORTH_EAST = { value: 45, label: "NE" };
 const NORTH_EAST_1_4_EAST = { value: 56.25, label: "N\u00BCNE" };
 const EAST_NORTH_EAST = { value: 67.5, label: "ENE" };
-const EAST_1_4_NORTH_EAST = { value: 68.75, label: "E\u00BCNE" };
+const EAST_1_4_NORTH_EAST = { value: 78.75, label: "E\u00BCNE" };
 const EAST = { value: 90, label: "E" };
 const EAST_1_4_SOUTH_EAST = { value: 101.25, label: "E\u00BCSE" };
 const EAST_SOUTH_EAST = { value: 112.50, label: "ESE" };
@@ -396,7 +398,7 @@ function drawWindArrow(divId, dir, force) {
   text.appendChild(document.createTextNode(`${label}`));
   svg.appendChild(text);
 
-  if (parent !== null) {
+  if (parent !== null && DEBUG) {
     console.log(parent.innerHTML);
   }
   //debugger;
