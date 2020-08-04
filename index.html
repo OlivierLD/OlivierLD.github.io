@@ -208,7 +208,7 @@ span.expand-collapse:hover {
 
 .w3-modal-content {
   margin: auto;
-  background-color: 000;
+  background-color: #000;
   position: relative;
   padding: 0;
   outline: 0;
@@ -960,7 +960,7 @@ Date.prototype.format = function (dateFormat) {
     Change BG in <span id="count-down">00 s</span>
   </div>
 
-  <div class="slideshow-container">
+  <div class="slideshow-container" title="What's in there...">
 
     <div class="the-slides fade">
       <div class="number-text">1 / 9</div>
@@ -1491,6 +1491,7 @@ Date.prototype.format = function (dateFormat) {
   const FAST_BG_INTERVAL = ((1 * 60) + 1) * 1000; // in ms.
   let BG_INTERVAL = SLOW_BG_INTERVAL;
   const BG_IMAGES = [
+    "night.sky.01.jpeg",
     "neuralnetwork.jpg",
     "NorthernLight.2.jpeg",
     "cloud.jpeg",

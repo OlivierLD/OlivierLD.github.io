@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <!--
- | Requires the leafletjs resources to be in a "leaflet" directory under "web".
+ | Requires the leafletjs resources to be in a "leaflet" directory under "web" if running in standalone (no connection)
  | Available from http://leafletjs.com/
  | Tutorials and examples at https://leafletjs.com/examples.html
  | Note: No native way to change orientation
@@ -57,7 +57,7 @@ OpenSource JavaScript map API at <a href="https://leafletjs.com/" target="leafle
     </tr>
 </table>    
 
-<script>
+<script type="text/javascript">
 
     function decToSex(val, ns_ew) {
         let absVal = Math.abs(val);
