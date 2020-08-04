@@ -294,15 +294,15 @@ const NORTH_1_4_NORTH_WEST = {value: 348.75, label: "SN\u00BCNW"};
 
 const WIND_COLORS = [
   'rgb(255, 255, 255)', // 0-5
-  'rgb(21, 200, 232)',  // Blue 5-10
-  'rgb(19, 234, 186)',  // Lighter blue 10-15
+  'rgb(19, 234, 186)',  // Light blue 5-10
+  'rgb(21, 200, 232)',  // Blue 10-15
   'rgb(48, 232, 21)',   // Green 15-20
   'rgb(211, 239, 14)',  // Yellow 20-25
   'rgb(232, 180, 21)',  // Orange 25-30
   'rgb(232, 100, 21)',  // Darker Orange 30-35
   'rgb(180, 8, 0)',     // Red 35-40
   'rgb(147, 4, 0)',     // Dark red 40-45
-  'rgb(148, 4, 161)'    // Purple 45-
+  'rgb(148, 4, 161)'    // Purple 45+
 ];
 
 function getWindColor(beaufort) {
