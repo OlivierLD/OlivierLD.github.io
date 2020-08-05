@@ -7,22 +7,22 @@
     <script type="text/javascript" src="js/prev.next.js"></script>
 </head>
 <body> <!-- background="bground.jpg" -->
-<p>
+
+<script type="text/javascript">
+if (!getPrint()) {
+    prevNext(1, true, 'EN');
+}
+</script>
 <table width="98%">
-    <script type="text/javascript">
-        if (!getPrint()) {
-            prevNext(1, true, 'EN');
-        }
-    </script>
     <tr>
         <td valign="top" align="left">
             <h2>First Leg, San Francisco to Nuku-Hiva</h2>
         </td>
     </tr>
 </table>
-<p>
+
 <h3><a name="01">From San Francisco to the Tropic of Cancer</a></h3>
-<p>
+
 <table width="100%" border="0">
     <tr>
         <td valign="bottom">
@@ -92,8 +92,9 @@
         </td>
     </tr>
     <script type="text/javascript">
-        if (!getPrint())
+        if (!getPrint()) {
             document.writeln('<tr><td colspan="2"><small><a href="GPX/LeafletGPX.html?track=leg.01.gpx.json&scale=5&upTo=2010-10-03T19:40:00Z&plot=-8.92/-140.10" target="GoogleMaps">See Map</a></small></td></tr>');
+        }
     </script>
     <tr>
         <td colspan="2">
@@ -331,9 +332,9 @@
         </td>
     </tr>
 </table>
-</p>
+
 <h3><a name="02">From the Tropic of Cancer to the ITCZ</a></h3>
-<p>
+
 <table width="100%">
     <tr>
         <td valign="bottom">
@@ -607,9 +608,9 @@
         </td>
     </tr>
 </table>
-</p>
+
 <h3><a name="03">From the ITCZ to the Equator</a></h3>
-<p>
+
 <table width="100%">
     <tr>
         <td valign="bottom">
@@ -861,9 +862,9 @@
         </td>
     </tr>
 </table>
-</p>
+
 <h3><a name="04">From the Equator to Nuku-Hiva</a></h3>
-<p>
+
 <table width="100%">
     <tr>
         <td valign="bottom">
@@ -1068,18 +1069,14 @@
         </td>
     </tr>
 </table>
-</p>
-</p>
-</p>
-<table width="98%">
-    <script type="text/javascript">
-			if (!getPrint()) {
-				prevNext(1, false, 'EN');
-			}
 
-    </script>
-</table>
-<hr>
+<script type="text/javascript">
+if (!getPrint()) {
+    prevNext(1, false, 'EN');
+}
+</script>
+
+<hr/>
 
 </body>
 </html>

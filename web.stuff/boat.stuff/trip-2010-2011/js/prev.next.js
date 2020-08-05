@@ -1,4 +1,4 @@
-// previous and next page, with "prinatble version"
+// previous and next page, with "printable version"
 function prevNext(idx, top, lang) {
 	let prev = lpad((idx - 1).toString(), '0', 2);
 	let next = lpad((idx + 1).toString(), '0', 2);

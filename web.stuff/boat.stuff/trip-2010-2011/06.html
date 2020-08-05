@@ -7,24 +7,23 @@
     <script type="text/javascript" src="js/prev.next.js"></script>
 </head>
 <body> <!-- background="bground.jpg" -->
-<p>
-<table width="98%">
-    <script type="text/javascript">
-				if (!getPrint()) {
-					prevNext(6, true, 'EN');
-				}
 
-    </script>
+<script type="text/javascript">
+    if (!getPrint()) {
+        prevNext(6, true, 'EN');
+    }
+
+</script>
+<table width="98%">
     <tr>
         <td valign="top" align="left">
             <h2>Society Islands.</h2>
         </td>
     </tr>
 </table>
-<p>
-<p>
-    <i><a name="01">Windward Islands, Tahiti</a></i>
-    <br/>
+
+<i><a name="01">Windward Islands, Tahiti</a></i>
+<br/>
 <table width="100%">
     <tr>
         <td>
@@ -59,8 +58,7 @@
         </td>
     </tr>
 </table>
-</p>
-<p>
+
 <table width="100%">
     <tr>
         <td>
@@ -97,8 +95,7 @@
         </td>
     </tr>
 </table>
-</p>
-<p>
+
 <table width="100%">
     <tr>
         <td>
@@ -142,8 +139,7 @@
         </td>
     </tr>
 </table>
-</p>
-<p>
+
 <table width="100%">
     <tr>
         <td>
@@ -159,11 +155,11 @@
                     <td align="center">
                         <script type="text/javascript">
                             // Several pictures
-                            var ratio_12_19 = 4.82;
-                            var idname_12_19 = '2010-12-19-pic';
-                            var lnkidname_12_19 = '2010-12-19-lnk';
-                            var current_12_19 = 0;
-                            var picarray_12_19 = [
+                            let ratio_12_19 = 4.82;
+                            let idname_12_19 = '2010-12-19-pic';
+                            let lnkidname_12_19 = '2010-12-19-lnk';
+                            let current_12_19 = 0;
+                            let picarray_12_19 = [
                                 {
                                     name: "Skip Sky",
                                     location: "PC160897.JPG",
@@ -178,9 +174,9 @@
                                 }];
 
                             function displayDefault_12_19() {
-                                var idx = picarray_12_19.length - 1;
+                                let idx = picarray_12_19.length - 1;
                                 current_12_19 = idx;
-                                str = '<div id="' + idname_12_19 + '"><img src="filmstrip.png" align="center" width="' + (picarray_12_19[idx].width / ratio_12_19) + '"><br/><a href="' + picarray_12_19[idx].location + '" target="photo"><img src="' + picarray_12_19[idx].location + '" alt="' + picarray_12_19[idx].name + '" title="' + picarray_12_19[idx].name + '" align="center" width="' + (picarray_12_19[idx].width / ratio_12_19) + '" height="' + (picarray_12_19[idx].height / ratio_12_19) + '" border="0" hspace="5" vspace="0"></a><br/><img src="filmstrip.png" align="center" width="' + (picarray_12_19[idx].width / ratio_12_19) + '"></div>';
+                                let str = '<div id="' + idname_12_19 + '"><img src="filmstrip.png" align="center" width="' + (picarray_12_19[idx].width / ratio_12_19) + '"><br/><a href="' + picarray_12_19[idx].location + '" target="photo"><img src="' + picarray_12_19[idx].location + '" alt="' + picarray_12_19[idx].name + '" title="' + picarray_12_19[idx].name + '" align="center" width="' + (picarray_12_19[idx].width / ratio_12_19) + '" height="' + (picarray_12_19[idx].height / ratio_12_19) + '" border="0" hspace="5" vspace="0"></a><br/><img src="filmstrip.png" align="center" width="' + (picarray_12_19[idx].width / ratio_12_19) + '"></div>';
                                 // alert("Writing:" + str);
                                 document.write(str);
                                 if (picarray_12_19.length > 0) {
@@ -191,18 +187,19 @@
                             }
 
                             function displayLinks_12_19() {
-                                str = "";
+                                let str = "";
                                 for (i = 0; i < picarray_12_19.length; i++) {
-                                    if (i == current_12_19)
+                                    if (i == current_12_19) {
                                         str += ((i + 1) + '&nbsp;');
-                                    else
+                                    } else {
                                         str += ('<a href="javascript:updatePic_12_19(' + i + ');">' + (i + 1) + '</a>&nbsp;');
+                                    }
                                 }
                                 return str;
                             }
 
                             function updatePic_12_19(i) {
-                                str = '<img src="filmstrip.png" align="center" width="' + (picarray_12_19[i].width / ratio_12_19) + '"><br/><a href="' + picarray_12_19[i].location + '" target="photo"><img src="' + picarray_12_19[i].location + '" alt="' + picarray_12_19[i].name + '" title="' + picarray_12_19[i].name + '" align="center" width="' + (picarray_12_19[i].width / ratio_12_19) + '" height="' + (picarray_12_19[i].height / ratio_12_19) + '" border="0" hspace="5" vspace="0"></a><br/><img src="filmstrip.png" align="center" width="' + (picarray_12_19[i].width / ratio_12_19) + '">';
+                                let str = '<img src="filmstrip.png" align="center" width="' + (picarray_12_19[i].width / ratio_12_19) + '"><br/><a href="' + picarray_12_19[i].location + '" target="photo"><img src="' + picarray_12_19[i].location + '" alt="' + picarray_12_19[i].name + '" title="' + picarray_12_19[i].name + '" align="center" width="' + (picarray_12_19[i].width / ratio_12_19) + '" height="' + (picarray_12_19[i].height / ratio_12_19) + '" border="0" hspace="5" vspace="0"></a><br/><img src="filmstrip.png" align="center" width="' + (picarray_12_19[i].width / ratio_12_19) + '">';
                                 document.getElementById(idname_12_19).innerHTML = str;
                                 current_12_19 = i;
                                 str = displayLinks_12_19();
@@ -265,11 +262,11 @@
                     <td align="center">
                         <script type="text/javascript">
                             // Several pictures
-                            var ratio_12_20 = 4.82;
-                            var idname_12_20 = '2010-12-20-pic';
-                            var lnkidname_12_20 = '2010-12-20-lnk';
-                            var current_12_20 = 0;
-                            var picarray_12_20 = [
+                            let ratio_12_20 = 4.82;
+                            let idname_12_20 = '2010-12-20-pic';
+                            let lnkidname_12_20 = '2010-12-20-lnk';
+                            let current_12_20 = 0;
+                            let picarray_12_20 = [
                                 {
                                     name: "The old chainplate",
                                     location: "PC291031.JPG",
@@ -284,9 +281,9 @@
                                 }];
 
                             function displayDefault_12_20() {
-                                var idx = picarray_12_20.length - 1;
+                                let idx = picarray_12_20.length - 1;
                                 current_12_20 = idx;
-                                str = '<div id="' + idname_12_20 + '"><img src="filmstrip.png" align="center" width="' + (picarray_12_20[idx].width / ratio_12_20) + '"><br/><a href="' + picarray_12_20[idx].location + '" target="photo"><img src="' + picarray_12_20[idx].location + '" alt="' + picarray_12_20[idx].name + '" title="' + picarray_12_20[idx].name + '" align="center" width="' + (picarray_12_20[idx].width / ratio_12_20) + '" height="' + (picarray_12_20[idx].height / ratio_12_20) + '" border="0" hspace="5" vspace="0"></a><br/><img src="filmstrip.png" align="center" width="' + (picarray_12_20[idx].width / ratio_12_20) + '"></div>';
+                                let str = '<div id="' + idname_12_20 + '"><img src="filmstrip.png" align="center" width="' + (picarray_12_20[idx].width / ratio_12_20) + '"><br/><a href="' + picarray_12_20[idx].location + '" target="photo"><img src="' + picarray_12_20[idx].location + '" alt="' + picarray_12_20[idx].name + '" title="' + picarray_12_20[idx].name + '" align="center" width="' + (picarray_12_20[idx].width / ratio_12_20) + '" height="' + (picarray_12_20[idx].height / ratio_12_20) + '" border="0" hspace="5" vspace="0"></a><br/><img src="filmstrip.png" align="center" width="' + (picarray_12_20[idx].width / ratio_12_20) + '"></div>';
                                 // alert("Writing:" + str);
                                 document.write(str);
                                 if (picarray_12_20.length > 0) {
@@ -297,18 +294,19 @@
                             }
 
                             function displayLinks_12_20() {
-                                str = "";
+                                let str = "";
                                 for (i = 0; i < picarray_12_20.length; i++) {
-                                    if (i == current_12_20)
+                                    if (i == current_12_20) {
                                         str += ((i + 1) + '&nbsp;');
-                                    else
+                                    } else {
                                         str += ('<a href="javascript:updatePic_12_20(' + i + ');">' + (i + 1) + '</a>&nbsp;');
+                                    }
                                 }
                                 return str;
                             }
 
                             function updatePic_12_20(i) {
-                                str = '<img src="filmstrip.png" align="center" width="' + (picarray_12_20[i].width / ratio_12_20) + '"><br/><a href="' + picarray_12_20[i].location + '" target="photo"><img src="' + picarray_12_20[i].location + '" alt="' + picarray_12_20[i].name + '" title="' + picarray_12_20[i].name + '" align="center" width="' + (picarray_12_20[i].width / ratio_12_20) + '" height="' + (picarray_12_20[i].height / ratio_12_20) + '" border="0" hspace="5" vspace="0"></a><br/><img src="filmstrip.png" align="center" width="' + (picarray_12_20[i].width / ratio_12_20) + '">';
+                                let str = '<img src="filmstrip.png" align="center" width="' + (picarray_12_20[i].width / ratio_12_20) + '"><br/><a href="' + picarray_12_20[i].location + '" target="photo"><img src="' + picarray_12_20[i].location + '" alt="' + picarray_12_20[i].name + '" title="' + picarray_12_20[i].name + '" align="center" width="' + (picarray_12_20[i].width / ratio_12_20) + '" height="' + (picarray_12_20[i].height / ratio_12_20) + '" border="0" hspace="5" vspace="0"></a><br/><img src="filmstrip.png" align="center" width="' + (picarray_12_20[i].width / ratio_12_20) + '">';
                                 document.getElementById(idname_12_20).innerHTML = str;
                                 current_12_20 = i;
                                 str = displayLinks_12_20();
@@ -410,7 +408,8 @@
             The Yacht Club de Tahiti did not make us pay for the last day.
             <br/>
             We leave the lagoon of Arue using the west channel, it's <a
-                href="GPX/LeafletGPX.html?track=exiting.arue.gpx.json&scale=16" target="GoogleMaps">pretty narrow</a> (25 meters
+                href="GPX/LeafletGPX.html?track=exiting.arue.gpx.json&scale=16" target="GoogleMaps">pretty narrow</a>
+            (25 meters
             at some point), but it's all right.
             We're targeting Moorea, before heading to Huahine.
             <br/>
@@ -627,11 +626,11 @@
                     <td align="center">
                         <script type="text/javascript">
                             // Several pictures
-                            var ratio_01_20 = 4.82;
-                            var idname_01_20 = '2011-01-20-pic';
-                            var lnkidname_01_20 = '2011-01-20-lnk';
-                            var current_01_20 = 0;
-                            var picarray_01_20 = [
+                            let ratio_01_20 = 4.82;
+                            let idname_01_20 = '2011-01-20-pic';
+                            let lnkidname_01_20 = '2011-01-20-lnk';
+                            let current_01_20 = 0;
+                            let picarray_01_20 = [
                                 {
                                     name: "Tapuamu anchorage",
                                     location: "P1201323.JPG",
@@ -688,9 +687,9 @@
                                 }];
 
                             function displayDefault_01_20() {
-                                var idx = picarray_01_20.length - 1;
+                                let idx = picarray_01_20.length - 1;
                                 current_01_20 = idx;
-                                str = '<div id="' + idname_01_20 + '"><img src="filmstrip.png" align="center" width="' + (picarray_01_20[idx].width / ratio_01_20) + '"><br/><a href="' + picarray_01_20[idx].location + '" target="photo"><img src="' + picarray_01_20[idx].location + '" alt="' + picarray_01_20[idx].name + '" title="' + picarray_01_20[idx].name + '" align="center" width="' + (picarray_01_20[idx].width / ratio_01_20) + '" height="' + (picarray_01_20[idx].height / ratio_01_20) + '" border="0" hspace="5" vspace="0"></a><br/><img src="filmstrip.png" align="center" width="' + (picarray_01_20[idx].width / ratio_01_20) + '"></div>';
+                                let str = '<div id="' + idname_01_20 + '"><img src="filmstrip.png" align="center" width="' + (picarray_01_20[idx].width / ratio_01_20) + '"><br/><a href="' + picarray_01_20[idx].location + '" target="photo"><img src="' + picarray_01_20[idx].location + '" alt="' + picarray_01_20[idx].name + '" title="' + picarray_01_20[idx].name + '" align="center" width="' + (picarray_01_20[idx].width / ratio_01_20) + '" height="' + (picarray_01_20[idx].height / ratio_01_20) + '" border="0" hspace="5" vspace="0"></a><br/><img src="filmstrip.png" align="center" width="' + (picarray_01_20[idx].width / ratio_01_20) + '"></div>';
                                 // alert("Writing:" + str);
                                 document.write(str);
                                 if (picarray_01_20.length > 0) {
@@ -797,11 +796,11 @@
                     <td align="center">
                         <script type="text/javascript">
                             // Several pictures
-                            var ratio_01_25 = 4.82;
-                            var idname_01_25 = '2011-01-25-pic';
-                            var lnkidname_01_25 = '2011-01-25-lnk';
-                            var current_01_25 = 0;
-                            var picarray_01_25 = [
+                            let ratio_01_25 = 4.82;
+                            let idname_01_25 = '2011-01-25-pic';
+                            let lnkidname_01_25 = '2011-01-25-lnk';
+                            let current_01_25 = 0;
+                            let picarray_01_25 = [
                                 {
                                     name: "Anchored in Bora-Bora",
                                     location: "P1251428.JPG",
@@ -822,7 +821,7 @@
                                 }];
 
                             function displayDefault_01_25() {
-                                var idx = picarray_01_25.length - 1;
+                                let idx = picarray_01_25.length - 1;
                                 current_01_25 = idx;
                                 let str = '<div id="' + idname_01_25 + '"><img src="filmstrip.png" align="center" width="' + (picarray_01_25[idx].width / ratio_01_25) + '"><br/><a href="' + picarray_01_25[idx].location + '" target="photo"><img src="' + picarray_01_25[idx].location + '" alt="' + picarray_01_25[idx].name + '" title="' + picarray_01_25[idx].name + '" align="center" width="' + (picarray_01_25[idx].width / ratio_01_25) + '" height="' + (picarray_01_25[idx].height / ratio_01_25) + '" border="0" hspace="5" vspace="0"></a><br/><img src="filmstrip.png" align="center" width="' + (picarray_01_25[idx].width / ratio_01_25) + '"></div>';
                                 // alert("Writing:" + str);
@@ -891,11 +890,11 @@
                     <td align="center">
                         <script type="text/javascript">
                             // Several pictures
-                            var ratio_01_27 = 4.82;
-                            var idname_01_27 = '2011-01_27-pic';
-                            var lnkidname_01_27 = '2011-01_27-lnk';
-                            var current_01_27 = 0;
-                            var picarray_01_27 = [
+                            let ratio_01_27 = 4.82;
+                            let idname_01_27 = '2011-01_27-pic';
+                            let lnkidname_01_27 = '2011-01_27-lnk';
+                            let current_01_27 = 0;
+                            let picarray_01_27 = [
                                 {
                                     name: "Potimarara",
                                     location: "P1271479.JPG",
@@ -922,7 +921,7 @@
                                 }];
 
                             function displayDefault_01_27() {
-                                var idx = picarray_01_27.length - 1;
+                                let idx = picarray_01_27.length - 1;
                                 current_01_27 = idx;
                                 let str = '<div id="' + idname_01_27 + '"><img src="filmstrip.png" align="center" width="' + (picarray_01_27[idx].width / ratio_01_27) + '"><br/><a href="' + picarray_01_27[idx].location + '" target="photo"><img src="' + picarray_01_27[idx].location + '" alt="' + picarray_01_27[idx].name + '" title="' + picarray_01_27[idx].name + '" align="center" width="' + (picarray_01_27[idx].width / ratio_01_27) + '" height="' + (picarray_01_27[idx].height / ratio_01_27) + '" border="0" hspace="5" vspace="0"></a><br/><img src="filmstrip.png" align="center" width="' + (picarray_01_27[idx].width / ratio_01_27) + '"></div>';
                                 // alert("Writing:" + str);
@@ -979,18 +978,14 @@
         </td>
     </tr>
 </table>
-</p>
-</p>
-</p>
-<table width="98%">
-    <script type="text/javascript">
-			if (!getPrint()) {
-				prevNext(6, false, 'EN');
-			}
 
-    </script>
-</table>
-<hr>
+<script type="text/javascript">
+    if (!getPrint()) {
+        prevNext(6, false, 'EN');
+    }
+
+</script>
+<hr/>
 
 </body>
 </html>

@@ -7,12 +7,12 @@
     <script type="text/javascript" src="js/prev.next.js"></script>
 </head>
 <body> <!-- background="bground.jpg" -->
+<script type="text/javascript">
+    if (!getPrint()) {
+        prevNext(4, true, 'EN');
+    }
+</script>
 <table width="98%">
-    <script type="text/javascript">
-        if (!getPrint()) {
-            prevNext(4, true, 'EN');
-        }
-    </script>
     <tr>
         <td valign="top" align="left">
             <h2><a name="04">Tuamotu, Rangiroa</a></h2>
@@ -31,13 +31,14 @@
                                                         alt="Dinghy on the beach" title="Dinghy on the beach"></a>
             <!--a href="TiputaPass.MP4" target="BigPic"><img border="0" hspace="10" vspace="5" align="right" src="TiputaPass.MP4" width="425" height="319" alt="Tiputa Pass, ebbing" title="Tiputa Pass, ebbing"></a-->
             <script type="text/javascript">
-                if (!getPrint())
+                if (!getPrint()) {
                     document.writeln(
                         '<object width="425" height="344" align="right" hspace="10" vspace="5">' +
                         '<param name="movie" value="https://www.youtube.com/v/PYZCit5ufhc?hl=en&fs=1"></param>' +
                         '<param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param>' +
                         '<embed src="https://www.youtube.com/v/PYZCit5ufhc?hl=en&fs=1" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="344"></embed>' +
                         '</object>');
+                }
             </script>
             The first thing that really strikes us is the light, and the colors... It's quite different from what we've
             seen
@@ -137,14 +138,14 @@
         </td>
     </tr>
 </table>
-<table width="98%">
-    <script type="text/javascript">
-        if (!getPrint()) {
-            prevNext(4, false, 'EN');
-        }
-    </script>
-</table>
-<hr>
+
+<script type="text/javascript">
+    if (!getPrint()) {
+        prevNext(4, false, 'EN');
+    }
+</script>
+
+<hr/>
 
 </body>
 </html>
