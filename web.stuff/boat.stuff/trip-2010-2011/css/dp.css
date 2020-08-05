@@ -55,6 +55,10 @@ h1, h2, h3, h4, h5, h6 {
   font-style: normal;
 }
 
+h4 > a {
+  margin-top: 5px;
+}
+
 .active-link {
   color: white;
   font-size: 20px;

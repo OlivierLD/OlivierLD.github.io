@@ -20,7 +20,7 @@ let monthFR    = [ "janvier", "f&eacute;vrier", "mars", "avril", "mai", "juin", 
 
 function formatDateHeader(year, month, day, lng) {
   let currentDate = setDate(year, month, day);
-  let str = "<h4><a name='" + formatDateAnchor(nbAnchors) + "'>"
+  let str = "<div><h4><a name='" + formatDateAnchor(nbAnchors) + "' style='padding-top: 20px;'>";
   str = str + formatDate(currentDate, lng) + "&nbsp;&nbsp<small>(" + (lng=="EN"?"day":"jour") + " " + (diffDateInDays(startDate, currentDate) + 1) + ")</small>";
   str = str + "</a>" + "&nbsp;&nbsp;&nbsp;";
   if (!getPrint()) {
@@ -30,7 +30,7 @@ function formatDateHeader(year, month, day, lng) {
     str = str + "<a href='#" + formatDateAnchor(nbAnchors + 1) + "'><img src='next.png' border='0' alt='" + next(lng) + "' title='" + next(lng) + "'></a>" + "</h4>";
   }
   nbAnchors++;
-  
+  str += "</div>";
   return str;
 }
 
