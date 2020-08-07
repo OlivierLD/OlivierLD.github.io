@@ -7,7 +7,7 @@ function closeNav() {
 }
 
 function switchTo(lang) {
-  alert(`switching to ${lang} (WiP)`);
+  // alert(`switching to ${lang} (WiP)`);
   // document.getElementById("side-nav").style.width = "0";
 }
 
