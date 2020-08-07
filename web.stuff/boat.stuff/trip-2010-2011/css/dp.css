@@ -133,6 +133,18 @@ span.expand-collapse:hover {
   margin-left: 50px;
 }
 
+.sidenav .other-lang {
+  position: absolute;
+  top: 0;
+  leftt: 25px;
+  font-size: 24px;
+  margin-right: 50px;
+}
+
+#lang-id:hover {
+  box-shadow: 2px 2px 4px grey, 0 0 25px white, 0 0 7px cyan;
+}
+
 .sub-section {
   /* display: none; */
   visibility: hidden;

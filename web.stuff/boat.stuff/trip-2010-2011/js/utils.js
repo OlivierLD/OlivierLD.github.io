@@ -6,6 +6,11 @@ function closeNav() {
     document.getElementById("side-nav").style.width = "0";
 }
 
+function switchTo(lang) {
+  alert(`switching to ${lang} (WiP)`);
+  // document.getElementById("side-nav").style.width = "0";
+}
+
 function showSection(id) {
 //document.getElementById(id).style.display = 'inline-block';
   document.getElementById(id).style.visibility = 'visible';
