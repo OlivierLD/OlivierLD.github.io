@@ -333,12 +333,20 @@ function drawWindArrow(divId, dir, force) {
       direction = 0;
     }
   }
+  let title = null;
+  if (force !== undefined && typeof(dir) !== 'number') {
+    title = `Wind ${force} Beaufort\x0A${dir.label}`;
+  }
 
   direction = -direction;
   // XMLNS Required.
   const XMLNS = "http://www.w3.org/2000/svg";
 
   let parent = (divId !== null) ? document.getElementById(divId) : null;
+  if (title !== null && parent !== null) {
+    parent.setAttribute('title', title);
+
+  }
   let svg = document.createElementNS(XMLNS, 'svg');
   // svg.setAttribute('xmlns', xmlns);
   svg.setAttributeNS(null, 'width', FRAME_WIDTH.toString());
