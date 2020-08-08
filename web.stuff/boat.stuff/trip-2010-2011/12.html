@@ -227,7 +227,7 @@
                             function displayLinks_04_18() {
                                 let str = "";
                                 for (let i = 0; i < picarray_04_18.length; i++) {
-                                    if (i == current_04_18) {
+                                    if (i === current_04_18) {
                                         str += ((i + 1) + '&nbsp;');
                                     } else {
                                         str += ('<a href="javascript:updatePic_04_18(' + i + ');">' + (i + 1) + '</a>&nbsp;');

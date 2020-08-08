@@ -144,7 +144,7 @@
                             function displayLinks_03_01() {
                                 let str = "";
                                 for (let i = 0; i < picarray_03_01.length; i++) {
-                                    if (i == current_03_01) {
+                                    if (i === current_03_01) {
                                         str += ((i + 1) + '&nbsp;');
                                     } else {
                                         str += ('<a href="javascript:updatePic_03_01(' + i + ');">' + (i + 1) + '</a>&nbsp;');
