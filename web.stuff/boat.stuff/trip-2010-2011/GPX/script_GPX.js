@@ -132,6 +132,10 @@ function loadData() {
     let scale = parseInt(getPrm('scale'));
     let upTo = getPrm('upTo');
     let plot = getPrm('plot');
+    let lang = getPrm('lang');
+    if (lang.trim().length === 0) {
+        lang = 'EN';
+    }
 
     let upToDate = null;
     if (upTo !== undefined && upTo.trim().length > 0) {
@@ -170,10 +174,34 @@ function loadData() {
                                         direction: parseInt(pt.extension.wind.direction),
                                         force: parseInt(pt.extension.wind.force) });
                                 }
+                                if (pt.extension.marker !== undefined) {
+                                    let marker = {
+                                        lat: pt._lat,
+                                        lng: pt._lon
+                                    };
+                                    let markerData = null;
+                                    for (let i=0; i<pt.extension.marker["html-text"].length; i++) {
+                                        if (pt.extension.marker["html-text"][i]._lang === lang) {
+                                            markerData = pt.extension.marker["html-text"][i].__cdata;
+                                            break;
+                                        }
+                                    }
+                                    if (markerData === null) { // Take EN by default
+                                        for (let i=0; i<pt.extension.marker["html-text"].length; i++) {
+                                            if (pt.extension.marker["html-text"][i]._lang === 'EN') {
+                                                markerData = pt.extension.marker["html-text"][i].__cdata;
+                                                break;
+                                            }
+                                        }
+                                    }
+                                    marker.cdata = markerData;
+                                    markers.push(marker);
+                                }
                             }
                         }
                     }
                 });
+
                 let polyline = L.polyline(latlngs, {color: 'red'}).addTo(map);
                 // zoom the map to the polyline
                 map.fitBounds(polyline.getBounds());
@@ -189,6 +217,14 @@ function loadData() {
                         });
                         L.marker([arrow.lat, arrow.lng], {icon: markerIcon}).addTo(map);
                     });
+                }
+                if (markers.length > 0) {
+                    markers.forEach(mark => {
+                        let marker = L.marker([mark.lat, mark.lng]);
+                        console.log('CDATA:', mark.cdata);
+                        marker.addTo(map)
+                              .bindPopup(mark.cdata);
+                    })
                 }
 
             }

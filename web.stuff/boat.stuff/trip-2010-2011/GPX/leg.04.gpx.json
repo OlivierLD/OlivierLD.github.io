@@ -118,11 +118,11 @@
                 "html-text": [
                   {
                     "_lang": "EN",
-                    "__cdata": "\n\t\t\t\t\t  <a href='08.html'>Tongareva</a>\n\t\t\t\t\t  <br>\n\t\t\t\t\t  Omoka Village\n\t\t\t\t\t  <br>\n\t\t\t\t\t  <a href='09.html'>Tongareva to Christmas</a>\n\t\t\t\t\t"
+                    "__cdata": "\n\t\t\t\t\t  <a href='../08.html'>Tongareva</a>\n\t\t\t\t\t  <br>\n\t\t\t\t\t  Omoka Village\n\t\t\t\t\t  <br>\n\t\t\t\t\t  <a href='../09.html'>Tongareva to Christmas</a>\n\t\t\t\t\t"
                   },
                   {
                     "_lang": "FR",
-                    "__cdata": "\n\t\t\t\t\t  <a href='08_fr.html'>Tongareva</a>\n\t\t\t\t\t  <br>\n\t\t\t\t\t  Village d'Omoka\n\t\t\t\t\t  <br>\n\t\t\t\t\t  <a href='09_fr.html'>Tongareva &agrave; Christmas</a>\n\t\t\t\t\t"
+                    "__cdata": "\n\t\t\t\t\t  <a href='../08_fr.html'>Tongareva</a>\n\t\t\t\t\t  <br>\n\t\t\t\t\t  Village d'Omoka\n\t\t\t\t\t  <br>\n\t\t\t\t\t  <a href='../09_fr.html'>Tongareva &agrave; Christmas</a>\n\t\t\t\t\t"
                   }
                 ]
               }

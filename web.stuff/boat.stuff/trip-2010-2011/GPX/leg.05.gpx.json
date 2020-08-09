@@ -118,11 +118,11 @@
                 "html-text": [
                   {
                     "_lang": "EN",
-                    "__cdata": "\n\t\t\t\t\t  <a href='10.html'>Kiritimati Island</a>\n\t\t\t\t\t  <br>\n\t\t\t\t\t  <a href='11.html'>Kiritimati to Hawai&apos;i</a>\n\t\t\t\t\t"
+                    "__cdata": "\n\t\t\t\t\t  <a href='../10.html'>Kiritimati Island</a>\n\t\t\t\t\t  <br>\n\t\t\t\t\t  <a href='../11.html'>Kiritimati to Hawai&apos;i</a>\n\t\t\t\t\t"
                   },
                   {
                     "_lang": "FR",
-                    "__cdata": "\n\t\t\t\t\t  <a href='10_fr.html'>&Icirc;le de Kiritimati</a>\n\t\t\t\t\t  <br>\n\t\t\t\t\t  <a href='11_fr.html'>de Kiritimati &agrave; Hawai&apos;i</a>\n\t\t\t\t\t"
+                    "__cdata": "\n\t\t\t\t\t  <a href='../10_fr.html'>&Icirc;le de Kiritimati</a>\n\t\t\t\t\t  <br>\n\t\t\t\t\t  <a href='../11_fr.html'>de Kiritimati &agrave; Hawai&apos;i</a>\n\t\t\t\t\t"
                   }
                 ]
               }

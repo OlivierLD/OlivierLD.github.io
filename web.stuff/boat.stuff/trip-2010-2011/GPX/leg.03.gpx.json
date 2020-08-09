@@ -14,11 +14,11 @@
                 "html-text": [
                   {
                     "_lang": "EN",
-                    "__cdata": "\n\t\t\t\t\t  <a href='04.html'>Tuamotu Archipelago, Rangiroa Atoll</a>\n\t\t\t\t\t  <br>\n\t\t\t\t\t  <br>\n\t\t\t\t\t  <a href='05.html'>Tuamotu (Rangiroa) - Tahiti</a>\n\t\t\t\t\t  <br>\n\t\t\t\t\t  <img src=\"PC040821.jpg\" width=\"102\" height=\"77\">\n\t\t\t\t\t"
+                    "__cdata": "\n\t\t\t\t\t  <a href='../04.html'>Tuamotu Archipelago, Rangiroa Atoll</a>\n\t\t\t\t\t  <br>\n\t\t\t\t\t  <br>\n\t\t\t\t\t  <a href='../05.html'>Tuamotu (Rangiroa) - Tahiti</a>\n\t\t\t\t\t  <br>\n\t\t\t\t\t  <img src=\"../PC040821.jpg\" width=\"102\" height=\"77\">\n\t\t\t\t\t"
                   },
                   {
                     "_lang": "FR",
-                    "__cdata": "\n\t\t\t\t\t  <a href='04_fr.html'>Archipel des Tuamotu, Atoll de Rangiroa</a>\n\t\t\t\t\t  <br>\n\t\t\t\t\t  <br>\n\t\t\t\t\t  <a href='05_fr.html'>Tuamotu (Rangiroa) - Tahiti</a>\n\t\t\t\t\t  <br>\n\t\t\t\t\t  <img src=\"PC040821.jpg\" width=\"102\" height=\"77\">\n\t\t\t\t\t"
+                    "__cdata": "\n\t\t\t\t\t  <a href='../04_fr.html'>Archipel des Tuamotu, Atoll de Rangiroa</a>\n\t\t\t\t\t  <br>\n\t\t\t\t\t  <br>\n\t\t\t\t\t  <a href='../05_fr.html'>Tuamotu (Rangiroa) - Tahiti</a>\n\t\t\t\t\t  <br>\n\t\t\t\t\t  <img src=\"../PC040821.jpg\" width=\"102\" height=\"77\">\n\t\t\t\t\t"
                   }
                 ]
               }

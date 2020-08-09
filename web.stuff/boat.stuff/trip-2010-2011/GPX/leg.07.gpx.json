@@ -344,11 +344,11 @@
                 "html-text": [
                   {
                     "_lang": "EN",
-                    "__cdata": "\n\t\t\t\t\t  <!--a href='01.html#01'>San Francisco - Marquesas</a>\n\t\t\t\t\t  <br-->\n\t\t\t\t\t  Lying Ahull\n\t\t\t\t\t"
+                    "__cdata": "\n\t\t\t\t\t  <!--a href='../01.html#01'>San Francisco - Marquesas</a>\n\t\t\t\t\t  <br-->\n\t\t\t\t\t  Lying Ahull\n\t\t\t\t\t"
                   },
                   {
                     "_lang": "FR",
-                    "__cdata": "\n\t\t\t\t\t  <!--a href='01_fr.html#01'>San Francisco - Marquises</a>\n\t\t\t\t\t  <br-->\n\t\t\t\t\t  &Agrave; la cape s&egrave;che\n\t\t\t\t\t"
+                    "__cdata": "\n\t\t\t\t\t  <!--a href='../01_fr.html#01'>San Francisco - Marquises</a>\n\t\t\t\t\t  <br-->\n\t\t\t\t\t  &Agrave; la cape s&egrave;che\n\t\t\t\t\t"
                   }
                 ]
               },

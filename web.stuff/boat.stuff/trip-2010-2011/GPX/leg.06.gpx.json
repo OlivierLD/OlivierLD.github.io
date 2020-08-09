@@ -190,11 +190,11 @@
                 "html-text": [
                   {
                     "_lang": "EN",
-                    "__cdata": "\n\t\t\t\t\t  <a href='12.html'>Ala Wai</a>\n\t\t\t\t\t"
+                    "__cdata": "\n\t\t\t\t\t  <a href='../12.html'>Ala Wai</a>\n\t\t\t\t\t"
                   },
                   {
                     "_lang": "FR",
-                    "__cdata": "\n\t\t\t\t\t  <a href='12_fr.html'>Ala Wai</a>\n\t\t\t\t\t"
+                    "__cdata": "\n\t\t\t\t\t  <a href='../12_fr.html'>Ala Wai</a>\n\t\t\t\t\t"
                   }
                 ]
               }
@@ -244,11 +244,11 @@
                 "html-text": [
                   {
                     "_lang": "EN",
-                    "__cdata": "\n\t\t\t\t\t  <a href='12.html'>Outer Ke&apos;ehi Lagoon</a>\n\t\t\t\t\t"
+                    "__cdata": "\n\t\t\t\t\t  <a href='../12.html'>Outer Ke&apos;ehi Lagoon</a>\n\t\t\t\t\t"
                   },
                   {
                     "_lang": "FR",
-                    "__cdata": "\n\t\t\t\t\t  <a href='12_fr.html'>Lagon de Ke&apos;ehi, &agrave; l&apos;ext&eacute;rieur</a>\n\t\t\t\t\t"
+                    "__cdata": "\n\t\t\t\t\t  <a href='../12_fr.html'>Lagon de Ke&apos;ehi, &agrave; l&apos;ext&eacute;rieur</a>\n\t\t\t\t\t"
                   }
                 ]
               }
@@ -274,11 +274,11 @@
                 "html-text": [
                   {
                     "_lang": "EN",
-                    "__cdata": "\n\t\t\t\t\t  <a href='12.html'>Ke'ehi Lagoon</a>\n\t\t\t\t\t"
+                    "__cdata": "\n\t\t\t\t\t  <a href='../12.html'>Ke'ehi Lagoon</a>\n\t\t\t\t\t"
                   },
                   {
                     "_lang": "FR",
-                    "__cdata": "\n\t\t\t\t\t  <a href='12_fr.html'>Lagon de Ke'ehi</a>\n\t\t\t\t\t"
+                    "__cdata": "\n\t\t\t\t\t  <a href='../12_fr.html'>Lagon de Ke'ehi</a>\n\t\t\t\t\t"
                   }
                 ]
               }
