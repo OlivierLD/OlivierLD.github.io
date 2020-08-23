@@ -214,7 +214,7 @@
 			}, (error, message) => {
 				console.debug('ISSData error', error, message);
 				let box = document.querySelector('#iss-textbox');
-				box.innerHTML = `${error}, ${message}`; // newContent;
+				box.innerHTML = `${ JSON.stringify(error, null, 2) }, ${message}`; // newContent;
 			})
 		}, 5000);
 	})();
