@@ -33,7 +33,7 @@
 </body>
 <script type="text/javascript">
 
-	const DEBUG = false;
+	const DEBUG = true;
 	const DEFAULT_TIMEOUT = 60000; // 1 minute
 	/* global events */
 
@@ -68,7 +68,15 @@
 			if (headers === null) {
 				xhr.setRequestHeader("Content-type", "application/json");
 			} else {
-				headers.forEach(header => xhr.setRequestHeader(header.name, header.value));
+				if (DEBUG) {
+					console.log("Setting headers");
+				}
+				headers.forEach(header => {
+					if (DEBUG) {
+						console.log(`Setting header ${header.name}: ${header.value}`);
+					}
+					xhr.setRequestHeader(header.name, header.value);
+				});
 			}
 			try {
 				if (data === undefined || data === null) {
@@ -99,7 +107,7 @@
 	}
 
 	function getISSData() {
-		return getPromise('https://api.open-notify.org/iss-now.json',  // https!!
+		return getPromise('http://api.open-notify.org/iss-now.json',  // https!!
 				DEFAULT_TIMEOUT,
 				'GET',
 				200,
@@ -107,13 +115,13 @@
 				false,
 				[{
 					name:'Access-Control-Allow-Origin',
-					value: '*'
+					value: 'http://olivier.lediouris.net' // '*'
 				}, {
 					name: 'Access-Control-Allow-Methods',
 					value: 'GET, POST, PUT, OPTIONS, HEAD'
 				}, {
 					name: 'Access-Control-Allow-Headers',
-					value: 'Content-Type'
+					value: '*' // 'Content-Type'
 				}]);
 	}
 
