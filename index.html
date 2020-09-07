@@ -22,6 +22,24 @@
     src: url(alegreya-sans/AlegreyaSans-Medium.ttf) format("truetype");
 }
 
+.background {
+  /*color: #999999;*/
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  top: 0;
+  left: 0;
+  z-index: -100;
+}
+.bg-data {
+  font-size: 256px;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.15);
+  text-align: center;
+  margin-top: 125px;
+  margin-left: 20px;
+}
+
 html {
   display: table;
   width: 100%;
@@ -820,6 +838,11 @@ Date.prototype.format = function (dateFormat) {
 
 </head>
 <body class="bg-gradient">
+
+  <div class="background">
+    <div class="bg-data" id="bg-data">. . .</div>
+  </div>
+
   <small style="margin-left: 5px;">&gt; &nbsp;Work in Progress. Use the hamburger below to display the menu. See kebab on the right.</small>
 
   <div id="id01" class="w3-modal">
@@ -1705,7 +1728,6 @@ Date.prototype.format = function (dateFormat) {
       content += `url("./backgbrounds/${BG_IMAGES[bgIndex]}") no-repeat top`;
 
       // console.log("Content:" + content);
-
       dom.style.background = content;
 
       let docElem = document.documentElement;
@@ -1714,6 +1736,11 @@ Date.prototype.format = function (dateFormat) {
       let h = window.innerHeight || docElem.clientHeight || body.clientHeight;
       dom.style.backgroundSize = `${w}px ${h}px`;
     }, 100);
+
+    window.setInterval(() => {
+      let date = new Date();
+      document.getElementById('bg-data').innerText = date.format('H:i:s');
+    }, 1000);
 
     window.addEventListener("resize", () => {
       // document.getElementById('marquee-panel-01').width = document.body.clientWidth;
