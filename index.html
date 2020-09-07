@@ -32,6 +32,7 @@
   z-index: -100;
 }
 .bg-data {
+  font-family: "Courier New";
   font-size: 256px;
   font-weight: bold;
   color: rgba(0, 0, 0, 0.15);
@@ -414,7 +415,7 @@ span.expand-collapse:hover {
 }
 
 .active, .dot:hover {
-  /*background-color: cyan; /*#717171;*/*/
+  /*background-color: cyan; #717171;*/
   border: 1px solid cyan;
   background-image: radial-gradient(blue, cyan);
 }
@@ -582,10 +583,10 @@ input:checked + .slider:before {
 /* Switch grid */
 .switch-container {
   display: grid;
-  grid-template-columns: calc(var(--slider-scale) * 64px) 200px;
+  grid-template-columns: calc(var(--slider-scale) * 80px) 200px;
 }
 .switch-element {
-  place-self: center;
+  place-self: flex-start;
 }
 
 button {
@@ -840,7 +841,7 @@ Date.prototype.format = function (dateFormat) {
 <body class="bg-gradient">
 
   <div class="background">
-    <div class="bg-data" id="bg-data">. . .</div>
+    <div class="bg-data" id="bg-data"></div>
   </div>
 
   <small style="margin-left: 5px;">&gt; &nbsp;Work in Progress. Use the hamburger below to display the menu. See kebab on the right.</small>
@@ -971,6 +972,14 @@ Date.prototype.format = function (dateFormat) {
       <span class="slider round"></span>
     </label>
     <span class="switch-element">Change BG faster</span>
+  </div>
+
+  <div class="switch-container" style="margin-left: 30px;" title="On or off">
+    <label class="switch switch-element">
+      <input id="time-bg-slider" type="checkbox" onchange="manageTimeBGClick(this);">
+      <span class="slider round"></span>
+    </label>
+    <span class="switch-element">BG Time Display</span>
   </div>
 
   <div style="margin-left: 30px; margin-top: 10px;">
@@ -1632,6 +1641,15 @@ Date.prototype.format = function (dateFormat) {
     BG_INTERVAL = (cb.checked ? FAST_BG_INTERVAL : SLOW_BG_INTERVAL);
   }
 
+  function manageTimeBGClick(cb) {
+    if (cb.checked) { // Start
+      bgTime = true;
+    } else { // Stop
+      bgTime = false;
+      document.getElementById('bg-data').innerText = '';
+    }
+  }
+
   let slideIndex = 1;
   showSlides(slideIndex);
 
@@ -1684,6 +1702,7 @@ Date.prototype.format = function (dateFormat) {
   }
 
   let bgAnimation;
+  let bgTime = false;
 
   function changeBGNow() {
     if (bgAnimation !== undefined) {
@@ -1737,11 +1756,6 @@ Date.prototype.format = function (dateFormat) {
       dom.style.backgroundSize = `${w}px ${h}px`;
     }, 100);
 
-    window.setInterval(() => {
-      let date = new Date();
-      document.getElementById('bg-data').innerText = date.format('H:i:s');
-    }, 1000);
-
     window.addEventListener("resize", () => {
       // document.getElementById('marquee-panel-01').width = document.body.clientWidth;
     });
@@ -1779,6 +1793,9 @@ Date.prototype.format = function (dateFormat) {
       let now = new Date();
       let timeData = now.format('D d M Y') + '<br/>' + now.format('H:i:s Z');
       document.getElementById('date-time-container').innerHTML = timeData;
+      if (bgTime) {
+          document.getElementById('bg-data').innerText = now.format('H:i:s');
+      }
     }, 1000);
 
     // Dialog management
