@@ -34,7 +34,7 @@
 	let status = 'tick';
 	// Activity witness
 	function flipLight() {
-		var element = document.getElementById('working');
+		let element = document.getElementById('working');
 		if (status === 'tick') {
 			status = 'tock';
 			element.style.color = 'red';
@@ -81,7 +81,7 @@
 
 	// Called from navigator.geolocation.getCurrentPosition
 	function onPosError(err) {
-		let errMess = '';
+		let errMess;
 		if (err.code === err.PERMISSION_DENIED) {
 			errMess = 'Location access was denied by the user.';
 		} else {
@@ -110,7 +110,7 @@
 	(() => {
 		// Refreshed every second.
 		setInterval(() => {
-			let watchId = navigator.geolocation.getCurrentPosition(onPosSuccess, onPosError, options);
+			/* let watchId = */ navigator.geolocation.getCurrentPosition(onPosSuccess, onPosError, options);
 		}, 1000);
 	})();
 </script>
