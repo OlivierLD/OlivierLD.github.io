@@ -9,9 +9,17 @@
             color: navy;
         }
 
-        .gps-text {
+        h1 {
             font-size: x-large;
             font-weight: bold;
+        }
+        .gps-text {
+            /*font-size: x-large;*/
+            font-weight: bold;
+        }
+        td, th {
+            border: 1px solid silver;
+            border-radius: 5px;
         }
     </style>
 
@@ -20,7 +28,7 @@
 
 </head>
 <body>
-<h1 class="gps-text">Geolocation Api Demo &nbsp;<span id="working" title="Traffic">&#11044;</span></h1>
+<h1>Geolocation Api Demo &nbsp;<span id="working" title="Traffic">&#11044;</span></h1>
 <hr/>
 <small>
     Some devices have both a browser and a GPS, like your cell phone for example. You will be prompted to allow the browser to get to your position (once).
@@ -30,7 +38,7 @@
     Good to know, specially if you want to prevent it.
 </small>
 <hr/>
-<div id="textbox" class="gps-text"></div>
+<div id="textbox" class="gps-text">. . .</div>
 <hr/>
 
 <table>
@@ -40,19 +48,27 @@
             <div id="mapid" style="width: 1200px; height: 600px;"></div>
         </td>
         <td valign="top" align="left">
-            <input type="checkbox" id="keep-centered"/> Keep map centered on current position
+            <input type="checkbox" id="keep-centered"/> Keep map centered on current GPS position
             <hr/>
-            Mouse position:
+            <i>Mouse position:</i>
             <hr/>
             <div id="curr-pos"></div>
             <hr/>
             <small><i>Decimal:</i></small>
             <div id="curr-pos-dec"></div>
             <hr/>
+            <i>Last click position:</i>
+            <hr/>
+            <div id="curr-pos-click"></div>
+            <hr/>
+            <small><i>Decimal:</i></small>
+            <div id="curr-pos-click-dec"></div>
+            <hr/>
         </td>
     </tr>
 </table>
-
+<hr/>
+<span style="font-style: italic;">&copy 2020, Oliv did it.</span>
 
 </body>
 
@@ -101,18 +117,20 @@
             } catch (err) {
             }
             let newContent =
-                'LAT = ' + decToSex(pos.coords.latitude, 'NS') + "<br/>" +
-                'LNG = ' + decToSex(pos.coords.longitude, 'EW') + "<br/>" +
-                'HDG = ' + hdg + '<br/>' +
-                'SPD = ' + speed + ' m/s' + '<br/>' +
-                'accuracy: ' + acc + ' meters';
+                `<table><tr><th>LAT</th><th>LNG</th><th>HDG</th><th>SPD</th><th>Accuracy</th></tr>` +
+                `<tr><td>${decToSex(pos.coords.latitude, 'NS')}</td><td>${decToSex(pos.coords.longitude, 'EW')}</td><td>${hdg}&deg;</td><td>${speed} m/s</td><td>${acc} meters</td></tr></table>`;
+                // 'LAT = ' + decToSex(pos.coords.latitude, 'NS') + "<br/>" +
+                // 'LNG = ' + decToSex(pos.coords.longitude, 'EW') + "<br/>" +
+                // 'HDG = ' + hdg + '<br/>' +
+                // 'SPD = ' + speed + ' m/s' + '<br/>' +
+                // 'accuracy: ' + acc + ' meters';
             let box = document.querySelector('#textbox');
             box.innerHTML = newContent;
             flipLight();
             // Update map
             L.marker([pos.coords.latitude, pos.coords.longitude])
                 .addTo(map)
-                .bindPopup(`<b>You (or your proxy) are here!</b>`);
+                .bindPopup(`<b>You (or your proxy) are here!<br/><span style="color: red;">${decToSex(pos.coords.latitude, "NS")}<br/>${decToSex(pos.coords.longitude, "EW")}</span></b>`);
             map.panTo(new L.LatLng(pos.coords.latitude, pos.coords.longitude));
 
             positionNotSet = false;
@@ -169,6 +187,12 @@
         // let lng = Math.round(event.latlng.lng * 100000) / 100000;
         document.getElementById('curr-pos').innerHTML = `${decToSex(event.latlng.lat, "NS")}<br/>${decToSex(event.latlng.lng, "EW")}`;
         document.getElementById('curr-pos-dec').innerHTML = `${event.latlng.lat}<br/>${event.latlng.lng}`;
+    });
+    map.addEventListener('click', (event) => {
+        // let lat = Math.round(event.latlng.lat * 100000) / 100000;
+        // let lng = Math.round(event.latlng.lng * 100000) / 100000;
+        document.getElementById('curr-pos-click').innerHTML = `${decToSex(event.latlng.lat, "NS")}<br/>${decToSex(event.latlng.lng, "EW")}`;
+        document.getElementById('curr-pos-click-dec').innerHTML = `${event.latlng.lat}<br/>${event.latlng.lng}`;
     });
 
 
