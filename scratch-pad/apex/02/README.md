@@ -82,7 +82,7 @@ the `Web Source Module` manually.
     ![03](./images/WSM.03.png)
 - Click `Next >`
     ![04](./images/WSM.04.png)
-- In the `Authentication screen, click `Create Module Manually`
+- In the `Authentication screen`, click `Create Module Manually`
     ![05](./images/WSM.05.png)
 - Click the Module name in the left column
     ![06](./images/WSM.06.png)
