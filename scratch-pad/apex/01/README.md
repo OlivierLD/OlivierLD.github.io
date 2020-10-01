@@ -597,12 +597,12 @@ For inspiration, see <https://blogs.oracle.com/apex/quick-and-easy-twitter-api-w
 - Go to <https://apex.oraclecorp.com/en/> and sign in
   - In `App Builder`, create a new application
      - like `REST Weather`
-  - In `Shared COmponents` > `Application Definition Attributes`, set your proxy.   
+  - In `Shared Components` > `Application Definition Attributes`, set your proxy.   
   - Create a new Web Source Module **from Scratch**
      - Add `Shared Components` > `Data Sources` > `Web Source Modules` > `Create >`
      - `Method` > `From scratch` > `Next >`
        - Name: `OpenWeatherMap REST API`
-       - URL Endpoint: `http://api.openweathermap.org/data/2.5/onecall?lat=37.75&lon=-122.5&exclude=minutely&appid=17e62fbaa546fb8ed87fc9df51f7d3ec` (_requires the proxy to be set!_)
+       - URL Endpoint: `http://api.openweathermap.org/data/2.5/onecall?lat=37.75&lon=-122.5&exclude=minutely&appid=XXXXXXXXXXXXfb8ed87fc9df51f7d3ec` (_requires the proxy to be set!_)
        ![Web Source - 1](./images/01.WebSource.v2.png)
        - Click `Next >`
        ![Web Source - 2](./images/02.WebSource.v2.png)
