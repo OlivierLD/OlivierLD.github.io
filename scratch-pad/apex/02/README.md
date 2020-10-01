@@ -82,20 +82,20 @@ the `Web Source Module` manually.
     ![03](./images/WSM.03.png)
 - Click `Next >`
     ![04](./images/WSM.04.png)
-- In the `Authentication screen`, click `Create Module Manually`
+- In the `Authentication` screen, click `Create Module Manually`
     ![05](./images/WSM.05.png)
-- Click the Module name in the left column
+- Click the Module Name in the left column
     ![06](./images/WSM.06.png)
-- Click `Edit Data profile`
+- Click `Edit Data Profile`
     ![07](./images/WSM.07.png)
 - We will change the `Row Selector`, and the column definitions
     ![08](./images/WSM.08.png)
-- `Row selector` is set to `properties` as in the returned `JSON` Object
+- `Row selector` is set to `properties` as in the returned `JSON` Object, and it is a Single Row.
     ![09](./images/WSM.09.png)
 - Once the `properties` row selector is set, we can `Rediscover Data Profile`
     ![10](./images/WSM.10.png)
   and it works fine, we see the elements of the `properties` member. But we'll do it manually, as we do not need all those columns,
-  we don **not* click the `Extend Data Profile` we just `Close` the dialog.  
+  we do *not* click the `Extend Data Profile` we just `Close` the dialog.  
 - We edit and change the columns definitions, the path (`selector`) is relative to the `Row Selector` 
     ![11](./images/WSM.11.png)
 - `Apply Changes`, and now we can create a page
