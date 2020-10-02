@@ -119,3 +119,5 @@ the `Web Source Module` manually.
 - Can APEX deal with a single-row returned payload, or does it *have* to be an array?
 ---
 
+## App Properties
+![Properties](./images/APEX.01.png)
