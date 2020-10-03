@@ -32,7 +32,7 @@
   z-index: -100;
 }
 .bg-data {
-  font-family: "Courier New";
+  font-family: "Courier New",sans-serif;
   font-size: 256px;
   font-weight: bold;
   color: lightskyblue;
@@ -513,7 +513,7 @@ span.expand-collapse:hover {
   grid-area: top;
   text-align: center;
   vertical-align: bottom;
-  padding-left: 0px;
+  padding-left: 0;
   align-self: end;
   color: inherit;
   font-size: 14px;
@@ -604,7 +604,7 @@ button {
   letter-spacing: 0.05em;
   text-transform: uppercase;
   color: #fff;
-  text-shadow: 0px 1px 10px #000;
+  text-shadow: 0 1px 10px #000;
   /* add to small curve to the corners of the button */
   -webkit-border-radius: 15px;
   -moz-border-radius: 15px;
@@ -851,7 +851,7 @@ Date.prototype.format = function (dateFormat) {
       <div class="image-container">
         <span onclick="hideAbout();"
               class="close-icon">&times;</span>
-        <img src="bonus.jpg"/>
+        <img src="bonus.jpg" alt="Me!"/>
         <span class="enhanced">Yeah, what!?</span>
       </div>
     </div>
@@ -1522,7 +1522,7 @@ Date.prototype.format = function (dateFormat) {
   }
 
   const SLOW_BG_INTERVAL = ((2 * 60) + 1) * 1000; // in ms.
-  const FAST_BG_INTERVAL = ((1 * 60) + 1) * 1000; // in ms.
+  const FAST_BG_INTERVAL = ((/*1 * */ 60) + 1) * 1000; // in ms.
   let BG_INTERVAL = SLOW_BG_INTERVAL;
   const BG_IMAGES = [
     "night.sky.01.jpeg",
@@ -1546,7 +1546,7 @@ Date.prototype.format = function (dateFormat) {
   let secondLeft = BG_INTERVAL / 1000;
   let bgIndex = 0;
   // Was `radial-gradient(at top, rgba(255, ${green1}, 0, 0.5) ${v1}%, rgba(1, 67, ${blue2}, 0.60) ${v2}%), `;
-  currentBackground = `radial-gradient(at top, rgba(255, 255, 255, 0.00) 20%, rgba(10, 10, 0, 0.00) 55%)`;
+  let currentBackground = `radial-gradient(at top, rgba(255, 255, 255, 0.00) 20%, rgba(10, 10, 0, 0.00) 55%)`;
 
   let opacity = 0;
   function darkenBackground() {
