@@ -121,3 +121,87 @@ the `Web Source Module` manually.
 
 ## App Properties
 ![Properties](./images/APEX.01.png)
+
+### In `SQL Workshop`
+```
+declare
+    l_clob clob;
+begin
+    apex_web_service.g_request_headers.delete;
+    apex_web_service.g_request_headers(1).name := 'User-Agent';
+    apex_web_service.g_request_headers(1).value := 'Oracle Application Express';
+    l_clob := apex_web_service.make_rest_request('https://api.weather.gov/points/37.75,-122.50','GET', p_proxy_override=>'pdit-b2b-proxy.oraclecorp.com:80');
+end;
+```
+The proxy is blocking the `User-Agent`.
+
+At run time, APEX sends the "User Agent" request header; at design time it does not
+and for some reason, the request with the User Agent header is blocked by the proxy
+So you could raise a ticket with OIT, paste in this code snippet and ask for help to get these requests across the proxy
+must be resolved by operations people
+
+Try this:
+```
+declare
+    l_json json_object_t;
+    l_clob clob;
+    l_properties json_object_t;
+    l_gridX number;
+    l_gridY number;
+begin
+    apex_web_service.g_request_headers(1).name := 'User-Agent';
+    apex_web_service.g_request_headers(1).value := 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36';
+    apex_web_service.g_request_headers(2).name := 'Accept';
+    apex_web_service.g_request_headers(2).value := 'application/geo+json';
+    l_clob := apex_web_service.make_rest_request(
+            p_url => 'https://api.weather.gov/points/37.7488,-122.507',
+            p_http_method => 'GET'
+    );
+    l_json := json_object_t.parse(l_clob);
+    l_properties := l_json.get_object('properties');
+    l_gridX := l_properties.get_number('gridX');
+    l_gridY := l_properties.get_number('gridY');
+    htp.p(to_char(l_gridX));
+    htp.p(to_char(l_gridY));
+end;
+```
+
+That one works:
+```
+declare
+    l_json json_object_t;
+    l_clob clob;
+    l_from json_object_t;
+    l_to json_object_t;
+    l_from_lat number;
+    l_from_lng number;
+    l_to_lat varchar2(32);
+    l_to_lng varchar2(32);
+begin
+    apex_web_service.g_request_headers.delete;
+    apex_web_service.g_request_headers(1).name := 'Accept';
+    apex_web_service.g_request_headers(1).value := 'application/json';
+    apex_web_service.g_request_headers(2).name := 'User-Agent';
+    apex_web_service.g_request_headers(2).value := 'Oracle Application Express';
+    
+    l_clob := apex_web_service.make_rest_request('http://slc11aaf.us.oracle.com:8080/rest/geopos/37.75,-122.50','GET'); -- , p_proxy_override=>'www-proxy.us.oracle.com:80');
+    -- dbms_output.put_line('Result:' || l_clob);
+    
+    htp.p('Raw json:' || to_char(l_clob));
+
+    l_json := json_object_t.parse(l_clob);
+    l_from := l_json.get_object('from');
+    l_from_lat := l_from.get_number('lat');
+    l_from_lng := l_from.get_number('lng');
+    
+    l_to := l_json.get_object('to');
+    l_to_lat := l_to.get_string('lat');
+    l_to_lng := l_to.get_string('lng');
+    
+    htp.p('Lat from:' || to_char(l_from_lat));
+    htp.p('Lng from:' || to_char(l_from_lng));
+
+    htp.p('Lat to:' || to_char(l_to_lat));
+    htp.p('Lng to:' || to_char(l_to_lng));
+end;
+```
