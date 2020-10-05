@@ -191,10 +191,10 @@
         // let lng = Math.round(event.latlng.lng * 100000) / 100000;
         let lat = event.latlng.lat;
         let lng = event.latlng.lng;
-        while (lng > 180) {
+        while (lng > 180) { // Leaflet does that...
             lng -= 360;
         }
-        while (lng < -180) {
+        while (lng < -180) { // And this too
             lng += 360;
         }
         document.getElementById('curr-pos').innerHTML = `${decToSex(lat, "NS")}<br/>${decToSex(lng, "EW")}`;
