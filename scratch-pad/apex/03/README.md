@@ -16,9 +16,8 @@ declare
     l_to json_object_t;
     l_forcast_url varchar2(128);
 begin
+    -- Act 1, get Grid Prms (and next URL)
     apex_web_service.g_request_headers.delete;
-    -- apex_web_service.g_request_headers(1).name := 'User-Agent';
-    -- apex_web_service.g_request_headers(1).value := 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36';
     apex_web_service.g_request_headers(1).name := 'Accept';
     apex_web_service.g_request_headers(1).value := 'application/json';
     apex_web_service.g_request_headers(2).name := 'User-Agent';
@@ -26,17 +25,15 @@ begin
     
     l_clob := apex_web_service.make_rest_request('http://slc11aaf.us.oracle.com:8080/rest/points/37.75,-122.50','GET'); -- , p_proxy_override=>'www-proxy.us.oracle.com:80');
     -- dbms_output.put_line('Result:' || l_clob);
-    
     htp.p('Raw json:' || to_char(l_clob));
 
     l_json := json_object_t.parse(l_clob);
-
     l_properties := l_json.get_object('properties');
     l_forcast_url := l_properties.get_string('forecast');
     
     htp.p('Forecast:' || to_char(l_forcast_url));
 
-    -- Act 2
+    -- Act 2, next URL
     apex_web_service.g_request_headers.delete;
     apex_web_service.g_request_headers(1).name := 'Accept';
     apex_web_service.g_request_headers(1).value := 'application/json';
