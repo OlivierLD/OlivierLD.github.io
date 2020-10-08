@@ -231,6 +231,17 @@ function Graph(cName,       // Canvas Name
 			console.log('Start spraying');
 			canvas.style.cursor = 'crosshair';
 			spraying = true;
+		} else {
+			// Add one point, on click
+			let coords = relativeMouseCoords(evt, canvas);
+			let x = coords.x;
+			let y = coords.y;
+			let centerX = (minx + (x / xScale));
+			let centerY = (maxy - (y / yScale));
+			graphData.push({"x": centerX, "y": centerY});
+			instance.drawPoints(cName, graphData);
+
+			console.log(`One point added ${centerX}/${centerY}, now ${graphData.length} in yhe buffer`);
 		}
 	});
 
@@ -462,9 +473,20 @@ function Graph(cName,       // Canvas Name
 
 		// Plot points here
 		context.fillStyle = '#f00';
+		const pointRadius = 5; // TODO Make it a parameter?
 		for (let i = 0; i < data.length; i++) {
 //        console.log("Plotting x:" + data[i].x + ", y:" + data[i].y + " to " + (data[i].x - minx) * xScale + ":" + (height - (data[i].y - miny) * yScale));
-			context.fillRect((data[i].x - minx) * xScale, height - (data[i].y - miny) * yScale, 1, 1);
+// 			context.fillRect((data[i].x - minx) * xScale, height - (data[i].y - miny) * yScale, pointSize, pointSize);
+			context.beginPath();
+			context.arc(((data[i].x - minx) * xScale) - (pointRadius / 2),
+				(height - (data[i].y - miny) * yScale) - (pointRadius / 2),
+				pointRadius, 0, 2 * Math.PI, false);
+			context.fill();
+			// Circle around
+			context.lineWidth = 0.5;
+			context.strokeStyle = '#003300';
+			context.stroke();
+			context.closePath();
 		}
 
 		if (coeffs !== undefined) {
@@ -504,6 +526,7 @@ function Graph(cName,       // Canvas Name
 					progressX += len;
 				}
 			}
+			context.closePath();
 		}
 	};
 
