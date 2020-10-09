@@ -7,6 +7,7 @@
     <title>Smoothing, Linear Regression</title>
     <script type="text/javascript" src="js/Graph.js"></script>
     <link rel="stylesheet" href="css/stylesheet.css" type="text/css"/>
+    <link rel="stylesheet" href="css/rocker.css" type="text/css"/>
     <link rel="icon" type="image/png" href="function.png">
     <style>
 
@@ -143,7 +144,12 @@
         <td valign="top" align="left" valign="top" colspan="2">
           Required Degree : <input id="degree" type="number" style="text-align: right; width: 40px;" min="1" placeholder="Degree" size="3" value="3">
           <br/>
-          <input type="checkbox" id="with-spray" onchange="setSpray(this);" checked>Spray points
+          <!--input type="checkbox" id="with-spray" onchange="setSpray(this);" checked>Spray points -->
+          <label class="rocker rocker-small">
+            <input type="checkbox" onchange="setSpray(this);" checked>
+            <span class="switch-left">Spray</span>
+            <span class="switch-right">Click</span>
+          </label>
           <!--br/>
           <input type="checkbox" id="with-tooltip" onchange="setTooltip(this);">With tooltip -->
         </td>
