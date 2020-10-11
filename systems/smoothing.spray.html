@@ -26,6 +26,14 @@
         height: 500px;
       }
 
+      button {
+        font-width: bold;
+        font-size: 16px;
+        padding: 5px;
+        border-radius: 16px;
+        box-shadow: rgba(0, 0, 0, .55) 0 1px 6px;
+      }
+
       .graphdisplay {
         --tooltip-color: rgba(250, 250, 210, .7);
         --tooltip-text-color: black;
@@ -142,12 +150,16 @@
       </tr>
       <tr>
         <td valign="top" align="left" valign="middle" colspan="1">
-          Required Degree : <input id="degree" type="number" style="text-align: right; width: 40px;" min="1" placeholder="Degree" size="3" value="3">
-          <!--br/-->
+          <span style="position: absolute; margin-top: 20px; margin-left: 10px;font-size: 20px; font-weight: bold;">
+            Required Degree : <input id="degree" type="number" style="text-align: right; width: 40px;" min="1" placeholder="Degree" size="3" value="3">
+            <span style="margin-left: 10px;">
+              <button onclick="goDrawing();">Resolve</button>
+            </span>
+          </span>
         </td>
         <td valign="top" align="left" valign="top" colspan="1">
         <!--input type="checkbox" id="with-spray" onchange="setSpray(this);" checked>Spray points -->
-          <label class="rocker rocker-small">
+          <label class="rocker rocker-small" title="Point entry method">
             <input type="checkbox" onchange="setSpray(this);" checked>
             <span class="switch-left">Spray</span>
             <span class="switch-right">Click</span>
@@ -158,7 +170,7 @@
       </tr>
       <tr>
         <td colspan="1">
-          <small>Spray points on the canvas below (click and drag the mouse), and click </small><button onclick="goDrawing();">Display</button>
+          <small>Spray points on the canvas below (click and drag the mouse), and click the [Resolve] button</small>
         </td>
         <td colspan="1" align="right">
           <button onclick="zoomIn();">Zoom In</button>
