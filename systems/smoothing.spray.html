@@ -149,28 +149,23 @@
         </td>
       </tr>
       <tr>
-        <td valign="top" align="left" valign="middle" colspan="1">
-          <span style="position: absolute; margin-top: 20px; margin-left: 10px;font-size: 20px; font-weight: bold;">
-            Required Degree : <input id="degree" type="number" style="text-align: right; width: 40px;" min="1" placeholder="Degree" size="3" value="3">
-            <span style="margin-left: 10px;">
-              <button onclick="goDrawing();">Resolve</button>
-            </span>
-          </span>
-        </td>
-        <td valign="top" align="left" valign="top" colspan="1">
-        <!--input type="checkbox" id="with-spray" onchange="setSpray(this);" checked>Spray points -->
+        <td valign="top" align="left" valign="middle" colspan="2">
           <label class="rocker rocker-small" title="Point entry method">
             <input type="checkbox" onchange="setSpray(this);" checked>
             <span class="switch-left">Spray</span>
             <span class="switch-right">Click</span>
           </label>
-          <!--br/>
-          <input type="checkbox" id="with-tooltip" onchange="setTooltip(this);">With tooltip -->
+          <span style="position: absolute; margin-top: 18px; margin-left: 10px;font-size: 20px; font-weight: bold;">
+            Required Degree : <input id="degree" type="number" style="text-align: right; width: 40px;" min="1" placeholder="Degree" size="3" value="3">
+            <span style="margin-left: 20px;">
+              <button onclick="goDrawing();">Resolve</button>
+            </span>
+          </span>
         </td>
       </tr>
       <tr>
         <td colspan="1">
-          <small>Spray points on the canvas below (click and drag the mouse), and click the [Resolve] button</small>
+          <small>Drop your points (Spray or Click) on the canvas below (click and drag the mouse), and click the [Resolve] button</small>
         </td>
         <td colspan="1" align="right">
           <button onclick="zoomIn();">Zoom In</button>
