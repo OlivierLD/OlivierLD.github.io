@@ -1796,7 +1796,7 @@ Date.prototype.format = function (dateFormat) {
       let timeData = now.format('D d M Y') + '<br/>' + now.format('H:i:s Z');
       document.getElementById('date-time-container').innerHTML = timeData;
       if (bgTime) {
-          document.getElementById('bg-data').innerText = now.format('H:i:s');
+          document.getElementById('bg-data').innerHTML = now.format('H:i:s') + "<br/>" + now.format('Z');
       }
     }, 1000);
 
