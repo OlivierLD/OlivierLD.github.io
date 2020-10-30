@@ -120,7 +120,7 @@
             }
             let newContent =
                 `<table><tr><th>LAT</th><th>LNG</th><th>HDG</th><th>SPD</th><th>Accuracy</th></tr>` +
-                `<tr><td>${decToSex(pos.coords.latitude, 'NS')}</td><td>${decToSex(pos.coords.longitude, 'EW')}</td><td>${hdg}&deg;</td><td>${speed} m/s</td><td>${acc} meters</td></tr></table>`;
+                `<tr><td>${decToSex(pos.coords.latitude, 'NS')}</td><td>${decToSex(pos.coords.longitude, 'EW')}</td><td>${hdg}&deg;</td><td>${speed} m/s</td><td>${acc.toLocaleString('en-US')} meters</td></tr></table>`;
                 // 'LAT = ' + decToSex(pos.coords.latitude, 'NS') + "<br/>" +
                 // 'LNG = ' + decToSex(pos.coords.longitude, 'EW') + "<br/>" +
                 // 'HDG = ' + hdg + '<br/>' +

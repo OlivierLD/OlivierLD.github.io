@@ -71,7 +71,7 @@
 				'LNG = ' + decToSex(pos.coords.longitude, 'EW') + "<br/>" +
 				'HDG = ' + hdg + '<br/>' +
 				'SPD = ' + speed + ' m/s' + '<br/>' +
-				'accuracy: ' + acc + ' meters';
+				'accuracy: ' + acc.toLocaleString('en-US') + ' meters';
 		let box = document.querySelector('#textbox');
 		box.innerHTML = newContent;
 		flipLight();
