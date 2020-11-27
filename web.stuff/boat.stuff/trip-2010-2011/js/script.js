@@ -322,11 +322,11 @@ function drawWindArrow(divId, dir, force) {
   }
   let direction;  // = dir; //  + 180;
   if (typeof(dir) === 'number') {
-    direction = dir;
+    direction = (dir + 180) % 360;
     label += `${dir}°`
   } else {
     try {
-      direction = dir.value;
+      direction = (dir.value + 180) % 360;
       label += dir.label;
     } catch (oops) {
       console.log('Akeu what?')
