@@ -100,9 +100,14 @@
               let degree = parseInt(degreeStr);
               if (degree < 1) {
                 alert("Degree must be a positive integer");
-
               } else {
                 let graphData = dataGraph.getData();
+                
+                // Uncomment to see the data in the console
+                // let out = "";
+                // graphData.forEach(pt => out += (JSON.stringify(pt) + ","));
+                // console.log(`[${out}]`);
+
                 let coeffData = leastSquares(degree, graphData);
                 let json = [];
                 let deg = 0;
