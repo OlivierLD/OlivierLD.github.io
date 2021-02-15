@@ -1038,12 +1038,8 @@
 		function keepScrolling(sign) {
 			scrollValue = parseFloat(document.getElementById("scroll-digit-value").value);
 			scrollValue += (sign * 0.01);
-			if (scrollValue > 99.99) {
-				scrollValue = 0.0;
-			}
-			if (scrollValue < 0) {
-				scrollValue = 99.99;
-			}
+			scrollValue = Math.min(scrollValue, 99.99);
+			scrollValue = Math.max(scrollValue, 0);
 			let strValue = lpad(scrollValue.toFixed(2), 5, '0');
 			document.getElementById("scroll-digit-value").value = strValue;
 			setScrollDigitValue('scroll-digit-display-01', strValue);
