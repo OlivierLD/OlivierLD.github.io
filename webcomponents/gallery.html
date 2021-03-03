@@ -3419,9 +3419,10 @@
 	<div id="scroll-digit" class="smooth">
 		<pre style="font-weight: bold; text-align: left; color: white; vertical-align: top; margin-top: 6px;">
 &lt;scroll-digit-display id="split-flap-display-01"
-                      nb-char="5"
+                      nb-char="6"
                       font-size="40"
                       justified="RIGHT"
+					  nb-dec="2"
                       value="12.43">&lt;/scroll-digit-display>
 		</pre>
 		<table>
@@ -3430,9 +3431,10 @@
 					<div class="black-frame">
 						<scroll-digit-display id="scroll-digit-display-01"
 											class="scroll-digit-01"
-											nb-char="5"
+											nb-char="6"
 											font-size="40"
 											justified="RIGHT"
+											nb-dec="2"
 											value="12.34"></scroll-digit-display>
 						<br/>
 						Change the value, and tab out... <input type="number" id="scroll-digit-value" style="width: 55px;" size="5" value="12.34" step="0.01" onblur="setScrollDigitValue('scroll-digit-display-01', this.value);">
