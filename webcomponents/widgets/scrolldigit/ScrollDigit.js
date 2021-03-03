@@ -27,6 +27,7 @@ class ScrollDigitDisplay extends HTMLElement {
 			"font-size",    // Integer. Font size in px. Default 30
 			"nb-char",      // Integer. Nb flaps. Default 1
 			"value",        // Initial value, default blank. Must be numeric of not blank
+			"nb-dec",       // Number of decimal positions, default 0
 			"justified"     // LEFT (default), RIGHT or CENTER
 		];
 	}
@@ -39,7 +40,7 @@ class ScrollDigitDisplay extends HTMLElement {
 		let fallbackElemt = document.createElement("h1");
 		let content = document.createTextNode("This is a Scroll-Digit Display, on an HTML5 canvas");
 		fallbackElemt.appendChild(content);
-		this.canvas.appendChild(fallbackElemt);
+		this.canvas.appendChild(fallbackElemt);``
 		this.shadowRoot.appendChild(this.canvas);
 
 		this._connected = false;
@@ -50,6 +51,7 @@ class ScrollDigitDisplay extends HTMLElement {
 		this._font_size  = 30;
 		this._nb_char    =  1;
 		this._justified  = "LEFT";
+		this._nb_dec = 0;
 
 		this._previousClassName = "";
 		this.scrollDigitColorConfig = scrollDigitDefaultColorConfig;
@@ -90,6 +92,9 @@ class ScrollDigitDisplay extends HTMLElement {
 				break;
 			case "nb-char":
 				this._nb_char = parseInt(newVal);
+				break;
+			case "nb-dec":
+				this._nb_dec = parseInt(newVal);
 				break;
 			case "justified":
 				this._justified = (newVal === 'RIGHT' ? 'RIGHT' : 'LEFT');
@@ -141,6 +146,9 @@ class ScrollDigitDisplay extends HTMLElement {
 	}
 	get nbChar() {
 		return this._nb_char;
+	}
+	get nbDec() {
+		return this._nb_dec;
 	}
 	get justified() {
 		return this._justified;
@@ -221,11 +229,11 @@ class ScrollDigitDisplay extends HTMLElement {
 	getNextChar(char, sign) {
 
 		if (sign === 0) {
-			console.log("Sign = 0, should nt happen...");
-			// debugger;
+			console.log("Sign = 0, should not happen...");
+			debugger;
 		}
 
-		let intValue = parseInt(char);
+		let intValue = parseInt(char); // (char === ' ' ? 0 : parseInt(char));
 		intValue += sign;
 		if (intValue > 9) {
 			intValue = 0;
@@ -247,6 +255,10 @@ class ScrollDigitDisplay extends HTMLElement {
 	}
 
 	cleanString(str) {
+		if (typeof(str) !== "string") {
+			console.debug('Not a string!!');
+			debugger;
+		}
 		let clean = str;
 		let cleanArr = clean.split('');
 		for (let i=0; i<cleanArr.length; i++) {
@@ -346,12 +358,16 @@ class ScrollDigitDisplay extends HTMLElement {
 			default:
 				break;
 		}
-		return paddedVal;
+		return paddedVal; // .trim();
 	}
 
 	drawScrollDigit(textValue) {
 		if (this._connected) {
-			this._paddedValue = this.getPaddedValue(textValue);
+			let newVal = this.getPaddedValue(textValue);
+			if (newVal.indexOf("NaN") > 0) {
+				debugger;
+			}
+			this._paddedValue = newVal;
 		}
 		this.drawPaddedString();
 	}
@@ -396,7 +412,7 @@ class ScrollDigitDisplay extends HTMLElement {
 		ScrollDigitDisplay.roundRect(context, 0, 0, this.canvas.width, this.canvas.height, 5, true, false);
 
 		for (let i=0; i<upperCaseValue.length; i++) {
-			// TODO all characters one-by-one, but waiting for the previous one to be done.
+			// TODO all characters one-by-one, but waiting for the previous one to be done?
 			this.drawOneFlap(context,
 				upperCaseValue[i],
 				(fromValue !== undefined ? fromValue[i] : null),
@@ -417,7 +433,7 @@ class ScrollDigitDisplay extends HTMLElement {
 			stroke = true;
 		}
 		if (radius === undefined) {
-			radius = 5;
+			radius = 5; // Default
 		}
 		ctx.beginPath();
 		ctx.moveTo(x + radius, y);

@@ -1013,6 +1013,7 @@
 			if (floatFrom !== floatTo) {
 				sign = (floatTo > floatFrom) ? +1 : -1;
 			}
+			let scroll = Math.abs(floatFrom - floatTo) <= Math.pow(10, -elem.nbDec);
 
 			function updateValue(idx) { // THIS is balaise.
 				if (original.charAt(idx).toUpperCase() !== newPaddedValue.charAt(idx).toUpperCase()) {
@@ -1026,11 +1027,16 @@
 				}
 			}
 
-			for (let idx=0; idx<original.length; idx++) {
-				updateValue(idx);
+			if (scroll) {
+				if (sign !== 0) {
+					for (let idx=0; idx<original.length; idx++) {
+						updateValue(idx);
+					}
+				}
+			} else {
+				elem.value = value;
+				elem.repaint();
 			}
-//		elem.value = value;
-//		elem.repaint();
 		}
 
 		let isAutoScrolling = false;
@@ -1040,8 +1046,9 @@
 			scrollValue += (sign * 0.01);
 			scrollValue = Math.min(scrollValue, 99.99);
 			scrollValue = Math.max(scrollValue, 0);
-			let strValue = lpad(scrollValue.toFixed(2), 5, '0');
-			document.getElementById("scroll-digit-value").value = strValue;
+			let elem = document.getElementById('scroll-digit-display-01');
+			let strValue = lpad(scrollValue.toFixed(elem.nbDec), elem.nbChar, ' ');
+			document.getElementById("scroll-digit-value").value = strValue.trim();
 			setScrollDigitValue('scroll-digit-display-01', strValue);
 			if (isAutoScrolling) {
 				setTimeout(() => {
@@ -3428,7 +3435,7 @@
 											justified="RIGHT"
 											value="12.34"></scroll-digit-display>
 						<br/>
-						Change the value, and tab out... <input type="number" id="scroll-digit-value" size="5" value="12.34" step="0.01" onblur="setScrollDigitValue('scroll-digit-display-01', this.value);">
+						Change the value, and tab out... <input type="number" id="scroll-digit-value" style="width: 55px;" size="5" value="12.34" step="0.01" onblur="setScrollDigitValue('scroll-digit-display-01', this.value);">
 						<br/>
 						Auto: <input type="radio" id="up-and-down-1" name="direction" value="up" checked>
 						<label for="up-and-down-1">Up</label>
