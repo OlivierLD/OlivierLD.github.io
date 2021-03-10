@@ -123,6 +123,13 @@
           }
         }
 
+        function spitPoints() {
+          let graphData = dataGraph.getData();
+          // console.log(JSON.stringify(graphData));
+          let messZone = document.getElementById("err-mess");
+          messZone.innerText = JSON.stringify(graphData);
+        }
+
         function zoomIn() {
           let minX, maxX, minY, maxY;
           [minX, maxX, minY, maxY] = dataGraph.getBoundaries();
@@ -171,6 +178,9 @@
             <span style="margin-left: 20px;">
               <button onclick="goDrawing();">Resolve</button>
             </span>
+            <span style="margin-left: 20px;">
+              <button onclick="spitPoints();" title="Spit Point coordinates in the console">Spit points</button>
+            </span>
           </span>
         </td>
         <td valign="top" align="left" valign="top" colspan="1">
@@ -194,7 +204,7 @@
       </tr>
     </table>
 
-    <div id="err-mess" style="color: red;"></div>
+    <div id="err-mess" style="color: red; max-height: 100px; overflow-y: scroll;"></div>
     <hr/>
     <address>Oliv fecit, AD 2017.</address>
   </body>
