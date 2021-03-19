@@ -1081,14 +1081,15 @@ Date.prototype.format = function (dateFormat) {
     <div class="the-slides fade">
       <div class="number-text">Bonus</div>
       <div class="display">
+        <!-- See defaultMarqueeTextArray -->
         <marquee-panel id="marquee-panel-01"
                        class="marquee-01"
                        width="480"
                        height="350"
-                       nb-cols="128"
-                       nb-lines="64"
+                       nb-cols="140"
+                       nb-lines="68"
                        title="To start or stop the marquee&#13;Use the link below"
-                       display-data='{ "text-array": ["Raspberry Pi", "Web Components", "Java & Processing", "HTML5, CSS3, ES6", "NodeJS", "Python", "Arduino & Co", "3D printing", "AI, ML, DL", "and other toys..."], "x": 4, "y": 12 }'/>
+                       display-data='{ "text-array": ["Raspberry Pi", "Web Components", "Java & Processing", "HTML5, CSS3, ES6", "NodeJS", "Python", "Arduino & Co", "3D printing", "AI, ML, DL", "Artificial Intelligence", "Artificial Insanity", "and other toys..."], "x": 4, "y": 12 }'/>
       </div>
       <div class="text"><a href="javascript:void(0)" class="active-link" style="font-style: italic; font-size: 12px;" onclick="marqueeOnOff()">Marquee Panel (start or stop)</a></div>
     </div>
@@ -1361,7 +1362,7 @@ Date.prototype.format = function (dateFormat) {
   }
 
   let marqueeScrollUpAnimationInterval;
-  let defaultMarqueeTextArray = [ 'Raspberry Pi', 'Web Components', 'Java & Processing', 'HTML5, CSS3, ES6', 'NodeJS', 'Python', '3D Printing', 'Arduino & Co', 'AI, ML, DL', 'and other toys...' ];
+  let defaultMarqueeTextArray = [ 'Raspberry Pi', 'Web Components', 'Java & Processing', 'HTML5, CSS3, ES6', 'NodeJS', 'Python', '3D Printing', 'Arduino & Co', 'AI, ML, DL', 'Artificial Intelligence', 'Artificial Insanity', 'and other toys...' ];
   function marqueeScrollUp(marqueeId) {
     if (marqueeScrollUpAnimationInterval !== undefined) {
       window.clearInterval(marqueeScrollUpAnimationInterval); // Stop.
