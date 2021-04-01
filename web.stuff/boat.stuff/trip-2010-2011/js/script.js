@@ -1,9 +1,11 @@
 /**
  * Copyright and left, tamere
+ * 
+ * Good SVG/Bezier paper at https://www.drububu.com/animation/beziercurves/index.html
  */
 const DEBUG = false;
 
-const oneDay = 1000 * 60 * 60 * 24;
+const oneDay = 1000 * 60 * 60 * 24; // im ms.
 let startDate = setDate(2010, 10, 2);
 
 let nbAnchors = 0;
