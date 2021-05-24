@@ -1,4 +1,5 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
 	<title>International Code</title>
@@ -221,18 +222,18 @@
 </style>
 
 <body background="bground.jpg" onLoad="javascript:checkQS();">
-	<h2>A very useful translator</h2>
+	<h2>International Code of Signals</h2>
 	<div style="text-align: center;">
 		Enter a string below and hit the Translate button
 		<br>
 		<textarea id="original-text" name="txt" cols="60" rows="5"></textarea>
 		<br><br>
-		<input type="button" onClick="codeTranslate(document.getElementById('original-text').value);" value="Translate">
+		<button onClick="codeTranslate(document.getElementById('original-text').value);">Translate</button>
 	</div>
 	<div id="translated" style="background-color: silver; padding: 5px; margin-top: 5px;"></div>
 
 	<hr>
-	<address>&copy; 2001 and beyond, Oliv Cool Stuff Soft Strikes Again</address>
+	<address>&copy; 2001, 2021 and beyond, Oliv Cool Stuff Soft Strikes Again</address>
 </body>
 
 </html>
