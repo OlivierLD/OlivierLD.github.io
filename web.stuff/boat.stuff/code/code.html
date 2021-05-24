@@ -1,322 +1,238 @@
 <html>
-  <head>
-    <title>International Code</title>
-  </head>
-  <script type="text/javascript">
-function codeTranslate(str) {
-//    var str = fld.value;
-  document.write('<html>');
-  document.write('<head><title>Translation</title></head>');
-  document.write('<body background="rosewood.jpg" alink="cyan" vlink="orange" text="cyan">');
-  document.write('<font face="tahoma"><b>Translation for : ' + str + '</b></font>');
-  document.write('<br><br>');
-  for (i=0; i<str.length; i++) {
-	if (str.substring(i, i+1) != " ") {
-	  var letter = str.substring(i, i+1).toUpperCase();
-	  var title = "";
-	  var aBlank = false;
-	  switch (letter) {
-		case '!': 
-		case '"': 
-		case '#': 
-		case '$': 
-		case '%': 
-		case '&': 
-		case '\'': 
-		case '(': 
-		case ')': 
-		case '*': 
-		case '+': 
-		case ',': 
-		case '-': 
-		case '.': 
-		case '/': 
-		case ':': 
-		case ';': 
-		case '<': 
-		case '=': 
-		case '>': 
-		case '?': 
-		case '@': 
-		case '[': 
-		case '\\': 
-		case ']': 
-		case '^': 
-		case '_': 
-		case '`': 
-		case '{': 
-		case '|': 
-		case '}': 
-		case '~': 
-		case '�': 
-		case '�': 
-		case '�': 
-		case '�': 
-		case '�': 
-		case '�': 
-		case '�': 
-		case '�': 
-		case '�': 
-		case '�': 
-		case '�': 
-		case '�': 
-		case '�': 
-		case '�': 
-		case '�': 
-		case '�': 
-		case '�': 
-		case '�': 
-		case '�': 
-		case '�': 
-		case ' ': 
-		case '�': 
-		case '�': 
-		case '�': 
-		case '�': 
-		case '�': 
-		case '�': 
-		case '�': 
-		case '�': 
-		case '�': 
-		case '�': 
-		case '�': 
-		case '�': 
-		case '�': 
-		case '�': 
-		case '�': 
-		case '�': 
-		case '�': 
-		case '�': 
-		case '�': 
-		case '�': 
-		case '�': 
-		case '�': 
-		case '�': 
-		case '�': 
-		case '�': 
-		case '�': 
-		case '�': 
-		case '�': 
-		case '�': 
-		case '�': 
-		case '�': 
-		case '�': 
-		case '�': 
-//          case '\n': 
-		  aBlank = true;
-		  break;
-		case 'A':
-		case '�': 
-		case '�': 
-		case '�': 
-		case '�': 
-		case '�': 
-		case '�': 
-		case '�': 
-		  letter = 'A';
-		  title = 'Alfa';
-		  break;
-		case 'B': 
-		  title = 'Bravo';
-		  break;
-		case '�': 
-		case 'C': 
-		  letter = 'C';
-		  title = 'Charlie';
-		  break;
-		case '�': 
-		case 'D': 
-		  letter = 'D';
-		  title = 'Delta';
-		  break;
-		case '�': 
-		case '�': 
-		case '�': 
-		case '�': 
-		case 'E': 
-		  letter = 'E';
-		  title = 'Echo';
-		  break;
-		case 'F': 
-		  title = 'Foxtrott';
-		  break;
-		case 'G': 
-		  title = 'Golf';
-		  break;
-		case 'H': 
-		  title = 'Hotel';
-		  break;
-		case '�': 
-		case '�': 
-		case '�': 
-		case '�': 
-		case 'I': 
-		  letter = 'I';
-		  title = 'India';
-		  break;
-		case 'J': 
-		  title = 'Juliet';
-		  break;
-		case 'K': 
-		  title = 'Kilo';
-		  break;
-		case 'L': 
-		  title = 'Lima';
-		  break;
-		case 'M': 
-		  title = 'Mike';
-		  break;
-		case '�': 
-		case 'N': 
-		  letter = 'N';
-		  title = 'November';
-		  break;
-		case '�': 
-		case '�': 
-		case '�': 
-		case '�': 
-		case '�': 
-		case '�': 
-		case '�': 
-		case 'O': 
-		  letter = 'O';
-		  title = 'Oscar';
-		  break;
-		case 'P': 
-		  title = 'Papa';
-		  break;
-		case 'Q': 
-		  title = 'Quebec';
-		  break;
-		case 'R': 
-		  title = 'Romeo';
-		  break;
-		case '�': 
-		case 'S': 
-		  letter = 'S';
-		  title = 'Sierra';
-		  break;
-		case 'T': 
-		  title = 'Tango';
-		  break;
-		case '�': 
-		case '�': 
-		case '�': 
-		case '�': 
-		case 'U': 
-		  letter = 'U';
-		  title = 'Uniform';
-		  break;
-		case 'V': 
-		  title = 'Victor';
-		  break;
-		case 'W': 
-		  title = 'Whiskey';
-		  break;
-		case 'X': 
-		  title = 'X-Ray';
-		  break;
-		case '�': 
-		case '�': 
-		case 'Y': 
-		  letter = 'Y';
-		  title = 'Yankee';
-		  break;
-		case '�': 
-		case 'Z': 
-		  letter = 'Z';
-		  title = 'Zulu';
-		  break;
-		case '0': 
-		  title = 'Nadazero';
-		  break;
-		case '1': 
-		  title = 'Unaone';
-		  break;
-		case '2': 
-		  title = 'Bissotwo';
-		  break;
-		case '3': 
-		  title = 'Terathree';
-		  break;
-		case '4': 
-		  title = 'Quartafour';
-		  break;
-		case '5': 
-		  title = 'Pentafive';
-		  break;
-		case '6': 
-		  title = 'Soxisix';
-		  break;
-		case '7': 
-		  title = 'Setaseven';
-		  break;
-		case '8': 
-		  title = 'Octoeight';
-		  break;
-		case '9': 
-		  title = 'Novenine';
-		  break;
-		default:
-		  aBlank = true;
-		  break;
-	  }
-	  if (!aBlank) {
-		var imgName = letter.toLowerCase() + ".gif";
-		document.write('<img src="' + imgName + '" alt="' + letter + '" title="' + title + '">�');
-	  } else {
-		document.write('��');
-	  }
-	} else {
-	  document.write('<br>'); // A break for each blank
-	}
-  }
-  document.write('<hr>');
-  document.write('<a href="code.html"><font face="tahoma"><b>Back to text input</b></font></a>');
-  document.write('</body>');
-  document.write('</html>');
-}
 
-function getPrm(prmName) {
-  var loc = document.location.toString();
-  var i = loc.indexOf(prmName + "=");      
-  var value = '';
-  if (i > -1) {
-	str = loc.substr((prmName.length + 1)+i);
-	var j = str.indexOf('&');
-	if (j > -1) {
-	  value = str.substr(0, j);
-	} else {
-	  value = str;
-	}
-  }
-//alert(prmName + " = " + value);    
-  return value;
-}
+<head>
+	<title>International Code</title>
+</head>
+<script type="text/javascript">
+	function codeTranslate(str) {
 
-function checkQS() {
-  var qs = getPrm("txt");
-  if (qs != null && qs.length > 0) {
-	codeTranslate(unescape(qs));
-  }ty
-}
-  </script>
-  <!--body background="purptile.jpg"-->
-  <!--body background="marbpale.jpg"-->
-  <body background="rosewood.jpg" text="white" onLoad="javascript:checkQS();">
-    <font face="tahoma">
-      <h2>A very useful translator</h2>
-      <p align="center">
-        <form name="akeu">
-          Enter a string below and hit the Translate button
-          <br>
-          <textarea name="txt" cols="60" rows="5"></textarea>
-          <br><br>
-          <input type="button" onClick="codeTranslate(this.form.txt.value);" value="Translate">
-        </form>
-      </p>
-      <hr>
-      <address>� 2001 and beyond, Oliv Cool Stuff Soft Strikes Again</address>
-    </font>
-  </body>
+		document.getElementById('translated').innerHTML = '';
+		let translationContent = '';
+
+		for (i = 0; i < str.length; i++) {
+			if (str.charAt(i) != " ") {
+				let letter =  str.charAt(i).toUpperCase(); 
+				let title = "";
+				let aBlank = false;
+				let cr = false;
+				switch (letter) {
+					case '\n':
+						cr = true;
+						break;
+					case 'A':
+					case 'À':
+					case 'Á':
+					case 'Â':
+					case 'Ã':
+					case 'Ä':
+					case 'Å':
+					case 'Æ':
+						letter = 'A';
+						title = 'Alfa';
+						break;
+					case 'B':
+						title = 'Bravo';
+						break;
+					case 'C':
+					case 'Ç':
+						letter = 'C';
+						title = 'Charlie';
+						break;
+					case 'Ð':
+					case 'D':
+						letter = 'D';
+						title = 'Delta';
+						break;
+					case 'È':
+					case 'É':
+					case 'Ê':
+					case 'Ë':
+					case 'E':
+						letter = 'E';
+						title = 'Echo';
+						break;
+					case 'F':
+						title = 'Foxtrott';
+						break;
+					case 'G':
+						title = 'Golf';
+						break;
+					case 'H':
+						title = 'Hotel';
+						break;
+					case 'Ì':
+					case 'Í':
+					case 'Î':
+					case 'Ï':
+					case 'I':
+						letter = 'I';
+						title = 'India';
+						break;
+					case 'J':
+						title = 'Juliet';
+						break;
+					case 'K':
+						title = 'Kilo';
+						break;
+					case 'L':
+						title = 'Lima';
+						break;
+					case 'M':
+						title = 'Mike';
+						break;
+					case 'Ñ':
+					case 'N':
+						letter = 'N';
+						title = 'November';
+						break;
+					case 'Ò':
+					case 'Œ':
+					case 'Ó':
+					case 'Ô':
+					case 'Õ':
+					case 'Ö':
+					case 'Ø':
+					case 'O':
+						letter = 'O';
+						title = 'Oscar';
+						break;
+					case 'P':
+						title = 'Papa';
+						break;
+					case 'Q':
+						title = 'Quebec';
+						break;
+					case 'R':
+						title = 'Romeo';
+						break;
+					case 'Š':
+					case 'S':
+						letter = 'S';
+						title = 'Sierra';
+						break;
+					case 'T':
+						title = 'Tango';
+						break;
+					case 'Ù':
+					case 'Ú':
+					case 'Û':
+					case 'Ü':
+					case 'U':
+						letter = 'U';
+						title = 'Uniform';
+						break;
+					case 'V':
+						title = 'Victor';
+						break;
+					case 'W':
+						title = 'Whiskey';
+						break;
+					case 'X':
+						title = 'X-Ray';
+						break;
+					case 'Ý':
+					case 'Ÿ':
+					case 'Y':
+						letter = 'Y';
+						title = 'Yankee';
+						break;
+					case 'Ž':
+					case 'Z':
+						letter = 'Z';
+						title = 'Zulu';
+						break;
+					case '0':
+						title = 'Nadazero';
+						break;
+					case '1':
+						title = 'Unaone';
+						break;
+					case '2':
+						title = 'Bissotwo';
+						break;
+					case '3':
+						title = 'Terathree';
+						break;
+					case '4':
+						title = 'Quartafour';
+						break;
+					case '5':
+						title = 'Pentafive';
+						break;
+					case '6':
+						title = 'Soxisix';
+						break;
+					case '7':
+						title = 'Setaseven';
+						break;
+					case '8':
+						title = 'Octoeight';
+						break;
+					case '9':
+						title = 'Novenine';
+						break;
+					default:
+						aBlank = true;
+						break;
+				}
+				if (!aBlank) {
+					let imgName = letter.toLowerCase() + ".gif";
+					translationContent += ('<img src="' + imgName + '" alt="' + letter + '" title="' + title + '">&nbsp;');
+				} else {
+					translationContent += ('&nbsp;');
+				}
+			} else {
+				translationContent += ('<br>'); // A break for each blank
+			}
+		}
+		document.getElementById('translated').innerHTML = translationContent;
+	}
+
+	function getPrm(prmName) {
+		let loc = document.location.toString();
+		let i = loc.indexOf(prmName + "=");
+		let value = '';
+		if (i > -1) {
+			let str = loc.substr((prmName.length + 1) + i);
+			let j = str.indexOf('&');
+			if (j > -1) {
+				value = str.substr(0, j);
+			} else {
+				value = str;
+			}
+		}
+		//alert(prmName + " = " + value);    
+		return value;
+	}
+
+	function checkQS() {
+		let qs = getPrm("txt");
+		if (qs != null && qs.length > 0) {
+			codeTranslate(unescape(qs));
+		} ty
+	}
+</script>
+
+<style type="text/css">
+	body {
+		font-family: Verdana, Geneva, Tahoma, sans-serif;
+		color: navy;
+	}
+</style>
+
+<body background="bground.jpg" onLoad="javascript:checkQS();">
+	<h2>A very useful translator</h2>
+	<div style="text-align: center;">
+		Enter a string below and hit the Translate button
+		<br>
+		<textarea id="original-text" name="txt" cols="60" rows="5"></textarea>
+		<br><br>
+		<input type="button" onClick="codeTranslate(document.getElementById('original-text').value);" value="Translate">
+	</div>
+	<div id="translated" style="background-color: silver; padding: 5px; margin-top: 5px;"></div>
+
+	<hr>
+	<address>&copy; 2001 and beyond, Oliv Cool Stuff Soft Strikes Again</address>
+</body>
+
 </html>
