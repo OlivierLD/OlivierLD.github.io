@@ -5,6 +5,12 @@
 	<title>International Code</title>
 </head>
 <script type="text/javascript">
+	const LOREM_IPSUM = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere purus quis lorem bibendum blandit. Integer non tellus lobortis, ullamcorper justo sit amet, semper enim. Vivamus sapien metus, efficitur at tincidunt vitae, faucibus imperdiet massa. Etiam porta est nec felis aliquet, sed bibendum tortor scelerisque. Suspendisse euismod, erat et mollis bibendum, arcu metus tempus felis, sit amet tempor nibh dolor at orci. Suspendisse tempus orci sed dui sollicitudin tempus ut vitae elit. Praesent a suscipit metus.";
+
+	function loremIpsum() {
+		document.getElementById('original-text').value = LOREM_IPSUM;
+	}
+
 	function codeTranslate(str) {
 
 		document.getElementById('translated').innerHTML = '';
@@ -223,14 +229,16 @@
 
 <body background="bground.jpg" onLoad="javascript:checkQS();">
 	<h2>International Code of Signals</h2>
-	<div style="text-align: center;">
-		Enter a string below and hit the Translate button
+	<div style="text-align: left;">
+		Enter a text below and hit the Translate button
 		<br>
-		<textarea id="original-text" name="txt" cols="60" rows="5"></textarea>
+		<a href="#" onclick="loremIpsum();" title="If you're lazy...">Lorem Ipsum</a>
+		<br>
+		<textarea id="original-text" spellcheck="false" cols="60" rows="5"></textarea>
 		<br><br>
 		<button onClick="codeTranslate(document.getElementById('original-text').value);">Translate</button>
 	</div>
-	<div id="translated" style="background-color: silver; padding: 5px; margin-top: 5px;"></div>
+	<div id="translated" style="background-color: silver; padding: 5px; margin-top: 5px; border-radius: 3px;"></div>
 
 	<hr>
 	<address>&copy; 2001, 2021 and beyond, Oliv Cool Stuff Soft Strikes Again</address>
