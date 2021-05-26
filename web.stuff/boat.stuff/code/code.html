@@ -17,13 +17,14 @@
 		let translationContent = '';
 
 		for (i = 0; i < str.length; i++) {
-			if (str.charAt(i) != " ") {
+			// NL can happen, when text to translate is DnDropped...
+			if (str.charAt(i) != " " && str.charAt(i) != "\n") {
 				let letter =  str.charAt(i).toUpperCase(); 
 				let title = "";
 				let aBlank = false;
 				let cr = false;
 				switch (letter) {
-					case '\n':
+					case '\n':      // Redundant?
 						cr = true;
 						title = "";
 						break;
