@@ -25,6 +25,7 @@
 				switch (letter) {
 					case '\n':
 						cr = true;
+						title = "";
 						break;
 					case 'A':
 					case 'À':
@@ -180,11 +181,12 @@
 						break;
 					default:
 						aBlank = true;
+						title = "";
 						break;
 				}
 				if (!aBlank) {
 					let imgName = letter.toLowerCase() + ".gif";
-					translationContent += ('<img src="' + imgName + '" alt="' + letter + '" title="' + title + '">&nbsp;');
+					translationContent += (`<img src="${imgName}" alt="${letter}" title="${title}">&nbsp;`);
 				} else {
 					translationContent += ('&nbsp;');
 				}
