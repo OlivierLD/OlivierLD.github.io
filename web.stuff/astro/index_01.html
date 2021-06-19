@@ -18,6 +18,9 @@
 let displayWorldData = () => {
     let worldMap = document.getElementById('world-map-01');
 
+    // Set user position!!
+    worldMap.setUserPosition({ longitude: -122.507,latitude: 37.7489});
+
 let data = {
     "epoch": 1624126558000,
     "deltaT": 72.40674257812496,
@@ -484,7 +487,7 @@ worldMap.repaint();
 </head>
 <body>
 <h1>Celestial Computer test, with WebComponents</h1>
-<h4>Work in Progress</h4>
+<h3>Work in Progress</h3>
 <table>
     <tr>
         <td style="vertical-align: top;">

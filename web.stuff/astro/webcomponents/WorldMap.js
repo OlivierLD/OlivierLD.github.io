@@ -1,4 +1,4 @@
-const worldMapVerbose = false;
+const worldMapVerbose = true;
 const WORLD_MAP_TAG_NAME = 'world-map';
 
 /**
@@ -442,7 +442,11 @@ class WorldMap extends HTMLElement {
 		if (data.sun !== undefined) {
 			// set .setGlobeViewRightLeftRotation(-(sunD * Math.sin(Math.toRadians(lhaSun))));
 			if (this.userPosition !== {}) {
-				let lhaSun = data.sun.gha + this.userPosition.longitude;
+				let userLongitude = this.userPosition.longitude;
+				if (userLongitude === undefined) { // TODO Verify that
+					userLongitude = data.from.longitude;
+				}
+				let lhaSun = data.sun.gha + userLongitude;
 				while (lhaSun > 360) { lhaSun -= 360; }
 				while (lhaSun < 0) { lhaSun += 360; }
 				this.globeViewRightLeftRotation = -(data.sun.decl * Math.sin(Utilities.toRadians(lhaSun)));
