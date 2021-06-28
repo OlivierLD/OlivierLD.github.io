@@ -13,15 +13,40 @@
     <script type="module" src="./webcomponents/WorldMap.js"></script>
 
     <script type="text/javascript">
-// Temporary function
 
-let displayWorldData = () => {
+let transformDataForWorldWebComp = json => {
+    let newObj = {};
+    newObj.deltaT = json.deltaT;
+    let pos = {
+        latitude: 37.7489,
+        longitude: -122.507
+    };
+    newObj.from = pos;
+    let sun = {
+        decl: json.sun.DEC.raw,
+        gha: json.sun.GHA.raw
+    };
+    newObj.sun = sun;
+    let moon ={
+        decl: json.moon.DEC.raw,
+        gha: json.moon.GHA.raw
+    }; 
+    newObj.moon = moon;
+    
+    return newObj;
+};
+
+let displayWorldData = (astroData) => {
     let worldMap = document.getElementById('world-map-01');
 
     // Set user position!!
-    worldMap.setUserPosition({ longitude: -122.507, latitude: 37.7489 });
+    if (astroData === undefined) {
+        worldMap.setUserPosition({ longitude: -122.507, latitude: 37.7489 });
+    } else {
+        worldMap.setUserPosition({ longitude: astroData.from.longitude, latitude: astroData.from.latitude });
+    }
 
-    let data = {
+    let data = (astroData === undefined) ? {
         "epoch": 1624126558000,
         "deltaT": 72.40674257812496,
         "sun": {
@@ -429,12 +454,53 @@ let displayWorldData = () => {
             "min": 4,
             "sec": 27
         }
-    };
+    } : astroData;
 
     worldMap.setAstronomicalData(data);
     worldMap.repaint();
 
 };        
+
+let setTransparency = (wcId, cb) => {
+	document.getElementById(wcId).transparentGlobe = (cb.checked ? 'true' : 'false');
+	document.getElementById(wcId).repaint();
+};
+
+let setSun = (wcId, cb) => {
+	document.getElementById(wcId).withSun = (cb.checked ? 'true' : 'false');
+	document.getElementById(wcId).repaint();
+};
+
+let setGrid = (wcId, cb) => {
+	document.getElementById(wcId).withGrid = (cb.checked ? 'true' : 'false');
+	document.getElementById(wcId).repaint();
+};
+
+let setMoon = (wcId, cb) => {
+	document.getElementById(wcId).withMoon = (cb.checked ? 'true' : 'false');
+	document.getElementById(wcId).repaint();
+};
+
+let setSunlight = (wcId, cb) => {
+	document.getElementById(wcId).withSunlight = (cb.checked ? 'true' : 'false');
+	document.getElementById(wcId).repaint();
+};
+
+let setMoonlight = (wcId, cb) => {
+	document.getElementById(wcId).withMoonlight = (cb.checked ? 'true' : 'false');
+	document.getElementById(wcId).repaint();
+};
+
+let setTropics = (wcId, cb) => {
+	document.getElementById(wcId).withTropics = (cb.checked ? 'true' : 'false');
+	document.getElementById(wcId).repaint();
+};
+
+let setProjection = (id, radio) => {
+	document.getElementById(id).projection = radio.value;
+	document.getElementById(id).repaint();
+};
+
     </script>
 
     <link rel="stylesheet" href="css/web-components.css">
@@ -546,16 +612,21 @@ let displayWorldData = () => {
         <input type="checkbox" onchange="setMoon('world-map-01', this);" checked/>Moon
         <input type="checkbox" onchange="setSunlight('world-map-01', this);"/>Sunlight
         <input type="checkbox" onchange="setMoonlight('world-map-01', this);"/>Moonlight
+
+        <!--
         <input type="checkbox"
                 onchange="withWanderingBodies = this.checked; setWanderingBodies('world-map-01', this);"/>Wandering
         bodies
         <input type="checkbox" onchange="withStars = this.checked; setStars('world-map-01', this);"/>Stars
+        -->
         <input type="checkbox" onchange="setTropics('world-map-01', this);"/>Tropics
+        <!--
         <br/>
         <input type="checkbox" id="geo-sat-01"/>GeoStationary Satellites
         <input type="checkbox" id="iss-01" title="Requires Internet connection"/>ISS
         <input type="checkbox" id="gps-sat-01"/>GPS Satellites in view
         <input type="checkbox" id="moon-sun-path-01"/>Moon to Sun
+        -->
         <br/>
         <input type="radio" name="proj-01" value="GLOBE" onchange="setProjection('world-map-01', this);"
                 checked>Globe
@@ -635,10 +706,7 @@ let displayWorldData = () => {
             console.log(oops);
         }
 
-        // Temporary
-        // TODO Turn the data into the expected ones by the WorldMap WebComponent
-
-        displayWorldData();
+        displayWorldData(transformDataForWorldWebComp(testResult));
 
     };
 
