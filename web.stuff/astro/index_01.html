@@ -611,7 +611,7 @@ let showHideData = () => {
 <body>
 <h1>Celestial Computer test, with WebComponents</h1>
 <h3>Work in Progress</h3>
-<table>
+<table style="width: 100%;">
     <tr>
         <td style="text-align: left;">
             <span id="user-pos-switch" onclick="expandCollapseSetPosData();"
@@ -708,7 +708,7 @@ let showHideData = () => {
             <input type="checkbox" id="auto-refresh" onchange="autoRefresh(this);"><small>Auto Refresh</small>
         </td>
         <td>
-            <div id="moon-phase-div"></div>
+            <div id="moon-phase-div" style="text-align: right;"></div>
         </td>
     </tr>
 </table>
