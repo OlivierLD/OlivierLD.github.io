@@ -545,6 +545,17 @@ let setUserPos = (lat, lng) => {
     worldMap.setUserPosition(userPos);
     worldMap.repaint();
 };
+
+let hidden = true;
+let showHideData = () => {
+    let dataZone = document.getElementById("raw-data");
+    if (hidden) {
+        dataZone.style.display = "block";
+    } else {
+        dataZone.style.display = "none";
+    }
+    hidden = !hidden;
+};
     </script>
 
     <link rel="stylesheet" href="css/web-components.css">
@@ -558,6 +569,8 @@ let setUserPos = (lat, lng) => {
 
         body {
             font-family: Verdana,sans-serif;
+            color: cyan;
+            background-color: black;
         }
 
         .day {
@@ -742,11 +755,14 @@ let setUserPos = (lat, lng) => {
     </div>
 </div>
 
+<button onclick="showHideData();" style="margin: 10px;">Show/Hide Computed Data</button>
 
+<div id="raw-data" style="display: none;">
 <div id="result" class="result">
 </div>
 
 <div id="details" class="result">
+</div>
 </div>
 
 </body>
