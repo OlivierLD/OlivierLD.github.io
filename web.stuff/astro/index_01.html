@@ -210,7 +210,7 @@ let showHideData = () => {
             <div id="user-pos-widgets" style="display: none; padding: 10px;">
                 Latitude:
                 <select id="pos-lat-sign-01">
-                    <option value="N" selected>N</option>
+                    <option value="N" selected>N</option> <!-- Default value -->
                     <option value="S">S</option>
                 </select>
                 <input type="number"
@@ -221,7 +221,7 @@ let showHideData = () => {
                        min="0"
                        max="90"
                        step="1"
-                       value="37"/>
+                       value="37"/> <!-- Default value -->
                 <input type="number"
                        id="pos-lat-min-01"
                        placeholder="Minutes"
@@ -230,11 +230,11 @@ let showHideData = () => {
                        min="0"
                        max="59.99"
                        step="0.01"
-                       value="44.93"/>
+                       value="44.93"/> <!-- Default value -->
                 &nbsp;&nbsp;Longitude:
                 <select id="pos-lng-sign-01">
                     <option value="E">E</option>
-                    <option value="W" selected>W</option>
+                    <option value="W" selected>W</option> <!-- Default value -->
                 </select>
                 <input type="number"
                        id="pos-lng-deg-01"
@@ -244,7 +244,7 @@ let showHideData = () => {
                        min="0"
                        max="180"
                        step="1"
-                       value="122"/>
+                       value="122"/> <!-- Default value -->
                 <input type="number"
                        id="pos-lng-min-01"
                        placeholder="Minutes"
@@ -253,7 +253,7 @@ let showHideData = () => {
                        min="0"
                        max="59.99"
                        step="0.01"
-                       value="30.42"/>
+                       value="30.42"/> <!-- Default value -->
                 &nbsp;&nbsp;
                 <button id="update-position"
                         onclick="updatePosition();"
@@ -337,11 +337,9 @@ let showHideData = () => {
         <input type="checkbox" id="moon-sun-path-01"/>Moon to Sun
         -->
         <br/>
-        <input type="radio" name="proj-01" value="GLOBE" onchange="setProjection('world-map-01', this);"
-                checked>Globe
+        <input type="radio" name="proj-01" value="GLOBE" onchange="setProjection('world-map-01', this);" checked>Globe
         <input type="radio" name="proj-01" value="MERCATOR" onchange="setProjection('world-map-01', this);">Mercator
-        <input type="radio" name="proj-01" value="ANAXIMANDRE"
-                onchange="setProjection('world-map-01', this);">Square
+        <input type="radio" name="proj-01" value="ANAXIMANDRE" onchange="setProjection('world-map-01', this);">Square
     </div>
 </div>
 
