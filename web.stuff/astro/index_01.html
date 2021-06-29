@@ -194,6 +194,169 @@ let showHideData = () => {
             text-align: center;
         }
 
+		button {
+			padding: 4px 20px;
+			/* give the background a gradient */
+			background:#ffae00; /* fallback for browsers that don't support gradients */
+			background: -webkit-linear-gradient(top, #ffae00, #d67600);
+			background: -moz-linear-gradient(top, #ffae00, #d67600);
+			background: -o-linear-gradient(top, #ffae00, #d67600);
+			background: linear-gradient(top, #ffae00, #d67600);
+			border: 2px outset #dad9d8;
+			/* style the text */
+			font-family: Lato, Verdana, Andika, Arial, sans-serif; /* Andkia is available at http://www.google.com/webfonts/specimen/Andika */
+			font-size: 1.1em;
+			letter-spacing: 0.05em;
+			text-transform: uppercase;
+			color: #fff;
+			text-shadow: 0px 1px 10px #000;
+			/* add to small curve to the corners of the button */
+			-webkit-border-radius: 15px;
+			-moz-border-radius: 15px;
+			border-radius: 15px;
+			/* give the button a drop shadow */
+			-webkit-box-shadow: rgba(0, 0, 0, .55) 0 1px 6px;
+			-moz-box-shadow: rgba(0, 0, 0, .55) 0 1px 6px;
+			box-shadow: rgba(0, 0, 0, .55) 0 1px 6px;
+		}
+		/* NOW STYLE THE BUTTON'S HOVER STATE */
+		/*	button#rCoffee:hover, button#rCoffee:focus { */
+		button:hover, button:focus {
+			border:2px solid #dad9d8;
+		}
+
+		/* Switch starts here */
+		.rocker {
+			display: inline-block;
+			position: relative;
+			/*
+			SIZE OF SWITCH
+			==============
+			All sizes are in em - therefore
+			changing the font-size here
+			will change the size of the switch.
+			See .rocker-small below as example.
+			*/
+			font-size: 2em;
+			font-weight: bold;
+			text-align: center;
+			text-transform: uppercase;
+			color: #888;
+			width: 7em;
+			height: 4em;
+			overflow: hidden;
+			border-bottom: 0.5em solid #eee;
+		}
+
+		.rocker-small {
+			font-size: 0.75em; /* Sizes the switch */
+			margin: 1em;
+		}
+
+		.rocker-tiny {
+			font-size: 0.50em; /* Sizes the switch */
+			margin: 1em;
+		}
+
+		.rocker::before {
+			content: "";
+			position: absolute;
+			top: 0.5em;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background-color: #999;
+			border: 0.5em solid #eee;
+			border-bottom: 0;
+		}
+
+		.rocker input {
+			opacity: 0;
+			width: 0;
+			height: 0;
+		}
+
+		.switch-left,
+		.switch-right {
+			cursor: pointer;
+			position: absolute;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			height: 2.5em;
+			width: 3em;
+			transition: 0.2s;
+		}
+
+		.switch-left {
+			height: 2.4em;
+			width: 2.75em;
+			left: 0.85em;
+			bottom: 0.4em;
+			background-color: #ddd;
+			transform: rotate(15deg) skewX(15deg);
+		}
+
+		.switch-right {
+			right: 0.5em;
+			bottom: 0;
+			background-color: #bd5757;
+			color: #fff;
+		}
+
+		.switch-left::before,
+		.switch-right::before {
+			content: "";
+			position: absolute;
+			width: 0.4em;
+			height: 2.45em;
+			bottom: -0.45em;
+			background-color: #ccc;
+			transform: skewY(-65deg);
+		}
+
+		.switch-left::before {
+			left: -0.4em;
+		}
+
+		.switch-right::before {
+			right: -0.375em;
+			background-color: transparent;
+			transform: skewY(65deg);
+		}
+
+		input:checked + .switch-left {
+			background-color: #4d9c41; /* #0084d0; */
+			color: #fff;
+			bottom: 0px;
+			left: 0.5em;
+			height: 2.5em;
+			width: 3em;
+			transform: rotate(0deg) skewX(0deg);
+		}
+
+		input:checked + .switch-left::before {
+			background-color: transparent;
+			width: 3.0833em;
+		}
+
+		input:checked + .switch-left + .switch-right {
+			background-color: #ddd;
+			color: #888;
+			bottom: 0.4em;
+			right: 0.8em;
+			height: 2.4em;
+			width: 2.75em;
+			transform: rotate(-15deg) skewX(-15deg);
+		}
+
+		input:checked + .switch-left + .switch-right::before {
+			background-color: #ccc;
+		}
+
+	/*  select {
+			font-size: 30px;
+		} */
     </style>
 </head>
 <body>
@@ -293,9 +456,17 @@ let showHideData = () => {
                 <input type="checkbox" id="no-planet"><small>Skip planets calculations</small>
                 <input type="checkbox" id="verbose" onchange="verbose(this);"><small>Console Verbose</small>
             </div>
+            <div style="margin-bottom: 10px;">
             <button id="now" onclick="updateUTCDate();">Now</button>&nbsp;
             <button id="compute" onclick="compute();">Compute</button>&nbsp;
-            <input type="checkbox" id="auto-refresh" onchange="autoRefresh(this);"><small>Auto Refresh</small>
+            <!--input type="checkbox" id="auto-refresh" onchange="autoRefresh(this);"><small>Auto Refresh</small-->
+            Auto Refresh
+            <label class="rocker rocker-small" style="margin-bottom: -15px;"> <!-- One way widget. Will NOT be notified of a change on the server. -->
+				<input type="checkbox" id="auto-refresh" onchange="autoRefresh(this);">
+				<span class="switch-left">On</span>
+				<span class="switch-right">Off</span>
+			</label>
+            </div>
         </td>
         <td>
             <div id="moon-phase-div" style="text-align: right;"></div>
