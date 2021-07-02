@@ -138,10 +138,10 @@ let userPosDataExpanded = false;
 let expandCollapseSetPosData = () => {
     if (userPosDataExpanded) {
         document.getElementById('user-pos-widgets').style.display = 'none';
-        document.getElementById('user-pos-switch').innerText = '\u142f Position on Earth';
+        document.getElementById('pos-char').innerHTML = '&#5167'; //'\u142f Position on Earth';
     } else {
         document.getElementById('user-pos-widgets').style.display = 'block';
-        document.getElementById('user-pos-switch').innerText = '\u1431 Position on Earth';
+        document.getElementById('pos-char').innerHTML = '&#5169'; // '\u1431 Position on Earth';
     }
     userPosDataExpanded = !userPosDataExpanded;
 };
@@ -410,8 +410,8 @@ let showHideData = () => {
         <td style="text-align: left;" colspan="2">
         <div style="border: 1px solid rgba(0, 255, 255, 0.25); border-radius: 5px;">
             <!-- See https://unicode-table.com/en/sets/arrow-symbols/ -->
-            <span id="user-pos-switch" onclick="expandCollapseSetPosData();"
-                  style="border: 0px solid silver; border-radius: 5px; padding-left: 5px; padding-right: 5px; cursor: pointer; margin-left: 10px;">&#5167; Position on Earth</span>
+            <div id="user-pos-switch" onclick="expandCollapseSetPosData();"
+                  style="margin: 3px; padding-left: 5px; padding-right: 5px; cursor: pointer; margin-left: 10px;"><span id="pos-char" style="border: 2px solid cyan; border-radius: 50%;">&#5167;</span> Position on Earth</div>
 
             <div id="user-pos-widgets" style="display: none; padding: 10px;">
                 Latitude:
