@@ -1413,6 +1413,13 @@ function gatherOutput(noPlanets=false) {
 
 	outForm.deltaT = deltaT;
 
+    let aries = {};
+    aries.GHA = {
+        raw: GHAAtrue,
+        fmt: outHA(GHAAtrue)
+    };
+    outForm.aries = aries;
+
 	let sun = {};
 	sun.GHA = {
 		raw: GHASun,

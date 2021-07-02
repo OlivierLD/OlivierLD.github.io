@@ -32,6 +32,44 @@ let transformDataForWorldWebComp = json => {
         gha: json.moon.GHA.raw
     }; 
     newObj.moon = moon;
+
+    newObj.moonPhase = json.moon.phase.phaseAngle;
+
+    newObj.eclipticObliquity = json.trueObliq.raw;
+
+    newObj.ghaAries = json.aries.GHA.raw;
+
+    if (json.venus !== undefined) {
+        wanderingBodies = [];
+
+        wanderingBodies.push({
+            name: "aries",
+            decl: 0,
+            gha: json.aries.GHA.raw
+        });
+
+        wanderingBodies.push({
+            name: "venus",
+            decl: json.venus.DEC.raw,
+            gha: json.venus.GHA.raw
+        });
+        wanderingBodies.push({
+            name: "mars",
+            decl: json.mars.DEC.raw,
+            gha: json.mars.GHA.raw
+        });
+        wanderingBodies.push({
+            name: "jupiter",
+            decl: json.jupiter.DEC.raw,
+            gha: json.jupiter.GHA.raw
+        });
+        wanderingBodies.push({
+            name: "saturn",
+            decl: json.saturn.DEC.raw,
+            gha: json.saturn.GHA.raw
+        });
+        newObj.wanderingBodies = wanderingBodies;
+    }
     
     return newObj;
 };
@@ -76,6 +114,11 @@ let setSunlight = (wcId, cb) => {
 
 let setMoonlight = (wcId, cb) => {
 	document.getElementById(wcId).withMoonlight = (cb.checked ? 'true' : 'false');
+	document.getElementById(wcId).repaint();
+};
+
+let setWanderingBodies = (wcId, cb) => {
+	document.getElementById(wcId).withWanderingBodies = (cb.checked ? 'true' : 'false');
 	document.getElementById(wcId).repaint();
 };
 
@@ -457,11 +500,13 @@ let showHideData = () => {
                 <input type="checkbox" id="verbose" onchange="verbose(this);"><small>Console Verbose</small>
             </div>
             <div style="margin-bottom: 10px;">
-            <button id="now" onclick="updateUTCDate();">Now</button>&nbsp;
-            <button id="compute" onclick="compute();">Compute</button>&nbsp;
+            <button id="now" onclick="updateUTCDate();" title="Set the date/time to the current one">Now</button>&nbsp;
+            <button id="compute" onclick="compute();" title="Compute data for the date above">Compute</button>&nbsp;
             <!--input type="checkbox" id="auto-refresh" onchange="autoRefresh(this);"><small>Auto Refresh</small-->
             Auto Refresh
-            <label class="rocker rocker-small" style="margin-bottom: -15px;"> <!-- One way widget. Will NOT be notified of a change on the server. -->
+            <label class="rocker rocker-small" 
+                   style="margin-bottom: -15px;" 
+                   title="Auto-refresh the date every second."> <!-- One way widget. Will NOT be notified of a change on the server. -->
 				<input type="checkbox" id="auto-refresh" onchange="autoRefresh(this);">
 				<span class="switch-left">On</span>
 				<span class="switch-right">Off</span>
@@ -492,11 +537,10 @@ let showHideData = () => {
         <input type="checkbox" onchange="setMoon('world-map-01', this);" checked/>Moon
         <input type="checkbox" onchange="setSunlight('world-map-01', this);"/>Sunlight
         <input type="checkbox" onchange="setMoonlight('world-map-01', this);"/>Moonlight
-
-        <!--
         <input type="checkbox"
                 onchange="withWanderingBodies = this.checked; setWanderingBodies('world-map-01', this);"/>Wandering
         bodies
+        <!--
         <input type="checkbox" onchange="withStars = this.checked; setStars('world-map-01', this);"/>Stars
         -->
         <input type="checkbox" onchange="setTropics('world-map-01', this);"/>Tropics
