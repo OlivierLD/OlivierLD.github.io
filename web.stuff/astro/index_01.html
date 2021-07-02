@@ -138,10 +138,10 @@ let userPosDataExpanded = false;
 let expandCollapseSetPosData = () => {
     if (userPosDataExpanded) {
         document.getElementById('user-pos-widgets').style.display = 'none';
-        document.getElementById('user-pos-switch').innerText = '\u142f Set Pos';
+        document.getElementById('user-pos-switch').innerText = '\u142f Position';
     } else {
         document.getElementById('user-pos-widgets').style.display = 'block';
-        document.getElementById('user-pos-switch').innerText = '\u1431 Set Pos';
+        document.getElementById('user-pos-switch').innerText = '\u1431 Position';
     }
     userPosDataExpanded = !userPosDataExpanded;
 };
@@ -411,7 +411,7 @@ let showHideData = () => {
         <div style="border: 1px solid rgba(0, 255, 255, 0.25); border-radius: 5px;">
             <!-- See https://unicode-table.com/en/sets/arrow-symbols/ -->
             <span id="user-pos-switch" onclick="expandCollapseSetPosData();"
-                  style="border: 0px solid silver; border-radius: 5px; padding-left: 5px; padding-right: 5px; cursor: pointer; margin-left: 10px;">&#5167; Set Pos</span>
+                  style="border: 0px solid silver; border-radius: 5px; padding-left: 5px; padding-right: 5px; cursor: pointer; margin-left: 10px;">&#5167; Position</span>
 
             <div id="user-pos-widgets" style="display: none; padding: 10px;">
                 Latitude:
