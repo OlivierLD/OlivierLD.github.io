@@ -29,6 +29,10 @@ import * as Mars from './mars.js';
 import * as Jupiter from './jupiter.js';
 import * as Saturn from './saturn.js';
 
+import STAR_CATALOG from './stars.js';
+
+const EPS0_2000 = 23.439291111; // Reference
+
 // Global Variables
 let T, T2, T3, T4, T5, TE, TE2, TE3, TE4, TE5, Tau, Tau2, Tau3, Tau4, Tau5, deltaT,
 	eps0, eps, deltaPsi, deltaEps, Le, Be, Re, kappa, pi0, e, lambdaSun, RASun, DECSun,
@@ -49,7 +53,8 @@ let T, T2, T3, T4, T5, TE, TE2, TE3, TE4, TE5, Tau, Tau2, Tau3, Tau4, Tau5, delt
  * @param second Number, UTC second
  * @param delta_t Number, DeltaT
  */
-export function calculate(year, month, day, hour, minute, second, delta_t, noPlanets=false) {
+export function calculate(year, month, day, hour, minute, second, delta_t, noPlanets=false, withStars=true) {
+
 	calculateJulianDate(year, month, day, hour, minute, second, delta_t);
 	calculateNutation();
 	calculateAberration();
@@ -65,7 +70,7 @@ export function calculate(year, month, day, hour, minute, second, delta_t, noPla
 	calculatePolaris();
 	calculateMoonPhase();
 	calculateWeekDay();
-	return gatherOutput(noPlanets);
+	return gatherOutput(noPlanets, withStars);
 }
 
 export function isLeapYear(year) {
@@ -1111,11 +1116,11 @@ function calculatePolaris() {
 	let DECpol1 = DECpol0 + 100 * TE * dDECpol;
 
 	// Mean obliquity of ecliptic at 2000.0 in degrees
-	let eps0_2000 = 23.439291111;
+	// const eps0_2000 = 23.439291111;
 
 	// Transformation to ecliptic coordinates in radians (mean equinox and equator 2000.0)
-	let lambdapol1 = Math.atan2((Utils.sind(RApol1) * Utils.cosd(eps0_2000) + Utils.tand(DECpol1) * Utils.sind(eps0_2000)), Utils.cosd(RApol1));
-	let betapol1 = Math.asin(Utils.sind(DECpol1) * Utils.cosd(eps0_2000) - Utils.cosd(DECpol1) * Utils.sind(eps0_2000) * Utils.sind(RApol1));
+	let lambdapol1 = Math.atan2((Utils.sind(RApol1) * Utils.cosd(EPS0_2000) + Utils.tand(DECpol1) * Utils.sind(EPS0_2000)), Utils.cosd(RApol1));
+	let betapol1 = Math.asin(Utils.sind(DECpol1) * Utils.cosd(EPS0_2000) - Utils.cosd(DECpol1) * Utils.sind(EPS0_2000) * Utils.sind(RApol1));
 
 	// Precession
 	let eta =  Math.toRadians(47.0029 * TE - 0.03302 * TE2 + 0.00006 * TE3) / 3600;
@@ -1349,9 +1354,93 @@ export function calculateDeltaT(year, month) {
 	return deltaT;
 }
 
+function getStar(name) {
+	for (let i=0; i<STAR_CATALOG.length; i++) {
+		let s = STAR_CATALOG[i];
+		if (s.name === name) {
+			return s;
+		}
+	}
+	return null;
+}
 
-// Data output
-function gatherOutput(noPlanets=false) {
+function getStarPos(starName) {
+	let star = getStar(starName);
+	if (star !== null) {
+		//Read catalog
+		let RAstar0 = 15.0 * star.ra;
+		let DECstar0 = star.dec;
+		let dRAstar = 15.0 * star.deltaRA / 3600.0;
+		let dDECstar = star.deltaD / 3600.0;
+		let par = star.par / 3600.0;
+
+		//Equatorial coordinates at Julian Date T (mean equinox and equator 2000.0)
+		let RAstar1 = RAstar0 + TE * dRAstar;
+		let DECstar1 = DECstar0 + TE * dDECstar;
+
+		//Mean obliquity of ecliptic at 2000.0 in degrees
+//    let eps0_2000 = 23.439291111;
+
+		//Transformation to ecliptic coordinates in radians (mean equinox and equator 2000.0)
+		let lambdastar1 = Math.atan2((Utils.sind(RAstar1) * Utils.cosd(EPS0_2000) + Utils.tand(DECstar1) * Utils.sind(EPS0_2000)), Utils.cosd(RAstar1));
+		let betastar1 = Math.asin(Utils.sind(DECstar1) * Utils.cosd(EPS0_2000) - Utils.cosd(DECstar1) * Utils.sind(EPS0_2000) * Utils.sind(RAstar1));
+
+		//Precession
+		let eta = Math.toRadians(47.0029 * TE - 0.03302 * TE2 + 0.00006 * TE3) / 3600.0;
+		let PI0 = Math.toRadians(174.876384 - (869.8089 * TE + 0.03536 * TE2) / 3600.0);
+		let p0 = Math.toRadians(5029.0966 * TE + 1.11113 * TE2 - 0.0000006 * TE3) / 3600.0;
+		let A1 = Math.cos(eta) * Math.cos(betastar1) * Math.sin(PI0 - lambdastar1) - Math.sin(eta) * Math.sin(betastar1);
+		let B1 = Math.cos(betastar1) * Math.cos(PI0 - lambdastar1);
+		let C1 = Math.cos(eta) * Math.sin(betastar1) + Math.sin(eta) * Math.cos(betastar1) * Math.sin(PI0 - lambdastar1);
+		let lambdastar2 = p0 + PI0 - Math.atan2(A1, B1);
+		let betastar2 = Math.asin(C1);
+
+		//Annual parallax
+		let par_lambda = Math.toRadians(par * Math.sin(Math.toRadians(Lsun_true) - lambdastar2) / Math.cos(betastar2));
+		let par_beta = -Math.toRadians(par * Math.sin(betastar2) * Math.cos(Math.toRadians(Lsun_true) - lambdastar2));
+
+		lambdastar2 += par_lambda;
+		betastar2 += par_beta;
+
+		// Nutation in longitude
+		lambdastar2 += Math.toRadians(deltaPsi);
+
+		// Aberration
+//    let kappa = Math.toRadians(20.49552) / 3600.0;
+//    let pi0 = Math.toRadians(102.93735 + 1.71953 * TE + 0.00046 * TE2);
+//    let e = 0.016708617 - 0.000042037 * TE - 0.0000001236 * TE2;
+
+		let dlambdastar = (e * kappa * Math.cos(pi0 - lambdastar2) - kappa * Math.cos(Math.toRadians(Lsun_true) - lambdastar2)) / Math.cos(betastar2);
+		let dbetastar = -kappa * Math.sin(betastar2) * (Math.sin(Math.toRadians(Lsun_true) - lambdastar2) - e * Math.sin(pi0 - lambdastar2));
+
+		lambdastar2 += dlambdastar;
+		betastar2 += dbetastar;
+
+		// Transformation back to equatorial coordinates in radians
+		let RAstar2 = Math.atan2((Math.sin(lambdastar2) * Utils.cosd(eps) - Math.tan(betastar2) * Utils.sind(eps)), Math.cos(lambdastar2));
+		let DECstar2 = Math.asin(Math.sin(betastar2) * Utils.cosd(eps) + Math.cos(betastar2) * Utils.sind(eps) * Math.sin(lambdastar2));
+
+		// Lunar distance of star TODO Manage it.
+		let starMoonDist = Math.toDegrees(Math.acos(Utils.sind(DECMoon) * Math.sin(DECstar2) + Utils.cosd(DECMoon) * Math.cos(DECstar2) * Utils.cosd(RAMoon - Math.toDegrees(RAstar2))));
+
+		// Finals
+		let GHAstar = GHAAtrue - Math.toDegrees(RAstar2);
+		let SHAstar = 360 - Math.toDegrees(RAstar2);
+		let DECstar = Math.toDegrees(DECstar2);
+		return {
+			gha: GHAstar,
+			sha: SHAstar,
+			dec: DECstar
+		}
+	} else {
+		console.log(starName + " not found in the catalog...");
+		return null;
+	}
+}
+
+
+// Data output. Might be tweaked to fit user's needs.
+function gatherOutput(noPlanets=false, withStars=false) {
 	// Sun
 	let fmtGHASun = outHA(GHASun);
 	let fmtRASun = outRA(RASun);
@@ -1615,6 +1704,21 @@ function gatherOutput(noPlanets=false) {
 		fmt: fmtLDist
 	};
 	outForm.dayOfWeek = DoW;
+
+	if (withStars) {
+	    let stars = [];
+		STAR_CATALOG.forEach(star => {
+			let starPos = getStarPos(star.name);
+			if (starPos !== null) {
+			    stars.push({
+			        name: star.name,
+					decl: starPos.dec,
+					gha: starPos.gha
+			    });
+			}
+		});
+		outForm.stars = stars;
+	}
 
 	return outForm;
 }

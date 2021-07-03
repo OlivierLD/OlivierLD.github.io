@@ -70,6 +70,10 @@ let transformDataForWorldWebComp = json => {
         });
         newObj.wanderingBodies = wanderingBodies;
     }
+
+    if (json.stars !== undefined) {
+        newObj.stars = json.stars;
+    }
     
     return newObj;
 };
@@ -138,7 +142,7 @@ let userPosDataExpanded = false;
 let expandCollapseSetPosData = () => {
     if (userPosDataExpanded) {
         document.getElementById('user-pos-widgets').style.display = 'none';
-        document.getElementById('pos-char').innerHTML = '&#5167;'; //'\u142f Position on Earth';
+        document.getElementById('pos-char').innerHTML = '&#5167;'; // '\u142f Position on Earth';
     } else {
         document.getElementById('user-pos-widgets').style.display = 'block';
         document.getElementById('pos-char').innerHTML = '&#5169;'; // '\u1431 Position on Earth';
