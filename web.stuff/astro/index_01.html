@@ -150,21 +150,27 @@ let userPosDataExpanded = false;
 let userDateExpanded = false;
 
 let expandCollapseSetPosData = () => {
+
+    document.getElementById('user-pos-widgets').classList.toggle('visible-div');
+
     if (userPosDataExpanded) {
-        document.getElementById('user-pos-widgets').style.display = 'none';
+        // document.getElementById('user-pos-widgets').style.display = 'none';
         document.getElementById('pos-char').innerHTML = '&#5167;'; // '\u142f Position on Earth';
     } else {
-        document.getElementById('user-pos-widgets').style.display = 'block';
+        //document.getElementById('user-pos-widgets').style.display = 'block';
         document.getElementById('pos-char').innerHTML = '&#5169;'; // '\u1431 Position on Earth';
     }
     userPosDataExpanded = !userPosDataExpanded;
 };
 let expandCollapseDateData = () => {
+
+    document.getElementById('user-date-widgets').classList.toggle('visible-div');
+
     if (userDateExpanded) {
-        document.getElementById('user-date-widgets').style.display = 'none';
+        // document.getElementById('user-date-widgets').style.display = 'none';
         document.getElementById('date-char').innerHTML = '&#5167;';
     } else {
-        document.getElementById('user-date-widgets').style.display = 'block';
+        // document.getElementById('user-date-widgets').style.display = 'block';
         document.getElementById('date-char').innerHTML = '&#5169;';
     }
     userDateExpanded = !userDateExpanded;
@@ -259,6 +265,31 @@ let showHideData = () => {
 
         .centered {
             text-align: center;
+        }
+
+        .smooth {
+            /*height: 0;*/
+            /*visibility: hidden;*/
+            /*opacity: 0;*/
+            /*transition: visibility 0.5s, height 0.5s, opacity 0.5s linear;*/
+            height: 0;
+            max-height: 0;
+            margin: auto;
+            /*transition: transform 0.5s, max-height 1s, height 1s;*/
+            transition: all 0.5s ease;
+            opacity: 0;
+            transform: scaleY(0);
+            transform-origin: top;
+            overflow: hidden;
+        }
+
+        .visible-div {
+            opacity: 1;
+            width: auto;
+            height: auto;
+            max-height: 1600px;
+            transform: scaleY(1);
+            margin-top: 5px;
         }
 
 		button {
@@ -442,7 +473,7 @@ let showHideData = () => {
                 <div id="user-pos-switch" onclick="expandCollapseSetPosData();"
                     style="margin: 3px; padding-left: 5px; padding-right: 5px; cursor: pointer;"><span id="pos-char" style="border: 2px solid cyan; border-radius: 50%;">&#5167;</span> Position on Earth</div>
 
-                <div id="user-pos-widgets" style="display: none; padding: 10px;">
+                <div id="user-pos-widgets" class="smooth" style="padding: 10px;"> <!-- display: none;  -->
                     Latitude:
                     <select id="pos-lat-sign-01">
                         <option value="N" selected>N</option> <!-- Default value -->
@@ -498,6 +529,9 @@ let showHideData = () => {
                 </div>
             </div>
         </td>
+        <td style="vertical-align: top; min-width: 50px; max-width: 55px; width: 50px;" rowspan="2">
+            <div id="moon-phase-div" style="text-align: right;"></div>
+        </td>
     </tr>
     <tr>
         <td style="vertical-align: top;" colspan="1">
@@ -505,7 +539,7 @@ let showHideData = () => {
                 <div id="user-date-switch" onclick="expandCollapseDateData();"
                     style="margin: 3px; padding-left: 5px; padding-right: 5px; cursor: pointer;"><span id="date-char" style="border: 2px solid cyan; border-radius: 50%;">&#5167;</span> UTC Date, and options</div>
 
-                <div id="user-date-widgets" style="display: none; padding: 10px;">
+                <div id="user-date-widgets" class="smooth" style="padding: 10px;">
                     <small>Enter UTC date and time, then click the Compute button.</small>
                     <div>
                         <input class="day" type="number" id="UTC-day" placeholder="day" min="1" max="31" title="Day of the Month">
@@ -549,9 +583,6 @@ let showHideData = () => {
                     <span class="switch-right">Off</span>
                 </label>
             </div>
-        </td>
-        <td style="vertical-align: top; min-width: 50px; max-width: 55px; width: 50px;">
-            <div id="moon-phase-div" style="text-align: right;"></div>
         </td>
     </tr>
 </table>
