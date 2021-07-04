@@ -56,6 +56,7 @@ let T, T2, T3, T4, T5, TE, TE2, TE3, TE4, TE5, Tau, Tau2, Tau3, Tau4, Tau5, delt
  */
 export function calculate(year, month, day, hour, minute, second, delta_t, noPlanets=false, withStars=true) {
 
+	// UTC - Epoch
 	epoch = new Date(`${year}-${month}-${day} ${hour}:${minute}:${second} GMT+0000`).getTime();
 
 	calculateJulianDate(year, month, day, hour, minute, second, delta_t);
