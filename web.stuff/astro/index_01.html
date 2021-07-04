@@ -189,6 +189,22 @@ let updatePosition = () => {
 
 //		console.log("Setting pos to " + lat + "/" + lng);
     setUserPos(lat, lng);
+    // URL to bookmark
+    let toBookmark = `${window.location.protocol}//${window.location.hostname}:${window.location.pathname}?lat=${lat}&long=${lng}`;
+
+    console.log("Bookmark this URL: " + toBookmark);
+    document.getElementById("url-to-bookmark").innerText = "Bookmark this URL: " + toBookmark;
+};
+
+let updateFromUserPos = () => {
+    document.getElementById("pos-lat-sign-01").value = userPos.latitude < 0 ? "S" : "N"; 
+    document.getElementById("pos-lng-sign-01").value = userPos.longitude < 0 ? "W" : "E";
+    let absLat = Math.abs(userPos.latitude);
+    let absLong = Math.abs(userPos.longitude);
+    document.getElementById("pos-lat-deg-01").value = Math.trunc(absLat);
+    document.getElementById("pos-lat-min-01").value = ((absLat - Math.trunc(absLat)) * 60).toFixed(2);
+    document.getElementById("pos-lng-deg-01").value = Math.trunc(absLong);
+    document.getElementById("pos-lng-min-01").value = ((absLong - Math.trunc(absLong)) * 60).toFixed(2);
 };
 
 let userPos = {
@@ -529,6 +545,7 @@ let showHideData = () => {
                             style="margin-top: 3px;">Set Position
                     </button>
                 </div>
+                <div id="url-to-bookmark"></div>
             </div>
         </td>
         <td style="vertical-align: top; min-width: 50px; max-width: 55px; width: 50px;" rowspan="2">
@@ -772,11 +789,39 @@ let showHideData = () => {
         consoleVerbose = cb.checked;
     };
 
+    let getQueryParameterByName = (name, url) => {
+        if (!url) {
+            url = window.location.href;
+        }
+        name = name.replace(/[\[\]]/g, "\\$&");
+        let regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+        if (!results) {
+            return null;
+        }
+        if (!results[2]) {
+            return '';
+        }
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+    };
+
+
     // Set default date values
     window.onload = () => {
 
         console.log('On Load, ready.');
         updateUTCDate();
+        // Check QS for location
+        let qsLat = getQueryParameterByName('lat');
+        let qsLong = getQueryParameterByName('long');
+        if (qsLat !== null && qsLong !== null) {
+            let latitude = parseFloat(qsLat);
+            let longitude = parseFloat(qsLong);
+
+            setUserPos(latitude, longitude);
+            updateFromUserPos();
+        }
+
         console.log('On Load, done.');
 
     };
