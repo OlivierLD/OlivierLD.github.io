@@ -41,7 +41,8 @@ let T, T2, T3, T4, T5, TE, TE2, TE3, TE4, TE5, Tau, Tau2, Tau3, Tau4, Tau5, delt
 	RAJupiter, DECJupiter, GHAJupiter, SDJupiter, HPJupiter, RASaturn, DECSaturn, GHASaturn, SDSaturn, HPSaturn,
 	RAMoon, DECMoon, GHAMoon, SDMoon, HPMoon, RAPol, DECPol, GHAPol, OoE, tOoE, LDist,
 	JD0h, JD, JDE, lambdaMapp, SidTm, GHAAtrue, SidTa,
-	moonPhaseAngle = 0, moonPhase = "", DoW = "", illumMoon, illumVenus, illumMars, illumJupiter, illumSaturn;
+	moonPhaseAngle = 0, moonPhase = "", DoW = "", illumMoon, illumVenus, illumMars, illumJupiter, illumSaturn,
+	epoch;
 
 /**
  * Main function
@@ -54,6 +55,8 @@ let T, T2, T3, T4, T5, TE, TE2, TE3, TE4, TE5, Tau, Tau2, Tau3, Tau4, Tau5, delt
  * @param delta_t Number, DeltaT
  */
 export function calculate(year, month, day, hour, minute, second, delta_t, noPlanets=false, withStars=true) {
+
+	epoch = new Date(`${year}-${month}-${day} ${hour}:${minute}:${second} GMT+0000`).getTime();
 
 	calculateJulianDate(year, month, day, hour, minute, second, delta_t);
 	calculateNutation();
@@ -712,7 +715,7 @@ function calculateMars() {
 	// Declination of Mars, apparent
 	DECMars = Math.toDegrees(Math.asin(Math.sin(beta) * Utils.cosd(eps) + Math.cos(beta) * Utils.sind(eps) * Math.sin(lambda)));
 
-//GHA of Mars
+	//GHA of Mars
 	GHAMars = Utils.norm360Deg(GHAAtrue - RAMars);
 
 	// Semi-diameter of Mars
@@ -1367,7 +1370,7 @@ function getStar(name) {
 function getStarPos(starName) {
 	let star = getStar(starName);
 	if (star !== null) {
-		//Read catalog
+		// Read catalog
 		let RAstar0 = 15.0 * star.ra;
 		let DECstar0 = star.dec;
 		let dRAstar = 15.0 * star.deltaRA / 3600.0;
@@ -1500,9 +1503,12 @@ function gatherOutput(noPlanets=false, withStars=false) {
 
 	let outForm = {};
 
+	// "epoch": 1589036261000,
+	outForm.epoch = epoch;
+
 	outForm.deltaT = deltaT;
 
-    let aries = {};
+    let aries = {}; // Aries RA = 0, by definition.
     aries.GHA = {
         raw: GHAAtrue,
         fmt: outHA(GHAAtrue)

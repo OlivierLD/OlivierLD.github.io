@@ -11,6 +11,10 @@
     <script type="module" src="app.js"></script>
 
     <script type="module" src="./webcomponents/WorldMap.js"></script>
+    <script type="module" src="./webcomponents/CalendarDisplay.js"></script>
+    <script type="module" src="./webcomponents/SplitFlapDisplay.js"></script>
+
+    <script type="text/javascript" src="date.proto.js"></script>
 
     <script type="text/javascript">
 
@@ -528,40 +532,62 @@ let showHideData = () => {
     </tr>
 </table>
 
-<!--
-    WORLD MAP
-+-->
-<div id="world-map">
-    <div class="black-frame centered">
-        <world-map id="world-map-01"
-                    class="worldmap-display"
-                    title="World Map"
-                    width="700"
-                    height="500"></world-map>
+<div style="display: grid; grid-template-columns: auto auto;">
+    <!--
+        WORLD MAP
+    +-->
+    <div id="world-map">
+        <div class="black-frame centered">
+            <world-map id="world-map-01"
+                        class="worldmap-display"
+                        title="World Map"
+                        width="700"
+                        height="500"></world-map>
+        </div>
+        <div class="black-frame centered">
+            <input type="checkbox" onchange="setTransparency('world-map-01', this);"/>Transparent
+            <input type="checkbox" onchange="setGrid('world-map-01', this);" checked/>Grid
+            <input type="checkbox" onchange="setSun('world-map-01', this);" checked/>Sun
+            <input type="checkbox" onchange="setMoon('world-map-01', this);" checked/>Moon
+            <input type="checkbox" onchange="setSunlight('world-map-01', this);"/>Sunlight
+            <input type="checkbox" onchange="setMoonlight('world-map-01', this);"/>Moonlight
+            <input type="checkbox"
+                    onchange="withWanderingBodies = this.checked; setWanderingBodies('world-map-01', this);"/>Wandering
+            bodies
+            <input type="checkbox" onchange="withStars = this.checked; setStars('world-map-01', this);"/>Stars
+            <input type="checkbox" onchange="setTropics('world-map-01', this);"/>Tropics
+            <!--
+            <br/>
+            <input type="checkbox" id="geo-sat-01"/>GeoStationary Satellites
+            <input type="checkbox" id="iss-01" title="Requires Internet connection"/>ISS
+            <input type="checkbox" id="gps-sat-01"/>GPS Satellites in view
+            <input type="checkbox" id="moon-sun-path-01"/>Moon to Sun
+            -->
+            <br/>
+            <input type="radio" name="proj-01" value="GLOBE" onchange="setProjection('world-map-01', this);" checked>Globe
+            <input type="radio" name="proj-01" value="MERCATOR" onchange="setProjection('world-map-01', this);">Mercator
+            <input type="radio" name="proj-01" value="ANAXIMANDRE" onchange="setProjection('world-map-01', this);">Square
+        </div>
     </div>
     <div class="black-frame centered">
-        <input type="checkbox" onchange="setTransparency('world-map-01', this);"/>Transparent
-        <input type="checkbox" onchange="setGrid('world-map-01', this);" checked/>Grid
-        <input type="checkbox" onchange="setSun('world-map-01', this);" checked/>Sun
-        <input type="checkbox" onchange="setMoon('world-map-01', this);" checked/>Moon
-        <input type="checkbox" onchange="setSunlight('world-map-01', this);"/>Sunlight
-        <input type="checkbox" onchange="setMoonlight('world-map-01', this);"/>Moonlight
-        <input type="checkbox"
-                onchange="withWanderingBodies = this.checked; setWanderingBodies('world-map-01', this);"/>Wandering
-        bodies
-        <input type="checkbox" onchange="withStars = this.checked; setStars('world-map-01', this);"/>Stars
-        <input type="checkbox" onchange="setTropics('world-map-01', this);"/>Tropics
-        <!--
-        <br/>
-        <input type="checkbox" id="geo-sat-01"/>GeoStationary Satellites
-        <input type="checkbox" id="iss-01" title="Requires Internet connection"/>ISS
-        <input type="checkbox" id="gps-sat-01"/>GPS Satellites in view
-        <input type="checkbox" id="moon-sun-path-01"/>Moon to Sun
-        -->
-        <br/>
-        <input type="radio" name="proj-01" value="GLOBE" onchange="setProjection('world-map-01', this);" checked>Globe
-        <input type="radio" name="proj-01" value="MERCATOR" onchange="setProjection('world-map-01', this);">Mercator
-        <input type="radio" name="proj-01" value="ANAXIMANDRE" onchange="setProjection('world-map-01', this);">Square
+        <h2>UTC</h2>
+        <div style="margin: 10px;">
+            <calendar-display id="calendar-01"
+                            class="calendar-01"
+                            title="UTC Date"
+                            width="140"
+                            height="168"
+                            value="01-01-1970"></calendar-display>
+        </div>
+        <div style="margin: 10px;">
+            <split-flap-display id="split-flap-utc-display"
+                                class="split-flap-night"
+                                nb-char="8"
+                                font-size="30"
+                                justified="LEFT"
+                                title="UTC Time"
+                                value="00:00:00"></split-flap-display>
+        </div>                    
     </div>
 </div>
 
@@ -637,8 +663,21 @@ let showHideData = () => {
         } catch (oops) {
             console.log(oops);
         }
-
+        // Update World Map
         displayWorldData(transformDataForWorldWebComp(testResult));
+        // Update Calendar
+        let utcOffsetInMinutes = new Date().getTimezoneOffset();
+        let utcTime = new Date(testResult.epoch + (utcOffsetInMinutes * 60 * 1000)); // .getUTCDate();
+
+        let date = utcTime.format("d-m-Y-l");
+        let calendar = document.getElementById('calendar-01');
+        calendar.value = date;
+        calendar.repaint();
+        // Update UTC time
+        let time = utcTime.format("H:i:s");
+        let splitFalp = document.getElementById('split-flap-utc-display');
+        splitFalp.value = time;
+        splitFalp.repaint();
 
     };
 
