@@ -42,7 +42,8 @@ export function sampleMain(userDataObject) {
 	// console.log("DeltaT is now %f", delta_t);
 
 	let noPlanets = userDataObject.noPlanets || false;
-	return CelestialComputer.calculate(year, month, day, hour, minute, second, delta_t, noPlanets);
+	let noStars = userDataObject.noStars || false;
+	return CelestialComputer.calculate(year, month, day, hour, minute, second, delta_t, noPlanets, noStars);
 }
 
 window.sampleMain = sampleMain;
