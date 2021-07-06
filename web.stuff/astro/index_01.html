@@ -26,6 +26,11 @@ let transformDataForWorldWebComp = json => {
     //     longitude: -122.507
     // };
     newObj.from = userPos; // pos;
+
+    // GRID coordinates
+    let maidenHeadGridSquare = gridSquare(userPos.latitude, userPos.longitude); // exposed in app.js
+    newObj.gridSquare = maidenHeadGridSquare;
+
     let sun = {
         decl: json.sun.DEC.raw,
         gha: json.sun.GHA.raw
@@ -89,7 +94,7 @@ let displayWorldData = (astroData) => {
     if (astroData === undefined) {
         worldMap.setUserPosition({ longitude: -122.507, latitude: 37.7489 });
     } else {
-        worldMap.setUserPosition({ longitude: astroData.from.longitude, latitude: astroData.from.latitude });
+        worldMap.setUserPosition({ longitude: astroData.from.longitude, latitude: astroData.from.latitude, gridSquare: astroData.gridSquare });
         worldMap.setAstronomicalData(astroData);
         worldMap.repaint();
     }

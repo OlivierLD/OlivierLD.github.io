@@ -1442,6 +1442,9 @@ function getStarPos(starName) {
 	}
 }
 
+export function gridSquare(lat, lng) {
+	return Utils.gridSquare(lat, lng);
+}
 
 // Data output. Might be tweaked to fit user's needs.
 function gatherOutput(noPlanets=false, withStars=false) {

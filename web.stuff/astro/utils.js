@@ -48,6 +48,38 @@ export function longitudeToGHA(longitude) {
 	return gha;
 };
 
+/*
+ * See http://en.wikipedia.org/wiki/Maidenhead_Locator_System
+ */
+export function gridSquare(lat, lng) {
+    let gridSquare = "";
+
+    lng += 180;
+    lat += 90;
+    const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    //                0         1         2
+    //                01234567890123456789012345. Useless beyond X
+    let first = Math.trunc(lng / 20.0);
+    gridSquare += alphabet.charAt(first);
+    let second = Math.trunc(lat / 10.0);
+    gridSquare += alphabet.charAt(second);
+
+    let third = Math.trunc((lng % 20) / 2);
+    gridSquare += third.toFixed(0);
+    let fourth = Math.trunc(lat % 10);
+    gridSquare += fourth.toFixed(0);
+
+    let d = lng - (Math.trunc(lng / 2) * 2);
+    let fifth = Math.trunc(d * 12);
+    gridSquare += alphabet.toLowerCase().charAt(fifth);
+    let e = lat - Math.trunc(lat);
+    let sixth = Math.trunc(e * 24);
+    gridSquare += alphabet.toLowerCase().charAt(sixth);
+
+    return gridSquare;
+};
+
+
 if (Math.toRadians === undefined) {
 	Math.toRadians = (deg) => {
 		return deg * (Math.PI / 180);

@@ -47,4 +47,5 @@ export function sampleMain(userDataObject) {
 }
 
 window.sampleMain = sampleMain;
+window.gridSquare = CelestialComputer.gridSquare;
 
