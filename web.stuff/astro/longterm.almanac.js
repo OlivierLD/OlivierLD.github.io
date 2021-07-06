@@ -1446,6 +1446,10 @@ export function gridSquare(lat, lng) {
 	return Utils.gridSquare(lat, lng);
 }
 
+export function sightReduction(lat, lng, ahg, dec) {
+	return Utils.sightReduction(lat, lng, ahg, dec);
+}
+
 // Data output. Might be tweaked to fit user's needs.
 function gatherOutput(noPlanets=false, withStars=false) {
 	// Sun

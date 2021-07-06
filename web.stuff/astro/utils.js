@@ -79,6 +79,49 @@ export function gridSquare(lat, lng) {
     return gridSquare;
 };
 
+export function sightReduction(lat, lng, ahg, dec) {
+	let AHL = ahg + lng;
+	while (AHL < 0.0) {
+		AHL = 360.0 + AHL;
+	}
+	// Formula to solve : sin He = sin L sin D + cos L cos D cos AHL
+	let sinL = Math.sin(Math.toRadians(lat));
+	let sinD = Math.sin(Math.toRadians(dec));
+	let cosL = Math.cos(Math.toRadians(lat));
+	let cosD = Math.cos(Math.toRadians(dec));
+	let cosAHL = Math.cos(Math.toRadians(AHL));
+
+	let sinHe = (sinL * sinD) + (cosL * cosD * cosAHL);
+	let He = Math.toDegrees(Math.asin(sinHe));
+//  console.log("Estimated Altitude : " + He);
+
+	// Formula to solve : tg Z = sin P / cos L tan D - sin L cos P
+	let P = (AHL < 180.0) ? AHL : (360.0 - AHL);
+	let sinP = Math.sin(Math.toRadians(P));
+	let cosP = Math.cos(Math.toRadians(P));
+	let tanD = Math.tan(Math.toRadians(dec));
+	let tanZ = sinP / ((cosL * tanD) - (sinL * cosP));
+	let Z = Math.toDegrees(Math.atan(tanZ));
+
+	if (AHL < 180.0) { // vers l'West
+		if (Z < 0.0) { // sud vers nord
+			Z = 180.0 - Z;
+		} else {         // Nord vers Sud
+			Z = 360.0 - Z;
+		}
+	} else {           // vers l'Est
+		if (Z < 0.0) { // sud vers nord
+			Z = 180.0 + Z;
+//    } else {       // nord vers sud
+//      Z = Z;
+		}
+	}
+//  console.log("Azimut : " + Z);
+	return {
+		alt: He,
+		Z: Z
+	};
+};
 
 if (Math.toRadians === undefined) {
 	Math.toRadians = (deg) => {

@@ -1,6 +1,6 @@
 import * as CelestialComputer from './longterm.almanac.js';
+import { sightReduction } from './utils.js';
 // import * as CelestialComputer from './lib/celestial-computer.min.js';
-
 // let CelestialComputer = require('./longterm.almanac.js');
 
 export function sampleMain(userDataObject) {
@@ -42,10 +42,12 @@ export function sampleMain(userDataObject) {
 	// console.log("DeltaT is now %f", delta_t);
 
 	let noPlanets = userDataObject.noPlanets || false;
-	let noStars = userDataObject.noStars || false;
-	return CelestialComputer.calculate(year, month, day, hour, minute, second, delta_t, noPlanets, noStars);
+	return CelestialComputer.calculate(year, month, day, hour, minute, second, delta_t, noPlanets);
 }
 
 window.sampleMain = sampleMain;
 window.gridSquare = CelestialComputer.gridSquare;
+window.sightReduction = CelestialComputer.sightReduction;
+
+// console.log("SRU Test:" + JSON.stringify(sightReduction(37.5,-122.3, 80, 22)));
 
