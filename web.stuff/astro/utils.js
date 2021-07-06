@@ -38,6 +38,16 @@ export function cost(x) {
 	return Math.cos(norm2PiRad(x));
 }
 
+export function ghaToLongitude(gha) {
+	let longitude = (gha < 180) ? -gha : 360 - gha;
+	return longitude;
+};
+
+export function longitudeToGHA(longitude) {
+	let gha = (longitude < 0) ? -longitude : 360 - longitude;
+	return gha;
+};
+
 if (Math.toRadians === undefined) {
 	Math.toRadians = (deg) => {
 		return deg * (Math.PI / 180);
