@@ -1922,11 +1922,11 @@ class WorldMap extends HTMLElement {
 			let strLat = WorldMap.decToSex(this.userPosition.latitude, "NS");
 			let strLng = WorldMap.decToSex(this.userPosition.longitude, "EW");
 			context.fillStyle = this.worldmapColorConfig.displayPositionColor;
-			context.font = "bold 16px Arial"; // "bold 40px Arial"
-			context.fillText(strLat, 10, 18);
-			context.fillText(strLng, 10, 38);
+			context.font = "bold 16px Arial";  // "bold 40px Arial"
+			context.fillText(strLat, 10, 18);  // Latitude
+			context.fillText(strLng, 10, 38);  // Longitude
 			if (this.userPosition.gridSquare !== undefined) {
-				context.fillText(this.userPosition.gridSquare, 10, 58);
+				context.fillText(this.userPosition.gridSquare, 10, 58); // Maidenhead grid square
 			}
 		}
 
