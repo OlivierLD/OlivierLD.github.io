@@ -614,7 +614,7 @@ let showHideData = () => {
                 <button id="now" onclick="updateUTCDate();" title="Set the date/time to the current one">Now</button>&nbsp;
                 <button id="compute" onclick="compute();" title="Compute data for the date above">Compute</button>&nbsp;
                 <!--input type="checkbox" id="auto-refresh" onchange="autoRefresh(this);"><small>Auto Refresh</small-->
-                Auto Refresh
+                Real Time
                 <label class="rocker rocker-small" 
                     style="margin-bottom: -15px;" 
                     title="Auto-refresh the date every second."> <!-- One way widget. Will NOT be notified of a change on the server. -->
@@ -666,6 +666,7 @@ let showHideData = () => {
     </div>
     <div class="black-frame centered">
         <h2>UTC</h2>
+        <!-- CALENDAR -->
         <div style="margin: 10px;">
             <calendar-display id="calendar-01"
                             class="calendar-01"
@@ -674,6 +675,7 @@ let showHideData = () => {
                             height="168"
                             value="01-01-1970"></calendar-display>
         </div>
+        <!-- SPLIT-FLAP -->
         <div style="margin: 10px;">
             <split-flap-display id="split-flap-utc-display"
                                 class="split-flap-night"
