@@ -754,6 +754,9 @@ let showHideData = () => {
         try {
             if (testResult.moon.phase.phaseAngle !== undefined) {
                 let phaseIndex = Math.floor(testResult.moon.phase.phaseAngle / (360 / 28.5)) + 1;
+                if (phaseIndex > 28) {
+                    phaseIndex = 1;
+                }
                 let phaseImageName = `moon/phase${(phaseIndex < 10 ? '0' : '') + phaseIndex}.gif`;
                 if (consoleVerbose) {
                     console.log('Loading ', phaseImageName);
