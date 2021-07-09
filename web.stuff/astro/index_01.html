@@ -763,7 +763,7 @@ let showHideData = () => {
                 }
                 let phaseDivImage = document.getElementById('moon-phase-div');
                 phaseDivImage.innerHTML =
-                    `<img src='${phaseImageName}' alt='${testResult.moon.phase.phaseAngle}' title='Phase ${testResult.moon.phase.phaseAngle.toFixed(0) + '&deg'}'>`;
+                    `<img src='${phaseImageName}' alt='${testResult.moon.phase.phaseAngle}' title='Phase ${testResult.moon.phase.phaseAngle.toFixed(0) + '&deg'}'><br/><small>Phase ${testResult.moon.phase.phaseAngle.toFixed(0) + '&deg'}</small>`;
                 // phaseDivImage.title = `Phase ${testResult.moon.phase.phaseAngle.toFixed(0)}\272`;    
             }
         } catch (oops) {
