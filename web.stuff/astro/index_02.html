@@ -2,6 +2,7 @@
 <!--
  | All the skill in the "compute" function below,
  | invoked on click.
+ | Dynamic backgrund test.
  +-->
 <html lang="en_US">
 <head>
@@ -255,6 +256,16 @@ let showHideData = () => {
             background-color: black;
         }
 
+        .background {
+            /*color: #999999;*/
+            position: absolute;
+            width: 100%;
+            /*text-align: center;*/
+            top: 0;
+            left: 0;
+            z-index: -100;
+        }
+
         .day {
             width: 40px;
             text-align: center;
@@ -497,16 +508,28 @@ let showHideData = () => {
     </style>
 </head>
 <body>
-<!-- Background div -->    
+<h1>ES6 Celestial Computer test (2), with WebComponents</h1>
+<div class="background" style="margin: 30px; margin-top: 50px;">
+    <!--
+        WORLD MAP BG
+    +-->
+    <div id="world-map">
+        <div class="centered">
+            <world-map id="world-map-01"
+                        class="worldmap-display-bg"
+                        title="World Map"
+                        width="800"
+                        height="600"></world-map>
+        </div>
+    </div>
+</div>
+
 <div style="padding: 4px; border: 1px solid rgba(0, 255, 255, 0.25); border-radius: 5px;">
     <small>
         Once the page is loaded, all calculations and renderings happen only in the browser, it generates absolutely NO network traffic.<br/>
         Guaranteed <b><i>0%</i></b> external libraries (100% pure organic HTML5/CSS3/ES6), no GMO.
     </small>
 </div>
-<!-- End of Background div -->
-
-<h1>ES6 Celestial Computer test, with WebComponents</h1>
 <table style="width: 100%;">
     <tr>
         <td style="text-align: left;" colspan="1">
@@ -630,18 +653,11 @@ let showHideData = () => {
     </tr>
 </table>
 
-<div style="display: grid; grid-template-columns: auto auto;">
+<div>
     <!--
-        WORLD MAP
-    +-->
-    <div id="world-map">
-        <div class="black-frame centered">
-            <world-map id="world-map-01"
-                        class="worldmap-display"
-                        title="World Map"
-                        width="700"
-                        height="500"></world-map>
-        </div>
+     |  WORLD MAP CTRL
+     +-->
+    <div id="world-map-ctrl">
         <div class="black-frame centered">
             <input type="checkbox" onchange="setTransparency('world-map-01', this);"/>Transparent
             <input type="checkbox" onchange="setGrid('world-map-01', this);" checked/>Grid
@@ -661,33 +677,13 @@ let showHideData = () => {
             <input type="checkbox" id="gps-sat-01"/>GPS Satellites in view
             <input type="checkbox" id="moon-sun-path-01"/>Moon to Sun
             -->
+            <!--
             <br/>
             <input type="radio" name="proj-01" value="GLOBE" onchange="setProjection('world-map-01', this);" checked>Globe
             <input type="radio" name="proj-01" value="MERCATOR" onchange="setProjection('world-map-01', this);">Mercator
             <input type="radio" name="proj-01" value="ANAXIMANDRE" onchange="setProjection('world-map-01', this);">Square
+            -->
         </div>
-    </div>
-    <div class="black-frame centered">
-        <h2>UTC</h2>
-        <!-- CALENDAR -->
-        <div style="margin: 10px;">
-            <calendar-display id="calendar-01"
-                            class="calendar-01"
-                            title="UTC Date"
-                            width="140"
-                            height="168"
-                            value="01-01-1970"></calendar-display>
-        </div>
-        <!-- SPLIT-FLAP -->
-        <div style="margin: 10px;">
-            <split-flap-display id="split-flap-utc-display"
-                                class="split-flap-night"
-                                nb-char="8"
-                                font-size="30"
-                                justified="LEFT"
-                                title="UTC Time"
-                                value="00:00:00"></split-flap-display>
-        </div>                    
     </div>
 </div>
 
