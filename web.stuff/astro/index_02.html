@@ -863,7 +863,7 @@ let showHideData = () => {
     let hdg = 0.0;
 
     let hdgRandomUpdater = () => {
-        let diff = (Math.random() - 0.5) * 5.0;
+        let diff = (Math.random() - 0.5) * 2.0; // [-1..1]
         hdg += diff;
         hdg = (hdg % 360);
     };
