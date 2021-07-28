@@ -1,0 +1,177 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+
+<!--
+ |  WiP
+ +-->
+<head>
+	<title>Tides in France</title>
+</head>
+<body>
+
+    <div style="width:203px; border:1px solid #ccc; background-color:#fff; margin:0;" align="center">
+   
+        <a href="http://www.horaire-maree.fr/">
+            <img src="http://www.horaire-maree.fr/images/logo-widget-big-v3.png" border="0" onFocus="this.blur();" alt="mar&eacute;e" width="200" height="54" />
+        </a>
+       
+        <form action="http://www.horaire-maree.fr/consulter_horaire_maree.php" 
+              method="get" 
+              name="formMaree" 
+              target="iframe"
+              style="padding:0; margin:0">
+        <select name='port' class='select_port' onchange="formMaree.submit();">
+          <option value=" " selected="selected">-- Choisissez un port -- </option>
+          <option value = "ABER_BENOIT">Aber Benoit</option>
+          <option value = "ABER_ILDUT">Aber Ildut</option>
+          <option value = "ABER_WRAC_H">Aber Wrac'h</option>
+          <option value = "ALPHA-BAIE_DE_SEINE">Alpha-Baie de Seine</option>
+          <option value = "ANSE_DE_PRIMEL">Anse de Primel</option>
+          <option value = "ARCACHON_EYRAC">Arcachon (Jet&eacute;e d'Eyrac)</option>
+          <option value = "ARRADON">Arradon</option>
+          <option value = "ARROMANCHES-LES-BAINS">Arromanches-Les-Bains</option>
+          <option value = "AUDIERNE">Audierne</option>
+          <option value = "AURAY">Auray / Saint-Goustan</option>
+          <option value = "BALISE_A">Balise A</option>
+          <option value = "BANC_DU_SANDETTIE">Banc du Sandetti&eacute;</option>
+          <option value = "BARFLEUR">Barfleur</option>
+          <option value = "BASSURELLE">Bassurelle</option>
+          <option value = "BELLE-ILE_(LE_PALAIS)">Belle-Ile (Le Palais)</option>
+          <!--option value = "BELZ">Belz</option-->
+          <option value = "BENODET">Benodet</option>
+          <option value = "BERCK">Berck</option>
+          <option value = "BINIC">Binic</option>
+          <option value = "BISCARROSSE">Biscarrosse</option>
+          <option value = "BOUCAU-BAYONNE">Boucau-Bayonne</option>
+          <option value = "BOULOGNE-SUR-MER">Boulogne-sur-Mer</option>
+          <option value = "BRAYE">Braye (Aurigny)</option>
+          <option value = "BREST">Brest</option>
+          <option value = "BRIGNOGAN">Brignogan</option>
+          <option value = "CALAIS">Calais</option>
+          <option value = "CAMARET-SUR-MER">Camaret-sur-Mer</option>
+          <option value = "CANCALE">Cancale</option>
+          <option value = "CARTERET">Carteret</option>
+          <option value = "CAYEUX-SUR-MER">Cayeux-sur-Mer</option>
+          <option value = "CHATEAU_DU_TAUREAU">Chateau du Taureau</option>
+          <option value = "CHERBOURG">Cherbourg</option>
+          <option value = "CONCARNEAU">Concarneau</option>
+          <option value = "CORDOUAN">Cordouan</option>
+          <option value = "COURSEULLES-SUR-MER">Courseulles-Sur-Mer</option>
+          <option value = "DAHOUET">Dahouet</option>
+          <option value = "DEAUVILLE">Deauville (Trouville)</option>
+          <option value = "DIELETTE">Dielette</option>
+          <option value = "DIEPPE">Dieppe</option>
+          <option value = "DIVES_EMBOUCHURE">Dives (embouchure)</option>
+          <option value = "DOUARNENEZ">Douarnenez</option>
+          <option value = "DUNKERQUE">Dunkerque</option>
+          <option value = "ERQUY">Erquy</option>
+          <option value = "ETEL">Etel</option>
+          <option value = "ETRETAT">Etretat</option>
+          <option value = "FECAMP">F&eacute;camp</option>
+          <option value = "FLAMANVILLE">Flamanville</option>
+          <option value = "FORT-MAHON">Fort-Mahon</option>
+          <option value = "FROMENTINE_BOUEE">Fromentine Bou&eacute;e</option>
+          <option value = "FROMENTINE_PORT">Fromentine Port</option>
+          <option value = "GIRONDE_(RICHARD)">Gironde (Richard)</option>
+          <option value = "GOURY">Goury</option>
+          <option value = "GRANDCAMP">Grandcamp</option>
+          <option value = "GRANVILLE">Granville</option>
+          <option value = "GRAVELINES">Gravelines</option>
+          <option value = "HENNEBONT">Hennebont</option>
+          <option value = "HONFLEUR">Honfleur</option>
+          <option value = "ILE_D_AIX">Ile d'Aix</option>
+          <option value = "ILE_D_OUESSANT">Ile d'Ouessant (Lampaul)</option>
+          <option value = "ILE_D_YEU">Ile d'Yeu (Port-Joinville)</option>
+          <option value = "ILE_DE_BREHAT">Ile de Br&eacute;hat (Port-Clos)</option>
+          <option value = "ILE_DE_HOEDIC">Ile de Hoedic</option>
+          <option value = "ILE_DE_HOUAT">Ile de Houat</option>
+          <option value = "ILE_DE_MOLENE">Ile de Mol&egrave;ne</option>
+          <option value = "ILE_DE_RE_ST-MARTIN">Ile de R&eacute; (Saint-Martin)</option>
+          <option value = "ILE_DE_SEIN">Ile de Sein</option>
+          <option value = "ILES_CHAUSEY">Iles Chausey</option>
+          <option value = "ILES_DE_GLENAN">Iles de Gl&eacute;nan</option>
+          <option value = "ILES_DES_HEBIHENS">Iles des H&eacute;bihens</option>
+          <option value = "ILES_SAINT-MARCOUF">Iles Saint-Marcouf</option>
+          <option value = "LA_ROCHELLE-PALLICE">La Rochelle</option>
+          <option value = "LA_TRINITE-SUR-MER">La Trinite-sur-Mer</option>
+          <option value = "LACANAU">Lacanau Cap Ferret</option>
+          <option value = "LE_CONQUET">Le Conquet</option>
+          <option value = "LE_CROISIC">Le Croisic</option>
+          <option value = "LE_GUILVINEC">Le Guilvinec</option>
+          <option value = "LE_HAVRE">Le Havre</option>
+          <option value = "LE_HAVRE-ANTIFER">Le Havre-Antifer</option>
+          <option value = "LE_LEGUE">Le Legue (Saint-Brieuc)</option>
+          <option value = "LE_LOJO">Le Logeo</option>
+          <option value = "LE_POULIGUEN">Le Pouliguen</option>
+          <option value = "LE_SENEQUET">Le Senequet</option>
+          <option value = "LE_TOUQUET">Le Touquet</option>
+          <option value = "LE_TREPORT">Le Treport</option>
+          <option value = "LES_ECREHOU">Les Ecrehou</option>
+          <option value = "LES_HEAUX-DE-BREHAT">Les Heaux-de-Br&eacute;hat</option>
+          <option value = "LES_MINQUIERS">Les Minquiers</option>
+          <option value = "LES_SABLES-D_OLONNE">Les Sables-d'Olonne</option>
+          <option value = "LESCONIL">Lesconil</option>
+          <option value = "LEZARDRIEUX">Lezardrieux</option>
+          <option value = "LOCQUIREC">Locquirec</option>
+          <option value = "LOCTUDY">Loctudy</option>
+          <option value = "LORIENT">Lorient</option>
+          <option value = "MIMIZAN">Mimizan</option>
+          <option value = "MORGAT">Morgat</option>
+          <option value = "NIEUWPOORT">Nieuwpoort</option>
+          <option value = "L_HERBAUDIERE">Noirmoutier (L'Herbaudi&egrave;re)</option>
+          <option value = "OMONVILLE-LA-ROGUE">Omonville-La-Rogue</option>
+          <option value = "OOSTENDE">Oostende</option>
+          <option value = "OUISTREHAM">Ouistreham</option>
+          <option value = "PAIMPOL">Paimpol</option>
+          <option value = "PENERF">Penerf</option>
+          <option value = "PENMARC_H">Penmarc'h / Saint Gu&eacute;nol&eacute;</option>
+          <option value = "PERROS-GUIREC">Perros-Guirec</option>
+          <option value = "PLOUMANACH">Ploumanac'h</option>
+          <option value = "POINTE_D_AGON">Pointe d'Agon</option>
+          <option value = "POINTE_DE_GATSEAU">Pointe de Gatseau</option>
+          <option value = "POINTE_DE_GRAVE">Pointe de Grave</option>
+          <option value = "PORNIC">Pornic</option>
+          <option value = "PORNICHET">Pornichet</option>
+          <option value = "PORT-BENI">Port-Beni</option>
+          <option value = "PORT-EN-BESSIN">Port-en-Bessin</option>
+          <option value = "PORT-LOUIS">Port-Louis (Locmalo)</option>
+          <option value = "PORT-NAVALO">Port-Navalo</option>
+          <option value = "PORT-TUDY">Port-Tudy</option>
+          <option value = "PORTBAIL">Portbail</option>
+          <option value = "PORTSALL">Portsall</option>
+          <option value = "PORT-HALIGUEN">Quiberon (Port-Haliguen)</option>
+          <option value = "PORT-MARIA">Quiberon (Port-Maria)</option>
+          <option value = "REGNEVILLE-SUR-MER">Regneville-sur-Mer</option>
+          <option value = "ROSCOFF">Roscoff</option>
+          <option value = "ROYAN">Royan</option>
+          <option value = "SAINT_PETER_PORT">Saint Peter Port (Guernesey)</option>
+          <option value = "SAINT-ARMEL">Saint-Armel (Le Passage)</option>
+          <option value = "SAINT-CAST">Saint-Cast</option>
+          <option value = "SAINT-GERMAIN-SUR-AY">Saint-Germain-sur-Ay</option>
+          <option value = "SAINT-GILDAS">Saint-Gildas</option>
+          <option value = "SAINT_HELIER">Saint-H&eacute;lier (Jersey)</option>
+          <option value = "SAINT-JEAN-DE-LUZ">Saint-Jean-de-Luz</option>
+          <option value = "SAINT-MALO">Saint-Malo</option>
+          <option value = "SAINT-NAZAIRE">Saint-Nazaire</option>
+          <option value = "SAINT-QUAY-PORTRIEUX">Saint-Quay-Portrieux</option>
+          <option value = "SAINT-VAAST-LA-HOUGUE">Saint-Vaast-La-Hougue</option>
+          <option value = "SAINT-VALERY-EN-CAUX">Saint-Valery-en-Caux</option>
+          <option value = "ST-GILLES-CROIX-DE-VIE">St-Gilles-Croix-de-Vie</option>
+          <option value = "TREBEURDEN">Trebeurden</option>
+          <option value = "TREGUIER">Treguier</option>
+          <option value = "TREHIGUIER">Trehiguier</option>
+          <option value = "LE_TREZ-HIR">Trez-Hir</option>
+          <option value = "VANNES">Vannes</option>
+          <option value = "VIEUX-BOUCAU">Vieux-Boucau</option>
+          <option value = "WISSANT">Wissant</option>
+          <option value = "ZEEBRUGGE">Zeebrugge</option>
+        </select>
+      </form>
+      <p style="font-size:8px; margin:0.5em  0 0; padding-left:5px; padding-right:5px; font-family:Verdana, Arial, Helvetica, sans-serif" align="left">Toutes les <a href="http://www.horaire-maree.fr/" style="color:#336699;"><strong>mar&eacute;es</strong></a> d'apr&egrave;s les pr&eacute;dictions donn&eacute; &agrave; titre indicatif de <a href="mailto:info@meteorem.com" target="_blank" style="color:#336699;"  title="Fournisseur de donn&eacute;es">Aviabag M&eacute;t&eacute;orem</a> ne rempla&ccedil;ant pas les documents officiels.</p>
+    
+    </div>
+    <iframe id="iframe"><!-- Put the target here --></iframe>
+    
+</body>
+</html>

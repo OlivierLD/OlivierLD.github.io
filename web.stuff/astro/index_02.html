@@ -16,6 +16,7 @@
     <script type="module" src="./webcomponents/SplitFlapDisplay.js"></script>
 
     <script type="text/javascript" src="date.proto.js"></script>
+    <script type="text/javascript" src="js/nav-bar.js"></script>
 
     <script type="text/javascript">
 
@@ -239,9 +240,11 @@ let showHideData = () => {
     }
     hidden = !hidden;
 };
+
     </script>
 
     <link rel="stylesheet" href="css/web-components.css">
+    <link rel="stylesheet" href="css/nav-bar.css">
 
     <style>
         h1 {
@@ -508,7 +511,79 @@ let showHideData = () => {
     </style>
 </head>
 <body>
-<h1>ES6 Celestial Computer test (2), with WebComponents</h1>
+
+    <dialog id="background-prms-dialog" class="shadow-menu">
+        <div class="dialog-header">
+          <span>Backround Parameters...</span>
+          <span class="dialog-header-close" onclick="closePrmsDialog();">&times</span>
+        </div>
+
+        <div style="margin-bottom: 10px;">
+            <button id="now" onclick="updateUTCDate();" title="Set the date/time to the current one">Now</button>&nbsp;
+            <button id="compute" onclick="compute();" title="Compute data for the date above">Compute</button>&nbsp;
+            <!--input type="checkbox" id="auto-refresh" onchange="autoRefresh(this);"><small>Auto Refresh</small-->
+            Real Time
+            <label class="rocker rocker-small" 
+                style="margin-bottom: -15px;" 
+                title="Auto-refresh the date every second."> <!-- One way widget. Will NOT be notified of a change on the server. -->
+                <input type="checkbox" id="auto-refresh" onchange="autoRefresh(this);">
+                <span class="switch-left">On</span>
+                <span class="switch-right">Off</span>
+            </label>
+        </div>
+
+        <div>
+            <!--
+             |  WORLD MAP CTRL
+             +-->
+            <div id="world-map-ctrl">
+                <div class="black-frame centered">
+                    <input type="checkbox" onchange="setTransparency('world-map-01', this);"/>Transparent
+                    <input type="checkbox" onchange="setGrid('world-map-01', this);" checked/>Grid
+                    <input type="checkbox" onchange="setSun('world-map-01', this);" checked/>Sun
+                    <input type="checkbox" onchange="setMoon('world-map-01', this);" checked/>Moon
+                    <input type="checkbox" onchange="setSunlight('world-map-01', this);"/>Sunlight
+                    <input type="checkbox" onchange="setMoonlight('world-map-01', this);"/>Moonlight
+                    <input type="checkbox"
+                            onchange="withWanderingBodies = this.checked; setWanderingBodies('world-map-01', this);"/>Wandering
+                    bodies
+                    <input type="checkbox" onchange="withStars = this.checked; setStars('world-map-01', this);"/>Stars
+                    <input type="checkbox" onchange="setTropics('world-map-01', this);"/>Tropics
+                    <!--
+                    <br/>
+                    <input type="checkbox" id="geo-sat-01"/>GeoStationary Satellites
+                    <input type="checkbox" id="iss-01" title="Requires Internet connection"/>ISS
+                    <input type="checkbox" id="gps-sat-01"/>GPS Satellites in view
+                    <input type="checkbox" id="moon-sun-path-01"/>Moon to Sun
+                    -->
+                    <!--
+                    <br/>
+                    <input type="radio" name="proj-01" value="GLOBE" onchange="setProjection('world-map-01', this);" checked>Globe
+                    <input type="radio" name="proj-01" value="MERCATOR" onchange="setProjection('world-map-01', this);">Mercator
+                    <input type="radio" name="proj-01" value="ANAXIMANDRE" onchange="setProjection('world-map-01', this);">Square
+                    -->
+                </div>
+            </div>
+        </div>
+        
+    </dialog>    
+
+  <!--
+    The Big Main Menu on the left
+
+    ◄ = &#9668;
+    ► = &#9658;
+    ▼ = &#9660;
+    ▲ = &#9650;
+  -->
+<div id="side-nav" class="sidenav" onmouseleave="closeNav()"> 
+    <a href="javascript:void(0)" id="close-nav-button" class="closebtn" onclick="closeNav()">&times;</a>
+
+    <a href="javascript:void(0)" class="active-link" style="margin-top: 20px;" onclick="showPrmsDialog()">Background parameters</a>
+
+</div>
+    
+<h1 style="width: 100%; font-style: normal; text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px silver;"><span style="cursor: pointer;" onclick="openNav()" onmouseover="openNav()" title="Hamburger">&nbsp; &#8801;</span> ES6 Celestial Computer test (2), with WebComponents</h1>
 <div class="background" style="margin: 30px; margin-top: 50px;">
     <!--
         WORLD MAP BG
@@ -636,56 +711,9 @@ let showHideData = () => {
                     </div>
                 </div>    
             </div>    
-            <div style="margin-bottom: 10px;">
-                <button id="now" onclick="updateUTCDate();" title="Set the date/time to the current one">Now</button>&nbsp;
-                <button id="compute" onclick="compute();" title="Compute data for the date above">Compute</button>&nbsp;
-                <!--input type="checkbox" id="auto-refresh" onchange="autoRefresh(this);"><small>Auto Refresh</small-->
-                Real Time
-                <label class="rocker rocker-small" 
-                    style="margin-bottom: -15px;" 
-                    title="Auto-refresh the date every second."> <!-- One way widget. Will NOT be notified of a change on the server. -->
-                    <input type="checkbox" id="auto-refresh" onchange="autoRefresh(this);">
-                    <span class="switch-left">On</span>
-                    <span class="switch-right">Off</span>
-                </label>
-            </div>
         </td>
     </tr>
 </table>
-
-<div>
-    <!--
-     |  WORLD MAP CTRL
-     +-->
-    <div id="world-map-ctrl">
-        <div class="black-frame centered">
-            <input type="checkbox" onchange="setTransparency('world-map-01', this);"/>Transparent
-            <input type="checkbox" onchange="setGrid('world-map-01', this);" checked/>Grid
-            <input type="checkbox" onchange="setSun('world-map-01', this);" checked/>Sun
-            <input type="checkbox" onchange="setMoon('world-map-01', this);" checked/>Moon
-            <input type="checkbox" onchange="setSunlight('world-map-01', this);"/>Sunlight
-            <input type="checkbox" onchange="setMoonlight('world-map-01', this);"/>Moonlight
-            <input type="checkbox"
-                    onchange="withWanderingBodies = this.checked; setWanderingBodies('world-map-01', this);"/>Wandering
-            bodies
-            <input type="checkbox" onchange="withStars = this.checked; setStars('world-map-01', this);"/>Stars
-            <input type="checkbox" onchange="setTropics('world-map-01', this);"/>Tropics
-            <!--
-            <br/>
-            <input type="checkbox" id="geo-sat-01"/>GeoStationary Satellites
-            <input type="checkbox" id="iss-01" title="Requires Internet connection"/>ISS
-            <input type="checkbox" id="gps-sat-01"/>GPS Satellites in view
-            <input type="checkbox" id="moon-sun-path-01"/>Moon to Sun
-            -->
-            <!--
-            <br/>
-            <input type="radio" name="proj-01" value="GLOBE" onchange="setProjection('world-map-01', this);" checked>Globe
-            <input type="radio" name="proj-01" value="MERCATOR" onchange="setProjection('world-map-01', this);">Mercator
-            <input type="radio" name="proj-01" value="ANAXIMANDRE" onchange="setProjection('world-map-01', this);">Square
-            -->
-        </div>
-    </div>
-</div>
 
 <button onclick="showHideData();" style="margin: 10px;">Show/Hide Computed Data</button>
 
@@ -775,15 +803,14 @@ let showHideData = () => {
         let utcTime = new Date(testResult.epoch + (utcOffsetInMinutes * 60 * 1000)); // .getUTCDate();
 
         let date = utcTime.format("d-m-Y-l");
-        let calendar = document.getElementById('calendar-01');
-        calendar.value = date;
-        calendar.repaint();
-        // Update UTC time
-        let time = utcTime.format("H:i:s");
-        let splitFalp = document.getElementById('split-flap-utc-display');
-        splitFalp.value = time;
-        splitFalp.repaint();
-
+        // let calendar = document.getElementById('calendar-01');
+        // calendar.value = date;
+        // calendar.repaint();
+        // // Update UTC time
+        // let time = utcTime.format("H:i:s");
+        // let splitFalp = document.getElementById('split-flap-utc-display');
+        // splitFalp.value = time;
+        // splitFalp.repaint();
     };
 
     let updateUTCDate = () => {
