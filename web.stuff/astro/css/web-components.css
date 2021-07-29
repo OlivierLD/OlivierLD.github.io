@@ -69,3 +69,12 @@
 	--frame-color: silver;
 	--value-font: Arial;
 }
+
+.split-flap-night-bg {
+	--bg-color: transparent;
+	--display-background-gradient-from: rgba(0, 0, 0, 0.5);
+	--display-background-gradient-to: rgba(190, 190, 190, 0.5);
+	--display-color: rgba(255, 255, 255, 0.5);
+	--frame-color: silver;
+	--value-font: Arial;
+}

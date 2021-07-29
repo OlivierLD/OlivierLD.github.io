@@ -12,8 +12,8 @@
     <script type="module" src="app.js"></script>
 
     <script type="module" src="./webcomponents/WorldMap.js"></script>
-    <script type="module" src="./webcomponents/CalendarDisplay.js"></script>
-    <!--script type="module" src="./webcomponents/SplitFlapDisplay.js"></script-->
+    <!--script type="module" src="./webcomponents/CalendarDisplay.js"></script-->
+    <script type="module" src="./webcomponents/SplitFlapDisplay.js"></script>
 
     <script type="text/javascript" src="date.proto.js"></script>
     <script type="text/javascript" src="js/nav-bar.js"></script>
@@ -600,6 +600,20 @@ let showHideData = () => {
                         height="600"></world-map>
         </div>
     </div>
+
+    <div class="centered">
+        <!-- SPLIT-FLAP -->
+        <div style="margin: 10px;">
+            <split-flap-display id="split-flap-utc-display"
+                                class="split-flap-night-bg"
+                                nb-char="12"
+                                font-size="30"
+                                justified="LEFT"
+                                title="UTC Time"
+                                value="00:00:00 UTC"></split-flap-display>
+        </div>                    
+    </div>
+
 </div>
 
 <div style="padding: 4px; border: 1px solid rgba(0, 255, 255, 0.25); border-radius: 5px;">
@@ -810,11 +824,11 @@ let showHideData = () => {
         // let calendar = document.getElementById('calendar-01');
         // calendar.value = date;
         // calendar.repaint();
-        // // Update UTC time
-        // let time = utcTime.format("H:i:s");
-        // let splitFalp = document.getElementById('split-flap-utc-display');
-        // splitFalp.value = time;
-        // splitFalp.repaint();
+        // Update UTC time
+        let time = utcTime.format("H:i:s");
+        let splitFalp = document.getElementById('split-flap-utc-display');
+        splitFalp.value = time + " UTC";
+        splitFalp.repaint();
     };
 
     let updateUTCDate = () => {
