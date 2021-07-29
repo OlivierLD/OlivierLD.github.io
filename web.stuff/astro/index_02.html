@@ -514,7 +514,7 @@ let showHideData = () => {
 
         .bg-container {
             display: grid;
-            grid-template-columns: auto auto;
+            grid-template-columns: 600px 280px;
             grid-template-rows: auto;
             grid-template-areas: 
                 "wm jumbos"
@@ -594,17 +594,19 @@ let showHideData = () => {
 
     <a href="javascript:void(0)" class="active-link" style="margin-top: 20px;" onclick="showPrmsDialog()">Background parameters</a>
 
+    <a href="javascript:void(0)" class="active-link" style="margin-top: 20px;">More links here...</a>
+
     <!-- More links here if needed -->
 </div>
     
 <h1 style="width: 100%; font-style: normal; text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px silver;"><span style="cursor: pointer;" onclick="openNav()" onmouseover="openNav()" title="Hamburger">&nbsp; &#8801;</span> ES6 Celestial Computer test, with BG WebComponents</h1>
 
-<div class="background bg-container" style="margin: 30px; margin-top: 50px;">
+<div class="background bg-container" style="margin: 10px; margin-top: 50px;">
     <!--
         WORLD MAP BG
     +-->
-    <div id="world-map" style="grid-area: wm">
-        <div class="centered" style="width: 800px; border: 0px solid silver; border-radius: 5px;">
+    <div id="world-map" style="grid-area: wm; text-align: right;">
+        <div class="centered" style="width: 600px; border: 0px solid silver; border-radius: 5px;">
             <world-map id="world-map-01"
                         class="worldmap-display-bg"
                         title="World Map&#13;Background"
@@ -614,11 +616,19 @@ let showHideData = () => {
     </div>
 
     <!-- JUMBO -->
-    <div class="centered" style="grid-area: jumbos; width: 240; text-align: left;">
+    <div class="centered" style="grid-area: jumbos; width: 240px; border: 0px solid silver; border-radius: 5px;">
+
+        <div style="margin-top: 50px; margin-bottom: 20px; font-weight: bold; color: rgba(0, 255, 255, 0.5);">JUMBOS</div>
         <jumbo-display id="jumbo-01"
                        class="jumbo-01 digital-font-orange"
                        value="000"
                        label="HDG"
+                       width="180"
+                       height="80"></jumbo-display>
+        <jumbo-display id="jumbo-02"
+                       class="jumbo-01 digital-font-green one-decimal"
+                       value="00.0"
+                       label="BSP"
                        width="180"
                        height="80"></jumbo-display>
     </div>
@@ -912,6 +922,7 @@ let showHideData = () => {
         }
 
         document.getElementById("jumbo-01").value = hdg.toFixed(0);
+        document.getElementById("jumbo-02").value = 0.0;
     };
 
     let extraDrawingWorldMap = (wm, context) => {
