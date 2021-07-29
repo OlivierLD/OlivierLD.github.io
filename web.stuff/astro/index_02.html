@@ -200,7 +200,8 @@ let updatePosition = () => {
     let toBookmark = `${window.location.protocol}//${window.location.hostname}:${window.location.pathname}?lat=${lat}&long=${lng}`;
 
     console.log("Bookmark this URL: " + toBookmark);
-    document.getElementById("url-to-bookmark").innerText = "Bookmark this URL: " + toBookmark;
+    document.getElementById("url-to-bookmark").innerText = toBookmark;
+    document.getElementById("url-placeHolder").style.display = "block";
 };
 
 let updateFromUserPos = () => {
@@ -494,7 +495,7 @@ let showHideData = () => {
 
         .bookmark {
             font-family: 'Courier New', Courier, monospace; 
-            background-color: honeydew; 
+            background-color: rgba(240, 255, 240, 0.75); 
             color:black; 
             margin-left:20px; 
             margin-right: 20px; 
@@ -667,7 +668,10 @@ let showHideData = () => {
                             title="Set position value"
                             style="margin-top: 3px;">Set Position
                     </button>
-                    <div id="url-to-bookmark" class="bookmark"></div>
+                    <div id="url-placeHolder" style="display: none;">
+                        <small>Bookmark this URL:</small>
+                        <div id="url-to-bookmark" class="bookmark"></div>
+                    </div>
                 </div>
             </div>
         </td>
