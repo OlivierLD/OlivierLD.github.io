@@ -281,10 +281,11 @@ let showHideData = () => {
         }
 
         .result {
+            margin: auto;
             margin-top: 10px;
             border: solid silver 1px;
             border-radius: 5px;
-            width: 80%;
+            width: 90%;
             height: 200px;
             max-height: 200px;
             font-family: "Courier New",sans-serif;
@@ -683,7 +684,7 @@ let showHideData = () => {
         <td style="vertical-align: top;" colspan="1">
             <div style="border: 0px solid rgba(0, 255, 255, 0.25); border-radius: 5px;">
                 <div id="user-date-switch" onclick="expandCollapseDateData();" title="Click to expand/collase"
-                    style="margin: 3px; padding-left: 5px; padding-right: 5px; cursor: pointer;"><span id="date-char">&#9658;</span> UTC Date, and options</div>
+                     style="margin: 3px; padding-left: 5px; padding-right: 5px; cursor: pointer;"><span id="date-char">&#9658;</span> UTC Date, and options</div>
 
                 <div id="user-date-widgets" class="smooth" style="padding: 2px; border: 1px solid rgba(0, 255, 255, 0.25); border-radius: 5px;">
                     <small>Enter UTC date and time, then click the Compute button.</small>
@@ -723,11 +724,9 @@ let showHideData = () => {
 <button onclick="showHideData();" style="margin: 10px;">Show/Hide Computed Data</button>
 
 <div id="raw-data" style="display: none;">
-<div id="result" class="result">
-</div>
+    <div id="result" class="result"></div>
 
-<div id="details" class="result" style="background-color: rgba(0,0,0,0.5);">
-</div>
+    <div id="details" class="result" style="background-color: rgba(0,0,0,0.5);"></div>
 </div>
 
 </body>
