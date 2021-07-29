@@ -78,3 +78,42 @@
 	--frame-color: silver;
 	--value-font: Arial;
 }
+
+.jumbo-01 {
+	--bg-color: white;
+	--display-background-gradient-from: black;
+	--display-background-gradient-to: gray;
+	--grid-color: rgba(255, 255, 255, 0.7);
+	--display-color: cyan;
+	--value-nb-decimal: 0;
+	--label-font: 'Courier New';
+	--value-font: Arial;
+}
+
+.jumbo-02 {
+	--bg-color: black;
+	--display-background-gradient-from: white;
+	--display-background-gradient-to: gray;
+	--grid-color: rgba(0, 0, 0, 0.7);
+	--display-color: navy;
+	--value-nb-decimal: 2;
+	--label-font: 'Courier New';
+	--value-font: 'Helvetica Neue';
+}
+
+@font-face {
+	font-family: DigiFont;
+	src: url(./fonts/ds-digi.ttf) format("truetype");
+}
+
+jumbo-display .digital-font-orange {
+	--display-color: orange;
+	--label-font: DigiFont;
+	--value-font: DigiFont;
+}
+
+jumbo-display .digital-font-green {
+	--display-color: lightgreen;
+	--label-font: DigiFont;
+	--value-font: DigiFont;
+}

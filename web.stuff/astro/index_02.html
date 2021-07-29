@@ -14,6 +14,7 @@
     <script type="module" src="./webcomponents/WorldMap.js"></script>
     <!--script type="module" src="./webcomponents/CalendarDisplay.js"></script-->
     <script type="module" src="./webcomponents/SplitFlapDisplay.js"></script>
+    <script type="module" src="./webcomponents/JumboDisplay.js"></script>
 
     <script type="text/javascript" src="date.proto.js"></script>
     <script type="text/javascript" src="js/nav-bar.js"></script>
@@ -510,6 +511,15 @@ let showHideData = () => {
 	/*  select {
 			font-size: 30px;
 		} */
+
+        .bg-container {
+            display: grid;
+            grid-template-columns: auto auto;
+            grid-template-rows: auto;
+            grid-template-areas: 
+                "wm jumbos"
+                "utc utc";
+        }
     </style>
 </head>
 <body>
@@ -588,21 +598,33 @@ let showHideData = () => {
 </div>
     
 <h1 style="width: 100%; font-style: normal; text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px silver;"><span style="cursor: pointer;" onclick="openNav()" onmouseover="openNav()" title="Hamburger">&nbsp; &#8801;</span> ES6 Celestial Computer test, with BG WebComponents</h1>
-<div class="background" style="margin: 30px; margin-top: 50px;">
+
+<div class="background bg-container" style="margin: 30px; margin-top: 50px;">
     <!--
         WORLD MAP BG
     +-->
-    <div id="world-map">
-        <div class="centered">
+    <div id="world-map" style="grid-area: wm">
+        <div class="centered" style="width: 800px; border: 0px solid silver; border-radius: 5px;">
             <world-map id="world-map-01"
                         class="worldmap-display-bg"
                         title="World Map&#13;Background"
-                        width="800"
+                        width="600"
                         height="600"></world-map>
         </div>
     </div>
 
-    <div class="centered">
+    <!-- JUMBO -->
+    <div class="centered" style="grid-area: jumbos; width: 240; text-align: left;">
+        <jumbo-display id="jumbo-01"
+                       class="jumbo-01 digital-font-orange"
+                       value="000"
+                       label="HDG"
+                       width="180"
+                       height="80"></jumbo-display>
+    </div>
+
+
+    <div class="centered" style="grid-area: utc">
         <!-- SPLIT-FLAP -->
         <div style="margin: 10px;">
             <split-flap-display id="split-flap-utc-display"
@@ -614,7 +636,6 @@ let showHideData = () => {
                                 value="00:00:00 UTC"></split-flap-display>
         </div>                    
     </div>
-
 </div>
 
 <div style="padding: 4px; border: 1px solid rgba(0, 255, 255, 0.25); border-radius: 5px;">
@@ -886,6 +907,11 @@ let showHideData = () => {
         let diff = (Math.random() - 0.5) * 2.0; // [-1..1]
         hdg += diff;
         hdg = (hdg % 360);
+        if (hdg < 0) {
+            hdg += 360;
+        }
+
+        document.getElementById("jumbo-01").value = hdg.toFixed(0);
     };
 
     let extraDrawingWorldMap = (wm, context) => {
