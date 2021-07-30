@@ -2,7 +2,10 @@
 <!--
  | All the skill in the "compute" function below,
  | invoked on click.
- | Dynamic backgrund test.
+ | Dynamic background test.
+ | Some (if not many) functions are faked (or simulated)
+ |
+ | Grid stuff: https://css-tricks.com/snippets/css/complete-guide-grid/
  +-->
 <html lang="en_US">
 <head>
@@ -15,6 +18,7 @@
     <!--script type="module" src="./webcomponents/CalendarDisplay.js"></script-->
     <script type="module" src="./webcomponents/SplitFlapDisplay.js"></script>
     <script type="module" src="./webcomponents/JumboDisplay.js"></script>
+    <script type="module" src="./webcomponents/ScrollDigit.js"></script>
 
     <script type="text/javascript" src="date.proto.js"></script>
     <script type="text/javascript" src="js/nav-bar.js"></script>
@@ -517,8 +521,8 @@ let showHideData = () => {
             grid-template-columns: 600px 280px;
             grid-template-rows: auto;
             grid-template-areas: 
-                "wm jumbos"
-                "utc utc";
+                "wm jumbos prmsl"
+                "utc utc utc";
         }
     </style>
 </head>
@@ -555,8 +559,8 @@ let showHideData = () => {
                     <input type="checkbox" onchange="setSun('world-map-01', this);" checked/>Sun
                     <input type="checkbox" onchange="setMoon('world-map-01', this);" checked/>Moon
                     <input type="checkbox" onchange="setSunlight('world-map-01', this);"/>Sunlight
-                    <input type="checkbox" onchange="setMoonlight('world-map-01', this);"/>Moonlight
                     <br/>
+                    <input type="checkbox" onchange="setMoonlight('world-map-01', this);"/>Moonlight
                     <input type="checkbox"
                             onchange="withWanderingBodies = this.checked; setWanderingBodies('world-map-01', this);"/>Wandering
                     bodies
@@ -633,6 +637,18 @@ let showHideData = () => {
                        height="80"></jumbo-display>
     </div>
 
+    <!-- SCROLL -->
+    <div class="centered" style="grid-area: prmsl; width: 240px; border: 0px solid silver; border-radius: 5px;">
+
+        <div style="margin-top: 50px; margin-bottom: 20px; font-weight: bold; color: rgba(0, 255, 255, 0.5);">PRMSL</div>
+        <scroll-digit-display id="scroll-digit-display-01"
+                              class="scroll-digit-01"
+                              nb-char="6"
+                              font-size="40"
+                              justified="RIGHT"
+                              nb-dec="1"
+                              value="1013.5"></scroll-digit-display>
+</div>
 
     <div class="centered" style="grid-area: utc">
         <!-- SPLIT-FLAP -->
@@ -767,7 +783,7 @@ let showHideData = () => {
     </tr>
 </table>
 
-<h2>Heading is <i>simulated</i></h2>
+<h2>Heading and PRMSL are <i>simulated</i></h2>
 
 <button onclick="showHideData();" style="margin: 10px;">Show/Hide Computed Data</button>
 
@@ -911,18 +927,71 @@ let showHideData = () => {
         return decodeURIComponent(results[2].replace(/\+/g, " "));
     };
 
-    let hdg = 0.0;
+    function setScrollDigitValue(id, value) {
+        let elem = document.getElementById(id);
+        // Character by character
+        let original = elem.paddedValue;
+        let newPaddedValue = elem.getPaddedValue(elem.cleanString(value));
+        //        console.log("Old [%s], new [%s]", original, newPaddedValue);
+        //        assert(old.length === new.length);
+        let floatFrom = parseFloat(original);
+        let floatTo = parseFloat(newPaddedValue);
+        let sign = 0;
+        if (floatFrom !== floatTo) {
+            sign = (floatTo > floatFrom) ? +1 : -1;
+        }
+        let scroll = Math.abs(floatFrom - floatTo) <= Math.pow(10, -elem.nbDec);
 
-    let hdgRandomUpdater = () => {
+        function updateValue(idx) { // THIS is balaise.
+            if (original.charAt(idx).toUpperCase() !== newPaddedValue.charAt(idx).toUpperCase()) {
+                setTimeout(() => {
+                    let next = elem.getNextChar(original.charAt(idx), sign);
+//                                        console.log("Updating %s with %s", original, next);
+                    elem.setCharAt(idx, next, sign);
+                    original = elem.paddedValue;
+                    updateValue(idx);
+                }, 50);
+            }
+        }
+
+        if (scroll) {
+            if (sign !== 0) {
+                for (let idx = 0; idx < original.length; idx++) {
+                    updateValue(idx);
+                }
+            }
+        } else {
+            elem.value = value;
+            elem.repaint();
+        }
+    }
+
+    let hdg = 0.0;
+    let prmsl = 1013.5;
+    
+    let sensorUpdater = () => {
         let diff = (Math.random() - 0.5) * 2.0; // [-1..1]
         hdg += diff;
         hdg = (hdg % 360);
         if (hdg < 0) {
             hdg += 360;
         }
-
         document.getElementById("jumbo-01").value = hdg.toFixed(0);
         document.getElementById("jumbo-02").value = 0.0;
+    };
+
+    let prmslUpdater = () => {
+        let prmslDiff = (Math.random() - 0.5) * 0.2; // [-0.1..0.1]
+        prmsl += prmslDiff;
+        if (prmsl > 1040) {
+            prmsl -= (2 * prmslDiff);
+        }
+        if (prmsl < 950) {
+            prmsl += (2 * prmslDiff);
+        }
+
+        // document.getElementById("scroll-digit-display-01").value = prmsl.toFixed(1);
+        setScrollDigitValue("scroll-digit-display-01", prmsl.toFixed(1));
     };
 
     let extraDrawingWorldMap = (wm, context) => {
@@ -1019,7 +1088,8 @@ let showHideData = () => {
 
         document.getElementById("world-map-01").setDoAfter(extraDrawingWorldMap);
 
-        let hdgUpdater = window.setInterval(hdgRandomUpdater, 1000);
+        let hdgUpdater = window.setInterval(sensorUpdater, 1000);
+        let prmslData = window.setInterval(prmslUpdater, 2000);
 
         console.log('On Load, done.');
 
