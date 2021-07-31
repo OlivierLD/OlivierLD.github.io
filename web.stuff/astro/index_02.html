@@ -635,6 +635,18 @@ let showHideData = () => {
                        label="BSP"
                        width="180"
                        height="80"></jumbo-display>
+        <jumbo-display id="jumbo-03"
+                       class="jumbo-01 digital-font-red one-decimal"
+                       value="00.0"
+                       label="COG"
+                       width="180"
+                       height="80"></jumbo-display>
+        <jumbo-display id="jumbo-04"
+                       class="jumbo-01 digital-font-cyan one-decimal"
+                       value="00.0"
+                       label="SOG"
+                       width="180"
+                       height="80"></jumbo-display>
     </div>
 
     <!-- SCROLL -->
@@ -978,6 +990,8 @@ let showHideData = () => {
         }
         document.getElementById("jumbo-01").value = hdg.toFixed(0);
         document.getElementById("jumbo-02").value = 0.0;
+        document.getElementById("jumbo-03").value = 0.0;
+        document.getElementById("jumbo-04").value = 0.0;
     };
 
     let prmslUpdater = () => {

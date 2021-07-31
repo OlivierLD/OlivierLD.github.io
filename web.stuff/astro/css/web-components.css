@@ -126,6 +126,18 @@ jumbo-display .digital-font-green {
 	--value-font: DigiFont;
 }
 
+jumbo-display .digital-font-red {
+	--display-color: rgba(255, 0, 0, 0.75);
+	--label-font: DigiFont;
+	--value-font: DigiFont;
+}
+
+jumbo-display .digital-font-cyan {
+	--display-color: rgba(0, 255, 255, 0.75);
+	--label-font: DigiFont;
+	--value-font: DigiFont;
+}
+
 .scroll-digit-01 {
 	--bg-color: transparent;
 	--display-background-gradient-from: black;
