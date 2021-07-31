@@ -121,7 +121,7 @@ jumbo-display .digital-font-orange {
 }
 
 jumbo-display .digital-font-green {
-	--display-color: rgb(144, 238, 144, 0.75);
+	--display-color: rgba(144, 238, 144, 0.75);
 	--label-font: DigiFont;
 	--value-font: DigiFont;
 }
