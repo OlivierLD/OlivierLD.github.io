@@ -954,13 +954,13 @@ let showHideData = () => {
             }
         }
 
-        if (scroll) {
+        if (scroll || true) {
             if (sign !== 0) {
                 for (let idx = 0; idx < original.length; idx++) {
                     updateValue(idx);
                 }
             }
-        } else {
+        } else { // No scroll
             elem.value = value;
             elem.repaint();
         }

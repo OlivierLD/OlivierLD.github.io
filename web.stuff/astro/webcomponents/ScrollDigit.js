@@ -270,6 +270,9 @@ class ScrollDigitDisplay extends HTMLElement {
 		return cleanArr.join('');
 	}
 
+	/*
+	 * Works fine between 2 & 3, 7 & 8
+	 */
 	drawOneFlap(context, char, fromChar, sign, x, y, w, h, scale) {
 		let grd = context.createLinearGradient(x, y, x + w, y + h);
 		grd.addColorStop(0, this.scrollDigitColorConfig.displayBackgroundGradient.from); // 0  Beginning
@@ -303,7 +306,7 @@ class ScrollDigitDisplay extends HTMLElement {
 			let fontSize = Math.round(scale * this._font_size);
 			let instance = this;
 			function getYOffset() {
-				// console.log("Offset", yOffset, "Ref", startOffset);
+				// console.log("\tOffset", yOffset, "Ref", startOffset);
 				if (Math.abs(yOffset - startOffset) < fontSize) {
 					setTimeout(() => {
 						context.textBaseline = "middle";
@@ -322,10 +325,16 @@ class ScrollDigitDisplay extends HTMLElement {
 						// Re-loop
 						getYOffset();
 					}, 10);
-				} // else exit!
+				} else { // else exit!
+					// Done
+				}
 			}
 			getYOffset();
 		} else {
+			if (scrollDigitVerbose) {
+				console.log(`>> drawOneFlap, raw display, no change or null: fromChar ${fromChar}, char ${char}`);
+				// debugger;
+			}
 			let yOffset = y + (h / 2);
 			context.textBaseline = "middle";
 			context.fillText(strVal, xOffset, yOffset);
@@ -368,16 +377,36 @@ class ScrollDigitDisplay extends HTMLElement {
 				debugger;
 			}
 			this._paddedValue = newVal;
+			if (scrollDigitVerbose) {
+				console.log(`  >> drawPaddedString: ${textValue}, to ${newVal}`);
+			}
+			let sign = 0;
+			if (textValue !== newVal) {
+				sign = (parseFloat(textValue) > parseFloat(newVal)) ? -1 : 1;
+			}
+			this.drawPaddedString(textValue, newVal, sign);
 		}
-		this.drawPaddedString();
+		// this.drawPaddedString(textValue);
 	}
+
+	// drawScrollDigit(textValue) {
+	// 	if (this._connected) {
+	// 		let newVal = this.getPaddedValue(textValue);
+	// 		if (newVal.indexOf("NaN") > 0) {
+	// 			debugger;
+	// 		}
+	// 		this._paddedValue = newVal;
+	// 	}
+	// 	this.drawPaddedString();
+	// }
+
 
 	drawPaddedString(fromValue, toValue, sign) {
 		// From, to "12.34" to "23.45"
 		if (fromValue !== undefined && toValue !== undefined) {
 			// debugger;
 			if (scrollDigitVerbose) {
-				console.log("Scrolling from", fromValue, "to", toValue);
+				console.log(">> Scrolling from", fromValue, "to", toValue, "(sign ", sign, ")");
 			}
 		}
 		let upperCaseValue = this._paddedValue.toUpperCase().split(''); // Char array
