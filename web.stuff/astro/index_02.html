@@ -600,6 +600,8 @@ let showHideData = () => {
 
     <a href="javascript:void(0)" class="active-link" style="margin-top: 20px;">More links here...</a>
 
+    <a href="javascript:void(0)" class="active-link" style="margin-top: 20px;"><span style="font-size: 40px;" title="Call for details.">&phone;</span></a>
+
     <!-- More links here if needed -->
 </div>
     
@@ -623,24 +625,28 @@ let showHideData = () => {
     <div class="centered" style="grid-area: jumbos; width: 240px; border: 0px solid silver; border-radius: 5px;">
 
         <div style="margin-top: 50px; margin-bottom: 20px; font-weight: bold; color: rgba(0, 255, 255, 0.5);">JUMBOS</div>
+        <!-- HDG -->
         <jumbo-display id="jumbo-01"
                        class="jumbo-01 digital-font-orange"
                        value="000"
                        label="HDG"
                        width="180"
                        height="80"></jumbo-display>
+        <!-- BSP -->
         <jumbo-display id="jumbo-02"
                        class="jumbo-01 digital-font-green one-decimal"
                        value="00.0"
                        label="BSP"
                        width="180"
                        height="80"></jumbo-display>
+        <!-- COG -->               
         <jumbo-display id="jumbo-03"
                        class="jumbo-01 digital-font-red one-decimal"
                        value="00.0"
                        label="COG"
                        width="180"
                        height="80"></jumbo-display>
+        <!-- SOG -->               
         <jumbo-display id="jumbo-04"
                        class="jumbo-01 digital-font-cyan one-decimal"
                        value="00.0"
@@ -649,7 +655,7 @@ let showHideData = () => {
                        height="80"></jumbo-display>
     </div>
 
-    <!-- SCROLL -->
+    <!-- SCROLL-DISPLAY (PRMSL) -->
     <div class="centered" style="grid-area: prmsl; width: 240px; border: 0px solid silver; border-radius: 5px;">
 
         <div style="margin-top: 50px; margin-bottom: 20px; font-weight: bold; color: rgba(0, 255, 255, 0.5);">PRMSL</div>
@@ -663,7 +669,7 @@ let showHideData = () => {
 </div>
 
     <div class="centered" style="grid-area: utc">
-        <!-- SPLIT-FLAP -->
+        <!-- SPLIT-FLAP UTC -->
         <div style="margin: 10px;">
             <split-flap-display id="split-flap-utc-display"
                                 class="split-flap-night-bg"

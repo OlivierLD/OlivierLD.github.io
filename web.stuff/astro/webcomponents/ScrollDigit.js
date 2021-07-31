@@ -270,9 +270,6 @@ class ScrollDigitDisplay extends HTMLElement {
 		return cleanArr.join('');
 	}
 
-	/*
-	 * Works fine between 2 & 3, 7 & 8
-	 */
 	drawOneFlap(context, char, fromChar, sign, x, y, w, h, scale) {
 		let grd = context.createLinearGradient(x, y, x + w, y + h);
 		grd.addColorStop(0, this.scrollDigitColorConfig.displayBackgroundGradient.from); // 0  Beginning
