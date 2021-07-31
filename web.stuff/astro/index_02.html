@@ -1077,7 +1077,7 @@ let showHideData = () => {
 			context.translate(width / 2, (height / 2));
 			context.rotate((2 * Math.PI * (heading / 360)));
 			context.font = "bold " + Math.round(scale * 15) + "px Arial"; // Like "bold 15px Arial"
-			context.fillStyle = digitColor;
+			context.fillStyle = (i === 0) ? 'cyan' : digitColor;
 			let str = i.toString();
 			let len = context.measureText(str).width;
 			context.fillText(str, -len / 2, (-(radius * .8) + 10));
