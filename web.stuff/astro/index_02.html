@@ -960,7 +960,7 @@ let showHideData = () => {
         }
         let scroll = Math.abs(floatFrom - floatTo) <= Math.pow(10, -elem.nbDec);
 
-        function updateValue(idx) { // THIS is balaise.
+        function updateValue(idx) { // Now THIS is balaise.
             if (original.charAt(idx).toUpperCase() !== newPaddedValue.charAt(idx).toUpperCase()) {
                 setTimeout(() => {
                     let next = elem.getNextChar(original.charAt(idx), sign);
