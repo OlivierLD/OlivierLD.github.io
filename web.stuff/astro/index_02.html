@@ -22,6 +22,7 @@
 
     <script type="text/javascript" src="date.proto.js"></script>
     <script type="text/javascript" src="js/nav-bar.js"></script>
+    <script type="text/javascript" src="js/ajax.manager.js"></script>
 
     <script type="text/javascript">
 
@@ -1110,6 +1111,8 @@ let showHideData = () => {
 
         let hdgUpdater = window.setInterval(sensorUpdater, 1000);
         let prmslData = window.setInterval(prmslUpdater, 2000);
+
+        initAjax(); // ISS Station
 
         console.log('On Load, done.');
 
