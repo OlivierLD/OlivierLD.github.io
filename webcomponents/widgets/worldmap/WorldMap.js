@@ -1,9 +1,11 @@
 const worldMapVerbose = false;
 const WORLD_MAP_TAG_NAME = 'world-map';
 
+const DEBUG = false;
+
 /**
  * TODO:
- * - Rhumblines.
+ * - Rhumblines & Great Circles.
  * - document doAfter & doBefore
  * - document utilities (usable in doBefore & doAfter)
  */
@@ -18,11 +20,10 @@ const mapProjections = {
 		type: "GLOBE"
 	}
 };
-
-const tropicLat = 23.43686; // Earth Tilt
+const tropicLat = 23.43698;
 
 const worldMapDefaultColorConfig = {
-	canvasBackground: "rgba(0, 0, 100, 1.0)",  // Remove this?
+	canvasBackground: "rgba(0, 0, 100, 1.0)", // TODO Remove this?
 	defaultPlotPointColor: "red",
 	travelColor: "gray",
 	arrowBodyColor: 'rgba(255, 255, 255, 0.5)',
@@ -446,6 +447,10 @@ class WorldMap extends HTMLElement {
 		if (data.sun !== undefined) {
 			// set .setGlobeViewRightLeftRotation(-(sunD * Math.sin(Math.toRadians(lhaSun))));
 			if (this.userPosition !== {}) {
+				let userLongitude = this.userPosition.longitude;
+				if (userLongitude === undefined) { // TODO Verify that
+					userLongitude = data.from.longitude;
+				}
 				let lhaSun = data.sun.gha + this.userPosition.longitude;
 				while (lhaSun > 360) { lhaSun -= 360; }
 				while (lhaSun < 0) { lhaSun += 360; }
@@ -601,8 +606,8 @@ class WorldMap extends HTMLElement {
 		let dec = absVal - intValue;
 		let i = intValue;
 		dec *= 60;
-//    let s = i + "°" + dec.toFixed(2) + "'";
-//    let s = i + String.fromCharCode(176) + dec.toFixed(2) + "'";
+//    var s = i + "°" + dec.toFixed(2) + "'";
+//    var s = i + String.fromCharCode(176) + dec.toFixed(2) + "'";
 		let s = "";
 		if (ns_ew !== undefined) {
 			if (val < 0) {
@@ -616,9 +621,23 @@ class WorldMap extends HTMLElement {
 				s += '-'
 			}
 		}
-		s += i + "°" + dec.toFixed(2) + "'";
+		s += i + "°" + Utilities.lpad(dec.toFixed(2), 5, '0') + "'";
 
 		return s;
+	}
+
+	decToSex(val, ns_ew) {
+		return WorldMap.decToSex(val, ns_ew);
+	}
+
+	// Defined this way so it can be invoked on the WorldMap object (instance), from a callback for example.
+	toRadians(deg) {
+		return Math.toRadians(deg);
+	}
+
+	// Same as above
+	toDegrees(rad) {
+		return Math.toDegrees(rad);
 	}
 
 	computeGreatCircle(from, to, nb) {
@@ -632,13 +651,17 @@ class WorldMap extends HTMLElement {
 	 * @param route route in Degrees
 	 * @return DR Position, L & G in Radians
 	 */
-	deadReckoningRadians(from, dist, route) {
+	static deadReckoningRadians(from, dist, route) {
 		let radianDistance = Math.toRadians(dist / 60);
 		let finalLat = (Math.asin((Math.sin(from.lat) * Math.cos(radianDistance)) +
 				(Math.cos(from.lat) * Math.sin(radianDistance) * Math.cos(Math.toRadians(route)))));
 		let finalLng = from.lng + Math.atan2(Math.sin(Math.toRadians(route)) * Math.sin(radianDistance) * Math.cos(from.lat),
 				Math.cos(radianDistance) - Math.sin(from.lat) * Math.sin(finalLat));
 		return {lat: finalLat, lng: finalLng};
+	}
+
+	deadReckoningRadians(from, dist, route) {
+		return WorldMap.deadReckoningRadians(from, dist, route);
 	}
 
 	drawNight(context, from, user, gha) {
@@ -772,6 +795,10 @@ class WorldMap extends HTMLElement {
 			lng += 360;
 		}
 		return lng;
+	}
+
+	plotPoint(context, pt, color) {
+		WorldMap.plot(context, pt, color);
 	}
 
 	static plot(context, pt, color) {
@@ -1603,22 +1630,39 @@ class WorldMap extends HTMLElement {
 
 		let go = true;
 
-//	console.log("_west ", _west, "first", first);
+		if (DEBUG) {
+			console.log("_west ", this._west, "first", first);
+			context.strokeStyle = 'yellow';
+		}
 
-		for (let idx=first; idx<360 && go === true; idx++) {
+		let firstCanvasPt = null;
+		let startFrom = first + 1;
+		for (let idx=startFrom; idx<360 && go === true; idx++) {
 			pt = this.posToCanvas(Math.toDegrees(nightRim[idx].lat), WorldMap.toRealLng(Math.toDegrees(nightRim[idx].lng)));
 			context.lineTo(pt.x, pt.y);
+			if (idx === (startFrom)) {
+				firstCanvasPt = pt;
+			}
 
-			// DEBUG
-			// if (idx % 20 === 0) {
-			// 	context.fillStyle = 'cyan';
-			// 	context.fillText(idx, pt.x, pt.y);
-			// }
+			if (DEBUG) {
+				console.log(`Plotting (1) on canvas (idx:${idx}) x:${pt.x}, y:${pt.y}`);
+
+				if (idx % 10 === 0) {
+					context.fillStyle = 'cyan';
+					context.fillText(idx, pt.x, pt.y);
+				}
+				if (idx === (startFrom)) {
+					context.fillStyle = 'green';
+					console.log(`Plotting FIRST on canvas x:${pt.x}, y:${pt.y}`);
+					context.fillText("FIRST", pt.x, pt.y);
+				}
+			}
 
 			//  if (toRealLng(toDegrees(nightRim[idx].lng)) > _east) {
 			// 	 go = false;
 			//  }
 		}
+
 		if (go) {
 			for (let idx=0; idx<360 && go === true; idx++) {
 				if (WorldMap.toRealLng(Math.toDegrees(nightRim[idx].lng)) > this._east) {
@@ -1626,31 +1670,71 @@ class WorldMap extends HTMLElement {
 				} else {
 					pt = this.posToCanvas(Math.toDegrees(nightRim[idx].lat), WorldMap.toRealLng(Math.toDegrees(nightRim[idx].lng)));
 					context.lineTo(pt.x, pt.y);
-					// DEBUG
-					// if (idx % 20 === 0) {
-					// 	context.fillStyle = 'red';
-					// 	context.fillText(idx, pt.x, pt.y);
-					// }
+
+					if (DEBUG) {
+						if (idx % 20 === 0) {
+							context.fillStyle = 'red';
+							context.fillText(idx, pt.x, pt.y);
+						}
+						console.log(`Plotting (2) on canvas (idx:${idx}) x:${pt.x}, y:${pt.y}`);
+					}
 				}
 			}
 		}
-		context.lineTo(this.width + 10, pt.y); // right most
-
-		// DEBUG
-		// context.fillStyle = 'red';
-		// context.fillText('Last', pt.x - 10, pt.y);
-
-		if (from.lat > 0) { // N Decl, night is south
-			context.lineTo(this.width, this.height); // bottom right
-			context.lineTo(0, this.height);            // bottom left
-		} else {            // S Decl, night is north
-			context.lineTo(this.width, 0);             // top right
-			context.lineTo(0, 0);                        // top left
+		if (first > 180) {
+			context.lineTo(- 10, pt.y); // left most?
+		} else {
+			context.lineTo(this.width + 10, pt.y); // right most?
+			if (DEBUG) {
+				console.log(`Plotting RIGHT/LAST on canvas x:${this.width + 10}, y:${pt.y}`);
+				context.fillStyle = 'green';
+				context.fillText("LAST", pt.x, pt.y);
+			}
 		}
-//	context.lineTo(firstPt.x, firstPt.y);
+
+		if (DEBUG) {
+			context.fillStyle = 'red';
+			context.fillText('Last', pt.x - 10, pt.y);
+		}
+
+		let closeFrame = true;
+		if (closeFrame) {
+			if (from.lat > 0) { // N Decl, night is south
+				if (first > 180) { // (pt.x < this.width / 2) { // Went right to left, first > 180
+					context.lineTo(0, this.height);
+					if (DEBUG) {
+						console.log(`CLOSING x:${0}, ${this.height}`);
+					}
+				}
+				context.lineTo(this.width, this.height);
+				if (DEBUG) {
+					console.log(`CLOSING x:${this.width}, ${this.height}`);
+				}
+				if (firstCanvasPt !== null) {
+					context.lineTo(this.width, firstCanvasPt.y);
+					if (DEBUG) {
+						console.log(`CLOSING x:${this.width}, ${firstCanvasPt.y}`);
+					}
+				}
+			} else {            // S Decl, night is north
+				// TODO Look into that
+				if (first > 180) { // (pt.x < this.width / 2) { // Went right to left
+					context.lineTo(0, 0);
+				}
+				context.lineTo(this.width, 0);
+				if (firstCanvasPt !== null) {
+					context.lineTo(this.width, firstCanvasPt.y);
+				}
+			}
+		}
+//		context.lineTo(firstPt.x, firstPt.y); // See above
+
 		context.fillStyle = this.worldmapColorConfig.nightColor;
 		context.closePath();
 		context.fill();
+		if (DEBUG) {
+			context.stroke();
+		}
 	}
 
 	drawFlatCelestialOptions(context) {
