@@ -524,6 +524,33 @@
 			}
 		}
 
+        function moveToGCElement(wcComp, gc, i, label) {
+            // console.log("Moving to ", gc[i]);
+            wcComp.setUserPosition({latitude: gc[i].pos.lat, longitude: gc[i].pos.lng});
+            wcComp.positionLabel = (label !== undefined ? `to ${label} - ${i}` : `${i}`);
+            wcComp.repaint();
+            if (i < gc.length - 1) {
+                window.setTimeout(() => {
+                    moveToGCElement(wcComp, gc, i + 1, label);
+                }, 50);
+            }
+        }
+
+        function flyTo(wcId, pos, label) {
+            let wcComp = document.getElementById(wcId);
+            let currentPos = wcComp.getUserPosition(); // SF: {latitude: 37.7489, longitude: -122.507});
+            if (currentPos !== undefined && currentPos !== null) {
+                // Calculate GC from currentPos to pos
+                let gc = wcComp.computeGreatCircle({lat: currentPos.latitude, lng: currentPos.longitude}, pos, 50); // 50 steps
+                // GC is an array of points
+                window.setTimeout(() => {
+                    moveToGCElement(wcComp, gc, 0, label);
+                }, 50);
+            } else {
+                console.log("No current position yet...")
+            }
+        }
+
 		function simulateAstroData(wcId) {
 			document.getElementById(wcId).setUserPosition({latitude: 37.7489, longitude: -122.507 });
 			document.getElementById(wcId).positionLabel = "San Francisco";
@@ -2825,65 +2852,110 @@
 				<td valign="top">
 					<div class="black-frame centered">
 						<world-map id="world-map-01"
-											 class="worldmap-display"
-											 title="World Map"
-											 width="700"
-											 height="500"></world-map>
+								   class="worldmap-display"
+								   title="World Map"
+								   width="500"
+								   height="500"></world-map>
 					</div>
 					<div class="black-frame centered">
 						<button onclick="simulateAstroData('world-map-01');"
-										title="Set Astro Data"
-										style="margin-top: 3px;">Pos to SF</button>
+								title="Set Astro Data"
+								style="margin-top: 3px;">Pos to SF
+						</button>
 						<input type="checkbox" onchange="setTransparency('world-map-01', this);"/>Transparent
 						<input type="checkbox" onchange="setGrid('world-map-01', this);" checked/>Grid
 						<input type="checkbox" onchange="setSun('world-map-01', this);" checked/>Sun
 						<input type="checkbox" onchange="setMoon('world-map-01', this);" checked/>Moon
 						<input type="checkbox" onchange="setSunlight('world-map-01', this);"/>Sunlight
 						<input type="checkbox" onchange="setMoonlight('world-map-01', this);"/>Moonlight
+						<br/>
 						<input type="checkbox" onchange="setWanderingBodies('world-map-01', this);"/>Wandering bodies
 						<input type="checkbox" onchange="setStars('world-map-01', this);"/>Stars
 						<input type="checkbox" onchange="setTropics('world-map-01', this);"/>Tropics
 						<br/>
-						Spin <button onclick="spin('world-map-01', 1);">Clockwise</button> <button onclick="spin('world-map-01', -1);">Counter Clockwise</button>
+						Spin
+						<button onclick="spin('world-map-01', 1);">Clockwise</button>
+						<button onclick="spin('world-map-01', -1);">Counter Clockwise</button>
 						<br/>
-						<input type="radio" name="proj-01" value="GLOBE" onchange="setProjection('world-map-01', this);" checked>Globe
+						<input type="radio" name="proj-01" value="GLOBE" onchange="setProjection('world-map-01', this);"
+							   checked>Globe
 						<input type="radio" name="proj-01" value="MERCATOR" onchange="setProjection('world-map-01', this);">Mercator
-						<input type="radio" name="proj-01" value="ANAXIMANDRE" onchange="setProjection('world-map-01', this);">Square
+						<input type="radio" name="proj-01" value="ANAXIMANDRE"
+							   onchange="setProjection('world-map-01', this);">Square
 						<hr/>
-						Callback samples: <button onclick="callBefore('world-map-01')">Before</button>&nbsp;&nbsp;<button onclick="callAfter('world-map-01')" title="Satellites and Great Circle (Paris-Hawaii)">After</button>
+						Callback samples:
+						<button onclick="callBefore('world-map-01')">Before</button>&nbsp;&nbsp;<button
+							onclick="callAfter('world-map-01')" title="Satellites and Great Circle (Paris-Hawaii)">After
+					</button>
 					</div>
 				</td>
 				<td valign="top">
 					<div class="black-frame centered">
 						<world-map id="world-map-02"
-											 class="worldmap-display-02"
-											 title="World Map"
-											 width="700"
-											 height="500"></world-map>
+								   class="worldmap-display-02"
+								   title="World Map"
+								   width="500"
+								   height="500"></world-map>
 					</div>
 					<div class="black-frame centered">
 						<button onclick="simulateAstroData('world-map-02');"
-										title="Set Astro Data"
-										style="margin-top: 3px;">Pos to SF</button>
+								title="Set Astro Data"
+								style="margin-top: 3px;">Pos to SF
+						</button>
 						<input type="checkbox" onchange="setTransparency('world-map-02', this);"/>Transparent
 						<input type="checkbox" onchange="setGrid('world-map-02', this);" checked/>Grid
 						<input type="checkbox" onchange="setSun('world-map-02', this);" checked/>Sun
 						<input type="checkbox" onchange="setMoon('world-map-02', this);" checked/>Moon
 						<input type="checkbox" onchange="setSunlight('world-map-02', this);"/>Sunlight
 						<input type="checkbox" onchange="setMoonlight('world-map-02', this);"/>Moonlight
+						<br/>
 						<input type="checkbox" onchange="setWanderingBodies('world-map-02', this);"/>Wandering bodies
 						<input type="checkbox" onchange="setStars('world-map-02', this);"/>Stars
 						<input type="checkbox" onchange="setTropics('world-map-02', this);"/>Tropics
 						<br/>
-						Spin <button onclick="spin('world-map-02', 1);">Clockwise</button> <button onclick="spin('world-map-02', -1);">Counter Clockwise</button>
+						Spin
+						<button onclick="spin('world-map-02', 1);">Clockwise</button>
+						<button onclick="spin('world-map-02', -1);">Counter Clockwise</button>
 						<br/>
-						<input type="radio" name="proj-02" value="GLOBE" onchange="setProjection('world-map-02', this);" checked>Globe
+						<input type="radio" name="proj-02" value="GLOBE" onchange="setProjection('world-map-02', this);"
+							   checked>Globe
 						<input type="radio" name="proj-02" value="MERCATOR" onchange="setProjection('world-map-02', this);">Mercator
-						<input type="radio" name="proj-02" value="ANAXIMANDRE" onchange="setProjection('world-map-02', this);">Square
+						<input type="radio" name="proj-02" value="ANAXIMANDRE"
+							   onchange="setProjection('world-map-02', this);">Square
+					</div>
+				</td>
+				<td valign="top">
+					<div class="black-frame centered">
+						<world-map id="world-map-03"
+								   class="worldmap-display"
+								   title="World Map"
+								   width="500"
+								   height="500"></world-map>
+					</div>
+					<div class="black-frame centered">
+						<button onclick="simulateAstroData('world-map-03');"
+								title="Set Astro Data"
+								style="margin-top: 3px;">Pos to SF
+						</button>
+						<input type="checkbox" onchange="setTransparency('world-map-03', this);"/>Transparent
+						<input type="checkbox" onchange="setGrid('world-map-03', this);" checked/>Grid
+						<input type="checkbox" onchange="setSun('world-map-03', this);" checked/>Sun
+						<input type="checkbox" onchange="setMoon('world-map-03', this);" checked/>Moon
+						<input type="checkbox" onchange="setSunlight('world-map-03', this);"/>Sunlight
+						<input type="checkbox" onchange="setMoonlight('world-map-03', this);"/>Moonlight
+						<br/>
+						<input type="checkbox" onchange="setWanderingBodies('world-map-03', this);"/>Wandering bodies
+						<input type="checkbox" onchange="setStars('world-map-03', this);"/>Stars
+						<input type="checkbox" onchange="setTropics('world-map-03', this);"/>Tropics
+						<br/>
+						<hr/>
+						<button onclick="flyTo('world-map-03', {lat: 37.7489, lng: -122.507}, 'SF');" title="Fly to SF">SF</button>&nbsp;&nbsp;
+						<button onclick="flyTo('world-map-03', {lat: 49.01500, lng: 2.5423080}, 'Paris');" title="Fly to Paris">Paris</button>&nbsp;&nbsp;
+						<button onclick="flyTo('world-map-03', {lat: 19.7373, lng: -155.0668648}, 'Hawai\'i');" title="Fly to Hawai'i">Hawai'i</button>
 					</div>
 				</td>
 			</tr>
-		</table>
+			</table>
 	</div>
 	<hr/>
 	<!--

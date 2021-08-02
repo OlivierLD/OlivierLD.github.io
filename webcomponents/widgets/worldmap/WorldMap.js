@@ -403,6 +403,10 @@ class WorldMap extends HTMLElement {
 		this.globeViewForeAftRotation = pos.latitude;
 	}
 
+	getUserPosition() {
+		return this.userPosition;
+	}
+
 	setUserLatitude(val) {
 		this.globeViewForeAftRotation = val;
 		this.userPosition.latitude = val;
