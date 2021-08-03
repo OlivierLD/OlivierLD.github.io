@@ -144,5 +144,6 @@ jumbo-display .digital-font-cyan {
 	--display-background-gradient-to: gray;
 	--display-color: rgba(255, 255, 255, 0.5);
 	--frame-color: silver;
-	--value-font: Arial;
+	/* --value-font: Arial; */
+	--value-font: 'Courier New';
 }
