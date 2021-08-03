@@ -667,6 +667,8 @@ let showHideData = () => {
                               justified="RIGHT"
                               nb-dec="1"
                               value="1013.5"></scroll-digit-display>
+        <div id="sru-elev-z" style="margin-top: 10px; text-align: left; color: rgba(0, 255, 255, 0.5);">
+        </div>
 </div>
 
     <div class="centered" style="grid-area: utc">
@@ -838,6 +840,14 @@ let showHideData = () => {
         if (consoleVerbose) {
             console.log("Calculation done %d-%d-%d %d:%d:%d UTC :", calculationData.utcyear, calculationData.utcmonth, calculationData.utcday, calculationData.utchour, calculationData.utcminute, calculationData.utcsecond);
             console.log("Result:\n", JSON.stringify(testResult, null, 2));
+        }
+        // SRU
+        try {
+            let sru = sightReduction(userPos.latitude, userPos.longitude, testResult.sun.GHA.raw, testResult.sun.DEC.raw);
+            document.getElementById('sru-elev-z').innerHTML =
+                `SUN<br/>Elev: ${sru.alt.toFixed(2)}&deg;<br/>Z: ${sru.Z.toFixed(1)}&deg;`;
+        } catch (error) {
+
         }
 
         document.getElementById('result').innerHTML = '<pre>' + JSON.stringify(testResult, null, 2) + '</pre>';
