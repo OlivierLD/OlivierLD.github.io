@@ -1681,8 +1681,14 @@ class WorldMap extends HTMLElement {
 				}
 			}
 		}
-		if (first > 180) {
+		// if (first > 180) {
+		if (pt.x < this.width / 2) {
 			context.lineTo(- 10, pt.y); // left most?
+			if (DEBUG) {
+				console.log(`Plotting RIGHT/LAST on canvas x:${- 10}, y:${pt.y}`);
+				context.fillStyle = 'green';
+				context.fillText("LAST", pt.x, pt.y);
+			}
 		} else {
 			context.lineTo(this.width + 10, pt.y); // right most?
 			if (DEBUG) {
@@ -1705,18 +1711,32 @@ class WorldMap extends HTMLElement {
 					if (DEBUG) {
 						console.log(`CLOSING x:${0}, ${this.height}`);
 					}
+                    context.lineTo(this.width, this.height);
+                    if (DEBUG) {
+                        console.log(`CLOSING x:${this.width}, ${this.height}`);
+                    }
+                    if (firstCanvasPt !== null) {
+                        context.lineTo(this.width, firstCanvasPt.y);
+                        if (DEBUG) {
+                            console.log(`CLOSING x:${this.width}, ${firstCanvasPt.y}`);
+                        }
+                    }
+				} else {
+                    context.lineTo(this.width, this.height);
+                    if (DEBUG) {
+                        console.log(`CLOSING x:${this.width}, ${this.height}`);
+                    }
+                    context.lineTo(0, this.height);
+                    if (DEBUG) {
+                        console.log(`CLOSING x:${0}, ${this.height}`);
+                    }
+                    if (firstCanvasPt !== null) {
+                        context.lineTo(0, firstCanvasPt.y);
+                        if (DEBUG) {
+                            console.log(`CLOSING x:${0}, ${firstCanvasPt.y}`);
+                        }
+                    }
 				}
-				context.lineTo(this.width, this.height);
-				if (DEBUG) {
-					console.log(`CLOSING x:${this.width}, ${this.height}`);
-				}
-				if (firstCanvasPt !== null) {
-					context.lineTo(this.width, firstCanvasPt.y);
-					if (DEBUG) {
-						console.log(`CLOSING x:${this.width}, ${firstCanvasPt.y}`);
-					}
-				}
-				// TODO See below the 2 options
 			} else {            // S Decl, night is north
 				if (first > 180) { // (pt.x  < this.width / 2) { // Went right to left
 					context.lineTo(0, 0);
@@ -1728,8 +1748,8 @@ class WorldMap extends HTMLElement {
 						console.log(`CLOSING x:${this.width}, ${0}`);
 					}
 					if (firstCanvasPt !== null) {
-						// context.lineTo(this.width, firstCanvasPt.y); 
-						context.lineTo(this.width, firstCanvasPt.y); 
+						// context.lineTo(this.width, firstCanvasPt.y);
+						context.lineTo(this.width, firstCanvasPt.y);
 						if (DEBUG) {
 							console.log(`CLOSING x:${this.width}, ${firstCanvasPt.y}`);
 						}
@@ -1744,8 +1764,8 @@ class WorldMap extends HTMLElement {
 						console.log(`CLOSING x:${0}, ${0}`);
 					}
 					if (firstCanvasPt !== null) {
-						// context.lineTo(this.width, firstCanvasPt.y); 
-						context.lineTo(0, firstCanvasPt.y); 
+						// context.lineTo(this.width, firstCanvasPt.y);
+						context.lineTo(0, firstCanvasPt.y);
 						if (DEBUG) {
 							console.log(`CLOSING x:${0}, ${firstCanvasPt.y}`);
 						}
