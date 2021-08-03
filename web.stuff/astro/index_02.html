@@ -1033,8 +1033,9 @@ let showHideData = () => {
 		context.stroke();
 		context.closePath();
 
-        let majorTicks = 30;
-        let minorTicks =  1;
+        let numberTicks = 30;
+        let majorTicks  = 10;
+        let minorTicks  =  1;
 
         context.beginPath();
 		for (let i = 0; i < 360; i += majorTicks) {
@@ -1072,7 +1073,7 @@ let showHideData = () => {
         let digitColor = 'rgba(0, 255, 255, 0.5)'; // Numbers
 		context.beginPath();
 		let scale = 1;
-		for (let i = 0; i < 360; i += majorTicks) {
+		for (let i = 0; i < 360; i += numberTicks) {
 			let heading = i - hdg;
 			context.save();
 			context.translate(width / 2, (height / 2));
