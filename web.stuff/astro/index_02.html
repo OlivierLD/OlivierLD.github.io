@@ -306,7 +306,7 @@ let drawArrow = (divId, dir, force) => {
     // svg.setAttribute('xmlns', xmlns);
     svg.setAttributeNS(null, 'width', FRAME_WIDTH.toString());
     svg.setAttributeNS(null, 'height', FRAME_HEIGHT.toString());
-    svg.setAttribute('style', 'background-color: transparent; border-radius: 10px; border: 2px solid rgba(0, 0, 0, 0.25);');
+    svg.setAttribute('style', 'background-color: transparent; border-radius: 10px; border: 2px solid rgba(128, 128, 128, 0.25);');
 
     if (parent !== null) {
         parent.appendChild(svg);
@@ -384,14 +384,14 @@ let drawArrow = (divId, dir, force) => {
 let drawElevation = (divId, elev) => {
     // console.log(`Sun Elevation: ${elev.toFixed(2)}`);
     // document.getElementById(divId).innerHTML = `Sun Elevation: ${elev.toFixed(2)}&deg;`;
-    let fillColor = 'white';
+    let fillColor = 'rgba(255, 255, 255, 0.5)';
     let parent = (divId !== null) ? document.getElementById(divId) : null;
 
     let svg = document.createElementNS(XMLNS, 'svg');
     // svg.setAttribute('xmlns', xmlns);
     svg.setAttributeNS(null, 'width', FRAME_WIDTH.toString());
     svg.setAttributeNS(null, 'height', FRAME_HEIGHT.toString());
-    svg.setAttribute('style', 'background-color: transparent; border-radius: 10px; border: 2px solid rgba(0, 0, 0, 0.25);');
+    svg.setAttribute('style', 'background-color: transparent; border-radius: 10px; border: 2px solid rgba(128, 128, 128, 0.25);');
 
     if (parent !== null) {
         parent.appendChild(svg);
@@ -402,7 +402,7 @@ let drawElevation = (divId, elev) => {
     <path d="M150 0 L75 200 L225 200 Z" />
         */
     let path = document.createElementNS(XMLNS, 'path');
-    path.setAttribute('style', `fill: ${fillColor}; stroke: rgba(0, 0, 0, 0.35); stroke-width: 2;`);
+    path.setAttribute('style', `fill: ${fillColor}; stroke: rgba(128, 128, 128, 0.5); stroke-width: 2;`);
     let pathDef = `M5,10 A30,30 0 0,1 5,${FRAME_HEIGHT - 10}`;
     //              |                 |
     //              |                 To 5,XX
@@ -892,7 +892,8 @@ let drawElevation = (divId, elev) => {
                               justified="RIGHT"
                               nb-dec="1"
                               value="1013.5"></scroll-digit-display>
-        <div id="sru-elev-z" style="margin-top: 10px; text-align: left; color: rgba(0, 255, 255, 0.5);">
+        <!--div id="sru-elev-z" style="margin-top: 10px; text-align: left; color: rgba(0, 255, 255, 0.5);"-->
+        <div id="sru-elev-z" style="margin-top: 10px; display: grid; grid-template-columns: auto auto;">
             <!-- Sun Z -->
             <div style="text-align: left; margin: 20px 20px 20px;" id="sun-azimuth" title="Sun Azimuth">
                 <div style="width: 160px; height: 160px; border: 1px solid blue; border-radius: 5px;">
