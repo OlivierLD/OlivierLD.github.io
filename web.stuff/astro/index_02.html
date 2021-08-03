@@ -270,17 +270,13 @@ const XMLNS = "http://www.w3.org/2000/svg";
  * @param force Optional. Used for wind (Beaufort)
  * @returns {{svgContent: SVGSVGElement, x: number, y: number}} if divId is undefined.
  */
-let drawArrow = (divId, dir, force) => {
+let drawArrow = (divId, dir, body) => {
     let label = '';
     let fillColor = 'white';
-    if (force !== undefined) {
-        label = `F${force}, `;
-        // fillColor = getWindColor(force);
-    }
     let direction;  // = dir; //  + 180;
     if (typeof(dir) === 'number') {
         direction = dir - 180;
-        label += `Sun Z: ${dir.toFixed(1)}°`
+        label += `${body} Z: ${dir.toFixed(1)}°`
     } else {
         try {
             direction = dir.value;
@@ -291,10 +287,6 @@ let drawArrow = (divId, dir, force) => {
         }
     }
     let title = null;
-    if (force !== undefined && typeof(dir) !== 'number') {
-        title = `Wind ${force} Beaufort\x0A${dir.label}`;
-    }
-
     direction = -direction;
 
     let parent = (divId !== null) ? document.getElementById(divId) : null;
@@ -906,6 +898,18 @@ let drawElevation = (divId, elev) => {
                     Sun Elevation (SVG)...
                 </div>
             </div>
+            <!-- Moon Z -->
+            <div style="text-align: left; margin: 20px 20px 20px;" id="moon-azimuth" title="Moon Azimuth">
+                <div style="width: 160px; height: 160px; border: 1px solid blue; border-radius: 5px;">
+                    Moon Azimuth (SVG)...
+                </div>
+            </div>
+            <!-- Moon Altitude -->
+            <div style="text-align: left; margin: 20px 20px 20px;" id="moon-elevation" title="Moon Elevation">
+                <div style="width: 160px; height: 160px; border: 1px solid blue; border-radius: 5px;">
+                    Moon Elevation (SVG)...
+                </div>
+            </div>
         </div>
 </div>
 
@@ -1081,17 +1085,22 @@ let drawElevation = (divId, elev) => {
         }
         // SRU
         try {
-            let sru = sightReduction(userPos.latitude, userPos.longitude, testResult.sun.GHA.raw, testResult.sun.DEC.raw);
+            let sruSun = sightReduction(userPos.latitude, userPos.longitude, testResult.sun.GHA.raw, testResult.sun.DEC.raw);
             // document.getElementById('sru-elev-z').innerHTML =
             //     `SUN<br/>Elev: ${sru.alt.toFixed(2)}&deg;<br/>Z: ${sru.Z.toFixed(1)}&deg;`;
 
             // Background data display
-            drawArrow('sun-azimuth', sru.Z);
+            drawArrow('sun-azimuth', sruSun.Z, 'Sun');
             // Sun Altitude: json.CELESTIAL_DATA.elevation
-            drawElevation('sun-elevation', sru.alt);
+            drawElevation('sun-elevation', sruSun.alt);
     
-        } catch (error) {
+            let sruMoon = sightReduction(userPos.latitude, userPos.longitude, testResult.moon.GHA.raw, testResult.moon.DEC.raw);
 
+            drawArrow('moon-azimuth', sruMoon.Z, 'Moon');
+            // Sun Altitude: json.CELESTIAL_DATA.elevation
+            drawElevation('moon-elevation', sruMoon.alt);
+        } catch (error) {
+            console.debug(error);
         }
 
         document.getElementById('result').innerHTML = '<pre>' + JSON.stringify(testResult, null, 2) + '</pre>';
