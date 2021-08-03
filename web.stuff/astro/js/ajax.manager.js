@@ -11,7 +11,7 @@ function initAjax() {
     // ISS Position http://api.open-notify.org/iss-now.json
     // ISS Passage time http://api.open-notify.org/iss-pass.json?lat=37.7&lon=-122.5 [ &alt=20&n=5 ]
     // ISS Crew members: http://api.open-notify.org/astros.json
-    if (true) { // 
+    if (false) { // 
         let issInterval = setInterval(() => {
             let issPromise = getISSData();
             issPromise.then(issData => {
