@@ -1,5 +1,11 @@
 import * as CelestialComputer from './longterm.almanac.js';
-import { sightReduction, getGCDistance, getGCDistanceDegreesNM, calculateGreatCircle, getMoonTilt } from './utils.js';
+import { 
+	sightReduction, 
+	getGCDistance, 
+	getGCDistanceDegreesNM, 
+	calculateGreatCircle, 
+	getMoonTilt 
+} from './utils.js';
 // import * as CelestialComputer from './lib/celestial-computer.min.js';
 // let CelestialComputer = require('./longterm.almanac.js');
 
@@ -47,7 +53,7 @@ export function sampleMain(userDataObject) {
 
 window.sampleMain = sampleMain;
 window.gridSquare = CelestialComputer.gridSquare;
-window.sightReduction = CelestialComputer.sightReduction;
+window.sightReduction = CelestialComputer.sightReduction; // The one in utils.js
 
 window.getGCDistance = getGCDistance;
 window.getGCDistanceDegreesNM = getGCDistanceDegreesNM;
