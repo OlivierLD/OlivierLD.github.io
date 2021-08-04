@@ -1255,11 +1255,15 @@ let drawElevation = (divId, elev, color, circleColor) => { // colors in hex, lik
     let sensorUpdater = () => {
         let diff = (Math.random() - 0.5) * 2.0; // [-1..1]
         hdg += diff;
-        hdg = (hdg % 360);
-        if (hdg < 0) {
-            hdg += 360;
+        let _hdg = Math.trunc(hdg);
+        // _hdg %= 360;
+        while (_hdg < 0) {
+            _hdg += 360;
+        } 
+        while (_hdg >= 360) {
+            _hdg -= 360;
         }
-        document.getElementById("jumbo-01").value = hdg.toFixed(0);
+        document.getElementById("jumbo-01").value = _hdg; // .toFixed(0);
         document.getElementById("jumbo-02").value = 0.0;
         document.getElementById("jumbo-03").value = 0.0;
         document.getElementById("jumbo-04").value = 0.0;
