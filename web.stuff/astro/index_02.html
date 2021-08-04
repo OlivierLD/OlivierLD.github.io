@@ -5,7 +5,7 @@
  | Dynamic background test.
  | Some (if not many) functions are faked (or simulated)
  |
- | Grid stuff: https://css-tricks.com/snippets/css/complete-guide-grid/
+ | Good grid stuff: https://css-tricks.com/snippets/css/complete-guide-grid/
  +-->
 <html lang="en_US">
 <head>
@@ -373,7 +373,7 @@ let drawArrow = (divId, dir, body) => {
 };
 
 // SVG widget for the Sun's altitude.
-let drawElevation = (divId, elev) => {
+let drawElevation = (divId, elev, color, circleColor) => { // colors in hex, like #ffff00
     // console.log(`Sun Elevation: ${elev.toFixed(2)}`);
     // document.getElementById(divId).innerHTML = `Sun Elevation: ${elev.toFixed(2)}&deg;`;
     let fillColor = 'rgba(255, 255, 255, 0.5)';
@@ -424,7 +424,7 @@ let drawElevation = (divId, elev) => {
     <circle cx="40" cy="40" r="24" style="stroke:#006600; fill:#00cc00"/>
         */
     let sun = document.createElementNS(XMLNS, 'circle');
-    sun.setAttribute('style', 'stroke:#ff0000; fill:#ffff00;');
+    sun.setAttribute('style', `stroke:${circleColor !== undefined ? circleColor : '#ff0000'}; fill:${color !== undefined ? color : '#ffff00'};`);
     sun.setAttribute('cx', `${x}`);
     sun.setAttribute('cy', `${(FRAME_HEIGHT / 2) - y}`);
     sun.setAttribute('r', '6');
@@ -1099,7 +1099,7 @@ let drawElevation = (divId, elev) => {
 
             drawArrow('moon-azimuth', sruMoon.Z, 'Moon');
             // Sun Altitude: json.CELESTIAL_DATA.elevation
-            drawElevation('moon-elevation', sruMoon.alt);
+            drawElevation('moon-elevation', sruMoon.alt, '#ffffff', '#808080');
         } catch (error) {
             console.debug(error);
         }
