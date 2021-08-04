@@ -135,6 +135,173 @@ if (Math.toDegrees === undefined) {
 	};
 }
 
+/**
+ * 
+ * @param {*} from { lat: xxx, lng: xxx }, values in Radians
+ * @param {*} to { lat: xxx, lng: xxx }, values in Radians
+ * Return distance in radians
+ */
+ export function getGCDistance(from, to) {
+	let cos = Math.sin(from.lat) * Math.sin(to.lat) + Math.cos(from.lat) * 
+			  Math.cos(to.lat) * Math.cos(to.lng - from.lng);
+	let dist = Math.acos(cos);
+	return dist;
+};
+
+
+// Points coordinates in degrees, return in nautical miles.
+export function getGCDistanceDegreesNM(from, to) {
+	return 60.0 * Math.toDegrees(getGCDistance(
+		{ lat: Math.toRadians(from.lat), lng: Math.toRadians(from.lng) },
+		{ lat: Math.toRadians(to.lat), lng: Math.toRadians(to.lng) }
+	));
+};
+
+const TO_NORTH = 0;
+const TO_SOUTH = 1;
+const TO_EAST  = 2;
+const TO_WEST  = 3;
+
+/**
+ * 
+ * @param {*} from { lat: xxx, lng: xxx }, values in Radians
+ * @param {*} to { lat: xxx, lng: xxx }, values in Radians
+ * @param {*} nbPoints 
+ */
+export function calculateGreatCircle(from, to, nbPoints) {
+	let nsDir = (to.lat > from.lat) ? TO_NORTH : TO_SOUTH;
+	let ewDir = (to.lng > from.lng) ? TO_EAST : TO_WEST;
+	if (Math.abs(to.lng - from.lng) > Math.PI) { // Then turn the other way
+		if (ewDir === TO_EAST) {
+			ewDir = TO_WEST;
+			to.lng -= (2 * Math.PI);
+		} else {
+			ewDir = TO_EAST;
+			to.lng += (2 * Math.PI);
+		}
+	}
+	let deltaG = to.lng - from.lng;
+	let route = [];
+	let interval = deltaG / nbPoints;
+	let smallStart = from;
+	for (let g=from.lng; route.length <= nbPoints; g+=interval) {
+		let deltag = to.lng - g;
+		let tanStartAngle = Math.sin(deltag) / (Math.cos(smallStart.lat) * Math.tan(to.lat) - Math.sin(smallStart.lat) * Math.cos(deltag));
+		let smallL = Math.atan(Math.tan(smallStart.lat) * Math.cos(interval) + Math.sin(interval) / (tanStartAngle * Math.cos(smallStart.lat)));
+		let rpG = g + interval;
+		if (rpG > Math.PI) {
+			rpG -= (2 * Math.PI);
+		}
+		if (rpG < -Math.PI) {
+			rpG = (2 * Math.PI) + rpG;
+		}
+		let routePoint = { lat: smallL, lng: rpG };
+		let ari = Math.toDegrees(Math.atan(tanStartAngle));
+		if (ari < 0.0) {
+			ari = Math.abs(ari);
+		}
+		let _nsDir;
+		if (routePoint.lat > smallStart.lat) {
+			_nsDir = TO_NORTH;
+		} else {
+			_nsDir = TO_SOUTH;
+		}
+		let arrG = routePoint.lng;
+		let staG = smallStart.lng;
+		if (Math.sign(arrG) !== Math.sign(staG)) {
+			if (Math.sign(arrG) > 0) {
+				arrG -= (2 * Math.PI);
+			} else {
+				arrG = Math.PI - arrG;
+			}
+		}
+		let _ewDir;
+		if (arrG > staG) {
+			_ewDir = TO_EAST;
+		} else {
+			_ewDir = TO_WEST;
+		}
+		let _start = 0.0;
+		if (_nsDir == TO_SOUTH) {
+			_start = 180;
+			if (_ewDir == TO_EAST) {
+				ari = _start - ari;
+			} else {
+				ari = _start + ari;
+			}
+		} else if (_ewDir == TO_EAST) {
+			ari = _start + ari;
+		} else {
+			ari = _start - ari;
+		}
+		while (ari < 0.0) {
+			ari += 360;
+		}
+		route.push({ point: smallStart, z: to === smallStart ? null : ari });
+		smallStart = routePoint;
+	}
+	return route;
+};
+
+/**
+ * 
+ * @param {*} obs { lat: xx, lng: xx } values in degrees
+ * @param {*} sunCoord { gha: xx, dec: xx } values in degrees
+ * @param {*} moonCoord { gha: xx, dec: xx } values in degrees
+ */
+export function getMoonTilt(obs, sunCoord, moonCoord ) {
+
+	let moonLongitude = ghaToLongitude(moonCoord.gha);
+	let sunLongitude = ghaToLongitude(sunCoord.gha);
+	let skyRoute = calculateGreatCircle({lat: Math.toRadians(moonCoord.dec), lng: Math.toRadians(moonLongitude)},
+										{lat: Math.toRadians(sunCoord.dec), lng: Math.toRadians(sunLongitude)},
+										20);
+	let route = [];									
+	skyRoute.forEach(rp => {
+		let sru = sightReduction(obs.lat, obs.lng, longitudeToGHA(Math.toDegrees(rp.point.lng)), Math.toDegrees(rp.point.lat));
+		route.push({observer: obs, 
+					observed: { alt: sru.alt,
+								z: sru.Z}});
+	});									
+	// Take the first triangle, from the Moon.
+	let z0 = route[0].observed.z;
+	let z1 = route[1].observed.z;
+
+	let alt0 = route[0].observed.alt;
+	let alt1 = route[1].observed.alt;
+
+	let deltaZ = z1 - z0;
+	if (deltaZ > 180) { // like 358 - 2, should be 358 - 362.
+		deltaZ -= 360;
+	}
+	let deltaElev = alt1 - alt0;
+	let alpha = Math.toDegrees(Math.atan2(deltaElev, deltaZ)); // atan2 from -Pi to Pi
+
+	if (deltaElev > 0) {
+		if (deltaZ > 0) { // positive angle, like 52
+			alpha *= -1;
+		} else { // Angle > 90, like 116
+			if (alpha < 90) {
+				alpha -= 90;
+			} else {
+				alpha = 180 - alpha;
+			}
+		}
+	} else {
+		if (deltaZ > 0) { // negative angle, like -52
+			alpha *= -1;
+		} else { // Negative, < -90, like -116
+			if (alpha > -90) {
+				alpha += 90;
+			} else {
+				alpha = -180 - alpha;
+			}
+		}
+	}
+
+	return alpha;
+};
+
 /*
 exports.sind = sind;
 exports.cosd = cosd;

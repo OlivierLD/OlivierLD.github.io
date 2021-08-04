@@ -19,6 +19,7 @@
     <script type="module" src="./webcomponents/SplitFlapDisplay.js"></script>
     <script type="module" src="./webcomponents/JumboDisplay.js"></script>
     <script type="module" src="./webcomponents/ScrollDigit.js"></script>
+    <script type="module" src="./webcomponents/MoonPhase.js"></script>
 
     <script type="text/javascript" src="date.proto.js"></script>
     <script type="text/javascript" src="js/nav-bar.js"></script>
@@ -872,6 +873,13 @@ let drawElevation = (divId, elev, color, circleColor) => { // colors in hex, lik
                        label="SOG"
                        width="180"
                        height="80"></jumbo-display>
+        <!-- MOON PHASE and TILT -->                
+        <moon-phase id="moon-phase-01"
+                    title="Moon Phase"
+                    phase="0"
+                    tilt="0"
+                    label="Moon phase"
+                    small-label=" - "/>
     </div>
 
     <!-- SCROLL-DISPLAY (PRMSL) -->
@@ -924,7 +932,7 @@ let drawElevation = (divId, elev, color, circleColor) => { // colors in hex, lik
                                 justified="LEFT"
                                 title="UTC Time"
                                 value="00:00:00 UTC"></split-flap-display>
-        </div>                    
+        </div>    
     </div>
 </div>
 
@@ -1162,6 +1170,19 @@ let drawElevation = (divId, elev, color, circleColor) => { // colors in hex, lik
         let splitFalp = document.getElementById('split-flap-utc-display');
         splitFalp.value = time + " UTC";
         splitFalp.repaint();
+
+        // Moon-tilt
+        // userPos.latitude, userPos.longitude
+        let moonTilt = getMoonTilt({lat: userPos.latitude, lng: userPos.longitude}, 
+							{gha: testResult.sun.GHA.raw, dec: testResult.sun.DEC.raw}, 
+							{gha: testResult.moon.GHA.raw, dec: testResult.moon.DEC.raw});
+        // console.log(`Moon Tilt: ${moonTilt}`);
+        let moonPhase = document.getElementById('moon-phase-01');
+        moonPhase.phase = testResult.moon.phase.phaseAngle;
+        moonPhase.tilt = moonTilt;   
+        moonPhase.title = `Tilt:${moonTilt.toFixed(1)}°`; // Update tooltip
+		// Update small label
+		moonPhase.smallLabel = `Tilt:${moonTilt.toFixed(1)}°`;
     };
 
     let updateUTCDate = () => {
