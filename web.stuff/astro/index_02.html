@@ -824,7 +824,7 @@ let drawElevation = (divId, elev, color, circleColor) => { // colors in hex, lik
 
     <!-- More links here if needed -->
 </div>
-<div style="text-align: right;"><small>Last code update Aug 5, 2021, 8:57 PDT</small></div>    
+<div style="text-align: right;"><small>Last code update Aug 5, 2021, 9:13 PDT</small></div>    
 <h1 style="width: 100%; font-style: normal; text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px silver;"><span style="cursor: pointer;" onclick="openNav()" onmouseover="openNav()" title="Hamburger">&nbsp; &#8801;</span> ES6 Celestial Computer test, with BG WebComponents</h1>
 
 <div class="background bg-container" style="margin: 10px; margin-top: 50px;">
@@ -1151,7 +1151,7 @@ let drawElevation = (divId, elev, color, circleColor) => { // colors in hex, lik
                 }
                 let phaseDivImage = document.getElementById('moon-phase-div');
                 phaseDivImage.innerHTML =
-                    `<img src='${phaseImageName}' alt='${testResult.moon.phase.phaseAngle}' title='Phase ${testResult.moon.phase.phaseAngle.toFixed(0) + '&deg'}'><br/><small>Phase ${testResult.moon.phase.phaseAngle.toFixed(0) + '&deg'}</small>`;
+                    `<img src='${phaseImageName}' alt='${testResult.moon.phase.phaseAngle}' title='Phase ${testResult.moon.phase.phaseAngle.toFixed(0) + '&deg'}'><br/><small>Phase&nbsp;${testResult.moon.phase.phaseAngle.toFixed(0) + '&deg'}<br/>Illum:${testResult.moon.illum.toFixed(0) + '%'}</small>`;
                 // phaseDivImage.title = `Phase ${testResult.moon.phase.phaseAngle.toFixed(0)}\272`;    
             }
         } catch (oops) {
