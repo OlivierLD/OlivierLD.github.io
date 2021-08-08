@@ -24,45 +24,79 @@ a.list-link:hover {
   text-shadow: 4px 4px 8px black, 0 0 25px white, 0 0 10px cyan;
 }
 	</style>
+	<script type="text/javascript" src="js/qrcode.js"></script>
 </head>
 <body>
 	<h1>Astro links</h1>
 	<hr/>
-	<ul>
-	  <li>
-		<b>ES6</b>
-		<br/>
-		The links below are illustrations of what can be done with the ES6 part of <a href="https://github.com/OlivierLD/AstroComputer">this git repo</a>, which remains the point of truth.
-		<br/>
-		The WebComponents are defined in their <a href="https://github.com/OlivierLD/WebComponents">own git repo</a>.
-		<ul>
-			<li>
-				<a class="list-link" href="index_00.html">Simple Test</a>
-				<br/>
-				<small>
-					Basic JSON objects, nothing fancy.
-				</small>
-			</li>
-			<li>
-				<a class="list-link" href="index_01.html">More Complex (with WebComponents)</a>
-				<br/>
-				<small>
-					Nicer UI. WebComponents.
-				</small>
-			</li>
-			<li>
-				<a class="list-link" href="index_02.html">Dynamic Globe Background (with WebComponents)</a>
-				<br/>
-				<small>
-					This shows a rich Web UI, that can be served by a small machine (like a Raspberry pi Zero). The small machine provides the 
-					data, the data are rendered on another device, connected on the same network as the small machine (possibly emitted by it).
+	<div style="display: grid; grid-template-columns: auto auto;">
+
+		<div>
+			<ul>
+				<li>
+					<b>ES6</b>
 					<br/>
-					The UI rendering is the most demanding process, taken care of by a phone, tablet, or laptop, connected on the network.
-				</small>
-			</li>
-		</ul>
-	  </li>
-	</ul>
+					The links below are illustrations of what can be done with the ES6 part of <a href="https://github.com/OlivierLD/AstroComputer">this git repo</a>, which remains the point of truth.
+					<br/>
+					The WebComponents are defined in their <a href="https://github.com/OlivierLD/WebComponents">own git repo</a>.
+					<ul>
+						<li>
+							<a class="list-link" href="index_00.html">Simple Test</a>
+							<button onclick="makeCode('index_00.html');">QR Code</button>
+							<br/>
+							<small>
+								Basic JSON objects, nothing fancy.
+							</small>
+						</li>
+						<li>
+							<a class="list-link" href="index_01.html">More Complex (with WebComponents)</a>
+							<button onclick="makeCode('index_01.html');">QR Code</button>
+							<br/>
+							<small>
+								Nicer UI. WebComponents.
+							</small>
+						</li>
+						<li>
+							<a class="list-link" href="index_02.html">Dynamic Globe Background (with WebComponents)</a>
+							<button onclick="makeCode('index_02.html');">QR Code</button>
+							<br/>
+							<small>
+								This shows a rich Web UI, that can be served by a small machine (like a Raspberry pi Zero). The small machine provides the 
+								data, the data are rendered on another device, connected on the same network as the small machine (possibly emitted by it).
+								<br/>
+								The UI rendering is the most demanding process, taken care of by a phone, tablet, or laptop, connected on the network.
+							</small>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+		<div id="qrcode" style="width:250px; height:250px; margin-top:15px;"></div>
+	</div>
 	<hr/>
 </body>
+<script type="text/javascript">
+
+let qrcode;
+
+let makeCode = function(url) {    
+	if (url === undefined) {
+		url = "index_00.html";
+	}
+	let docLoc = document.location.href;
+	let toDisplay = docLoc.substring(0, docLoc.lastIndexOf('/')) + "/" + url; // document.location + url;
+
+  	qrcode.makeCode(toDisplay);
+};
+
+window.onload = () => {
+	qrcode = new QRCode(document.getElementById("qrcode"), {
+	width:  250,
+	height: 250
+	});
+
+	makeCode();
+}
+
+</script>
 </html>

@@ -1708,7 +1708,7 @@ Date.prototype.format = function (dateFormat) {
       slides[slideIndex - 1].classList.add("visible-slide");
 
       dots[slideIndex - 1].className += " active";
-      let TEN_SEC = 10000;
+      let TEN_SEC = 10000; // In ms.
       setTimeout(showSlides, TEN_SEC);
     }
   }
