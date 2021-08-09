@@ -255,8 +255,8 @@ export function getMoonTilt(obs, sunCoord, moonCoord ) {
 	let sunLongitude = ghaToLongitude(sunCoord.gha);
 	let skyRoute = calculateGreatCircle({lat: Math.toRadians(moonCoord.dec), lng: Math.toRadians(moonLongitude)},
 										{lat: Math.toRadians(sunCoord.dec), lng: Math.toRadians(sunLongitude)},
-										20);
-	// Bonus:
+										20); // 20 steps...
+	// Bonus, verify Lunar distance.
 	if (false) {
 		let sunMoonDist = getGCDistance({lat: Math.toRadians(moonCoord.dec), lng: Math.toRadians(moonLongitude)},
 										{lat: Math.toRadians(sunCoord.dec), lng: Math.toRadians(sunLongitude)});
@@ -273,6 +273,14 @@ export function getMoonTilt(obs, sunCoord, moonCoord ) {
 								z: sru.Z}});
 	});									
 	// Take the first triangle, from the Moon.
+	/*
+	 *                   . - alt1
+	 *                   |
+     *                   |
+	 *       .-----------. - alt0
+	 *       |           |
+	 *      z0           z1
+	 */
 	let z0 = route[0].observed.z;
 	let z1 = route[1].observed.z;
 
