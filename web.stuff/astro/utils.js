@@ -253,18 +253,20 @@ export function getMoonTilt(obs, sunCoord, moonCoord ) {
 
 	let moonLongitude = ghaToLongitude(moonCoord.gha);
 	let sunLongitude = ghaToLongitude(sunCoord.gha);
-	let skyRoute = calculateGreatCircle({lat: Math.toRadians(moonCoord.dec), lng: Math.toRadians(moonLongitude)},
-										{lat: Math.toRadians(sunCoord.dec), lng: Math.toRadians(sunLongitude)},
-										20); // 20 steps...
-	// Bonus, verify Lunar distance.
+
+	// Get lunar distance, to know how many points to calculate in the GC.
+	let sunMoonDist = getGCDistance({lat: Math.toRadians(moonCoord.dec), lng: Math.toRadians(moonLongitude)},
+									{lat: Math.toRadians(sunCoord.dec), lng: Math.toRadians(sunLongitude)});
+	let inDeg = Math.toDegrees(sunMoonDist);
+	let intPart = Math.trunc(inDeg);
+	let minutes = 60 * (inDeg - intPart);								
 	if (false) {
-		let sunMoonDist = getGCDistance({lat: Math.toRadians(moonCoord.dec), lng: Math.toRadians(moonLongitude)},
-										{lat: Math.toRadians(sunCoord.dec), lng: Math.toRadians(sunLongitude)});
-		let inDeg = Math.toDegrees(sunMoonDist);
-		let intPart = Math.trunc(inDeg);
-		let minutes = 60 * (inDeg - intPart);								
 		console.log(`Sun-Moon distance: ${intPart + '°' + minutes.toFixed(2) + '\''}`);
 	}
+	let nbPoints = inDeg < 10 ? 20 : (2 * inDeg);
+	let skyRoute = calculateGreatCircle({lat: Math.toRadians(moonCoord.dec), lng: Math.toRadians(moonLongitude)},
+										{lat: Math.toRadians(sunCoord.dec), lng: Math.toRadians(sunLongitude)},
+										nbPoints);
 	let route = [];									
 	skyRoute.forEach(rp => {
 		let sru = sightReduction(obs.lat, obs.lng, longitudeToGHA(Math.toDegrees(rp.point.lng)), Math.toDegrees(rp.point.lat));
