@@ -256,6 +256,15 @@ export function getMoonTilt(obs, sunCoord, moonCoord ) {
 	let skyRoute = calculateGreatCircle({lat: Math.toRadians(moonCoord.dec), lng: Math.toRadians(moonLongitude)},
 										{lat: Math.toRadians(sunCoord.dec), lng: Math.toRadians(sunLongitude)},
 										20);
+	// Bonus:
+	if (false) {
+		let sunMoonDist = getGCDistance({lat: Math.toRadians(moonCoord.dec), lng: Math.toRadians(moonLongitude)},
+										{lat: Math.toRadians(sunCoord.dec), lng: Math.toRadians(sunLongitude)});
+		let inDeg = Math.toDegrees(sunMoonDist);
+		let intPart = Math.trunc(inDeg);
+		let minutes = 60 * (inDeg - intPart);								
+		console.log(`Sun-Moon distance: ${intPart + '°' + minutes.toFixed(2) + '\''}`);
+	}
 	let route = [];									
 	skyRoute.forEach(rp => {
 		let sru = sightReduction(obs.lat, obs.lng, longitudeToGHA(Math.toDegrees(rp.point.lng)), Math.toDegrees(rp.point.lat));

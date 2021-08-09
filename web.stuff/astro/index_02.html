@@ -1156,7 +1156,7 @@ let drawElevation = (divId, elev, color, circleColor) => { // colors in hex, lik
                 }
                 let phaseDivImage = document.getElementById('moon-phase-div');
                 phaseDivImage.innerHTML =
-                    `<img src='${phaseImageName}' alt='${testResult.moon.phase.phaseAngle}' title='Phase ${testResult.moon.phase.phaseAngle.toFixed(0) + '&deg'}'><br/><small>Phase&nbsp;${testResult.moon.phase.phaseAngle.toFixed(0) + '&deg'}<br/>Illum:${testResult.moon.illum.toFixed(0) + '%'}</small>`;
+                    `<img src='${phaseImageName}' alt='${testResult.moon.phase.phaseAngle}' title='Phase ${testResult.moon.phase.phaseAngle.toFixed(0) + '&deg'}&#13;Illum ${testResult.moon.illum.toFixed(0) + '%'}'><br/><small>Phase&nbsp;${testResult.moon.phase.phaseAngle.toFixed(0) + '&deg'}<br/>Illum&nbsp;${testResult.moon.illum.toFixed(0) + '%'}</small>`;
                 // phaseDivImage.title = `Phase ${testResult.moon.phase.phaseAngle.toFixed(0)}\272`;    
             }
         } catch (oops) {

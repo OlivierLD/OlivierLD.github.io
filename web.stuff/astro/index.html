@@ -84,7 +84,7 @@ a.list-link:hover {
 
 let qrcode;
 
-let makeCode = function(url) {    
+let makeCode = (url) => {    
 	if (url === undefined) {
 		url = "index_00.html";
 	}
@@ -96,8 +96,8 @@ let makeCode = function(url) {
 
 window.onload = () => {
 	qrcode = new QRCode(document.getElementById("qrcode"), {
-	width:  250,
-	height: 250
+		width:  250,
+		height: 250
 	});
 
 	makeCode();
