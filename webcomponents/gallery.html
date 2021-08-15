@@ -6278,6 +6278,16 @@ const DATA_TO_RECENTER = [
     340.9747118424385
 ];
 
+const DATA_TO_RECENTER_2 = [315,316,316,316,316,316,316,316,315,316,103,103,
+                            103,315,315,315,315,315,315,315,315,315,315,315,
+							315,315,316,316,316,316,316,316,317,317,317,95,96,
+							96,97,108,109,113];
+const AS_IS = 1;
+const FLIP_180 = 2;
+const CENTER_ON_LAST = 3;
+
+const DATA_TO_USE = DATA_TO_RECENTER;
+
 function plotGraphRC(graphId, recenter) {
 
 	let elmt = document.getElementById(graphId);
@@ -6285,33 +6295,62 @@ function plotGraphRC(graphId, recenter) {
 	let mini = 0, maxi = 360;
 	let valLabel = "0:45";
 
+	let value = ""; // To display, bottom right.
+
 	let values = { x: [], y: [] };
-	if (recenter !== undefined && recenter === true) {
+	if (recenter !== undefined && (recenter === FLIP_180 || recenter === CENTER_ON_LAST)) {
 		console.log('Re-centering data');
 		mini = 360, maxi = 0;
 		DATA_TO_RECENTER.forEach(val => {
 			mini = Math.min(mini, val);
 			maxi = Math.max(maxi, val);
 		});
-		if (mini < 180 && maxi > 180) {
-			console.log("Recenter required...");
-			valLabel = "-180:45";
-			for (let i=0; i<DATA_TO_RECENTER.length; i++) {
+		if (recenter === FLIP_180) {
+			if (mini < 180 && maxi > 180) {
+				console.log("Recenter required...");
+				valLabel = "-180:45";
+				for (let i=0; i<DATA_TO_USE.length; i++) {
+					values.x.push(i);
+					// let y = DATA_TO_USE[i] - 180;
+					if (DATA_TO_USE[i] < 180) {
+						values.y.push(DATA_TO_USE[i]);
+					} else {
+						values.y.push((DATA_TO_USE[i] - 360));
+					}
+				}
+				mini = -180;
+				maxi = 180;
+			}
+	    } else if (recenter === CENTER_ON_LAST) {
+			let lastValue = DATA_TO_USE[DATA_TO_USE.length - 1];
+			let graphLastValue = lastValue;
+			console.log(`centering on ${lastValue}`);
+			// if (graphLastValue > 180) {
+			// 	graphLastValue -= 360;
+			// }
+
+			let min = graphLastValue - 180;
+			let max = graphLastValue + 180;
+			for (let i=0; i<DATA_TO_USE.length; i++) {
 				values.x.push(i);
-				// let y = DATA_TO_RECENTER[i] - 180;
-				if (DATA_TO_RECENTER[i] < 180) {
-					values.y.push(DATA_TO_RECENTER[i]);
+				let curVal = DATA_TO_USE[i];
+				if (curVal < min) {
+					values.y.push(curVal + 360);
+				} else if (curVal > max) {
+					values.y.push(curVal - 360);
 				} else {
-					values.y.push((DATA_TO_RECENTER[i] - 360));
+					values.y.push(curVal);
 				}
 			}
-			mini = -180;
-			maxi = 180;
+			mini = min; // -180;
+			maxi = max; // 180;
+			valLabel = `${mini}:45`; // "-180:45";
+			value = lastValue.toFixed(1) + "°";
 		}
 	} else {
-		for (let i=0; i<DATA_TO_RECENTER.length; i++) {
+		for (let i=0; i<DATA_TO_USE.length; i++) {
 			values.x.push(i);
-			values.y.push(DATA_TO_RECENTER[i]);
+			values.y.push(DATA_TO_USE[i]);
 		}
 	}
 
@@ -6343,6 +6382,7 @@ function plotGraphRC(graphId, recenter) {
 	elmt.data.withYLabels = false;
 	elmt.vgrid = valLabel;
 	elmt.label = "Reworking data";
+	elmt.value = value;
 	elmt.repaint();
 }
 
@@ -6366,8 +6406,9 @@ function plotGraphRC(graphId, recenter) {
 								   title="Aaaaah!"/>
 				</div>
 				<div style="padding: 5px;">
-					<button onclick="plotGraphRC('graph-03', false);">As-is</button>
-					<button onclick="plotGraphRC('graph-03', true);">Re-centered</button>
+					<button onclick="plotGraphRC('graph-03', AS_IS);">As-is</button>
+					<button onclick="plotGraphRC('graph-03', FLIP_180);">Flip 180&deg;</button>
+					<button onclick="plotGraphRC('graph-03', CENTER_ON_LAST);">Centered on last Value</button>
 				</div>
 				<script type="text/javascript">
 					// Duh
