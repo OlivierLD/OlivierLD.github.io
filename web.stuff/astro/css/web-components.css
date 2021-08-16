@@ -15,9 +15,9 @@
 	--chart-color: cyan;
 	--chart-line-width: 1;
 	--user-pos-color: red;
-	--sun-color: yellow;
+	--sun-color: rgb(255, 255, 0);
 	--sun-arrow-color: rgba(255, 255, 0, 0.5);
-	--moon-color: white;
+	--moon-color: rgb(255, 255, 255);
 	--moon-arrowcolor: rgba(255, 255, 255, 0.5);
 	--aries-color: LightGray;
 	--venus-color: orange;
@@ -42,9 +42,9 @@
 	--chart-color: rgba(0, 255, 255, 0.5);
 	--chart-line-width: 1;
 	--user-pos-color: red;
-	--sun-color: yellow;
+	--sun-color: rgb(255, 255, 0);
 	--sun-arrow-color: rgba(255, 255, 0, 0.5);
-	--moon-color: white;
+	--moon-color: rgb(255, 255, 255);
 	--moon-arrowcolor: rgba(255, 255, 255, 0.5);
 	--aries-color: LightGray;
 	--venus-color: orange;

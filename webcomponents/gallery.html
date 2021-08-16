@@ -736,6 +736,11 @@
             document.getElementById(wcId).repaint();
         }
 
+		function setAntiSunMoon(wcId, cb) {
+			document.getElementById(wcId).withAntiSunMoon = (cb.checked ? 'true' : 'false');
+			document.getElementById(wcId).repaint();
+		}
+
         function setSunlight(wcId, cb) {
             document.getElementById(wcId).withSunlight = (cb.checked ? 'true' : 'false');
             document.getElementById(wcId).repaint();
@@ -3183,6 +3188,7 @@
 					<input type="checkbox" onchange="setSunlight('world-map-01', this);"/>Sunlight
 					<input type="checkbox" onchange="setMoonlight('world-map-01', this);"/>Moonlight
 					<br/>
+					<input type="checkbox" onchange="setAntiSunMoon('world-map-01', this);"/>Anti Sun &amp; Moon
 					<input type="checkbox" onchange="setWanderingBodies('world-map-01', this);"/>Wandering bodies
 					<input type="checkbox" onchange="setStars('world-map-01', this);"/>Stars
 					<input type="checkbox" onchange="setTropics('world-map-01', this);"/>Tropics
@@ -3223,6 +3229,7 @@
 					<input type="checkbox" onchange="setSunlight('world-map-02', this);"/>Sunlight
 					<input type="checkbox" onchange="setMoonlight('world-map-02', this);"/>Moonlight
 					<br/>
+					<input type="checkbox" onchange="setAntiSunMoon('world-map-02', this);"/>Anti Sun &amp; Moon
 					<input type="checkbox" onchange="setWanderingBodies('world-map-02', this);"/>Wandering bodies
 					<input type="checkbox" onchange="setStars('world-map-02', this);"/>Stars
 					<input type="checkbox" onchange="setTropics('world-map-02', this);"/>Tropics
@@ -3258,6 +3265,7 @@
 					<input type="checkbox" onchange="setSunlight('world-map-03', this);"/>Sunlight
 					<input type="checkbox" onchange="setMoonlight('world-map-03', this);"/>Moonlight
 					<br/>
+					<input type="checkbox" onchange="setAntiSunMoon('world-map-03', this);"/>Anti Sun &amp; Moon
 					<input type="checkbox" onchange="setWanderingBodies('world-map-03', this);"/>Wandering bodies
 					<input type="checkbox" onchange="setStars('world-map-03', this);"/>Stars
 					<input type="checkbox" onchange="setTropics('world-map-03', this);"/>Tropics
@@ -6282,11 +6290,31 @@ const DATA_TO_RECENTER_2 = [315,316,316,316,316,316,316,316,315,316,103,103,
                             103,315,315,315,315,315,315,315,315,315,315,315,
 							315,315,316,316,316,316,316,316,317,317,317,95,96,
 							96,97,108,109,113];
+
+const DATA_TO_RECENTER_3 = [218,204,195,198,201,211,210,215,211,214,209,218,220,233,233,
+							233,233,239,241,242,245,244,238,230,233,226,220,221,221,210,213,215,215,211,212,206,204,203,
+							200,206,203,211,215,223,220,217,223,229,229,229,217,226,219,234,223,212,207,207,202,191,174,
+							199,200,202,206,218,214,209,202,201,201,222,222,212,198,196,198,203,202,189,196,200,201,193,
+							200,203,193,192,193,198,199,193,191,188,189,187,184,198,191,179,178,180,175,174,168,167,167,
+							174,177,172,174,176,176,171,170,170,167,167,167,163,155,160,160,166,157,158,162,162,162,160,
+							145,150,149,148,148,157,169,168,163,160,157,164,168,170,170,175,173,173,175,174,165,172,171,
+							176,178,178,172,176,174,176,175,178,178,182,184,180,180,183,183,182,181,178,177,178,178,178,
+							181,178,181,180,180,179,180,180,184,193,195,190,189,192,195,192,195,195,194,188,184,183,183,
+							182,181,182,184,183,189,190,191,190,190,186,178,180,176,186,178,183,186,189,183,186,181,181,
+							190,191,188,185,181,185,185,189,184,186,187,187,184,183,180,179,179,180,175,170,168,167,169,
+							172,174,179,179,184,182,186,190,192,193,187,186,189,189,190,188,188,187,193,191,187,190,182,
+							184,186,183,182,182,183,179,179,185,186,185,184,186,183,180,182,182,183,190,190,193,192,190,
+							193,190,191,190,196,193,194,193,192,190,191,190,189,188,188,189,191,192,190,193,191,189,190,
+							190,188,188,186,188,188,191,191,190,190,191,188,189,191,193,192,192,192,194,195,196,194,194,
+							192,194,193,195,193,192,193,195,194,194,191,191,193,193,194,196,194,194,190,190,189,190,191,
+							193,191,189,193,189,189,189,189,190,187,189,191,191,193,192,192,194,193,193,191,192,193,192,
+							193,192,194,192,190,193,190,190,190,190,192,192,192,192,194,191,193];
+
 const AS_IS = 1;
 const FLIP_180 = 2;
 const CENTER_ON_LAST = 3;
 
-const DATA_TO_USE = DATA_TO_RECENTER;
+const DATA_TO_USE = DATA_TO_RECENTER_3;
 
 function plotGraphRC(graphId, recenter) {
 
