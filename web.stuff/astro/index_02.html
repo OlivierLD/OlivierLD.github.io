@@ -15,6 +15,7 @@
     <script type="module" src="app.js"></script>
 
     <script type="module" src="./webcomponents/WorldMap.js"></script>
+    <script type="module" src="./webcomponents/MarqueePanel.js"></script>
     <!--script type="module" src="./webcomponents/CalendarDisplay.js"></script-->
     <script type="module" src="./webcomponents/SplitFlapDisplay.js"></script>
     <script type="module" src="./webcomponents/JumboDisplay.js"></script>
@@ -826,6 +827,26 @@ let drawElevation = (divId, elev, color, circleColor) => { // colors in hex, lik
         
     </dialog>    
 
+    <!-- Marquee values -->
+    <dialog id="marquee-dialog" class="shadow-menu" style="z-index: 10;">
+        <div class="dialog-header">
+            <span>Marquee</span>
+            <span class="dialog-header-close" onclick="closeMarqueeDialog();">&times</span>
+        </div>
+        <div style="margin-bottom: 10px;">
+                    <!-- See defaultMarqueeTextArray -->
+        <marquee-panel id="marquee-panel-01"
+                       class="marquee-01"
+                       width="480"
+                       height="350"
+                       nb-cols="140"
+                       nb-lines="68"
+                       title="To start or stop the marquee&#13;Use the link below"
+                       display-data='{ "text-array": ["Raspberry Pi", "Web Components", "Java & Processing", "HTML5, CSS3, ES6", "NodeJS", "Python", "Arduino & Co", "3D printing", "AI, ML, DL", "Artificial Intelligence", "Artificial Insanity", "and other toys..."], "x": 4, "y": 12 }'/>
+
+        </div>    
+    </dialog>
+
   <!--
     The Big Main Menu on the left
 
@@ -837,9 +858,11 @@ let drawElevation = (divId, elev, color, circleColor) => { // colors in hex, lik
 <div id="side-nav" class="sidenav" onmouseleave="closeNav()"> 
     <a href="javascript:void(0)" id="close-nav-button" class="closebtn" onclick="closeNav()">&times;</a>
 
-    <a href="javascript:void(0)" class="active-link" style="margin-top: 20px; margin-right: 20px; text-align: right;" onclick="showHelpDialog()">Help!</a>
+    <a href="javascript:void(0)" class="active-link" style="margin-top: 20px; margin-right: 20px; text-align: right;" onclick="showHelpDialog();">Help!</a>
 
-    <a href="javascript:void(0)" class="active-link" style="margin-top: 20px;" onclick="showPrmsDialog()">Background parameters</a>
+    <a href="javascript:void(0)" class="active-link" style="margin-top: 20px;" onclick="showPrmsDialog();">Background parameters</a>
+
+    <a href="javascript:void(0)" class="active-link" style="margin-top: 20px;" onclick="showMarqueeDialog();">Marquee Panel</a>
 
     <a href="javascript:void(0)" class="active-link" style="margin-top: 20px;">More links here...</a>
 

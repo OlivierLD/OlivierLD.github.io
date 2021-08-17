@@ -8,6 +8,7 @@ let closeNav = () => {
 
 const PRMS_DIALOG_ID = "background-prms-dialog";
 const HELP_DIALOG_ID = "help-dialog";
+const MARQUEE_DIALOG_ID = "marquee-dialog";
 
 let showPrmsDialog = () => {
     let prmsDialog = document.getElementById(PRMS_DIALOG_ID);
@@ -20,12 +21,21 @@ let closePrmsDialog = () => {
   };
 
   let showHelpDialog = () => {
-    let prmsDialog = document.getElementById(HELP_DIALOG_ID);
-    prmsDialog.show();
+    let helpDialog = document.getElementById(HELP_DIALOG_ID);
+    helpDialog.show();
 };
 
 let closeHelpDialog = () => {
-    let prmsDialog = document.getElementById(HELP_DIALOG_ID);
-    prmsDialog.close();
-  };
+    let helpDialog = document.getElementById(HELP_DIALOG_ID);
+    helpDialog.close();
+};
 
+let showMarqueeDialog = () => {
+    let marqueeDialog = document.getElementById(MARQUEE_DIALOG_ID);
+    marqueeDialog.show();
+};
+
+let closeMarqueeDialog = () => {
+    let marqueeDialog = document.getElementById(MARQUEE_DIALOG_ID);
+    marqueeDialog.close();
+};

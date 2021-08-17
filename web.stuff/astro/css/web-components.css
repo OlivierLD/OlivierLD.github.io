@@ -105,6 +105,13 @@
 	--value-font: 'Helvetica Neue';
 }
 
+.marquee-01 {
+	--bg-color-from: rgba(0, 0, 0, 0);
+	--bg-color-to: rgba(0, 0, 0, 0);
+	--fg-color-from: red;
+	--fg-color-to: orange;
+}
+
 .one-decimal {
 	--value-nb-decimal: 1;
 }
