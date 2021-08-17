@@ -7,6 +7,7 @@ let closeNav = () => {
 };
 
 const PRMS_DIALOG_ID = "background-prms-dialog";
+const HELP_DIALOG_ID = "help-dialog";
 
 let showPrmsDialog = () => {
     let prmsDialog = document.getElementById(PRMS_DIALOG_ID);
@@ -15,6 +16,16 @@ let showPrmsDialog = () => {
 
 let closePrmsDialog = () => {
     let prmsDialog = document.getElementById(PRMS_DIALOG_ID);
+    prmsDialog.close();
+  };
+
+  let showHelpDialog = () => {
+    let prmsDialog = document.getElementById(HELP_DIALOG_ID);
+    prmsDialog.show();
+};
+
+let closeHelpDialog = () => {
+    let prmsDialog = document.getElementById(HELP_DIALOG_ID);
     prmsDialog.close();
   };
 

@@ -748,6 +748,27 @@ let drawElevation = (divId, elev, color, circleColor) => { // colors in hex, lik
 </head>
 <body>
 
+    <!-- help-dialog -->
+    <dialog id="help-dialog" class="shadow-menu" style="z-index: 10;">
+        <div class="dialog-header">
+            <span>Help!</span>
+            <span class="dialog-header-close" onclick="closeHelpDialog();">&times</span>
+        </div>
+        <div style="margin-bottom: 10px;">
+            <p>
+                This page shows how to display graphical components in background, always present, even if other elements
+                are displayed on top.
+            </p>
+            <p>
+                Use the Background Parameters link in the menu to configure the globe.
+            </p>
+            <p>
+                Use the Show/Hide Computed Data button to display the computed data in the foreground.
+            </p>
+        </div>
+      </dialog>
+
+    <!-- BG parameters -->
     <dialog id="background-prms-dialog" class="shadow-menu" style="z-index: 10;">
         <div class="dialog-header">
           <span>Backround Parameters...</span>
@@ -815,6 +836,8 @@ let drawElevation = (divId, elev, color, circleColor) => { // colors in hex, lik
   -->
 <div id="side-nav" class="sidenav" onmouseleave="closeNav()"> 
     <a href="javascript:void(0)" id="close-nav-button" class="closebtn" onclick="closeNav()">&times;</a>
+
+    <a href="javascript:void(0)" class="active-link" style="margin-top: 20px; margin-right: 20px; text-align: right;" onclick="showHelpDialog()">Help!</a>
 
     <a href="javascript:void(0)" class="active-link" style="margin-top: 20px;" onclick="showPrmsDialog()">Background parameters</a>
 
@@ -1061,8 +1084,8 @@ let drawElevation = (divId, elev, color, circleColor) => { // colors in hex, lik
         </td>
     </tr>
 </table>
-<p>
-    Use the hamburger at the top left (&#8801;) to set the background parameters (Wandering bodies, Sunlight, Real Time...)
+<p style="margin: 20px;">
+    Use the hamburger (&#8801;) at the top left to set the background parameters (Wandering bodies, Sunlight, Real Time...)
     <br/>
     And then you can show or hide the computed data...
 </p>
