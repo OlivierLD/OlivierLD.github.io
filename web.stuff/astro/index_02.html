@@ -27,6 +27,8 @@
     <script type="text/javascript">
 
 let globalAstroData;
+let globalSRUSun;
+let globalSRUMoon;
 
 let marqueeScrollUpAnimationInterval;
 let defaultMarqueeTextArray = [ 'Raspberry Pi', 'Web Components', 'Java & Processing', 'HTML5, CSS3, ES6', 'NodeJS', 'Python', '3D Printing', 'Arduino & Co', 'AI, ML, DL', 'Artificial Intelligence', 'Artificial Insanity', 'and other toys...' ];
@@ -72,6 +74,16 @@ let marqueeScrollUp = (marqueeId) => {
                 toDisplay.push("Saturn GHA: " + globalAstroData.saturn.GHA.fmt);
                 toDisplay.push("Saturn D: " + globalAstroData.saturn.DEC.fmt);
             }
+            if (globalSRUSun !== undefined) {
+                toDisplay.push("-----------------------");
+                toDisplay.push(`Sun Elev: ${globalSRUSun.alt.toFixed(2)}°`);
+                toDisplay.push(`Sun Z: ${globalSRUSun.Z.toFixed(1)}°`);
+            }
+            if (globalSRUMoon !== undefined) {
+                toDisplay.push(`Moon Elev: ${globalSRUMoon.alt.toFixed(2)}°`);
+                toDisplay.push(`Moon Z: ${globalSRUMoon.Z.toFixed(1)}°`);
+            }
+            toDisplay.push("-----------------------");
             // toDisplay.push('And more to come!');
 
             data['text-array'] = toDisplay;
@@ -1214,6 +1226,7 @@ let drawElevation = (divId, elev, color, circleColor) => { // colors in hex, lik
         // SRU
         try {
             let sruSun = sightReduction(userPos.latitude, userPos.longitude, testResult.sun.GHA.raw, testResult.sun.DEC.raw);
+            globalSRUSun = sruSun;
             // document.getElementById('sru-elev-z').innerHTML =
             //     `SUN<br/>Elev: ${sru.alt.toFixed(2)}&deg;<br/>Z: ${sru.Z.toFixed(1)}&deg;`;
 
@@ -1223,7 +1236,7 @@ let drawElevation = (divId, elev, color, circleColor) => { // colors in hex, lik
             drawElevation('sun-elevation', sruSun.alt);
     
             let sruMoon = sightReduction(userPos.latitude, userPos.longitude, testResult.moon.GHA.raw, testResult.moon.DEC.raw);
-
+            globalSRUMoon = sruMoon;
             drawArrow('moon-azimuth', sruMoon.Z, 'Moon');
             // Sun Altitude: json.CELESTIAL_DATA.elevation
             drawElevation('moon-elevation', sruMoon.alt, '#ffffff', '#808080');
