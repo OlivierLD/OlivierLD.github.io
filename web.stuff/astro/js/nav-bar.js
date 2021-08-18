@@ -33,9 +33,11 @@ let closeHelpDialog = () => {
 let showMarqueeDialog = () => {
     let marqueeDialog = document.getElementById(MARQUEE_DIALOG_ID);
     marqueeDialog.show();
+    marqueeScrollUp("marquee-panel-01"); // Start
 };
 
 let closeMarqueeDialog = () => {
     let marqueeDialog = document.getElementById(MARQUEE_DIALOG_ID);
     marqueeDialog.close();
+    marqueeScrollUp("marquee-panel-01"); // Stop if started
 };

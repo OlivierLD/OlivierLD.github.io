@@ -23,6 +23,67 @@
     <script type="module" src="./webcomponents/MoonPhase.js"></script>
 
     <script type="text/javascript" src="date.proto.js"></script>
+
+    <script type="text/javascript">
+
+let globalAstroData;
+
+let marqueeScrollUpAnimationInterval;
+let defaultMarqueeTextArray = [ 'Raspberry Pi', 'Web Components', 'Java & Processing', 'HTML5, CSS3, ES6', 'NodeJS', 'Python', '3D Printing', 'Arduino & Co', 'AI, ML, DL', 'Artificial Intelligence', 'Artificial Insanity', 'and other toys...' ];
+
+let marqueeScrollUp = (marqueeId) => {
+    if (marqueeScrollUpAnimationInterval !== undefined) {
+        window.clearInterval(marqueeScrollUpAnimationInterval); // Stop.
+        marqueeScrollUpAnimationInterval = undefined;
+    } else {
+        let marqueeObj = document.getElementById(marqueeId);
+        let x = marqueeObj.nbCols;
+        let yOffset = marqueeObj.yOffset;
+        let y = 12;
+        marqueeScrollUpAnimationInterval = window.setInterval(function() { // Start
+            let data = JSON.parse(marqueeObj.displayData); // { text-array: txt, x: x, y: y };
+            let arrayCardinality = 1;
+            if (data['text-array'] !== undefined) {
+                arrayCardinality = data['text-array'].length;
+            }
+            yOffset -= 1;
+            if (yOffset < -(arrayCardinality * 12)) {
+                yOffset = marqueeObj.nbLines;
+            }
+            marqueeObj.yOffset = yOffset;
+
+            let toDisplay = [];
+            toDisplay.push(new Date().format('d M Y H:i:s Z'));
+            // defaultMarqueeTextArray.forEach(item => {
+            //     toDisplay.push(item);
+            // });
+            // Other values    
+            if (globalAstroData !== undefined) {        
+                toDisplay.push("Sun GHA: " + globalAstroData.sun.GHA.fmt);
+                toDisplay.push("Sun D: " + globalAstroData.sun.DEC.fmt);
+                toDisplay.push("Moon GHA: " + globalAstroData.moon.GHA.fmt);
+                toDisplay.push("Moon D: " + globalAstroData.moon.DEC.fmt);
+                toDisplay.push("Venus GHA: " + globalAstroData.venus.GHA.fmt);
+                toDisplay.push("Venus D: " + globalAstroData.venus.DEC.fmt);
+                toDisplay.push("Mars GHA: " + globalAstroData.mars.GHA.fmt);
+                toDisplay.push("Mars D: " + globalAstroData.mars.DEC.fmt);
+                toDisplay.push("Jupiter GHA: " + globalAstroData.jupiter.GHA.fmt);
+                toDisplay.push("Jupiter D: " + globalAstroData.jupiter.DEC.fmt);
+                toDisplay.push("Saturn GHA: " + globalAstroData.saturn.GHA.fmt);
+                toDisplay.push("Saturn D: " + globalAstroData.saturn.DEC.fmt);
+            }
+            // toDisplay.push('And more to come!');
+
+            data['text-array'] = toDisplay;
+            marqueeObj.displayData = JSON.stringify(data);
+            marqueeObj.repaint();
+        }, 30);
+    }
+};
+
+// console.log("marqueeScrollUp defined");
+    </script>
+
     <script type="text/javascript" src="js/nav-bar.js"></script>
     <script type="text/javascript" src="js/ajax.manager.js"></script>
 
@@ -830,16 +891,16 @@ let drawElevation = (divId, elev, color, circleColor) => { // colors in hex, lik
     <!-- Marquee values -->
     <dialog id="marquee-dialog" class="shadow-menu" style="z-index: 10;">
         <div class="dialog-header">
-            <span>Marquee</span>
+            <span>Astro Data Marquee</span>
             <span class="dialog-header-close" onclick="closeMarqueeDialog();">&times</span>
         </div>
         <div style="margin-bottom: 10px;">
                     <!-- See defaultMarqueeTextArray -->
         <marquee-panel id="marquee-panel-01"
                        class="marquee-01"
-                       width="480"
+                       width="600"
                        height="350"
-                       nb-cols="140"
+                       nb-cols="200"
                        nb-lines="68"
                        title="To start or stop the marquee&#13;Use the link below"
                        display-data='{ "text-array": ["Raspberry Pi", "Web Components", "Java & Processing", "HTML5, CSS3, ES6", "NodeJS", "Python", "Arduino & Co", "3D printing", "AI, ML, DL", "Artificial Intelligence", "Artificial Insanity", "and other toys..."], "x": 4, "y": 12 }'/>
@@ -1145,6 +1206,7 @@ let drawElevation = (divId, elev, color, circleColor) => { // colors in hex, lik
         };
 
         let testResult = sampleMain(calculationData); // in app.js
+        globalAstroData = testResult;
         if (consoleVerbose) {
             console.log("Calculation done %d-%d-%d %d:%d:%d UTC :", calculationData.utcyear, calculationData.utcmonth, calculationData.utcday, calculationData.utchour, calculationData.utcminute, calculationData.utcsecond);
             console.log("Result:\n", JSON.stringify(testResult, null, 2));
