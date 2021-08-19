@@ -209,15 +209,20 @@
         }
 
         function showHideSiblingWidget(node) {
-            let status = node.parentNode.parentNode.parentNode.childNodes[2].style.display;
+            let status = // node.parentNode.parentNode.parentNode.childNodes[2].style.display;
+                         node.parentNode.parentNode.parentNode.querySelectorAll("tr")[1].style.display;
             console.log('Status:', status);
-            if (status === 'none') {
-                node.parentNode.parentNode.parentNode.childNodes[2].style.display = 'block';
-                // node.parentNode.parentNode.parentNode.childNodes[4].style.display = 'block';
-            } else {
-                node.parentNode.parentNode.parentNode.childNodes[2].style.display = 'none';
-                // node.parentNode.parentNode.parentNode.childNodes[4].style.display = 'none';
+            let trs = node.parentNode.parentNode.parentNode.querySelectorAll("tr");
+            for (let i=1; i<trs.length; i++) {
+                trs[i].style.display = status === 'none' ? 'block' : 'none';
             }
+            // if (status === 'none') {
+            //     node.parentNode.parentNode.parentNode.childNodes[2].style.display = 'block';
+            //     // node.parentNode.parentNode.parentNode.childNodes[4].style.display = 'block';
+            // } else {
+            //     node.parentNode.parentNode.parentNode.childNodes[2].style.display = 'none';
+            //     // node.parentNode.parentNode.parentNode.childNodes[4].style.display = 'none';
+            // }
         }
 
         function changeBG(value) {
@@ -3275,6 +3280,49 @@
 					<button onclick="flyTo('world-map-03', {lat: 49.01500, lng: 2.5423080}, 'Paris');" title="Fly to Paris">Paris</button>&nbsp;&nbsp;
 					<button onclick="flyTo('world-map-03', {lat: 19.7373, lng: -155.0668648}, 'Hawai\'i');" title="Fly to Hawai'i">Hawai'i</button>
 				</div>
+			</td>
+        </tr>
+        <tr style="display: none;">
+			<td valign="top">
+				<div class="black-frame centered">
+					<world-map id="world-map-04"
+							   class="worldmap-display-02"
+							   title="World Map - Mercator"
+                               projection="MERCATOR"
+                               east="0"
+                               west="180"
+                               north="60"
+                               south="-60"
+							   width="1024"
+							   height="400"></world-map>
+				</div>
+				<!-- div class="black-frame centered">
+					<button onclick="simulateAstroData('world-map-02');"
+							title="Set Astro Data"
+							style="margin-top: 3px;">Pos to SF
+					</button>
+					<input type="checkbox" onchange="setTransparency('world-map-02', this);"/>Transparent
+					<input type="checkbox" onchange="setGrid('world-map-02', this);" checked/>Grid
+					<input type="checkbox" onchange="setSun('world-map-02', this);" checked/>Sun
+					<input type="checkbox" onchange="setMoon('world-map-02', this);" checked/>Moon
+					<input type="checkbox" onchange="setSunlight('world-map-02', this);"/>Sunlight
+					<input type="checkbox" onchange="setMoonlight('world-map-02', this);"/>Moonlight
+					<br/>
+					<input type="checkbox" onchange="setAntiSunMoon('world-map-02', this);"/>Anti Sun &amp; Moon
+					<input type="checkbox" onchange="setWanderingBodies('world-map-02', this);"/>Wandering bodies
+					<input type="checkbox" onchange="setStars('world-map-02', this);"/>Stars
+					<input type="checkbox" onchange="setTropics('world-map-02', this);"/>Tropics
+					<br/>
+					Spin
+					<button onclick="spin('world-map-02', 1);">Clockwise</button>
+					<button onclick="spin('world-map-02', -1);">Counter Clockwise</button>
+					<br/>
+					<input type="radio" name="proj-02" value="GLOBE" onchange="setProjection('world-map-02', this);"
+						   checked>Globe
+					<input type="radio" name="proj-02" value="MERCATOR" onchange="setProjection('world-map-02', this);">Mercator
+					<input type="radio" name="proj-02" value="ANAXIMANDRE"
+						   onchange="setProjection('world-map-02', this);">Square
+				</div -->
 			</td>
 		</tr>
 	</table>
