@@ -632,10 +632,12 @@ let drawElevation = (divId, elev, color, circleColor) => { // colors in hex, lik
 			padding: 4px 20px;
 			/* give the background a gradient */
 			background:#ffae00; /* fallback for browsers that don't support gradients */
-			background: -webkit-linear-gradient(top, #ffae00, #d67600);
+			/* background: -webkit-linear-gradient(top, #ffae00, #d67600); */
+			background: -webkit-linear-gradient(top, rgba(255, 174, 0, 0.6), rgba(214, 118, 0, 0.6));
 			background: -moz-linear-gradient(top, #ffae00, #d67600);
 			background: -o-linear-gradient(top, #ffae00, #d67600);
-			background: linear-gradient(top, #ffae00, #d67600);
+			/* background: linear-gradient(top, #ffae00, #d67600); */
+			background: linear-gradient(top, rgba(255, 174, 0, 0.6), rgba(214, 118, 0, 0.6));
 			border: 2px outset #dad9d8;
 			/* style the text */
 			font-family: Lato, Verdana, Andika, Arial, sans-serif; /* Andkia is available at http://www.google.com/webfonts/specimen/Andika */
