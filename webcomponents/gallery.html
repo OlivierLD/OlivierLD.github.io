@@ -900,7 +900,12 @@
 
             let lastPointToPlot = null;
             for (let i = 0; i < gc.length; i++) {
-                let panelPoint = worldMap.getPanelPoint(gc[i].pos.lat, gc[i].pos.lng);
+                let panelPoint; 
+                if (worldMap.projection.type === 'GLOBE') {
+                    panelPoint = worldMap.getPanelPoint(gc[i].pos.lat, gc[i].pos.lng);
+                } else {
+                    panelPoint = worldMap.posToCanvas(gc[i].pos.lat, gc[i].pos.lng);
+                }
                 let thisPointIsBehind = worldMap.isBehind(Math.toRadians(gc[i].pos.lat), Math.toRadians(gc[i].pos.lng - worldMap.globeViewLngOffset));
                 if (!thisPointIsBehind || worldMap.transparentGlobe) {
                     // Draw segment
@@ -921,31 +926,43 @@
         }
 
         function plotSatellite(context, worldMap, userPos, satColor, name, satellite) {
-            let sat = worldMap.getPanelPoint(satellite.lat, satellite.lng);
+            let sat;
+            if (worldMap.projection.type === 'GLOBE') {
+                sat = worldMap.getPanelPoint(satellite.lat, satellite.lng);
+            } else {
+                sat = worldMap.posToCanvas(satellite.lat, satellite.lng);
+            }
             let thisPointIsBehind = worldMap.isBehind(Math.toRadians(satellite.lat), Math.toRadians(satellite.lng - worldMap.globeViewLngOffset));
             if (!thisPointIsBehind || worldMap.transparentGlobe) {
-                // Draw Satellite
-                worldMap.plot(context, sat, satColor);
-                context.fillStyle = satColor;
-                context.fillText(name, Math.round(sat.x) + 3, Math.round(sat.y) - 3);
-                // Arrow, to the satellite
-                context.setLineDash([2]);
-                context.strokeStyle = satColor;
-                context.beginPath();
-                context.moveTo(userPos.x, userPos.y);
-                context.lineTo(sat.x, sat.y);
-                context.stroke();
-                context.closePath();
-                context.setLineDash([0]); // Reset
-                context.strokeStyle = satColor;
-                let deltaX = sat.x - userPos.x;
-                let deltaY = sat.y - userPos.y;
-                context.beginPath();
-                context.moveTo(sat.x, sat.y);
-                context.lineTo(sat.x + deltaX, sat.y + deltaY);
-                context.stroke();
-                context.closePath();
-                worldMap.fillCircle(context, {x: sat.x + deltaX, y: sat.y + deltaY}, 6, satColor);
+                if (worldMap.projection.type === 'GLOBE') {
+                    // Draw Satellite
+                    worldMap.plot(context, sat, satColor);
+                    context.fillStyle = satColor;
+                    context.fillText(name, Math.round(sat.x) + 3, Math.round(sat.y) - 3);
+                    // Arrow, to the satellite
+                    context.setLineDash([2]);
+                    context.strokeStyle = satColor;
+                    context.beginPath();
+                    context.moveTo(userPos.x, userPos.y);
+                    context.lineTo(sat.x, sat.y);
+                    context.stroke();
+                    context.closePath();
+                    context.setLineDash([0]); // Reset
+                    context.strokeStyle = satColor;
+                    let deltaX = sat.x - userPos.x;
+                    let deltaY = sat.y - userPos.y;
+                    context.beginPath();
+                    context.moveTo(sat.x, sat.y);
+                    context.lineTo(sat.x + deltaX, sat.y + deltaY);
+                    context.stroke();
+                    context.closePath();
+                    worldMap.fillCircle(context, {x: sat.x + deltaX, y: sat.y + deltaY}, 6, satColor);
+                } else {
+                    // Draw Satellite - Just plot.
+                    worldMap.plot(context, sat, satColor);
+                    context.fillStyle = satColor;
+                    context.fillText(name, Math.round(sat.x) + 3, Math.round(sat.y) - 3);
+                }
             }
         }
 
@@ -975,7 +992,12 @@
         function callAfter(id) {
             document.getElementById(id).setDoAfter((worldMap, context) => {
                 if (Object.keys(worldMap.userPosition).length > 0) {
-                    let userPos = worldMap.getPanelPoint(worldMap.userPosition.latitude, worldMap.userPosition.longitude);
+                    let userPos;
+                    if (worldMap.projection.type === 'GLOBE') {
+                        userPos = worldMap.getPanelPoint(worldMap.userPosition.latitude, worldMap.userPosition.longitude);
+                    } else {
+                        userPos = worldMap.posToCanvas(worldMap.userPosition.latitude, worldMap.userPosition.longitude);
+                    }
                     /*
                                          * Display 4 geostationary satellites. Data provided by the user, below.
                                          */
@@ -1003,8 +1025,8 @@
                     }
                     // Plot great-circle between Paris & Hawaii (Hilo Bay)
                     plotGreatCircle(context, worldMap,
-                        {lat: 49.01500, lng: 2.5423080},
-                        {lat: 19.7373, lng: -155.0668648});
+                        {lat: 49.01500, lng: 2.5423080},    // Paris
+                        {lat: 19.7373, lng: -155.0668648}); // Hawai'i
                 }
             });
             document.getElementById(id).repaint();
@@ -3284,45 +3306,85 @@
         </tr>
         <tr style="display: none;">
 			<td valign="top">
+               <div style="display: grid; grid-template-columns: auto auto;">
 				<div class="black-frame centered">
 					<world-map id="world-map-04"
-							   class="worldmap-display-02"
+							   class="worldmap-display-01"
 							   title="World Map - Mercator"
                                projection="MERCATOR"
-                               east="0"
+                               east="40"
                                west="180"
                                north="60"
                                south="-60"
-							   width="1024"
-							   height="400"></world-map>
-				</div>
-				<!-- div class="black-frame centered">
-					<button onclick="simulateAstroData('world-map-02');"
+							   width="800"
+							   height="600"></world-map>
+                </div>
+                <div>
+                    <pre style="font-weight: bold; text-align: left; color: white; vertical-align: top; margin-top: 4px;">    
+  &lt;world-map id="world-map-04"
+             class="worldmap-display"
+             title="World Map - Mercator"
+             projection="MERCATOR"
+             east="40"
+             west="180"
+             north="60"
+             south="-60"
+             width="800"
+             height="600">&lt;/world-map>
+                    </pre>
+                    <button onclick="simulateAstroData('world-map-04');"
 							title="Set Astro Data"
 							style="margin-top: 3px;">Pos to SF
 					</button>
-					<input type="checkbox" onchange="setTransparency('world-map-02', this);"/>Transparent
-					<input type="checkbox" onchange="setGrid('world-map-02', this);" checked/>Grid
-					<input type="checkbox" onchange="setSun('world-map-02', this);" checked/>Sun
-					<input type="checkbox" onchange="setMoon('world-map-02', this);" checked/>Moon
-					<input type="checkbox" onchange="setSunlight('world-map-02', this);"/>Sunlight
-					<input type="checkbox" onchange="setMoonlight('world-map-02', this);"/>Moonlight
-					<br/>
-					<input type="checkbox" onchange="setAntiSunMoon('world-map-02', this);"/>Anti Sun &amp; Moon
-					<input type="checkbox" onchange="setWanderingBodies('world-map-02', this);"/>Wandering bodies
-					<input type="checkbox" onchange="setStars('world-map-02', this);"/>Stars
-					<input type="checkbox" onchange="setTropics('world-map-02', this);"/>Tropics
-					<br/>
-					Spin
-					<button onclick="spin('world-map-02', 1);">Clockwise</button>
-					<button onclick="spin('world-map-02', -1);">Counter Clockwise</button>
-					<br/>
-					<input type="radio" name="proj-02" value="GLOBE" onchange="setProjection('world-map-02', this);"
-						   checked>Globe
-					<input type="radio" name="proj-02" value="MERCATOR" onchange="setProjection('world-map-02', this);">Mercator
-					<input type="radio" name="proj-02" value="ANAXIMANDRE"
-						   onchange="setProjection('world-map-02', this);">Square
-				</div -->
+                    <button onclick="callAfter('world-map-04')" title="Satellites and Great Circle (Paris-Hawaii)">After</button>
+                </div> 
+            </div>
+            Move the mouse on the map, and see its coordinates below.
+            <div class="black-frame">
+                <span id="recalculated-east"></span><br/>
+                <span id="mouse-lat"></span><br/>
+                <span id="mouse-long"></span>
+            </div>
+
+            <script type="text/javascript">
+let map = document.getElementById('world-map-04'); 
+
+map.wmCallback = prm => {
+    // console.log(`Callback invoked with:${JSON.stringify(prm)}`);
+    let val = '';
+    if (prm.type && prm.type === 'calculated-east') {
+        val = 'Re-calculated East: ' + prm.value;
+    } else {
+        val = JSON.stringify(prm);
+    }
+    document.getElementById('recalculated-east').innerText = val;
+};
+
+map.addEventListener('mousemove', evt => {
+    // console.log(`Mouse Moved: X:${evt.clientX}, Y:${evt.clientY}, screenX:${evt.screenX}, screenY:${evt.screenY}, offsetX:${evt.offsetX}, offsetY:${evt.offsetY}`);
+    // console.log(`evt :${JSON.stringify(evt)}`);
+
+    let rect = evt.target.getBoundingClientRect();
+    let x = evt.clientX - rect.left; // x position within the element.
+    let y = evt.offsetY; // evt.clientY - rect.top;  // y position within the element. // TODO The value is to big by ~6
+    // console.log(`Mouse X:${x}, Y:${y}`);
+    // // let y = evt.offsetY + rect.height;  // y position within the element.
+
+    let pos = map.canvasToPos(x, y - 6); // Cheated!!! 
+    // console.log(` --> ${JSON.stringify(pos)}`);
+    // if (x === 0) {
+    //     debugger;
+    // }
+    let strLat = map.decToSex(pos.lat, "NS");
+	let strLng = map.decToSex(pos.lng, "EW");
+    // console.log(` --> ${strLat} / ${strLng}`);
+    document.getElementById('mouse-lat').innerText = strLat;
+    document.getElementById('mouse-long').innerText = strLng;
+
+    map.title = `${strLat}\n${strLng}`;
+});
+                    
+               </script>           
 			</td>
 		</tr>
 	</table>
