@@ -540,6 +540,12 @@ let drawElevation = (divId, elev, color, circleColor) => { // colors in hex, lik
     }
 };
 
+let showForeGround = true;
+let toggleForeground = () => {
+    showForeGround = !showForeGround;
+    document.getElementById('full-foreground').style.display = showForeGround ? 'block' : 'none';
+
+};
     </script>
 
     <link rel="stylesheet" href="css/web-components.css">
@@ -841,6 +847,10 @@ let drawElevation = (divId, elev, color, circleColor) => { // colors in hex, lik
             <p>
                 Use the Show/Hide Computed Data button to display the computed data in the foreground.
             </p>
+            <p>
+                The Marquee panel (available from the hamburger &#8801; menu) will show the same data, formatted, 
+                in a dialog, on top of others.
+            </p>
         </div>
       </dialog>
 
@@ -937,6 +947,8 @@ let drawElevation = (divId, elev, color, circleColor) => { // colors in hex, lik
     <hr style="color: rgb(192,192,192, 0.5); width: 90%;"/>
     <a href="javascript:void(0)" class="active-link" style="margin-top: 20px;" onclick="showPrmsDialog();">Background parameters</a>
 
+    <a href="javascript:void(0)" class="active-link" style="margin-top: 20px;" onclick="toggleForeground();">Toggle foreground</a>
+
     <a href="javascript:void(0)" class="active-link" onclick="showMarqueeDialog();">Marquee Panel</a>
     <hr style="color: rgb(192,192,192, 0.5); width: 90%;"/>
     <a href="javascript:void(0)" class="active-link" style="margin-top: 20px;">More links here...</a>
@@ -945,7 +957,7 @@ let drawElevation = (divId, elev, color, circleColor) => { // colors in hex, lik
 
     <!-- More links here if needed -->
 </div>
-<div style="text-align: right;"><small>Last code update Aug 19, 2021, 13:43 MDT</small></div>    
+<div style="text-align: right;"><small>Last code update Aug 22, 2021, 9:31 PDT</small></div>    
 <h1 style="width: 100%; font-style: normal; text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px silver;"><span style="cursor: pointer;" onclick="openNav()" onmouseover="openNav()" title="Hamburger">&nbsp; &#8801;</span> ES6 Celestial Computer test, with BG Components</h1>
 
 <div class="background bg-container" 
@@ -958,6 +970,7 @@ let drawElevation = (divId, elev, color, circleColor) => { // colors in hex, lik
             <world-map id="world-map-01"
                        class="worldmap-display-bg"
                        title="World Map&#13;Background"
+                       with-anti-sun-moon="true"
                        width="800"
                        height="600"></world-map>
         </div>
@@ -1065,137 +1078,139 @@ let drawElevation = (divId, elev, color, circleColor) => { // colors in hex, lik
     </div>
 </div>
 
-<div style="padding: 4px; border: 0px solid rgba(0, 255, 255, 0.25); border-radius: 5px;">
-    <small>
-        Once the page is loaded, all calculations and renderings happen only in the browser, it generates absolutely NO network traffic.<br/>
-        Guaranteed <b><i>0%</i></b> external libraries (100% pure organic HTML5/CSS3/ES6), no GMO.
-    </small>
-</div>
-<table style="width: 96%;">
-    <tr>
-        <td style="text-align: left;" colspan="1">
-            <div style="border: 0px solid rgba(0, 255, 255, 0.25); border-radius: 5px;">
-                <!-- See https://unicode-table.com/en/sets/arrow-symbols/ -->
-                <div id="user-pos-switch" onclick="expandCollapseSetPosData();" title="Click to expand/collase"
-                    style="margin: 3px; padding-left: 5px; padding-right: 5px; cursor: pointer;"><span id="pos-char">&#9658;</span> Position on Earth</div>
+<div id="full-foreground" style="display: block;">
+    <div style="padding: 4px; border: 0px solid rgba(0, 255, 255, 0.25); border-radius: 5px;">
+        <small>
+            Once the page is loaded, all calculations and renderings happen only in the browser, it generates absolutely NO network traffic.<br/>
+            Guaranteed <b><i>0%</i></b> external libraries (100% pure organic HTML5/CSS3/ES6), no GMO.
+        </small>
+    </div>
+    <table style="width: 96%;">
+        <tr>
+            <td style="text-align: left;" colspan="1">
+                <div style="border: 0px solid rgba(0, 255, 255, 0.25); border-radius: 5px;">
+                    <!-- See https://unicode-table.com/en/sets/arrow-symbols/ -->
+                    <div id="user-pos-switch" onclick="expandCollapseSetPosData();" title="Click to expand/collase"
+                        style="margin: 3px; padding-left: 5px; padding-right: 5px; cursor: pointer;"><span id="pos-char">&#9658;</span> Position on Earth</div>
 
-                <div id="user-pos-widgets" class="smooth" style="padding: 2px; border: 1px solid rgba(0, 255, 255, 0.25); border-radius: 5px;"> <!-- display: none;  -->
-                    Latitude:
-                    <select id="pos-lat-sign-01">
-                        <option value="N" selected>N</option> <!-- Default value -->
-                        <option value="S">S</option>
-                    </select>
-                    <input type="number"
-                        id="pos-lat-deg-01"
-                        placeholder="Deg"
-                        title="Lat degrees to set"
-                        style="width: 40px; text-align: center;"
-                        min="0"
-                        max="90"
-                        step="1"
-                        value="37"/> <!-- Default value -->
-                    <input type="number"
-                        id="pos-lat-min-01"
-                        placeholder="Minutes"
-                        title="Lat minutes to set"
-                        style="width: 60px; text-align: center;"
-                        min="0"
-                        max="59.99"
-                        step="0.01"
-                        value="44.93"/> <!-- Default value -->
-                    &nbsp;&nbsp;Longitude:
-                    <select id="pos-lng-sign-01">
-                        <option value="E">E</option>
-                        <option value="W" selected>W</option> <!-- Default value -->
-                    </select>
-                    <input type="number"
-                        id="pos-lng-deg-01"
-                        placeholder="Deg"
-                        title="Lng degrees to set"
-                        style="width: 40px; text-align: center;"
-                        min="0"
-                        max="180"
-                        step="1"
-                        value="122"/> <!-- Default value -->
-                    <input type="number"
-                        id="pos-lng-min-01"
-                        placeholder="Minutes"
-                        title="Lng minutes to set"
-                        style="width: 60px; text-align: center;"
-                        min="0"
-                        max="59.99"
-                        step="0.01"
-                        value="30.42"/> <!-- Default value -->
-                    &nbsp;&nbsp;
-                    <button id="update-position"
-                            onclick="updatePosition();"
-                            title="Set position value"
-                            style="margin-top: 3px;">Set Position
-                    </button>
-                    <div id="url-placeHolder" style="display: none;">
-                        <small>Bookmark this URL:</small>
-                        <div id="url-to-bookmark" class="bookmark"></div>
+                    <div id="user-pos-widgets" class="smooth" style="padding: 2px; border: 1px solid rgba(0, 255, 255, 0.25); border-radius: 5px;"> <!-- display: none;  -->
+                        Latitude:
+                        <select id="pos-lat-sign-01">
+                            <option value="N" selected>N</option> <!-- Default value -->
+                            <option value="S">S</option>
+                        </select>
+                        <input type="number"
+                            id="pos-lat-deg-01"
+                            placeholder="Deg"
+                            title="Lat degrees to set"
+                            style="width: 40px; text-align: center;"
+                            min="0"
+                            max="90"
+                            step="1"
+                            value="37"/> <!-- Default value -->
+                        <input type="number"
+                            id="pos-lat-min-01"
+                            placeholder="Minutes"
+                            title="Lat minutes to set"
+                            style="width: 60px; text-align: center;"
+                            min="0"
+                            max="59.99"
+                            step="0.01"
+                            value="44.93"/> <!-- Default value -->
+                        &nbsp;&nbsp;Longitude:
+                        <select id="pos-lng-sign-01">
+                            <option value="E">E</option>
+                            <option value="W" selected>W</option> <!-- Default value -->
+                        </select>
+                        <input type="number"
+                            id="pos-lng-deg-01"
+                            placeholder="Deg"
+                            title="Lng degrees to set"
+                            style="width: 40px; text-align: center;"
+                            min="0"
+                            max="180"
+                            step="1"
+                            value="122"/> <!-- Default value -->
+                        <input type="number"
+                            id="pos-lng-min-01"
+                            placeholder="Minutes"
+                            title="Lng minutes to set"
+                            style="width: 60px; text-align: center;"
+                            min="0"
+                            max="59.99"
+                            step="0.01"
+                            value="30.42"/> <!-- Default value -->
+                        &nbsp;&nbsp;
+                        <button id="update-position"
+                                onclick="updatePosition();"
+                                title="Set position value"
+                                style="margin-top: 3px;">Set Position
+                        </button>
+                        <div id="url-placeHolder" style="display: none;">
+                            <small>Bookmark this URL:</small>
+                            <div id="url-to-bookmark" class="bookmark"></div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </td>
-        <td style="vertical-align: top; min-width: 50px; max-width: 55px; width: 50px; border: 0px solid silver; border-radius: 4px;" rowspan="2">
-            <div id="moon-phase-div" style="text-align: right;" title=""></div>
-        </td>
-    </tr>
-    <tr>
-        <td style="vertical-align: top;" colspan="1">
-            <div style="border: 0px solid rgba(0, 255, 255, 0.25); border-radius: 5px;">
-                <div id="user-date-switch" onclick="expandCollapseDateData();" title="Click to expand/collase"
-                     style="margin: 3px; padding-left: 5px; padding-right: 5px; cursor: pointer;"><span id="date-char">&#9658;</span> UTC Date, and options</div>
+            </td>
+            <td style="vertical-align: top; min-width: 50px; max-width: 55px; width: 50px; border: 0px solid silver; border-radius: 4px;" rowspan="2">
+                <div id="moon-phase-div" style="text-align: right;" title=""></div>
+            </td>
+        </tr>
+        <tr>
+            <td style="vertical-align: top;" colspan="1">
+                <div style="border: 0px solid rgba(0, 255, 255, 0.25); border-radius: 5px;">
+                    <div id="user-date-switch" onclick="expandCollapseDateData();" title="Click to expand/collase"
+                        style="margin: 3px; padding-left: 5px; padding-right: 5px; cursor: pointer;"><span id="date-char">&#9658;</span> UTC Date, and options</div>
 
-                <div id="user-date-widgets" class="smooth" style="padding: 2px; border: 1px solid rgba(0, 255, 255, 0.25); border-radius: 5px;">
-                    <small>Enter UTC date and time, then click the Compute button.</small>
-                    <div>
-                        <input class="day" type="number" id="UTC-day" placeholder="day" min="1" max="31" title="Day of the Month">
-                        <select class="month" id="UTC-month" title="Month of the year">
-                            <option value="1">Jan</option>
-                            <option value="2">Feb</option>
-                            <option value="3">Mar</option>
-                            <option value="4">Apr</option>
-                            <option value="5">May</option>
-                            <option value="6">Jun</option>
-                            <option value="7">Jul</option>
-                            <option value="8">Aug</option>
-                            <option value="9">Sep</option>
-                            <option value="10">Oct</option>
-                            <option value="11">Nov</option>
-                            <option value="12">Dec</option>
-                        </select>
-                        <input class="year" type="number" id="UTC-year" placeholder="year" min="0" title="year">
-                        at
-                        <input class="day" type="number" id="UTC-hour" placeholder="hours" min="0" max="23" title="Hour of the day [0..23]">:
-                        <input class="day" type="number" id="UTC-minute" placeholder="minutes" min="0" max="59" title="minutes">:
-                        <input class="day" type="number" id="UTC-second" placeholder="seconds" min="0" max="59" title="seconds"> UTC
-                    </div>
-                    <div>
-                        <input type="checkbox" id="no-planet"><small>Skip planets calculations</small>
-                        <input type="checkbox" id="no-star"><small>Skip stars calculations</small>
-                        <input type="checkbox" id="verbose" onchange="verbose(this);"><small>Console Verbose</small>
-                    </div>
+                    <div id="user-date-widgets" class="smooth" style="padding: 2px; border: 1px solid rgba(0, 255, 255, 0.25); border-radius: 5px;">
+                        <small>Enter UTC date and time, then click the Compute button.</small>
+                        <div>
+                            <input class="day" type="number" id="UTC-day" placeholder="day" min="1" max="31" title="Day of the Month">
+                            <select class="month" id="UTC-month" title="Month of the year">
+                                <option value="1">Jan</option>
+                                <option value="2">Feb</option>
+                                <option value="3">Mar</option>
+                                <option value="4">Apr</option>
+                                <option value="5">May</option>
+                                <option value="6">Jun</option>
+                                <option value="7">Jul</option>
+                                <option value="8">Aug</option>
+                                <option value="9">Sep</option>
+                                <option value="10">Oct</option>
+                                <option value="11">Nov</option>
+                                <option value="12">Dec</option>
+                            </select>
+                            <input class="year" type="number" id="UTC-year" placeholder="year" min="0" title="year">
+                            at
+                            <input class="day" type="number" id="UTC-hour" placeholder="hours" min="0" max="23" title="Hour of the day [0..23]">:
+                            <input class="day" type="number" id="UTC-minute" placeholder="minutes" min="0" max="59" title="minutes">:
+                            <input class="day" type="number" id="UTC-second" placeholder="seconds" min="0" max="59" title="seconds"> UTC
+                        </div>
+                        <div>
+                            <input type="checkbox" id="no-planet"><small>Skip planets calculations</small>
+                            <input type="checkbox" id="no-star"><small>Skip stars calculations</small>
+                            <input type="checkbox" id="verbose" onchange="verbose(this);"><small>Console Verbose</small>
+                        </div>
+                    </div>    
                 </div>    
-            </div>    
-        </td>
-    </tr>
-</table>
-<p style="margin: 20px;">
-    Use the hamburger (&#8801;) at the top left to set the background parameters (Wandering bodies, Sunlight, Real Time...)
-    <br/>
-    And then you can show or hide the computed data...
-</p>
-<h2 style="margin-left: 10px; color: rgba(255, 255, 255, 0.5);">Heading and PRMSL are <i>simulated</i></h2>
+            </td>
+        </tr>
+    </table>
+    <p style="margin: 20px;">
+        Use the hamburger (&#8801;) at the top left to set the background parameters (Wandering bodies, Sunlight, Real Time...)
+        <br/>
+        And then you can show or hide the computed data...
+    </p>
+    <h2 style="margin-left: 10px; color: rgba(255, 255, 255, 0.5);">Heading and PRMSL are <i>simulated</i></h2>
 
-<button onclick="showHideData();" style="margin: 10px;">Show/Hide Computed Data</button>
+    <button onclick="showHideData();" style="margin: 10px;">Show/Hide Computed Data</button>
 
-<div id="raw-data" style="display: none;">
-    <div id="result" class="result"></div>
+    <div id="raw-data" style="display: none;">
+        <div id="result" class="result"></div>
 
-    <div id="details" class="result" style="background-color: rgba(0,0,0,0.5);"></div>
+        <div id="details" class="result" style="background-color: rgba(0,0,0,0.5);"></div>
+    </div>
 </div>
 
 </body>
