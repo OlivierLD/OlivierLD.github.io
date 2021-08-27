@@ -4,10 +4,15 @@ import {
 	getGCDistance, 
 	getGCDistanceDegreesNM, 
 	calculateGreatCircle, 
-	getMoonTilt 
+	getMoonTilt,
+	calcLHA 
 } from './utils.js';
 // import * as CelestialComputer from './lib/celestial-computer.min.js';
 // let CelestialComputer = require('./longterm.almanac.js');
+
+import {
+	decToSex
+} from './webcomponents/utilities/Utilities.js';
 
 export function sampleMain(userDataObject) {
 	let year = userDataObject.utcyear;
@@ -59,6 +64,9 @@ window.getGCDistance = getGCDistance;
 window.getGCDistanceDegreesNM = getGCDistanceDegreesNM;
 window.calculateGreatCircle = calculateGreatCircle;
 window.getMoonTilt = getMoonTilt;
+
+window.calcLHA = calcLHA;
+window.decToSex = decToSex;
 
 // console.log("SRU Test:" + JSON.stringify(sightReduction(37.5,-122.3, 80, 22)));
 

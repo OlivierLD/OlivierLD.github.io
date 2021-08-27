@@ -321,6 +321,14 @@ export function getMoonTilt(obs, sunCoord, moonCoord ) {
 	return alpha;
 };
 
+export function calcLHA(gha, longitude) {
+	let lha = gha + longitude;
+	while (lha > 360) {
+		lha -= 360;
+	}
+	return lha;
+};
+
 /*
 exports.sind = sind;
 exports.cosd = cosd;
