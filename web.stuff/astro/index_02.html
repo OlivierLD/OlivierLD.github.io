@@ -1289,8 +1289,8 @@ let toggleForeground = () => {
             " Sun    : GHA: " + testResult.sun.GHA.fmt + ", RA: " + testResult.sun.RA.fmt + ", Dec: " + testResult.sun.DEC.fmt + ", sd:" + testResult.sun.SD.fmt + ", hp:" + testResult.sun.HP.fmt + "\n" +
             " Moon   : GHA: " + testResult.moon.GHA.fmt + ", RA: " + testResult.moon.RA.fmt + ", Dec: " + testResult.moon.DEC.fmt + ", sd:" + testResult.moon.SD.fmt + ", hp:" + testResult.moon.HP.fmt + "\n" +
             "     Moon Phase:" + testResult.moon.phase.phaseAngle + "&deg;, " + testResult.moon.phase.phase + "\n" +
-            `LHA Sun: ${decToSex(lhaSun)}\n` +
-            `LHA Moon: ${decToSex(lhaMoon)}\n`;
+            ` LHA Sun: ${decToSex(lhaSun)}\n` +
+            ` LHA Moon: ${decToSex(lhaMoon)}\n`;
 
 
         if (!document.getElementById('no-planet').checked) {
