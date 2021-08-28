@@ -1286,21 +1286,20 @@ let toggleForeground = () => {
         document.getElementById('result').innerHTML = '<pre>' + JSON.stringify(testResult, null, 2) + '</pre>';
         // More here, ...
         let detailsContent =
-            " Sun    : GHA: " + testResult.sun.GHA.fmt + ", RA: " + testResult.sun.RA.fmt + ", Dec: " + testResult.sun.DEC.fmt + ", sd:" + testResult.sun.SD.fmt + ", hp:" + testResult.sun.HP.fmt + "\n" +
-            " Moon   : GHA: " + testResult.moon.GHA.fmt + ", RA: " + testResult.moon.RA.fmt + ", Dec: " + testResult.moon.DEC.fmt + ", sd:" + testResult.moon.SD.fmt + ", hp:" + testResult.moon.HP.fmt + "\n" +
+            " Sun     : GHA: " + testResult.sun.GHA.fmt + ", RA: " + testResult.sun.RA.fmt + ", Dec: " + testResult.sun.DEC.fmt + ", sd:" + testResult.sun.SD.fmt + ", hp:" + testResult.sun.HP.fmt + "\n" +
+            " Moon    : GHA: " + testResult.moon.GHA.fmt + ", RA: " + testResult.moon.RA.fmt + ", Dec: " + testResult.moon.DEC.fmt + ", sd:" + testResult.moon.SD.fmt + ", hp:" + testResult.moon.HP.fmt + "\n" +
             "     Moon Phase:" + testResult.moon.phase.phaseAngle + "&deg;, " + testResult.moon.phase.phase + "\n" +
-            ` LHA Sun: ${decToSex(lhaSun)}\n` +
+            ` LHA Sun : ${decToSex(lhaSun)}\n` +
             ` LHA Moon: ${decToSex(lhaMoon)}\n`;
-
 
         if (!document.getElementById('no-planet').checked) {
             detailsContent +=
-                " Venus  : GHA: " + testResult.venus.GHA.fmt + ", RA: " + testResult.venus.RA.fmt + ", Dec: " + testResult.venus.DEC.fmt + ", sd:" + testResult.venus.SD.fmt + ", hp:" + testResult.venus.HP.fmt + "\n" +
-                " Mars   : GHA: " + testResult.mars.GHA.fmt + ", RA: " + testResult.mars.RA.fmt + ", Dec: " + testResult.mars.DEC.fmt + ", sd:" + testResult.mars.SD.fmt + ", hp:" + testResult.mars.HP.fmt + "\n" +
-                " Jupiter: GHA: " + testResult.jupiter.GHA.fmt + ", RA: " + testResult.jupiter.RA.fmt + ", Dec: " + testResult.jupiter.DEC.fmt + ", sd:" + testResult.jupiter.SD.fmt + ", hp:" + testResult.jupiter.HP.fmt + "\n" +
-                " Saturn : GHA: " + testResult.saturn.GHA.fmt + ", RA: " + testResult.saturn.RA.fmt + ", Dec: " + testResult.saturn.DEC.fmt + ", sd:" + testResult.saturn.SD.fmt + ", hp:" + testResult.saturn.HP.fmt + "\n" +
+                " Venus   : GHA: " + testResult.venus.GHA.fmt + ", RA: " + testResult.venus.RA.fmt + ", Dec: " + testResult.venus.DEC.fmt + ", sd:" + testResult.venus.SD.fmt + ", hp:" + testResult.venus.HP.fmt + "\n" +
+                " Mars    : GHA: " + testResult.mars.GHA.fmt + ", RA: " + testResult.mars.RA.fmt + ", Dec: " + testResult.mars.DEC.fmt + ", sd:" + testResult.mars.SD.fmt + ", hp:" + testResult.mars.HP.fmt + "\n" +
+                " Jupiter : GHA: " + testResult.jupiter.GHA.fmt + ", RA: " + testResult.jupiter.RA.fmt + ", Dec: " + testResult.jupiter.DEC.fmt + ", sd:" + testResult.jupiter.SD.fmt + ", hp:" + testResult.jupiter.HP.fmt + "\n" +
+                " Saturn  : GHA: " + testResult.saturn.GHA.fmt + ", RA: " + testResult.saturn.RA.fmt + ", Dec: " + testResult.saturn.DEC.fmt + ", sd:" + testResult.saturn.SD.fmt + ", hp:" + testResult.saturn.HP.fmt + "\n" +
                 "\n" +
-                " Polaris: GHA: " + testResult.polaris.GHA.fmt + ", RA: " + testResult.polaris.RA.fmt + ", Dec: " + testResult.polaris.DEC.fmt + "\n";
+                " Polaris : GHA: " + testResult.polaris.GHA.fmt + ", RA: " + testResult.polaris.RA.fmt + ", Dec: " + testResult.polaris.DEC.fmt + "\n";
         }
         if (!document.getElementById('no-star').checked) {
             // TODO
