@@ -326,6 +326,9 @@ export function calcLHA(gha, longitude) {
 	while (lha > 360) {
 		lha -= 360;
 	}
+	while (lha < 0) {
+		lha += 360;
+	}
 	return lha;
 };
 
