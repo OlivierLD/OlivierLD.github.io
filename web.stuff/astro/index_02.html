@@ -74,6 +74,13 @@ let marqueeScrollUp = (marqueeId) => {
                 toDisplay.push("Saturn GHA: " + globalAstroData.saturn.GHA.fmt);
                 toDisplay.push("Saturn D: " + globalAstroData.saturn.DEC.fmt);
             }
+            if (userPos !== undefined && userPos.longitude !== undefined) {
+                let lhaSun  = calcLHA(globalAstroData.sun.GHA.raw, userPos.longitude);
+                let lhaMoon = calcLHA(globalAstroData.moon.GHA.raw, userPos.longitude);
+                toDisplay.push("-----------------------");
+                toDisplay.push(`LHA Sun: ${decToSex(lhaSun)}`);
+                toDisplay.push(`LHA Moon: ${decToSex(lhaMoon)}`);
+            }
             if (globalSRUSun !== undefined) {
                 toDisplay.push("-----------------------");
                 toDisplay.push(`Sun Elev: ${globalSRUSun.alt.toFixed(2)}°`);
@@ -959,7 +966,7 @@ let toggleForeground = () => {
 </div>
 <div style="display: grid; grid-template-columns: auto auto;">
     <div><h1 style="vertical-align: top; margin-top: 0; font-style: normal; text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px silver;"><span style="cursor: pointer;" onclick="openNav()" onmouseover="openNav()" title="Hamburger">&nbsp; &#8801;</span> ES6 Celestial Computer, with BG Components</h1></div>
-    <div style="text-align: right;"><small>Last code update Aug 22, 2021, 9:31 PDT</small></div>    
+    <div style="text-align: right;"><small>Last code update Aug 28, 2021, 7:48 PDT</small></div>    
 </div>
 <div class="background bg-container" 
      style="width: 98%; margin: 10px; margin-top: 50px; border: 2px solid rgba(0, 255, 255, 0.5); border-radius: 10px;">
@@ -1281,7 +1288,11 @@ let toggleForeground = () => {
         let detailsContent =
             " Sun    : GHA: " + testResult.sun.GHA.fmt + ", RA: " + testResult.sun.RA.fmt + ", Dec: " + testResult.sun.DEC.fmt + ", sd:" + testResult.sun.SD.fmt + ", hp:" + testResult.sun.HP.fmt + "\n" +
             " Moon   : GHA: " + testResult.moon.GHA.fmt + ", RA: " + testResult.moon.RA.fmt + ", Dec: " + testResult.moon.DEC.fmt + ", sd:" + testResult.moon.SD.fmt + ", hp:" + testResult.moon.HP.fmt + "\n" +
-            "     Moon Phase:" + testResult.moon.phase.phaseAngle + "&deg;, " + testResult.moon.phase.phase + "\n";
+            "     Moon Phase:" + testResult.moon.phase.phaseAngle + "&deg;, " + testResult.moon.phase.phase + "\n" +
+            `LHA Sun: ${decToSex(lhaSun)}\n` +
+            `LHA Moon: ${decToSex(lhaMoon)}\n`;
+
+
         if (!document.getElementById('no-planet').checked) {
             detailsContent +=
                 " Venus  : GHA: " + testResult.venus.GHA.fmt + ", RA: " + testResult.venus.RA.fmt + ", Dec: " + testResult.venus.DEC.fmt + ", sd:" + testResult.venus.SD.fmt + ", hp:" + testResult.venus.HP.fmt + "\n" +
