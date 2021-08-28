@@ -1,6 +1,6 @@
 import * as CelestialComputer from './longterm.almanac.js';
 import { 
-	sightReduction, 
+	// sightReduction, 
 	getGCDistance, 
 	getGCDistanceDegreesNM, 
 	calculateGreatCircle, 
@@ -69,4 +69,3 @@ window.calcLHA = calcLHA;
 window.decToSex = decToSex;
 
 // console.log("SRU Test:" + JSON.stringify(sightReduction(37.5,-122.3, 80, 22)));
-
