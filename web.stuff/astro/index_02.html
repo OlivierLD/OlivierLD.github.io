@@ -1080,8 +1080,17 @@ let toggleForeground = () => {
     <div class="centered" style="grid-area: utc">
         <!-- SPLIT-FLAP UTC -->
         <div style="margin: 10px;">
+            <split-flap-display id="split-flap-utc-date-display"
+                                class="split-flap-night-bg"
+                                nb-char="15"
+                                font-size="30"
+                                justified="LEFT"
+                                title="UTC Date"
+                                value="Mon 01 Jan 1970"></split-flap-display>
+
             <split-flap-display id="split-flap-utc-display"
                                 class="split-flap-night-bg"
+                                style="margin-left: 10px;"
                                 nb-char="12"
                                 font-size="30"
                                 justified="LEFT"
@@ -1335,7 +1344,12 @@ let toggleForeground = () => {
         let utcOffsetInMinutes = new Date().getTimezoneOffset();
         let utcTime = new Date(testResult.epoch + (utcOffsetInMinutes * 60 * 1000)); // .getUTCDate();
 
-        let date = utcTime.format("d-m-Y-l");
+//      let date = utcTime.format("d-m-Y-l");
+        let date = utcTime.format("D d M Y");
+        let splitFalpDate = document.getElementById('split-flap-utc-date-display');
+        splitFalpDate.value = date;
+        splitFalpDate.repaint();
+
         // let calendar = document.getElementById('calendar-01');
         // calendar.value = date;
         // calendar.repaint();
