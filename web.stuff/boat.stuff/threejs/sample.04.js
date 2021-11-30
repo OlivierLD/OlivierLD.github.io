@@ -49,7 +49,9 @@ calculatedPoints.forEach(pt => points.push(new THREE.Vector3(pt.x / factor, pt.z
 
 const geometry = new ConvexGeometry( points );
 const material = // new THREE.MeshBasicMaterial( { color: 0x00ffff, transparent: true, opacity: 0.75 } );
-                 new THREE.MeshPhongMaterial();
+              // new THREE.MeshPhongMaterial({ wireframe: false });
+              new THREE.MeshNormalMaterial({ wireframe: false });
+
 //let spGroup = new THREE.Object3D();
 //let material_2 = new THREE.MeshBasicMaterial({color: 0xff0000, transparent: true});
 //points.forEach(point => {
