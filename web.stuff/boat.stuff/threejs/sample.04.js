@@ -38,7 +38,7 @@ document.body.appendChild( renderer.domElement );
 const controls = new OrbitControls( camera, renderer.domElement );
 controls.minDistance = 5; // 20;
 controls.maxDistance = 5; // 50;
-controls.maxPolarAngle = Math.PI / 2;
+controls.maxPolarAngle = Math.PI / 1;
 
 // Fill it out
 let points = [];
