@@ -559,6 +559,13 @@ let toggleForeground = () => {
     <link rel="stylesheet" href="css/nav-bar.css">
 
     <style>
+        :root {
+        --slide-width: 500px;
+        --slide-height: 400px;
+        --expanded-nav-width: 450px;
+        --slider-scale: 0.5;
+        }
+
         h1 {
             color: silver;
             font-family: Verdana,sans-serif;
@@ -833,6 +840,76 @@ let toggleForeground = () => {
                 "wm jumbos prmsl"
                 "utc utc utc";
         }
+        /* For the switch (slider) */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: calc(var(--slider-scale) * 60px);
+            height: calc(var(--slider-scale) * 34px);
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: calc(var(--slider-scale) * 26px);
+            width: calc(var(--slider-scale) * 26px);
+            left: calc(var(--slider-scale) * 4px);
+            bottom: calc(var(--slider-scale) * 4px);
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        input:checked + .slider {
+            background-color: #2196f3;
+        }
+
+        input:focus + .slider {
+            box-shadow: 0 0 1px #2196f3;
+        }
+
+        input:checked + .slider:before {
+            -webkit-transform: translateX(calc(var(--slider-scale) * 26px));
+            -ms-transform: translateX(calc(var(--slider-scale) * 26px));
+            transform: translateX(calc(var(--slider-scale) * 26px));
+        }
+
+        /* Rounded sliders */
+        .slider.round {
+            border-radius: calc(var(--slider-scale) * 34px);
+        }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
+
+        /* Switch grid */
+        .switch-container {
+            display: grid;
+            grid-template-columns: calc(var(--slider-scale) * 80px) 200px;
+            }
+        .switch-element {
+            place-self: flex-start;
+        }
+
     </style>
 </head>
 <body>
@@ -886,20 +963,81 @@ let toggleForeground = () => {
             <!--
              |  WORLD MAP CTRL
              +-->
-            <div id="world-map-ctrl">
+            <div id="world-map-ctrl" title="Map Controls">
                 <div class="black-frame centered">
-                    <input type="checkbox" onchange="setTransparency('world-map-01', this);"/>Transparent
-                    <input type="checkbox" onchange="setGrid('world-map-01', this);" checked/>Grid
-                    <input type="checkbox" onchange="setSun('world-map-01', this);" checked/>Sun
-                    <input type="checkbox" onchange="setMoon('world-map-01', this);" checked/>Moon
-                    <input type="checkbox" onchange="setSunlight('world-map-01', this);"/>Sunlight
-                    <br/>
-                    <input type="checkbox" onchange="setMoonlight('world-map-01', this);"/>Moonlight
-                    <input type="checkbox"
-                            onchange="withWanderingBodies = this.checked; setWanderingBodies('world-map-01', this);"/>Wandering
-                    bodies
-                    <input type="checkbox" onchange="withStars = this.checked; setStars('world-map-01', this);"/>Stars
-                    <input type="checkbox" onchange="setTropics('world-map-01', this);"/>Tropics
+                    <!--input type="checkbox" onchange="setTransparency('world-map-01', this);"/>Transparent -->
+                    <div class="switch-container" style="margin-left: 30px;" title="Make globe transparent">
+                        <label class="switch switch-element">
+                          <input id="transp-slider" type="checkbox" onchange="setTransparency('world-map-01', this);">
+                          <span class="slider round"></span>
+                        </label>
+                        <span class="switch-element">Transparent Globe</span>
+                    </div>
+                    <!--input type="checkbox" onchange="setGrid('world-map-01', this);" checked/>Grid -->
+                    <div class="switch-container" style="margin-left: 30px;" title="Display grid on the map">
+                        <label class="switch switch-element">
+                          <input id="grid-slider" type="checkbox" onchange="setGrid('world-map-01', this);">
+                          <span class="slider round"></span>
+                        </label>
+                        <span class="switch-element">Display Polar Grid</span>
+                    </div>
+                    <!--input type="checkbox" onchange="setSun('world-map-01', this);" checked/>Sun -->
+                    <div class="switch-container" style="margin-left: 30px;" title="Display the Sun">
+                        <label class="switch switch-element">
+                          <input id="sun-slider" type="checkbox" onchange="setSun('world-map-01', this);" checked>
+                          <span class="slider round"></span>
+                        </label>
+                        <span class="switch-element">Display Sun</span>
+                    </div>
+                    <!--input type="checkbox" onchange="setMoon('world-map-01', this);" checked/>Moon -->
+                    <div class="switch-container" style="margin-left: 30px;" title="Display the Moon">
+                        <label class="switch switch-element">
+                          <input id="moon-slider" type="checkbox" onchange="setMoon('world-map-01', this);" checked>
+                          <span class="slider round"></span>
+                        </label>
+                        <span class="switch-element">Display Moon</span>
+                    </div>
+                    <!--input type="checkbox" onchange="setSunlight('world-map-01', this);"/>Sunlight -->
+                    <div class="switch-container" style="margin-left: 30px;" title="Display Sun light and Sun shadow">
+                        <label class="switch switch-element">
+                          <input id="sunlight-slider" type="checkbox" onchange="setSunlight('world-map-01', this);">
+                          <span class="slider round"></span>
+                        </label>
+                        <span class="switch-element">Display Sun Light</span>
+                    </div>
+                    <!--input type="checkbox" onchange="setMoonlight('world-map-01', this);"/>Moonlight -->
+                    <div class="switch-container" style="margin-left: 30px;" title="Display Moon light and Moon shadow">
+                        <label class="switch switch-element">
+                          <input id="moonlight-slider" type="checkbox" onchange="setMoonlight('world-map-01', this);">
+                          <span class="slider round"></span>
+                        </label>
+                        <span class="switch-element">Display Moon Light</span>
+                    </div>
+                    <!--input type="checkbox"
+                            onchange="withWanderingBodies = this.checked; setWanderingBodies('world-map-01', this);"/>Wandering bodies -->
+                    <div class="switch-container" style="margin-left: 30px;" title="Display wandering bodies">
+                        <label class="switch switch-element">
+                          <input id="wb-slider" type="checkbox" onchange="withWanderingBodies = this.checked; setWanderingBodies('world-map-01', this);">
+                          <span class="slider round"></span>
+                        </label>
+                        <span class="switch-element">Wandering Bodies</span>
+                    </div>
+                    <!--input type="checkbox" onchange="withStars = this.checked; setStars('world-map-01', this);"/>Stars -->
+                    <div class="switch-container" style="margin-left: 30px;" title="Display stars">
+                        <label class="switch switch-element">
+                          <input id="stars-slider" type="checkbox" onchange="withStars = this.checked; setStars('world-map-01', this);">
+                          <span class="slider round"></span>
+                        </label>
+                        <span class="switch-element">Display Stars</span>
+                    </div>
+                    <!--input type="checkbox" onchange="setTropics('world-map-01', this);"/>Tropics -->
+                    <div class="switch-container" style="margin-left: 30px;" title="Display polar circles and tropics">
+                        <label class="switch switch-element">
+                          <input id="tropic-slider" type="checkbox" onchange="setTropics('world-map-01', this);"">
+                          <span class="slider round"></span>
+                        </label>
+                        <span class="switch-element">Tropics &amp; Polar Circles</span>
+                    </div>
                     <!--
                     <br/>
                     <input type="checkbox" id="geo-sat-01"/>GeoStationary Satellites
