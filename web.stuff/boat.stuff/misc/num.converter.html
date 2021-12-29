@@ -52,6 +52,7 @@
         text-align: right;
       }
         </style>
+        <script type="module" src="./SplitFlapDisplay.js"></script>
     </head>        
     <body>
         <h1>Hexdecimal to Sexagesimal, and vice-versa</h1>
@@ -127,10 +128,29 @@
         </div>
         <hr/>
         <div id="results" style="display: none; padding-left: 10px;">
-            <div class="display-result" style="width: 50%;">
-                <div id="01"></div>
-                <div id="02"></div>
-                <div id="03"></div>
+            <div style="display: grid; grid-template-columns: auto auto;">
+                <div class="display-result" style="width: 50%;">
+                    <div id="01"></div>
+                    <div id="02"></div>
+                    <div id="03"></div>
+                </div>
+                <div style="width: 50%; margin-top: 10px; margin-left: 16px">
+                    <split-flap-display id="decimal-deg-display"
+                                        nb-char="15"
+                                        justified="RIGHT"
+                                        font-size="40"
+                                        value="000.000000°"></split-flap-display>
+                    <split-flap-display id="deg-decimal-min-display"
+                                        nb-char="15"
+                                        justified="RIGHT"
+                                        font-size="40"
+                                        value="000°00.0000'"></split-flap-display>
+                    <split-flap-display id="deg-min-decimal-sec-display"
+                                        nb-char="15"
+                                        justified="RIGHT"
+                                        font-size="40"
+                                        value="000°00'00.0000 "></split-flap-display>
+                </div>
             </div>
         </div>
         <hr/>
@@ -169,6 +189,10 @@ fromDecimal = () => {
         `${degrees}&deg;${decimalMin.toFixed(4)}'`,
         `${degrees}&deg;${intMin}'${decimalSeconds.toFixed(4)}"`
     );
+
+    setSplitFlapValue("decimal-deg-display", `${originalValue.toFixed(6)}°`);
+    setSplitFlapValue("deg-decimal-min-display", `${degrees}°${decimalMin.toFixed(4)}'`);
+    setSplitFlapValue("deg-min-decimal-sec-display", `${degrees}°${intMin}'${decimalSeconds.toFixed(4)}"`);
 };
 
 fromDegMin = () => {
@@ -189,6 +213,9 @@ fromDegMin = () => {
         `${degOriginal}&deg;${minOriginal.toFixed(4)}'`,
         `${degOriginal}&deg;${intMinutes}'${decimalSec.toFixed(4)}"`
     );
+    setSplitFlapValue("decimal-deg-display", `${decimalDeg.toFixed(6)}°`);
+    setSplitFlapValue("deg-decimal-min-display", `${degOriginal}°${minOriginal.toFixed(4)}'`);
+    setSplitFlapValue("deg-min-decimal-sec-display", `${degOriginal}°${intMinutes}'${decimalSec.toFixed(4)}"`);
 };
 
 fromDegMinSec = () => {
@@ -208,6 +235,37 @@ fromDegMinSec = () => {
         `${degOriginal}&deg;${decimalMin.toFixed(4)}'`,
         `${degOriginal}&deg;${minOriginal}'${secOriginal.toFixed(4)}"`
     );
+    setSplitFlapValue("decimal-deg-display", `${decimalDeg.toFixed(6)}°`);
+    setSplitFlapValue("deg-decimal-min-display", `${degOriginal}°${decimalMin.toFixed(4)}'`);
+    setSplitFlapValue("deg-min-decimal-sec-display", `${degOriginal}°${minOriginal}'${secOriginal.toFixed(4)}"`);
 };
+
+setSplitFlapValue = (id, value) => {
+            let elem = document.getElementById(id);
+            // Character by character, flap-flap-flap
+            let original = elem.paddedValue;
+            let newPaddedValue = elem.getPaddedValue(elem.cleanString(value));
+            //        console.log("Old [%s], new [%s]", original, newPaddedValue);
+            //        assert(old.length === new.length);
+
+            function updateFlap(idx) { // THIS is balaise.
+                if (original.charAt(idx).toUpperCase() !== newPaddedValue.charAt(idx).toUpperCase()) {
+                    setTimeout(() => {
+                        let next = elem.getNextChar(original.charAt(idx));
+//                                        console.log("Updating %s with %s", original, next);
+                        elem.setCharAt(idx, next);
+                        original = elem.paddedValue;
+                        updateFlap(idx);
+                    }, 50);
+                }
+            }
+
+            for (let idx = 0; idx < original.length; idx++) {
+                updateFlap(idx);
+            }
+//                elem.value = value;
+//                elem.repaint();
+        };
+
     </script>
 </html>
