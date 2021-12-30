@@ -51,15 +51,89 @@
         font-weight: bold; 
         text-align: right;
       }
+
+      .small-label {
+          font-size: 10px;
+          text-align: left;
+          vertical-align: bottom;
+          padding-top: 20px;
+      }
+
+      /* 
+          See https://codepen.io/shimdim/pen/NjyNNb 
+              https://blog.logrocket.com/creating-beautiful-tooltips-with-only-css/
+      */
+      /*You can use [title] selector as well*/
+      [data-title] {
+        /*outline: red dotted 1px;*/ /*optional styling*/
+        /*font-size: 30px;*/ /*optional styling*/
+        position: relative;
+        cursor: help;
+      }
+
+      [data-title]:hover::before {
+        content: attr(data-title); /* Content of attribute data-title */
+        position: absolute;
+        bottom: -26px;
+        display: inline-block;
+        padding: 3px 6px;
+        border-radius: 2px;
+        background: #000;
+        color: #fff;
+        font-size: 12px;
+        font-family: sans-serif;
+        white-space: nowrap;
+        z-index: 10;
+      }
+
+      [data-title]:hover::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 8px;
+        display: inline-block;
+        color: #fff;
+        border: 2px solid red;	
+        border: 8px solid transparent;	
+        border-bottom: 8px solid #000;
+      }
+      .smooth {
+            /*height: 0;*/
+            /*visibility: hidden;*/
+            /*opacity: 0;*/
+            /*transition: visibility 0.5s, height 0.5s, opacity 0.5s linear;*/
+            height: 0;
+            max-height: 0;
+            margin: auto;
+            /*transition: transform 0.5s, max-height 1s, height 1s;*/
+            transition: all 0.5s ease;
+            opacity: 0;
+            transform: scaleY(0);
+            transform-origin: top;
+            overflow: hidden;
+        }
+
+        .visible-div {
+            opacity: 1;
+            width: auto;
+            height: auto;
+            max-height: 1600px;
+            transform: scaleY(1);
+            margin-top: 5px;
+        }
+
         </style>
         <script type="module" src="./SplitFlapDisplay.js"></script>
     </head>        
     <body>
-        <h1>Hexdecimal to Sexagesimal, and vice-versa</h1>
+        <h1>Decimal to Sexagesimal, and vice-versa</h1>
         <div>
-            <small style="padding-left: 10px;">Enter values to convert, and hit the "Convert" in the corresponding line.</small>
+            <small style="padding-left: 10px;">Enter values to convert in the fields, and hit the "Convert" button in the corresponding line.</small>
         </div>
         <hr/>
+        <div id="alert-zone" class="smooth" style="padding: 2px; border: 1px solid red; border-radius: 5px; padding: 5px;"> <!-- display: none;  -->
+            <div id="alert-mess" style="color: green; background-color: orange; border-radius: 5px; padding: 5px;"></div>
+        </div>    
         <div style="padding-left: 5px;">
             <table>
                 <tr>
@@ -73,7 +147,7 @@
                                            step="0.01"   
                                            pattern="^\d+(?:\.\d{1,6})?$"                                      
                                            placeholder="Dec. Degrees">&deg;</td>
-                    <td><button id="from-decimal" onclick="fromDecimal();" title="Convert to all formats">Convert</button></td>
+                    <td><button id="from-decimal" onclick="fromDecimal();" title="Convert decimal degrees&#13;to all formats">Convert</button></td>
                 </tr>
                 <tr>
                     <td style="text-align: right;">Degrees, decimal minutes</td>
@@ -94,7 +168,7 @@
                                            max="60"
                                            step="0.01"                                         
                                            placeholder="Dec. Minutes">'</td>
-                    <td><button id="from-dec-min" onclick="fromDegMin();" title="Convert to all formats">Convert</button></td>
+                    <td><button id="from-dec-min" onclick="fromDegMin();" title="Convert degrees and&#13;decimal minutes&#13;to all formats">Convert</button></td>
                 </tr>
                 <tr>
                     <td style="text-align: right;">Degrees, minutes, decimal seconds</td>
@@ -122,39 +196,42 @@
                                max="60"
                                step="0.01"                                         
                                placeholder="Dec. Seconds">"</td>
-                    <td><button id="from-dec-min-sec" onclick="fromDegMinSec();" title="Convert to all formats">Convert</button></td>
+                    <td><button id="from-dec-min-sec" onclick="fromDegMinSec();" title="Convert degrees,&#13;minutes and decimal seconds&#13;to all formats">Convert</button></td>
                 </tr>
             </table>
         </div>
         <hr/>
         <div id="results" style="display: none; padding-left: 10px;">
             <div style="display: grid; grid-template-columns: 1fr 1fr;">
-                <div class="display-result">
-                    <div id="01" class="display-result"></div>
-                    <div id="02" class="display-result"></div>
-                    <div id="03" class="display-result"></div>
+                <div class="display-result" style="display: grid; grid-template-columns: auto auto;">
+                    <div class="small-label">Decimal deg</div><div id="01" class="display-result" title="Decimal Degrees"></div>
+                    <div class="small-label">Degrees decimal minutes</div><div id="02" class="display-result" title="Degrees&#13;Decimal Minutes"></div>
+                    <div class="small-label">Degrees minutes decimal seconds</div><div id="03" class="display-result" title="Degrees&#13;Minutes&#13;Decimal Seconds"></div>
                 </div>
                 <div style="margin-top: 10px; margin-left: 16px">
                     <split-flap-display id="decimal-deg-display"
                                         nb-char="15"
                                         justified="RIGHT"
                                         font-size="40"
+                                        title="Decimal Degrees"
                                         value="000.000000°"></split-flap-display>
                     <split-flap-display id="deg-decimal-min-display"
                                         nb-char="15"
                                         justified="RIGHT"
                                         font-size="40"
+                                        title="Degrees&#13;Decimal Minutes"
                                         value="000°00.0000'"></split-flap-display>
                     <split-flap-display id="deg-min-decimal-sec-display"
                                         nb-char="15"
                                         justified="RIGHT"
                                         font-size="40"
+                                        title="Degrees&#13;Minutes&#13;Decimal Seconds"
                                         value="000°00'00.0000 "></split-flap-display>
                 </div>
             </div>
         </div>
         <hr/>
-        <i>Wow!</i>
+        <i style="padding-left: 20px; text-shadow: 1px 1px 2px orange, 0 0 25px white, 0 0 5px silver;">Wow!</i>
     </body>
     <script type="text/javascript">
 displayResult = (one, two, three) => {
@@ -167,6 +244,13 @@ displayResult = (one, two, three) => {
 fromDecimal = () => {
     let original = document.getElementById("decimal");
     let originalValue = parseFloat(original.value);
+    if (isNaN(originalValue)) {
+        originalValue = 0;
+    }
+    if (originalValue < 0) {
+        alert("Positive values only, thanks.")
+        originalValue *= -1;
+    }
     console.log(`Converting ${originalValue}`);
     // Int part (degrees)
     let degrees = Math.floor(originalValue);
@@ -198,6 +282,20 @@ fromDecimal = () => {
 fromDegMin = () => {
     let degOriginal = parseInt(document.getElementById("deg-one").value);
     let minOriginal = parseFloat(document.getElementById("minutes").value);
+    if (isNaN(degOriginal)) {
+        degOriginal = 0;
+    }
+    if (isNaN(minOriginal)) {
+        minOriginal = 0;
+    }
+    if (degOriginal < 0) {
+        alert("Positive values only, thanks.")
+        degOriginal *= -1;
+    }
+    if (! (minOriginal >= 0 && minOriginal < 60.0)) {
+        alert("Minutes shoud be positive and lower than 60. Setting it to 0.");
+        minOriginal = 0;
+    }
     console.log(`Converting ${degOriginal}, ${minOriginal}`);
     let decimalDeg = degOriginal + (minOriginal / 60);
     let intMinutes = Math.floor(minOriginal);
@@ -222,6 +320,27 @@ fromDegMinSec = () => {
     let degOriginal = parseInt(document.getElementById("deg-two").value);
     let minOriginal = parseInt(document.getElementById("min-two").value);
     let secOriginal = parseFloat(document.getElementById("seconds").value);
+    if (isNaN(degOriginal)) {
+        degOriginal = 0;
+    }
+    if (isNaN(minOriginal)) {
+        minOriginal = 0;
+    }
+    if (isNaN(secOriginal)) {
+        secOriginal = 0;
+    }
+    if (degOriginal < 0) {
+        alert("Positive values only, thanks.")
+        degOriginal *= -1;
+    }
+    if (! (minOriginal >= 0 && minOriginal < 60.0)) {
+        alert("Minutes shoud be positive and lower than 60. Setting it to 0.");
+        minOriginal = 0;
+    }
+    if (! (secOriginal >= 0 && secOriginal < 60.0)) {
+        alert("Seconds shoud be positive and lower than 60. Setting it to 0.");
+        secOriginal = 0;
+    }
     console.log(`Converting ${degOriginal}, ${minOriginal}, ${secOriginal}`);
     let decimalDeg = degOriginal + (minOriginal / 60) + (secOriginal / 3600);
     let decimalMin = minOriginal + (secOriginal / 60);
@@ -241,31 +360,53 @@ fromDegMinSec = () => {
 };
 
 setSplitFlapValue = (id, value) => {
-            let elem = document.getElementById(id);
-            // Character by character, flap-flap-flap
-            let original = elem.paddedValue;
-            let newPaddedValue = elem.getPaddedValue(elem.cleanString(value));
-            //        console.log("Old [%s], new [%s]", original, newPaddedValue);
-            //        assert(old.length === new.length);
+    let elem = document.getElementById(id);
+    // Character by character, flap-flap-flap
+    let original = elem.paddedValue;
+    let newPaddedValue = elem.getPaddedValue(elem.cleanString(value));
+    // console.log("Old [%s], new [%s]", original, newPaddedValue);
+    // assert(old.length === new.length);
 
-            function updateFlap(idx) { // THIS is balaise.
-                if (original.charAt(idx).toUpperCase() !== newPaddedValue.charAt(idx).toUpperCase()) {
-                    setTimeout(() => {
-                        let next = elem.getNextChar(original.charAt(idx));
-//                                        console.log("Updating %s with %s", original, next);
-                        elem.setCharAt(idx, next);
-                        original = elem.paddedValue;
-                        updateFlap(idx);
-                    }, 50);
-                }
-            }
-
-            for (let idx = 0; idx < original.length; idx++) {
+    function updateFlap(idx) { // THIS is balaise. Recursive inner function.
+        if (original.charAt(idx).toUpperCase() !== newPaddedValue.charAt(idx).toUpperCase()) {
+            setTimeout(() => {
+                let next = elem.getNextChar(original.charAt(idx));
+//                console.log("Updating %s with %s", original, next);
+                elem.setCharAt(idx, next);
+                original = elem.paddedValue;
                 updateFlap(idx);
-            }
-//                elem.value = value;
-//                elem.repaint();
-        };
+            }, 50);
+        }
+    }
 
-    </script>
+    for (let idx = 0; idx < original.length; idx++) {
+        updateFlap(idx);
+    }
+//     elem.value = value;
+//     elem.repaint();
+};
+
+let customAlertExpanded = false;
+let expandCollapseAlertData = () => {
+    document.getElementById('alert-zone').classList.toggle('visible-div');
+    customAlertExpanded = !customAlertExpanded;
+};
+
+let customAlert = (errMess) => {
+    document.getElementById('alert-mess').innerText = errMess;
+    if (!customAlertExpanded) {
+        expandCollapseAlertData();
+    }
+    setTimeout(hideAlert, 5000);
+};
+
+let hideAlert = () => {
+    if (customAlertExpanded) {
+        expandCollapseAlertData();
+    }
+};
+
+window.alert = customAlert;
+
+</script>
 </html>
