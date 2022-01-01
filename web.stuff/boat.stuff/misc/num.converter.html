@@ -97,6 +97,7 @@
         border: 8px solid transparent;	
         border-bottom: 8px solid #000;
       }
+
       .smooth {
             /*height: 0;*/
             /*visibility: hidden;*/
@@ -202,7 +203,7 @@
         </div>
         <hr/>
         <div id="results" style="display: none; padding-left: 10px;">
-            <div style="display: grid; grid-template-columns: 1fr 1fr;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr auto;">
                 <div class="display-result" style="display: grid; grid-template-columns: auto auto;">
                     <div class="small-label">Decimal deg</div><div id="01" class="display-result" title="Decimal Degrees"></div>
                     <div class="small-label">Degrees decimal minutes</div><div id="02" class="display-result" title="Degrees&#13;Decimal Minutes"></div>
@@ -227,6 +228,13 @@
                                         font-size="40"
                                         title="Degrees&#13;Minutes&#13;Decimal Seconds"
                                         value="000°00'00.0000 "></split-flap-display>
+                </div>
+                <div>
+                    <button onclick="copyToClipboard('01')"><img src="icons8-copy-to-clipboard-50.png" style="width: 40px; height: auto;" title="Copy to Clipboard"></button>
+                    <br/>
+                    <button onclick="copyToClipboard('02')"><img src="icons8-copy-to-clipboard-50.png" style="width: 40px; height: auto;" title="Copy to Clipboard"></button>
+                    <br/>
+                    <button onclick="copyToClipboard('03')"><img src="icons8-copy-to-clipboard-50.png" style="width: 40px; height: auto;" title="Copy to Clipboard"></button>
                 </div>
             </div>
         </div>
@@ -406,7 +414,20 @@ let hideAlert = () => {
     }
 };
 
-window.alert = customAlert;
+let copyToClipboard = (fieldId) => {
+    let value = document.getElementById(fieldId).innerHTML;
+    let codeContent = value.replaceAll("<br>", "\n");
+    // console.log(codeContent);
+    let codeHolder = document.createElement("textarea"); // To keep the format, 'input' would not.
+    codeHolder.value = codeContent;
+    document.body.appendChild(codeHolder);
+    codeHolder.select();
+    document.execCommand("copy");
+    document.body.removeChild(codeHolder);
+    alert(`Value ${value} copied to clipboard`);
+};
+
+window.alert = customAlert; // Override!
 
 </script>
 </html>
