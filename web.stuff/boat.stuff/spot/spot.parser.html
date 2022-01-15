@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>spot.parser</title>
+    <link rel="icon" type="image/jpg" href="../icons/hammerhead.02.ico">
+    <script type="text/javascript" src="js/date.proto.js"></script>
+    <script type="text/javascript" src="analog.display/AnalogDisplay.js"></script>
+    <!--script type="text/javascript" src="temperature/Thermometer.js"></script-->
+    <script type="text/javascript" src="direction/Direction.js"></script>
+    <script type="text/javascript" src="rain/Pluviometer.js"></script>
+    <script type="text/javascript" src="graph/graph.js"></script>
+    <script type="text/javascript" src="spot.parser.js"></script>
+    <script type="text/javascript">
+// Line with arrow head
+function Line(x1, y1, x2, y2) {
+  this.x1 = x1;
+  this.y1 = y1;
+  this.x2 = x2;
+  this.y2 = y2;
+};
+Line.prototype.drawWithArrowhead = function(ctx) {
+  this.drawWithArrowheads(ctx, false);
+};
+
+Line.prototype.drawWithArrowheads = function(ctx, both) {
+  if (both === undefined) {
+    both = true;
+  }
+  // arbitrary styling
+  ctx.strokeStyle = "blue";
+  ctx.fillStyle   = "blue";
+  ctx.lineWidth   = 1;
+
+  // draw the line
+  ctx.beginPath();
+  ctx.moveTo(this.x1, this.y1);
+  ctx.lineTo(this.x2, this.y2);
+  ctx.stroke();
+
+  if (both) {
+    // draw the starting arrowhead
+    let startRadians = Math.atan((this.y2 - this.y1) / (this.x2 - this.x1));
+    startRadians += ((this.x2>this.x1)?-90:90) * Math.PI/180;
+    this.drawArrowhead(ctx, this.x1, this.y1, startRadians);
+  }
+  // draw the ending arrowhead
+  let endRadians=Math.atan((this.y2 - this.y1) / (this.x2 - this.x1));
+  endRadians += ((this.x2>this.x1)?90:-90) * Math.PI/180;
+  this.drawArrowhead(ctx, this.x2, this.y2, endRadians);
+};
+
+const HEAD_LENGTH = 10;
+const HEAD_WIDTH  = 3;
+
+Line.prototype.drawArrowhead = function(ctx, x, y, radians) {
+  ctx.save();
+  ctx.beginPath();
+  ctx.translate(x, y);
+  ctx.rotate(radians);
+  ctx.moveTo(0, 0);
+  ctx.lineTo( HEAD_WIDTH, HEAD_LENGTH);
+  ctx.lineTo(-HEAD_WIDTH, HEAD_LENGTH);
+  ctx.closePath();
+  ctx.restore();
+  ctx.fill();
+};
+    </script>
+    <script src="http://maps.googleapis.com/maps/api/js?v=3&amp;sensor=false&amp;key=AIzaSyDu5cW4UXjXZTswehBdIO8jCZdzUbk2v5o"
+            type="text/javascript"></script>
+    <script type="text/javascript">
+ let markers = [];
+ let windArrow;
+
+ let displayScale = 0.75;
+
+ let displayTWD, displayTWS, displayPRMSL, displayRain, thermometer, graph, map;
+ let withTWD = true;
+ 
+ window.onload = () => {
+   displayTWD   = new Direction('twdCanvas', 100 * displayScale, 45, 5);
+   displayTWS   = new AnalogDisplay('twsCanvas',   100 * displayScale,   50, 10, 1, true, 40);
+   displayPRMSL = new AnalogDisplay('prmslCanvas', 100 * displayScale, 1045, 10, 1, true, 50, 985, 0);
+   displayRain  = new Pluviometer('rainCanvas');
+   
+   loadMap();
+   setDefaultTimeZone();
+ };
+ 
+function setDefaultTimeZone() {
+  // For the best solution, check out https://bitbucket.org/pellepim/jstimezonedetect
+  let tzOffset = 0;
+
+  let re = new RegExp("GMT([+-]\\d{4}).*"); // Like xxx GMT+0100 (xxx)
+  let now = new Date();
+  let match = re.exec(now);
+  if (match !== null) {
+    tzOffset = parseInt(match[1]);
+  }
+  if (isNaN(tzOffset)) {
+    tzOffset = 0;
+  } else {
+    tzOffset /= 100;
+  }
+   document.getElementById("tz").value = tzOffset;
+};
+ 
+function updateOnClick(idx, tws, twd, prmsl, rain) {
+   let txtDate = SpotParser.nmeaData[idx].getNMEADate();
+// console.log("Date is : " + reformatDate(txtDate));
+   let utc = document.getElementById("tz");   
+   document.getElementById("recno").innerHTML = "Record #<b style='color:red;'>" + (idx + 1) + "</b> of " + SpotParser.nmeaData.length + ", " +  reformatDate(txtDate) + " " + utc.options[utc.selectedIndex].text;
+
+   let wd = parseFloat(twd);
+   displayTWD.animate(wd);
+
+   let ws = parseFloat(tws);
+   displayTWS.animate(ws);
+   
+   let pr = parseFloat(prmsl);
+   displayPRMSL.animate(pr);
+   
+   let prate = parseFloat(rain);
+   displayRain.animate(prate);
+   
+   graph.drawGraph("graphCanvas", graphdata, idx);
+// graph.drawGraph("graphCanvas", rainData, idx); // TODO Option
+   if (withTWD) { // with wind
+     graph.drawWind(SpotParser.nmeaData);
+   }
+   clearMarkers();
+   if (windArrow !== undefined) {
+     windArrow.setMap(null);
+   }
+   
+   let marker = new google.maps.Marker({
+      position: new google.maps.LatLng(SpotParser.position.lat, SpotParser.position.lng),
+      map: map
+   });
+   markers.push(marker);
+   map.setCenter(new google.maps.LatLng(SpotParser.position.lat, SpotParser.position.lng));
+// map.setZoom(11);
+
+   drawWindFeather(SpotParser.position.lat, 
+                   SpotParser.position.lng,
+                   ws,
+                   wd);                    
+
+ };
+
+ const SPEED_PRM = 0.05;
+
+ function drawWindFeather(lat, lng, speed, dir) {
+   let windpoints = [];  
+   windpoints.push(new google.maps.LatLng(lat, lng));
+  
+   let onedash = false;
+   if (onedash) {
+     windpoints.push(deadReckoning(lat, lng, speed * SPEED_PRM, dir));
+   } else {
+     windpoints.push(deadReckoning(lat, lng, speed * SPEED_PRM, dir - 10));
+     windpoints.push(deadReckoning(lat, lng, speed * SPEED_PRM * 0.9, dir));
+     windpoints.push(deadReckoning(lat, lng, speed * SPEED_PRM, dir + 10));
+     windpoints.push(new google.maps.LatLng(lat, lng));
+   }
+  
+   let color = "#ffff00"; // yellow
+  
+   const lightblue = "#00ffff";
+   const green     = "#00ff00";
+   const yellow    = "#ffff00";
+   const orange    = "#ff8000";
+   const red       = "#ff0000";
+  
+   if (speed < 10) color = lightblue;
+   else if (speed < 20) color = green;
+   else if (speed < 30) color = yellow;
+   else if (speed < 40) color = orange;
+   else color = red;
+
+   windArrow = new google.maps.Polyline({
+     path: windpoints,
+     geodesic: true,
+     strokeColor: color,
+     strokeOpacity: 1.0,
+     strokeWeight: 2
+   });
+   windArrow.setMap(map);
+ };
+
+ function deadReckoning(l, g, s, d) {
+   let deltaL = (s / 60) * Math.cos(toRadians(d));
+   let l2 = l + deltaL;
+   let lc1 = getIncLat(l);
+   lc2 = getIncLat(l2);
+   let deltaLc = lc2 - lc1;
+   let deltaG = deltaLc * Math.tan(toRadians(d));
+   let g2 = g + deltaG;
+   return new google.maps.LatLng(l2, g2);
+ };
+
+ function getIncLat(lat) {
+   let il = Math.log(Math.tan((Math.PI / 4) + (toRadians(lat) / 2)));
+   return toDegrees(il);
+ };
+
+ function toRadians(d) {
+   return Math.PI * d / 180;
+ };
+
+ function toDegrees(d) {
+   return d * 180 / Math.PI;
+ };
+
+ function reformatDate(utcDate, fmt) {
+   if (fmt === undefined) {
+     fmt = "D d-M-Y H:i";
+   }
+   let month = 0, day = 0, hours = 0, minutes = 0;
+   // 07-03 00:00
+   let dateRegExpr = new RegExp("(\\d{2})-(\\d{2})\\s(\\d{2}):(\\d{2})");
+   let matches = dateRegExpr.exec(utcDate);
+   if (matches !== null) {
+     month   = matches[1];
+     day     = matches[2];
+     hours   = matches[3];
+     minutes = matches[4];
+   }
+   let date = new Date();
+   date.setMonth(parseInt(month - 1));
+   date.setDate(parseInt(day));
+   date.setHours(parseInt(hours));
+   date.setMinutes(parseInt(minutes));
+   date.setSeconds(0);
+// console.log(date.toString());
+   let time = date.getTime();
+   let offset = parseInt(document.getElementById("tz").value);
+   offset *= (60 * 60 * 1000); // 1 hour, in ms.
+   time += offset;
+   date = new Date(time);
+// console.log("becomes: " + date.toString());
+   return date.format(fmt);
+ };
+
+ let graphdata = [];
+//let rainData = []; // rain
+ // Parse the data
+ function onDataChange() {
+   let text = document.getElementById("spot").value;  
+   let htmlLink = "";
+
+   graphdata = []; // TWS
+// rainData = []; // rain
+   if (text.length > 0) {
+     htmlLink = SpotParser.parse(text, 'updateOnClick', setPosOnMap);
+     let nmeaData = SpotParser.nmeaData;
+     for (let i=0; i<nmeaData.length; i++) {
+       graphdata.push(new Tuple(i, parseFloat(nmeaData[i].getNMEATws())));
+//     rainData.push(new Tuple(i, parseFloat(nmeaData[i].getNMEARain())));
+     }
+     graph = new Graph("graphCanvas", 650, 200, graphdata);
+     
+     if (withTWD) { // with wind
+       graph.drawWind(nmeaData);
+     }
+   }
+   document.getElementById("links").innerHTML = htmlLink;
+ };
+ 
+ function setPosOnMap() {
+   try {
+      let marker = new google.maps.Marker({
+        position: new google.maps.LatLng(SpotParser.position.lat, SpotParser.position.lng),
+        map: map
+      });
+      map.setCenter(new google.maps.LatLng(SpotParser.position.lat, SpotParser.position.lng));
+  //  map.setZoom(11);
+      markers.push(marker);
+   } catch (err) {
+     // In case Google Map APIs are not loaded...
+   }
+ };
+ 
+ function animateSpot() {
+   let animateButton = document.getElementById("animate-button");
+   if (!keepWorking) {
+     animateButton.innerHTML = "Stop";
+   } else {
+     animateButton.innerHTML = "Animate";
+   }
+   if (!keepWorking) {
+     let data = SpotParser.nmeaData;
+     if (data !== undefined && data !== null && data.length > 0) {
+  //   alert("There are " + data.length + " records");
+       keepWorking = true;
+       scrollData(0);
+     } else {
+       alert("Parse some data first...");
+       animateButton.innerHTML = "Animate";
+     }
+   }
+   else
+     keepWorking = false;
+ };
+ 
+ let keepWorking = false;
+ 
+ function scrollData(i) {
+   let data = SpotParser.nmeaData[i];
+   graph.drawGraph("graphCanvas", graphdata, i);
+// graph.drawGraph("graphCanvas", rainData, i); // TODO on option
+
+   let utc = document.getElementById("tz");   
+   document.getElementById("recno").innerHTML = "Record #<b style='color:red;'>" + (i + 1) + "</b> of " + SpotParser.nmeaData.length + ", " +  data.getNMEADate() + " " + utc.options[utc.selectedIndex].text;
+   updateOnClick(i, data.getNMEATws(), data.getNMEATwd(), data.getNMEAPrmsl(), data.getNMEARain());
+   if (i < (SpotParser.nmeaData.length - 1) && keepWorking) {
+     setTimeout(function() { scrollData(i+1); }, 1000);
+   } else {
+     keepWorking = false;
+     let animateButton = document.getElementById("animate-button");
+     animateButton.innerHTML = "Animate";
+     document.getElementById("recno").innerHTML = "Done.";
+   }
+ }
+ 
+ let defaultLocation = "0.0N,0.0E"; 
+ 
+ function loadMap() {
+   map = new google.maps.Map(document.getElementById("map"), {
+      center: new google.maps.LatLng(0, 0),
+      zoom: 3,
+      mapTypeId: google.maps.MapTypeId.SATELLITE
+    });
+
+   google.maps.event.addListener(map, 'click', function(event) {
+     placeMarker(event.latLng);
+   });
+ }
+ 
+ function setAllMap(map) {
+   for (let i = 0; i < markers.length; i++) {
+     markers[i].setMap(map);
+   }
+ }
+
+ // Removes the markers from the map, but keeps them in the array.
+ function clearMarkers() {
+   setAllMap(null);
+ }
+
+ function placeMarker(location) {
+   let marker = new google.maps.Marker({
+      position: location,
+      map: map
+   });
+  clearMarkers();
+  if (windArrow !== undefined) {
+    windArrow.setMap(null);
+  }
+  markers.push(marker);
+  map.setCenter(location);
+//map.setZoom(11);
+  defaultLocation = (location.lat() > 0?(location.lat() + "N"):(-location.lat() + "S")) + "," +
+                    (location.lng() > 0?(location.lng() + "E"):(-location.lng() + "W"));
+  buildRequest();
+ }
+
+ function buildRequest() {
+   // Like spot:37.5N,122.5W|5,3|PRMSL,WIND,RAIN
+   let spot = document.getElementById("spot-req");
+   let req = "send spot:";
+   req += (defaultLocation + "|");
+   req += (document.getElementById("nb-days").value + "," + document.getElementById("interval").value + "|");
+//   let data = "";
+//   if (document.getElementById("PRMSL").checked)
+//     data += "PRMSL";
+//   if (document.getElementById("WIND").checked)
+//     data += ((data.length > 0?",":"") + "WIND");
+//   if (document.getElementById("RAIN").checked)
+//     data += ((data.length > 0?",":"") + "RAIN");
+   let data = "PRMSL,WIND,RAIN";
+   req += data;
+   
+   spot.innerHTML = req;
+ }
+ 
+ function compose() {
+   let anchor = document.getElementById("custom-request");
+   let href = "mailto:query@saildocs.com?subject=spot&body=" + document.getElementById("spot-req").innerHTML.replace(" ", "%20");
+   anchor.href = href;
+ }
+
+ function showHelpDialog() {
+    let weatherDialog = document.getElementById("spot-help");
+    weatherDialog.show();
+  }
+
+  function closeHelpDialog() {
+    let weatherDialog = document.getElementById("spot-help");
+    weatherDialog.close();
+  }
+
+    </script>
+    <link rel="stylesheet" href="css/stylesheet.css" type="text/css"/>
+    <style type="text/css">
+.displayCanvas {
+  border: 1px solid #9C9898;
+  border-radius: 5px;
+  opacity:0.9;
+}
+.display-scheme {
+  color: white;
+}
+.dialog-header {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.dialog-header-close {
+  float: right;
+}
+.dialog-header-close:hover {
+  color: cyan;
+  cursor: pointer;
+}
+    </style>
+  </head>
+  <body onunload="GUnload();">    
+
+    <dialog id="spot-help" style="width: 400px; border-radius: 8px; z-index: 10;">
+      <div class="dialog-header">
+        <span>What's a SPOT bulletin...</span>
+        <span class="dialog-header-close" onclick="closeHelpDialog();">&times</span>
+      </div>
+      A SPOT bulletin is an extraction from a GRIB file, for a given location.
+      <br/>
+      You can obtain a SPOT bulletin by sending an email request to the address mentionned here.
+      <br/>
+      This page will help you to build the request. 
+      Click on the map to define the spot you want the bulletin for, define the number of days, and the interval.
+      <br/>
+      Then send the generated request, through your favorite email client <b>in text format</b></b>.
+      <br/>
+      The bulletin should come to you within a few minutes, if not seconds.
+      <br/>
+      Then copy its content, and paste it in the box expecting it.
+      <br/>
+      And you're done!
+    </dialog>
+  
+    <table>
+      <tr>
+        <td valign="top" colspan="4"><h2>Spot GRIB Parser <a href="#" onclick="showHelpDialog();" title="Help!">?</a></h2></td>
+        <td colspan="1" valign="top" rowspan="2" style="text-align: right;">
+          <textarea id="spot" 
+                    style="margin: 2px; height: 50px; width: 365px;" 
+                    onchange="onDataChange();" 
+                    placeholder="Paste SPOT bulletin here, and tab out." 
+                    title="Paste here the bulletin&#13;received by email, at least from the top&#13;to the last data line."></textarea>
+          <br/>
+          <small>
+            Paste your spot bulletin &uarr; in the box above, <b>including the header lines</b>.</small>
+          </small>
+        </td>
+      </tr>
+      <tr>
+        <td valign="top" colspan="4">
+          Send this spot request to <a href="mailto:query@saildocs.com?subject=spot" id="custom-request" onclick="compose();" target="mail">query@saildocs.com</a>:
+          <div id="spot-req" style="color: red;">send spot:0.0N,0.0E|5,3|PRMSL,WIND,RAIN</div>
+          <small>Request in the body, <i>as text</i>, any subject.</small>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="4" valign="top">
+          <table>
+            <tr>
+              <td colspan="4">Click on the map to locate the spot.</td>
+            </tr>
+            <tr>
+              <td> Number of  days</td>
+              <td style="text-align: right;">
+                <select id="nb-days" onchange="buildRequest();" style="direction: rtl;">
+                   <option value="1">1</option>
+                   <option value="2">2</option>
+                   <option value="3">3</option>
+                   <option value="4">4</option>
+                   <option value="5" selected="true">5</option>
+                   <option value="6">6</option>
+                   <option value="7">7</option>
+                 </select>
+              </td>
+            <!--/tr>
+            <tr-->
+              <td>Interval in hours</td>
+              <td style="text-align: right;">
+                <select id="interval" onchange="buildRequest();" style="direction: rtl;">
+                  <option value="3" selected="true">3</option>
+                  <option value="6">6</option>
+                  <option value="9">9</option>
+                  <option value="12">12</option>
+                  <option value="24">24</option>
+                </select>
+              </td>
+            </tr>
+            <!--tr>
+              <td>Data to retreive</td> 
+              <td>
+                <input type="checkbox" id="PRMSL" checked="true" onchange="buildRequest();">PRMSL</input>&nbsp;
+                <input type="checkbox" id="WIND" checked="true" onchange="buildRequest();">WIND</input>&nbsp;
+                <input type="checkbox" id="RAIN" checked="true" onchange="buildRequest();">RAIN</input>    
+              </td>
+            </tr-->  
+          </table>
+        </td>
+        <td rowspan="7" valign="top"><div id="map" style="width: 400px; height: 530px;"></div></td>
+      </tr>
+      <tr>
+        <td style="text-align: left;" colspan="4">
+          Your time zone:
+          <select id="tz" style="direction: ltr; font-family: 'Source Code Pro', 'courier new';">
+            <option value="-12">UTC-12</option>
+            <option value="-11">UTC-11</option>
+            <option value="-10">UTC-10</option>
+            <option value="-9">UTC -9</option>
+            <option value="-8">UTC -8</option>
+            <option value="-7">UTC -7</option>
+            <option value="-6">UTC -6</option>
+            <option value="-5">UTC -5</option>
+            <option value="-4">UTC -4</option>
+            <option value="-3">UTC -3</option>
+            <option value="-2">UTC -2</option>
+            <option value="-1">UTC -1</option>
+            <option value="0">UTC &plusmn;0</option>
+            <option value="1">UTC +1</option>
+            <option value="2">UTC +2</option>
+            <option value="3">UTC +3</option>
+            <option value="4">UTC +4</option>
+            <option value="5">UTC +5</option>
+            <option value="6">UTC +6</option>
+            <option value="7">UTC +7</option>
+            <option value="8">UTC +8</option>
+            <option value="9">UTC +9</option>
+            <option value="10">UTC+10</option>
+            <option value="11">UTC+11</option>
+            <option value="12">UTC+12</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="4" style="text-align: center;">
+          <span style="color: red;">TWS</span>/<span style="color: blue;">TWD</span>
+          &nbsp;<input type="checkbox" id="raw-data"    onchange="onDataChange();">Raw
+          &nbsp;<input type="checkbox" id="smooth-data" onchange="onDataChange();" checked="true">Smoothed
+          &nbsp;<input type="checkbox" id="tooltip"     onchange="onDataChange();" checked="true">Tooltip
+          &nbsp;<input type="checkbox" id="utc-display" onchange="onDataChange();">UTC
+          <br>
+          <canvas id="graphCanvas" width="650" height="200" class="displayCanvas"/>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="4">      
+          <small>Warning: The wind arrows indicate the direction <b><i>in which</i></b> the wind is blowing</small>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="4">      
+          <div id="recno">Record...</div>
+        </td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">Wind Dir in &deg;</td>
+        <td style="text-align: center;">Wind Speed in knots</td>
+        <td style="text-align: center;">Pressure in hPa</td>
+        <td style="text-align: center;">Rain in mm/h</td>
+      </tr>
+      <tr>
+        <td style="text-align: center;" valign="top" width="200">
+          <canvas id="twdCanvas" width="180" height="165" class="display-scheme displayCanvas"/>
+        </td>
+        <td style="text-align: center;" valign="top" width="200">
+          <canvas id="twsCanvas" width="180" height="165" class="displayCanvas"/>
+        </td>
+        <td style="text-align: center;" valign="top" width="200">
+          <canvas id="prmslCanvas" width="180" height="165" class="displayCanvas"/>
+        </td>
+        <td style="text-align: center;" valign="top" width="100">
+          <canvas id="rainCanvas" width="90" height="165" class="displayCanvas"/>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="5">
+          <div id="links" style="padding:5px; background:#ddd; border-radius:5px; overflow-x: scroll; border:1px solid #CCC; margin-top:3px; height:35px;"></div>          
+        </td>
+      </tr>
+      <tr>
+        <td colspan="5" valign="top">
+          <button id="animate-button" onclick="animateSpot();">Animate</button>
+        </td>
+      </tr>
+    </table>  
+    <hr/>
+    &copy; 2013, OlivSoft.
+  </body>
+</html>
