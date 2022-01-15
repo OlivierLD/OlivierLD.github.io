@@ -21,22 +21,121 @@
       cursor: pointer;
       text-shadow: 4px 4px 8px black, 0 0 25px white, 0 0 10px cyan;
     }
+    pre {
+        background-color: lightyellow; 
+        border: 2px solid yellow;
+        border-radius: 5px; 
+        padding: 5px;
+        max-width: 80%;
+        overflow-y: scroll;
+    }
+    code {
+        font-weight: bold;
+    }
     </style>
 </head>
 <body>
     <h1>Oracle scratch-pad</h1>
-
-    <h2>Speech Service</h2>>
+    <hr/>
+    <h2>Speech Service</h2>
     Building the Speech Service
     <ul>
         <li><a class="list-link" href="https://docs.oracle.com/en/cloud/paas/digital-assistant/sdk-js/index.html">Discover ODA</a></li>
         <li><a class="list-link" href="https://confluence.oci.oraclecorp.com/pages/viewpage.action?spaceKey=SPEECHAI&title=Speech+Service+Internal+Bug+Bash">OCI Speech Bug Bash page</a></li>
         <li><a class="list-link" href="https://confluence.oraclecorp.com/confluence/display/IBS/ATR+file%2C+a+TSV+file+format+for+audio+text+transcriptions">ATR Format</a></li>
 
-		<li>Setup on OCI Compute Instance as described <a class="list-link" href="https://confluence.oraclecorp.com/confluence/display/IBS/OCI+Compute+Instance+for+Digital+Assistant+Development">Here</a>, use compartment "development".</li>        
+		<li>Setup on OCI Compute Instance as described <a class="list-link" href="https://confluence.oraclecorp.com/confluence/display/IBS/OCI+Compute+Instance+for+Digital+Assistant+Development">here</a>, use compartment "development".</li>
+        <li>
+            On that instance, upgrade the <code>git</code> version.
+            <br/>
+            See instructions <a class="list-link" href="https://oracle-base.com/articles/linux/git-2-installation-on-linux">here</a>.
+            <br/>
+            On the instance:
+<pre>
+$ sudo su
+$ yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel -y
+$ yum install gcc perl-ExtUtils-MakeMaker -y
+</pre>
+            To remove existing version of git:
+<pre>
+$ yum remove git -y
+</pre>
+            <b>Option 1</b>:
+            <br/> 
+            Download the archive from your laptop, and send it to your instance:
+            <br/>
+            From laptop (Like Mac)
+<pre>
+$ export http_proxy=http://www-proxy.us.oracle.com:80
+$ wget -e use_proxy=yes -e http_proxy=$http_proxy -e https_proxy=$http_proxy https://www.kernel.org/pub/software/scm/git/git-2.30.0.tar.gz
+</pre>
+            Send it to the Compute Instance
+<pre>
+$ scp -i ~/.ssh/id_rsa_00 ./git-2.30.0.tar.gz  opc@100.111.136.104:~
+</pre>
+            On the instance:
+<pre>
+$ sudo mv ~/git-2.30.0.tar.gz /usr/src
+$ cd /usr/src
+$ sudo su
+$ tar xzf git-2.30.0.tar.gz
+$ make prefix=/usr/local/git all
+$ make prefix=/usr/local/git install
+$ echo "export PATH=/usr/local/git/bin:$PATH" >> /etc/bashrc 
+$ exit
+$ source /etc/bashrc
+$ git --version
+git version 2.30.0
+$ 
+</pre>
+            Before starting the build, do a <code>git clean -fdx</code>.
+            <br/>
+            <b>Option 2</b>:
+            <br/> 
+            On the instance:
+<pre>
+$ sudo yum install -y curl-devel expat-devel gettext-devel openssl-devel zlib-devel gcc perl-ExtUtils-MakeMaker
 
+$ sudo yum remove git
+# https://tecadmin.net/install-git-on-centos-fedora/
+$ wget https://www.kernel.org/pub/software/scm/git/git-2.21.0.tar.gz
+$ tar xzf git-2.21.0.tar.gz
+$ cd git-2.21.0
+$ make prefix=/usr/local all
+$ sudo make prefix=/usr/local install
+</pre>
+
+            <h3>Then</h3>
+            Make sure <code>docker-compose</code> is in your PATH
+<pre>
+$ sudo su -
+$ yum remove docker-compose
+$ source /home/opc/.proxies.sh
+# export http_proxy=http://www-proxy-hqdc.us.oracle.com:80
+# export https_proxy=http://www-proxy-hqdc.us.oracle.com:80
+$ curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+$ chmod 755 /usr/local/bin/docker-compose                
+</pre>
+        </li>
+        <li>On that instance, clone the <a class="list-link" href="https://bitbucket.oci.oraclecorp.com/projects/ODA/repos/bots-speech/browse">repo</a> (master branch)</li>
+        <li>
+            <h4>Important:</h4>
+            If you have other service(s) running on your instance (like ODA <code>bots</code>),
+            <i><b>do reboot your instance</b></i>!!
+        </li>
+        <li>
+            Start the build:
+            <br/>
+            Make sure you've set the right System variables:
+<pre>
+export ORACLE_ID=akeu.coucou@oracle.com
+export JAVA_HOME=/usr/java/jdk-11.0.7
+</pre>
+<pre>
+$ ./buildDeploy.sh -x tests
+</pre>
+        </li>
     </ul>
-
 
 </body>
 </html>
