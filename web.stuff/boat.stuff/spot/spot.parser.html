@@ -376,9 +376,28 @@ function closeHelpDialog() {
   let weatherDialog = document.getElementById("spot-help");
   weatherDialog.close();
 }
+
+let copyToClipboard = (fieldId) => {
+    let value = document.getElementById(fieldId).innerHTML;
+    let codeContent = value.replaceAll("<br>", "\n");
+    // console.log(codeContent);
+    let codeHolder = document.createElement("textarea"); // To keep the format, 'input' would not.
+    codeHolder.value = codeContent;
+    document.body.appendChild(codeHolder);
+    codeHolder.select();
+    document.execCommand("copy");
+    document.body.removeChild(codeHolder);
+    alert(`Value ${value} copied to clipboard`);
+};
+
     </script>
     <link rel="stylesheet" href="css/stylesheet.css" type="text/css"/>
     <style type="text/css">
+.spot-request {
+  font-family: 'Source Code Pro', 'courier new';
+  font-weight: bold;
+  font-size: 16px;
+}      
 .displayCanvas {
   border: 1px solid #9C9898;
   border-radius: 5px;
@@ -391,7 +410,6 @@ function closeHelpDialog() {
     font-size: 24px;
     font-weight: 700;
 }
-
 .dialog-header-close {
   float: right;
 }
@@ -444,8 +462,10 @@ function closeHelpDialog() {
       </tr>
       <tr>
         <td valign="top" colspan="4">
-          Send this spot request to <a href="mailto:query@saildocs.com?subject=spot" id="custom-request" onclick="compose();" target="mail">query@saildocs.com</a>:
-          <div id="spot-req" style="color: red;">send spot:0.0N,0.0E|5,3|PRMSL,WIND,RAIN</div>
+          Send this spot request to <a href="mailto:query@saildocs.com?subject=spot" id="custom-request" onclick="compose();" target="mail" title="Send it">query@saildocs.com</a>
+          <button onclick="copyToClipboard('spot-req')"><img src="icons8-copy-to-clipboard-50.png" style="width: 16px; height: auto; vertical-align: middle;" title="Copy request to clipboard"></button>
+          :
+          <div id="spot-req" class="spot-request" style="color: red;">send spot:0.0N,0.0E|5,3|PRMSL,WIND,RAIN</div>
           <small>Request in the body, <i>as text</i>, any subject.</small>
         </td>
       </tr>
