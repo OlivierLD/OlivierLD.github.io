@@ -131,8 +131,9 @@ function updateOnClick(idx, tws, twd, prmsl, rain) {
    if (withTWD) { // with wind
      graph.drawWind(SpotParser.nmeaData);
    }
-   map.setCenter(new google.maps.LatLng(SpotParser.position.lat, SpotParser.position.lng));
-// map.setZoom(11);
+  placeMarker({ lat: SpotParser.position.lat, lng: SpotParser.position.lng });
+  spotMap.panTo(new L.LatLng(SpotParser.position.lat, SpotParser.position.lng));
+
 }
 
 const SPEED_PRM = 0.05;
@@ -247,9 +248,9 @@ function animateSpot() {
        alert("Parse some data first...");
        animateButton.innerHTML = "Animate";
      }
-   }
-   else
+   } else {
      keepWorking = false;
+   }
 }
  
 let keepWorking = false;
@@ -263,7 +264,9 @@ function scrollData(i) {
    document.getElementById("recno").innerHTML = "Record #<b style='color:red;'>" + (i + 1) + "</b> of " + SpotParser.nmeaData.length + ", " +  data.getNMEADate() + " " + utc.options[utc.selectedIndex].text;
    updateOnClick(i, data.getNMEATws(), data.getNMEATwd(), data.getNMEAPrmsl(), data.getNMEARain());
    if (i < (SpotParser.nmeaData.length - 1) && keepWorking) {
-     setTimeout(function() { scrollData(i+1); }, 1000);
+     setTimeout(function() { 
+                  scrollData(i+1); 
+                }, 1000);
    } else {
      keepWorking = false;
      let animateButton = document.getElementById("animate-button");
