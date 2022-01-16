@@ -1,4 +1,8 @@
 <!DOCTYPE html>
+<!--
+ ! Removed GoogleMaps,
+ ! Replaced with Leaflet
+ +-->
 <html>
   <head>
     <title>spot.parser</title>
@@ -65,18 +69,18 @@ Line.prototype.drawArrowhead = function(ctx, x, y, radians) {
   ctx.fill();
 };
     </script>
-    <script src="http://maps.googleapis.com/maps/api/js?v=3&amp;sensor=false&amp;key=AIzaSyDu5cW4UXjXZTswehBdIO8jCZdzUbk2v5o"
-            type="text/javascript"></script>
+    <!--script src="http://maps.googleapis.com/maps/api/js?v=3&amp;sensor=false&amp;key=AIzaSyDu5cW4UXjXZTswehBdIO8jCZdzUbk2v5o"
+            type="text/javascript"></script-->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+                
     <script type="text/javascript">
- let markers = [];
- let windArrow;
+let displayScale = 0.75;
 
- let displayScale = 0.75;
-
- let displayTWD, displayTWS, displayPRMSL, displayRain, thermometer, graph, map;
- let withTWD = true;
+let displayTWD, displayTWS, displayPRMSL, displayRain, thermometer, graph, map;
+let withTWD = true;
  
- window.onload = () => {
+window.onload = () => {
    displayTWD   = new Direction('twdCanvas', 100 * displayScale, 45, 5);
    displayTWS   = new AnalogDisplay('twsCanvas',   100 * displayScale,   50, 10, 1, true, 40);
    displayPRMSL = new AnalogDisplay('prmslCanvas', 100 * displayScale, 1045, 10, 1, true, 50, 985, 0);
@@ -84,7 +88,7 @@ Line.prototype.drawArrowhead = function(ctx, x, y, radians) {
    
    loadMap();
    setDefaultTimeZone();
- };
+};
  
 function setDefaultTimeZone() {
   // For the best solution, check out https://bitbucket.org/pellepim/jstimezonedetect
@@ -102,7 +106,7 @@ function setDefaultTimeZone() {
     tzOffset /= 100;
   }
    document.getElementById("tz").value = tzOffset;
-};
+}
  
 function updateOnClick(idx, tws, twd, prmsl, rain) {
    let txtDate = SpotParser.nmeaData[idx].getNMEADate();
@@ -127,91 +131,42 @@ function updateOnClick(idx, tws, twd, prmsl, rain) {
    if (withTWD) { // with wind
      graph.drawWind(SpotParser.nmeaData);
    }
-   clearMarkers();
-   if (windArrow !== undefined) {
-     windArrow.setMap(null);
-   }
-   
-   let marker = new google.maps.Marker({
-      position: new google.maps.LatLng(SpotParser.position.lat, SpotParser.position.lng),
-      map: map
-   });
-   markers.push(marker);
    map.setCenter(new google.maps.LatLng(SpotParser.position.lat, SpotParser.position.lng));
 // map.setZoom(11);
+}
 
-   drawWindFeather(SpotParser.position.lat, 
-                   SpotParser.position.lng,
-                   ws,
-                   wd);                    
+const SPEED_PRM = 0.05;
 
- };
-
- const SPEED_PRM = 0.05;
-
- function drawWindFeather(lat, lng, speed, dir) {
-   let windpoints = [];  
-   windpoints.push(new google.maps.LatLng(lat, lng));
-  
-   let onedash = false;
-   if (onedash) {
-     windpoints.push(deadReckoning(lat, lng, speed * SPEED_PRM, dir));
-   } else {
-     windpoints.push(deadReckoning(lat, lng, speed * SPEED_PRM, dir - 10));
-     windpoints.push(deadReckoning(lat, lng, speed * SPEED_PRM * 0.9, dir));
-     windpoints.push(deadReckoning(lat, lng, speed * SPEED_PRM, dir + 10));
-     windpoints.push(new google.maps.LatLng(lat, lng));
-   }
-  
-   let color = "#ffff00"; // yellow
-  
-   const lightblue = "#00ffff";
-   const green     = "#00ff00";
-   const yellow    = "#ffff00";
-   const orange    = "#ff8000";
-   const red       = "#ff0000";
-  
-   if (speed < 10) color = lightblue;
-   else if (speed < 20) color = green;
-   else if (speed < 30) color = yellow;
-   else if (speed < 40) color = orange;
-   else color = red;
-
-   windArrow = new google.maps.Polyline({
-     path: windpoints,
-     geodesic: true,
-     strokeColor: color,
-     strokeOpacity: 1.0,
-     strokeWeight: 2
-   });
-   windArrow.setMap(map);
- };
-
- function deadReckoning(l, g, s, d) {
-   let deltaL = (s / 60) * Math.cos(toRadians(d));
-   let l2 = l + deltaL;
-   let lc1 = getIncLat(l);
-   lc2 = getIncLat(l2);
-   let deltaLc = lc2 - lc1;
-   let deltaG = deltaLc * Math.tan(toRadians(d));
-   let g2 = g + deltaG;
-   return new google.maps.LatLng(l2, g2);
- };
-
- function getIncLat(lat) {
+function getIncLat(lat) {
    let il = Math.log(Math.tan((Math.PI / 4) + (toRadians(lat) / 2)));
    return toDegrees(il);
- };
+}
 
- function toRadians(d) {
+function toRadians(d) {
    return Math.PI * d / 180;
- };
+}
 
- function toDegrees(d) {
+function toDegrees(d) {
    return d * 180 / Math.PI;
- };
+}
 
- function reformatDate(utcDate, fmt) {
+function decToSex(val, ns_ew) {
+    let absVal = Math.abs(val);
+    let intValue = Math.floor(absVal);
+    let dec = absVal - intValue;
+    let i = intValue;
+    dec *= 60;
+    let s = i + "&deg;" /*"°"*/ + dec.toFixed(2) + "'";
+
+    if (val < 0) {
+        s += (ns_ew === 'NS' ? 'S' : 'W');
+    } else {
+        s += (ns_ew === 'NS' ? 'N' : 'E');
+    }
+    return s;
+}
+
+function reformatDate(utcDate, fmt) {
    if (fmt === undefined) {
      fmt = "D d-M-Y H:i";
    }
@@ -239,12 +194,12 @@ function updateOnClick(idx, tws, twd, prmsl, rain) {
    date = new Date(time);
 // console.log("becomes: " + date.toString());
    return date.format(fmt);
- };
+}
 
- let graphdata = [];
+let graphdata = [];
 //let rainData = []; // rain
- // Parse the data
- function onDataChange() {
+// Parse the data
+function onDataChange() {
    let text = document.getElementById("spot").value;  
    let htmlLink = "";
 
@@ -264,23 +219,18 @@ function updateOnClick(idx, tws, twd, prmsl, rain) {
      }
    }
    document.getElementById("links").innerHTML = htmlLink;
- };
+}
  
- function setPosOnMap() {
-   try {
-      let marker = new google.maps.Marker({
-        position: new google.maps.LatLng(SpotParser.position.lat, SpotParser.position.lng),
-        map: map
-      });
-      map.setCenter(new google.maps.LatLng(SpotParser.position.lat, SpotParser.position.lng));
-  //  map.setZoom(11);
-      markers.push(marker);
-   } catch (err) {
-     // In case Google Map APIs are not loaded...
-   }
- };
+function setPosOnMap() {
+  try {
+    placeMarker({ lat: SpotParser.position.lat, lng: SpotParser.position.lng });
+    spotMap.panTo(new L.LatLng(SpotParser.position.lat, SpotParser.position.lng));
+  } catch (err) {
+     // ...
+  }
+}
  
- function animateSpot() {
+function animateSpot() {
    let animateButton = document.getElementById("animate-button");
    if (!keepWorking) {
      animateButton.innerHTML = "Stop";
@@ -300,11 +250,11 @@ function updateOnClick(idx, tws, twd, prmsl, rain) {
    }
    else
      keepWorking = false;
- };
+}
  
- let keepWorking = false;
+let keepWorking = false;
  
- function scrollData(i) {
+function scrollData(i) {
    let data = SpotParser.nmeaData[i];
    graph.drawGraph("graphCanvas", graphdata, i);
 // graph.drawGraph("graphCanvas", rainData, i); // TODO on option
@@ -320,56 +270,81 @@ function updateOnClick(idx, tws, twd, prmsl, rain) {
      animateButton.innerHTML = "Animate";
      document.getElementById("recno").innerHTML = "Done.";
    }
- }
+}
  
- let defaultLocation = "0.0N,0.0E"; 
+let defaultLocation = "0.0N,0.0E"; 
+let spotMap = null; // L.map('map'); // Leaflet, Google,...
  
- function loadMap() {
-   map = new google.maps.Map(document.getElementById("map"), {
-      center: new google.maps.LatLng(0, 0),
-      zoom: 3,
-      mapTypeId: google.maps.MapTypeId.SATELLITE
+function loadMap() {
+  spotMap = L.map('map'); // .setView([currentLatitude, currentLongitude], 13);
+  spotMap.setView([0, 0], 3);
+
+  L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+      accessToken: 'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw',
+      attribution: '© <a href="https://www.mapbox.com/about/maps/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> <strong><a href="https://www.mapbox.com/map-feedback/" target="_blank">Improve this map</a></strong>',
+      tileSize: 512,
+      maxZoom: 18,
+      zoomOffset: -1,
+      id: 'mapbox/streets-v11'
+  }).addTo(spotMap);
+
+  spotMap.addEventListener('mousemove', (event) => {
+        // let lat = Math.round(event.latlng.lat * 100000) / 100000;
+        // let lng = Math.round(event.latlng.lng * 100000) / 100000;
+        let lat = event.latlng.lat;
+        let lng = event.latlng.lng;
+        while (lng > 180) { // Leaflet does that...
+            lng -= 360;
+        }
+        while (lng < -180) { // And this too
+            lng += 360;
+        }
+        // TODO Something smart if needed
+        // document.getElementById('curr-pos').innerHTML = `${decToSex(lat, "NS")}<br/>${decToSex(lng, "EW")}`;
+        // document.getElementById('curr-pos-dec').innerHTML = `${lat}<br/>${lng}`;
     });
+    spotMap.addEventListener('click', (event) => {
+        // let lat = Math.round(event.latlng.lat * 100000) / 100000;
+        // let lng = Math.round(event.latlng.lng * 100000) / 100000;
+        let lat = event.latlng.lat;
+        let lng = event.latlng.lng;
+        while (lng > 180) {
+            lng -= 360;
+        }
+        while (lng < -180) {
+            lng += 360;
+        }
 
-   google.maps.event.addListener(map, 'click', function(event) {
-     placeMarker(event.latLng);
-   });
- }
+        placeMarker({ lat: lat, lng: lng });
+        // document.getElementById('curr-pos-click').innerHTML = `${decToSex(lat, "NS")}<br/>${decToSex(lng, "EW")}`;
+        // document.getElementById('curr-pos-click-dec').innerHTML = `${lat}<br/>${lng}`;
+    });
+}
  
- function setAllMap(map) {
-   for (let i = 0; i < markers.length; i++) {
-     markers[i].setMap(map);
-   }
- }
+let theMarker = null;
 
- // Removes the markers from the map, but keeps them in the array.
- function clearMarkers() {
-   setAllMap(null);
- }
-
- function placeMarker(location) {
-   let marker = new google.maps.Marker({
-      position: location,
-      map: map
-   });
-  clearMarkers();
-  if (windArrow !== undefined) {
-    windArrow.setMap(null);
+function placeMarker(location) {
+  if (theMarker !== null) {
+    spotMap.removeLayer(theMarker)
   }
-  markers.push(marker);
-  map.setCenter(location);
-//map.setZoom(11);
-  defaultLocation = (location.lat() > 0?(location.lat() + "N"):(-location.lat() + "S")) + "," +
-                    (location.lng() > 0?(location.lng() + "E"):(-location.lng() + "W"));
-  buildRequest();
- }
+  theMarker = L.marker([location.lat, location.lng]);
 
- function buildRequest() {
+  theMarker.addTo(spotMap)
+           .bindPopup(`<b>Bulletin request for this location.<br/><span style="color: red;">${decToSex(location.lat, "NS")}<br/>${decToSex(location.lng, "EW")}</span></b>`);
+  spotMap.panTo(new L.LatLng(location.lat, location.lng));
+
+  defaultLocation = (location.lat > 0?(location.lat + "N"):(-location.lat + "S")) + "," +
+                    (location.lng > 0?(location.lng + "E"):(-location.lng + "W"));
+  buildRequest();
+}
+
+function buildRequest() {
    // Like spot:37.5N,122.5W|5,3|PRMSL,WIND,RAIN
    let spot = document.getElementById("spot-req");
    let req = "send spot:";
    req += (defaultLocation + "|");
-   req += (document.getElementById("nb-days").value + "," + document.getElementById("interval").value + "|");
+   req += (document.getElementById("nb-days").value + "," + 
+           document.getElementById("interval").value + "|");
 //   let data = "";
 //   if (document.getElementById("PRMSL").checked)
 //     data += "PRMSL";
@@ -381,24 +356,23 @@ function updateOnClick(idx, tws, twd, prmsl, rain) {
    req += data;
    
    spot.innerHTML = req;
- }
+}
  
- function compose() {
+function compose() {
    let anchor = document.getElementById("custom-request");
    let href = "mailto:query@saildocs.com?subject=spot&body=" + document.getElementById("spot-req").innerHTML.replace(" ", "%20");
    anchor.href = href;
- }
+}
 
- function showHelpDialog() {
-    let weatherDialog = document.getElementById("spot-help");
-    weatherDialog.show();
-  }
+function showHelpDialog() {
+  let weatherDialog = document.getElementById("spot-help");
+  weatherDialog.show();
+}
 
-  function closeHelpDialog() {
-    let weatherDialog = document.getElementById("spot-help");
-    weatherDialog.close();
-  }
-
+function closeHelpDialog() {
+  let weatherDialog = document.getElementById("spot-help");
+  weatherDialog.close();
+}
     </script>
     <link rel="stylesheet" href="css/stylesheet.css" type="text/css"/>
     <style type="text/css">
@@ -424,7 +398,7 @@ function updateOnClick(idx, tws, twd, prmsl, rain) {
 }
     </style>
   </head>
-  <body onunload="GUnload();">    
+  <body> <!-- onunload="GUnload();" -->    
 
     <dialog id="spot-help" style="width: 400px; border-radius: 8px; z-index: 10;">
       <div class="dialog-header">
@@ -598,6 +572,6 @@ function updateOnClick(idx, tws, twd, prmsl, rain) {
       </tr>
     </table>  
     <hr/>
-    &copy; 2013, OlivSoft.
+    &copy; 2013, 2022, OlivSoft.
   </body>
 </html>

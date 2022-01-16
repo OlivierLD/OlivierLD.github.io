@@ -14,12 +14,12 @@ let SpotParser = {
 //  console.info("We have " + line.length + " line(s)");
     
     let linkList = "";
-    //                           07-03 00:00 1011.8  8.4 214  0.0 11.3
+    //                            07-03 00:00 1                      011.8           8.4             214       0.0       11.3
     let regExp   = new RegExp("(\\d{2}-\\d{2}\\s\\d{2}:\\d{2})\\s*(\\d*\\.\\d)\\s*(\\d*\\.\\d)\\s*(\\d*)\\s*(\\d*\\.\\d).*");  
-    //                            ^                                  ^               ^               ^         ^          ^
-    //                            date                               prmsl           tws             twd       rain       etc
+    //                            ^                                  ^               ^               ^         ^         ^
+    //                            date                               prmsl           tws             twd       rain      etc
     
-    //                           request code: spot:37.5N,122.5W|5,3|PRMSL,WIND,RAIN,LFTX
+    // request code: spot:37.5N,122.5W|5,3|PRMSL,WIND,RAIN,LFTX
     let posRegExpr = new RegExp("request\\scode:\\sspot:([^|]*).*");
     let j = 0;
     for (let i=0; i<line.length; i++) {
