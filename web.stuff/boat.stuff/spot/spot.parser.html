@@ -6,6 +6,7 @@
 <html lang="en">
   <head>
     <title>spot.parser</title>
+    <meta charset="UTF-8">
     <link rel="icon" type="image/jpg" href="../icons/hammerhead.02.ico">
     <script type="text/javascript" src="js/date.proto.js"></script>
     <script type="text/javascript" src="analog.display/AnalogDisplay.js"></script>
@@ -369,17 +370,29 @@ function compose() {
 
 function showHelpDialog() {
   let weatherDialog = document.getElementById("spot-help");
-  weatherDialog.show();
+  if (weatherDialog.show !== undefined) {
+    weatherDialog.show();
+  } else {
+    weatherDialog.style.display = 'inline';
+  }
 }
 
 function showManual() {
   let manualDialog = document.getElementById("spot-user-manual");
-  manualDialog.show();
+  if (manualDialog.show !== undefined) {
+    manualDialog.show();
+  } else {
+    manualDialog.style.display = 'inline';
+  }
 }
 
 function closeDialog(dialogId) {
-  let weatherDialog = document.getElementById(dialogId);
-  weatherDialog.close();
+  let dialog = document.getElementById(dialogId);
+  if (dialog.close !== undefined) {
+    dialog.close();
+  } else {
+    dialog.style.display = 'none';
+  }
 }
 
 let copyToClipboard = (fieldId) => {
@@ -396,9 +409,14 @@ let copyToClipboard = (fieldId) => {
 };
 
 function showCustomAlert(text) {
-  let weatherDialog = document.getElementById("custom-alert");
+  let customAlert = document.getElementById("custom-alert");
   document.getElementById("inner-alert").innerHTML = text;
-  weatherDialog.show();
+  if (customAlert.show !== undefined) {
+    customAlert.show();
+  } else {
+    customAlert.style.display = 'inline';
+  }
+
 }
 
 function closeCustomAlert() {
