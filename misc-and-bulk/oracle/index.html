@@ -38,7 +38,16 @@
     <h1>Oracle scratch-pad</h1>
     <hr/>
     <h2>Speech Service</h2>
-    Building the Speech Service
+    <p>
+        Build the Speech Service from its repo, and put it to work.
+    </p>
+    <p>
+        <ul>
+            <li><a href="#build-it">Build it</a></li>
+            <li><a href="#access-it">Access it</a></li>
+        </ul>
+    </p>
+    <h3><a name="build-it">Building the Speech Service</a></h3>
     <ul>
         <li><a class="list-link" href="https://docs.oracle.com/en/cloud/paas/digital-assistant/sdk-js/index.html">Discover ODA</a></li>
         <li><a class="list-link" href="https://confluence.oci.oraclecorp.com/pages/viewpage.action?spaceKey=SPEECHAI&title=Speech+Service+Internal+Bug+Bash">OCI Speech Bug Bash page</a></li>
@@ -135,7 +144,102 @@ export JAVA_HOME=/usr/java/jdk-11.0.7
 $ ./buildDeploy.sh -x tests
 </pre>
         </li>
-    </ul>
+        <li>
+            <b><i>Note</i>:</b>
+            <br/>
+            To have the project compiled locally in IntelliJ running on your laptop,
+            you need to set the Gradle flag <code>skip.requirement</code> to <code>true</code>.
+            <br/>
+            To do so, add the following line to your local <code>~/.gradle/gradle.properties</code>:
+<pre>
+skip.requirements=true
+</pre>
+        You can also start the build from the command line:
+<pre>
+$ ./buildDeploy.sh -x test -x lint -Pskip.requirements=true
+</pre>
+        </li>
+      </ul>
+      
+      <h3><a name="access-it">Access the Speech Service</a></h3>
+      <ul>
+        <li>
+            The <code>README.md</code> at <a href="https://bitbucket.oci.oraclecorp.com/projects/ODA/repos/bots-speech/browse">https://bitbucket.oci.oraclecorp.com/projects/ODA/repos/bots-speech/browse</a> 
+            will tell you what to do next.
+        </li>
+        <li>
+            Use the <b>Web SDK</b>, from your browser.
+            <br/>
+            From Google Chrome, go to <code>chrome://flags</code> to change the configuration,
+            <ul>
+              <li>enabled Insecure origins treated as secure</li>
+              <li>add http://&lt;ip&gt;</li>
+            </ul>
+            Then reach <a href="http://100.111.136.104/test/dev-latest">http://100.111.136.104/test/dev-latest</a>,
+            where <code>100.111.136.104</code> is the IP Address of your instance.
+            <br/>
+            <i><b>Note:</b></i> The WebSDK is using Node-RED, you can reach the Node-RED UI at <a href=" http://100.111.136.104:1881/"> http://100.111.136.104:1881/</a>
+            where again, <code>100.111.136.104</code> is the IP Address of your instance.
+        </li>
+        <li>
+            Use the Speech Service from <code>curl</code>:
+            <br/>
+            Have a shell script (named for example <code>curl.speech.sh</code>) like this:
+<pre>
+#!/bin/bash
+MACHINE_IP=100.111.136.104
+# MACHINE_IP=147.154.101.151  # speech.aiservice.us-phoenix-1.oci.oraclecloud.com
+TENANT_ID=odaserviceinstance00
+OPTION=generic
+# OPTION=alarm
+AUDIO_FILE=./foo.wav
+#
+if [[ "$1" != "" ]]; then
+    AUDIO_FILE=$1
+    echo -e "{ \"message\": \"Will transcript user-provided ${AUDIO_FILE}\" }"
+else  
+    echo -e "{ \"message\": \"Will transcript default ${AUDIO_FILE}\" }"
+fi
+#
+# "http://${MACHINE_IP}/voice/recognize/en-us/generic"
+# Convert m4a to wav on line: https://www.zamzar.com/
+#
+curl -X POST \
+    --data-binary @${AUDIO_FILE} \
+    -H "Bots-TenantId: ${TENANT_ID}" \
+    -H "channelId: recognize" \
+    -H "Content-Type: audio/wav" \
+    "http://${MACHINE_IP}/voice/recognize/en-us/${OPTION}"
 
+</pre>            
+        The default file to process is <code>foo.wav</code>, run the script with <code>jq</code> like this:
+<pre>
+./curl.speech.sh | jq
+% Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                Dload  Upload   Total   Spent    Left  Speed
+0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+{
+  "message": "Will transcript default ./foo.wav"
+}
+100  138k  100   142  100  138k     54  54388  0:00:02  0:00:02 --:--:-- 54442
+{
+  "event": "finalResult",
+  "requestId": "4f3dcc37-de48-42d3-810c-cab9068be66f",
+  "nbest": [
+    {
+      "utterance": "Change the name to waking up",
+      "score": "47"
+    }
+  ]
+}  
+</pre>      
+      </li>
+      <li>
+        Consume the Speech Service from <code>Java</code> and <code>Python</code>, with <code>REST</code> and <code>WebSockets</code>.
+        <br/>
+        See the code at <a href="https://github.com/OlivierLD/AllLanguagesScratchPad/tree/master/oracle-speech-service">https://github.com/OlivierLD/AllLanguagesScratchPad/tree/master/oracle-speech-service</a>.
+      </li>
+    </ul>
+    <hr/>
 </body>
 </html>
