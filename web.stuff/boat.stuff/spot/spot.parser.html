@@ -529,7 +529,7 @@ window.alert = showCustomAlert; // Override!
         <div>
           The bulletin you got as a response to your email looks like this:
           <br/>
-          <textarea style="font-family: 'Courier New', Courier, monospace; width: 98%; height: 200px; max-height: 250px; overflow: scroll;">
+          <textarea style="font-family: 'Courier New', Courier, monospace; width: 98%; height: 200px; max-height: 250px; overflow: scroll;" spellcheck="false">
 Data extracted from file gfs-20220117-00z.grb dated 2022/01/17 05:13:48
 request code: spot:37.77715986825405N,76.00255966186525W|5,3|PRMSL,WIND,RAIN
 
@@ -644,6 +644,7 @@ info@saildocs.com, this will return the how-to document (about 5K).
                     style="margin: 2px; height: 100px; width: 365px;" 
                     onchange="onDataChange();" 
                     placeholder="Paste SPOT bulletin here, and tab out." 
+                    spellcheck="false"
                     title="Paste here the bulletin&#13;received by email, at least from the top&#13;to the last data line."></textarea>
           <br/>
           <small>
