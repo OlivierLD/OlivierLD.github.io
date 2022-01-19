@@ -92,7 +92,7 @@ window.onload = () => {
 };
  
 function setDefaultTimeZone() {
-  // For the best solution, check out https://bitbucket.org/pellepim/jstimezonedetect
+
   let tzOffset = 0;
 
   let re = new RegExp("GMT([+-]\\d{4}).*"); // Like xxx GMT+0100 (xxx)
@@ -456,7 +456,7 @@ window.alert = showCustomAlert; // Override!
     </style>
   </head>
   <body> <!-- onunload="GUnload();" -->    
-    <small>Last code update 19-Jan-2022 07:16 GMT+0100</small>
+    <small>Last code update 19-Jan-2022 14:48 GMT+0100</small>
 
     <dialog id="spot-help" style="width: 400px; border-radius: 8px; z-index: 10; background-color: rgba(255, 255, 255, 0.80);">
       <div class="dialog-header">
@@ -609,7 +609,7 @@ info@saildocs.com, this will return the how-to document (about 5K).
           <i>Note:</i> You can use the content above, for tests.
           <br/>
           Now, paste the copied bulletin in the text-box that says 
-          <code style="color:gray; font-family: 'Courier New', Courier, monospace;">Paste SPOT bulletin here, and tab out.</code>,
+          <code style="background-color: white; color:gray; font-family: 'Courier New', Courier, monospace;">Paste SPOT bulletin here, and tab out.</code>,
           and tab out of the text-box (or just click anywhere else).
           <br/>
           The rest should be straightforward.
@@ -631,7 +631,7 @@ info@saildocs.com, this will return the how-to document (about 5K).
         <td valign="top" colspan="4">
           <h2>Spot GRIB Parser <a href="#" 
                                   onclick="showHelpDialog();" 
-                                  style="padding: 3px; border: 2px solid gray; border-radius: 50%;"
+                                  style="padding: 0 5px 0 5px; border: 2px solid gray; border-radius: 50px;"
                                   title="Help!&#13;What is a SPOT bulletin?">?</a>
                                <img src="manual.png" 
                                     style="width: 25px; height: auto; vertical-align: baseline; margin-bottom: -4px; cursor: pointer;" 
