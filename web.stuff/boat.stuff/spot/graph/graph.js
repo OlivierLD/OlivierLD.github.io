@@ -238,12 +238,13 @@ function Graph(cName,       // Canvas Name
       context.closePath();
     }
   };
-  
+
   const ARROW_LEN = 20;
-  
+  const ADD_180_DEGREES = false;
+
   this.drawWind = function(nmea) {    
     for (let i=0; i<nmea.length; i++) {
-      let wd = parseFloat(nmea[i].getNMEATwd()) + 180; // Direction the wind is blowing TO
+      let wd = parseFloat(nmea[i].getNMEATwd()) + (ADD_180_DEGREES ? 180 : 0); // 180: Direction the wind is blowing TO
       while (wd > 360) {
         wd -= 360;
       }
@@ -256,7 +257,8 @@ function Graph(cName,       // Canvas Name
       // create a new line object
       let line = new Line(x, y, x + dX, y + dY);
       // draw the line
-      line.drawWithArrowhead(context);
+      // console.log(`WindSpeed: ${nmea[i].getNMEATws()}`);
+      line.drawWindArrow(context, wd, parseFloat(nmea[i].getNMEATws()) /* + 50 */, false);
       context.closePath();
     }
   };

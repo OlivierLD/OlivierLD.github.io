@@ -23,11 +23,103 @@ function Line(x1, y1, x2, y2) {
   this.x2 = x2;
   this.y2 = y2;
 };
-Line.prototype.drawWithArrowhead = function(ctx) {
-  this.drawWithArrowheads(ctx, false);
-};
 
-Line.prototype.drawWithArrowheads = function(ctx, both) {
+function getNbFeathers(tws) {
+  let bigOnes = 0;
+  let longOnes = 0;
+  let smallOne = 0;
+  bigOnes = Math.trunc(tws / 50);
+  longOnes = Math.trunc((tws - (bigOnes * 50)) / 10);
+  smallOne = (tws - (bigOnes * 50) - (longOnes * 10)) > 5 ? 1 : 0;
+  return {
+    big: bigOnes,
+    long: longOnes,
+    small: smallOne
+  };
+}
+
+  const FEATHER = 1;
+  const ARROW_HEAD = 2;
+  const ARROW_OPTION = FEATHER; // ARROW_HEAD; //
+  
+
+const ARROW_LEN = 20;
+const BIG_FEATHER_BASE = 5;
+const LONG_FEATHER_LEN = 10;
+const SMALL_FEATHER_LEN = 5;
+const BETWEEN_FEATHERS = 3;
+const FEATHER_ANGLE = 135; // in degrees
+const DOT_RADIUS = 2;
+
+function drawBigFeather(ctx, x, y, twa) {
+  ctx.beginPath();
+  ctx.strokeStyle = "blue";
+  ctx.fillStyle   = "blue";
+  ctx.moveTo(x, y);
+  let tipX = x + (LONG_FEATHER_LEN * Math.cos(toRadians(twa - 180)));
+  let tipY = y + (LONG_FEATHER_LEN * Math.sin(toRadians(twa - 180)));
+  ctx.lineTo(tipX, tipY);
+  let frontX = x - (BIG_FEATHER_BASE * Math.cos(toRadians(twa - 90)));
+  let frontY = y - (BIG_FEATHER_BASE * Math.sin(toRadians(twa - 90)));
+  ctx.lineTo(frontX, frontY);
+  ctx.closePath();
+  // ctx.stroke();
+  ctx.fill();
+}
+function drawLongFeather(ctx, x, y, twa) {
+  drawThinFeather(ctx, x, y, twa, LONG_FEATHER_LEN);
+}
+function drawSmallFeather(ctx, x, y, twa) {
+  drawThinFeather(ctx, x, y, twa, SMALL_FEATHER_LEN);
+}
+function drawThinFeather(ctx, x, y, twa, len) {
+  ctx.strokeStyle = "blue";
+  // ctx.fillStyle   = "blue";
+  // ctx.lineWidth   = 1;
+
+  ctx.beginPath();
+  ctx.moveTo(x, y);
+  let endX = x + (len * Math.cos(toRadians(twa - FEATHER_ANGLE)));
+  let endY = y + (len * Math.sin(toRadians(twa - FEATHER_ANGLE)));
+  ctx.lineTo(endX, endY);
+  ctx.closePath();
+  ctx.stroke();
+}
+
+Line.prototype.drawWindFeathers = function(ctx, twa, tws) {
+  // this.drawWithArrowheads(ctx, false);
+  // How many feathers?
+  let feathers = getNbFeathers(tws);
+  console.log(feathers);
+  let currentFeatherPos = ARROW_LEN;
+  let rootFeatherPos = { x: this.x2, y: this.y2 };
+  let twaRadians = toRadians(twa); // Math.atan((this.y2 - this.y1) / (this.x2 - this.x1));
+  // Fat ones
+  for (let x=0; x<feathers.big; x++) {
+    drawBigFeather(ctx, rootFeatherPos.x, rootFeatherPos.y, twa);
+    currentFeatherPos -= (BIG_FEATHER_BASE + 1);
+    let dX = currentFeatherPos * Math.sin(toRadians(twa));
+    let dY = - currentFeatherPos * Math.cos(toRadians(twa));
+    rootFeatherPos = { x: this.x1 + dX, y: this.y1 + dY };
+  }
+  // Long ones
+  for (let x=0; x<feathers.long; x++) {
+    drawLongFeather(ctx, rootFeatherPos.x, rootFeatherPos.y, twa);
+    currentFeatherPos -= BETWEEN_FEATHERS;
+    let dX = currentFeatherPos * Math.sin(toRadians(twa));
+    let dY = - currentFeatherPos * Math.cos(toRadians(twa));
+    rootFeatherPos = { x: this.x1 + dX, y: this.y1 + dY };
+  }
+  // Small one
+  if (feathers.small > 0) {
+    drawSmallFeather(ctx, rootFeatherPos.x, rootFeatherPos.y, twa);
+  }
+
+};
+Line.prototype.drawWithArrowhead = function(ctx) {
+  this.drawWindArrow(ctx, 0, 0, false);
+};
+Line.prototype.drawWindArrow = function(ctx, twa, tws, both) { // both: both ends.
   if (both === undefined) {
     both = true;
   }
@@ -36,22 +128,38 @@ Line.prototype.drawWithArrowheads = function(ctx, both) {
   ctx.fillStyle   = "blue";
   ctx.lineWidth   = 1;
 
+  // if (ARROW_OPTION === FEATHER) {  // Important: sync with ADD_180_DEGREES in Graph.js
+  //   let deltaX = this.x2 - this.x1;
+  //   let deltaY = this.y2 - this.y1;
+  //   this.x2 = this.x1 - deltaX;
+  //   this.y2 = this.y1 - deltaY;
+  // }
+
   // draw the line
   ctx.beginPath();
   ctx.moveTo(this.x1, this.y1);
   ctx.lineTo(this.x2, this.y2);
+  ctx.closePath();
   ctx.stroke();
-
-  if (both) {
+  if (ARROW_OPTION === FEATHER) { // Draw a dot on top of the wind arrow.
+    ctx.arc(this.x1, this.y1, DOT_RADIUS, 0, (2 * Math.PI), false);
+    ctx.fill();
+  }
+  
+  if (both && ARROW_OPTION === ARROW_HEAD) {
     // draw the starting arrowhead
     let startRadians = Math.atan((this.y2 - this.y1) / (this.x2 - this.x1));
-    startRadians += ((this.x2>this.x1)?-90:90) * Math.PI/180;
+    startRadians += toRadians((this.x2>this.x1)?-90:90);
     this.drawArrowhead(ctx, this.x1, this.y1, startRadians);
   }
-  // draw the ending arrowhead
-  let endRadians=Math.atan((this.y2 - this.y1) / (this.x2 - this.x1));
-  endRadians += ((this.x2>this.x1)?90:-90) * Math.PI/180;
-  this.drawArrowhead(ctx, this.x2, this.y2, endRadians);
+  if (ARROW_OPTION === ARROW_HEAD) {
+    // draw the ending arrowhead
+    let endRadians=Math.atan((this.y2 - this.y1) / (this.x2 - this.x1));
+    endRadians += toRadians((this.x2>this.x1)?90:-90); //  * Math.PI/180;
+    this.drawArrowhead(ctx, this.x2, this.y2, endRadians);
+  } else if (ARROW_OPTION === FEATHER) {
+    this.drawWindFeathers(ctx, twa, tws);
+  }
 };
 
 const HEAD_LENGTH = 10;
@@ -145,11 +253,18 @@ function getIncLat(lat) {
 }
 
 function toRadians(d) {
-   return Math.PI * d / 180;
+   return d * Math.PI / 180;
 }
 
-function toDegrees(d) {
-   return d * 180 / Math.PI;
+function toDegrees(r) {
+  let deg = r * 180 / Math.PI; 
+  while (deg < 0) {
+    deg += 360;
+  }
+  while (deg > 360) {
+    deg -= 360;
+  }
+  return deg;
 }
 
 function decToSex(val, ns_ew) {
@@ -456,7 +571,7 @@ window.alert = showCustomAlert; // Override!
     </style>
   </head>
   <body> <!-- onunload="GUnload();" -->    
-    <small>Last code update 19-Jan-2022 14:48 GMT+0100</small>
+    <small>Last code update 20-Jan-2022 09:50 GMT+0100</small>
 
     <dialog id="spot-help" style="width: 400px; border-radius: 8px; z-index: 10; background-color: rgba(255, 255, 255, 0.80);">
       <div class="dialog-header">
@@ -750,8 +865,9 @@ info@saildocs.com, this will return the how-to document (about 5K).
         </td>
       </tr>
       <tr>
-        <td colspan="4">      
-          <small>Warning: The wind arrows indicate the direction <b><i>in which</i></b> the wind is blowing</small>
+        <td colspan="4">  
+          <!-- Uncomment to have arrows instead of feathers -->    
+          <!--small><i>Warning:</i> The wind arrows indicate the direction <b><i>in which</i></b> the wind is blowing</small-->
         </td>
       </tr>
       <tr>
