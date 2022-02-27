@@ -954,6 +954,14 @@ Date.prototype.format = function (dateFormat) {
     Raspberry Pi
   </div-->
 
+  <div class="switch-container" style="margin-left: 30px;" title="Cloud backgrounds only">
+    <label class="switch switch-element">
+      <input id="cloud-slider" type="checkbox" onchange="manageCloudClick(this);">
+      <span class="slider round"></span>
+    </label>
+    <span class="switch-element">Cloud BG only</span>
+  </div>
+
   <div class="switch-container" style="margin-left: 30px;" title="Flip the slides automatically.&#13;Much nicer than&#13;a check box 😎">
     <label class="switch switch-element">
       <input id="slide-slider" type="checkbox" onchange="manageClick(this);">
@@ -1535,26 +1543,35 @@ Date.prototype.format = function (dateFormat) {
   const FAST_BG_INTERVAL = ((/*1 * */ 60) + 1) * 1000; // in ms.
   let BG_INTERVAL = SLOW_BG_INTERVAL;
   const BG_IMAGES = [
-    { name: "overcast.jpg" },
-    { name: "night.sky.01.jpeg" },
-    { name: "neuralnetwork.jpg" },
-    { name: "next_wave.jpg" },
-    { name: "NorthernLight.2.jpeg" },
-    { name: "cloud.jpeg" },
-    { name: "creative-computing-resizedjpg.jpeg" },
-    { name: "ag6.jpg" },
-    { name: "rpi.jpg" },
-    { name: "above.cape.town.jpeg" },
-    { name: "clouds.2.jpg" },
-    { name: "hexagon-2-wallpapers.jpg" },
-    { name: "sky.above.Czechia.jpeg" },
-    { name: "cartago.costa.rica.jpeg" },
-    { name: "matrix.jpg" },
-    { name: "pcb.jpg" },
-    { name: "sky.and.clouds.jpg" },
-    { name: "sky.jpg" },
-    { name: "la.licorne.jpeg" }
+    { name: "overcast.jpg", cat: "clouds" },
+    { name: "night.sky.01.jpeg", cat: "clouds" },
+    { name: "neuralnetwork.jpg", cat: "misc" },
+    { name: "next_wave.jpg", cat: "misc" },
+    { name: "NorthernLight.2.jpeg", cat: "misc" },
+    { name: "cloud.jpeg", cat: "clouds" },
+    { name: "creative-computing-resizedjpg.jpeg", cat: "misc" },
+    { name: "ag6.jpg", cat: "misc" },
+    { name: "rpi.jpg", cat: "misc" },
+    { name: "above.cape.town.jpeg", cat: "clouds" },
+    { name: "clouds.2.jpg", cat: "clouds" },
+    { name: "hexagon-2-wallpapers.jpg", cat: "misc" },
+    { name: "sky.above.Czechia.jpeg", cat: "clouds" },
+    { name: "cartago.costa.rica.jpeg", cat: "clouds" },
+    { name: "matrix.jpg", cat: "misc" },
+    { name: "pcb.jpg", cat: "misc" },
+    { name: "sky.and.clouds.jpg", cat: "clouds" },
+    { name: "sky.jpg", cat: "clouds" },
+    { name: "la.licorne.jpeg", cat: "misc" }
   ];
+
+  let BG_CLOUDS_ONLY = [];
+  BG_IMAGES.forEach(img => {
+    if (img.cat === 'clouds') {
+      BG_CLOUDS_ONLY.push(img);
+    }
+  });
+
+  let bgToUse = BG_IMAGES;
 
   let secondLeft = BG_INTERVAL / 1000;
   let bgIndex = 0;
@@ -1571,12 +1588,12 @@ Date.prototype.format = function (dateFormat) {
       // Change image in the dark
       if (!randomOrder) {
         bgIndex += 1; // Sorted
-        bgIndex %= BG_IMAGES.length;
+        bgIndex %= bgToUse.length;
       } else {
-        let newBgIndex = Math.floor((Math.random() * BG_IMAGES.length));
+        let newBgIndex = Math.floor((Math.random() * bgToUse.length));
         if (bgIndex === newBgIndex) {
           bgIndex += 1;
-          bgIndex %= BG_IMAGES.length;
+          bgIndex %= bgToUse.length;
         } else {
           bgIndex = newBgIndex;
         }
@@ -1639,6 +1656,12 @@ Date.prototype.format = function (dateFormat) {
   }
 
   let auto = false;
+  let cloudBGOnly = false;
+
+  function manageCloudClick(cb) {
+    cloudBGOnly = cb.checked;
+    bgToUse = cloudBGOnly ? BG_CLOUDS_ONLY : BG_IMAGES;
+  }
 
   function manageClick(cb) {
     auto = cb.checked;
@@ -1760,7 +1783,7 @@ Date.prototype.format = function (dateFormat) {
       let dom = document.body;
       // let content = `radial-gradient(at top, rgba(255, 255, 0, 0.5) 20%, rgba(1, 67, 114, 0.60) 55%)`;
       let content = `${currentBackground}, `; // `radial-gradient(at top, rgba(255, ${green1}, 0, 0.5) ${v1}%, rgba(1, 67, ${blue2}, 0.60) ${v2}%), `;
-      content += `url("./backgbrounds/${BG_IMAGES[bgIndex].name}") no-repeat left top`;
+      content += `url("./backgbrounds/${bgToUse[bgIndex].name}") no-repeat left top`;
 
       // TODO Change bg image scale? add to content: dom.style.backgroundSize("150px 120px") ?
 
