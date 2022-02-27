@@ -1021,7 +1021,10 @@ Date.prototype.format = function (dateFormat) {
       <div class="display">
         <span class="display-title">Some examples of Web Components</span>
         <span class="display-data">Web Components</span>
-        <span class="display-unit">A W3C Standard</span>
+        <span class="display-unit">
+          A W3C Standard<br/>
+          <a href="./webcomponents/gallery.html" class="active-link" target="WebComp">WebComponents Samples</a>
+        </span>
       </div>
       <div class="text">TWO</div>
     </div>
@@ -1109,17 +1112,43 @@ Date.prototype.format = function (dateFormat) {
     <div class="next" onclick="plusSlides(1);">&#10095;</div>
 
     <div class="dots">
-      <span class="dot" onclick="currentSlide(1);" title="Raspberry"></span>
-      <span class="dot" onclick="currentSlide(2);" title="Web Comp"></span>
+      <span class="dot" onclick="currentSlide(1);" title="Raspberry Pi"></span>
+      <span class="dot" onclick="currentSlide(2);" title="Web Components"></span>
       <span class="dot" onclick="currentSlide(3);" title="Java"></span>
       <span class="dot" onclick="currentSlide(4);" title="Python"></span>
       <span class="dot" onclick="currentSlide(5);" title="Arduino"></span>
       <span class="dot" onclick="currentSlide(6);" title="Web 2.0"></span>
-      <span class="dot" onclick="currentSlide(7);" title="Sailing"></span>
-      <span class="dot" onclick="currentSlide(8);" title="3D Print"></span>
+      <span class="dot" onclick="currentSlide(7);" title="Sailing or so"></span>
+      <span class="dot" onclick="currentSlide(8);" title="3D Printing"></span>
       <span class="dot" onclick="currentSlide(9);" title="Marquee"></span>
     </div>
   </div>
+
+  <dialog id="about-dialog" class="shadow-menu" style="width: 800px;">
+    <div class="dialog-header">
+      <span>Where did you just land?...</span>
+      <span class="dialog-header-close" onclick="closeAboutDialog();">&times</span>
+    </div>
+    <div>
+      <!-- About content -->
+      <div style="margin-top: 15px;">
+        This page is a sort of home page for several aspects of my work.<br/>
+        It includes links to articles, git repos, blogs, web pages, and other (isolated) resources.<br/>
+        It can also be seen as some kind of playground, to illustrate what a web-UI can look like (without pretending to be the best one, by far).<br/>
+        An interesting (in my books) thing to keep in mind: the Web-UI presented here contains <i>absolutely NO external library</i>. <b>No</b> JQuery, <b>no</b> AngularJS, <b>no</b> Underscore, etc.<br/>
+      </div>
+      <div style="margin-top: 15px;">
+        It uses several <i>recent</i> specifications from the <a href="https://www.w3.org/" target="W3C">W3C</a>, about ES6, HTML5, CSS3, that might not be supported (yet?) by all browsers...
+      </div>
+      <div style="margin-top: 15px;">
+        You might be sceptical about the structure of the site..., and I am with you about that.
+        It is a work in constant progress.
+      </div>
+      <div style="margin-top: 15px;">
+        This being said, enjoy the ride!
+      </div>
+    </div>
+  </dialog>
 
   <dialog id="weather-links-dialog" class="shadow-menu">
     <div class="dialog-header">
@@ -1161,6 +1190,7 @@ Date.prototype.format = function (dateFormat) {
   <div id="side-nav" class="sidenav"> <!-- onmouseleave="closeNav()"> -->
     <a href="javascript:void(0)" id="close-nav-button" class="closebtn" onclick="closeNav()">&times;</a>
     <a href="javascript:void(0)" class="active-link" style="margin-top: 20px;" onclick="showAbout()">About me</a>
+    <a href="javascript:void(0)" class="active-link" style="margin-top: 10px;" onclick="showWhatThisPageIs()">What this page is</a>
 
     <!--a href="javascript:void(0)" class="active-link" onclick="marqueeOnOff()">Marquee Panel (start or stop)</a-->
     <div> <!-- onmouseover="showSection('section-1');" onmouseleave="hideSection('section-1');"> -->
@@ -1388,7 +1418,7 @@ Date.prototype.format = function (dateFormat) {
       let x = marqueeObj.nbCols;
       let yOffset = marqueeObj.yOffset;
       let y = 12;
-      marqueeScrollUpAnimationInterval = window.setInterval(function() { // Start
+      marqueeScrollUpAnimationInterval = window.setInterval(() => { // Start
         let data = JSON.parse(marqueeObj.displayData); // { text-array: txt, x: x, y: y };
         let arrayCardinality = 1;
         if (data['text-array'] !== undefined) {
@@ -1634,6 +1664,7 @@ Date.prototype.format = function (dateFormat) {
       setTimeout(leftNewContent, 10);
     }
   }
+
   function leftOldContent() {
     if (currentLeftMargin > -100) {
       currentLeftMargin -= 1;
@@ -1649,6 +1680,7 @@ Date.prototype.format = function (dateFormat) {
       setTimeout(leftNewContent, 10);
     }
   }
+
   function swipeTitle() {
     aboutDiv = document.getElementById('about-div');
     // console.log(`About-Div, margin left: ${aboutDiv.style.marginLeft}`);
@@ -1750,6 +1782,16 @@ Date.prototype.format = function (dateFormat) {
     bgAnimation = setInterval(() => {
       setTimeout(darkenBackground, 1);
     }, BG_INTERVAL); // in ms.
+  }
+
+  function showWhatThisPageIs() {
+    let aboutDialog = document.getElementById("about-dialog");
+    aboutDialog.show();
+  }
+
+  function closeAboutDialog() {
+    let aboutDialog = document.getElementById("about-dialog");
+    aboutDialog.close();
   }
 
   function showWeatherDialog() {
