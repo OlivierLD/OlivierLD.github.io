@@ -1026,7 +1026,7 @@ Date.prototype.format = function (dateFormat) {
           If Python is a sand-box, Java is a football field!
         </span>
         <span class="display-data">Java and<br/>Processing</span>
-        <span class="display-unit"><a href="http://processing.org" target="processing">Processing.org</a></span>
+        <span class="display-unit"><a href="http://processing.org" class="active-link" target="processing">Processing.org</a></span>
       </div>
       <div class="text">THREE</div>
     </div>
@@ -1535,25 +1535,25 @@ Date.prototype.format = function (dateFormat) {
   const FAST_BG_INTERVAL = ((/*1 * */ 60) + 1) * 1000; // in ms.
   let BG_INTERVAL = SLOW_BG_INTERVAL;
   const BG_IMAGES = [
-    "overcast.jpg",
-    "night.sky.01.jpeg",
-    "neuralnetwork.jpg",
-    "next_wave.jpg",
-    "NorthernLight.2.jpeg",
-    "cloud.jpeg",
-    "creative-computing-resizedjpg.jpeg",
-    "ag6.jpg",
-    "rpi.jpg",
-    "above.cape.town.jpeg",
-    "clouds.2.jpg",
-    "hexagon-2-wallpapers.jpg",
-    "sky.above.Czechia.jpeg",
-    "cartago.costa.rica.jpeg",
-    "matrix.jpg",
-    "pcb.jpg",
-    "sky.and.clouds.jpg",
-    "sky.jpg",
-    "la.licorne.jpeg"
+    { name: "overcast.jpg" },
+    { name: "night.sky.01.jpeg" },
+    { name: "neuralnetwork.jpg" },
+    { name: "next_wave.jpg" },
+    { name: "NorthernLight.2.jpeg" },
+    { name: "cloud.jpeg" },
+    { name: "creative-computing-resizedjpg.jpeg" },
+    { name: "ag6.jpg" },
+    { name: "rpi.jpg" },
+    { name: "above.cape.town.jpeg" },
+    { name: "clouds.2.jpg" },
+    { name: "hexagon-2-wallpapers.jpg" },
+    { name: "sky.above.Czechia.jpeg" },
+    { name: "cartago.costa.rica.jpeg" },
+    { name: "matrix.jpg" },
+    { name: "pcb.jpg" },
+    { name: "sky.and.clouds.jpg" },
+    { name: "sky.jpg" },
+    { name: "la.licorne.jpeg" }
   ];
 
   let secondLeft = BG_INTERVAL / 1000;
@@ -1760,7 +1760,7 @@ Date.prototype.format = function (dateFormat) {
       let dom = document.body;
       // let content = `radial-gradient(at top, rgba(255, 255, 0, 0.5) 20%, rgba(1, 67, 114, 0.60) 55%)`;
       let content = `${currentBackground}, `; // `radial-gradient(at top, rgba(255, ${green1}, 0, 0.5) ${v1}%, rgba(1, 67, ${blue2}, 0.60) ${v2}%), `;
-      content += `url("./backgbrounds/${BG_IMAGES[bgIndex]}") no-repeat left top`;
+      content += `url("./backgbrounds/${BG_IMAGES[bgIndex].name}") no-repeat left top`;
 
       // TODO Change bg image scale? add to content: dom.style.backgroundSize("150px 120px") ?
 
