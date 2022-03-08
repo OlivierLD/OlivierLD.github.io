@@ -21,6 +21,7 @@
     <script type="module" src="./webcomponents/JumboDisplay.js"></script>
     <script type="module" src="./webcomponents/ScrollDigit.js"></script>
     <script type="module" src="./webcomponents/MoonPhase.js"></script>
+    <script type="module" src="./webcomponents/SunPath.js"></script>
 
     <script type="text/javascript" src="date.proto.js"></script>
 
@@ -101,6 +102,25 @@ let marqueeScrollUp = (marqueeId) => {
 };
 
 // console.log("marqueeScrollUp defined");
+
+let setNewTilt = (range, id) => {
+    let elem = document.getElementById(id);
+    var val = range.value;
+    if (elem !== undefined) {
+        elem.tilt = val;
+        elem.repaint();
+    }
+};
+
+let setNewZOffset = (range, id) => {
+    let elem = document.getElementById(id);
+    var val = range.value;
+    if (elem !== undefined) {
+        elem.zOffset = val;
+        elem.repaint();
+    }
+};
+
     </script>
 
     <script type="text/javascript" src="js/nav-bar.js"></script>
@@ -1064,17 +1084,51 @@ let toggleForeground = () => {
             <span class="dialog-header-close" onclick="closeMarqueeDialog();">&times</span>
         </div>
         <div style="margin-bottom: 10px;">
-                    <!-- See defaultMarqueeTextArray -->
-        <marquee-panel id="marquee-panel-01"
-                       class="marquee-01"
-                       width="600"
-                       height="350"
-                       nb-cols="200"
-                       nb-lines="68"
-                       title="To start or stop the marquee&#13;Use the link below"
-                       display-data='{ "text-array": ["Raspberry Pi", "Web Components", "Java & Processing", "HTML5, CSS3, ES6", "NodeJS", "Python", "Arduino & Co", "3D printing", "AI, ML, DL", "Artificial Intelligence", "Artificial Insanity", "and other toys..."], "x": 4, "y": 12 }'/>
-
+            <!-- See defaultMarqueeTextArray -->
+            <marquee-panel id="marquee-panel-01"
+                        class="marquee-01"
+                        width="600"
+                        height="350"
+                        nb-cols="200"
+                        nb-lines="68"
+                        title="Computed Data"
+                        display-data='{ "text-array": ["You must have", "triggered a computation", "to see something", "in here..."], "x": 4, "y": 12 }'/>
         </div>    
+    </dialog>
+
+    <!-- Sun Path -->
+    <dialog id="sun-path-dialog" class="shadow-menu" style="z-index: 10;">
+        <div class="dialog-header">
+            <span>Sun Path (in progress)</span>
+            <span class="dialog-header-close" onclick="closeSunPathDialog();">&times</span>
+        </div>
+        <div style="margin-bottom: 10px;">
+            <table style="width: 98%;">
+                <tr>
+                    <td>
+                        <div class="black-frame centered">
+                            <sun-path id="sun-path-01"
+                                    class="sun-path-01"
+                                    width="400"
+                                    height="400"
+                                    tilt="-10"></sun-path>
+                        </div>    
+                    </td>
+                    <td>
+                        <input type="range"
+                        style="-webkit-appearance: slider-vertical; width: 8px; height: 400px; margin-left: 0;" min="-90"
+                        max="90" value="-10" onchange="setNewTilt(this, 'sun-path-01');">
+                     </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="range" style="width: 566px; height: 8px; margin-left: 0;" min="-90" max="90" value="0"
+                               onchange="setNewZOffset(this, 'sun-path-01');">
+                    </td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
     </dialog>
 
   <!--
@@ -1091,12 +1145,11 @@ let toggleForeground = () => {
     <a href="javascript:void(0)" class="active-link list-link" style="margin-top: 20px; margin-right: 20px; text-align: right;" onclick="showHelpDialog();">Help!</a>
     <hr style="color: rgb(192,192,192, 0.5); width: 90%;"/>
     <a href="javascript:void(0)" class="active-link list-link" style="margin-top: 20px;" onclick="showPrmsDialog();">Background parameters</a>
-
     <a href="javascript:void(0)" class="active-link list-link" onclick="toggleForeground();">Toggle foreground</a>
-
     <a href="javascript:void(0)" class="active-link list-link" onclick="showMarqueeDialog();">Marquee Panel</a>
+    <a href="javascript:void(0)" class="active-link list-link" onclick="showSunPathDialog();">Sun Path</a>
     <hr style="color: rgb(192,192,192, 0.5); width: 90%;"/>
-    <a href="javascript:void(0)" class="active-link" style="margin-top: 20px;">More links here...</a>
+    <a href="javascript:void(0)" class="active-link" style="margin-top: 20px;">More links here, some day...</a>
 
     <a href="javascript:void(0)" class="active-link" style="margin-top: 20px;"><span style="font-size: 40px;" title="Call for details.">&phone;</span></a>
 
