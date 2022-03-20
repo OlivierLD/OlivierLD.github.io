@@ -1,3 +1,10 @@
+let lpad = (str, pad, len) => {
+    while (str.length < len) {
+        str = pad + str;
+    }
+    return str;
+};
+
 let openNav = () => {
     document.getElementById("side-nav").style.width =  getComputedStyle(document.documentElement).getPropertyValue('--expanded-nav-width'); // "450px";
 };
@@ -521,15 +528,56 @@ const saturnPos = {he: -53.297318027659344, z: 76.66895229998141};
 
 let setSunPathData = () => {
     let elem1 = document.getElementById('sun-path-01');
-    elem1.sunPath = sunPath1;
-    elem1.sunData = sunData1;
-    elem1.userPos = userPosition1;
-    elem1.moonPos = moonPos;
 
-    elem1.venusPos = venusPos;
-    elem1.marsPos = marsPos;
-    elem1.jupiterPos = jupiterPos;
-    elem1.saturnPos = saturnPos;
+    let current = new Date(globalAstroData.epoch);
+    let year = current.getUTCFullYear();
+	let month = current.getUTCMonth() + 1;
+	let day = current.getUTCDate();
+	let hour = current.getUTCHours();
+	let minute = current.getUTCMinutes();
+	let second = current.getUTCSeconds();
+    let duration = `${year.toString()}-${lpad(month.toString(), '0', 2)}-${lpad(day.toString(), '0', 2)}T${lpad(hour.toString(), '0', 2)}:${lpad(minute.toString(), '0', 2)}:${lpad(second.toFixed(0), '0', 2) + '.000'}Z`;
+
+    let sunBodyData = CelestialComputer.getSunDataForDate(globalAstroData.deltaT, 
+                                                          duration, 
+                                                          userPos.latitude, 
+                                                          userPos.longitude, 
+                                                          globalAstroData.epoch,
+                                                          globalAstroData.sun.DEC.raw, 
+                                                          globalAstroData.sun.GHA.raw,
+                                                          globalAstroData.sun.HP.raw, 
+                                                          globalAstroData.sun.SD.raw, 
+                                                          globalAstroData.EOT.raw);
+    sunBodyData.altitude =  sunBodyData.elev; // Small Tx.                                                        
+
+    // elem1.sunPath = sunPath1;       // get it from CelestialComputer.getSunDataForAllDay
+    const STEP = 20;
+    let sunPath = CelestialComputer.getSunDataForAllDay(sunBodyData, 
+                                                        globalAstroData.deltaT, 
+                                                        userPos.latitude, 
+                                                        userPos.longitude, 
+                                                        STEP, 
+                                                        globalAstroData.epoch);
+    let txSunPath = [];
+    sunPath.forEach( sp => {
+        txSunPath.push({ epoch: sp.epoch, alt: sp.he, z: sp.z });
+    });                                                        
+    elem1.sunPath = txSunPath;
+    // elem1.sunData = sunData1;       // get it from CelestialComputer.getSunDataForDate
+    elem1.sunData = sunBodyData;
+
+    elem1.userPos = userPos;
+
+    let srMoon = sightReduction(userPos.latitude, userPos.longitude, globalAstroData.moon.GHA.raw, globalAstroData.moon.DEC.raw);
+    let srVenus = sightReduction(userPos.latitude, userPos.longitude, globalAstroData.venus.GHA.raw, globalAstroData.venus.DEC.raw);
+    let srMars = sightReduction(userPos.latitude, userPos.longitude, globalAstroData.mars.GHA.raw, globalAstroData.mars.DEC.raw);
+    let srJupiter = sightReduction(userPos.latitude, userPos.longitude, globalAstroData.jupiter.GHA.raw, globalAstroData.jupiter.DEC.raw);
+    let srSaturn = sightReduction(userPos.latitude, userPos.longitude, globalAstroData.saturn.GHA.raw, globalAstroData.saturn.DEC.raw);
+    elem1.moonPos = { he: srMoon.alt, z: srMoon.Z }; // moonPos;
+    elem1.venusPos = { he: srVenus.alt, z: srVenus.Z }; // venusPos;
+    elem1.marsPos = { he: srMars.alt, z: srMars.Z }; // marsPos;
+    elem1.jupiterPos = { he: srJupiter.alt, z: srJupiter.Z }; // jupiterPos;
+    elem1.saturnPos = { he: srSaturn.alt, z: srSaturn.Z }; // saturnPos;
 
     elem1.repaint();
 }

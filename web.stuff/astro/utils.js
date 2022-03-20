@@ -1,6 +1,5 @@
 "use strict";
 
-
 // Sine of angles in degrees
 export function sind(x) {
 	return Math.sin(Math.toRadians(x));
@@ -48,17 +47,21 @@ export function longitudeToGHA(longitude) {
 	return gha;
 };
 
-/*
+/**
  * See http://en.wikipedia.org/wiki/Maidenhead_Locator_System
+ * @param {float} lat Latitude
+ * @param {float} lng Longitude
  */
 export function gridSquare(lat, lng) {
     let gridSquare = "";
 
     lng += 180;
-    lat += 90;
+    lat +=  90;
     const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    //                0         1         2
-    //                01234567890123456789012345. Useless beyond X
+    //                0         1         2  |
+    //                01234567890123456789012345. 
+	//                                       | 
+	//                                       Useless beyond X
     let first = Math.trunc(lng / 20.0);
     gridSquare += alphabet.charAt(first);
     let second = Math.trunc(lat / 10.0);
@@ -79,6 +82,14 @@ export function gridSquare(lat, lng) {
     return gridSquare;
 };
 
+/**
+ * Returns altitude and azimuth of a body based on observer's position and body's coordinates (GHA & D)
+ * @param {float} lat Latitude as a float
+ * @param {float} lng Longitude as a float
+ * @param {float} ahg Greenwich Hour Angle (Agnle Horaire Greenwich in French) as a float
+ * @param {float} dec Declination, as a float
+ * @returns { alt: float, Z: float } a JSON Object, { alt: float, Z: float }
+ */
 export function sightReduction(lat, lng, ahg, dec) {
 	let AHL = ahg + lng;
 	while (AHL < 0.0) {
@@ -92,7 +103,7 @@ export function sightReduction(lat, lng, ahg, dec) {
 	let cosAHL = Math.cos(Math.toRadians(AHL));
 
 	let sinHe = (sinL * sinD) + (cosL * cosD * cosAHL);
-	let He = Math.toDegrees(Math.asin(sinHe));
+	let He = Math.toDegrees(Math.asin(sinHe)); // He stands for Hauteur Estimee (that's french)
 //  console.log("Estimated Altitude : " + He);
 
 	// Formula to solve : tg Z = sin P / cos L tan D - sin L cos P
@@ -103,16 +114,16 @@ export function sightReduction(lat, lng, ahg, dec) {
 	let tanZ = sinP / ((cosL * tanD) - (sinL * cosP));
 	let Z = Math.toDegrees(Math.atan(tanZ));
 
-	if (AHL < 180.0) { // vers l'West
-		if (Z < 0.0) { // sud vers nord
+	if (AHL < 180.0) { // to West
+		if (Z < 0.0) { // South to North
 			Z = 180.0 - Z;
-		} else {         // Nord vers Sud
+		} else {         // North to South
 			Z = 360.0 - Z;
 		}
-	} else {           // vers l'Est
-		if (Z < 0.0) { // sud vers nord
+	} else {           // to East
+		if (Z < 0.0) { // South to North
 			Z = 180.0 + Z;
-//    } else {       // nord vers sud
+//    } else {       // North to South
 //      Z = Z;
 		}
 	}
@@ -137,19 +148,23 @@ if (Math.toDegrees === undefined) {
 
 /**
  * 
- * @param {*} from { lat: xxx, lng: xxx }, values in Radians
- * @param {*} to { lat: xxx, lng: xxx }, values in Radians
+ * @param { lat: float, lng: float } from values in Radians
+ * @param { lat: float, lng: float } to values in Radians
  * Return distance in radians
  */
- export function getGCDistance(from, to) {
+export function getGCDistance(from, to) {
 	let cos = Math.sin(from.lat) * Math.sin(to.lat) + Math.cos(from.lat) * 
 			  Math.cos(to.lat) * Math.cos(to.lng - from.lng);
 	let dist = Math.acos(cos);
 	return dist;
 };
 
-
-// Points coordinates in degrees, return in nautical miles.
+/**
+ * Points coordinates in degrees, return in nautical miles.
+ * @param { lat: float, lng: float } from values in degrees
+ * @param { lat: float, lng: float } to values in degrees
+ * @returns value in nautical miles
+ */
 export function getGCDistanceDegreesNM(from, to) {
 	return 60.0 * Math.toDegrees(getGCDistance(
 		{ lat: Math.toRadians(from.lat), lng: Math.toRadians(from.lng) },
@@ -164,9 +179,9 @@ const TO_WEST  = 3;
 
 /**
  * 
- * @param {*} from { lat: xxx, lng: xxx }, values in Radians
- * @param {*} to { lat: xxx, lng: xxx }, values in Radians
- * @param {*} nbPoints 
+ * @param { lat: float, lng: float } from values in Radians
+ * @param { lat: float, lng: float } to values in Radians
+ * @param { int } nbPoints 
  */
 export function calculateGreatCircle(from, to, nbPoints) {
 	let nsDir = (to.lat > from.lat) ? TO_NORTH : TO_SOUTH;
@@ -244,45 +259,28 @@ export function calculateGreatCircle(from, to, nbPoints) {
 };
 
 /**
- * 
- * @param {*} obs { lat: xx, lng: xx } values in degrees
- * @param {*} sunCoord { gha: xx, dec: xx } values in degrees
- * @param {*} moonCoord { gha: xx, dec: xx } values in degrees
+ * Will return the Initial Route Angle of the GC between Moon and Sun
+ * @param { lat: float, lng: float } obs values in degrees
+ * @param { gha: float, dec: float } sunCoord values in degrees
+ * @param { gha: float, dec: float } moonCoord values in degrees
+ * @returns {float} the moon tilt
  */
 export function getMoonTilt(obs, sunCoord, moonCoord ) {
 
 	let moonLongitude = ghaToLongitude(moonCoord.gha);
 	let sunLongitude = ghaToLongitude(sunCoord.gha);
-
-	// Get lunar distance, to know how many points to calculate in the GC.
-	let sunMoonDist = getGCDistance({lat: Math.toRadians(moonCoord.dec), lng: Math.toRadians(moonLongitude)},
-									{lat: Math.toRadians(sunCoord.dec), lng: Math.toRadians(sunLongitude)});
-	let inDeg = Math.toDegrees(sunMoonDist);
-	let intPart = Math.trunc(inDeg);
-	let minutes = 60 * (inDeg - intPart);								
-	if (false) {
-		console.log(`Sun-Moon distance: ${intPart + '°' + minutes.toFixed(2) + '\''}`);
-	}
-	let nbPoints = inDeg < 10 ? 20 : (2 * inDeg);
 	let skyRoute = calculateGreatCircle({lat: Math.toRadians(moonCoord.dec), lng: Math.toRadians(moonLongitude)},
 										{lat: Math.toRadians(sunCoord.dec), lng: Math.toRadians(sunLongitude)},
-										nbPoints);
-	let route = [];									
+										20);
+	let route = [];
 	skyRoute.forEach(rp => {
 		let sru = sightReduction(obs.lat, obs.lng, longitudeToGHA(Math.toDegrees(rp.point.lng)), Math.toDegrees(rp.point.lat));
-		route.push({observer: obs, 
-					observed: { alt: sru.alt,
-								z: sru.Z}});
+		route.push({ observer: obs,
+					 observed: { alt: sru.alt,
+					  			 z: sru.Z }
+				   });
 	});									
 	// Take the first triangle, from the Moon.
-	/*
-	 *                   . - alt1
-	 *                   |
-     *                   |
-	 *       .-----------. - alt0
-	 *       |           |
-	 *      z0           z1
-	 */
 	let z0 = route[0].observed.z;
 	let z1 = route[1].observed.z;
 
@@ -317,7 +315,6 @@ export function getMoonTilt(obs, sunCoord, moonCoord ) {
 			}
 		}
 	}
-
 	return alpha;
 };
 
@@ -332,7 +329,35 @@ export function calcLHA(gha, longitude) {
 	return lha;
 };
 
+/**
+ * 
+ * @param {string} duration string, like "2011-02-06T14:41:42.000Z"
+ * @returns { year: {int}, month: {int}, day: {int}, hour: {int}, minute: {int}, second: {float}, tz: {string} }
+ *
+ */
+export function parseDuration(duration) {
+	let pattern = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}\.\d{3})(.*)$/gm
+
+	let result = pattern.exec(duration);
+	// console.log(`Match length: ${result.length}`);
+	if (result === null) {
+		throw { err: 'parseDuration, no match!' };
+	}
+	// Get the groups, result[x]
+	return {
+		year: parseInt(result[1]),
+		month: parseInt(result[2]),
+		day: parseInt(result[3]),
+		hour: parseInt(result[4]),
+		minute: parseInt(result[5]),
+		second: parseFloat(result[6]),
+		tz: result[7]
+	};
+};
+
 /*
+ * This would be for NodeJS *
+ *
 exports.sind = sind;
 exports.cosd = cosd;
 exports.tand = tand;
