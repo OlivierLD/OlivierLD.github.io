@@ -59,7 +59,6 @@ export function sampleMain(userDataObject) {
 window.sampleMain = sampleMain;
 window.CelestialComputer = CelestialComputer;
 
-
 window.gridSquare = CelestialComputer.gridSquare;
 window.sightReduction = CelestialComputer.sightReduction; // The one in utils.js
 

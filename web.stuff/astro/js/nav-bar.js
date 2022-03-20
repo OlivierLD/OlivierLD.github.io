@@ -579,5 +579,15 @@ let setSunPathData = () => {
     elem1.jupiterPos = { he: srJupiter.alt, z: srJupiter.Z }; // jupiterPos;
     elem1.saturnPos = { he: srSaturn.alt, z: srSaturn.Z }; // saturnPos;
 
+    elem1.sunRise = { time:  sunBodyData.riseTime, z:  sunBodyData.riseZ };
+    elem1.sunSet = { time:  sunBodyData.setTime, z:  sunBodyData.setZ };
+
+    let tt = CelestialComputer.getSunMeridianPassageTime(userPos.latitude, userPos.longitude, globalAstroData.EOT.raw);
+	let dms = CelestialComputer.decimalToDMS(tt);
+
+	let ttDate = new Date(`${year.toString()}-${lpad(month.toString(), '0', 2)}-${lpad(day.toString(), '0', 2)} 00:00:00 GMT+0000`);
+	let ttEpoch = ttDate.getTime() + (dms.hours * 3600 * 1000) + (dms.minutes * 60 * 1000) + (dms.seconds * 1000);
+    elem1.sunTransit = { time: ttEpoch };
+
     elem1.repaint();
 }
