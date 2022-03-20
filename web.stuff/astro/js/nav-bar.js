@@ -61,6 +61,9 @@ let showSunPathDialog = () => {
 let closeSunPathDialog = () => {
     let sunPathDialog = document.getElementById(SUN_PATH_DIALOG_ID);
     sunPathDialog.close();
+    if (sunPathUpdater !== undefined) {
+        window.clearInterval(sunPathUpdater);
+    }
 };
 
 // TODO Calculate real sunPath & others
@@ -526,6 +529,8 @@ const marsPos = {he: 58.47991564246026, z: 149.3054495194241};
 const jupiterPos = {he: -28.40640020324427, z: 97.22917381313722};
 const saturnPos = {he: -53.297318027659344, z: 76.66895229998141};
 
+let sunPathUpdater;
+
 let setSunPathData = () => {
     let elem1 = document.getElementById('sun-path-01');
 
@@ -568,16 +573,23 @@ let setSunPathData = () => {
 
     elem1.userPos = userPos;
 
-    let srMoon = sightReduction(userPos.latitude, userPos.longitude, globalAstroData.moon.GHA.raw, globalAstroData.moon.DEC.raw);
-    let srVenus = sightReduction(userPos.latitude, userPos.longitude, globalAstroData.venus.GHA.raw, globalAstroData.venus.DEC.raw);
-    let srMars = sightReduction(userPos.latitude, userPos.longitude, globalAstroData.mars.GHA.raw, globalAstroData.mars.DEC.raw);
-    let srJupiter = sightReduction(userPos.latitude, userPos.longitude, globalAstroData.jupiter.GHA.raw, globalAstroData.jupiter.DEC.raw);
-    let srSaturn = sightReduction(userPos.latitude, userPos.longitude, globalAstroData.saturn.GHA.raw, globalAstroData.saturn.DEC.raw);
-    elem1.moonPos = { he: srMoon.alt, z: srMoon.Z }; // moonPos;
-    elem1.venusPos = { he: srVenus.alt, z: srVenus.Z }; // venusPos;
-    elem1.marsPos = { he: srMars.alt, z: srMars.Z }; // marsPos;
-    elem1.jupiterPos = { he: srJupiter.alt, z: srJupiter.Z }; // jupiterPos;
-    elem1.saturnPos = { he: srSaturn.alt, z: srSaturn.Z }; // saturnPos;
+    let bodiesUpdater = () => {
+        let srSun = sightReduction(userPos.latitude, userPos.longitude, globalAstroData.sun.GHA.raw, globalAstroData.sun.DEC.raw);
+        let srMoon = sightReduction(userPos.latitude, userPos.longitude, globalAstroData.moon.GHA.raw, globalAstroData.moon.DEC.raw);
+        let srVenus = sightReduction(userPos.latitude, userPos.longitude, globalAstroData.venus.GHA.raw, globalAstroData.venus.DEC.raw);
+        let srMars = sightReduction(userPos.latitude, userPos.longitude, globalAstroData.mars.GHA.raw, globalAstroData.mars.DEC.raw);
+        let srJupiter = sightReduction(userPos.latitude, userPos.longitude, globalAstroData.jupiter.GHA.raw, globalAstroData.jupiter.DEC.raw);
+        let srSaturn = sightReduction(userPos.latitude, userPos.longitude, globalAstroData.saturn.GHA.raw, globalAstroData.saturn.DEC.raw);
+
+        elem1.sunPos = { he: srSun.alt, z: srSun.Z }; 
+        elem1.moonPos = { he: srMoon.alt, z: srMoon.Z }; // moonPos;
+        elem1.venusPos = { he: srVenus.alt, z: srVenus.Z }; // venusPos;
+        elem1.marsPos = { he: srMars.alt, z: srMars.Z }; // marsPos;
+        elem1.jupiterPos = { he: srJupiter.alt, z: srJupiter.Z }; // jupiterPos;
+        elem1.saturnPos = { he: srSaturn.alt, z: srSaturn.Z }; // saturnPos;
+        elem1.repaint();
+    };
+    sunPathUpdater = window.setInterval(bodiesUpdater, 1_000);
 
     elem1.sunRise = { time:  sunBodyData.riseTime, z:  sunBodyData.riseZ };
     elem1.sunSet = { time:  sunBodyData.setTime, z:  sunBodyData.setZ };
