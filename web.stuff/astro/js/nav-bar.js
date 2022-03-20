@@ -583,7 +583,7 @@ let setSunPathData = () => {
         let srSaturn = sightReduction(userPos.latitude, userPos.longitude, globalAstroData.saturn.GHA.raw, globalAstroData.saturn.DEC.raw);
 
         elem1.sunPos = { he: srSun.alt, z: srSun.Z }; 
-        elem1.moonPos = { he: srMoon.alt, z: srMoon.Z }; // moonPos;
+        elem1.moonPos = { he: srMoon.alt, z: srMoon.Z, phase: globalAstroData.moon.phase.phaseAngle }; // moonPos;
         elem1.venusPos = { he: srVenus.alt, z: srVenus.Z }; // venusPos;
         elem1.marsPos = { he: srMars.alt, z: srMars.Z }; // marsPos;
         elem1.jupiterPos = { he: srJupiter.alt, z: srJupiter.Z }; // jupiterPos;
