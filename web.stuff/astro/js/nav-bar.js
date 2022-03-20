@@ -543,6 +543,7 @@ let setSunPathData = () => {
 	let second = current.getUTCSeconds();
     let duration = `${year.toString()}-${lpad(month.toString(), '0', 2)}-${lpad(day.toString(), '0', 2)}T${lpad(hour.toString(), '0', 2)}:${lpad(minute.toString(), '0', 2)}:${lpad(second.toFixed(0), '0', 2) + '.000'}Z`;
 
+    // That step is demanding... (Rise & Set adjustments)
     let sunBodyData = CelestialComputer.getSunDataForDate(globalAstroData.deltaT, 
                                                           duration, 
                                                           userPos.latitude, 
