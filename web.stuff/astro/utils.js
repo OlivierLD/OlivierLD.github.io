@@ -339,10 +339,10 @@ export function parseDuration(duration) {
 	let pattern = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}\.\d{3})(.*)$/gm
 
 	let result = pattern.exec(duration);
-	// console.log(`Match length: ${result.length}`);
 	if (result === null) {
-		throw { err: 'parseDuration, no match!' };
+		throw { err: `parseDuration, no match for ${duration} !` };
 	}
+	// console.log(`Match length: ${result.length}`);
 	// Get the groups, result[x]
 	return {
 		year: parseInt(result[1]),
