@@ -842,6 +842,11 @@ Date.prototype.format = function (dateFormat) {
 </head>
 <body class="bg-gradient">
 
+  <div id="browser-warning" style="display: none; border: 2px solid orange; border-radius: 5px; padding: 5px; width: 95%;">
+    <span style="color: red;"><i>Warning!</i></span> This site is using cutting-edge ES6/HTML5/CSS3 features.
+    Your current browser may not be able to support all of them...
+  </div>
+
   <div class="background">
     <div class="bg-data" id="bg-data"></div>
   </div>
@@ -1806,7 +1811,35 @@ Date.prototype.format = function (dateFormat) {
     weatherDialog.close();
   }
 
+  function detectBrowser() {
+
+    let userAgent = navigator.userAgent;
+    let browserName;
+
+    if (userAgent.match(/chrome|chromium|crios/i)) {
+      browserName = "chrome";
+    } else if(userAgent.match(/firefox|fxios/i)) {
+      browserName = "firefox";
+    } else if(userAgent.match(/safari/i)) {
+      browserName = "safari";
+    }else if(userAgent.match(/opr\//i)) {
+      browserName = "opera";
+    } else if(userAgent.match(/edg/i)) {
+      browserName = "edge";
+    } else {
+      browserName = "No browser detection";
+    }
+
+    console.log(`Detected ${browserName}`);
+    if (browserName !== "chrome") {
+      document.getElementById("browser-warning").style.display = 'block';
+    }
+  }
+
   (() => {
+
+    detectBrowser();
+
     setInterval(() => {
       v1 += dir1;
       if (v1 > 20 || v1 < -20) {
