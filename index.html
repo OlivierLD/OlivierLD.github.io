@@ -635,6 +635,31 @@ button:hover, button:focus {
   cursor: pointer;
 }
 
+.smooth {
+    /*height: 0;*/
+    /*visibility: hidden;*/
+    /*opacity: 0;*/
+    /*transition: visibility 0.5s, height 0.5s, opacity 0.5s linear;*/
+    height: 0;
+    max-height: 0;
+    margin: auto;
+    /*transition: transform 0.5s, max-height 1s, height 1s;*/
+    transition: all 0.5s ease;
+    opacity: 0;
+    transform: scaleY(0);
+    transform-origin: top;
+    overflow: hidden;
+}
+
+.visible-div {
+    opacity: 1;
+    width: auto;
+    height: auto;
+    max-height: 1600px;
+    transform: scaleY(1);
+    margin-top: 5px;
+}
+
 </style>
 
 <script type="text/javascript">
@@ -842,7 +867,7 @@ Date.prototype.format = function (dateFormat) {
 </head>
 <body class="bg-gradient">
 
-  <div id="browser-warning" style="display: none; border: 2px solid orange; border-radius: 5px; padding: 5px; width: 95%;">
+  <div id="browser-warning" class="smooth" style="border: 2px solid orange; border-radius: 5px; padding: 5px; width: 95%;">
     <span style="color: red;"><i>Warning!</i></span> This site is using cutting-edge ES6/HTML5/CSS3 features.
     Your current browser may not be able to support all of them...
   </div>
@@ -1832,7 +1857,9 @@ Date.prototype.format = function (dateFormat) {
 
     console.log(`Detected ${browserName}`);
     if (browserName !== "chrome") {
-      document.getElementById("browser-warning").style.display = 'block';
+      window.setTimeout(() => {
+        document.getElementById("browser-warning").classList.toggle('visible-div'); // style.display = 'block';
+      }, 1000);
     }
   }
 
