@@ -867,7 +867,8 @@ Date.prototype.format = function (dateFormat) {
 </head>
 <body class="bg-gradient">
 
-  <div id="browser-warning" class="smooth" style="border: 2px solid orange; border-radius: 5px; padding: 5px; width: 95%;">
+  <div id="browser-warning" class="smooth" 
+       style="font-size: 150%; border: 2px solid orange; border-radius: 5px; padding: 5px; width: 95%; text-shadow: 2px 2px 4px black, 0 0 25px white, 0 0 5px silver;">
     <span style="color: red;"><i>Warning!</i></span> This site is using cutting-edge ES6/HTML5/CSS3 features.
     Your current browser may not be able to support all of them...
   </div>
@@ -1847,7 +1848,7 @@ Date.prototype.format = function (dateFormat) {
       browserName = "firefox";
     } else if(userAgent.match(/safari/i)) {
       browserName = "safari";
-    }else if(userAgent.match(/opr\//i)) {
+    } else if(userAgent.match(/opr\//i)) {
       browserName = "opera";
     } else if(userAgent.match(/edg/i)) {
       browserName = "edge";
