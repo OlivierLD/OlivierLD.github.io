@@ -1819,7 +1819,11 @@ Date.prototype.format = function (dateFormat) {
 
   function showWhatThisPageIs() {
     let aboutDialog = document.getElementById("about-dialog");
-    aboutDialog.show();
+    if (aboutDialog.show !== undefined) {
+      aboutDialog.show();
+    } else {
+      alert("Your browser seems not to support dialogs...");
+    }
   }
 
   function closeAboutDialog() {
@@ -1829,7 +1833,11 @@ Date.prototype.format = function (dateFormat) {
 
   function showWeatherDialog() {
     let weatherDialog = document.getElementById("weather-links-dialog");
-    weatherDialog.show();
+    if (weatherDialog.show !== undefined) {
+      weatherDialog.show();
+    } else {
+        alert("Your browser seems not to support dialogs...");
+    }
   }
 
   function closeWeatherDialog() {
