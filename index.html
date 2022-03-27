@@ -1824,27 +1824,39 @@ Date.prototype.format = function (dateFormat) {
     if (aboutDialog.show !== undefined) {
       aboutDialog.show();
     } else {
-      alert(NO_DIALOG_MESSAGE);
+      // alert(NO_DIALOG_MESSAGE);
+      aboutDialog.style.display = 'inline';
     }
   }
 
   function closeAboutDialog() {
     let aboutDialog = document.getElementById("about-dialog");
-    aboutDialog.close();
+    if (aboutDialog.close !== undefined) {
+      aboutDialog.close();
+    } else {
+      // alert(NO_DIALOG_MESSAGE);
+      aboutDialog.style.display = 'none';
+    }
   }
 
   function showWeatherDialog() {
     let weatherDialog = document.getElementById("weather-links-dialog");
     if (weatherDialog.show !== undefined) {
-      weatherDialog.show();
+        weatherDialog.show();
     } else {
-        alert(NO_DIALOG_MESSAGE);
+        // alert(NO_DIALOG_MESSAGE);
+        weatherDialog.style.display = 'inline';
     }
   }
 
   function closeWeatherDialog() {
     let weatherDialog = document.getElementById("weather-links-dialog");
-    weatherDialog.close();
+    if (weatherDialog.close !== undefined) {
+      weatherDialog.close();
+    } else {
+        // alert(NO_DIALOG_MESSAGE);
+        weatherDialog.style.display = 'none';
+    }
   }
 
   function detectBrowser() {

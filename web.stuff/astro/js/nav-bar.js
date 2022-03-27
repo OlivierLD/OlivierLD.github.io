@@ -25,13 +25,19 @@ let showPrmsDialog = () => {
     if (prmsDialog.show !== undefined) {
         prmsDialog.show();
     } else {
-        alert(BAD_BROWSER);
+        // alert(BAD_BROWSER);
+        prmsDialog.style.display = 'inline';
     }
 };
 
 let closePrmsDialog = () => {
     let prmsDialog = document.getElementById(PRMS_DIALOG_ID);
-    prmsDialog.close();
+    if (prmsDialog.close !== undefined) {
+        prmsDialog.close();
+    } else {
+        // alert(BAD_BROWSER);
+        prmsDialog.style.display = 'none';
+    }
   };
 
   let showHelpDialog = () => {
@@ -39,28 +45,40 @@ let closePrmsDialog = () => {
     if (helpDialog.show !== undefined) {
         helpDialog.show();
     } else {
-        alert(BAD_BROWSER);
+        // alert(BAD_BROWSER);
+        helpDialog.style.display = 'inline';
     }
 };
 
 let closeHelpDialog = () => {
     let helpDialog = document.getElementById(HELP_DIALOG_ID);
-    helpDialog.close();
+    if (helpDialog.close !== undefined) {
+        helpDialog.close();
+    } else {
+        // alert(BAD_BROWSER);
+        helpDialog.style.display = 'none';
+    }
 };
 
 let showMarqueeDialog = () => {
     let marqueeDialog = document.getElementById(MARQUEE_DIALOG_ID);
     if (marqueeDialog.show !== undefined) {
         marqueeDialog.show();
-        marqueeScrollUp("marquee-panel-01"); // Start
     } else {
-        alert(BAD_BROWSER);
+        // alert(BAD_BROWSER);
+        marqueeDialog.style.display = 'inline';
     }
+    marqueeScrollUp("marquee-panel-01"); // Start
 };
 
 let closeMarqueeDialog = () => {
     let marqueeDialog = document.getElementById(MARQUEE_DIALOG_ID);
-    marqueeDialog.close();
+    if (marqueeDialog.close !== undefined) {
+        marqueeDialog.close();
+    } else {
+        // alert(BAD_BROWSER);
+        marqueeDialog.style.display = 'none';
+    }
     marqueeScrollUp("marquee-panel-01"); // Stop if started
 };
 
@@ -72,13 +90,19 @@ let showSunPathDialog = () => {
     if (sunPathDialog.show != undefined) {
         sunPathDialog.show();
     } else {
-        alert(BAD_BROWSER);
+        // alert(BAD_BROWSER);
+        sunPathDialog.style.display = 'inline';
     }
 };
 
 let closeSunPathDialog = () => {
     let sunPathDialog = document.getElementById(SUN_PATH_DIALOG_ID);
-    sunPathDialog.close();
+    if (sunPathDialog.close !== undefined) {
+        sunPathDialog.close();
+    } else {
+        // alert(BAD_BROWSER);
+        sunPathDialog.style.display = 'none';
+    }
     if (sunPathUpdater !== undefined) {
         window.clearInterval(sunPathUpdater);
     }

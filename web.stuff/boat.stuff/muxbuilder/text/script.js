@@ -710,9 +710,17 @@ function generateTheCode() {
 // Show/Hide generated yaml code
 function showGeneratedDialog() {
     let codeDialog = document.getElementById("generated-code-dialog");
-    codeDialog.show();
+    if (codeDialog.show !== undefined) {
+        codeDialog.show();
+    } else {
+        codeDialog.style.display = 'inline';
+    }
 }
 function closeGeneratedDialog() {
     let codeDialog = document.getElementById("generated-code-dialog");
-    codeDialog.close();    
+    if (codeDialog.close !== undefined) {
+        codeDialog.close();    
+    } else {
+        codeDialog.style.display = 'none';
+    }
 }

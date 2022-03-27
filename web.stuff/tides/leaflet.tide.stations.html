@@ -381,7 +381,11 @@ function showGeneratedDialog(station) {
 }
 function closeGeneratedDialog() {
     let graphDialog = document.getElementById("generated-curve-dialog");
-    graphDialog.close();    
+    if (graphDialog.close !== undefined) {
+        graphDialog.close();    
+    } else {
+        graphDialog.style.display = 'none';
+    }
 }
 
 const FLY = 1;
