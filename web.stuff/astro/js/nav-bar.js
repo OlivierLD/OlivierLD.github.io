@@ -18,9 +18,15 @@ const HELP_DIALOG_ID = "help-dialog";
 const MARQUEE_DIALOG_ID = "marquee-dialog";
 const SUN_PATH_DIALOG_ID = "sun-path-dialog";
 
+const BAD_BROWSER = "Your browser does not know about dialogs!\nPlease find one that does.";
+
 let showPrmsDialog = () => {
     let prmsDialog = document.getElementById(PRMS_DIALOG_ID);
-    prmsDialog.show();
+    if (prmsDialog.show !== undefined) {
+        prmsDialog.show();
+    } else {
+        alert(BAD_BROWSER);
+    }
 };
 
 let closePrmsDialog = () => {
@@ -30,7 +36,11 @@ let closePrmsDialog = () => {
 
   let showHelpDialog = () => {
     let helpDialog = document.getElementById(HELP_DIALOG_ID);
-    helpDialog.show();
+    if (helpDialog.show !== undefined) {
+        helpDialog.show();
+    } else {
+        alert(BAD_BROWSER);
+    }
 };
 
 let closeHelpDialog = () => {
@@ -40,8 +50,12 @@ let closeHelpDialog = () => {
 
 let showMarqueeDialog = () => {
     let marqueeDialog = document.getElementById(MARQUEE_DIALOG_ID);
-    marqueeDialog.show();
-    marqueeScrollUp("marquee-panel-01"); // Start
+    if (marqueeDialog.show !== undefined) {
+        marqueeDialog.show();
+        marqueeScrollUp("marquee-panel-01"); // Start
+    } else {
+        alert(BAD_BROWSER);
+    }
 };
 
 let closeMarqueeDialog = () => {
@@ -55,7 +69,11 @@ let showSunPathDialog = () => {
     
     setSunPathData(); // Display current data (TODO: Animate?)
 
-    sunPathDialog.show();
+    if (sunPathDialog.show != undefined) {
+        sunPathDialog.show();
+    } else {
+        alert(BAD_BROWSER);
+    }
 };
 
 let closeSunPathDialog = () => {

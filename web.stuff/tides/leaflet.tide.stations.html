@@ -373,7 +373,11 @@ function showGeneratedDialog(station) {
         document.getElementById("station-name").innerText = decodeURIComponent(station);
         document.getElementById("tide-table").innerHTML = tableContent;
     }
-    graphDialog.show();
+    if (graphDialog.show !== undefined) {
+        graphDialog.show();
+    } else {
+        graphDialog.style.display = 'inline';
+    }
 }
 function closeGeneratedDialog() {
     let graphDialog = document.getElementById("generated-curve-dialog");

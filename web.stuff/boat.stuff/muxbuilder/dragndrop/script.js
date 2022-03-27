@@ -80,7 +80,11 @@ function showGeneratedDialog() {
     document.execCommand("copy");
     document.body.removeChild(codeHolder);
 
-    codeDialog.show(); // showModal();
+    if (codeDialog.show !== undefined) {
+      codeDialog.show(); // showModal();
+    } else {
+      alert("Your browser does not support dialogs!\nPlase find one that does.");
+    }
 }
 function closeGeneratedDialog() {
     let codeDialog = document.getElementById("generated-code-dialog");
