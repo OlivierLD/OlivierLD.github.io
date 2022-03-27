@@ -1817,12 +1817,14 @@ Date.prototype.format = function (dateFormat) {
     }, BG_INTERVAL); // in ms.
   }
 
+  const NO_DIALOG_MESSAGE = "Your browser seems not to support dialogs...\nMaybe Chrome or Chromium would?";
+
   function showWhatThisPageIs() {
     let aboutDialog = document.getElementById("about-dialog");
     if (aboutDialog.show !== undefined) {
       aboutDialog.show();
     } else {
-      alert("Your browser seems not to support dialogs...");
+      alert(NO_DIALOG_MESSAGE);
     }
   }
 
@@ -1836,7 +1838,7 @@ Date.prototype.format = function (dateFormat) {
     if (weatherDialog.show !== undefined) {
       weatherDialog.show();
     } else {
-        alert("Your browser seems not to support dialogs...");
+        alert(NO_DIALOG_MESSAGE);
     }
   }
 
