@@ -1812,6 +1812,12 @@ Date.prototype.format = function (dateFormat) {
       let TEN_SEC = 10000; // In ms.
       setTimeout(showSlides, TEN_SEC);
     }
+    try {
+      let newTitle = document.querySelectorAll(".the-slides")[slideIndex - 1].querySelector(".display").querySelector(".display-data").innerText;
+      document.querySelector(".slideshow-container").title = newTitle;
+    } catch (err) {
+      console.log("Unconventional slide...");
+    }
   }
 
   let bgAnimation;
