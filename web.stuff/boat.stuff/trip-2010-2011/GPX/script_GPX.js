@@ -255,7 +255,8 @@ function loadPlotterData() {
     let lat = parseFloat(getPrm('latitude'));
     let lon = parseFloat(getPrm('longitude'));
     let scale = parseInt(getPrm('scale'));
-    let label = unescape(getPrm('label'));
+    // let label = unescape(getPrm('label'));
+    let label = getPrm('label');
 
     let marker = L.marker([lat, lon]);
     marker.addTo(map)

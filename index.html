@@ -586,6 +586,7 @@ input:checked + .slider:before {
 .switch-container {
   display: grid;
   grid-template-columns: calc(var(--slider-scale) * 80px) 200px;
+  width: 500px;
 }
 .switch-element {
   place-self: flex-start;
@@ -658,6 +659,10 @@ button:hover, button:focus {
     max-height: 1600px;
     transform: scaleY(1);
     margin-top: 5px;
+}
+
+#h2-title:hover, #kebab:hover, #hamburger:hover, #my-name:hover {
+    color: cyan;
 }
 
 </style>
@@ -868,7 +873,7 @@ Date.prototype.format = function (dateFormat) {
 <body class="bg-gradient">
 
   <div id="browser-warning" class="smooth" 
-       style="border: 2px solid orange; border-radius: 5px; padding: 5px; width: 95%; text-shadow: 2px 2px 4px black, 0 0 25px white, 0 0 5px silver;">
+       style="position: absolute; z-index: 20; border: 2px solid orange; border-radius: 5px; padding: 5px; width: 95%; text-shadow: 2px 2px 4px black, 0 0 25px white, 0 0 5px silver; background-color: rgba(0, 0, 0, .55);">
     <div class="dialog-header" style="font-size: 150%;">
       <span style="color: red;"><i>Warning!</i></span>
       <span class="dialog-header-close" onclick="closeWarning();">&times</span>
@@ -882,8 +887,6 @@ Date.prototype.format = function (dateFormat) {
   <div class="background">
     <div class="bg-data" id="bg-data"></div>
   </div>
-
-  <small style="margin-left: 5px;">&gt; &nbsp;Work (constantly) in Progress. Use the hamburger below to display the menu. See kebab on the right.</small>
 
   <div id="id01" class="w3-modal">
     <div class="w3-modal-content">
@@ -966,7 +969,7 @@ Date.prototype.format = function (dateFormat) {
     </div>
   </div>
 
-  <div id="id02" class="floating-menu no-shadow" onmouseleave="hideKebabMenu()">
+  <div id="id02" class="floating-menu no-shadow" onmouseleave="hideKebabMenu()" style="margin-top: 30px;">
     <div>
       <h4 style="margin-left: 10px;">More links</h4>
       <ul>
@@ -983,9 +986,11 @@ Date.prototype.format = function (dateFormat) {
     </div>
   </div>
 
+  <h2 id="h2-title" style="margin: 0; font-style: normal; text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px silver;">This page is my workbench</h2>    
+  <small style="margin-left: 5px;">&gt; &nbsp;Work (constantly) in Progress. Use the hamburger below to display the menu. See kebab on the right.</small>
   <!--h1 style="font-style: normal;">&nbsp; &#9776;&nbsp; &#8801;</h1-->
-  <h1 title="The background is dynamic, its color is changing!&#013;Use the hamburger on the left to reach the menu.&#013;Also see the kebab on the right."
-      style="width: 100%; font-style: normal; text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px silver;"><span style="cursor: pointer;" onclick="openNav()" onmouseover="openNav()" title="Hamburger">&nbsp; &#8801;</span> OlivierLD <span style="float: right;" title="Kebab,&#013;Extra links...." onclick="showKebabMenu()" onmouseover="showKebabMenu()">&#8942;&nbsp;&nbsp;&nbsp;</span></h1>
+  <h1 title="The background is dynamic, its image is changing!&#013;Use the hamburger on the left to reach the menu.&#013;Also see the kebab on the right."
+      style="width: 100%; font-style: normal; text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px silver;"><span id="hamburger" style="cursor: pointer;" onclick="openNav()" onmouseover="openNav()" title="Hamburger">&nbsp; &#8801;</span> <span id="my-name">OlivierLD </span><span id="kebab" style="float: right; margin-top: -50px;" title="Kebab,&#013;Extra links...." onclick="showKebabMenu()" onmouseover="showKebabMenu()">&#8942;&nbsp;&nbsp;&nbsp;</span></h1>
 
   <!--div style="font-size: 48px; color: yellow; text-align: center; text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px silver;" id="about-div">
     Raspberry Pi
@@ -1041,7 +1046,7 @@ Date.prototype.format = function (dateFormat) {
     Change BG in <span id="count-down">00 s</span>
   </div>
 
-  <div class="slideshow-container" title="What's in there...">
+  <div class="slideshow-container" style="margin-top: -260px;" title="What's in there...">
 
     <div class="the-slides fade">
       <div class="number-text">1 / 9</div>
@@ -1807,6 +1812,12 @@ Date.prototype.format = function (dateFormat) {
       dots[slideIndex - 1].className += " active";
       let TEN_SEC = 10000; // In ms.
       setTimeout(showSlides, TEN_SEC);
+    }
+    try {
+      let newTitle = document.querySelectorAll(".the-slides")[slideIndex - 1].querySelector(".display").querySelector(".display-data").innerText;
+      document.querySelector(".slideshow-container").title = newTitle;
+    } catch (err) {
+      console.log("Unconventional slide...");
     }
   }
 
