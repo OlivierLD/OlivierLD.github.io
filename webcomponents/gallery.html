@@ -232,9 +232,19 @@
             if (value === 'LIGHT') {
                 bodyStyle.background = 'radial-gradient(at top, white -8%, lightgrey 55%)';
                 htmlStyle.backgroundColor = 'lightgrey';
+                bodyStyle.color = 'black';
+                let anchors = document.querySelectorAll("a");
+                anchors.forEach(anchor => {
+                    anchor.style.color = 'navy';
+                });
             } else {
                 bodyStyle.background = 'radial-gradient(at top, DarkGrey -8%, black 55%)';
                 htmlStyle.backgroundColor = 'black';
+                bodyStyle.color = 'gray';
+                let anchors = document.querySelectorAll("a");
+                anchors.forEach(anchor => {
+                    anchor.style.color = 'orange';
+                });
             }
         }
 
