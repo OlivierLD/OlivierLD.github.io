@@ -207,6 +207,60 @@
 
 	<script type="text/javascript">
 
+        function expandAll() {
+            let expandableNodes = document.querySelectorAll("div[onclick][tabindex]");
+            expandableNodes.forEach(node => {
+                let nodeId = node.onclick;
+                let fullCall = nodeId.toString();
+                // Find the id of the div to expand (prm of the showHide function).
+                let functionCallIndex = fullCall.indexOf('showHide');
+                if (functionCallIndex !== -1) {
+                    let actualCall = fullCall.substring(functionCallIndex);
+                    actualCall = actualCall.substring(0, actualCall.indexOf(';'));
+                    // let regExp = new RegExp("^showHide\((['a-zA-Z]*)\).*", "");
+                    let regExp = /^showHide\('([a-zA-Z\-\d]*)'\).*/ 
+                    let matches = regExp.exec(actualCall);
+                    if (matches && matches[1]) {
+                        let theId = matches[1];
+                        // console.log(`Managing div ${theId}`);
+                        let theDiv = document.getElementById(theId);
+                        let classList = theDiv.classList;
+                        // add visible-div if not there yet
+                        if (!classList.contains('visible-div')) {
+                            theDiv.classList.add('visible-div');
+                        }
+                    }
+                }
+            })
+        }
+
+        function collapseAll() {
+            let expandableNodes = document.querySelectorAll("div[onclick][tabindex]");
+            expandableNodes.forEach(node => {
+                let nodeId = node.onclick;
+                let fullCall = nodeId.toString();
+                // Find the id of the div to expand (prm of the showHide function).
+                let functionCallIndex = fullCall.indexOf('showHide');
+                if (functionCallIndex !== -1) {
+                    let actualCall = fullCall.substring(functionCallIndex);
+                    actualCall = actualCall.substring(0, actualCall.indexOf(';'));
+                    // let regExp = new RegExp("^showHide\((['a-zA-Z]*)\).*", "");
+                    let regExp = /^showHide\('([a-zA-Z\-\d]*)'\).*/ 
+                    let matches = regExp.exec(actualCall);
+                    if (matches && matches[1]) {
+                        let theId = matches[1];
+                        // console.log(`Managing div ${theId}`);
+                        let theDiv = document.getElementById(theId);
+                        let classList = theDiv.classList;
+                        // add visible-div if not there yet
+                        if (classList.contains('visible-div')) {
+                            theDiv.classList.remove('visible-div');
+                        }
+                    }
+                }
+            })
+        }
+
         function lpad(str, len, pad) {
             let s = str;
             while (s.length < len) {
@@ -1421,10 +1475,10 @@
 		<td style="text-align: right;">
 			<!-- Page BG -->
 			<!--
-                                Page Background
-                                <input type="radio" name="page-bg" value="DARK" checked onchange="changeBG(this.value);">Dark
-                                <input type="radio" name="page-bg" value="LIGHT" onchange="changeBG(this.value);">Light
-                                -->
+            Page Background
+            <input type="radio" name="page-bg" value="DARK" checked onchange="changeBG(this.value);">Dark
+            <input type="radio" name="page-bg" value="LIGHT" onchange="changeBG(this.value);">Light
+            -->
 			<div class="switch-container">
                 <span class="switch-element"
 					  style="font-size: 24px; font-weight: bold; padding-bottom: 0px;">&#9790</span>
@@ -1463,6 +1517,11 @@
 </p>
 
 <hr/>
+
+<div style="margin: 10px; padding: 10px;">
+    <a href="#" style="padding: 5px; border: 1px solid orange; border-radius: 5px;" onclick="expandAll()">Expand All</a> 
+    <a href="#" style="padding: 5px; border: 1px solid orange; border-radius: 5px;" onclick="collapseAll()">Collapse All</a>
+</div>
 
 <div id="overall-container"
      style="display: grid; grid-template-columns: var(--padding) auto var(--padding); padding: 0px 10px 10px 10px;">

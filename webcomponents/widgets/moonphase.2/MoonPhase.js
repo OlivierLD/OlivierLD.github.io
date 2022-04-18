@@ -2,7 +2,7 @@
  * MoonPhase - v2
  */
 
-const moonPhaseVerbose = true;
+const moonPhaseVerbose = false;
 const MOON_PHASE_TAG_NAME = 'moon-phase-2';
 
 const WITH_MOON_IMG = true;
@@ -36,7 +36,6 @@ class MoonPhaseDisplay extends HTMLElement {
 
 	constructor() {
 		super();
-
 		// Find current module's path, for co-located resources.
 		const errorStack = new Error().stack;
 		let stack;
@@ -47,11 +46,11 @@ class MoonPhaseDisplay extends HTMLElement {
 		}							   
 		// Get the last entry
 		let scriptPath;
-		if (stack[stack.length - 1].trim() !== "") { // Chrome
+		if (stack[stack.length - 1].trim() !== "") {
 			scriptPath = stack[stack.length - 1].trim();
 		} else { // Firefox?
 			scriptPath = stack[stack.length - 2].trim();
-			if (scriptPath.startsWith("@")) {
+			if (scriptPath.startsWith("@")) { // Should not happen, see split above.
 				scriptPath = scriptPath.substring(1);
 			}
 		}
