@@ -48,6 +48,7 @@
 
 	<style>
         :root {
+            --padding: 50px;
             --perspective: 100em;
             --rotateX: -15deg;
             --scaleY: 1;
@@ -67,6 +68,10 @@
             background: radial-gradient(at top, DarkGrey -8%, black 55%);
             background-repeat: no-repeat;
             background-size: 100% 100%;
+        }
+
+        hr {
+            width: 90%;
         }
 
         a, a:visited, a:active, a:any-link {
@@ -1187,6 +1192,11 @@
             document.body.classList.toggle('mirror-upside-down');
         }
 
+        function setPadding(e) {
+            let v = this.value;
+            document.body.style.setProperty("--padding", v + "px");
+        }
+
         function setPerspective(e) {
             let v = this.value;
             document.body.style.setProperty("--perspective", v + "em");
@@ -1356,19 +1366,25 @@
 <div id="heads-up-sliders" style="display: none;">
 	<table width="100%">
 		<tr>
-			<td width="33%">
+			<td width="25%">    
+				<h5 style="color: cyan;">Padding</h5>
+				<input type="range" value="50" min="0" max="200" style="width: 90%;"
+					   oninput="setPadding.call(this, event); padding01.value = this.value;"/>
+				<output name="padding" id="padding01" style="color: cyan;"></output>
+			</td>
+			<td width="25%">
 				<h5 style="color: cyan;">Perspective</h5>
 				<input type="range" value="100" min="0" max="100" style="width: 90%;"
 					   oninput="setPerspective.call(this, event); perspective01.value = this.value;"/>
 				<output name="perspective" id="perspective01" style="color: cyan;"></output>
 			</td>
-			<td width="33%">
+			<td width="25%">
 				<h5 style="color: cyan;">Rotate X</h5>
 				<input type="range" value="-15" min="-100" max="100" style="width: 90%;"
 					   oninput="setRotateX.call(this, event); perspective02.value = this.value;"/>
 				<output name="perspective" id="perspective02" style="color: cyan;"></output>
 			</td>
-			<td width="33%">
+			<td width="25%">
 				<h5 style="color: cyan;">Scale Y</h5>
 				<input type="range" value="1" min="0" max="5" step="0.1" style="width: 90%;"
 					   oninput="setScaleY.call(this, event); scaleY02.value = this.value;"/>
@@ -1436,6 +1452,14 @@
 </p>
 
 <hr/>
+
+<div id="overall-container"
+     style="display: grid; grid-template-columns: var(--padding) auto var(--padding); padding: 0px 10px 10px 10px; text-align: left;">
+
+<div id="inner-container"
+     style="display: grid; grid-column-start: 2; grid-template-columns: auto; padding-left: 10px; max-width: inherit; text-align: left;">
+
+
 <!--
     SKELETON
  +-->
@@ -6739,6 +6763,9 @@ function plotGraphRC(graphId, recenter) {
  </div>
  <hr/>
  
+</div> <!-- Inner Container -->
+</div> <!-- Outer Container -->
+  
 <!-- The end -->
 <table width="100%">
 	<tr>
