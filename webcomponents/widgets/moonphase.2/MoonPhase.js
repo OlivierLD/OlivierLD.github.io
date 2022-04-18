@@ -2,7 +2,7 @@
  * MoonPhase - v2
  */
 
-const moonPhaseVerbose = false;
+const moonPhaseVerbose = true;
 const MOON_PHASE_TAG_NAME = 'moon-phase-2';
 
 const WITH_MOON_IMG = true;
@@ -38,9 +38,23 @@ class MoonPhaseDisplay extends HTMLElement {
 		super();
 
 		// Find current module's path, for co-located resources.
-		const stack = new Error().stack.split('at');
+		const errorStack = new Error().stack;
+		let stack;
+		if (errorStack.indexOf('at') !== -1) {
+			stack = errorStack.split('at');  // Chrome
+		} else { 
+		 	stack = errorStack.split('@');   // Firefox
+		}							   
 		// Get the last entry
-		const scriptPath = stack[stack.length - 1].trim();
+		let scriptPath;
+		if (stack[stack.length - 1].trim() !== "") { // Chrome
+			scriptPath = stack[stack.length - 1].trim();
+		} else { // Firefox?
+			scriptPath = stack[stack.length - 2].trim();
+			if (scriptPath.startsWith("@")) {
+				scriptPath = scriptPath.substring(1);
+			}
+		}
 		// The component will share the path up to the last slash
 		const componentPath = scriptPath.substring(0, scriptPath.lastIndexOf('/'));
 		this._componentPath = componentPath;
