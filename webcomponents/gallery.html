@@ -281,7 +281,7 @@
                 cmdElem.innerText = "+ Head up";
             } else {
                 slidersElem.style.display = 'block';
-                buttonZone.style.display = 'inline';
+                buttonZone.style.display = 'block';
                 cmdElem.innerText = "- Head up";
             }
             headUpExpanded = !headUpExpanded;
@@ -1361,9 +1361,11 @@
 
 <!-- Perspective sliders -->
 <span id="head-up-command" onclick="collapseExpandHeadsup();" style="cursor: pointer;" tabindex="0"
-	  title="Show/Hide HeadUp Controls">+ Head up</span> <span id="button-span-zone" style="display: none;"><button
-		onclick="toggleHeadsUp();" style="border-radius: 5px; margin: 5px;"
-		title="Click this for HeadUp display, is a wind shield for example...">Head Up</button></span>
+	  title="Show/Hide HeadUp Controls">+ Head up</span> 
+<div id="button-span-zone" style="display: none; text-align: center;">
+    <button onclick="toggleHeadsUp();" style="border-radius: 5px; margin: 5px;"
+		    title="Click this for HeadUp display, is a wind shield for example...">Head Up</button>
+</div>
 <div id="heads-up-sliders" style="display: none;">
 	<table width="100%">
 		<tr>
