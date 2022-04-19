@@ -225,6 +225,7 @@
                         // console.log(`Managing div ${theId}`);
                         let theDiv = document.getElementById(theId);
                         let classList = theDiv.classList;
+                        console.log(`expandAll, managing div ${theId}: classList: ${classList}`);
                         // add visible-div if not there yet
                         if (!classList.contains('visible-div')) {
                             theDiv.classList.add('visible-div');
@@ -252,7 +253,8 @@
                         // console.log(`Managing div ${theId}`);
                         let theDiv = document.getElementById(theId);
                         let classList = theDiv.classList;
-                        // add visible-div if not there yet
+                        console.log(`collapseAll, managing div ${theId}: classList: ${classList}`);
+                        // remove visible-div if here
                         if (classList.contains('visible-div')) {
                             theDiv.classList.remove('visible-div');
                         }
@@ -557,20 +559,22 @@
 
             // let status = elmt.style.display;
             // elmt.style.display = (status === 'none' ? 'inline' : 'none');
-            let h = elmt.style.height;
-            let newH = '', newV = '', newO = '';
-            if (h === '' || h === '0' || h === '0px') {
-                newH = '100%';
-                newV = 'visible';
-                newO = '1';
-            } else {
-                newH = '0';
-                newV = 'hidden';
-                newO = '0';
+            if (false) {
+                let h = elmt.style.height;
+                let newH = '', newV = '', newO = '';
+                if (h === '' || h === '0' || h === '0px') {
+                    newH = '100%';
+                    newV = 'visible';
+                    newO = '1';
+                } else {
+                    newH = '0';
+                    newV = 'hidden';
+                    newO = '0';
+                }
+                elmt.style.height = newH;
+                elmt.style.visibility = newV;
+                elmt.style.opacity = newO;
             }
-            elmt.style.height = newH;
-            elmt.style.visibility = newV;
-            elmt.style.opacity = newO;
         }
 
         let directionAnimationInterval;
