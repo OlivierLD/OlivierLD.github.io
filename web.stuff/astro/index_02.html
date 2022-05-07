@@ -260,6 +260,71 @@ let setProjection = (id, radio) => {
 	document.getElementById(id).repaint();
 };
 
+let geoInterval;
+const options = {
+    enableHighAccuracy: true,
+    maximumAge: 0,
+    timeout: 5000
+};
+
+let positionNotSet = true;
+
+const onPosSuccess = (pos) => {
+    // Doc at https://w3c.github.io/geolocation-api/
+    // Position object at https://w3c.github.io/geolocation-api/#position_interface
+    //
+    // Check privileges in config.xml
+    //
+    console.log('lat= ' + pos.coords.latitude + ' lon= ' + pos.coords.longitude);
+    console.log('hdg= ' + pos.coords.heading + ' spd= ' + pos.coords.speed + ' m/s');
+    //  console.log("Pos data:" + pos.coords);
+    // Feed the fields: 
+    // pos-lat-sign-01, pos-lat-deg-01, pos-lat-min-01
+    // pos-lng-sign-01, pos-lng-deg-01, pos-lng-min-01
+    let latSign = (pos.coords.latitude < 0) ? 'S' : 'N';
+    document.getElementById('pos-lat-sign-01').value = latSign;
+    let lat = Math.abs(pos.coords.latitude);
+    let lngSign = (pos.coords.longitude < 0) ? 'W' : 'E';
+    document.getElementById('pos-lng-sign-01').value = lngSign;
+    let lng = Math.abs(pos.coords.longitude);
+    // Latitude value
+    let latDegVal = Math.floor(lat);
+    document.getElementById('pos-lat-deg-01').value = latDegVal;
+    let latMinVal = parseFloat(((lat - latDegVal) * 60.0).toFixed(2));
+    document.getElementById('pos-lat-min-01').value = latMinVal;
+    // Longitude Value
+    let lngDegVal = Math.floor(lng);
+    document.getElementById('pos-lng-deg-01').value = lngDegVal;
+    let lngMinVal = parseFloat(((lng - lngDegVal) * 60.0).toFixed(2));
+    document.getElementById('pos-lng-min-01').value = lngMinVal;
+};
+
+// Called from navigator.geolocation.getCurrentPosition
+const onPosError = (err) => {
+    let errMess;
+    if (err.code === err.PERMISSION_DENIED) {
+        errMess = 'Location access was denied by the user.';
+    } else {
+        errMess = 'location error (' + err.code + '): ' + err.message;
+    }
+    console.error(errMess);
+};
+
+let setGeolocation = (slider) => {
+    console.log(`GeoLocation turned ${slider.checked ? 'ON' : 'OFF'}`);
+    if (slider.checked) {
+        document.getElementById('geo-mess').style.display = 'block';
+        geoInterval = setInterval(() => {
+           /* let watchId = */ navigator.geolocation.getCurrentPosition(onPosSuccess, onPosError, options);
+        }, 1000);
+    } else {
+        document.getElementById('geo-mess').style.display = 'none';
+        if (geoInterval) {
+            clearInterval(geoInterval);
+        }
+    }
+};
+
 // expandCollapseSetPosData
 let userPosDataExpanded = false;
 let userDateExpanded = false;
@@ -1357,8 +1422,18 @@ let toggleForeground = () => {
                         <button id="update-position"
                                 onclick="updatePosition();"
                                 title="Set position value"
-                                style="margin-top: 3px;">Set Position
-                        </button>
+                                style="margin-top: 3px;">Set Position</button>
+                        <br/>
+                        <!-- Enable Geolocation APIs -->        
+                        <div class="switch-container" style="margin-left: 30px;" title="Enable GeoLocation APIs">
+                            <label class="switch switch-element">
+                              <input id="geoloc-slider" type="checkbox" onchange="setGeolocation(this);">
+                              <span class="slider round"></span>
+                            </label>
+                            <span class="switch-element">Enable GeoLocation</span>
+                        </div>
+                        <div id="geo-mess" style="display: none;"><small style="font-style: italic; color: yellow;">(hit "Set Position" when GeoLocation is obtained)</small></div>
+    
                         <div id="url-placeHolder" style="display: none;">
                             <small>Bookmark this URL:</small>
                             <div id="url-to-bookmark" class="bookmark"></div>
