@@ -20,7 +20,8 @@
     <script type="module" src="./webcomponents/SplitFlapDisplay.js"></script>
     <script type="module" src="./webcomponents/JumboDisplay.js"></script>
     <script type="module" src="./webcomponents/ScrollDigit.js"></script>
-    <script type="module" src="./webcomponents/MoonPhase.js"></script>
+    <!--script type="module" src="./webcomponents/MoonPhase.js"></script-->
+    <script type="module" src="./webcomponents/moonphase.2/MoonPhase.js"></script>
     <script type="module" src="./webcomponents/SunPath.js"></script>
 
     <script type="text/javascript" src="date.proto.js"></script>
@@ -1277,14 +1278,14 @@ let toggleForeground = () => {
                        width="180"
                        height="80"></jumbo-display>
         <!-- MOON PHASE and TILT -->                
-        <moon-phase id="moon-phase-01"
-                    width="180"
-                    height="180"
-                    title="Moon Phase"
-                    phase="0"
-                    tilt="0"
-                    label="Moon phase"
-                    small-label="..."/>
+        <moon-phase-2 id="moon-phase-01"
+                      width="180"
+                      height="180"
+                      title="Moon Phase"
+                      phase="0"
+                      tilt="0"
+                      label="Moon phase"
+                      small-label="..."/>
     </div>
 
     <!-- SCROLL-DISPLAY (PRMSL) -->
