@@ -271,10 +271,9 @@ const options = {
 let positionNotSet = true;
 
 const onPosSuccess = (pos) => {
+    document.getElementById('geo-mess').style.display = 'block'; // Display message
     // Doc at https://w3c.github.io/geolocation-api/
     // Position object at https://w3c.github.io/geolocation-api/#position_interface
-    //
-    // Check privileges in config.xml
     //
     console.log('lat= ' + pos.coords.latitude + ' lon= ' + pos.coords.longitude);
     console.log('hdg= ' + pos.coords.heading + ' spd= ' + pos.coords.speed + ' m/s');
@@ -314,7 +313,6 @@ const onPosError = (err) => {
 let setGeolocation = (slider) => {
     console.log(`GeoLocation turned ${slider.checked ? 'ON' : 'OFF'}`);
     if (slider.checked) {
-        document.getElementById('geo-mess').style.display = 'block';
         geoInterval = setInterval(() => {
            /* let watchId = */ navigator.geolocation.getCurrentPosition(onPosSuccess, onPosError, options);
         }, 1000);
