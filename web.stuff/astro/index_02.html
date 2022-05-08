@@ -261,6 +261,7 @@ let setProjection = (id, radio) => {
 	document.getElementById(id).repaint();
 };
 
+// Used by setGeolocation
 let geoInterval;
 const options = {
     enableHighAccuracy: true,
@@ -268,8 +269,8 @@ const options = {
     timeout: 5000
 };
 
-let positionNotSet = true;
-
+// Called from navigator.geolocation.getCurrentPosition
+// Used by setGeolocation
 const onPosSuccess = (pos) => {
     document.getElementById('geo-mess').style.display = 'block'; // Display message
     // Doc at https://w3c.github.io/geolocation-api/
@@ -300,6 +301,7 @@ const onPosSuccess = (pos) => {
 };
 
 // Called from navigator.geolocation.getCurrentPosition
+// Used by setGeolocation
 const onPosError = (err) => {
     let errMess;
     if (err.code === err.PERMISSION_DENIED) {
