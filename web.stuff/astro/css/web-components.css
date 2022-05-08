@@ -13,6 +13,7 @@
 	--grid-color: rgba(0, 255, 255, 0.3);
 	--tropic-color: LightGray;
 	--chart-color: cyan;
+	--chart-color-behind: yellow; /* rgba(0, 255, 255, 0.5); */
 	--chart-line-width: 1;
 	--user-pos-color: red;
 	--sun-color: rgb(255, 255, 0);
@@ -40,6 +41,7 @@
 	--grid-color: rgba(0, 255, 255, 0.3);
 	--tropic-color: rgba(255, 165, 0, 0.75);
 	--chart-color: rgba(0, 255, 255, 0.5);
+	--chart-color-behind: rgba(0, 255, 255, 0.25);
 	--chart-line-width: 1;
 	--user-pos-color: red;
 	--sun-color: rgb(255, 255, 0);

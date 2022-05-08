@@ -30,11 +30,12 @@ const worldMapDefaultColorConfig = {
 	globeBackground: "black",
 	globeGradient: {
 		from: "navy",
-		to: "blue",
+		to: "blue"
 	},
 	gridColor: 'rgba(0, 255, 255, 0.3)',
 	tropicColor: 'LightGray',
 	chartColor: 'cyan',
+	chartColorBehind: 'rgba(0, 255, 255, 0.5',
 	chartLineWidth: 1,
 	userPosColor: 'red',
 	sunColor: 'rgb(255, 255, 0)', // 'yellow',
@@ -570,7 +571,7 @@ class WorldMap extends HTMLElement {
 			longitude -= 360;
 		}
 		let aries = { lat: Math.toRadians(obl), lng: Math.toRadians(longitude) };
-		let eclCenter = WorldMap.deadReckoningRadians(aries, 90 * 60, 0); // "Center" of the Ecliptic
+		let eclCenter = this.deadReckoningRadians(aries, 90 * 60, 0); // "Center" of the Ecliptic
 
 		context.fillStyle = this.worldmapColorConfig.tropicColor;
 		for (let hdg=0; hdg<360; hdg++) {
@@ -949,6 +950,9 @@ class WorldMap extends HTMLElement {
 										case '--chart-color':
 											colorConfig.chartColor = value;
 											break;
+										case '--chart-color-behind':
+											colorConfig.chartColorBehind = value;
+											break;
 										case '--user-pos-color':
 											colorConfig.userPosColor = value;
 											break;
@@ -1224,12 +1228,18 @@ class WorldMap extends HTMLElement {
 				let section = worldTop.section; // We assume top has been found.
 
 //      console.log("Found " + section.length + " section(s).")
+
 				for (let i = 0; i < section.length; i++) {
-					let point = section[i].point;
+					let point = section[i].point; // 'point' is an array of points...
 					if (point !== undefined) {
 						let firstPt = null;
 						let previousPt = null;
+						// Previous was behind, previous was in front... And change color if behind/in front
+						let previousIsBehind;
+						context.lineWidth = this.worldmapColorConfig.chartLineWidth;
 						context.beginPath();
+						context.strokeStyle = this.worldmapColorConfig.chartColor;
+	
 						for (let p = 0; p < point.length; p++) {
 							let lat = parseFloat(point[p].Lat);
 							let lng = parseFloat(point[p].Lng);
@@ -1246,6 +1256,28 @@ class WorldMap extends HTMLElement {
 								drawIt = false;
 								previousPt = null; // Something better, maybe ?
 							}
+							if (drawIt && this.transparentGlobe) { // Case of transparency, change strokeStyle if behind
+								if (previousIsBehind !== undefined) {
+									if (previousIsBehind !== thisPointIsBehind) {
+										context.stroke(); // Draw previous path
+										context.closePath();
+										context.beginPath(); // New path.
+										if (thisPointIsBehind) { // fade color
+											context.strokeStyle = this.worldmapColorConfig.chartColorBehind;
+										} else { // bright color
+											context.strokeStyle = this.worldmapColorConfig.chartColor;
+										}
+									}
+								} else {
+									if (thisPointIsBehind) { // fade color
+										context.strokeStyle = this.worldmapColorConfig.chartColorBehind;
+									} else { // bright color
+										context.strokeStyle = this.worldmapColorConfig.chartColor;
+									}
+							    }
+								previousIsBehind = thisPointIsBehind;
+							}
+
 							let pt = this.getPanelPoint(lat, lng);
 							if (previousPt === null) { // p === 0) {
 								context.moveTo(pt.x, pt.y);
@@ -1262,9 +1294,9 @@ class WorldMap extends HTMLElement {
 					// if (false && firstPt !== null && previousPt !== null) {
 					// 	context.lineTo(firstPt.x, firstPt.y); // close the loop
 					// }
-					context.lineWidth = this.worldmapColorConfig.chartLineWidth;
-					context.strokeStyle = this.worldmapColorConfig.chartColor;
-					context.stroke();
+					// context.lineWidth = this.worldmapColorConfig.chartLineWidth;
+					// context.strokeStyle = this.worldmapColorConfig.chartColor;
+					context.stroke(); // Last of the section.
 					context.closePath();
 				}
 			} catch (ex) {
@@ -1554,7 +1586,7 @@ class WorldMap extends HTMLElement {
 	plotPosToCanvas(context, lat, lng, label, color) {
 
 		let pt = this.posToCanvas(lat, lng);
-		this.plotPoint(context, pt, (color !== undefined ? color : this.worldmapColorConfig.defaultPlotPointColor));
+		WorldMap.plot(context, pt, (color !== undefined ? color : this.worldmapColorConfig.defaultPlotPointColor));
 		if (label !== undefined) {
 			try {
 				// BG
@@ -1866,7 +1898,7 @@ class WorldMap extends HTMLElement {
 		if (pt.x < this.width / 2) {
 			context.lineTo(- 10, pt.y); // left most?
 			if (DEBUG) {
-				console.log(`Plotting LEFT/LAST on canvas x:${- 10}, y:${pt.y}`);
+				console.log(`Plotting RIGHT/LAST on canvas x:${- 10}, y:${pt.y}`);
 				context.fillStyle = 'green';
 				context.fillText("LAST", pt.x, pt.y);
 			}
@@ -2232,11 +2264,11 @@ class WorldMap extends HTMLElement {
 			let strLat = WorldMap.decToSex(this.userPosition.latitude, "NS");
 			let strLng = WorldMap.decToSex(this.userPosition.longitude, "EW");
 			context.fillStyle = this.worldmapColorConfig.displayPositionColor;
-			context.font = "bold 16px Arial";  // "bold 40px Arial"
-			context.fillText(strLat, 10, 18);  // Latitude
-			context.fillText(strLng, 10, 38);  // Longitude
+			context.font = "bold 16px Arial"; // "bold 40px Arial"
+			context.fillText(strLat, 10, 18);
+			context.fillText(strLng, 10, 38);
 			if (this.userPosition.gridSquare !== undefined) {
-				context.fillText(this.userPosition.gridSquare, 10, 58); // Maidenhead grid square
+				context.fillText(this.userPosition.gridSquare, 10, 58);
 			}
 		}
 

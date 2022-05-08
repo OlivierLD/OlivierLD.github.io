@@ -426,6 +426,7 @@ compass-display .green {
 	--grid-color: rgba(0, 255, 255, 0.3);
 	--tropic-color: LightGray;
 	--chart-color: cyan;
+	--chart-color-behind: rgba(0, 255, 255, 0.5);
 	--chart-line-width: 1;
 	--user-pos-color: red;
 	--sun-color: rgb(255, 255, 0);
@@ -453,6 +454,7 @@ compass-display .green {
 	--grid-color: rgba(244, 246, 246, 1);
 	--tropic-color: LightGrey;
 	--chart-color: grey;
+	--chart-color-behind: silver;
 	--chart-line-width: 1;
 	--user-pos-color: black;
 	--sun-color: rgb(255, 255, 0);
