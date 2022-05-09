@@ -642,7 +642,18 @@ let setSunPathData = () => {
 
 	let ttDate = new Date(`${year.toString()}-${lpad(month.toString(), '0', 2)}-${lpad(day.toString(), '0', 2)} 00:00:00 GMT+0000`);
 	let ttEpoch = ttDate.getTime() + (dms.hours * 3600 * 1000) + (dms.minutes * 60 * 1000) + (dms.seconds * 1000);
-    elem1.sunTransit = { time: ttEpoch };
+
+    let transitEl = 0;
+    for (let i=0; i<sunPath.length; i++) {
+        // if (sunPath[i].epoch > ttEpoch) {
+        if (sunPath[i].z < 270 && sunPath[i].z >= 180) { // Approx. < 270: avoid values like 359...
+            transitEl = sunPath[i].he;
+            break;
+        }
+    }
+    // console.log(`NavBar: Transit Elev: ${transitEl} deg.`);
+
+    elem1.sunTransit = { time: ttEpoch, elev: transitEl };
 
     elem1.repaint();
 }

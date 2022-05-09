@@ -776,6 +776,13 @@ class SunPath extends HTMLElement {
 					metrics = context.measureText(displayData);
 					context.fillText(displayData, (this._width / 2) - (metrics.width / 2), this._height - 20);
 				}
+				if (this._sunTransit.elev !== undefined) {
+					// Utilities.decToSex(this.moonHe);
+					let elevData = `Elev: ${Utilities.decToSex(this._sunTransit.elev)}`;
+					// console.log(`Transit Elev: ${this._sunTransit.elev} deg.`);
+					metrics = context.measureText(elevData);
+					context.fillText(elevData, (this._width / 2) - (metrics.width / 2), this._height - 20);
+				}
 			}
 			if (this._sunRise !== undefined && this._sunSet !== undefined) {
 				let dayLight = this._sunSet.time - this._sunRise.time;
