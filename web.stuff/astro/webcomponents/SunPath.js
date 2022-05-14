@@ -734,6 +734,8 @@ class SunPath extends HTMLElement {
 				context.fillText(strLng, this._width - 10 - len, 40);
 			}
 			context.fillStyle = this.sunPathColorConfig.cardPointColor;
+			// let savedFont = context.font;
+			// context.font = "bold " + context.font;
 			if (this._sunRise !== undefined) {
 				let strRiseTime = new Date(this._sunRise.time).format('H:i:s Z');
 				let strRiseZ = Utilities.decToSex(this._sunRise.z);
@@ -741,6 +743,7 @@ class SunPath extends HTMLElement {
 				context.fillText("Time:" + strRiseTime, 10, this._height - 40);
 				context.fillText("Azimuth:" + strRiseZ, 10, this._height - 20);
 			}
+			// context.font = savedFont;
 			if (this._sunSet !== undefined) {
 				let strSetTime = new Date(this._sunSet.time).format('H:i:s Z');
 				let strSetZ = Utilities.decToSex(this._sunSet.z);
