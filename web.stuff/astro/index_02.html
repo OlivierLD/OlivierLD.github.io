@@ -1162,15 +1162,18 @@ let toggleForeground = () => {
         </div>    
     </dialog>
 
-    <!-- Sun Path - Make it draggable ? -->
+    <!-- Sun Path - Draggable dialog
+        See in window.onload the 
+        ondragover, ondrop functions.
+    -->
     <dialog id="sun-path-dialog" 
             class="shadow-menu" 
-            style="z-index: 10; width: 470px;" >
-       <!-- draggable="true">
+            style="z-index: 10; width: 470px;" 
+            draggable="true"
             ondragstart="dragStartSP(event)" 
-            ondrag="draggingSP(event)"> -->
+            ondrag="draggingSP(event)"> 
         <div class="dialog-header">
-            <span>Sun Path</span>
+            <span>Sun Path (draggable)</span>
             <span class="dialog-header-close" onclick="closeSunPathDialog();">&times</span>
         </div>
         <div style="margin-bottom: 10px;">
@@ -1224,11 +1227,11 @@ let toggleForeground = () => {
 
     <a href="javascript:void(0)" class="active-link" style="margin-top: 20px;"><span style="font-size: 40px;" title="Call for details.">&phone;</span></a>
 
-    <!-- More links go here if needed -->
+    <!-- More links go here if/when needed -->
 </div>
 <div style="display: grid; grid-template-columns: auto auto;" title="Single Page Application with Background SVG &amp; Web Components">
     <div><h1 style="vertical-align: top; margin-top: 0; font-style: normal; text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px silver;"><span style="cursor: pointer;" onclick="openNav()" onmouseover="openNav()" title="Hamburger">&nbsp; &#8801;</span> ES6 Celestial Computer, SPA with BG Components</h1></div>
-    <div style="text-align: right;"><small>Last code update May 09, 2022, 09:58 CET</small></div>    
+    <div style="text-align: right;"><small>Last code update May 14, 2022, 12:08 CET</small></div>    
 </div>
 <div class="background bg-container" 
      style="width: 98%; margin: 10px; margin-top: 50px; border: 2px solid rgba(0, 255, 255, 0.5); border-radius: 10px;">
@@ -1863,6 +1866,19 @@ let toggleForeground = () => {
         let prmslData = window.setInterval(prmslUpdater, 2000);
 
         initAjax(); // ISS Station?
+
+        document.ondragover = function(event) {
+            console.log("On drag Over");
+            event.preventDefault();
+        };
+
+        document.ondrop = function(event) {
+            console.log("On drop");
+            event.preventDefault();
+            // var data = event.dataTransfer.getData("Text");
+            // event.target.appendChild(document.getElementById(data));
+            // document.getElementById("demo").innerHTML = "The p element was dropped";
+        };
 
         console.log('On Load, done.');
 

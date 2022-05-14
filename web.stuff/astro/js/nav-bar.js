@@ -114,18 +114,18 @@ let dialogXOrig = 0;
 let dialogYOrig = 0;
 
 let dragStartSP = event => {
-    console.log("Start dragging");
+    // console.log("Start dragging");
     dragStartX = event.x; // clientX;
     dragStartY = event.y; // clientY;
     let dialogBox = document.getElementById('sun-path-dialog');
     let computedStyle = window.getComputedStyle(dialogBox, null);
-    dialogXOrig = parseInt(computedStyle.left.replace('px', ''));
-    dialogYOrig = parseInt(computedStyle.top.replace('px', ''));
+    dialogXOrig = parseFloat(computedStyle.marginLeft.replace('px', ''));
+    dialogYOrig = parseFloat(computedStyle.marginTop.replace('px', ''));
     // console.log("End");
 };
 
 let draggingSP = event => {
-    console.log("Dragging!");
+    // console.log("Dragging!");
     if (true) {
         let dialogBox = document.getElementById('sun-path-dialog');
         // let computedStyle = window.getComputedStyle(dialogBox, null);
@@ -137,12 +137,12 @@ let draggingSP = event => {
             let deltaY = event.y - dragStartY; // clientY;
             let newLeft = `${dialogXOrig + deltaX}px`;
             let newTop = `${dialogYOrig + deltaY}px`;
-            dialogBox.style.left = newLeft;
-            dialogBox.style.top = newTop;
-            console.log(`event.x:${event.x}, event.y:${event.y}, dragStartX: ${dragStartX}, dragStartY: ${dragStartY}, dialogXOrig:${dialogXOrig}, dialogYOrig:${dialogYOrig}, New Left: ${newLeft}, New Top: ${newTop}`);
-            console.log("evt:", event);
+            dialogBox.style.marginLeft = newLeft;
+            dialogBox.style.marginTop = newTop;
+            // console.log(`event.x:${event.x}, event.y:${event.y}, dragStartX: ${dragStartX}, dragStartY: ${dragStartY}, dialogXOrig:${dialogXOrig}, dialogYOrig:${dialogYOrig}, New Left: ${newLeft}, New Top: ${newTop}`);
+            // console.log("evt:", event);
         }
-        // event.preventDefault();
+        event.preventDefault();
     }
 };
 
