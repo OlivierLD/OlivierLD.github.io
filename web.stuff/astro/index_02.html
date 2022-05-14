@@ -1162,8 +1162,13 @@ let toggleForeground = () => {
         </div>    
     </dialog>
 
-    <!-- Sun Path -->
-    <dialog id="sun-path-dialog" class="shadow-menu" style="z-index: 10; width: 470px;">
+    <!-- Sun Path - Make it draggable ? -->
+    <dialog id="sun-path-dialog" 
+            class="shadow-menu" 
+            style="z-index: 10; width: 470px;" >
+       <!-- draggable="true">
+            ondragstart="dragStartSP(event)" 
+            ondrag="draggingSP(event)"> -->
         <div class="dialog-header">
             <span>Sun Path</span>
             <span class="dialog-header-close" onclick="closeSunPathDialog();">&times</span>

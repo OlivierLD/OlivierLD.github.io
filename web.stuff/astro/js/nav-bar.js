@@ -6,7 +6,7 @@ let lpad = (str, pad, len) => {
 };
 
 let openNav = () => {
-    document.getElementById("side-nav").style.width =  getComputedStyle(document.documentElement).getPropertyValue('--expanded-nav-width'); // "450px";
+    document.getElementById("side-nav").style.width = getComputedStyle(document.documentElement).getPropertyValue('--expanded-nav-width'); // "450px";
 };
 
 let closeNav = () => {
@@ -18,7 +18,7 @@ const HELP_DIALOG_ID = "help-dialog";
 const MARQUEE_DIALOG_ID = "marquee-dialog";
 const SUN_PATH_DIALOG_ID = "sun-path-dialog";
 
-const BAD_BROWSER = "Your browser does not know about dialogs!\nPlease find one that does.";
+const BAD_BROWSER = "Your browser does not know about dialogs!\nPlease find one that does.\nYou can do it.";
 
 let showPrmsDialog = () => {
     let prmsDialog = document.getElementById(PRMS_DIALOG_ID);
@@ -105,6 +105,44 @@ let closeSunPathDialog = () => {
     }
     if (sunPathUpdater !== undefined) {
         window.clearInterval(sunPathUpdater);
+    }
+};
+
+let dragStartX = 0;
+let dragStartY = 0;
+let dialogXOrig = 0;
+let dialogYOrig = 0;
+
+let dragStartSP = event => {
+    console.log("Start dragging");
+    dragStartX = event.x; // clientX;
+    dragStartY = event.y; // clientY;
+    let dialogBox = document.getElementById('sun-path-dialog');
+    let computedStyle = window.getComputedStyle(dialogBox, null);
+    dialogXOrig = parseInt(computedStyle.left.replace('px', ''));
+    dialogYOrig = parseInt(computedStyle.top.replace('px', ''));
+    // console.log("End");
+};
+
+let draggingSP = event => {
+    console.log("Dragging!");
+    if (true) {
+        let dialogBox = document.getElementById('sun-path-dialog');
+        // let computedStyle = window.getComputedStyle(dialogBox, null);
+        if (event.buttons > 0) {
+            // if (event.x === 0 && event.y === 0) {
+            //     debugger;
+            // }
+            let deltaX = event.x - dragStartX; // clientX ;
+            let deltaY = event.y - dragStartY; // clientY;
+            let newLeft = `${dialogXOrig + deltaX}px`;
+            let newTop = `${dialogYOrig + deltaY}px`;
+            dialogBox.style.left = newLeft;
+            dialogBox.style.top = newTop;
+            console.log(`event.x:${event.x}, event.y:${event.y}, dragStartX: ${dragStartX}, dragStartY: ${dragStartY}, dialogXOrig:${dialogXOrig}, dialogYOrig:${dialogYOrig}, New Left: ${newLeft}, New Top: ${newTop}`);
+            console.log("evt:", event);
+        }
+        // event.preventDefault();
     }
 };
 
