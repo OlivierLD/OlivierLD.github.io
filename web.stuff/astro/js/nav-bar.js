@@ -678,8 +678,13 @@ let setSunPathData = () => {
     let tt = CelestialComputer.getSunMeridianPassageTime(userPos.latitude, userPos.longitude, globalAstroData.EOT.raw);
 	let dms = CelestialComputer.decimalToDMS(tt);
 
-	let ttDate = new Date(`${year.toString()}-${lpad(month.toString(), '0', 2)}-${lpad(day.toString(), '0', 2)} 00:00:00 GMT+0000`);
-	let ttEpoch = ttDate.getTime() + (dms.hours * 3600 * 1000) + (dms.minutes * 60 * 1000) + (dms.seconds * 1000);
+    let ttDate, ttEpoch;
+    if (false) { // Firefox does not like it
+        ttDate = new Date(`${year.toString()}-${lpad(month.toString(), '0', 2)}-${lpad(day.toString(), '0', 2)} 00:00:00 GMT+0000`);
+        ttEpoch = ttDate.getTime() + (dms.hours * 3600 * 1000) + (dms.minutes * 60 * 1000) + (dms.seconds * 1000);
+    } else {
+        ttEpoch = Date.UTC(year, month - 1, day, 0, 0, 0) + (dms.hours * 3600 * 1000) + (dms.minutes * 60 * 1000) + (dms.seconds * 1000);
+    }
 
     let transitEl = 0;
     for (let i=0; i<sunPath.length; i++) {
