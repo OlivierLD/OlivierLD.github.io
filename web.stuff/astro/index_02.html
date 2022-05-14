@@ -33,7 +33,7 @@ let globalSRUSun;
 let globalSRUMoon;
 
 let marqueeScrollUpAnimationInterval;
-let defaultMarqueeTextArray = [ 'Raspberry Pi', 'Web Components', 'Java & Processing', 'HTML5, CSS3, ES6', 'NodeJS', 'Python', '3D Printing', 'Arduino & Co', 'AI, ML, DL', 'Artificial Intelligence', 'Artificial Insanity', 'and other toys...' ];
+// let defaultMarqueeTextArray = [ 'Raspberry Pi', 'Web Components', 'Java & Processing', 'HTML5, CSS3, ES6', 'NodeJS', 'Python', '3D Printing', 'Arduino & Co', 'AI, ML, DL', 'Artificial Intelligence', 'Artificial Insanity', 'and other toys...' ];
 
 let marqueeScrollUp = (marqueeId) => {
     if (marqueeScrollUpAnimationInterval !== undefined) {
@@ -1173,7 +1173,7 @@ let toggleForeground = () => {
             ondragstart="dragStartSP(event)" 
             ondrag="draggingSP(event)"> 
         <div class="dialog-header">
-            <span>Sun Path (draggable)</span>
+            <span id="sun-path-header-title">Sun Path (draggable)</span> <!-- This is tweak by the window.onload -->
             <span class="dialog-header-close" onclick="closeSunPathDialog();">&times</span>
         </div>
         <div style="margin-bottom: 10px;">
@@ -1880,8 +1880,10 @@ let toggleForeground = () => {
             // document.getElementById("demo").innerHTML = "The p element was dropped";
         };
 
-        console.log('On Load, done.');
+        document.getElementById('sun-path-header-title').innerText = ("Sun Path" + 
+                                          (navigator.userAgent.indexOf("Chrome") > -1 ? " (draggable)" : ""));
 
+        console.log('On Load, done.');
     };
 </script>
 </html>
