@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <!--
- | All the skill in the "compute" function below,
- | invoked on click.
+ | All the skill in the "compute" function below, invoked on click.
  | Dynamic background test.
- | Some (if not many) functions are faked (or simulated)
+ | Some (if not many) functions returning baot data are faked (or simulated)
  |
  | Good grid stuff: https://css-tricks.com/snippets/css/complete-guide-grid/
  +-->
@@ -276,8 +275,7 @@ const onPosSuccess = (pos) => {
     // Doc at https://w3c.github.io/geolocation-api/
     // Position object at https://w3c.github.io/geolocation-api/#position_interface
     //
-    console.log('lat= ' + pos.coords.latitude + ' lon= ' + pos.coords.longitude);
-    console.log('hdg= ' + pos.coords.heading + ' spd= ' + pos.coords.speed + ' m/s');
+    console.log('lat= ' + pos.coords.latitude + ' lon= ' + pos.coords.longitude); // + ' hdg= ' + pos.coords.heading + ' spd= ' + pos.coords.speed + ' m/s');
     //  console.log("Pos data:" + pos.coords);
     // Feed the fields: 
     // pos-lat-sign-01, pos-lat-deg-01, pos-lat-min-01
@@ -1539,7 +1537,7 @@ let toggleForeground = () => {
             console.log("Calculation done %d-%d-%d %d:%d:%d UTC :", calculationData.utcyear, calculationData.utcmonth, calculationData.utcday, calculationData.utchour, calculationData.utcminute, calculationData.utcsecond);
             console.log("Result:\n", JSON.stringify(testResult, null, 2));
         }
-        // SRU
+        // SRU - Sight Reduction Utility
         try {
             let sruSun = sightReduction(userPos.latitude, userPos.longitude, testResult.sun.GHA.raw, testResult.sun.DEC.raw);
             globalSRUSun = sruSun;
@@ -1737,6 +1735,7 @@ let toggleForeground = () => {
     let hdg = 0.0;
     let prmsl = 1013.5;
     
+    // Random Simulation
     let sensorUpdater = () => {
         let diff = (Math.random() - 0.5) * 2.0; // [-1..1]
         hdg += diff;
@@ -1863,22 +1862,23 @@ let toggleForeground = () => {
 
         document.getElementById("world-map-01").setDoAfter(extraDrawingWorldMap);
 
-        let hdgUpdater = window.setInterval(sensorUpdater, 1000);
-        let prmslData = window.setInterval(prmslUpdater, 2000);
+        let hdgUpdater = window.setInterval(sensorUpdater, 1000); // Simulation
+        let prmslData = window.setInterval(prmslUpdater, 2000);   // Simulation
 
         initAjax(); // ISS Station?
 
-        document.ondragover = function(event) {
-            console.log("On drag Over");
+        document.ondragover = (event) => { // Used for Sun-Path dialog
+            // console.log("On drag Over");
             event.preventDefault();
         };
 
-        document.ondrop = function(event) {
-            console.log("On drop");
+        document.ondrop = (event) => { // Used for Sun-Path dialog
+            // console.log("On drop");
             event.preventDefault();
-            // var data = event.dataTransfer.getData("Text");
+            let data = event.dataTransfer.getData("drag-data"); // Set in dragStartSP
+            console.log("Dropped -> ", data);
             // event.target.appendChild(document.getElementById(data));
-            // document.getElementById("demo").innerHTML = "The p element was dropped";
+            // document.getElementById("demo").innerHTML = "The SunPath dialog was dropped";
         };
 
         document.getElementById('sun-path-header-title').innerText = (navigator.userAgent.indexOf("Chrome") > -1 ? "(draggable)" : "");

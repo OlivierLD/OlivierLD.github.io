@@ -115,6 +115,7 @@ let dialogYOrig = 0;
 
 let dragStartSP = event => {
     // console.log("Start dragging");
+    event.dataTransfer.setData("drag-data", `${event.target.id}: ${new Date()} `); // Dummy, just for the example. See the ondrop function.
     dragStartX = event.x; // clientX;
     dragStartY = event.y; // clientY;
     let dialogBox = document.getElementById('sun-path-dialog');

@@ -58,9 +58,9 @@ export function calculate(year, month, day, hour, minute, second, delta_t, noPla
 	if (false) { // Chrome likes it... not FireFox
 		let dateStr = `${year}-${lpad(month.toString(), '0', 2)}-${lpad(day.toString(), '0', 2)} ${lpad(hour.toString(), '0', 2)}:${lpad(minute.toString(), '0', 2)}:${lpad(second.toString(), '0', 2)} GMT+0000`;
 		epoch = new Date(dateStr).getTime();
+	} else {
+		epoch = Date.UTC(year, month - 1, day, hour, minute, second);
 	}
-
-	epoch = Date.UTC(year, month - 1, day, hour, minute, second);
 
 	calculateJulianDate(year, month, day, hour, minute, second, delta_t);
 	calculateNutation();
