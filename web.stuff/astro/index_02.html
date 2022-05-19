@@ -1594,6 +1594,8 @@ let toggleForeground = () => {
 
         document.getElementById('details').innerHTML = '<pre>' + detailsContent + '</pre>';
 
+        /* Moon Phase and illum, redundant with moon phase web-comp */
+        /*
         try {
             if (testResult.moon.phase.phaseAngle !== undefined) {
                 let phaseIndex = Math.floor(testResult.moon.phase.phaseAngle / (360 / 28.5)) + 1;
@@ -1612,6 +1614,7 @@ let toggleForeground = () => {
         } catch (oops) {
             console.log(oops);
         }
+        */
         // Update World Map
         displayWorldData(transformDataForWorldWebComp(testResult));
         // Update Calendar
@@ -1642,7 +1645,8 @@ let toggleForeground = () => {
         let moonPhase = document.getElementById('moon-phase-01');
         moonPhase.phase = testResult.moon.phase.phaseAngle;
         moonPhase.tilt = moonTilt;   
-        moonPhase.title = `Tilt:${moonTilt.toFixed(1)}°`; // Update tooltip
+        let illum = `${testResult.moon.illum.toFixed(0)} %`;
+        moonPhase.title = `Tilt:${moonTilt.toFixed(1)}°\nIllum:${illum}`; // Update tooltip
 		// Update small label
 		moonPhase.smallLabel = `Tilt:${moonTilt.toFixed(1)}°`;
     };
