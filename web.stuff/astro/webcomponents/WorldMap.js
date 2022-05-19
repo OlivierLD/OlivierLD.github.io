@@ -2259,7 +2259,7 @@ class WorldMap extends HTMLElement {
 			this.drawGlobe(context);
 		}
 
-		// Print position
+		// Print position and GridSquare.
 		if (this.userPosition.latitude !== undefined && this.userPosition.longitude !== undefined) {
 			let strLat = WorldMap.decToSex(this.userPosition.latitude, "NS");
 			let strLng = WorldMap.decToSex(this.userPosition.longitude, "EW");
@@ -2271,11 +2271,11 @@ class WorldMap extends HTMLElement {
 				context.fillText(this.userPosition.gridSquare, 10, 58);
 			}
 		}
-
+		// Print used DeltaT
 		if (this.astronomicalData !== undefined && this.astronomicalData.deltaT !== undefined) {
 			context.fillStyle = this.worldmapColorConfig.displayPositionColor;
 			context.font = "12px Arial"; // "bold 40px Arial"
-			let deltaT = "\u0394T=" + this.astronomicalData.deltaT + " s";
+			let deltaT = "\u0394T=" + this.astronomicalData.deltaT + " s";  
 			context.fillText(deltaT, 10, this.height - 5);
 		}
 	}
