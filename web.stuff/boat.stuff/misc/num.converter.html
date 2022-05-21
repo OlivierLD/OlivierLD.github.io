@@ -102,15 +102,17 @@
             /*height: 0;*/
             /*visibility: hidden;*/
             /*opacity: 0;*/
-            /*transition: visibility 0.5s, height 0.5s, opacity 0.5s linear;*/
+            /*transition: visibility 0.5s, height 0.5s, opacity 0.5s linear;*/        
             height: 0;
-            max-height: 0;
+            max-height: 0;            
             margin: auto;
-            /*transition: transform 0.5s, max-height 1s, height 1s;*/
-            transition: all 0.5s ease;
+            /* transition: transform 0.5s, max-height 1s, height 1s; */
+            transition: all 0.5s ease-in-out;
+            /* -webkit-transition: all .5s ease-in-out; */
             opacity: 0;
             transform: scaleY(0);
-            transform-origin: top;
+            /* transform-origin: top; */
+            /* transition-timing-function: ease; */
             overflow: hidden;
         }
 
@@ -118,6 +120,7 @@
             opacity: 1;
             width: auto;
             height: auto;
+            transition: all 0.5s ease-in-out;
             max-height: 1600px;
             transform: scaleY(1);
             margin-top: 5px;
@@ -130,7 +133,7 @@
         <h1>Decimal to Sexagesimal, and vice-versa</h1>
 
         <div id="user-help-switch" onclick="expandCollapseHelpData();" title="Click to expand/collase"
-        style="margin: 3px; padding-left: 5px; padding-right: 5px; cursor: pointer;"><span id="pos-char">&#9658;</span> Help</div>
+             style="margin: 3px; padding-left: 5px; padding-right: 5px; cursor: pointer;"><span id="pos-char">&#9658;</span> Help</div>
         <div id="user-help" class="smooth" style="padding: 10px; margin: 10px; border: 1px solid rgba(0, 255, 255, 0.25); border-radius: 5px;"> <!-- display: none;  -->
             <small style="padding-left: 10px;">This is a small Single Page App, showing how to go beyond the basics of a small calculation.</small>
             <br/>
