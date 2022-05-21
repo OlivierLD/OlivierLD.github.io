@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html>
+<!--
+ | Available from http://leafletjs.com/
+ | Tutorials and examples at https://leafletjs.com/examples.html
+ | Note: No native way to change orientation
+ +-->
+<head>
+
+    <title>Leaflet - Rhumbline &amp; Great Circle</title>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" /-->
+    <!-- link rel="icon" type="image/ico" href="icons/hammerhead.02.ico" -->
+    <link rel="icon" type="image/ico" href="./jellyfish.ico">
+
+    <!--
+    <link rel="stylesheet" href="leaflet/leaflet.css" />
+    <script src="leaflet/leaflet.js"></script>
+    -->
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+          integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+          crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+            integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+            crossorigin=""></script>
+    <style>
+        :root {
+        --slide-width: 500px;
+        --slide-height: 400px;
+        --expanded-nav-width: 450px;
+        --slider-scale: 0.5;
+        }
+
+        /* For the switch (slider) */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: calc(var(--slider-scale) * 60px);
+            height: calc(var(--slider-scale) * 34px);
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: calc(var(--slider-scale) * 26px);
+            width: calc(var(--slider-scale) * 26px);
+            left: calc(var(--slider-scale) * 4px);
+            bottom: calc(var(--slider-scale) * 4px);
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        input:checked + .slider {
+            background-color: #2196f3;
+        }
+
+        input:focus + .slider {
+            box-shadow: 0 0 1px #2196f3;
+        }
+
+        input:checked + .slider:before {
+            -webkit-transform: translateX(calc(var(--slider-scale) * 26px));
+            -ms-transform: translateX(calc(var(--slider-scale) * 26px));
+            transform: translateX(calc(var(--slider-scale) * 26px));
+        }
+
+        /* Rounded sliders */
+        .slider.round {
+            border-radius: calc(var(--slider-scale) * 34px);
+        }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
+
+        /* Switch grid */
+        .switch-container {
+            display: grid;
+            grid-template-columns: calc(var(--slider-scale) * 80px) 200px;
+        }
+        .switch-element {
+            place-self: flex-start;
+        }
+
+    </style>
+</head>
+<body style='font-family: "Source Code Pro", "Courier New", Helvetica, Geneva; font-weight: bold;'>
+
+OpenSource JavaScript map API at <a href="https://leafletjs.com/" target="leaflet">leafletjs.com</a>
+
+<h2>Great Circles and Rhumblines</h2>
+
+<!--div id="mapid" style="width: 600px; height: 400px;"></div-->
+<div style="margin: 5px;">
+    <span id="curr-point" style="margin: 10px;"></span><span id="point-card" style="margin: 10px;"></span>
+    <button id="reset-button" onclick="reset();">Reset Markers</button>
+    <button id="calculate-button" onclick="calculate();" disabled>Calculate</button>
+</div>
+<!-- Enable Geolocation APIs -->        
+<div class="switch-container" style="margin-left: 30px;" title="Enable GeoLocation APIs">
+    <label class="switch switch-element">
+        <input id="geoloc-slider" type="checkbox" onchange="setGeolocation(this);">
+        <span class="slider round"></span>
+    </label>
+    <span class="switch-element">Enable GeoLocation</span>
+</div>
+
+<!--
+ | Try
+ | - map.panTo(new L.LatLng(40.737, -73.923));
+ | - map.setView(new L.LatLng(40.737, -73.923), 8);
+ | - map.flyTo(new L.LatLng(40.737, -73.923));
+ +-->
+
+<table>
+    <tr>
+        <td valign="top">
+            <!--div id="mapid" style="width: 1200px; height: 800px;"></div-->
+            <div id="mapid" style="width: 1200px; height: 600px;"></div>
+        </td>
+        <td valign="top" style="text-align: right;">
+            <div id="curr-pos"></div>
+            <div id="distances" style="text-align: left;"></div>
+        </td>
+    </tr>
+</table>    
+<div>
+    Click 2 points on the chart, and then vlick the [Calculate] button...
+</div>
+
+<script>
+
+    let decToSex = (val, ns_ew) => {
+        let absVal = Math.abs(val);
+        let intValue = Math.floor(absVal);
+        let dec = absVal - intValue;
+        let i = intValue;
+        dec *= 60;
+        let min = dec.toFixed(4);
+        while (min.length < 7) {
+            min = '0' + min;
+        }
+        let s = i + "°" + min + "'";
+
+        if (val < 0) {
+            s += (ns_ew === 'NS' ? 'S' : 'W');
+        } else {
+            s += (ns_ew === 'NS' ? 'N' : 'E');
+        }
+        return s;
+    };
+
+    let map = L.map('mapid'); // .setView([51.505, -0.09], 13);
+
+    // L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+    //     maxZoom: 28,
+    //     attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+    //     '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+    //     'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+    //     id: 'mapbox.streets'
+    // }).addTo(map);
+
+    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+        accessToken: 'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw',
+        attribution: '© <a href="https://www.mapbox.com/about/maps/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> <strong><a href="https://www.mapbox.com/map-feedback/" target="_blank">Improve this map</a></strong>',
+        tileSize: 512,
+        maxZoom: 18,
+        zoomOffset: -1,
+        id: 'mapbox/streets-v11'
+    }).addTo(map);
+
+    // let polyline = L.polyline(latlngs, {color: 'red'}).addTo(map);
+    // // zoom the map to the polyline
+    // map.fitBounds(polyline.getBounds());
+
+    map.setView([47.5, -3.0], 6); // Orig. TODO: enable geoLocation
+
+    let pathIdx = 0;
+
+    map.addEventListener('mousemove', (event) => {
+        // let lat = Math.round(event.latlng.lat * 100000) / 100000;
+        // let lng = Math.round(event.latlng.lng * 100000) / 100000;
+        let lat = event.latlng.lat;
+        let lng = event.latlng.lng;
+        while (lng > 180) {
+            lng -= 360;
+        }
+        while (lng < -180) {
+            lng += 360;
+        }
+        document.getElementById('curr-pos').innerHTML = `${decToSex(lat, "NS")}<br/>${decToSex(lng, "EW")}`;
+    });
+
+    let from = null, to = null;
+    let greatCircle = null;
+    let rhumbline = null;
+
+    map.addEventListener('click', (event) => {
+        // console.log("Paf!");
+        let clickPos = event.latlng;
+        let message = from === null ? "Start from here" : "Go to here";
+        let marker = new L.marker([clickPos.lat, clickPos.lng])
+                        //   .addTo(map)
+                          .bindPopup(`<b>${decToSex(clickPos.lat, 'NS')}<br/>${decToSex(clickPos.lng, 'EW')}</b>`)
+                          .bindTooltip(message);
+        if (from === null) {
+            from = marker;
+            from.addTo(map);
+        } else if (to === null) {
+            to = marker;
+            to.addTo(map);
+        } else {
+            alert("From and to already exist.\nReset to enter new ones");
+        }     
+        if (from !== null && to !== null) {
+            document.getElementById("calculate-button").disabled = false;
+        }                    
+    });
+
+    let reset = () => {
+        if (to !== null) {
+            map.removeLayer(to);
+            to = null;
+        }
+        if (from !== null) {
+            map.removeLayer(from);
+            from = null;
+        }
+        if (greatCircle !== null) {
+            map.removeLayer(greatCircle);
+            greatCircle = null;
+        }
+        if (rhumbline !== null) {
+            map.removeLayer(rhumbline);
+            rhumbline = null;
+        }
+        document.getElementById("calculate-button").disabled = true;
+        document.getElementById('distances').innerHTML = '';
+    };
+
+    // Used by setGeolocation
+    let geoInterval;
+    const options = {
+        enableHighAccuracy: true,
+        maximumAge: 0,
+        timeout: 5000
+    };
+
+    // Called from navigator.geolocation.getCurrentPosition
+    // Used by setGeolocation
+    const onPosSuccess = (pos) => {
+
+        // Doc at https://w3c.github.io/geolocation-api/
+        // Position object at https://w3c.github.io/geolocation-api/#position_interface
+        //
+        console.log('lat= ' + pos.coords.latitude + ' lon= ' + pos.coords.longitude); // + ' hdg= ' + pos.coords.heading + ' spd= ' + pos.coords.speed + ' m/s');
+        console.log(`GeoLocatioj jposition: ${decToSex(pos.coords.latitude, 'NS')} / ${decToSex(pos.coords.longitude, 'EW')}`);
+        //  console.log("Pos data:" + pos.coords);
+        map.panTo(new L.LatLng(pos.coords.latitude, pos.coords.longitude));
+    };
+
+    // Called from navigator.geolocation.getCurrentPosition
+    // Used by setGeolocation
+    const onPosError = (err) => {
+        let errMess;
+        if (err.code === err.PERMISSION_DENIED) {
+            errMess = 'Location access was denied by the user.';
+        } else {
+            errMess = 'location error (' + err.code + '): ' + err.message;
+        }
+        console.error(errMess);
+    };
+
+    let setGeolocation = (slider) => {
+        console.log(`GeoLocation turned ${slider.checked ? 'ON' : 'OFF'}`);
+        if (slider.checked) {
+            geoInterval = setInterval(() => {
+            /* let watchId = */ navigator.geolocation.getCurrentPosition(onPosSuccess, onPosError, options);
+            }, 1000);
+        } else {
+            if (geoInterval) {
+                clearInterval(geoInterval);
+            }
+        }
+    };
+
+    let calculate = () => { // With from and to
+        // from._latlng, to._latlng
+        console.log(`From ${decToSex(from._latlng.lat, 'NS')} / ${decToSex(from._latlng.lng, 'EW')}`);
+        console.log(`To   ${decToSex(to._latlng.lat, 'NS')} / ${decToSex(to._latlng.lng, 'EW')}`);
+
+        let gc = calculateGreatCircle({ lat: Math.toRadians(from._latlng.lat), lng: Math.toRadians(from._latlng.lng) },
+                                      { lat: Math.toRadians(to._latlng.lat), lng: Math.toRadians(to._latlng.lng) },
+                                      30);
+        // DPosition data are returned in radians
+        // console.log("Done with GC");
+        let gcData = [];
+        gc.forEach(pt => {
+            gcData.push([ Math.toDegrees(pt.point.lat), Math.toDegrees(pt.point.lng) ]);
+        });
+        let polyline = L.polyline(gcData, {color: 'red'}); // .addTo(map);
+        greatCircle = polyline;
+        greatCircle.addTo(map);
+        map.fitBounds(greatCircle.getBounds());
+
+        let gcDist = getGCDistanceDegreesNM({ lat: from._latlng.lat, lng: from._latlng.lng },
+                                            { lat: to._latlng.lat, lng: to._latlng.lng });
+        console.log(`GC Distance: ${gcDist} nm.`); 
+
+        // Returned heading in radians
+        let rl = calculateRhumLine({ lat: Math.toRadians(from._latlng.lat), lng: Math.toRadians(from._latlng.lng) },
+                                   { lat: Math.toRadians(to._latlng.lat), lng: Math.toRadians(to._latlng.lng) });
+        console.log(`RL Distance: ${rl.dist} nm.`);
+
+        let orthoData = [
+            [ from._latlng.lat, from._latlng.lng ],
+            [ to._latlng.lat, to._latlng.lng ]
+        ];
+        let ortho =  L.polyline(orthoData, {color: 'orange'});
+        rhumbline = ortho;
+        rhumbline.addTo(map);
+
+        // Display distances
+        document.getElementById('distances').innerHTML = `GC Dist: ${gcDist.toFixed(2)} nm. <br/>RL Dist: ${rl.dist.toFixed(2)} nm.`;
+    };
+
+    if (Math.toRadians === undefined) {
+        Math.toRadians = (deg) => {
+            return deg * (Math.PI / 180);
+        };
+    }
+
+    if (Math.toDegrees === undefined) {
+        Math.toDegrees = (rad) => {
+            return rad * (180 / Math.PI);
+        };
+    }
+
+    let sign = (d) => {
+        let s = 0;
+        if (d > 0.0) {
+            s = 1;
+        }
+        if (d < 0.0) {
+            s = -1;
+        }
+        return s;
+    };
+
+    /**
+     * 
+     * @param { lat: float, lng: float } from values in Radians
+     * @param { lat: float, lng: float } to values in Radians
+     * Return distance in radians
+     */
+    let getGCDistance = (from, to) => {
+        let cos = Math.sin(from.lat) * Math.sin(to.lat) + Math.cos(from.lat) * 
+                Math.cos(to.lat) * Math.cos(to.lng - from.lng);
+        let dist = Math.acos(cos);
+        return dist;
+    };
+
+    /**
+     * Points coordinates in degrees, return in nautical miles.
+     * @param { lat: float, lng: float } from values in degrees
+     * @param { lat: float, lng: float } to values in degrees
+     * @returns value in nautical miles
+     */
+    let getGCDistanceDegreesNM = (from, to) => {
+        return 60.0 * Math.toDegrees(getGCDistance(
+            { lat: Math.toRadians(from.lat), lng: Math.toRadians(from.lng) },
+            { lat: Math.toRadians(to.lat), lng: Math.toRadians(to.lng) }
+        ));
+    };
+
+    let dirs = {
+		TO_NORTH: 0,
+		TO_SOUTH: 1,
+		TO_EAST:  2,
+		TO_WEST:  3
+	};
+
+    /**
+     * Rhumbline aka loxodrome
+     *
+     * Points coordinates in Radians
+     * returned value in radians
+     */
+    let calculateRhumLine = (from, to) => {
+        let nsDir = (to.lat > from.lat) ? dirs.TO_NORTH : dirs.TO_SOUTH;
+        let arrG = to.lng;
+        let staG = from.lng;
+        if (sign(arrG) !== sign(staG) && Math.abs(arrG - staG) > Math.PI) {
+            if (sign(arrG) > 0) {
+                arrG -= (2 * Math.PI);
+            } else {
+                arrG = Math.PI - arrG;
+            }
+        }
+        let ewDir = (arrG - staG > 0.0) ? dirs.TO_EAST : dirs.TO_WEST;
+        let deltaL = Math.toDegrees((to.lat - from.lat)) * 60;
+        let radianDeltaG = to.lng - from.lng;
+        if (Math.abs(radianDeltaG) > Math.PI) {
+            radianDeltaG = (2 * Math.PI) - Math.abs(radianDeltaG);
+        }
+        let deltaG = Math.abs(Math.toDegrees(radianDeltaG) * 60);
+        let startLC = Math.log(Math.tan((Math.PI / 4) + from.lat / 2));
+        let arrLC = Math.log(Math.tan((Math.PI / 4) + to.lat / 2));
+        let deltaLC = 3437.7467707849396 * (arrLC - startLC);
+        let rv;
+        if (deltaLC !== 0) {
+            rv = Math.atan(deltaG / deltaLC);
+        } else if (radianDeltaG > 0) {
+            rv = (Math.PI / 2);
+        } else {
+            rv = (3 * Math.PI / 2);
+        }
+        let dLoxo;
+        if (deltaL !== 0) {
+            dLoxo = deltaL / Math.cos(rv);
+        } else {
+            dLoxo = deltaG * Math.cos(from.lat); // TASK Make sure that's right...
+        }
+        dLoxo = Math.abs(dLoxo);
+        rv = Math.abs(rv);
+        if (ewDir === dirs.TO_EAST) {
+            if (nsDir !== dirs.TO_NORTH) {
+                rv = Math.PI - rv;
+            }
+        } else if (deltaLC !== 0) {
+            if (nsDir === dirs.TO_NORTH) {
+                rv = (2 * Math.PI) - rv;
+            } else {
+                rv = Math.PI + rv;
+            }
+        }
+        while (rv >= (2 * Math.PI)) {
+            rv -= (2 * Math.PI);
+        }
+        return ({ heading: rv, dist: dLoxo });
+    };
+
+    const TO_NORTH = 0;
+    const TO_SOUTH = 1;
+    const TO_EAST  = 2;
+    const TO_WEST  = 3;
+
+    /**
+     * 
+     * @param { lat: float, lng: float } from values in Radians
+     * @param { lat: float, lng: float } to values in Radians
+     * @param { int } nbPoints 
+     */
+    let calculateGreatCircle = (from, to, nbPoints) => {
+        let nsDir = (to.lat > from.lat) ? TO_NORTH : TO_SOUTH;
+        let ewDir = (to.lng > from.lng) ? TO_EAST : TO_WEST;
+        if (Math.abs(to.lng - from.lng) > Math.PI) { // Then turn the other way
+            if (ewDir === TO_EAST) {
+                ewDir = TO_WEST;
+                to.lng -= (2 * Math.PI);
+            } else {
+                ewDir = TO_EAST;
+                to.lng += (2 * Math.PI);
+            }
+        }
+        let deltaG = to.lng - from.lng;
+        let route = [];
+        let interval = deltaG / nbPoints;
+        let smallStart = from;
+        for (let g=from.lng; route.length <= nbPoints; g+=interval) {
+            let deltag = to.lng - g;
+            let tanStartAngle = Math.sin(deltag) / (Math.cos(smallStart.lat) * Math.tan(to.lat) - Math.sin(smallStart.lat) * Math.cos(deltag));
+            let smallL = Math.atan(Math.tan(smallStart.lat) * Math.cos(interval) + Math.sin(interval) / (tanStartAngle * Math.cos(smallStart.lat)));
+            let rpG = g + interval;
+            if (rpG > Math.PI) {
+                rpG -= (2 * Math.PI);
+            }
+            if (rpG < -Math.PI) {
+                rpG = (2 * Math.PI) + rpG;
+            }
+            let routePoint = { lat: smallL, lng: rpG };
+            let ari = Math.toDegrees(Math.atan(tanStartAngle));
+            if (ari < 0.0) {
+                ari = Math.abs(ari);
+            }
+            let _nsDir;
+            if (routePoint.lat > smallStart.lat) {
+                _nsDir = TO_NORTH;
+            } else {
+                _nsDir = TO_SOUTH;
+            }
+            let arrG = routePoint.lng;
+            let staG = smallStart.lng;
+            if (Math.sign(arrG) !== Math.sign(staG)) {
+                if (Math.sign(arrG) > 0) {
+                    arrG -= (2 * Math.PI);
+                } else {
+                    arrG = Math.PI - arrG;
+                }
+            }
+            let _ewDir;
+            if (arrG > staG) {
+                _ewDir = TO_EAST;
+            } else {
+                _ewDir = TO_WEST;
+            }
+            let _start = 0.0;
+            if (_nsDir == TO_SOUTH) {
+                _start = 180;
+                if (_ewDir == TO_EAST) {
+                    ari = _start - ari;
+                } else {
+                    ari = _start + ari;
+                }
+            } else if (_ewDir == TO_EAST) {
+                ari = _start + ari;
+            } else {
+                ari = _start - ari;
+            }
+            while (ari < 0.0) {
+                ari += 360;
+            }
+            route.push({ point: smallStart, z: to === smallStart ? null : ari });
+            smallStart = routePoint;
+        }
+        return route;
+    };
+
+    window.onload = () => {
+        // document.getElementById('point-card').innerText = `${latlngs.length} points.`;
+    };
+
+</script>
+
+</body>
+</html>
