@@ -148,7 +148,7 @@ OpenSource JavaScript map API at <a href="https://leafletjs.com/" target="leafle
     </tr>
 </table>    
 <div>
-    Click 2 points on the chart, and then click the [Calculate] button...
+    Click 2 points on the chart (From and To), and then click the [Calculate] button...
 </div>
 
 <script>
@@ -215,8 +215,9 @@ OpenSource JavaScript map API at <a href="https://leafletjs.com/" target="leafle
     });
 
     let from = null, to = null;
-    let greatCircle = null;
-    let rhumbline = null;
+    let polylineGroup = null;
+    // let greatCircle = null;
+    // let rhumbline = null;
 
     map.addEventListener('click', (event) => {
         // console.log("Paf!");
@@ -249,14 +250,19 @@ OpenSource JavaScript map API at <a href="https://leafletjs.com/" target="leafle
             map.removeLayer(from);
             from = null;
         }
-        if (greatCircle !== null) {
-            map.removeLayer(greatCircle);
-            greatCircle = null;
+        // if (greatCircle !== null) {
+        //     map.removeLayer(greatCircle);
+        //     greatCircle = null;
+        // }
+        // if (rhumbline !== null) {
+        //     map.removeLayer(rhumbline);
+        //     rhumbline = null;
+        // }
+        if (polylineGroup !== null) {
+            polylineGroup.removeFrom(map);
+            polylineGroup = null;
         }
-        if (rhumbline !== null) {
-            map.removeLayer(rhumbline);
-            rhumbline = null;
-        }
+
         document.getElementById("calculate-button").disabled = true;
         document.getElementById('distances').innerHTML = '';
     };
@@ -312,6 +318,10 @@ OpenSource JavaScript map API at <a href="https://leafletjs.com/" target="leafle
         console.log(`From ${decToSex(from._latlng.lat, 'NS')} / ${decToSex(from._latlng.lng, 'EW')}`);
         console.log(`To   ${decToSex(to._latlng.lat, 'NS')} / ${decToSex(to._latlng.lng, 'EW')}`);
 
+        if (polylineGroup === null) {
+            polylineGroup = L.layerGroup();
+        }
+
         let gc = calculateGreatCircle({ lat: Math.toRadians(from._latlng.lat), lng: Math.toRadians(from._latlng.lng) },
                                       { lat: Math.toRadians(to._latlng.lat), lng: Math.toRadians(to._latlng.lng) },
                                       30);
@@ -322,8 +332,9 @@ OpenSource JavaScript map API at <a href="https://leafletjs.com/" target="leafle
             gcData.push([ Math.toDegrees(pt.point.lat), Math.toDegrees(pt.point.lng) ]);
         });
         let polyline = L.polyline(gcData, {color: 'red'}); // .addTo(map);
-        greatCircle = polyline;
-        greatCircle.addTo(map);
+        let greatCircle = polyline;
+        // greatCircle.addTo(map);
+        polylineGroup.addLayer(greatCircle);
         map.fitBounds(greatCircle.getBounds());
 
         let gcDist = getGCDistanceDegreesNM({ lat: from._latlng.lat, lng: from._latlng.lng },
@@ -340,8 +351,10 @@ OpenSource JavaScript map API at <a href="https://leafletjs.com/" target="leafle
             [ to._latlng.lat, to._latlng.lng ]
         ];
         let ortho =  L.polyline(orthoData, {color: 'orange'});
-        rhumbline = ortho;
-        rhumbline.addTo(map);
+        let rhumbline = ortho;
+        polylineGroup.addLayer(rhumbline);
+
+        polylineGroup.addTo(map);
 
         // Display distances
         document.getElementById('distances').innerHTML = `GC Dist: ${gcDist.toFixed(2)} nm. <br/>RL Dist: ${rl.dist.toFixed(2)} nm.`;
@@ -378,7 +391,7 @@ OpenSource JavaScript map API at <a href="https://leafletjs.com/" target="leafle
      */
     let getGCDistance = (from, to) => {
         let cos = Math.sin(from.lat) * Math.sin(to.lat) + Math.cos(from.lat) * 
-                Math.cos(to.lat) * Math.cos(to.lng - from.lng);
+                  Math.cos(to.lat) * Math.cos(to.lng - from.lng);
         let dist = Math.acos(cos);
         return dist;
     };
