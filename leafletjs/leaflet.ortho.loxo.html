@@ -105,13 +105,51 @@
             place-self: flex-start;
         }
 
+		button {
+			padding: 4px 20px;
+			/* give the background a gradient */
+			background:#ffae00; /* fallback for browsers that don't support gradients */
+			/* background: -webkit-linear-gradient(top, #ffae00, #d67600); */
+			background: -webkit-linear-gradient(top, rgba(255, 174, 0, 0.6), rgba(214, 118, 0, 0.6));
+			background: -moz-linear-gradient(top, #ffae00, #d67600);
+			background: -o-linear-gradient(top, #ffae00, #d67600);
+			/* background: linear-gradient(top, #ffae00, #d67600); */
+			background: linear-gradient(top, rgba(255, 174, 0, 0.6), rgba(214, 118, 0, 0.6));
+			border: 2px outset #dad9d8;
+			/* style the text */
+			font-family: Lato, Verdana, Andika, Arial, sans-serif; /* Andkia is available at http://www.google.com/webfonts/specimen/Andika */
+			font-size: 1.1em;
+			letter-spacing: 0.05em;
+			text-transform: uppercase;
+			color: #fff;
+			text-shadow: 0px 1px 10px #000;
+			/* add to small curve to the corners of the button */
+			-webkit-border-radius: 15px;
+			-moz-border-radius: 15px;
+			border-radius: 15px;
+			/* give the button a drop shadow */
+			-webkit-box-shadow: rgba(0, 0, 0, .55) 0 1px 6px;
+			-moz-box-shadow: rgba(0, 0, 0, .55) 0 1px 6px;
+			box-shadow: rgba(0, 0, 0, .55) 0 1px 6px;
+		}
+		/* NOW STYLE THE BUTTON'S HOVER STATE */
+		/*	button#rCoffee:hover, button#rCoffee:focus { */
+		button:hover, button:focus {
+			border:2px solid #dad9d8;
+		}
+
+        button:disabled {
+            background: silver;
+            color: gray;
+        }
+
     </style>
 </head>
 <body style='font-family: "Source Code Pro", "Courier New", Helvetica, Geneva; font-weight: bold;'>
 
 OpenSource JavaScript map API at <a href="https://leafletjs.com/" target="leaflet">leafletjs.com</a>
 
-<h2>Great Circles and Rhumblines</h2>
+<h1>Great Circles and Rhumblines</h1>
 
 <!--div id="mapid" style="width: 600px; height: 400px;"></div-->
 <div style="margin: 5px;">
@@ -141,9 +179,9 @@ OpenSource JavaScript map API at <a href="https://leafletjs.com/" target="leafle
             <!--div id="mapid" style="width: 1200px; height: 800px;"></div-->
             <div id="mapid" style="width: 1200px; height: 600px;"></div>
         </td>
-        <td valign="top" style="text-align: right;">
+        <td valign="top" style="text-align: right; min-width: 200px;">
             <div id="curr-pos"></div>
-            <div id="distances" style="text-align: left;"></div>
+            <div id="distances" style="text-align: left; border: 1px solid cyan; border-radius: 5px; padding: 5px;"></div>
         </td>
     </tr>
 </table>    
@@ -196,7 +234,7 @@ OpenSource JavaScript map API at <a href="https://leafletjs.com/" target="leafle
     // // zoom the map to the polyline
     // map.fitBounds(polyline.getBounds());
 
-    map.setView([47.5, -3.0], 6); // Orig. TODO: enable geoLocation
+    map.setView([47.5, -3.0], 6); // Orig. Also see [enable geoLocation]
 
     let pathIdx = 0;
 
@@ -357,7 +395,15 @@ OpenSource JavaScript map API at <a href="https://leafletjs.com/" target="leafle
         polylineGroup.addTo(map);
 
         // Display distances
-        document.getElementById('distances').innerHTML = `GC Dist: ${gcDist.toFixed(2)} nm. <br/>RL Dist: ${rl.dist.toFixed(2)} nm.`;
+        document.getElementById('distances').innerHTML = `GC Dist: ${
+            gcDist.toFixed(2)
+        } nm. <br/>IRA: ${
+            gc[0].z.toFixed(0)
+        }&deg; t.<br/>RL Dist: ${
+            rl.dist.toFixed(2)
+        } nm.<br/>Route: ${
+            Math.toDegrees(rl.heading).toFixed(0)
+        }&deg; t.`;
     };
 
     if (Math.toRadians === undefined) {
@@ -371,17 +417,6 @@ OpenSource JavaScript map API at <a href="https://leafletjs.com/" target="leafle
             return rad * (180 / Math.PI);
         };
     }
-
-    let sign = (d) => {
-        let s = 0;
-        if (d > 0.0) {
-            s = 1;
-        }
-        if (d < 0.0) {
-            s = -1;
-        }
-        return s;
-    };
 
     /**
      * 
@@ -426,8 +461,8 @@ OpenSource JavaScript map API at <a href="https://leafletjs.com/" target="leafle
         let nsDir = (to.lat > from.lat) ? dirs.TO_NORTH : dirs.TO_SOUTH;
         let arrG = to.lng;
         let staG = from.lng;
-        if (sign(arrG) !== sign(staG) && Math.abs(arrG - staG) > Math.PI) {
-            if (sign(arrG) > 0) {
+        if (Math.sign(arrG) !== Math.sign(staG) && Math.abs(arrG - staG) > Math.PI) {
+            if (Math.sign(arrG) > 0) {
                 arrG -= (2 * Math.PI);
             } else {
                 arrG = Math.PI - arrG;
@@ -516,9 +551,9 @@ OpenSource JavaScript map API at <a href="https://leafletjs.com/" target="leafle
             }
             let routePoint = { lat: smallL, lng: rpG };
             let ari = Math.toDegrees(Math.atan(tanStartAngle));
-            if (ari < 0.0) {
-                ari = Math.abs(ari);
-            }
+            // if (ari < 0.0) {
+            //     ari = Math.abs(ari);
+            // }
             let _nsDir;
             if (routePoint.lat > smallStart.lat) {
                 _nsDir = TO_NORTH;
