@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Hex Converter</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>        
+    <body>
+        <h1>Decimal to Sexagesimal, and vice-versa</h1>
+
+        <div>
+            <table>
+                <tr>
+                    <td style="text-align: right;">Decimal degrees</td>
+                    <td colspan="3"><input type="number" 
+                                           id="decimal" 
+                                           title="Decimal Degrees to convert"
+                                           style="width: 150px; text-align: right;"
+                                           min="0"
+                                           max="180"
+                                           step="0.01"   
+                                           pattern="^\d+(?:\.\d{1,6})?$"                                      
+                                           placeholder="Dec. Degrees">&deg;</td>
+                    <td><button id="from-decimal" onclick="fromDecimal();" title="Convert decimal degrees&#13;to all formats">Convert</button></td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">Degrees, decimal minutes</td>
+                    <td><input type="number" 
+                               id="deg-one" 
+                               title="Degrees to convert (int)"
+                               style="width: 150px; text-align: right;"
+                               min="0"
+                               max="180"
+                               step="1"    
+                               pattern="^\d$"                                     
+                               placeholder="Degrees">&deg;</td>
+                    <td colspan="2"><input type="number" 
+                                           id="minutes" 
+                                           title="Decimal Minutes to convert"
+                                           style="width: 150px; text-align: right;"
+                                           min="0"
+                                           max="60"
+                                           step="0.01"                                         
+                                           placeholder="Dec. Minutes">'</td>
+                    <td><button id="from-dec-min" onclick="fromDegMin();" title="Convert degrees and&#13;decimal minutes&#13;to all formats">Convert</button></td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">Degrees, minutes, decimal seconds</td>
+                    <td><input type="number" 
+                               id="deg-two" 
+                               title="Degrees to convert (int)"
+                               style="width: 150px; text-align: right;"
+                               min="0"
+                               max="180"
+                               step="1"                                         
+                               placeholder="Degrees">&deg;</td>
+                    <td><input type="number" 
+                               id="min-two" 
+                               title="Minutes to convert (int)"
+                               style="width: 150px; text-align: right;"
+                               min="0"
+                               max="59"
+                               step="1"                                         
+                               placeholder="Minutes">'</td>
+                    <td><input type="number" 
+                               id="seconds" 
+                               title="Decimal Seconds to convert"
+                               style="width: 150px; text-align: right;"
+                               min="0"
+                               max="60"
+                               step="0.01"                                         
+                               placeholder="Dec. Seconds">"</td>
+                    <td><button id="from-dec-min-sec" onclick="fromDegMinSec();" title="Convert degrees,&#13;minutes and decimal seconds&#13;to all formats">Convert</button></td>
+                </tr>
+            </table>
+        </div>
+        <hr/>
+    </body>
+    <script type="text/javascript">
+fromDecimal = () => {
+    let original = document.getElementById("decimal");
+    let originalValue = parseFloat(original.value);
+    if (isNaN(originalValue)) {
+        originalValue = 0;
+    }
+    if (originalValue < 0) {
+        alert("Positive values only, thanks.")
+        originalValue *= -1;
+    }
+    console.log(`Converting ${originalValue}`);
+    // Int part (degrees)
+    let degrees = Math.floor(originalValue);
+    let decimalPart = originalValue - degrees;
+    let decimalMin = decimalPart * 60;
+    // Minutes
+    let intMin = Math.floor(decimalMin);
+    // Seconds
+    let decimalSeconds = (decimalMin - intMin) * 60;
+    // Display on other fields.
+    document.getElementById("deg-one").value = degrees;
+    document.getElementById("minutes").value = decimalMin.toFixed(4);
+
+    document.getElementById("deg-two").value = degrees;
+    document.getElementById("min-two").value = intMin;
+    document.getElementById("seconds").value = decimalSeconds.toFixed(4);
+};
+
+fromDegMin = () => {
+    let degOriginal = parseInt(document.getElementById("deg-one").value);
+    let minOriginal = parseFloat(document.getElementById("minutes").value);
+    if (isNaN(degOriginal)) {
+        degOriginal = 0;
+    }
+    if (isNaN(minOriginal)) {
+        minOriginal = 0;
+    }
+    if (degOriginal < 0) {
+        alert("Positive values only, thanks.")
+        degOriginal *= -1;
+    }
+    if (! (minOriginal >= 0 && minOriginal < 60.0)) {
+        alert("Minutes shoud be positive and lower than 60. Setting it to 0.");
+        minOriginal = 0;
+    }
+    console.log(`Converting ${degOriginal}, ${minOriginal}`);
+    let decimalDeg = degOriginal + (minOriginal / 60);
+    let intMinutes = Math.floor(minOriginal);
+    let decimalSec = (minOriginal - intMinutes) * 60;
+
+    document.getElementById("decimal").value = decimalDeg.toFixed(6);
+    document.getElementById("deg-two").value = degOriginal;
+    document.getElementById("min-two").value = intMinutes;
+    document.getElementById("seconds").value = decimalSec.toFixed(4);
+};
+
+fromDegMinSec = () => {
+    let degOriginal = parseInt(document.getElementById("deg-two").value);
+    let minOriginal = parseInt(document.getElementById("min-two").value);
+    let secOriginal = parseFloat(document.getElementById("seconds").value);
+    if (isNaN(degOriginal)) {
+        degOriginal = 0;
+    }
+    if (isNaN(minOriginal)) {
+        minOriginal = 0;
+    }
+    if (isNaN(secOriginal)) {
+        secOriginal = 0;
+    }
+    if (degOriginal < 0) {
+        alert("Positive values only, thanks.")
+        degOriginal *= -1;
+    }
+    if (! (minOriginal >= 0 && minOriginal < 60.0)) {
+        alert("Minutes shoud be positive and lower than 60. Setting it to 0.");
+        minOriginal = 0;
+    }
+    if (! (secOriginal >= 0 && secOriginal < 60.0)) {
+        alert("Seconds shoud be positive and lower than 60. Setting it to 0.");
+        secOriginal = 0;
+    }
+    console.log(`Converting ${degOriginal}, ${minOriginal}, ${secOriginal}`);
+    let decimalDeg = degOriginal + (minOriginal / 60) + (secOriginal / 3600);
+    let decimalMin = minOriginal + (secOriginal / 60);
+
+    document.getElementById("decimal").value = decimalDeg.toFixed(6);
+    document.getElementById("deg-one").value = degOriginal;
+    document.getElementById("minutes").value = decimalMin.toFixed(4);
+};
+
+</script>
+</html>
