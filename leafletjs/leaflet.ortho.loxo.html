@@ -153,7 +153,7 @@ OpenSource JavaScript map API at <a href="https://leafletjs.com/" target="leafle
 
 <!--div id="mapid" style="width: 600px; height: 400px;"></div-->
 <div style="margin: 5px;">
-    <span id="curr-point" style="margin: 10px;"></span><span id="point-card" style="margin: 10px;"></span>
+    <span id="center-point" style="margin: 10px;"></span>
     <button id="reset-button" onclick="reset();">Reset Markers</button>
     <button id="calculate-button" onclick="calculate();" disabled>Calculate</button>
 </div>
@@ -253,6 +253,7 @@ OpenSource JavaScript map API at <a href="https://leafletjs.com/" target="leafle
     });
 
     let from = null, to = null;
+    let center = null;
     let polylineGroup = null;
     // let greatCircle = null;
     // let rhumbline = null;
@@ -321,8 +322,19 @@ OpenSource JavaScript map API at <a href="https://leafletjs.com/" target="leafle
         // Position object at https://w3c.github.io/geolocation-api/#position_interface
         //
         console.log('lat= ' + pos.coords.latitude + ' lon= ' + pos.coords.longitude); // + ' hdg= ' + pos.coords.heading + ' spd= ' + pos.coords.speed + ' m/s');
-        console.log(`GeoLocatioj jposition: ${decToSex(pos.coords.latitude, 'NS')} / ${decToSex(pos.coords.longitude, 'EW')}`);
+        console.log(`GeoLocation position: ${decToSex(pos.coords.latitude, 'NS')} / ${decToSex(pos.coords.longitude, 'EW')}`);
         //  console.log("Pos data:" + pos.coords);
+        document.getElementById('center-point').innerHTML = `Centered on ${decToSex(pos.coords.latitude, 'NS')} / ${decToSex(pos.coords.longitude, 'EW')}`;
+
+        if (center !== null) {
+            map.removeLayer(center);
+            //center.removeFrom(map);
+            center = null;
+        }
+        center = new L.marker([pos.coords.latitude, pos.coords.longitude])  // TODO Change the color?
+                          .bindPopup(`<b>${decToSex(pos.coords.latitude, 'NS')}<br/>${decToSex(pos.coords.longitude, 'EW')}</b>`)
+                          .bindTooltip("Centered here!");
+        center.addTo(map);
         map.panTo(new L.LatLng(pos.coords.latitude, pos.coords.longitude));
     };
 
@@ -336,15 +348,26 @@ OpenSource JavaScript map API at <a href="https://leafletjs.com/" target="leafle
             errMess = 'location error (' + err.code + '): ' + err.message;
         }
         console.error(errMess);
+        if (center !== null) {
+            // map.removeLayer(center);
+            center.removeFrom(map);
+            center = null;
+        }
     };
 
     let setGeolocation = (slider) => {
         console.log(`GeoLocation turned ${slider.checked ? 'ON' : 'OFF'}`);
-        if (slider.checked) {
+        if (slider.checked) { // ON
             geoInterval = setInterval(() => {
             /* let watchId = */ navigator.geolocation.getCurrentPosition(onPosSuccess, onPosError, options);
             }, 1000);
-        } else {
+        } else {              // OFF
+            document.getElementById('center-point').innerHTML = '';
+            if (center !== null) {
+                // map.removeLayer(center);
+                center.removeFrom(map);
+                center = null;
+            }
             if (geoInterval) {
                 clearInterval(geoInterval);
             }
