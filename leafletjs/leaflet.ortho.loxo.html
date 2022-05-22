@@ -184,7 +184,8 @@ OpenSource JavaScript map API at <a href="https://leafletjs.com/" target="leafle
         </td>
         <td valign="top" style="text-align: right; min-width: 200px;">
             <div id="curr-pos"></div>
-            <div id="distances" style="text-align: left; border: 1px solid cyan; border-radius: 5px; padding: 5px;"></div>
+            <div id="distances" style="text-align: left; border: 1px solid cyan; border-radius: 5px; padding: 5px;" 
+                 title="Great Circle distance,&#13;Great Circle Initial Route Angle,&#13;RhumLine (aka Loxodromy) Distance,&#13;Rhumline Route."></div>
         </td>
     </tr>
 </table>    
@@ -452,15 +453,15 @@ OpenSource JavaScript map API at <a href="https://leafletjs.com/" target="leafle
         polylineGroup.addTo(map);
 
         // Display distances
-        document.getElementById('distances').innerHTML = `GC Dist: ${
+        document.getElementById('distances').innerHTML = `<table><tr><td>GC Dist:</td><td style='text-align: right; padding-left: 20px;'>${
             gcDist.toFixed(2)
-        } nm. <br/>IRA: ${
+        } nm.</td></tr><tr><td>IRA:</td><td style='text-align: right; padding-left: 20px;'>${
             gc[0].z.toFixed(0)
-        }&deg; t.<br/>RL Dist: ${
+        }&deg; t.</td></tr><tr><td>RL Dist:</td><td style='text-align: right; padding-left: 20px;'>${
             rl.dist.toFixed(2)
-        } nm.<br/>Route: ${
+        } nm.</td></tr><tr><td>Route:</td><td style='text-align: right; padding-left: 20px;'>${
             Math.toDegrees(rl.heading).toFixed(0)
-        }&deg; t.`;
+        }&deg; t.</td></tr></table>`;
     };
 
     if (Math.toRadians === undefined) {
