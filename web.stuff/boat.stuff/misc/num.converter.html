@@ -452,5 +452,16 @@ let copyToClipboard = (fieldId) => {
 
 window.alert = customAlert; // Override!
 
+window.onload = () => {
+    // For fun: list cookies.
+    console.log("--- Cookies ---");
+    let cookieArray = document.cookie.split(';');
+    cookieArray.forEach(cookie => {
+        let nameValuePair = cookie.split('=');
+        console.log(`${nameValuePair[0].trim()} : [${nameValuePair[1].trim()}]`);
+    });
+    console.log("---------------");
+};
+
 </script>
 </html>
