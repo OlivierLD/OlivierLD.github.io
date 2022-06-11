@@ -57,14 +57,14 @@ Date.prototype.getDayFull = function() {
 	return DAYS_FULL[this.getDay()];
 };
 
-// Provide full day of week name
+// Provide abbr day of week name
 Date.prototype.getDayAbbr = function() {
 	const DAYS_ABBR = [
 		'Sun',
 		'Mon',
 		'Tue',
 		'Wed',
-		'Thur',
+		'Thu',
 		'Fri',
 		'Sat'
 	];
