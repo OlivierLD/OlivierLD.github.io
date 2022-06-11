@@ -995,6 +995,67 @@ let toggleForeground = () => {
             place-self: flex-start;
         }
 
+        /* Button tooltips, used below */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            border-bottom: 1px dotted black;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 200px;
+            background-color: silver;
+            color: navy;
+            text-transform: none;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 0;
+            position: absolute;
+            z-index: 1;
+            top: 150%;
+            left: 50%;
+            margin-left: -100px;
+
+            /* Fade in tooltip - takes 1 second to go from 0% to 100% opac: */
+            opacity: 0;
+            transition: opacity 1s;
+        }
+
+        .tooltip .tooltiptext-right {
+            top: -5px;
+            left: 140%;
+            /*width: 200px;*/
+            margin-left: -60px;
+        }
+
+        .tooltip .tooltiptext::after {
+            content: "";
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: transparent transparent silver transparent;
+        }
+
+        .tooltip .tooltiptext-right::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            margin-left: -110px;
+            margin-top: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: transparent silver transparent transparent;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+
     </style>
 </head>
 <body>
@@ -1031,17 +1092,23 @@ let toggleForeground = () => {
         </div>
 
         <div style="margin-bottom: 10px;">
-            <button id="now" onclick="updateUTCDate();" title="Set the date/time to the current one">Now</button>&nbsp;
-            <button id="compute" onclick="compute();" title="Compute data for the date above">Compute</button>&nbsp;
+            <button id="now" class="tooltip" onclick="updateUTCDate();">Now
+                <span class="tooltiptext">Set the date/time to the current one (aka now)</span>
+            </button>&nbsp;
+            <button id="compute" class="tooltip" onclick="compute();">Compute
+                <span class="tooltiptext">Compute data for the date set before</span>
+            </button>&nbsp;
             <!--input type="checkbox" id="auto-refresh" onchange="autoRefresh(this);"><small>Auto Refresh</small-->
             Real Time
-            <label class="rocker rocker-small" 
-                style="margin-bottom: -15px;" 
-                title="Auto-refresh the date every second."> <!-- One way widget. Will NOT be notified of a change on the server. -->
-                <input type="checkbox" id="auto-refresh" onchange="autoRefresh(this);">
-                <span class="switch-left">On</span>
-                <span class="switch-right">Off</span>
-            </label>
+            <div class="tooltip">
+                <label class="rocker rocker-small" 
+                    style="margin-bottom: -15px;"> <!-- One way widget. Will NOT be notified of a change on the server. -->
+                    <input type="checkbox" id="auto-refresh" onchange="autoRefresh(this);">
+                    <span class="switch-left">On</span>
+                    <span class="switch-right">Off</span>
+                </label>
+                <span class="tooltiptext">Auto-refresh the date every second.</span>
+            </div>
         </div>
 
         <div>
@@ -1231,7 +1298,7 @@ let toggleForeground = () => {
 </div>
 <div style="display: grid; grid-template-columns: auto auto;" title="Single Page Application with Background SVG &amp; Web Components">
     <div><h1 style="vertical-align: top; margin-top: 0; font-style: normal; text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px silver;"><span style="cursor: pointer;" onclick="openNav()" onmouseover="openNav()" title="Hamburger">&nbsp; &#8801;</span> ES6 Celestial Computer, SPA with BG Components</h1></div>
-    <div style="text-align: right;"><small>Last code update June 11, 2022, 07:39 CET</small></div>    
+    <div style="text-align: right;"><small>Last code update June 11, 2022, 09:05 CET</small></div>    
 </div>
 <div class="background bg-container" 
      style="margin: 10px; margin-top: 50px; border: 2px solid rgba(0, 255, 255, 0.5); border-radius: 10px;">
@@ -1429,9 +1496,11 @@ let toggleForeground = () => {
                             value="30.42"/> <!-- Default value -->
                         &nbsp;&nbsp;
                         <button id="update-position"
+                                class="tooltip" 
                                 onclick="updatePosition();"
-                                title="Set position value"
-                                style="margin-top: 3px;">Set Position</button>
+                                style="margin-top: 3px;">Set Position
+                            <span class="tooltiptext tooltiptext-right">Set position value on the map</span>
+                        </button>
                         <br/>
                         <!-- Enable Geolocation APIs -->        
                         <div class="switch-container" style="margin-left: 30px;" title="Enable GeoLocation APIs">
@@ -1501,7 +1570,9 @@ let toggleForeground = () => {
     </p>
     <h2 style="margin-left: 10px; color: rgba(255, 255, 255, 0.5);">Heading and PRMSL are <i>simulated</i></h2>
 
-    <button onclick="showHideData();" style="margin: 10px;">Show/Hide Computed Data</button>
+    <button class="tooltip" onclick="showHideData();" style="margin: 10px;">Show/Hide Computed Data
+        <span class="tooltiptext">Computed data will show below</span>
+    </button>
 
     <div id="raw-data" style="display: none;">
         <div id="result" class="result"></div>
