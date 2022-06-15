@@ -162,7 +162,7 @@ OpenSource JavaScript map API at <a href="https://leafletjs.com/" target="leafle
                 if (keepDriving) {
                     window.setTimeout(() => {
                         document.getElementById('curr-pos').innerHTML = `${decToSex(pos[0], "NS")}<br/>${decToSex(pos[1], "EW")}`;
-                        document.getElementById('curr-point').innerText = `${j} /`;
+                        document.getElementById('curr-point').innerText = `${j.toLocaleString()} /`;
                         // map.setZoom(20);
                         map.panTo(new L.LatLng(pos[0], pos[1]));
 
@@ -223,7 +223,7 @@ OpenSource JavaScript map API at <a href="https://leafletjs.com/" target="leafle
     }
 
     window.onload = () => {
-        document.getElementById('point-card').innerText = `${latlngs.length} points.`;
+        document.getElementById('point-card').innerText = `${latlngs.length.toLocaleString()} points.`;
     };
 
 </script>
