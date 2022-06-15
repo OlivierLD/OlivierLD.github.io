@@ -146,6 +146,11 @@ OpenSource JavaScript map API at <a href="https://leafletjs.com/" target="leafle
         .bindPopup(`<b>Birds!</b><br /><img src='${imageLocation}' width='${(imgWidth / 4).toFixed(0)}' height='${(imgHeight / 4).toFixed(0)}'>`)
         .bindTooltip("Birds.<br/>Not seen there !!<br/><i>(it's a fake)</i>"); // .openPopup();
 
+
+    L.marker([37.501363, -122.481140]).addTo(map)
+        .bindPopup(`We used to live here, Half Moon Bay, dock H26.`)
+        .bindTooltip("We used to live here");
+
     // used on button click
     function drive() {
 
