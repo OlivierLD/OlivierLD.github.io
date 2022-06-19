@@ -60,7 +60,7 @@ OpenSource JavaScript map API at <a href="https://leafletjs.com/" target="leafle
     </tr>
 </table>    
 <div>
-    This is the track of a Kayak Trip in Tomales Bay.
+    This is the track of a Kayak Trip in Tomales Bay (Drakes Estero, actually).
     <br/>
     The API is clear and very easy to use.
     <br/>
@@ -146,6 +146,11 @@ OpenSource JavaScript map API at <a href="https://leafletjs.com/" target="leafle
         .bindPopup(`<b>Birds!</b><br /><img src='${imageLocation}' width='${(imgWidth / 4).toFixed(0)}' height='${(imgHeight / 4).toFixed(0)}'>`)
         .bindTooltip("Birds.<br/>Not seen there !!<br/><i>(it's a fake)</i>"); // .openPopup();
 
+
+    L.marker([37.501363, -122.481140]).addTo(map)
+        .bindPopup(`We used to live here, Half Moon Bay, dock H26.`)
+        .bindTooltip("We used to live here");
+
     // used on button click
     function drive() {
 
@@ -162,7 +167,7 @@ OpenSource JavaScript map API at <a href="https://leafletjs.com/" target="leafle
                 if (keepDriving) {
                     window.setTimeout(() => {
                         document.getElementById('curr-pos').innerHTML = `${decToSex(pos[0], "NS")}<br/>${decToSex(pos[1], "EW")}`;
-                        document.getElementById('curr-point').innerText = `${j} /`;
+                        document.getElementById('curr-point').innerText = `${j.toLocaleString()} /`;
                         // map.setZoom(20);
                         map.panTo(new L.LatLng(pos[0], pos[1]));
 
@@ -223,7 +228,7 @@ OpenSource JavaScript map API at <a href="https://leafletjs.com/" target="leafle
     }
 
     window.onload = () => {
-        document.getElementById('point-card').innerText = `${latlngs.length} points.`;
+        document.getElementById('point-card').innerText = `${latlngs.length.toLocaleString()} points.`;
     };
 
 </script>
