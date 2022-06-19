@@ -528,6 +528,9 @@ window.onload = () => {
     console.log("--- Cookies ---");
     try {
         let cookieArray = document.cookie.split(';');
+        if (cookieArray.length === 0) {
+            console.log("Found no cookies");
+        }
         cookieArray.forEach(cookie => {
             if (cookie.trim().indexOf('=') > -1) {
                 let nameValuePair = cookie.split('=');
