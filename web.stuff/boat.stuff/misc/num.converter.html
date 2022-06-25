@@ -53,7 +53,7 @@
       }
 
       .small-label {
-          font-size: 10px;
+          font-size: 20px;
           text-align: left;
           vertical-align: bottom;
           padding-top: 20px;
@@ -126,6 +126,49 @@
             margin-top: 5px;
         }
 
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            border-bottom: 1px dotted black;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 300px;
+            background-color: silver;
+            color: navy;
+            font-size: 20px;
+            text-transform: none;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 0;
+            position: absolute;
+            z-index: 1;
+            top: 100%;
+            left: 50%;
+            margin-left: -150px; /* half the width */
+
+            /* Fade in tooltip - takes 1 second to go from 0% to 100% opac: */
+            opacity: 0;
+            transition: opacity 1s;
+        }
+
+        .tooltip .tooltiptext::after {
+            content: "";
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: transparent transparent silver transparent;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+
         </style>
         <script type="module" src="./SplitFlapDisplay.js"></script>
     </head>        
@@ -140,6 +183,15 @@
             <small style="padding-left: 10px;">Enter values to convert in the fields, and hit the "Convert" button in the corresponding line.</small>
             <br/>
             <small style="padding-left: 10px;">You will see how the result is rendered, and how you can send the required content to the clipboard.</small>
+            <br/>
+            <small style="padding-left: 10px;"><i>Featuring:</i>
+                <ul>
+                    <li>Geometrical conversions</li>
+                    <li>Copy to Clipboard</li>
+                    <li>WebComponents</li>
+                    <li>Custom Tooltips</li>
+                </ul>
+            </small>
         </div>
 
         <hr/>
@@ -216,30 +268,49 @@
         <div id="results" style="display: none; padding-left: 10px;">
             <div style="display: grid; grid-template-columns: 1fr 1fr auto;">
                 <div class="display-result" style="display: grid; grid-template-columns: auto auto;">
-                    <div class="small-label">Decimal deg</div><div id="01" class="display-result" title="Decimal Degrees"></div>
-                    <div class="small-label">Degrees decimal minutes</div><div id="02" class="display-result" title="Degrees&#13;Decimal Minutes"></div>
-                    <div class="small-label">Degrees minutes decimal seconds</div><div id="03" class="display-result" title="Degrees&#13;Minutes&#13;Decimal Seconds"></div>
+                    <div class="small-label"><!--Decimal degrees--></div>
+                    <div class="tooltip">
+                        <div id="01" class="display-result" title="Decimal Degrees"></div>
+                        <span class="tooltiptext">Decimal Degrees</span>
+                    </div>
+                    <div class="small-label"><!--Degrees, decimal minutes--></div>
+                    <div class="tooltip">
+                        <div id="02" class="display-result" title="Degrees&#13;Decimal Minutes"></div>
+                        <span class="tooltiptext">Degrees,&#13;Decimal Minutes</span>
+                    </div>    
+                    <div class="small-label"><!--Degrees, minutes, decimal seconds--></div>
+                    <div class="tooltip">
+                        <div id="03" class="display-result" title="Degrees&#13;Minutes&#13;Decimal Seconds"></div>
+                        <span class="tooltiptext">Degrees,&#13;Minutes,&#13;Decimal Seconds</span>
+                    </div>                        
                 </div>
                 <div style="margin-top: 10px; margin-left: 16px">
-                    <split-flap-display id="decimal-deg-display"
-                                        nb-char="15"
-                                        justified="RIGHT"
-                                        font-size="40"
-                                        title="Decimal Degrees"
-                                        value="000.000000°"></split-flap-display>
-                    <split-flap-display id="deg-decimal-min-display"
-                                        nb-char="15"
-                                        justified="RIGHT"
-                                        font-size="40"
-                                        title="Degrees&#13;Decimal Minutes"
-                                        value="000°00.0000'"></split-flap-display>
-                    <split-flap-display id="deg-min-decimal-sec-display"
-                                        nb-char="15"
-                                        justified="RIGHT"
-                                        font-size="40"
-                                        title="Degrees&#13;Minutes&#13;Decimal Seconds"
-                                        value="000°00'00.0000 "></split-flap-display>
-                </div>
+                    <div class="tooltip">
+                        <split-flap-display id="decimal-deg-display"
+                                            class="tooltip"
+                                            nb-char="15"
+                                            justified="RIGHT"
+                                            font-size="40"
+                                            value="000.000000°"></split-flap-display>
+                        <span class="tooltiptext">Decimal Degrees</span>
+                    </div>
+                    <div class="tooltip">
+                        <split-flap-display id="deg-decimal-min-display"
+                                            nb-char="15"
+                                            justified="RIGHT"
+                                            font-size="40"
+                                            value="000°00.0000'"></split-flap-display>
+                        <span class="tooltiptext">Degrees,&#13;Decimal Minutes</span>
+                    </div>
+                    <div class="tooltip">
+                        <split-flap-display id="deg-min-decimal-sec-display"
+                                            nb-char="15"
+                                            justified="RIGHT"
+                                            font-size="40"
+                                            value="000°00'00.0000 "></split-flap-display>
+                            <span class="tooltiptext">Degrees,&#13;Minutes,&#13;Decimal Seconds</span>
+                        </div>
+                    </div>
                 <div>
                     <button onclick="copyToClipboard('01')"><img src="icons8-copy-to-clipboard-50.png" style="width: 40px; height: auto;" title="Copy to Clipboard"></button>
                     <br/>
@@ -457,6 +528,9 @@ window.onload = () => {
     console.log("--- Cookies ---");
     try {
         let cookieArray = document.cookie.split(';');
+        if (cookieArray.length === 0) {
+            console.log("Found no cookies");
+        }
         cookieArray.forEach(cookie => {
             if (cookie.trim().indexOf('=') > -1) {
                 let nameValuePair = cookie.split('=');
