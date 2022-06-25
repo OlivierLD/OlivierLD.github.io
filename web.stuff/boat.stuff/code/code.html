@@ -8,29 +8,29 @@
 	const LOREM_IPSUM = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere purus quis lorem bibendum blandit. Integer non tellus lobortis, ullamcorper justo sit amet, semper enim. Vivamus sapien metus, efficitur at tincidunt vitae, faucibus imperdiet massa. Etiam porta est nec felis aliquet, sed bibendum tortor scelerisque. Suspendisse euismod, erat et mollis bibendum, arcu metus tempus felis, sit amet tempor nibh dolor at orci. Suspendisse tempus orci sed dui sollicitudin tempus ut vitae elit. Praesent a suscipit metus.";
 
 	const MORSE_CODE = [
-		{ letter: 'A', morse: ". _" },   // Allo
+		{ letter: 'A', morse: ". _" },     // Allo
 		{ letter: 'B', morse: "_ . . ." }, // Bombardement
 		{ letter: 'C', morse: "_ . _ ." }, // Compte Goutte
-		{ letter: 'D', morse: "_ . ." },  // Domaine
-		{ letter: 'E', morse: "." },    // Eh!
+		{ letter: 'D', morse: "_ . ." },   // Domaine
+		{ letter: 'E', morse: "." },       // Eh!
 		{ letter: 'F', morse: ". . _ ." }, // Fanfaronne
-		{ letter: 'G', morse: "_ _ ." },  // Gloutonne
+		{ letter: 'G', morse: "_ _ ." },   // Gloutonne
 		{ letter: 'H', morse: ". . . ." }, // Heureusement
-		{ letter: 'I', morse: ". ." },   // Ile
+		{ letter: 'I', morse: ". ." },     // Ile
 		{ letter: 'J', morse: ". _ _ _" }, // J'ai mon loto
-		{ letter: 'K', morse: "_ . _" },  // Kohinor
+		{ letter: 'K', morse: "_ . _" },   // Kohinor
 		{ letter: 'L', morse: ". _ . ." }, // Linotype
-		{ letter: 'M', morse: "_ _" },   // Moto
-		{ letter: 'N', morse: "_ ." },   // Note
-		{ letter: 'O', morse: "_ _ _" },  // Oloron
+		{ letter: 'M', morse: "_ _" },     // Moto
+		{ letter: 'N', morse: "_ ." },     // Note
+		{ letter: 'O', morse: "_ _ _" },   // Oloron
 		{ letter: 'P', morse: ". _ _ ." }, // Pyrophore
-		{ letter: 'Q', morse: "_ _ . _" }, // Quocorico
-		{ letter: 'R', morse: ". _ ." },  // Raisonne
-		{ letter: 'S', morse: ". . ." },  // Salade
-		{ letter: 'T', morse: "_" },    // Top
-		{ letter: 'U', morse: ". . _" },  // Unisson
+		{ letter: 'Q', morse: "_ _ . _" }, // Quocorico <- trick
+		{ letter: 'R', morse: ". _ ." },   // Raisonne
+		{ letter: 'S', morse: ". . ." },   // Salade
+		{ letter: 'T', morse: "_" },       // Top
+		{ letter: 'U', morse: ". . _" },   // Unisson
 		{ letter: 'V', morse: ". . . _" }, // Vegetation
-		{ letter: 'W', morse: ". _ _" },  // Wagon long
+		{ letter: 'W', morse: ". _ _" },   // Wagon long
 		{ letter: 'X', morse: "_ . . _" }, // Xochimilco
 		{ letter: 'Y', morse: "_ . _ _" }, // Yotcheoufou
 		{ letter: 'Z', morse: "_ _ . ." }, // Zoroastre
@@ -241,7 +241,7 @@
 
 				if (!aBlank) {
 					if (document.getElementById('translation-type').checked) {
-						translationContent += `${morse}&nbsp;&nbsp;&nbsp;`;
+						translationContent += `<b>${morse}</b>&nbsp;&nbsp;&nbsp;`;
 					} else {
 						let imgName = letter.toLowerCase() + ".gif";
 						translationContent += (`<img src="${imgName}" alt="${letter}" title="${title}">&nbsp;`);
