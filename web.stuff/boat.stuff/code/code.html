@@ -7,6 +7,57 @@
 <script type="text/javascript">
 	const LOREM_IPSUM = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere purus quis lorem bibendum blandit. Integer non tellus lobortis, ullamcorper justo sit amet, semper enim. Vivamus sapien metus, efficitur at tincidunt vitae, faucibus imperdiet massa. Etiam porta est nec felis aliquet, sed bibendum tortor scelerisque. Suspendisse euismod, erat et mollis bibendum, arcu metus tempus felis, sit amet tempor nibh dolor at orci. Suspendisse tempus orci sed dui sollicitudin tempus ut vitae elit. Praesent a suscipit metus.";
 
+	const MORSE_CODE = [
+		{ letter: 'A', morse: ". _" },   // Allo
+		{ letter: 'B', morse: "_ . . ." }, // Bombardement
+		{ letter: 'C', morse: "_ . _ ." }, // Compte Goutte
+		{ letter: 'D', morse: "_ . ." },  // Domaine
+		{ letter: 'E', morse: "." },    // Eh!
+		{ letter: 'F', morse: ". . _ ." }, // Fanfaronne
+		{ letter: 'G', morse: "_ _ ." },  // Gloutonne
+		{ letter: 'H', morse: ". . . ." }, // Heureusement
+		{ letter: 'I', morse: ". ." },   // Ile
+		{ letter: 'J', morse: ". _ _ _" }, // J'ai mon loto
+		{ letter: 'K', morse: "_ . _" },  // Kohinor
+		{ letter: 'L', morse: ". _ . ." }, // Linotype
+		{ letter: 'M', morse: "_ _" },   // Moto
+		{ letter: 'N', morse: "_ ." },   // Note
+		{ letter: 'O', morse: "_ _ _" },  // Oloron
+		{ letter: 'P', morse: ". _ _ ." }, // Pyrophore
+		{ letter: 'Q', morse: "_ _ . _" }, // Quocorico
+		{ letter: 'R', morse: ". _ ." },  // Raisonne
+		{ letter: 'S', morse: ". . ." },  // Salade
+		{ letter: 'T', morse: "_" },    // Top
+		{ letter: 'U', morse: ". . _" },  // Unisson
+		{ letter: 'V', morse: ". . . _" }, // Vegetation
+		{ letter: 'W', morse: ". _ _" },  // Wagon long
+		{ letter: 'X', morse: "_ . . _" }, // Xochimilco
+		{ letter: 'Y', morse: "_ . _ _" }, // Yotcheoufou
+		{ letter: 'Z', morse: "_ _ . ." }, // Zoroastre
+		// Digits
+		{ letter: '1', morse: ". _ _ _ _" },
+		{ letter: '2', morse: ". . _ _ _" },
+		{ letter: '3', morse: ". . . _ _" },
+		{ letter: '4', morse: ". . . . _" },
+		{ letter: '5', morse: ". . . . ." },
+		{ letter: '6', morse: "- . . . ." },
+		{ letter: '7', morse: "_ _ . . ." },
+		{ letter: '8', morse: "_ _ _ . ." },
+		{ letter: '9', morse: "_ _ _ _ ." },
+		{ letter: '0', morse: "_ _ _ _ _" }
+	];
+
+	function findMorse(letter) {
+		let morse = "";
+		for (let i=0; i<MORSE_CODE.length; i++) {
+			if (MORSE_CODE[i].letter === letter) {
+				morse = MORSE_CODE[i].morse;
+				break;
+			}
+		}
+		return morse;
+	}
+
 	function loremIpsum() {
 		document.getElementById('original-text').value = LOREM_IPSUM;
 	}
@@ -21,6 +72,7 @@
 			if (str.charAt(i) != " " && str.charAt(i) != "\n") {
 				let letter =  str.charAt(i).toUpperCase(); 
 				let title = "";
+				let morse = "";
 				let aBlank = false;
 				let cr = false;
 				switch (letter) {
@@ -185,9 +237,15 @@
 						title = "";
 						break;
 				}
+				morse = findMorse(letter);
+
 				if (!aBlank) {
-					let imgName = letter.toLowerCase() + ".gif";
-					translationContent += (`<img src="${imgName}" alt="${letter}" title="${title}">&nbsp;`);
+					if (document.getElementById('translation-type').checked) {
+						translationContent += `${morse}&nbsp;&nbsp;&nbsp;`;
+					} else {
+						let imgName = letter.toLowerCase() + ".gif";
+						translationContent += (`<img src="${imgName}" alt="${letter}" title="${title}">&nbsp;`);
+					}
 				} else {
 					translationContent += ('&nbsp;');
 				}
@@ -240,8 +298,10 @@
 <body background="bground.jpg" onLoad="checkQS();">
 	<h2>International Code of Signals</h2>
 	<div style="text-align: left;">
-		Enter a text below and hit the Translate button
-		<br>
+		Enter a text below and hit the Translate button. 
+		<br/>
+		<input type="checkbox" id="translation-type">In Morse
+		<br/>
 		<a href="#" onclick="loremIpsum();" title="If you're lazy...">Lorem Ipsum...</a>
 		<br>
 		<textarea id="original-text" spellcheck="false" cols="60" rows="5"></textarea>
