@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<!--
+ | Translates a string entered by the user into
+ | 	- International Signal Code
+ |  - Morse Code
+ +-->
 <head>
 	<title>International Code</title>
 </head>
@@ -346,7 +351,7 @@
 				  rows="5" 
 				  style="border-radius: 5px; border: 2px solid blue; padding: 10px; font-size: 16px;"></textarea>
 		<br><br>
-		<button onClick="codeTranslate(document.getElementById('original-text').value);">Translate</button>
+		<button onClick="codeTranslate(document.getElementById('original-text').value);" style="margin-bottom: 10px;">Translate</button>
 	</div>
 	<div id="translated" class="translation" style="border-radius: 5px; border: 2px solid red; padding: 10px;"></div>
 	<hr>
