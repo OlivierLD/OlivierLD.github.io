@@ -1,11 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<!--
+ | Translates a string entered by the user into
+ | 	- International Signal Code
+ |  - Morse Code
+ +-->
 <head>
 	<title>International Code</title>
 </head>
 <script type="text/javascript">
 	const LOREM_IPSUM = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere purus quis lorem bibendum blandit. Integer non tellus lobortis, ullamcorper justo sit amet, semper enim. Vivamus sapien metus, efficitur at tincidunt vitae, faucibus imperdiet massa. Etiam porta est nec felis aliquet, sed bibendum tortor scelerisque. Suspendisse euismod, erat et mollis bibendum, arcu metus tempus felis, sit amet tempor nibh dolor at orci. Suspendisse tempus orci sed dui sollicitudin tempus ut vitae elit. Praesent a suscipit metus.";
+
+	const MORSE_CODE = [
+		{ letter: 'A', morse: ". -" },     // Allo
+		{ letter: 'B', morse: "- . . ." }, // Bombardement
+		{ letter: 'C', morse: "- . - ." }, // Compte Goutte
+		{ letter: 'D', morse: "- . ." },   // Domaine
+		{ letter: 'E', morse: "." },       // Eh!
+		{ letter: 'F', morse: ". . - ." }, // Fanfaronne
+		{ letter: 'G', morse: "- - ." },   // Gloutonne
+		{ letter: 'H', morse: ". . . ." }, // Heureusement
+		{ letter: 'I', morse: ". ." },     // Ile
+		{ letter: 'J', morse: ". - - -" }, // J'ai mon loto
+		{ letter: 'K', morse: "- . -" },   // Kohinor
+		{ letter: 'L', morse: ". - . ." }, // Linotype
+		{ letter: 'M', morse: "- -" },     // Moto
+		{ letter: 'N', morse: "- ." },     // Note
+		{ letter: 'O', morse: "- - -" },   // Oloron
+		{ letter: 'P', morse: ". - - ." }, // Pyrophore
+		{ letter: 'Q', morse: "- - . -" }, // Quocorico <- trick
+		{ letter: 'R', morse: ". - ." },   // Raisonne
+		{ letter: 'S', morse: ". . ." },   // Salade
+		{ letter: 'T', morse: "-" },       // Top
+		{ letter: 'U', morse: ". . -" },   // Unisson
+		{ letter: 'V', morse: ". . . -" }, // Vegetation
+		{ letter: 'W', morse: ". - -" },   // Wagon long
+		{ letter: 'X', morse: "- . . -" }, // Xochimilco
+		{ letter: 'Y', morse: "- . - -" }, // Yotcheoufou
+		{ letter: 'Z', morse: "- - . ." }, // Zoroastre
+		// Digits
+		{ letter: '1', morse: ". - - - -" },
+		{ letter: '2', morse: ". . - - -" },
+		{ letter: '3', morse: ". . . - -" },
+		{ letter: '4', morse: ". . . . -" },
+		{ letter: '5', morse: ". . . . ." },
+		{ letter: '6', morse: "- . . . ." },
+		{ letter: '7', morse: "- - . . ." },
+		{ letter: '8', morse: "- - - . ." },
+		{ letter: '9', morse: "- - - - ." },
+		{ letter: '0', morse: "- - - - -" }
+	];
+
+	function findMorse(letter) {
+		let morse = "";
+		for (let i=0; i<MORSE_CODE.length; i++) {
+			if (MORSE_CODE[i].letter === letter) {
+				morse = MORSE_CODE[i].morse;
+				break;
+			}
+		}
+		return morse;
+	}
 
 	function loremIpsum() {
 		document.getElementById('original-text').value = LOREM_IPSUM;
@@ -21,6 +77,7 @@
 			if (str.charAt(i) != " " && str.charAt(i) != "\n") {
 				let letter =  str.charAt(i).toUpperCase(); 
 				let title = "";
+				let morse = "";
 				let aBlank = false;
 				let cr = false;
 				switch (letter) {
@@ -185,9 +242,15 @@
 						title = "";
 						break;
 				}
+				morse = findMorse(letter).replaceAll('.', '&middot;');
+
 				if (!aBlank) {
-					let imgName = letter.toLowerCase() + ".gif";
-					translationContent += (`<img src="${imgName}" alt="${letter}" title="${title}">&nbsp;`);
+					if (document.getElementById('translation-type').checked) {
+						translationContent += `<b>${morse}</b>&nbsp;&nbsp;&nbsp;`;
+					} else {
+						let imgName = letter.toLowerCase() + ".gif";
+						translationContent += (`<img src="${imgName}" alt="${letter}" title="${title}">&nbsp;`);
+					}
 				} else {
 					translationContent += ('&nbsp;');
 				}
@@ -225,30 +288,72 @@
 
 <style type="text/css">
 	body {
-		font-family: Verdana, Geneva, Tahoma, sans-serif;
+		font-family: 'Courier New', Courier, monospace;
+		font-weight: bold;
 		color: navy;
 	}
 
 	.translation {
 		background-color: silver; 
+		margin: 14px;
 		padding: 5px; 
 		margin-top: 5px; 
 		border-radius: 3px;
 	}
+
+	button {
+		padding: 4px 20px;
+		/* give the background a gradient */
+		background: #ffae00; /* fallback for browsers that don't support gradients */
+		background: -webkit-linear-gradient(top, #ffae00, #d67600);
+		background: -moz-linear-gradient(top, #ffae00, #d67600);
+		background: -o-linear-gradient(top, #ffae00, #d67600);
+		background: linear-gradient(top, #ffae00, #d67600);
+		border: 2px outset #dad9d8;
+		/* style the text */
+		font-family: Lato, Verdana, Andika, Arial, sans-serif; /* Andkia is available at http://www.google.com/webfonts/specimen/Andika */
+		font-size: 0.8em;
+		letter-spacing: 0.05em;
+		text-transform: uppercase;
+		color: #fff;
+		text-shadow: 0 1px 10px #000;
+		/* add to small curve to the corners of the button */
+		-webkit-border-radius: 15px;
+		-moz-border-radius: 15px;
+		border-radius: 15px;
+		/* give the button a drop shadow */
+		-webkit-box-shadow: rgba(0, 0, 0, .55) 0 1px 6px;
+		-moz-box-shadow: rgba(0, 0, 0, .55) 0 1px 6px;
+		box-shadow: rgba(0, 0, 0, .55) 0 1px 6px;
+	}
+
+	/* NOW STYLE THE BUTTON'S HOVER STATE */
+	button:hover, button:focus {
+		border: 2px solid #dad9d8;
+	}
 </style>
 
-<body background="bground.jpg" onLoad="checkQS();">
-	<h2>International Code of Signals</h2>
+<!--body background="bground.jpg" onLoad="checkQS();"-->
+<body onLoad="checkQS();">
+	<h1>International Code of Signals</h1>
 	<div style="text-align: left;">
-		Enter a text below and hit the Translate button
+		Enter a text below and hit the Translate button. 
+		<input type="checkbox" id="translation-type">In Morse
+		<br/>
+		<div  style="margin: 10px; padding: 10px;">
+			<a href="#" onclick="loremIpsum();" title="If you're lazy...">Lorem Ipsum...</a>
+		</div>
 		<br>
-		<a href="#" onclick="loremIpsum();" title="If you're lazy...">Lorem Ipsum...</a>
-		<br>
-		<textarea id="original-text" spellcheck="false" cols="60" rows="5"></textarea>
+		<textarea id="original-text" 
+		          placeholder="Text to translate goes here" 
+				  spellcheck="false" 
+				  cols="120" 
+				  rows="5" 
+				  style="border-radius: 5px; border: 2px solid blue; padding: 10px; font-size: 16px;"></textarea>
 		<br><br>
-		<button onClick="codeTranslate(document.getElementById('original-text').value);">Translate</button>
+		<button onClick="codeTranslate(document.getElementById('original-text').value);" style="margin-bottom: 10px;">Translate</button>
 	</div>
-	<div id="translated" class="translation"></div>
+	<div id="translated" class="translation" style="border-radius: 5px; border: 2px solid red; padding: 10px;">Translation will show here...</div>
 	<hr>
 	<address>&copy; 2001, 2021 and beyond, Oliv Cool Stuff Soft Strikes Again</address>
 </body>
