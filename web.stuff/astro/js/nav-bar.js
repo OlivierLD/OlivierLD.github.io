@@ -176,6 +176,19 @@ let draggingSP = event => {
     }
 };
 
+let copyToClipboard = (fieldId) => {
+    let value = document.getElementById(fieldId).innerHTML;
+    let codeContent = value.replaceAll("<br>", "\n");
+    // console.log(codeContent);
+    let codeHolder = document.createElement("textarea"); // To keep the format, 'input' would not.
+    codeHolder.value = codeContent;
+    document.body.appendChild(codeHolder);
+    codeHolder.select();
+    document.execCommand("copy");
+    document.body.removeChild(codeHolder);
+    alert(`Value ${value} copied to clipboard`);
+};
+
 // TODO Calculate real sunPath & others
 // See getSunDataForAllDay, in astrorest.RESTImplementation, module RESTNauticalAlmanac
 const sunPath1 = [
