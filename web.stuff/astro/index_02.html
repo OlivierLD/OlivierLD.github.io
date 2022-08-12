@@ -1097,8 +1097,10 @@ let toggleForeground = () => {
                 <ul>
                     <li>Web Components</li>
                     <li>Custom Tooltips</li>
+                    <li>Custom Alerts</li>
                     <li>SVG</li>
                     <li>Celestial Calculations (all in ES6)</li>
+                    <li>Copy-to-clipboard</li>
                     <li>etc !</li>
                 </ul>
             </p>
@@ -1322,9 +1324,10 @@ let toggleForeground = () => {
 
     <!-- More links go here if/when needed -->
 </div>
+
 <div style="display: grid; grid-template-columns: auto auto;" title="Single Page Application with Background SVG &amp; Web Components">
     <div><h1 style="vertical-align: top; margin-top: 0; font-style: normal; text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px silver;"><span style="cursor: pointer;" onclick="openNav()" onmouseover="openNav()" title="Hamburger">&nbsp; &#8801;</span> ES6 Celestial Computer, SPA with BG Components</h1></div>
-    <div style="text-align: right;"><small>Last code update August 12, 2022, 12:25 CET</small></div>    
+    <div style="text-align: right;"><small>Last code update August 12, 2022, 12:50 CET</small></div>    
 </div>
 <div class="background bg-container" 
      style="margin: 10px; margin-top: 50px; border: 2px solid rgba(0, 255, 255, 0.5); border-radius: 10px;">
@@ -1539,6 +1542,11 @@ let toggleForeground = () => {
                         <div id="geo-mess" style="display: none;"><small style="font-style: italic; color: yellow;">(hit "Set Position" when GeoLocation is obtained)</small></div>
     
                         <div id="url-placeHolder" style="display: none;">
+                            <div id="alert-zone" class="smooth" style="padding: 2px; border: 1px solid red; border-radius: 5px; padding: 5px;"> <!-- display: none;  -->
+                                <div id="alert-mess" style="color: green; background-color: orange; border-radius: 5px; padding: 5px;"></div>
+                            </div>    
+                    
+
                             <div style="display: grid; grid-template-columns: auto auto auto; align-items: center; border: 1px solid rgba(128, 128, 128, 0.75); border-radius: 5px; margin: 5px; padding: 3px;">
                                 <small style="text-align: right;">Bookmark this URL:</small>
                                 <div id="url-to-bookmark" class="bookmark" style="white-space: nowrap; overflow-x: scroll; height: fit-content;"></div>

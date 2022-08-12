@@ -176,6 +176,26 @@ let draggingSP = event => {
     }
 };
 
+let customAlertExpanded = false;
+let expandCollapseAlertData = () => {
+    document.getElementById('alert-zone').classList.toggle('visible-div');
+    customAlertExpanded = !customAlertExpanded;
+};
+
+let customAlert = (errMess) => {
+    document.getElementById('alert-mess').innerText = errMess;
+    if (!customAlertExpanded) {
+        expandCollapseAlertData();
+    }
+    setTimeout(hideAlert, 5000);
+};
+
+let hideAlert = () => {
+    if (customAlertExpanded) {
+        expandCollapseAlertData();
+    }
+};
+
 let copyToClipboard = (fieldId) => {
     let value = document.getElementById(fieldId).innerHTML;
     let codeContent = value.replaceAll("<br>", "\n");
@@ -186,7 +206,7 @@ let copyToClipboard = (fieldId) => {
     codeHolder.select();
     document.execCommand("copy");
     document.body.removeChild(codeHolder);
-    alert(`Value ${value} copied to clipboard`);
+    customAlert(`Value ${value} copied to clipboard`);
 };
 
 // TODO Calculate real sunPath & others
