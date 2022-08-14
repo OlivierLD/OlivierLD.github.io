@@ -110,7 +110,7 @@
             opacity: 1;
             width: auto;
             height: auto;
-            max-height: 1600px;
+            max-height: 1800px;
             transform: scaleY(1);
             margin-top: 5px;
         }
@@ -365,6 +365,14 @@
                 elem.value = value;                            // value corresponds to the 'set value(val) { ...', invokes the setter in the HTMLElement class
             }
         }
+        function setSpecialData(from, to) {
+            let elem = document.getElementById(to);
+            let value = document.getElementById(from).value; // Field to read to get the value
+            if (value.length !== 0) {
+                elem.value = value;                            // value corresponds to the 'set value(val) { ...', invokes the setter in the HTMLElement class
+                elem.displayValue = (value >= 0 ? 'E ' : 'W ') + Math.abs(value).toFixed(1);
+            }
+        }
 
         function setPhase(from, to) {
             let elem = document.getElementById(to);
@@ -396,8 +404,11 @@
         let incr;
         let intervalId;
 
-        function smoothlySet(webComp, from, to) {
+        function smoothlySet(webComp, from, to, withDisplayValue) {
             webComp.value = currentValue;
+            if (withDisplayValue !== undefined && withDisplayValue === true) {
+                webComp.displayValue = (currentValue >= 0 ? 'E ' : 'W ') + Math.abs(currentValue).toFixed(1);
+            }
 //                console.log("From %f to %f, currently %f", from, to, currentValue);
             currentValue += incr;
             if ((incr > 0 && currentValue > to) || (incr < 0 && currentValue < to)) {
@@ -454,6 +465,26 @@
                         incr = ((startFrom < goTo) ? 1 : -1) * (increment !== undefined ? increment : 0.1);
                         intervalId = window.setInterval(() => {
                             smoothlySet(webComp, startFrom, goTo);
+                        }, 10);
+                    }
+                }
+            }
+        }
+
+        function doSpecialAnimate(fromField, toComp) {
+            if (animation) {
+                alert('Already animating, please wait...');
+            } else {
+                let webComp = document.getElementById(toComp);
+                let startFrom = webComp.value;
+                if (document.getElementById(fromField).value.length !== 0) {
+                    let goTo = parseFloat(document.getElementById(fromField).value);
+                    if (!isNaN(goTo) && startFrom !== goTo) {
+                        animation = true;
+                        currentValue = startFrom;
+                        incr = ((startFrom < goTo) ? 1 : -1) * 0.1;
+                        intervalId = window.setInterval(() => {
+                            smoothlySet(webComp, startFrom, goTo, true);
                         }, 10);
                     }
                 }
@@ -2731,6 +2762,59 @@
 				</div>
 			</td>
 		</tr>
+        <tr>
+            <td valign="top">
+                With extra attributes:
+                <pre>
+                    abs-tick-value="true"
+                    rotate-digits="false"
+                    value="2.5"
+                    display-value="E 2.5"
+                </pre>
+				<div class="black-frame centered" id="bg-cell-3" style="background-color: black;">
+                    <analog-display class="analogdisplay-monochrome-orange decreased-label-font"
+                                title="Deviation, East or West"
+                                id="analog-plus-minus"
+                                min-value="-15"
+                                max-value="15"
+                                abs-tick-value="true"
+                                rotate-digits="false"
+                                value="2.5"
+                                display-value="E 2.5"
+                                major-ticks="5"
+                                minor-ticks="0.5"
+                                with-border="true"
+                                rotate-digits="true"
+                                overlap="40"
+                                label="Dev."
+                                unit="Degrees &deg;"
+                                width="300"
+                                height="300"></analog-display>
+                </div>
+                <div class="black-frame centered">
+                    Value:
+                    <input type="number"
+                            id="analog-dyn-value-04"
+                            placeholder="Deviation value (+/-)"
+                            title="Deviation, &deg;"
+                            style="width: 50px; text-align: right;"
+                            value="2.5" min="-15" max="15"/>
+                    <br/>
+                    <button onclick="setSpecialData('analog-dyn-value-04', 'analog-plus-minus')"
+                            title="Set Deviation"
+                            style="margin-top: 3px;">Direct
+                    </button>
+                    <button onclick="doSpecialAnimate('analog-dyn-value-04', 'analog-plus-minus')"
+                            title="Set Deviation"
+                            style="margin-top: 3px;">Animate
+                    </button>
+                    <br/>
+                    <input type="range" min="-10" max="10" step="0.1" value="2.5"
+                            onchange="document.getElementById('analog-plus-minus').value = this.value; document.getElementById('analog-plus-minus').displayValue = (this.value >= 0 ? 'E ' : 'W ') + Math.abs(this.value).toFixed(1);"
+                            style="width: 100%;"/>
+                </div>
+            </td>
+        </tr>
 	</table>
 </div>
 <hr/>

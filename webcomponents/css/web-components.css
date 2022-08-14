@@ -257,6 +257,10 @@ jumbo-display .digital-font-green {
 	--value-font-size-factor: 1
 }
 
+.decreased-label-font {
+	--value-font-size-factor: 0.75;
+}
+
 /* Day, flat gray */
 .analogdisplay-flat-gray {
 	--bg-color: rgba(255, 255, 255, 0.0);
@@ -526,6 +530,15 @@ compass-display .green {
 	--display-color: black;
 	--frame-color: silver;
 	--value-font: Verdana;
+}
+
+.scroll-digit-01 {
+	--bg-color: transparent;
+	--display-background-gradient-from: black;
+	--display-background-gradient-to: gray;
+	--display-color: white;
+	--frame-color: silver;
+	--value-font: Arial;
 }
 
 .boat-overview-01 {
