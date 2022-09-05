@@ -663,9 +663,20 @@ button:hover, button:focus {
 
 #bg-title {
   color: rgba(192, 192, 192, 0.5); 
+  margin-right: 120px; 
+  padding: 10px; 
+  font-style: italic; 
+  text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px silver; 
+  border: 1px solid silver; 
+  border-radius: 5px;
+  
 }
 #h2-title:hover, #kebab:hover, #hamburger:hover, #my-name:hover, #bg-title:hover {
     color: cyan;
+}
+
+#bg-title:hover {  /* Extra for that one */
+  box-shadow: 5px 5px 5px rgba(0, 255, 255, 0.5);
 }
 
 </style>
@@ -993,8 +1004,7 @@ Date.prototype.format = function (dateFormat) {
     <h2 id="h2-title" style="margin: 0; font-style: normal; text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px silver;">This page is my workbench</h2>
     <div style="z-index: -10; text-align: right;">
       <span id="bg-title" 
-          style="margin-right: 120px; padding: 3px; font-style: italic; text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px silver; border: 1px solid silver; border-radius: 5px;"
-          title="Background image title">BG Image title</span>
+            title="Background image title">BG Image title</span>
     </div>     
   </div>
   <small style="margin-left: 5px;">&gt; &nbsp;Work (constantly) in Progress. Use the hamburger below to display the menu. See kebab on the right.</small>
