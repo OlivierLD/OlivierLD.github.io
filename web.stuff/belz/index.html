@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Belz, en Bretagne</title>
+	<link rel="icon" type="image/png" href="../../misc.pix/hummingbird.png">
+
+	<link rel="stylesheet" href="../../css/stylesheet.css">
+	<script type="module" src="../../webcomponents/widgets/slideshow/SlideShow.js"></script>
+	<style type="text/css">
+		body {
+			background: black;
+			color: cyan;
+		}
+        a:link {
+            color: cyan;
+        }
+	</style>
+
+<script type="text/javascript">
+
+    function onSlideShowClick(src) {
+        console.log(">> Client side!! Slide " + src + " was clicked.");
+        window.open(src, '_blank'); // This is an example
+    }
+
+</script>    
+</head>
+<body>
+    <h1>Belz Home, 56550</h1>
+    <hr/>
+    <div>
+        Content:
+        <ul>
+            <li><a href="#kayak">Kayaking</a></li>
+            <li><a href="#kitchen">Kitchen tune-up</a></li>
+        </ul>
+    </div>
+    <hr/>
+    <h2><a name="kayak">Kayaking in the Ria</a></h2>
+    <ul>
+        <li><a href="https://www.google.com/maps/d/edit?mid=1HGimwWDpelTGRKgWL7jj9R2uva0uX1Q&usp=sharing" target="_blank">Aug 4, 2022 (Corine)</a></li>
+        <li><a href="https://www.google.com/maps/d/edit?mid=1NGFLM-jcDwMWm2x0eUnsufJY-XIdsWQ&usp=sharing" target="_blank">Aug 19, 2022 (Arthur)</a></li>
+        <li><a href="https://www.google.com/maps/d/edit?mid=1ZnGOKytjevAeqkMjlTAHHeg_xlaK06A&usp=sharing" target="_blank">Sep 9, 2022 (Patrick)</a></li>
+    </ul>
+
+    <hr/>
+    <h2><a name="kitchen">Kitchen tune-up</a></h2>
+    <small style="font-style: italic;">Click the images to enlarge</small>
+
+    <div style="height: 600px; margin: 2px;">
+		<slide-show id="slide-show-kitchen"
+					width="800"
+					height="600">
+            <slide-show-image src="./images/cuisine.png" title="What we started from..."></slide-show-image>
+            <slide-show-image src="./images/01.jpeg" title="Preparing the walls"></slide-show-image>
+			<slide-show-image src="./images/02.jpeg" title="Preparing the walls"></slide-show-image>
+			<slide-show-image src="./images/03.jpeg" title="Behind the sink, wow!"></slide-show-image>
+			<slide-show-image src="./images/04.jpeg" title="See the bottom of the wall..."></slide-show-image>
+			<slide-show-image src="./images/05.jpg" title="Temporary setting, next door."></slide-show-image>
+			<slide-show-image src="./images/06.jpg" title="Removed the worktop!"></slide-show-image>
+			<slide-show-image src="./images/07.jpg" title="Removed the worktop"></slide-show-image>
+			<slide-show-image src="./images/08.jpg" title="First coat of paint"></slide-show-image>
+			<slide-show-image src="./images/09.jpg" title="First coat, progressing"></slide-show-image>
+			<slide-show-image src="./images/10.jpeg" title="Unpacking 62 boxes"></slide-show-image>
+			<slide-show-image src="./images/11.jpeg" title="Unpacking"></slide-show-image>
+			<slide-show-image src="./images/12.jpeg" title="Studying the doc..."></slide-show-image>
+			<slide-show-image src="./images/13.jpg" title="Coming together"></slide-show-image>
+			<slide-show-image src="./images/14.jpg" title="Looks like on the pictures!"></slide-show-image>
+			<slide-show-image src="./images/15.jpg" title="With closets"></slide-show-image>
+		</slide-show>
+		
+	</div>
+
+    <hr/>
+    <div style="height: 150px;"></div>
+</body>
+
+<script>
+    window.onload = () => { // Important: window.onload
+			document.getElementById("slide-show-kitchen").slideclick = onSlideShowClick;
+    };
+</script>
+</html>

@@ -13,6 +13,7 @@ let closeNav = () => {
     document.getElementById("side-nav").style.width = "0";
 };
 
+const ALERT_DIALOG_ID = "custom-alert";
 const PRMS_DIALOG_ID = "background-prms-dialog";
 const HELP_DIALOG_ID = "help-dialog";
 const MARQUEE_DIALOG_ID = "marquee-dialog";
@@ -60,6 +61,29 @@ let closeHelpDialog = () => {
     }
 };
 
+let showCustomAlert = (header, content) => {
+    document.getElementById("alert-header").innerHTML = header;
+    document.getElementById("alert-content").innerHTML = content;
+
+    let customAlertDialog = document.getElementById(ALERT_DIALOG_ID);
+    if (customAlertDialog.show !== undefined) {
+        customAlertDialog.show();
+    } else {
+        // alert(BAD_BROWSER);
+        customAlertDialog.style.display = 'inline';
+    }
+};
+
+let closeCustomAlert = () => {
+    let customAlertDialog = document.getElementById(ALERT_DIALOG_ID);
+    if (customAlertDialog.close !== undefined) {
+        customAlertDialog.close();
+    } else {
+        // alert(BAD_BROWSER);
+        customAlertDialog.style.display = 'none';
+    }
+};
+
 let showMarqueeDialog = () => {
     let marqueeDialog = document.getElementById(MARQUEE_DIALOG_ID);
     if (marqueeDialog.show !== undefined) {
@@ -83,6 +107,11 @@ let closeMarqueeDialog = () => {
 };
 
 let showSunPathDialog = () => {
+    if (!globalAstroData) {
+        showCustomAlert('Missing Data', '<p>⚠️&nbsp;<i><b>Compute something first!</b></i></p><p>(Menu > Background Parameters)</p>');
+        // alert("Compute something first!\n(Menu > Background Parameters)");
+        return;
+    }
     let sunPathDialog = document.getElementById(SUN_PATH_DIALOG_ID);
     
     setSunPathData(); // Display current data (TODO: Animate?)
@@ -145,6 +174,39 @@ let draggingSP = event => {
         }
         event.preventDefault();
     }
+};
+
+let customAlertExpanded = false;
+let expandCollapseAlertData = () => {
+    document.getElementById('alert-zone').classList.toggle('visible-div');
+    customAlertExpanded = !customAlertExpanded;
+};
+
+let customAlert = (errMess) => {
+    document.getElementById('alert-mess').innerText = errMess;
+    if (!customAlertExpanded) {
+        expandCollapseAlertData();
+    }
+    setTimeout(hideAlert, 5000);
+};
+
+let hideAlert = () => {
+    if (customAlertExpanded) {
+        expandCollapseAlertData();
+    }
+};
+
+let copyToClipboard = (fieldId) => {
+    let value = document.getElementById(fieldId).innerHTML;
+    let codeContent = value.replaceAll("<br>", "\n");
+    // console.log(codeContent);
+    let codeHolder = document.createElement("textarea"); // To keep the format, 'input' would not.
+    codeHolder.value = codeContent;
+    document.body.appendChild(codeHolder);
+    codeHolder.select();
+    document.execCommand("copy");
+    document.body.removeChild(codeHolder);
+    customAlert(`Value ${value} copied to clipboard`);
 };
 
 // TODO Calculate real sunPath & others

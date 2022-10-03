@@ -124,6 +124,7 @@ class SlideShow extends HTMLElement {
 				'/* Caption text */' +
 				'.text {' +
 				'   color: ' + this.widgetColor + ';' +
+  				'   text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px silver;' +
 				'   font-size: 15px;' +
 				'   /*padding: 8px 12px;*/' +
 				'   position: absolute;' +

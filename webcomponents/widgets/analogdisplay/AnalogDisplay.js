@@ -1,6 +1,12 @@
 const analogVerbose = false;
 const ANALOG_TAG_NAME = 'analog-display';
 
+if (Math.toRadians === undefined) {
+	Math.toRadians = (deg) => {
+		return deg * (Math.PI / 180);
+	};
+}
+
 /*
 * See custom properties in CSS.
 * =============================
@@ -96,7 +102,10 @@ class AnalogDisplay extends HTMLElement {
 			"value",            // Float. Value to display
 			"value-2",          // Float. Value to display, for scale 2
 			"unit",             // String. Unit
-			"unit-2"            // String. Unit 2
+			"unit-2",           // String. Unit 2
+			"display-value",    // String. Value label (if differente from value, like "W 2.1" for -2.1)
+			"display-value-2",  // String, Value label 2
+			"abs-tick-value"    // Boolean. Display absolute major tick values,m default false
 		];
 	}
 
@@ -114,6 +123,8 @@ class AnalogDisplay extends HTMLElement {
 		// Default values
 		this._value            =   0;
 		this._value_2          = undefined;
+		this._display_value    = undefined;
+		this._display_value_2  = undefined;
 		this._width            = 150;
 		this._height           = 150;
 		this._major_ticks      =  10;
@@ -136,6 +147,8 @@ class AnalogDisplay extends HTMLElement {
 
 		this._unit             = undefined;
 		this._unit_2           = undefined;
+
+		this._abs_tick_value = false;
 
 		this.miniVal =  10000000;
 		this.maxiVal = -10000000;
@@ -176,6 +189,12 @@ class AnalogDisplay extends HTMLElement {
 				break;
 			case "value-2":
 				this._value_2 = parseFloat(newVal);
+				break;
+			case "display-value":
+				this._display_value = newVal;
+				break;
+			case "display-value-2":
+				this._display_value_2 = newVal;
 				break;
 			case "unit":
 				this._unit = newVal;
@@ -219,6 +238,9 @@ class AnalogDisplay extends HTMLElement {
 			case "with-digits":
 				this._with_digits = ("true" === newVal);
 				break;
+			case "abs-tick-value":
+				this._abs_tick_value = ("true" === newVal);
+				break;
 			case "rotate-digits":
 				this._rotate_digits = ("true" === newVal);
 				break;
@@ -257,10 +279,24 @@ class AnalogDisplay extends HTMLElement {
 		}
 //	this.repaint();
 	}
+	set displayValue(option) {
+		this.setAttribute("display-value", option);
+		if (analogVerbose) {
+			console.log(">> DisplayValue option:", option);
+		}
+//	this.repaint();
+	}
 	set value2(option) {
 		this.setAttribute("value-2", option);
 		if (analogVerbose) {
 			console.log(">> Value2 option:", option);
+		}
+//	this.repaint();
+	}
+	set displayValue2(option) {
+		this.setAttribute("display-value-2", option);
+		if (analogVerbose) {
+			console.log(">> DisplayValue2 option:", option);
 		}
 //	this.repaint();
 	}
@@ -333,6 +369,12 @@ class AnalogDisplay extends HTMLElement {
 	}
 	get value2() {
 		return this._value_2;
+	}
+	get displayValue() {
+		return this._display_value;
+	}
+	get displayValue2() {
+		return this._display_value_2;
 	}
 	get width() {
 		return this._width;
@@ -650,7 +692,7 @@ class AnalogDisplay extends HTMLElement {
 			// Minor Ticks ?
 			if (this.minorTicks2 !== undefined && this.minorTicks2 > 0) {
 				context.beginPath();
-				for (let i = 0; i <= (this.maxValue2- this.minValue2); i += this.minorTicks2) {
+				for (let i = 0; i <= (this.maxValue2 - this.minValue2); i += this.minorTicks2) {
 					let _currentAngle = (totalAngle * (i / (this.maxValue2 - this.minValue2))) - Math.toRadians(this.overlap);
 
 					let xFrom = (this.canvas.width / 2) - ((radius * smallScaleRatio * 0.95) * Math.cos(_currentAngle));
@@ -677,6 +719,9 @@ class AnalogDisplay extends HTMLElement {
 					context.font = "bold " + Math.round(scale * 15) + "px " + this.analogDisplayColorConfig.font; // Like "bold 15px Arial"
 					context.fillStyle = digitColor;
 					let str = (i + this.minValue).toString();
+					if (this._abs_tick_value) {
+						str = Math.abs(i + this.minValue).toString();
+					}
 					let len = context.measureText(str).width;
 					let __currentAngle = (totalAngle * (i / (this.maxValue - this.minValue))) - Math.toRadians(this.overlap);
 					if (this.rotateDigits) { // Rotate
@@ -708,6 +753,9 @@ class AnalogDisplay extends HTMLElement {
 						context.font = "bold " + Math.round(scale * 8) + "px " + this.analogDisplayColorConfig.font; // Like "bold 15px Arial"
 						context.fillStyle = digitColor;
 						let str = (i + this.minValue2).toString();
+						if (this._abs_tick_value) {
+							str = Math.abs(i + this.minValue2).toString();
+						}
 						let len = context.measureText(str).width;
 						let __currentAngle = (totalAngle * (i / (this.maxValue2 - this.minValue2))) - Math.toRadians(this.overlap);
 						if (this.rotateDigits) { // Rotate
@@ -734,9 +782,12 @@ class AnalogDisplay extends HTMLElement {
 			}
 		}
 
-		// Value
+		// Value. Font size can be tweaked with --value-font-size-factor
 		let text = analogValue.toFixed(this.analogDisplayColorConfig.valueNbDecimal);
-//  text = displayValue.toFixed(nbDecimal); // analogDisplayColorConfig.valueNbDecimal);
+		if (this.displayValue !== undefined) {
+			text = this.displayValue;
+		}
+    //  text = displayValue.toFixed(nbDecimal); // analogDisplayColorConfig.valueNbDecimal);
 		let len = 0;
 		let fontCoeff = 40;
 		if (this.majorTicks2 !== undefined && this.maxValue2 !== undefined) { // Display value smaller if there is a second scale.
@@ -761,6 +812,9 @@ class AnalogDisplay extends HTMLElement {
 		if (analogValue2 !== undefined) {
 			let text = analogValue2.toFixed(this.analogDisplayColorConfig.valueNbDecimal);
 //  text = displayValue.toFixed(nbDecimal); // analogDisplayColorConfig.valueNbDecimal);
+			if (this.displayValue2 !== undefined) {
+				text = this.displayValue2;
+			}
 			let len = 0;
 			let fontCoeff = 20;
 			context.font = "bold " + Math.round(scale * fontCoeff * this.analogDisplayColorConfig.valueFontSizeFactor) + "px " + this.analogDisplayColorConfig.font; // "bold 40px Arial"

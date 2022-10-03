@@ -435,7 +435,7 @@ OpenSource JavaScript map API at <a href="https://leafletjs.com/" target="leafle
 
         let gcDist = getGCDistanceDegreesNM({ lat: from._latlng.lat, lng: from._latlng.lng },
                                             { lat: to._latlng.lat, lng: to._latlng.lng });
-        console.log(`GC Distance: ${gcDist} nm.`); 
+        console.log(`GC Distance: ${gcDist} nm, ari ${gc[0].z.toFixed(2)}`); 
 
         // Returned heading in radians
         let rl = calculateRhumLine({ lat: Math.toRadians(from._latlng.lat), lng: Math.toRadians(from._latlng.lng) },
@@ -634,17 +634,13 @@ OpenSource JavaScript map API at <a href="https://leafletjs.com/" target="leafle
                 _ewDir = TO_WEST;
             }
             let _start = 0.0;
-            if (_nsDir == TO_SOUTH) {
+            if (_nsDir === TO_SOUTH) {
                 _start = 180;
-                if (_ewDir == TO_EAST) {
-                    ari = _start - ari;
-                } else {
-                    ari = _start + ari;
-                }
-            } else if (_ewDir == TO_EAST) {
+                ari = _start + ari;
+            } else if (_ewDir === TO_EAST) {
                 ari = _start + ari;
             } else {
-                ari = _start - ari;
+                ari = ari; // _start - ari;
             }
             while (ari < 0.0) {
                 ari += 360;
