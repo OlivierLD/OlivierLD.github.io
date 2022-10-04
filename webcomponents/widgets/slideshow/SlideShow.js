@@ -388,6 +388,7 @@ class SlideShow extends HTMLElement {
 							let image = document.createElement("img");
 							let src = childNode.getAttribute('src');
 							let title = childNode.getAttribute('title');
+							let tooltip = childNode.getAttribute('desc');
 
 							// Get the actual size of the image, make sure it fits the slide
 							let realImage = new Image();
@@ -426,7 +427,11 @@ class SlideShow extends HTMLElement {
 							// image.setAttribute('width', self._width);
 							// image.setAttribute('height', self._height);
 							image.setAttribute('src', src);
-							image.setAttribute('title', title);
+							if (tooltip) {
+								image.setAttribute('title', tooltip);
+							} else {
+							  image.setAttribute('title', title);
+							}
 							slide.appendChild(image);
 							// On Slide Click:
 							slide.addEventListener('click', () => {
