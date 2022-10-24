@@ -130,7 +130,7 @@
         window.open(src, '_blank'); // This is an example
     };
 
-    const TABS = ['2022', '2023']; // Add tabs here as needed
+    const TABS = ['kayak', 'todo', '2022', '2023']; // Add tabs here as needed
 
     let openTab = (evt, tabNum) => {
         let tabLinks = document.getElementsByClassName("tablinks");
@@ -158,55 +158,41 @@
         </div>
     </div>
     <hr/>
-    <div>
-        Content:
+
+    <a name="diary" style="margin: 15px;">Diary &amp; Co</a>
+    <!-- The tabs. Add them here on demand -->
+    <div class="tab" style="margin-top: 10px; display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto;"> <!-- TODO Improve the grid-template... -->
+        <button class="tablinks" onclick="openTab(event, 0);">Kayak</button>
+        <button class="tablinks" onclick="openTab(event, 1);">ToDo</button>
+        <button class="tablinks active" onclick="openTab(event, 2);">2022</button>
+        <button class="tablinks" onclick="openTab(event, 3);">2023</button>
+    </div>
+
+    <div id="kayak" style="display: none;">
+        <h2><a name="kayak">Kayaking in the Ria</a></h2>
         <ul>
             <li>
-                <a class="list-link tooltip" href="./todolist.html" target="_new">TODO list...
-                    <span class="tooltiptext tooltiptext-right">Endless List !</span>
+                <a class="list-link tooltip" href="https://www.google.com/maps/d/edit?mid=1HGimwWDpelTGRKgWL7jj9R2uva0uX1Q&usp=sharing" target="_blank">Aug 4, 2022 (Corine)
+                    <span class="tooltiptext tooltiptext-right">Kayaking with Corine, Aug 4, 2022</span>
                 </a>
             </li>
             <li>
-                <a class="list-link tooltip" href="#kayak">Kayaking
-                    <span class="tooltiptext tooltiptext-right">Several tracks and pictures</span>
+                <a class="list-link tooltip" href="https://www.google.com/maps/d/edit?mid=1NGFLM-jcDwMWm2x0eUnsufJY-XIdsWQ&usp=sharing" target="_blank">Aug 19, 2022 (Arthur)
+                    <span class="tooltiptext tooltiptext-right">Kayaking with Arthur, Aug 19, 2022</span>
                 </a>
             </li>
             <li>
-                <a class="list-link tooltip" href="#diary">Diary
-                    <span class="tooltiptext tooltiptext-right">What's going on</span>
+                <a class="list-link tooltip" href="https://www.google.com/maps/d/edit?mid=1ZnGOKytjevAeqkMjlTAHHeg_xlaK06A&usp=sharing" target="_blank">Sep 9, 2022 (Patrick)
+                    <span class="tooltiptext tooltiptext-right">Kayaking with Patrick, Sep 9, 2022</span>
                 </a>
             </li>
         </ul>
-    </div>
+        </div>
 
-    <hr/>
-
-    <h2><a name="kayak">Kayaking in the Ria</a></h2>
-    <ul>
-        <li>
-            <a class="list-link tooltip" href="https://www.google.com/maps/d/edit?mid=1HGimwWDpelTGRKgWL7jj9R2uva0uX1Q&usp=sharing" target="_blank">Aug 4, 2022 (Corine)
-                <span class="tooltiptext tooltiptext-right">Kayaking with Corine, Aug 4, 2022</span>
-            </a>
-        </li>
-        <li>
-            <a class="list-link tooltip" href="https://www.google.com/maps/d/edit?mid=1NGFLM-jcDwMWm2x0eUnsufJY-XIdsWQ&usp=sharing" target="_blank">Aug 19, 2022 (Arthur)
-                <span class="tooltiptext tooltiptext-right">Kayaking with Arthur, Aug 19, 2022</span>
-            </a>
-        </li>
-        <li>
-            <a class="list-link tooltip" href="https://www.google.com/maps/d/edit?mid=1ZnGOKytjevAeqkMjlTAHHeg_xlaK06A&usp=sharing" target="_blank">Sep 9, 2022 (Patrick)
-                <span class="tooltiptext tooltiptext-right">Kayaking with Patrick, Sep 9, 2022</span>
-            </a>
-        </li>
-    </ul>
-
-    <hr/>
-
-    <a name="diary" style="margin: 15px;">Diary</a>
-    <!-- The tabs. Add them here on demand -->
-    <div class="tab" style="margin-top: 10px; display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto;"> <!-- TODO Improve the grid-template... -->
-        <button class="tablinks active" onclick="openTab(event, 0);">2022</button>
-        <button class="tablinks" onclick="openTab(event, 1);">2023</button>
+    <div id="todo" style="display: none;">
+        <a class="list-link tooltip" href="./todolist.html" target="_new">TODO list...
+            <span class="tooltiptext tooltiptext-right">Endless List !</span>
+        </a>
     </div>
 
     <div id="2022" style="display: block;">
