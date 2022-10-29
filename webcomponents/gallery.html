@@ -3111,7 +3111,38 @@
 				</div>
 			</td>
 
-		</tr>
+			<td valign="top">
+				<div class="black-frame centered" style="border: 1px solid cyan;">
+					<jumbo-display id="jumbo-05"
+								   class="jumbo-transparent"
+                                   title="Transparent Jumbo Display"
+								   value="23.45"
+								   label="BSP"
+								   width="280"
+								   height="80"></jumbo-display>
+				</div>
+
+				<div class="black-frame centered">
+					Value:
+					<input type="number"
+						   id="jumbo-value-05"
+						   placeholder="val"
+						   title="Jumbo"
+						   style="width: 50px; text-align: right;"
+						   value="23.45"/>
+					<br/>
+					<button onclick="setData('jumbo-value-05', 'jumbo-05')"
+							title="Set value for the jumbo"
+							style="margin-top: 3px;">Direct
+					</button>
+					<button onclick="doAnimate('jumbo-value-05', 'jumbo-05')"
+							title="Set value for the jumbo"
+							style="margin-top: 3px;">Animate
+					</button>
+				</div>
+			</td>
+
+        </tr>
 	</table>
 </div>
 <hr/>
