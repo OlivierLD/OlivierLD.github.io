@@ -1780,7 +1780,7 @@ let toggleForeground = () => {
         splitFlapSolarDate.repaint();
 
         let splitFlapSolar = document.getElementById('split-flap-solar-display'); // Time
-        splitFlapSolar.value = `${lpad(solarDate.hour.toFixed(0), '0', 2)}:${lpad(solarDate.minute.toFixed(0), '0', 2)}:${solarDate.second.toFixed(0)}`;
+        splitFlapSolar.value = `${lpad(solarDate.hour.toFixed(0), '0', 2)}:${lpad(solarDate.minute.toFixed(0), '0', 2)}:${lpad(solarDate.second.toFixed(0), '0', 2)}`;
         splitFlapSolar.repaint();
 
 
