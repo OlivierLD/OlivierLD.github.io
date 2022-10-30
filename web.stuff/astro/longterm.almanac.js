@@ -6,6 +6,7 @@
  * http://www.titulosnauticos.net/astro/
  *
  * DeltaT can be found at http://maia.usno.navy.mil/ (will be back to life in 2020... in your dreams)
+ * Also known as CelestialComputer.
  */
 
 if (Math.toRadians === undefined) {
@@ -55,12 +56,7 @@ let T, T2, T3, T4, T5, TE, TE2, TE3, TE4, TE5, Tau, Tau2, Tau3, Tau4, Tau5, delt
  */
 export function calculate(year, month, day, hour, minute, second, delta_t, noPlanets=false, withStars=true) {
 
-	if (false) { // Chrome likes it... not FireFox
-		let dateStr = `${year}-${lpad(month.toString(), '0', 2)}-${lpad(day.toString(), '0', 2)} ${lpad(hour.toString(), '0', 2)}:${lpad(minute.toString(), '0', 2)}:${lpad(second.toString(), '0', 2)} GMT+0000`;
-		epoch = new Date(dateStr).getTime();
-	} else {
-		epoch = Date.UTC(year, month - 1, day, hour, minute, second);
-	}
+	epoch = new Date(`${year}-${lpad(month, '0', 2)}-${lpad(day, '0', 2)} ${lpad(hour, '0', 2)}:${lpad(minute, '0', 2)}:${lpad(second, '0', 2)} GMT+0000`).getTime();
 
 	calculateJulianDate(year, month, day, hour, minute, second, delta_t);
 	calculateNutation();
@@ -1754,6 +1750,37 @@ function gatherOutput(noPlanets=false, withStars=false) {
 
 /**
  * 
+ * @param {float} lat 
+ * @param {float} lng 
+ * @param {float} sunEoT 
+ * @param {int} year
+ * @param {int} month [1..12]
+ * @param {int} day
+ * @param {int} hour
+ * @param {int} minute
+ * @param {int} second
+ * @param {float} delta_t
+ * @returns The solar date and time (NO time-zone)
+ */
+ export function getSolarDateAtPos(latitude, longitude, sunEoT, year, month, day, hour, minute, second, delta_t) {
+	let eotInHours = getSunMeridianPassageTime(latitude, longitude, sunEoT);
+
+	let currentDate = new Date(`${year}-${lpad(month, '0', 2)}-${lpad(day, '0', 2)} ${lpad(hour, '0', 2)}:${lpad(minute, '0', 2)}:${lpad(second, '0', 2)} GMT+0000`);
+
+	let ms = currentDate.getTime();
+	let solar = new Date(ms + Math.round((12 - eotInHours) * 3600000));
+	return {
+		year: solar.getFullYear(),
+		month: solar.getMonth() + 1,
+		day: solar.getDate(),
+		hour: solar.getHours(),
+		minute: solar.getMinutes(),
+		second: solar.getSeconds()
+	};
+};
+
+/**
+ * 
  * @param {float} decimalHours 
  * @returns a JSON object like { hours: {float}, minutes: {float}, seconds: {float} }
  */
@@ -1790,17 +1817,11 @@ export function sunRiseAndSetEpoch(delta_t, year, month, day, latitude, longitud
 	let zSet = (360.0 - Z);
 
 	// Sun rise
-	let rise, riseEpoch;
 	let dms = decimalToDMS(utRise);
-	if (false) { // Firefox does not like it
-		// // let rise = new Date(`${year}-${lpad(month, '0', 2)}-${lpad(day, '0', 2)} ${lpad(dms.hours, '0', 2)}:${lpad(dms.minutes, '0', 2)}:${lpad(Math.floor(dms.seconds), '0', 2)} GMT+0000`);
-		rise = new Date(`${year}-${lpad(month, '0', 2)}-${lpad(day, '0', 2)} 00:00:00 GMT+0000`);
-		riseEpoch = rise.getTime() + (dms.hours * 3600 * 1000) + (dms.minutes * 60 * 1000) + (dms.seconds * 1000);
-		rise.setTime(riseEpoch);
-	} else {
-		riseEpoch = Date.UTC(year, month - 1, day, 0, 0, 0)  + (dms.hours * 3600 * 1000) + (dms.minutes * 60 * 1000) + (dms.seconds * 1000);
-		rise = new Date(riseEpoch);
-	}
+	// let rise = new Date(`${year}-${lpad(month, '0', 2)}-${lpad(day, '0', 2)} ${lpad(dms.hours, '0', 2)}:${lpad(dms.minutes, '0', 2)}:${lpad(Math.floor(dms.seconds), '0', 2)} GMT+0000`);
+	let rise = new Date(`${year}-${lpad(month, '0', 2)}-${lpad(day, '0', 2)} 00:00:00 GMT+0000`);
+	let riseEpoch = rise.getTime() + (dms.hours * 3600 * 1000) + (dms.minutes * 60 * 1000) + (dms.seconds * 1000);
+	rise.setTime(riseEpoch);
 	// epoch: rise.getTime();
 	// let resultForRise = calculate(year, month, day, dms.hours, dms.minutes, dms.seconds, delta_t, true, false);
 	let resultForRise = calculate(rise.getUTCFullYear(), rise.getUTCMonth() + 1, rise.getUTCDate(), rise.getUTCHours(), rise.getUTCMinutes(), rise.getUTCSeconds(), delta_t, true, false);
@@ -1860,16 +1881,10 @@ export function sunRiseAndSetEpoch(delta_t, year, month, day, latitude, longitud
 
 	// Sun set
 	dms = decimalToDMS(utSet);
-	let set, setEpoch;
-	if (false) { // Firefox does not like it
-		// // let set = new Date(`${year}-${lpad(month, '0', 2)}-${lpad(day, '0', 2)} ${lpad(dms.hours, '0', 2)}:${lpad(dms.minutes, '0', 2)}:${lpad(Math.floor(dms.seconds), '0', 2)} GMT+0000`);
-		set = new Date(`${year}-${lpad(month, '0', 2)}-${lpad(day, '0', 2)} 00:00:00 GMT+0000`);
-		setEpoch = rise.getTime() + (dms.hours * 3600 * 1000) + (dms.minutes * 60 * 1000) + (dms.seconds * 1000);
-		set.setTime(setEpoch);
-	} else {
-		setEpoch = Date.UTC(year, month - 1, day, 0, 0, 0)  + (dms.hours * 3600 * 1000) + (dms.minutes * 60 * 1000) + (dms.seconds * 1000);
-		set = new Date(setEpoch);
-	}
+	// let set = new Date(`${year}-${lpad(month, '0', 2)}-${lpad(day, '0', 2)} ${lpad(dms.hours, '0', 2)}:${lpad(dms.minutes, '0', 2)}:${lpad(Math.floor(dms.seconds), '0', 2)} GMT+0000`);
+	let set = new Date(`${year}-${lpad(month, '0', 2)}-${lpad(day, '0', 2)} 00:00:00 GMT+0000`);
+	let setEpoch = rise.getTime() + (dms.hours * 3600 * 1000) + (dms.minutes * 60 * 1000) + (dms.seconds * 1000);
+	set.setTime(setEpoch);
 	// epoch: set.getTime();
 	// let resultForSet = calculate(year, month, day, dms.hours, dms.minutes, dms.seconds, delta_t, true, false);
 	let resultForSet = calculate(set.getUTCFullYear(), set.getUTCMonth() + 1, set.getUTCDate(), set.getUTCHours(), set.getUTCMinutes(), set.getUTCSeconds(), delta_t, true, false);
@@ -1971,9 +1986,8 @@ export function getSunDataForDate(delta_t,
 	let sr = Utils.sightReduction(latitude, longitude, ghaSun, decSun);
 	let tt = getSunMeridianPassageTime(latitude, longitude, sunEoT);
 	let dms = decimalToDMS(tt);
-	// let transitTime = new Date(`${parsed.year}-${lpad(parsed.month, '0', 2)}-${lpad(parsed.day, '0', 2)} ${lpad(dms.hours, '0', 2)}:${lpad(dms.minutes, '0', 2)}:${lpad(dms.seconds.toFixed(0), '0', 2)} GMT+0000`); // TODO Z->GMT
-	// let transitEpoch = transitTime.getTime();
-	let transitEpoch = Date.UTC(parsed.year, parsed.month - 1, parsed.day, dms.hours, dms.minutes, dms.seconds);
+	let transitTime = new Date(`${parsed.year}-${lpad(parsed.month, '0', 2)}-${lpad(parsed.day, '0', 2)} ${lpad(dms.hours, '0', 2)}:${lpad(dms.minutes, '0', 2)}:${lpad(dms.seconds.toFixed(0), '0', 2)} GMT+0000`); // TODO Z->GMT
+	let transitEpoch = transitTime.getTime();
 
 	let sunRiseAndSet = sunRiseAndSetEpoch(delta_t, parsed.year, parsed.month, parsed.day, latitude, longitude, decSun, hpSun, sdSun, sunEoT);
 
@@ -2004,7 +2018,7 @@ export function getSunDataForDate(delta_t,
  * @param {float} longitude 
  * @param {number} step in minutes (default 10 used if null)
  * @param {number} refDate epoch
- * @returns 
+ * @returns [ { epoch: {number}, he: {number}, z: {number} } ]
  */
 export function getSunDataForAllDay(bodyData, delta_t, latitude, longitude, step, refDate) {
 	if (bodyData === null) {

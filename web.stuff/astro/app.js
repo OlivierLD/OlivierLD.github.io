@@ -53,7 +53,11 @@ export function sampleMain(userDataObject) {
 	// console.log("DeltaT is now %f", delta_t);
 
 	let noPlanets = userDataObject.noPlanets || false;
-	return CelestialComputer.calculate(year, month, day, hour, minute, second, delta_t, noPlanets);
+	let calcResult = CelestialComputer.calculate(year, month, day, hour, minute, second, delta_t, noPlanets);
+	
+	let solarDate = CelestialComputer.getSolarDateAtPos(userPos.latitude, userPos.longitude, calcResult.EOT.raw, year, month, day, hour, minute, second, delta_t);
+	calcResult.solarDate = solarDate; // Adding SolarDate at user's position
+	return calcResult;
 }
 
 window.sampleMain = sampleMain;

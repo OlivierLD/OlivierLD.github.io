@@ -923,7 +923,8 @@ let toggleForeground = () => {
             grid-template-rows: auto;
             grid-template-areas: 
                 "wm jumbos prmsl"
-                "utc utc utc";
+                "utc utc utc"
+                "solar solar solar";
         }
         /* For the switch (slider) */
         .switch {
@@ -1459,6 +1460,29 @@ let toggleForeground = () => {
                                 value="00:00:00 UTC"></split-flap-display>
         </div>    
     </div>
+
+    <div class="centered" style="grid-area: solar">
+        <!-- SPLIT-FLAP Solar -->
+        <div style="margin: 10px;">
+            <split-flap-display id="split-flap-solar-date-display"
+                                class="split-flap-night-bg"
+                                nb-char="11"
+                                font-size="30"
+                                justified="LEFT"
+                                title="Solar Date"
+                                value="01 Jan 1970"></split-flap-display>
+
+            <split-flap-display id="split-flap-solar-display"
+                                class="split-flap-night-bg"
+                                style="margin-left: 10px;"
+                                nb-char="8"
+                                font-size="30"
+                                justified="LEFT"
+                                title="Solar Time"
+                                value="00:00:00"></split-flap-display>
+        </div>    
+    </div>
+
 </div>
 
 <div id="full-foreground" style="display: block;">
@@ -1623,6 +1647,8 @@ let toggleForeground = () => {
 </body>
 <script type="text/javascript">
 
+    const MONTHS = [ "JAN", "FEB", "MAR", "APR", "MAY", "JUN",
+                     "JUL", "AUG", "SEP", "OCT", "NOV", "DEC" ];
     const DELTA_T = 69.2201; // Will be re-calculated
 
     let consoleVerbose = false;
@@ -1643,7 +1669,7 @@ let toggleForeground = () => {
         };
 
         let testResult = sampleMain(calculationData); // in app.js
-        globalAstroData = testResult;
+        globalAstroData = testResult;  // Now includes the solar date.
         if (consoleVerbose) {
             console.log("Calculation done %d-%d-%d %d:%d:%d UTC :", calculationData.utcyear, calculationData.utcmonth, calculationData.utcday, calculationData.utchour, calculationData.utcminute, calculationData.utcsecond);
             console.log("Result:\n", JSON.stringify(testResult, null, 2));
@@ -1734,18 +1760,29 @@ let toggleForeground = () => {
 
 //      let date = utcTime.format("d-m-Y-l");
         let date = utcTime.format("D d M Y");
-        let splitFalpDate = document.getElementById('split-flap-utc-date-display');
-        splitFalpDate.value = date;
-        splitFalpDate.repaint();
+        let splitFlapDate = document.getElementById('split-flap-utc-date-display');
+        splitFlapDate.value = date;
+        splitFlapDate.repaint();
 
         // let calendar = document.getElementById('calendar-01');
         // calendar.value = date;
         // calendar.repaint();
         // Update UTC time
         let time = utcTime.format("H:i:s");
-        let splitFalp = document.getElementById('split-flap-utc-display');
-        splitFalp.value = time + " UTC";
-        splitFalp.repaint();
+        let splitFlap = document.getElementById('split-flap-utc-display');
+        splitFlap.value = time + " UTC";
+        splitFlap.repaint();
+
+        // Solar date and time if available
+        let solarDate = testResult.solarDate;
+        let splitFlapSolarDate = document.getElementById('split-flap-solar-date-display'); // Date
+        splitFlapSolarDate.value = `${lpad(solarDate.day.toFixed(0), '0', 2)} ${MONTHS[solarDate.month - 1]} ${solarDate.year.toFixed(0)}`;
+        splitFlapSolarDate.repaint();
+
+        let splitFlapSolar = document.getElementById('split-flap-solar-display'); // Time
+        splitFlapSolar.value = `${lpad(solarDate.hour.toFixed(0), '0', 2)}:${lpad(solarDate.minute.toFixed(0), '0', 2)}:${solarDate.second.toFixed(0)}`;
+        splitFlapSolar.repaint();
+
 
         // Moon-tilt
         // userPos.latitude, userPos.longitude
