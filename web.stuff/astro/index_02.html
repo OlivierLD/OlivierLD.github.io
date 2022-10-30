@@ -1466,11 +1466,11 @@ let toggleForeground = () => {
         <div style="margin: 10px;">
             <split-flap-display id="split-flap-solar-date-display"
                                 class="split-flap-night-bg"
-                                nb-char="11"
+                                nb-char="17"
                                 font-size="30"
                                 justified="LEFT"
                                 title="Solar Date"
-                                value="01 Jan 1970"></split-flap-display>
+                                value="SOLAR 01 Jan 1970"></split-flap-display>
 
             <split-flap-display id="split-flap-solar-display"
                                 class="split-flap-night-bg"
@@ -1776,7 +1776,7 @@ let toggleForeground = () => {
         // Solar date and time if available
         let solarDate = testResult.solarDate;
         let splitFlapSolarDate = document.getElementById('split-flap-solar-date-display'); // Date
-        splitFlapSolarDate.value = `${lpad(solarDate.day.toFixed(0), '0', 2)} ${MONTHS[solarDate.month - 1]} ${solarDate.year.toFixed(0)}`;
+        splitFlapSolarDate.value = `SOLAR ${lpad(solarDate.day.toFixed(0), '0', 2)} ${MONTHS[solarDate.month - 1]} ${solarDate.year.toFixed(0)}`;
         splitFlapSolarDate.repaint();
 
         let splitFlapSolar = document.getElementById('split-flap-solar-display'); // Time
