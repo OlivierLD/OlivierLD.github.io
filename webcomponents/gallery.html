@@ -20,6 +20,7 @@
 	<script type="module" src="widgets/rain/Pluviometer.js"></script>
 	<script type="module" src="widgets/temperature/Thermometer.js"></script>
 	<script type="module" src="widgets/jumbo/JumboDisplay.js"></script>
+	<script type="module" src="widgets/jumboplus/JumboPlusDisplay.js"></script>
 	<script type="module" src="widgets/direction/DirectionDisplay.js"></script>
 	<script type="module" src="widgets/analogdisplay/AnalogDisplay.js"></script>
 	<script type="module" src="widgets/windangle/WindAngleDisplay.js"></script>
@@ -3142,11 +3143,57 @@
 				</div>
 			</td>
 
-        </tr>
+		</tr>
 	</table>
 </div>
 <hr/>
 <!--
+    BIG JUMBOS
+ +-->
+ <div style="cursor: pointer;" onclick="showHide('jumboplus');" tabindex="0"><b><u><a id="a-jumbos-plus" href="#a-jumbos-plus">Big Jumbos</a></u></b></div>
+ <div id="jumboplus" class="smooth">
+                 <pre style="font-weight: bold; text-align: left; color: white; vertical-align: top; margin-top: 6px;">
+ &lt;jumbo-plus-display id="jumbo-plus-01"
+                     class="jumbo-plus"
+                     value="01-JAN-1970|00:00:00"
+                     label="UTC Date Time"
+                     width="400"
+                     height="140">&lt;/jumbo-plus-display>
+                 </pre>
+     <table>
+         <tr>
+             <td valign="top">
+                 <div class="black-frame centered" style="border: 1px solid cyan;">
+                     <jumbo-plus-display id="jumbo-plus-01"
+                                         class="jumbo-plus-transparent"
+                                         title="Transparent Jumbo Display&#13;Split lines on '|'"
+                                         value="01-JAN-1970|00:00:00"
+                                         label="UTC Date Time"
+                                         width="400"
+                                         height="140"></jumbo-plus-display>
+                 </div>
+ 
+                 <div class="black-frame centered">
+                     Value:
+                     <input type="text"
+                            id="jumbo-plus-value-05"
+                            placeholder="value"
+                            title="Jumbo Value"
+                            style="width: 200px; text-align: right;"
+                            value="01-JAN-1970|00:00:00"/>
+                     <!--br/-->
+                     <button onclick="setData('jumbo-plus-value-05', 'jumbo-plus-01')"
+                             title="Set value for the jumbo"
+                             style="margin-top: 3px;">Set Value
+                     </button>
+                 </div>
+             </td>
+ 
+         </tr>
+     </table>
+ </div>
+ <hr/>
+ <!--
     COMPASS ROSE. CONCAVE.
  +-->
 <div style="cursor: pointer;" onclick="showHide('compass-rose');" tabindex="0"><b><u><a id="a-compass" href="#a-compass">Compass (concave) Rose</a></u></b>

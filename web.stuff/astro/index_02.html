@@ -18,6 +18,7 @@
     <!--script type="module" src="./webcomponents/CalendarDisplay.js"></script-->
     <script type="module" src="./webcomponents/SplitFlapDisplay.js"></script>
     <script type="module" src="./webcomponents/JumboDisplay.js"></script>
+    <script type="module" src="./webcomponents/JumboPlusDisplay.js"></script>
     <script type="module" src="./webcomponents/ScrollDigit.js"></script>
     <!--script type="module" src="./webcomponents/MoonPhase.js"></script-->
     <script type="module" src="./webcomponents/moonphase.2/MoonPhase.js"></script>
@@ -218,6 +219,11 @@ let setTransparency = (wcId, cb) => {
 let setSun = (wcId, cb) => {
 	document.getElementById(wcId).withSun = (cb.checked ? 'true' : 'false');
 	document.getElementById(wcId).repaint();
+};
+
+let setSolarDate = (wcId, cb) => {
+	document.getElementById(wcId).style.display = (cb.checked ? 'block' : 'none');
+	// document.getElementById(wcId).repaint();
 };
 
 let setGrid = (wcId, cb) => {
@@ -1214,6 +1220,15 @@ let toggleForeground = () => {
                         </label>
                         <span class="switch-element">Tropics &amp; Polar Circles</span>
                     </div>
+                    <!--input type="checkbox" onchange="setSun('world-map-01', this);" checked/>Sun -->
+                    <div class="switch-container" style="margin-left: 30px;" title="Display the Foreground Solar Date/Time">
+                        <label class="switch switch-element">
+                          <input id="solar-slider" type="checkbox" onchange="setSolarDate('solar-jumbo-wrapper', this);" checked>
+                          <span class="slider round"></span>
+                        </label>
+                        <span class="switch-element">Solar Date Foreground</span>
+                    </div>
+
                     <!--
                     <br/>
                     <input type="checkbox" id="geo-sat-01"/>GeoStationary Satellites
@@ -1637,6 +1652,16 @@ let toggleForeground = () => {
         <span class="tooltiptext">Computed data will show below</span>
     </button>
 
+    <div id="solar-jumbo-wrapper" class="black-frame" style="border: 2px solid cyan; width: 400px; margin-left: 10px;">
+        <jumbo-plus-display id="jumbo-plus-01"
+                            class="jumbo-plus-transparent"
+                            title="Solar Date and Time"
+                            value="01-JAN-1970|00:00:00"
+                            label="Solar Date Time"
+                            width="400"
+                            height="140"></jumbo-plus-display>
+    </div>
+
     <div id="raw-data" style="display: none;">
         <div id="result" class="result"></div>
 
@@ -1783,6 +1808,11 @@ let toggleForeground = () => {
         splitFlapSolar.value = `${lpad(solarDate.hour.toFixed(0), '0', 2)}:${lpad(solarDate.minute.toFixed(0), '0', 2)}:${lpad(solarDate.second.toFixed(0), '0', 2)}`;
         splitFlapSolar.repaint();
 
+        // Big Jumbo
+        let bigUTCJumbo = document.getElementById('jumbo-plus-01');
+        bigUTCJumbo.value = `${lpad(solarDate.day.toFixed(0), '0', 2)} ${MONTHS[solarDate.month - 1]} ${solarDate.year.toFixed(0)}` +
+                            `|${lpad(solarDate.hour.toFixed(0), '0', 2)}:${lpad(solarDate.minute.toFixed(0), '0', 2)}:${lpad(solarDate.second.toFixed(0), '0', 2)}`;
+        bigUTCJumbo.repaint();
 
         // Moon-tilt
         // userPos.latitude, userPos.longitude

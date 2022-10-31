@@ -149,6 +149,16 @@
 	--value-font: 'Courier New';
 }
 
+.jumbo-plus-transparent {
+	--bg-color: rgba(0, 0, 0, 0.0);
+	--display-background-gradient-from: rgba(0, 0, 0, 0.0);
+	--display-background-gradient-to: rgba(0, 0, 0, 0.0);
+	--grid-color: rgba(0, 0, 0, 0.5);
+	--display-color: cyan;
+	--label-font: 'Courier New';
+	--value-font: 'Courier New';
+}
+
 @font-face {
 	font-family: DigiFont;
 	src: url(./fonts/ds-digi.ttf) format("truetype");
