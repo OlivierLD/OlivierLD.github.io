@@ -700,3 +700,17 @@ compass-display .green {
 	--label-font: Verdana;
 	--value-font: Arial;
 }
+
+.display-graph {
+	--display-background-gradient-from: black;
+	--display-background-gradient-to: gray;
+	--grid-color: rgba(255, 255, 255, 0.7);
+	--display-color: cyan;
+}
+
+.barograph {
+	--display-background-gradient-from: white;
+	--display-background-gradient-to: white;
+	--grid-color: orange;
+	--display-color: purple;
+}

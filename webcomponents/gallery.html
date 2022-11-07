@@ -6016,11 +6016,11 @@ map.addEventListener('mousemove', evt => {
     }
 
     /*
-                 * Good values:
-                 * from 0 to 10 step 0.1
-                 * expFact 10 to 1
-                 * cosFact 10
-                 */
+     * Good values:
+     * from 0 to 10 step 0.1
+     * expFact 10 to 1
+     * cosFact 10
+     */
     function calculateData(from, to, step, expFact, cosFact) {
         let x = [];
         let y = [];
@@ -6210,7 +6210,7 @@ map.addEventListener('mousemove', evt => {
 				<div class="black-frame centered">
 					<graph-display id="graph-01"
 								   tabindex="-1"
-								   class="graph-01"
+								   class="display-graph graph-01"
 								   width="600"
 								   height="200"
 								   padding="5"
@@ -6242,7 +6242,7 @@ map.addEventListener('mousemove', evt => {
 				<div class="black-frame centered">
 					<graph-display id="graph-02"
 								   tabindex="-1"
-								   class="graph-02"
+								   class="display-graph graph-02"
 								   width="200"
 								   height="400"
 								   orientation="vertical"
@@ -6703,7 +6703,7 @@ const CENTER_ON_LAST = 3;
 
 const DATA_TO_USE = DATA_TO_RECENTER_3;
 
-function plotGraphRC(graphId, recenter) {
+function plotGraphRC(graphId, recenter, lineColor='lime', graphLabel='Reworking Data') {
 
 	let elmt = document.getElementById(graphId);
 
@@ -6782,7 +6782,7 @@ function plotGraphRC(graphId, recenter) {
 		data: [
 			{
 				name: recenter ? 'Re-Centered' : 'As is',
-				lineColor: 'lime',
+				lineColor: lineColor ? lineColor : 'lime',
 				fillColor: null,
 				thickness: 3,
 				x: values.x,
@@ -6796,7 +6796,7 @@ function plotGraphRC(graphId, recenter) {
 	elmt.data.withXLabels = true;
 	elmt.data.withYLabels = false;
 	elmt.vgrid = valLabel;
-	elmt.label = "Reworking data";
+	elmt.label = graphLabel; // "Reworking data";
 	elmt.value = value;
 	elmt.repaint();
 }
@@ -6810,7 +6810,7 @@ function plotGraphRC(graphId, recenter) {
 				<div class="black-frame centered">
 					<graph-display id="graph-03"
 								   tabindex="-1"
-								   class="graph-02"
+								   class="display-graph graph-02"
 								   width="200"
 								   height="400"
 								   orientation="vertical"
@@ -6830,6 +6830,35 @@ function plotGraphRC(graphId, recenter) {
 				</script>
 			</td>
 		</tr>
+		<tr>
+			<td valign="top">
+				<script type="text/javascript">
+
+				</script>
+				<style>
+                    graph-display:focus {
+                        outline: none;
+                    }
+                </style>
+				<div class="black-frame centered">
+					<graph-display id="graph-04"
+								   tabindex="-1"
+								   class="barograph"
+								   width="600"
+								   height="200"
+								   padding="5"
+								   orientation="horizontal"
+								   value="1013.25"
+								   vgrid="0:0.5"
+								   hgrid="0:10"
+								   label="Barograph"
+								   title="PRMSL"/>
+				</div>
+				<div style="padding: 5px;">
+					<button onclick="plotGraphRC('graph-04', AS_IS, 'purple', 'PRMSL');">Plot PRMSL</button>
+				</div>
+            </td>
+        </tr>    
 	</table>
 </div>
 <hr/>
