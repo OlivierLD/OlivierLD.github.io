@@ -194,7 +194,7 @@ export function decToSex(val, ns_ew) { // ns_ew in { "NS", "EW" }
 		s += " ";
 	} else {
 		if (val < 0) {
-			s += '-'
+			s += '-';
 		}
 	}
 	s += i + "°" + dec.toFixed(2) + "'";
