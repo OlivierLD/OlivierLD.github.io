@@ -154,9 +154,13 @@
 	--display-background-gradient-from: rgba(0, 0, 0, 0.0);
 	--display-background-gradient-to: rgba(0, 0, 0, 0.0);
 	--grid-color: rgba(0, 0, 0, 0.5);
-	--display-color: cyan;
+	--display-color: rgba(0, 255, 255, 0.5);
 	--label-font: 'Courier New';
 	--value-font: 'Courier New';
+}
+
+.one-decimal {
+	--value-nb-decimal: 1;
 }
 
 @font-face {
@@ -172,6 +176,18 @@ jumbo-display .digital-font-orange {
 
 jumbo-display .digital-font-green {
 	--display-color: lightgreen;
+	--label-font: DigiFont;
+	--value-font: DigiFont;
+}
+
+jumbo-display .digital-font-red {
+	--display-color: rgba(255, 0, 0, 0.75);
+	--label-font: DigiFont;
+	--value-font: DigiFont;
+}
+
+jumbo-display .digital-font-cyan {
+	--display-color: rgba(0, 255, 255, 0.75);
 	--label-font: DigiFont;
 	--value-font: DigiFont;
 }
