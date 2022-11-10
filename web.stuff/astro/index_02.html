@@ -1812,7 +1812,7 @@ let toggleForeground = () => {
         let bigUTCJumbo = document.getElementById('jumbo-plus-01');
         bigUTCJumbo.value = `${lpad(solarDate.day.toFixed(0), '0', 2)} ${MONTHS[solarDate.month - 1]} ${solarDate.year.toFixed(0)}` +
                             `|${lpad(solarDate.hour.toFixed(0), '0', 2)}:${lpad(solarDate.minute.toFixed(0), '0', 2)}:${lpad(solarDate.second.toFixed(0), '0', 2)}`;
-        bigUTCJumbo.label = 'From ' + // 'Solar Date & Time from ' + 
+        bigUTCJumbo.label = 'Solar, from ' + // 'Solar Date & Time from ' + 
             decToSex(userPos.latitude, "NS") + " / " +
             decToSex(userPos.longitude, "EW");
         bigUTCJumbo.repaint();
