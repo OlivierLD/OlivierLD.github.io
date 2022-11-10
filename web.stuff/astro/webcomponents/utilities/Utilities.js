@@ -176,7 +176,7 @@ export function calculateGreatCircleInDegrees(start, arrival, nbPoints) {
 	return degRoute;
 }
 
-export function decToSex(val, ns_ew) {
+export function decToSex(val, ns_ew) { // ns_ew in { "NS", "EW" }
 	let absVal = Math.abs(val);
 	let intValue = Math.floor(absVal);
 	let dec = absVal - intValue;
