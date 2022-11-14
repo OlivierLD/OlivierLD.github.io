@@ -273,6 +273,19 @@
             </slide-show>
             
         </div>
+
+        <h2><a name="miko">Miko monte aussi une cuisine...</a></h2>
+        <small style="font-style: italic;">Click the images to enlarge</small>
+
+        <div style="height: 600px; margin: 2px;">
+            <slide-show id="slide-show-kitchen-2"
+                        width="800"
+                        height="600">
+                <slide-show-image src="./images/cuisine.2.jpeg" title="Miko monte la cuisine" desc="La cuisine d'Ellie"></slide-show-image>
+                <slide-show-image src="./images/Ellie.bureau.jpeg" title="Ellie &agrave; son bureau" desc="Mat&eacute;riaux r&eacute;cup&eacute;r&eacute;s de l'ancienne cuisine"></slide-show-image>
+            </slide-show>
+        </div>    
+
     </div>
 
     <div id="2023" style="display: none; margin: 15px;">Soon...</div>
@@ -284,6 +297,7 @@
 <script>
     window.onload = () => { // Important: window.onload
 		document.getElementById("slide-show-kitchen").slideclick = onSlideShowClick;
+		document.getElementById("slide-show-kitchen-2").slideclick = onSlideShowClick;
     };
 </script>
 </html>
