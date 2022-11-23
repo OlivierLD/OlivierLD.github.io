@@ -367,7 +367,7 @@ class GraphDisplay extends HTMLElement {
 
 		let grd = context.createLinearGradient(0, 5, 0, this.height);
 		grd.addColorStop(0, this.graphDisplayColorConfig.displayBackgroundGradient.from); // 0  Beginning
-		grd.addColorStop(1, this.graphDisplayColorConfig.displayBackgroundGradient.to); // 1  End
+		grd.addColorStop(1, this.graphDisplayColorConfig.displayBackgroundGradient.to);   // 1  End
 		context.fillStyle = grd;
 
 		// Background

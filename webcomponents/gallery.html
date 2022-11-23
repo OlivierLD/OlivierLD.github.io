@@ -5702,10 +5702,10 @@ map.addEventListener('mousemove', evt => {
 						<slide-show-image src="./images/banian.jpg" title="Banian"></slide-show-image>
 					</slide-show>
 					<!--script type="text/javascript">
-                                                        window.onload = () => { // Important: window.onload
-                                                                document.getElementById("slide-show-01").slideclick = onSlideShowClick;
-                                                        }
-                                                </script-->
+                        window.onload = () => { // Important: window.onload
+                                document.getElementById("slide-show-01").slideclick = onSlideShowClick;
+                        }
+                    </script-->
 				</div>
 			</td>
 			<td valign="top">
@@ -5721,12 +5721,12 @@ map.addEventListener('mousemove', evt => {
 						<slide-show-image src="./images/sand-dollar/05.jpg" title="The mold"></slide-show-image>
 						<slide-show-image src="./images/sand-dollar/08.jpg" title="Casting"></slide-show-image>
 					</slide-show>
-					<script type="text/javascript">
+					<!--script type="text/javascript">
                         window.onload = () => { // Important: window.onload
                             document.getElementById("slide-show-01").slideclick = onSlideShowClick;
                             document.getElementById("slide-show-02").slideclick = onSlideShowClick;
                         }
-                    </script>
+                    </script-->
 				</div>
 			</td>
 		</tr>
@@ -6832,9 +6832,17 @@ function plotGraphRC(graphId, recenter, lineColor='lime', graphLabel='Reworking 
 		</tr>
 		<tr>
 			<td valign="top">
-				<script type="text/javascript">
-
-				</script>
+				<!--script type="text/javascript">
+                window.onload = () => {
+                    const DAYS = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY'];
+                    document.getElementById('graph-04').setVGridLabelsCallback(val => {
+                        // console.log(`VGridLabel: ${val}`);
+                        // 0 to 360, step 45
+                        let i = (val / 45) % 7;
+                        return DAYS[i]; 
+                    });
+                };
+                </script-->
 				<style>
                     graph-display:focus {
                         outline: none;
@@ -7038,6 +7046,23 @@ function plotGraphRC(graphId, recenter, lineColor='lime', graphLabel='Reworking 
 		<td><span class="mirror" style="font-style: italic;" title="C'est MOI qui l'ai fait.">Oliv did it</span></td>
 	</tr>
 </table>
+
+
+<script type="text/javascript">
+    window.onload = () => { // Important: window.onload
+        document.getElementById("slide-show-01").slideclick = onSlideShowClick;
+        document.getElementById("slide-show-02").slideclick = onSlideShowClick;
+
+        const DAYS = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY'];
+        document.getElementById('graph-04').setVGridLabelsCallback(val => {
+            // console.log(`VGridLabel: ${val}`);
+            // 0 to 360, step 45
+            let i = (val / 45) % 7;
+            return DAYS[i]; 
+        });
+    }
+</script>
+
 
 <span>See (some of) them live on <a href="https://codepen.io/OlivierLD/" target="CodePen">CodePen.io</a>.</span>
 <br/>
