@@ -5702,6 +5702,7 @@ map.addEventListener('mousemove', evt => {
 						<slide-show-image src="./images/banian.jpg" title="Banian"></slide-show-image>
 					</slide-show>
 					<!--script type="text/javascript">
+                        // Can happen only once in the page..., see at the end
                         window.onload = () => { // Important: window.onload
                                 document.getElementById("slide-show-01").slideclick = onSlideShowClick;
                         }
@@ -5722,6 +5723,7 @@ map.addEventListener('mousemove', evt => {
 						<slide-show-image src="./images/sand-dollar/08.jpg" title="Casting"></slide-show-image>
 					</slide-show>
 					<!--script type="text/javascript">
+                        // Can happen only once in the page..., see at the end
                         window.onload = () => { // Important: window.onload
                             document.getElementById("slide-show-01").slideclick = onSlideShowClick;
                             document.getElementById("slide-show-02").slideclick = onSlideShowClick;
@@ -6833,7 +6835,7 @@ function plotGraphRC(graphId, recenter, lineColor='lime', graphLabel='Reworking 
 		<tr>
 			<td valign="top">
 				<!--script type="text/javascript">
-                window.onload = () => {
+                window.onload = () => {  // Can happen only once in the page..., see at the end
                     const DAYS = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY'];
                     document.getElementById('graph-04').setVGridLabelsCallback(val => {
                         // console.log(`VGridLabel: ${val}`);
@@ -7053,6 +7055,7 @@ function plotGraphRC(graphId, recenter, lineColor='lime', graphLabel='Reworking 
         document.getElementById("slide-show-01").slideclick = onSlideShowClick;
         document.getElementById("slide-show-02").slideclick = onSlideShowClick;
 
+        // Abscissa callback for the barograph.
         const DAYS = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY'];
         document.getElementById('graph-04').setVGridLabelsCallback(val => {
             // console.log(`VGridLabel: ${val}`);
