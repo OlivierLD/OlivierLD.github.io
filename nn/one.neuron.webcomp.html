@@ -34,7 +34,7 @@
 		<td class="left-right"><output name="fontsize" id="fontsize01">3em</output></td>
 	</tr>
 </table>
-<div>
+<div style="margin: 5px;">
 	The result (far right, in black) is calculated by the formula:<br/>
 	<code>ActivationFunction((((A * W1) + (B * W2) + (C * W3)) + bias) * finalW)</code><br/>
 	Where <code>A</code>, <code>B</code> and <code>C</code> are the three values on the left, in blue.
@@ -134,9 +134,9 @@
 <div style="width: 90%; padding-top: 10px;">
 	The graph below shows <i>only</i>:
 	<ul>
-		<li><code>(A * W1) + bias => (<span id="val-01"></span>)</code>, in <i style="color: blue;">blue</i>, the dot is at <code>[A, (A * W1) + bias] => <span id="pt-01"></span></code></li>
-		<li><code>(B * W2) + bias => (<span id="val-02"></span>)</code> in <i style="color: green;">green</i>, the dot is at <code>[B, (B * W2) + bias] => <span id="pt-02"></span></code></li>
-		<li><code>(C * W2) + bias => (<span id="val-03"></span>)</code>, in <i style="color: red;">red</i>, the dot is at <code>[C, (C * W3) + bias] => <span id="pt-03"></span></code></li>
+		<li><code style="color: blue;">(A * W1) + bias => (<span id="val-01"></span>)</code>, in <i style="color: blue;">blue</i>, the dot is at <code>[A, (A * W1) + bias] => <span id="pt-01"></span></code></li>
+		<li><code style="color: green;">(B * W2) + bias => (<span id="val-02"></span>)</code> in <i style="color: green;">green</i>, the dot is at <code>[B, (B * W2) + bias] => <span id="pt-02"></span></code></li>
+		<li><code style="color: red;">(C * W2) + bias => (<span id="val-03"></span>)</code>, in <i style="color: red;">red</i>, the dot is at <code>[C, (C * W3) + bias] => <span id="pt-03"></span></code></li>
 	</ul>
 	<table style=" border: none;">
 		<tr>
