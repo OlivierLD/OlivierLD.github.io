@@ -108,13 +108,13 @@
   }
 
   dialog {
-	background: rgba(25, 25, 25, 0.75);
-	color: silver;
-	width: 600px;
-	top: 50px;
-	border: 2px solid orange;
-	border-radius: 10px;
-}
+    background: rgba(25, 25, 25, 0.75);
+    color: silver;
+    width: 600px;
+    top: 50px;
+    border: 2px solid orange;
+    border-radius: 10px;
+  }
 
 
 .dialog-header {
