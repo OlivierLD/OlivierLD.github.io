@@ -44,6 +44,7 @@
 	<script type="module" src="widgets/graph/GraphDisplay.js"></script>
 	<script type="module" src="widgets/moonphase/MoonPhase.js"></script>
 	<script type="module" src="widgets/moonphase.2/MoonPhase.js"></script>
+	<script type="module" src="widgets/compassglobe/CompassGlobe.js"></script>
 
 	<script type="text/javascript" src="utils/NavigationHelper.js"></script>
 
@@ -417,6 +418,40 @@
                 window.clearInterval(intervalId);
                 animation = false;
             }
+        }
+
+        function setCompassGlobeValue(elementId, valueId) {
+            let element = document.getElementById(elementId);
+            let valueEl = document.getElementById(valueId);
+
+            element.value = valueEl.value;
+        }
+
+        function doAnimateGlobe(elem, valId) {
+            let element = document.getElementById(elem);
+            let valueEl = document.getElementById(valId);
+            let targetVal = parseInt(valueEl.value);
+            
+            let origin = element.value;
+            // console.log(`Ah! ${origin}, to ${targetVal}`);
+            let inc = (origin > targetVal) ? - 1 : 1;
+            let currentValue = origin;
+
+            function doIt() {
+                element.value = currentValue;
+                element.repaint();
+                // currentValue += inc;
+                if (currentValue !== targetVal) {
+                    window.setTimeout(() => {
+                            doIt();
+                    }, 50);
+                }
+                currentValue += inc;
+            };
+            // Start it.
+            window.setTimeout(() => {
+                            doIt();
+                        }, 50);
         }
 
         function doAnimateMoon(moonComp) {
@@ -7037,7 +7072,85 @@ function plotGraphRC(graphId, recenter, lineColor='lime', graphLabel='Reworking 
      </table>
  </div>
  <hr/>
- 
+
+ <!--
+    COMPASS GLOBE
+ +-->
+ <div style="cursor: pointer;" onclick="showHide('compass-globe');" tabindex="0"><b><u><a id="a-compass-globe" href="#a-compass-globe">Compass Globe</a></u></b></div>
+ <div id="compass-globe" class="smooth">
+                 <pre style="font-weight: bold; text-align: left; color: white; vertical-align: top; margin-top: 6px;">
+ &lt;compass-globe id="compass-globe-01"
+                title="Compass"
+                width="400"
+                height="400"
+                value="180"
+                label="HDG"/>
+                 </pre>
+
+     <table>
+         <tr>
+             <td valign="top">
+                 <div class="black-frame centered">
+                     <compass-globe id="compass-globe-01"
+                                    width="400"
+                                    height="400"
+                                    value="180"
+                                    label="HDG"
+                                    title="Compass"/>
+                 </div>
+                 <div class="black-frame centered">
+                     Heading:
+                     <input type="number"
+                            id="compass-globe-value-01"
+                            placeholder="Heading"
+                            title="Heading value"
+                            style="width: 50px; text-align: right;"
+                            value="180"/>
+                     <button onclick="setCompassGlobeValue('compass-globe-01', 'compass-globe-value-01');"
+                             title="Set HDG value above"
+                             style="margin-top: 3px;">Set
+                     </button>
+                     <!-- br/ -->
+                     <button onclick="doAnimateGlobe('compass-globe-01', 'compass-globe-value-01');"
+                             title="Smooth move"
+                             style="margin-top: 3px;">Animate
+                     </button>
+                 </div>
+             </td>
+             <td valign="top">
+                <div class="black-frame centered">
+                    <compass-globe id="compass-globe-02"
+                                   class="globe-compass-02"
+                                   width="300"
+                                   height="300"
+                                   value="180"
+                                   label="HDG"
+                                   title="Compass"/>
+                </div>
+                <div class="black-frame centered">
+                    Heading:
+                    <input type="number"
+                           id="compass-globe-value-02"
+                           placeholder="Heading"
+                           title="Heading value"
+                           style="width: 50px; text-align: right;"
+                           value="180"/>
+                    <button onclick="setCompassGlobeValue('compass-globe-02', 'compass-globe-value-02');"
+                            title="Set HDG value above"
+                            style="margin-top: 3px;">Set
+                    </button>
+                    <!-- br/ -->
+                    <button onclick="doAnimateGlobe('compass-globe-02', 'compass-globe-value-02');"
+                            title="Smooth move"
+                            style="margin-top: 3px;">Animate
+                    </button>
+                </div>
+            </td>
+       </tr>
+     </table>
+ </div>
+ <hr/>
+
 </div> <!-- Inner Container -->
 </div> <!-- Outer Container -->
   

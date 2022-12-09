@@ -714,3 +714,19 @@ compass-display .green {
 	--grid-color: orange;
 	--display-color: purple;
 }
+
+.globe-compass-02 {
+	--bg-color: transparent;
+    --display-background-gradient-from: none;
+    --display-background-gradient-to: none;
+	--display-globe-gradient-from: black;
+	--display-globe-gradient-to: rgb(47, 79, 79);
+	--display-cylinder-gradient-from: black;
+	--display-cylinder-gradient-to: darkgray;
+	--index-color: red;
+	--display-color: rgb(220, 220, 220);
+	--value-nb-decimal: 0;
+	--label-font: 'Courier New';
+	--value-font: Verdana;
+
+}
