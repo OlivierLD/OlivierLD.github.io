@@ -715,10 +715,10 @@ compass-display .green {
 	--display-color: purple;
 }
 
-.globe-compass-02 {
+.globe-compass-01 {
 	--bg-color: transparent;
-    --display-background-gradient-from: none;
-    --display-background-gradient-to: none;
+    --display-background-gradient-from: black;
+    --display-background-gradient-to: gray;
 	--display-globe-gradient-from: black;
 	--display-globe-gradient-to: rgb(47, 79, 79);
 	--display-cylinder-gradient-from: black;
@@ -728,4 +728,21 @@ compass-display .green {
 	--value-nb-decimal: 0;
 	--label-font: 'Courier New';
 	--value-font: Verdana;
+	--value-color: cyan;
+}
+
+.globe-compass-02 {
+	--bg-color: transparent;
+    --display-background-gradient-from: none;
+    --display-background-gradient-to: none;
+	--display-globe-gradient-from: black;
+	--display-globe-gradient-to: rgb(47, 79, 79);
+	--display-cylinder-gradient-from: black;
+	--display-cylinder-gradient-to: darkgray;
+	--index-color: orange;
+	--display-color: rgb(220, 220, 220);
+	--value-nb-decimal: 0;
+	--label-font: 'Courier New';
+	--value-font: Verdana;
+	--value-color: lime;
 }
