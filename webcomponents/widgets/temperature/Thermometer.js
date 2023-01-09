@@ -30,7 +30,8 @@ class Thermometer extends HTMLElement {
 			"max-value",    // Float. Max value for temperature
 			"major-ticks",  // Float. value between major ticks (those with labels)
 			"minor-ticks",  // Float. value between minor ticks
-			"value"         // Float. Temperature to display
+			"value",        // Float. Temperature to display
+			"unit"          // String. C (for Celsius) or F (for Fahrenheit), or anything. ' ' means no unit.
 		];
 	}
 
@@ -53,6 +54,7 @@ class Thermometer extends HTMLElement {
 		this._max_value   =  10;
 		this._major_ticks =   1;
 		this._minor_ticks =   0.25;
+		this._unit        = '';
 
 		this._previousClassName = "";
 		this.thermometerColorConfig = thermometerColorConfigDefault; // Init
@@ -84,7 +86,11 @@ class Thermometer extends HTMLElement {
 		}
 		switch (attrName) {
 			case "value":
-				this._value = parseFloat(newVal);
+				try {
+					this._value = parseFloat(newVal);
+				} catch (err) {
+					// NaN ?
+				}
 				break;
 			case "width":
 				this._width = parseInt(newVal);
@@ -103,6 +109,9 @@ class Thermometer extends HTMLElement {
 				break;
 			case "minor-ticks":
 				this._minor_ticks = parseFloat(newVal);
+				break;
+			case "unit":
+				this._unit = newVal;
 				break;
 			default:
 				break;
@@ -142,6 +151,9 @@ class Thermometer extends HTMLElement {
 	set minorTicks(val) {
 		this.setAttribute("minor-ticks", val);
 	}
+	set unit(val) {
+		this.setAttribute("unit", val);
+	}
 	set shadowRoot(val) {
 		this._shadowRoot = val;
 	}
@@ -166,6 +178,9 @@ class Thermometer extends HTMLElement {
 	}
 	get majorTicks() {
 		return this._major_ticks;
+	}
+	get unit() {
+		return this._unit;
 	}
 
 	get shadowRoot() {
@@ -379,47 +394,50 @@ class Thermometer extends HTMLElement {
 		context.closePath();
 
 		// Value
-		let text = tempValue.toFixed(this.thermometerColorConfig.valueNbDecimal);
-		context.font = "bold 20px Arial";
-		let metrics = context.measureText(text);
-		let len = metrics.width;
+		// console.log(`tempValue: ${tempValue}`);
+		if (!isNaN(tempValue)) {
+			let text = tempValue.toFixed(this.thermometerColorConfig.valueNbDecimal) + (this.unit.trim().length > 0 ? `°${this.unit}` : '' );
+			context.font = "bold 20px Arial";
+			let metrics = context.measureText(text);
+			let len = metrics.width;
 
-		context.beginPath();
-		context.fillStyle = this.thermometerColorConfig.valueColor;
-		context.fillText(text, (this.canvas.width / 2) - (len / 2), ((radius * .75) + 10));
-		context.lineWidth = 1;
-		context.strokeStyle = this.thermometerColorConfig.valueOutlineColor;
-		context.strokeText(text, (this.canvas.width / 2) - (len / 2), ((radius * .75) + 10)); // Outlined
-		context.closePath();
+			context.beginPath();
+			context.fillStyle = this.thermometerColorConfig.valueColor;
+			context.fillText(text, (this.canvas.width / 2) - (len / 2), ((radius * .75) + 10));
+			context.lineWidth = 1;
+			context.strokeStyle = this.thermometerColorConfig.valueOutlineColor;
+			context.strokeText(text, (this.canvas.width / 2) - (len / 2), ((radius * .75) + 10)); // Outlined
+			context.closePath();
 
-		// Liquid in the tube
-		let valInBoundaries = Math.min(tempValue, this._max_value);
-		valInBoundaries = Math.max(valInBoundaries, this._min_value);
-		context.beginPath();
-		//context.arc(x, y, radius, startAngle, startAngle + Math.PI, antiClockwise);
-		context.arc(this.canvas.width / 2, this.canvas.height - 10 - (radius * 0.75), (radius * 0.75), 5 * Math.PI / 4, 7 * Math.PI / 4, true);
-		let y = bottomTube - ((tubeLength) * ((valInBoundaries - this.minValue) / (this.maxValue - this.minValue)));
+			// Liquid in the tube
+			let valInBoundaries = Math.min(tempValue, this._max_value);
+			valInBoundaries = Math.max(valInBoundaries, this._min_value);
+			context.beginPath();
+			//context.arc(x, y, radius, startAngle, startAngle + Math.PI, antiClockwise);
+			context.arc(this.canvas.width / 2, this.canvas.height - 10 - (radius * 0.75), (radius * 0.75), 5 * Math.PI / 4, 7 * Math.PI / 4, true);
+			let y = bottomTube - ((tubeLength) * ((valInBoundaries - this.minValue) / (this.maxValue - this.minValue)));
 
-		context.lineTo((this.canvas.width / 2) + ((radius * 0.75) * Math.cos(Math.PI / 4)), y); // right side of the tube
-		context.lineTo((this.canvas.width / 2) - ((radius * 0.75) * Math.cos(Math.PI / 4)), y); // top of the liquid
+			context.lineTo((this.canvas.width / 2) + ((radius * 0.75) * Math.cos(Math.PI / 4)), y); // right side of the tube
+			context.lineTo((this.canvas.width / 2) - ((radius * 0.75) * Math.cos(Math.PI / 4)), y); // top of the liquid
 
-		context.lineWidth = 1;
+			context.lineWidth = 1;
 
-		let _grd = context.createLinearGradient(0, topTube, 0, tubeLength);
-		_grd.addColorStop(0, 'red');    // 0  Beginning
-		_grd.addColorStop(0.6, 'red');
-		_grd.addColorStop(0.8, 'blue');
-		_grd.addColorStop(1, 'navy');   // 1  End
-		context.fillStyle = _grd;
+			let _grd = context.createLinearGradient(0, topTube, 0, tubeLength);
+			_grd.addColorStop(0, 'red');    // 0  Beginning
+			_grd.addColorStop(0.6, 'red');
+			_grd.addColorStop(0.8, 'blue');
+			_grd.addColorStop(1, 'navy');   // 1  End
+			context.fillStyle = _grd;
 
-		context.shadowBlur = 20;
-		context.shadowColor = 'black';
+			context.shadowBlur = 20;
+			context.shadowColor = 'black';
 
-		context.lineJoin = "round";
-		context.fill();
-		context.strokeStyle = 'DarkGrey';
-		context.stroke();
-		context.closePath();
+			context.lineJoin = "round";
+			context.fill();
+			context.strokeStyle = 'DarkGrey';
+			context.stroke();
+			context.closePath();
+		}
 	}
 }
 
