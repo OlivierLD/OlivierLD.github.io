@@ -1833,6 +1833,7 @@
               major-ticks="10"
               minor-ticks="1"
               value="12.34"
+              unit="C"
               width="100"
               height="360">&lt;/thermo-meter>
                 </pre>
@@ -1848,6 +1849,7 @@
 								  major-ticks="10"
 								  minor-ticks="1"
 								  value="12.34"
+                                  unit="C"
 								  width="100"
 								  height="360"></thermo-meter>
 				</div>
@@ -1879,12 +1881,13 @@
 				<div class="black-frame centered">
 					<thermo-meter id="thermometer-02"
 								  class="thermometer-night"
-								  title="Celcius"
+								  title="Fahrenheit"
 								  min-value="-10"
-								  max-value="60"
+								  max-value="100"
 								  major-ticks="10"
 								  minor-ticks="1"
-								  value="23.45"
+								  value="68.0"
+                                  unit="F"
 								  width="100"
 								  height="360"></thermo-meter>
 				</div>
@@ -1893,9 +1896,9 @@
 					<input type="number"
 						   id="temp-value-02"
 						   placeholder="temp"
-						   title="in Celcius"
+						   title="in Fahrenheit"
 						   style="width: 40px; text-align: right;"
-						   value="23.45"/>
+						   value="68.0"/>
 					<br/>
 					<button onclick="setData('temp-value-02', 'thermometer-02')"
 							title="Set Temp value in the tube"
@@ -1906,7 +1909,7 @@
 							style="margin-top: 3px;">Animate
 					</button>
 					<br/>
-					<input type="range" min="-10" max="60" step="0.1" value="23.45"
+					<input type="range" min="-10" max="100" step="0.1" value="68.0"
 						   onchange="document.getElementById('thermometer-02').value = this.value;"
 						   style="width: 100%;"/>
 				</div>
