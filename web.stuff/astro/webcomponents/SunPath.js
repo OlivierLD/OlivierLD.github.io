@@ -92,7 +92,7 @@ class SunPath extends HTMLElement {
 
 		this.side =   0; // Left and right
 		this.addToZ = 180;  // 180 when pointing South (Sun in the South at noon). Combined with left right rotation
-		this.invertX =  1;  // +1/-1 . +1 when pointing south
+		this.invertX =  1;  // +1/-1 . +1 when pointing south, -1 when pointing north
 
 		this._previousClassName = "";
 		this.sunPathColorConfig = sunPathDefaultColorConfig;
@@ -737,10 +737,17 @@ class SunPath extends HTMLElement {
 			// let savedFont = context.font;
 			// context.font = "bold " + context.font;
 			if (this._zOffset !== undefined) {
+				let z = 180 - this._zOffset;
+				if (this.invertX == -1) { // Pointing north
+					z = - this._zOffset;
+				}
+				while (z < 0) {
+					z += 360;
+				}
 				// console.log(`Z Offset: ${this._zOffset}`);
-				let displayData = `${180 - this._zOffset}°`;  // TODO Adjust that for other Hemisphere
+				let displayData = `${z}°`;  
 				let metrics = context.measureText(displayData);
-				context.fillText(displayData, (this._width / 2) - (metrics.width / 2), (this._height / 2) + 30);
+				context.fillText(displayData, (this._width / 2) - (metrics.width / 2), (this._height / 2) + 60);
 			}
 
 			if (this._sunRise !== undefined) {
