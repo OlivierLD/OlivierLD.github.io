@@ -736,6 +736,13 @@ class SunPath extends HTMLElement {
 			context.fillStyle = this.sunPathColorConfig.cardPointColor;
 			// let savedFont = context.font;
 			// context.font = "bold " + context.font;
+			if (this._zOffset !== undefined) {
+				// console.log(`Z Offset: ${this._zOffset}`);
+				let displayData = `${180 - this._zOffset}°`;  // TODO Adjust that for other Hemisphere
+				let metrics = context.measureText(displayData);
+				context.fillText(displayData, (this._width / 2) - (metrics.width / 2), (this._height / 2) + 30);
+			}
+
 			if (this._sunRise !== undefined) {
 				let strRiseTime = new Date(this._sunRise.time).format('H:i:s Z');
 				let strRiseZ = Utilities.decToSex(this._sunRise.z);
