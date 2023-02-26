@@ -747,7 +747,10 @@ class SunPath extends HTMLElement {
 				// console.log(`Z Offset: ${this._zOffset}`);
 				let displayData = `${z}°`;  
 				let metrics = context.measureText(displayData);
-				context.fillText(displayData, (this._width / 2) - (metrics.width / 2), (this._height / 2) + 60);
+				context.fillText(displayData, (this._width / 2) - (metrics.width / 2), /*(this._height / 2) + 60*/ 18);
+				displayData = `\u21e7`;  // Vertical arrow
+				metrics = context.measureText(displayData);
+				context.fillText(displayData, (this._width / 2) - (metrics.width / 2), 36);
 			}
 
 			if (this._sunRise !== undefined) {
