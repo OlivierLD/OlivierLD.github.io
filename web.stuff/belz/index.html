@@ -154,8 +154,8 @@
     <div class="tab" style="margin-top: 10px; display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto;"> <!-- TODO Improve the grid-template... -->
         <button class="tablinks" onclick="openTab(event, 0);">Kayak</button>
         <button class="tablinks" onclick="openTab(event, 1);">ToDo</button>
-        <button class="tablinks active" onclick="openTab(event, 2);">2022</button>
-        <button class="tablinks" onclick="openTab(event, 3);">2023</button>
+        <button class="tablinks" onclick="openTab(event, 2);">2022</button>
+        <button class="tablinks active" onclick="openTab(event, 3);">2023</button>
     </div>
 
     <div id="kayak" style="display: none;">
@@ -231,7 +231,7 @@
         <span style="font-style: italic;">And more to come</span>
     </div>
 
-    <div id="2022" style="display: block;">
+    <div id="2022" style="display: none;">
         <h2><a name="signature">Jul 11, 2022</a></h2>
         <div>
             We signed !
@@ -295,7 +295,34 @@
         </div>
     </div>
 
-    <div id="2023" style="display: none; margin: 15px;">Soon...</div>
+    <div id="2023" style="display: block; margin: 15px;">
+
+        <h2><a name="new-planters">Nouveaux bacs &agrave; plantes dans le jardin</a></h2>
+        <small style="font-style: italic;">Click the images to enlarge</small>
+
+        <div style="height: 600px; margin: 2px;">
+            <slide-show id="slide-show-planters"
+                        width="800"
+                        height="600">
+                <slide-show-image src="./images/nouveaux.bacs.01.jpg" title="Replacing old ones" desc="Replacing"></slide-show-image>
+                <slide-show-image src="./images/nouveaux.bacs.02.jpg" title="Staged !" desc="Three stories"></slide-show-image>
+                <slide-show-image src="./images/nouveaux.bacs.03.jpg" title="Watering" desc="Thirsty"></slide-show-image>
+            </slide-show>
+        </div>    
+
+        <h2><a name="cabane-jardin">Construire une cabane de jardin... (in progress!)</a></h2>
+        <small style="font-style: italic;">Click the images to enlarge</small>
+
+        <div style="height: 600px; margin: 2px;">
+            <slide-show id="slide-show-cabane"
+                        width="800"
+                        height="600">
+                <slide-show-image src="./images/cabane.jardin.01.jpg" title="Blocks" desc="Aligning the base blocks"></slide-show-image>
+                <slide-show-image src="./images/cabane.jardin.02.jpg" title="Foundation" desc="Douglas fir !"></slide-show-image>
+            </slide-show>
+        </div>    
+
+    </div>
 
     <hr/>
     <div style="height: 150px;"><!-- Bottom padding --></div>
@@ -305,6 +332,9 @@
     window.onload = () => { // Important: window.onload
 		document.getElementById("slide-show-kitchen").slideclick = onSlideShowClick;
 		document.getElementById("slide-show-kitchen-2").slideclick = onSlideShowClick;
+
+		document.getElementById("slide-show-planters").slideclick = onSlideShowClick;
+		document.getElementById("slide-show-cabane").slideclick = onSlideShowClick;
     };
 </script>
 </html>
