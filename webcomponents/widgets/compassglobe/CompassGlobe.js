@@ -38,6 +38,38 @@ const MINOR_TICK_SIZE = 10;
 const BASE_FONT_SIZE = 30;
 const CYLINDER_HALF_SIZE = 60; 
 
+function convertToHexColor(color) {
+    // create a temporary div. 
+	let tempDiv = document.createElement('div');
+    tempDiv.style.color = color;
+	document.body.appendChild(tempDiv); // Must be added for getComputedStyle to work...
+    let computedColor = window.getComputedStyle(tempDiv).color;
+	document.body.removeChild(tempDiv);
+    return computedColor;
+}
+
+/**
+ * Enforce transparency
+ * @param {*} color 
+ * @param {*} transparency 
+ * @returns the rgba with enforced transparency
+ */
+function setTransparency(color, transparency) {
+	if (color.startsWith("#")) {
+		return `rgba(${hexToRgb(color)}, ${transparency / factor})`;
+	} else if (color.startsWith("rgb(")) {
+		let values = color.trim().substring('rgb('.length, color.trim().indexOf(')'));
+		return `rgba(${values}, ${transparency})`;
+	} else if (color.startsWith("rgba(")) {
+		let values = color.trim().substring('rgb('.length, color.trim().indexOf(')'));
+		let valueArray = values.split(",");
+		transparency = parseFloat(valueArray[3]);
+		return `rgba(${valueArray[0].trim()}, ${valueArray[1].trim()}, ${valueArray[2].trim()}, ${transparency})`;
+	} else {
+		return null; // Cannot find color values...
+	}
+}
+
 /* global HTMLElement */
 class CompassGlobeDisplay extends HTMLElement {
 
@@ -322,6 +354,53 @@ class CompassGlobeDisplay extends HTMLElement {
 			context.ellipse(this.canvas.width / 2, this.canvas.height / 4, radius * 0.5, radius * 0.25, 0, 2 * Math.PI, false);
 			context.closePath();
 			context.fill();
+		}
+
+		// One sector each 45 degrees. current value: this._value
+		// See below the 'red' axis.
+		context.lineWidth = 1;
+		context.strokeStyle = this.compassGlobeColorConfig.indexColor;
+
+		for (let i = 0; i < 360; i++) {
+			let notch = this._value - i;
+			// console.log(`i: ${i}, notch=${notch}, cos(notch): ${Math.cos(Math.toRadians(notch))}`);
+			context.lineWidth = 1;
+			if (Math.cos(Math.toRadians(i)) >= 0 || Math.abs(Math.cos(Math.toRadians(i))) < 0.001) {  // Visible side of the rose
+				context.strokeStyle = this.compassGlobeColorConfig.indexColor;
+			} else {
+				context.strokeStyle = setTransparency(convertToHexColor(this.compassGlobeColorConfig.indexColor), 0.25);
+			}
+			// console.log(`>> i:${i}, notch:${notch} - Math.cos(Math.toRadians(i))=${Math.cos(Math.toRadians(i))}, color: ${context.strokeStyle}`);
+			let yOrigin = 0;
+			if (notch % 45 === 0) {
+				yOrigin = -35;
+				let xOffset = radius * Math.sin(Math.toRadians(i));
+				// console.log(`i: ${i}, notch=${notch}, cos(notch): ${Math.cos(Math.toRadians(notch))}, offset: ${xOffset}, scale: ${scale}`);
+				if (notch % 90 === 0) {
+					yOrigin = -45;
+					// thicker
+					context.lineWidth = 3;
+				}
+				context.beginPath();
+				// For memo: Index position:
+				// context.moveTo((this.canvas.width / 2) + xOffset, (this.canvas.height / 2) - Math.round(scale * 100));
+				// context.lineTo((this.canvas.width / 2) + xOffset, (this.canvas.height / 2) + Math.round(scale * 100));
+				
+				// Draw an arc, with perspective.
+				for (let y = yOrigin; y <= -yOrigin; y+=5) {
+					let xCoeff = Math.cos(Math.toRadians(y));
+					let yOffset = Math.round(radius /*(this.canvas.height / 2)*/ * Math.sin(Math.toRadians(y)));
+					if (y == -yOrigin) { // First point
+						context.moveTo((this.canvas.width / 2) + (xOffset * xCoeff), 
+									   (this.canvas.height / 2) + yOffset);
+					} else {
+						context.lineTo((this.canvas.width / 2) + (xOffset * xCoeff), 
+					                   (this.canvas.height / 2) + yOffset);
+					}
+				}
+				context.closePath();
+				context.stroke();
+			}
 		}
 
 		let fontSize = Math.round(scale * BASE_FONT_SIZE);
