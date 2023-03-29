@@ -6950,17 +6950,69 @@ function plotGraphRC(graphId, recenter, lineColor='lime', graphLabel='Reworking 
 	elmt.repaint();
 }
 
+const PRMSL_URL = './baroData.json';	
+var prmslData;
+const DAYS = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY'];
+const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+// two variables below used in setVGridLabelsCallback
+let startIdx = 0;
+let firstWeekDayIdx = 0;
+
+fetch(PRMSL_URL)
+    .then(response => {
+        console.log(`Response: ${response.status}, ${response.statusText}`);
+        response.json().then(doc => {
+            prmslData = doc.y;
+            console.log(`PRMSL data loaded, ${doc.x.length} elements`); 
+            // Process it here if needed
+            // Find the first "midnight"
+            // let startIdx = 0;
+            for (let i=0; i<doc.x.length; i++) {
+                if (doc.x[i].substring(11, 13) === '00') {
+                    startIdx = i;
+                    break;
+                }
+            }
+
+            // What week day does it start
+            // "2023-03-19T08:42:33"
+            //  |    |  |  |
+            //  |    |  |  11
+            //  |    |  8  
+            //  |    5
+            //  0
+            let fullStrDate = `${MONTHS[parseInt(doc.x[startIdx].substring(5, 7)) - 1]} ${parseInt(doc.x[startIdx].substring(8, 10))}, ${parseInt(doc.x[startIdx].substring(0, 4))} ${doc.x[startIdx].substring(11)}`;
+            let weekDayIndex = new Date(fullStrDate).getDay();
+            firstWeekDayIdx = (weekDayIndex + 6) % 7;
+
+            console.log(`${fullStrDate} is a ${DAYS[firstWeekDayIdx]}`);
+
+        });
+    }, 
+    (error, errmess) => {
+        console.log("Ooch");
+        let message;
+        if (errmess) {
+            let mess = JSON.parse(errmess);
+            if (mess.message) {
+                message = mess.message;
+            }
+        }
+        console.debug("Failed to get PRMSL data..." + (error ? JSON.stringify(error, null, 2) : ' - ') + ', ' + (message ? message : ' - '));
+    });
+
 function plotBarographRC(graphId, recenter, lineColor='lime', graphLabel='Reworking Data') {
 
     let elmt = document.getElementById(graphId);
-    let pressureData = BAROGRAPH_DATA;
+    let pressureData = prmslData ? prmslData : BAROGRAPH_DATA;
 
     // For day names, look for setVGridLabelsCallback
 
     let mini = 980, maxi = 1050;
 
     let valLabel = // "0:45"; // One label every 45 points
-                   "0:96"; // One label every 96 point (24 * 4 = 96 : every day)
+                   `${startIdx}:96`;  // "0:96"; // One label every 96 point (24 * 4 = 96 : every day). See setVGridLabelsCallback function.
 
     let value = ""; // To display, bottom right.
 
@@ -7574,11 +7626,10 @@ function plotBarographRC(graphId, recenter, lineColor='lime', graphLabel='Rework
         document.getElementById("slide-show-02").slideclick = onSlideShowClick;
 
         // Abscissa callback for the barograph.
-        const DAYS = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY'];
         document.getElementById('graph-04').setVGridLabelsCallback(val => {
             // console.log(`VGridLabel: ${val}`);
-            // 0 to 360, step 45
-            let i = (val / 96) % 7;
+            // 0 to ..., step 96
+            let i = (((val - startIdx) / 96) + firstWeekDayIdx) % 7;
             return DAYS[i]; 
         });
     }
