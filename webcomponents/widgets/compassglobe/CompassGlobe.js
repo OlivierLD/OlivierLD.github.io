@@ -494,7 +494,8 @@ class CompassGlobeDisplay extends HTMLElement {
 							let newY = (this.canvas.height / 2) + Math.round(scale * MAJOR_TICK_SIZE) + (_fontSize / 1);
 							context.translate(newX, newY);
 							let rot = (i > 270) ? i - 360 : i;
- 							context.rotate(-Math.sin(Math.toRadians(rot / 9)));  // horizontal rotation: 10 degrees max (9 = 90 / 10)
+							// TODO We need some 'matrix' transformation here, to change text width, NOT height.
+ 							// context.rotate(-Math.sin(Math.toRadians(rot / 9)));  // horizontal rotation: 10 degrees max (9 = 90 / 10)
 							context.fillText(str, 0, 0,); // newX, newY);
 							context.restore();
 						}				

@@ -3416,7 +3416,6 @@
 	</table>
 </div>
 <hr/>
-
 <!--
     COMPASS DISPLAY. FLAT.
  +-->
@@ -3502,7 +3501,87 @@
 	</table>
 </div>
 <hr/>
+ <!--
+    COMPASS GLOBE
+ +-->
+ <div style="cursor: pointer;" onclick="showHide('compass-globe');" tabindex="0"><b><u><a id="a-compass-globe" href="#a-compass-globe">Compass Globe</a></u></b></div>
+ <div id="compass-globe" class="smooth">
+                 <pre style="font-weight: bold; text-align: left; color: white; vertical-align: top; margin-top: 6px;">
+ &lt;compass-globe id="compass-globe-01"
+                title="Compass"
+                width="400"
+                height="400"
+                value="180"
+                label="Contest"/>
+                 </pre>
 
+    <small>Warning: The rose in <i>convex</i>. You see it from behind.</small>
+
+    <table>
+         <tr>
+             <td valign="top">
+                 <div class="black-frame centered">
+                     <compass-globe id="compass-globe-01"
+                                    class="globe-compass-01"
+                                    width="400"
+                                    height="400"
+                                    value="180"
+                                    label="Contest"
+                                    title="Compass"/>
+                 </div>
+                 <div class="black-frame centered">
+                     Heading:
+                     <input type="number"
+                            id="compass-globe-value-01"
+                            placeholder="Heading"
+                            title="Heading value"
+                            style="width: 50px; text-align: right;"
+                            value="180"/>
+                     <button onclick="setCompassGlobeValue('compass-globe-01', 'compass-globe-value-01');"
+                             title="Set HDG value above"
+                             style="margin-top: 3px;">Set
+                     </button>
+                     <!-- br/ -->
+                     <button onclick="doAnimateGlobe('compass-globe-01', 'compass-globe-value-01');"
+                             title="Smooth move"
+                             style="margin-top: 3px;">Animate
+                     </button>
+                 </div>
+             </td>
+             <td valign="top">
+                <div class="black-frame centered">
+                    <compass-globe id="compass-globe-02"
+                                   class="globe-compass-02"
+                                   width="300"
+                                   height="300"
+                                   value="180"
+                                   label="HDG"
+                                   title="Compass"/>
+                </div>
+                <div class="black-frame centered">
+                    Heading:
+                    <input type="number"
+                           id="compass-globe-value-02"
+                           placeholder="Heading"
+                           title="Heading value"
+                           style="width: 50px; text-align: right;"
+                           value="180"/>
+                    <button onclick="setCompassGlobeValue('compass-globe-02', 'compass-globe-value-02');"
+                            title="Set HDG value above"
+                            style="margin-top: 3px;">Set
+                    </button>
+                    <!-- br/ -->
+                    <button onclick="doAnimateGlobe('compass-globe-02', 'compass-globe-value-02');"
+                            title="Smooth move"
+                            style="margin-top: 3px;">Animate
+                    </button>
+                </div>
+            </td>
+       </tr>
+     </table>
+ </div>
+ <hr/>
+ 
 <!--
     WORLD MAP
  +-->
@@ -7289,87 +7368,6 @@ function plotBarographRC(graphId, recenter, lineColor='lime', graphLabel='Rework
  </div>
  <hr/>
 
- <!--
-    COMPASS GLOBE
- +-->
- <div style="cursor: pointer;" onclick="showHide('compass-globe');" tabindex="0"><b><u><a id="a-compass-globe" href="#a-compass-globe">Compass Globe</a></u></b></div>
- <div id="compass-globe" class="smooth">
-                 <pre style="font-weight: bold; text-align: left; color: white; vertical-align: top; margin-top: 6px;">
- &lt;compass-globe id="compass-globe-01"
-                title="Compass"
-                width="400"
-                height="400"
-                value="180"
-                label="HDG"/>
-                 </pre>
-
-    <small>Warning: The rose in <i>convex</i>. You see it from behind.</small>
-
-    <table>
-         <tr>
-             <td valign="top">
-                 <div class="black-frame centered">
-                     <compass-globe id="compass-globe-01"
-                                    class="globe-compass-01"
-                                    width="400"
-                                    height="400"
-                                    value="180"
-                                    label="HDG"
-                                    title="Compass"/>
-                 </div>
-                 <div class="black-frame centered">
-                     Heading:
-                     <input type="number"
-                            id="compass-globe-value-01"
-                            placeholder="Heading"
-                            title="Heading value"
-                            style="width: 50px; text-align: right;"
-                            value="180"/>
-                     <button onclick="setCompassGlobeValue('compass-globe-01', 'compass-globe-value-01');"
-                             title="Set HDG value above"
-                             style="margin-top: 3px;">Set
-                     </button>
-                     <!-- br/ -->
-                     <button onclick="doAnimateGlobe('compass-globe-01', 'compass-globe-value-01');"
-                             title="Smooth move"
-                             style="margin-top: 3px;">Animate
-                     </button>
-                 </div>
-             </td>
-             <td valign="top">
-                <div class="black-frame centered">
-                    <compass-globe id="compass-globe-02"
-                                   class="globe-compass-02"
-                                   width="300"
-                                   height="300"
-                                   value="180"
-                                   label="HDG"
-                                   title="Compass"/>
-                </div>
-                <div class="black-frame centered">
-                    Heading:
-                    <input type="number"
-                           id="compass-globe-value-02"
-                           placeholder="Heading"
-                           title="Heading value"
-                           style="width: 50px; text-align: right;"
-                           value="180"/>
-                    <button onclick="setCompassGlobeValue('compass-globe-02', 'compass-globe-value-02');"
-                            title="Set HDG value above"
-                            style="margin-top: 3px;">Set
-                    </button>
-                    <!-- br/ -->
-                    <button onclick="doAnimateGlobe('compass-globe-02', 'compass-globe-value-02');"
-                            title="Smooth move"
-                            style="margin-top: 3px;">Animate
-                    </button>
-                </div>
-            </td>
-       </tr>
-     </table>
- </div>
- <hr/>
- 
  <!--
     COLORED SCALE
  +-->
