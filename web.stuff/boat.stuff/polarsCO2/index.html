@@ -1,0 +1,635 @@
+<html>
+  <!--
+   ! See https://www.mathjax.org/#gettingstarted
+   !     https://docs.mathjax.org/en/latest/index.html
+   !     https://www.overleaf.com/learn/latex/Matrices
+   +-->
+  <head>
+    <meta keyword="author" value="Olivier Le Diouris">
+    <title>C&ocirc;te d'Or 2 (aka CO2)</title>
+    <style>
+    /*
+     * Oliv fecit, AD 2001, and after.
+     */
+
+:root {
+	--visibility: none; /* or block */
+}
+.flip {
+  display: var(--visibility);
+}
+body, p, p.b, ul, li, ol, br {
+  font-family: Verdana, Arial, sans-serif;
+  color: black;
+  background-position: top left;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+th { /* ns 4 */
+  font-family: Verdana, Arial, sans-serif;
+  font-weight: bold;
+}
+td { /* ns 4 */
+  font-family: Verdana, Arial, sans-serif;
+}
+h1, h2, h3, h4 {
+  text-align: left;
+  font-family: Verdana, Tahoma, "Myriad Web", Syntax, sans-serif;
+  font-weight: normal;
+  color: #0050B2;
+}
+.hide { 
+  display: none; 
+}
+.tabletitle { 
+  background-color: #e0e0e0; 
+}
+div.head { 
+  margin-bottom: 1em; 
+}
+div.head h1 { 
+  margin-top: 2em; 
+  clear: both; 
+}
+div.head table { 
+  margin-left: 2em; 
+  margin-top: 2em; 
+}
+div.head img { /* remove border from top image */
+  color: white; 
+  border: none; 
+} 
+p.copyright { 
+  font-size: smaller; 
+}
+@media screen {  /* hide from IE3 */
+  a:hover { 
+    background: #FFA; 
+  }
+}
+pre { 
+  margin-left: 2em; 
+  font-size: 9pt; 
+  background: #f7f7e7; 
+}
+.latex {
+  margin-left: 2em; 
+  padding: 5px;
+  background: #f7f7e7; 
+}
+.variable {
+  font-family: 'Courier New'; 
+  font-weight: bold; 
+  font-size: 20px; 
+  color: gray;
+}
+/*
+P {
+  margin-top: 0.6em;
+  margin-bottom: 0.6em;
+}
+*/
+dt, dd {  /* opera 3.50 */
+  margin-top: 0; 
+  margin-bottom: 0; 
+}
+dt { 
+  font-weight: bold; 
+}
+pre { /* navigator 4 requires this */
+  font-family: monospace; 
+}        
+ul.toc { 
+  list-style: none; 
+}
+table.topTitle {
+  background-color: #0050B2; 
+  color: white; 
+}
+table.subTitle {
+  background-color: #0050B2; 
+  color: cyan; 
+}
+table.subSubTitle {
+  background-color: #0050B2; 
+  color: cyan; 
+  font-style: italic; 
+}
+table.subSubSubTitle {
+  background-color: #0050B2; 
+  color: yellow; 
+  font-style: italic; 
+}
+table.smallFont {
+  font-size: x-small; 
+}
+a.inTitle {
+  color: #80FFFF; 
+  link: #80FFFF; 
+  alink: #80FFFF; 
+  vlink: #80FFFF;
+}
+a.codeComment { 
+  text-decoration: none; color:"red"; 
+}
+@media aural {
+  h1, h2, h3, h4 { 
+    stress: 20; 
+    richness: 90; 
+  }
+  .hide { 
+    speak: none; 
+  }
+  p.copyright { 
+    volume: x-soft; 
+    speech-rate: x-fast; 
+  }
+  dt { 
+    pause-before: 20%; 
+  }
+  pre { 
+    speak-punctuation: code; 
+  }
+}
+.ro  {
+  background-color: #f7f7e7; 
+  color: black; 
+}
+.re {
+  background-color: white; 
+  color: black; 
+}
+.tableheader {
+  background-color: white; 
+  color: black; 
+  font-weight:bold; 
+}
+    </style>
+    <!--script-- src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script-->
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  </head>
+  <body>
+    <small>
+      <!-- Example: http://translate.google.com/translate?u=http://olivier.lediouris.net/sailing/PolarCO2/index.html&langpair=fr%7Cen&hl=en&ie=UTF8 -->
+      <form method="get" action="http://translate.google.com/translate" target="Google">
+        Google English translation:
+        <script language="JavaScript1.1">
+          document.writeln('<input type="hidden" name="u" value="' + document.location + '">');
+        </script>
+        <input type="hidden" name="langpair" value="fr-en">
+        <input type="hidden" name="hl" value="en">
+        <input type="hidden" name="ie" value="UTF8">
+        <!-- Submit -->
+        <input type="submit" value="Go!">
+      </form>
+    </small>
+    <table width="98%" cellspacing="10" cellpadding="15">
+      <tr>
+        <td valign="top" colspan="1">
+          <h1>C&ocirc;te d'Or 2</h1>
+          <h3>Campagne de mesures<br>du 14 au 22 mai 1987</h3>
+        </td>
+        <td valign="top" colspan="1">
+          <img src="CO2.jpg" alt="32 n&oelig;uds !">
+        </td>
+      </tr>
+      <tr>
+        <td valign="top" bgcolor="#f7f7e7" width="50%">
+          <p name="toc">
+            <ul class="toc">
+              <li type="disc"><a href="#Zero">M&eacute;thode</a></li>
+              <li type="disc"><a href="#One">Courbes de synth&egrave;se</a></li>
+              <li type="disc"><a href="#Two">Commentaires</a></li>
+            </ul>
+          </p>
+        </td>
+        <td valign="top" width="50%">
+          <p name="ContentDescription">
+            <p>
+              Ce document analyse et commente les r&eacute;sultats de la campagne de
+              mesures effectu&eacute;es &agrave; bord de C&ocirc;te&nbsp;d'Or 2 du
+              14 au 22 mai 1987, en pr&eacute;paration de la Course autour de
+              l'Europe de la m&ecirc;me ann&eacute;e.
+            </p>
+          </p>
+        </td>
+      </tr>
+    </table>
+    <p name="section">
+      <table width="100%" class="topTitle">
+        <tr>
+          <td>&nbsp;<big><a name="Zero">M&eacute;thode</a></big></td>
+          <td align="right"><small><a href="#" class="inTitle">Top of Page</a></small></td>
+        </tr>
+      </table>
+      <p name="content">
+        Le but de cette campagne &eacute;tait de d&eacute;terminer l'efficacit&eacute; des foils et l'int&eacute;r&ecirc;t de
+        leur volet de courbure. Il a donc &eacute;t&eacute; d&eacute;cid&eacute; d'&eacute;laborer des polaires de vitesse
+        lors d'essais en mer.
+        <p name="sectionContent">
+          <ul>
+            <li type="disc"><a href="#ZeroOne">Acquisition &agrave; bord</a></li>
+            <li type="disc"><a href="#ZeroTwo">Lissage des donn&eacute;es et &eacute;laboration des polaires</a></li>
+          </ul>
+        </p>
+        <p name="ssection">
+          <table width="100%" class="topTitle">
+            <tr>
+              <td>&nbsp;<big><a name="ZeroOne">Acquisition &agrave; bord</a></big></td>
+              <td align="right"><small><a href="#" class="inTitle">Top of Section</a></small></td>
+            </tr>
+          </table>
+          <p name="content">
+            Un ordinateur (EPSON PX-8) a &eacute;t&eacute; interfac&eacute; avec la centrale NKE du bord afin d'effectuer des saisies en temps
+            r&eacute;el. Ces saisies comprenaient :
+            <ul>
+              <li type="disc">L'angle du vent apparent (<b>A</b>pparent <b>W</b>ind <b>A</b>ngle : AWA)</li>
+              <li type="disc">La vitesse du vent apparent (<b>A</b>pparent <b>W</b>ind <b>S</b>peed : AWS)</li>
+              <li type="disc">La vitesse du bateau (<b>B</b>oat <b>SP</b>eed : BSP)</li>
+              <li type="disc">Le cap compas (<b>H</b>ea<b>D</b>in<b>G</b> : HDG)</li>
+            </ul>
+            L'ordinateur admettait une mesure toutes les secondes. Les saisies &eacute;taient d&eacute;clench&eacute;es &agrave; partir du clavier de l'ordinateur,
+            et arret&eacute;es de m&ecirc;me, afin d'avoir des mesures homog&egrave;nes (pas de virement de bord ni d'empannage, pas de r&eacute;glage, pas de voiles fasseyantes, etc).
+            <br>
+            Ces s&eacute;ries duraient en moyenne de l'ordre de 30 &agrave; 60 secondes.
+            <br>
+            Pour chacune de ces valeurs, on recalculait vitesse (<b>T</b>rue <b>W</b>ind <b>S</b>peed : TWS) et gisement (<b>T</b>rue <b>W</b>ind <b>A</b>ngle : TWA) du vent r&eacute;el, ainsi que la VMG (<b>V</b>elocity <b>M</b>ade <b>G</b>ood) de la
+            mani&egrave;re suivante :
+            <pre class="flip">
+  TWS = [AWS<sup><small>2</small></sup> + BSP<sup><small>2</small></sup> - 2*BSP*AWS*cos(AWA)]<sup><small>1/2</small></sup>
+  TWA = arctg[AWS*sin(AWA) / (AWS*cos(AWA) - BSP)]
+  VMG = BSP*cos(TWA)
+            </pre>
+            <div class="latex">
+              <p>
+              \(
+              TWS = [AWS^2 + BSP^2 - (2 \times BSP \times AWS \times cos(AWA))]^{1 \over 2}
+              \)
+              </p>
+              <p>
+              \(
+              TWA = arctg[AWS \times sin(AWA) / (AWS \times cos(AWA) - BSP)]
+              \)
+              </p>
+              <p>
+              \(
+              VMG = BSP \times cos(TWA)
+              \)
+              </p>
+            </div>
+            Les polaires ont ainsi toujours &eacute;t&eacute; r&eacute;alis&eacute;es avec le vent r&eacute;el, of course my horse.
+            <br>
+            Chaque s&eacute;rie &eacute;tait ensuite moyenn&eacute;e arythm&eacute;tiquement (sur donc 30 &agrave; 60 mesures), et donnait ainsi un
+            ensemble de <i>points de polaires</i>, coordonn&eacute;s en TWS, TWA et BSP.
+          </p>
+        </p>
+        <p name="ssection">
+          <table width="100%" class="topTitle">
+            <tr>
+              <td>&nbsp;<big><a name="ZeroTwo">Lissage des donn&eacute;es et &eacute;laboration des polaires</a></big></td>
+              <td align="right"><small><a href="#" class="inTitle">Top of Section</a></small></td>
+            </tr>
+          </table>
+          <p name="content">
+            <ol>
+              <li type="a"><a href="#ZeroTwoOne">Choix d'un vent r&eacute;el de r&eacute;f&eacute;rence</a></li>
+              <li type="a"><a href="#ZeroTwoTwo">Choix d'une fourchette autour de cette r&eacute;f&eacute;rence</a></li>
+              <li type="a"><a href="#ZeroTwoThree">D&eacute;termination et extrapolation des points de polaire</a></li>
+              <li type="a"><a href="#ZeroTwoFour">Lissage et calcul des coefficients du polyn&ocirc;me d'extrapolation</a></li>
+              <li type="a"><a href="#ZeroTwoFive">Calcul et dessin de la courbe obtenue</a></li>
+            </ol>
+            <hr>
+            <ol>
+              <li type="a">
+                <a name="ZeroTwoOne">Choix d'un vent r&eacute;el de r&eacute;f&eacute;rence</a>
+                <p name="liContent">
+                  On choisit donc un vent r&eacute;el de r&eacute;f&eacute;rence (TWS<sub><small>ref</small></sub>), et on dressera la
+                  polaire des vitesses du bateau pour celui-ci.
+                </p>
+              </li>
+              <li type="a">
+                <a name="ZeroTwoTwo">Choix d'une fourchette autour de cette r&eacute;f&eacute;rence</a>
+                <p name="liContent">
+                  On d&eacute;termine ensuite la largeur de la fourchette de vent r&eacute;el. On a pris une largeur de 5 n&oelig;uds
+                  pour cette campagne.
+                </p>
+              </li>
+              <li type="a">
+                <a name="ZeroTwoThree">D&eacute;termination et extrapolation des points de polaire</a>
+                <p name="liContent">
+                  On extrapole ensuite de mani&egrave;re lin&eacute;aire sur l'intervalle, les points de polaires pour les amener au vent r&eacute;el
+                  de r&eacute;f&eacute;rence par la formule suivante :
+                  <pre class="flip">
+  BSP<small><sub>TWSref</sub></small> = BSP * (TWS<small><sub>ref</sub></small> / TWS)
+                  </pre>
+                  <p class="latex">
+                  \(
+  BSP_{TWSref} = BSP \times {TWS_{ref} \over TWS}
+                  \)                     
+                  </p>
+                </p>
+              </li>
+              <li type="a">
+                <a name="ZeroTwoFour">Lissage et calcul des coefficients du polyn&ocirc;me d'extrapolation</a>
+                <p name="liContent">
+                  Les points de polaire ainsi obtenus sont port&eacute;s sur le graphique,et les coefficients du polyn&ocirc;me
+                  d'extrapolation sont calcul&eacute;s par la m&eacute;thode des moindres carr&eacute;s.
+                  <p name="sample">
+                    <h5>Exemple</h5>
+                    On cherche &agrave; d&eacute;terminer une courbe du 2<sup><small>e</small></sup> degr&eacute;. Pour la commodit&eacute; de la notation,
+                    on prendra les points polaires coordonn&eacute;s comme suit :
+                    <p align="center" class="flip">
+                      <table>
+                        <tr>
+                          <td rowspan="2">
+                            P
+                          </td>
+                          <td>TWA</td>
+                          <td rowspan="2">
+                            = P
+                          </td>
+                          <td>x</td>
+                        </tr>
+                        <tr>
+                          <td>BSP</td>
+                          <td>y</td>
+                        </tr>
+                      </table>
+                    </p>
+                    <p class="latex">
+                      \(
+ P_{BSP}^{TWA} = P_y^x
+                      \)
+                    </p>
+                    <p>
+                      TWA is x, BSP is y.
+                    </p>
+                    On cherche les coefficients a, b, c et d d'un polyn&ocirc;me pour lequel
+                    <pre class="flip">
+  ax<sup><small>2</small></sup> + bx + c
+                    </pre>
+                    <p class="latex">
+                      \(
+  ax^2 + bx + c
+                      \)
+                    </p>
+                    est le plus proche possible de y, c'est &agrave; dire que la somme
+                    <pre class="flip">
+  ax<sup><small>2</small></sup> + bx + c - y
+                    </pre>
+                    <p class="latex">
+                      \(
+  (ax^2 + bx + c) - y
+                      \)
+                    </p>
+                    soit la plus petite possible, donc, que pour tous les points mesur&eacute;s de la polaire, le carr&eacute;
+                    de cette diff&eacute;rence soit le plus proche possible de z&eacute;ro (on &eacute;l&egrave;ve au carr&eacute; pour supprimer le signe),
+                    et donc que le cumul de ces diff&eacute;rences soit en d&eacute;finitive la plus petite possible.
+                    Ceci revient &agrave; calculer les coefficients a, b et c pour lesquels la deriv&eacute;e premi&egrave;re
+                    de cette sommation des carr&eacute;s des diff&eacute;rences par rapport &agrave; chacun des a, b et c est nulle :
+                    <pre class="flip">
+  ([&Sigma;(ax<sup><small>2</small></sup> + bx<sup><small></small></sup> + c - y)]<sup><small>2</small></sup>)' = 0
+                    </pre>
+                    <p class="latex">
+                      \(
+  ([\sum (ax^2 + bx + c - y)]^2)' = 0                      
+                      \)
+                    </p>
+                    On d&eacute;veloppe avant de d&eacute;river :
+                    <pre class="flip">
+  S = a<sup><small>2</small></sup>&Sigma;x<sup><small>4</small></sup> + 2ab&Sigma;x<sup><small>3</small></sup> + 2ac&Sigma;x<sup><small>2</small></sup> - 2a&Sigma;yx<sup><small>2</small></sup> +
+      b<sup><small>2</small></sup>&Sigma;x<sup><small>2</small></sup> + 2bc&Sigma;x - 2b&Sigma;yx +
+      c<sup><small>2</small></sup>&Sigma;x<sup><small>0</small></sup> - 2c&Sigma;y + &Sigma;y<sup><small>2</small></sup>
+                    </pre>
+                    <p class="latex">
+                      \(
+  S = a^2 \sum x^4 + 2ab \sum x^3 + 2ac \sum x^2 - 2a \sum yx^2 + b^2 \sum x^2 + 2bc \sum x - 2b \sum yx + c^2 \sum x^0 - 2c \sum y + \sum y^2                      
+                      \)
+                    </p>
+                    On d&eacute;rive l'expression ainsi obtenue
+                    <ul>
+                      <li type="disc">
+                        Par rapport &agrave; <span class="variable">a</span> :
+                        <pre class="flip">
+                          <table>
+                            <tr>
+                              <td>
+                                &#8706;S
+                                <br>
+                                --- =
+                                <br>
+                                &#8706;a
+                              </td>
+                              <td>
+  2a&Sigma;x<sup><small>4</small></sup> + 2b&Sigma;x<sup><small>3</small></sup> + 2c&Sigma;x<sup><small>2</small></sup> - 2&Sigma;yx<sup><small>2</small></sup> = 0
+                              </td>
+                            </tr>
+                          </table>
+                        </pre>
+                        <p class="latex">
+                          \(
+   {{\partial S} \over {\partial a}} = 2a \sum x^4 + 2b \sum x^3 + 2c \sum x^2 + 2 \sum yx^2 = 0                          
+                          \)
+                        </p>
+                      </li>
+                      <li type="disc">
+                        Par rapport &agrave; <span class="variable">b</span> :
+                        <pre class="flip">
+                          <table>
+                            <tr>
+                              <td>
+                                &#8706;S
+                                <br>
+                                --- =
+                                <br>
+                                &#8706;b
+                              </td>
+                              <td>
+  2a&Sigma;x<sup><small>3</small></sup> + 2b&Sigma;x<sup><small>2</small></sup> + 2c&Sigma;x<sup><small>1</small></sup> - 2&Sigma;yx<sup><small>1</small></sup> = 0
+                              </td>
+                            </tr>
+                          </table>
+                        </pre>
+                        <p class="latex">
+                          \(
+   {{\partial S} \over {\partial b}} = 2a \sum x^3 + 2b \sum x^2 + 2c \sum x^1 + 2 \sum yx^1 = 0                          
+                          \)
+                        </p>
+                      </li>
+                      <li type="disc">
+                        Par rapport &agrave; <span class="variable">c</span> :
+                        <pre class="flip">
+                          <table>
+                            <tr>
+                              <td>
+                                &#8706;S
+                                <br>
+                                --- =
+                                <br>
+                                &#8706;c
+                              </td>
+                              <td>
+  2a&Sigma;x<sup><small>2</small></sup> + 2b&Sigma;x<sup><small>1</small></sup> + 2c&Sigma;x<sup><small>0</small></sup> - 2&Sigma;yx<sup><small>0</small></sup> = 0
+                              </td>
+                            </tr>
+                          </table>
+                        </pre>
+                        <p class="latex">
+                          \(
+   {{\partial S} \over {\partial c}} = 2a \sum x^2 + 2b \sum x^1 + 2c \sum x^0 + 2 \sum yx^0 = 0                          
+                          \)
+                        </p>
+                      </li>
+                    </ul>
+                    On change les termes en y de c&ocirc;t&eacute;, on simplifie par 2, et on obtient la r&eacute;solution matricielle suivante :
+                  </p>
+                  <pre class="flip">
+                    <table border="0">
+                      <tr>
+                        <td rowspan="3" valign="middle">| a, b, c | = </td>
+                        <td>|</td>
+                        <td>&Sigma;x<sup><small>4</small></sup></td>
+                        <td>&Sigma;x<sup><small>3</small></sup></td>
+                        <td>&Sigma;x<sup><small>2</small></sup></td>
+                        <td>| <small><sup>-1</sup></small></td>
+                        <td rowspan="3">*</td>
+                        <td>|</td>
+                        <td>&Sigma;yx<sup><small>2</small></sup></td>
+                        <td>|</td>
+                      </tr>
+                      <tr>
+                        <td>|</td>
+                        <td>&Sigma;x<sup><small>3</small></sup></td>
+                        <td>&Sigma;x<sup><small>2</small></sup></td>
+                        <td>&Sigma;x<sup><small>1</small></sup></td>
+                        <td>|</td>
+                        <td>|</td>
+                        <td>&Sigma;yx<sup><small>1</small></sup></td>
+                        <td>|</td>
+                      </tr>
+                      <tr>
+                        <td>|</td>
+                        <td>&Sigma;x<sup><small>2</small></sup></td>
+                        <td>&Sigma;x<sup><small>1</small></sup></td>
+                        <td>&Sigma;x<sup><small>0</small></sup></td>
+                        <td>|</td>
+                        <td>|</td>
+                        <td>&Sigma;yx<sup><small>0</small></sup></td>
+                        <td>|</td>
+                      </tr>
+                    </table>
+                  </pre>
+                  <p class="latex">
+                    \(
+  \begin{vmatrix}
+  a & b & c
+  \end{vmatrix}
+  =
+  \begin{vmatrix}
+  \sum x^4 & \sum x^3 & \sum x^2\\
+  \sum x^3 & \sum x^2 & \sum x^1\\
+  \sum x^2 & \sum x^1 & \sum x^0
+  \end{vmatrix}^{-1}
+  \times
+  \begin{vmatrix}
+  \sum yx^2\\
+  \sum yx^1\\
+  \sum yx^0
+  \end{vmatrix}
+                    \)
+                  </p>
+                
+                  <i>Remarque :</i> Les termes &Sigma;x<sup><small>0</small></sup> repr&eacute;sentent le nombre
+                  de mesures dans la courbe &agrave; lisser.
+                </p>
+                <p name="liContent">
+                  Le travail de l'ordinateur lors du lissage consiste donc &agrave; inverser la matrice carr&eacute;e <span class="flip">
+                  &Sigma;x<sup><small>0->2n</small></sup></span>  (\( \sum x^{0->2n} \)) et &agrave; la multiplier par la
+                  matrice colonne <span  class="flip">&Sigma;yx<sup><small>0->n</small></sup></span> (\( \sum yx^{0->n} \))
+                  pour obtenir la matrice ligne des coefficients du polyn&ocirc;me recherch&eacute;.
+                </p>
+                <p name="liContent">
+                  Pour nos polaires, un polyn&ocirc;me du 4<small><sup>e</sup></small> degr&eacute; convient.
+                </p>
+                <p name="liContent">
+                  Les courbes sont donc determin&eacute;es de 0 &agrave; 180&deg;. Il est &eacute;vident que nous n'avons pas de mesures
+                  dans l'angle mort, aussi, pour l'homog&eacute;n&eacute;it&eacute; du travail de l'ordinateur, il existe syst&eacute;matiquement dans les
+                  fichiers un point de coodonn&eacute;es (0, 0).
+                  Les &eacute;quations de nos polaires sont donc de la forme :
+                  <pre class="flip">
+  y = f(x) = ax<sup><small>4</small></sup> + bx<sup><small>3</small></sup> + cx<sup><small>2</small></sup> + dx + e
+                  </pre>
+                  <p class="latex">
+                    \(
+  y = f(x) = ax^4 + bx^3 + cx^2 + dx + e
+                    \)
+                  </p>
+                  Les deux VMG, au pr&egrave;s et au portant, sont donc les extrema de la fonction
+                  <pre class="flip">
+  f(x) * cos(x)
+                  </pre>
+                  <p class="latex">
+                    \(
+  f(x) \times cos(x)
+                    \)
+                  </p>
+                  &agrave; savoir les racines de
+                  <pre class="flip">
+  [f(x) * cos(x)]'
+                  </pre>
+                  <p class="latex">
+                    \(
+  [f(x) \times cos(x)]'
+                    \)
+                  </p>
+                  et la vitesse maximum est calcul&eacute;e comme &eacute;tant la racine de f'(x).
+                  <br>
+                  Voil&agrave; comment ont &eacute;t&eacute; constitu&eacute;es les polaires. On a t&acirc;ch&eacute; de faire un nombre identique de mesures avec et sans
+                  le volet du foil. Par manque de temps et d'instrumentation, on s'est content&eacute; d'avoir le foil &agrave; z&eacute;ro ou au
+                  maximum de braquage.
+                </p>
+              </li>
+              <li type="a">
+                <a name="ZeroTwoFive">Calcul et dessin de la courbe obtenue</a>
+                <p name="liContent">
+									Rien de particulier ici, il s'agit juste d'un polyn&ocirc;me.
+									Ses coefficients sont les &eacute;l&eacute;ments de la matrice ligne obtenue ci-avant.
+                </p>
+              </li>
+            </ol>
+          </p>
+        </p>
+      </p>
+    </p>
+    <p name="section">
+      <table width="100%" class="topTitle">
+        <tr>
+          <td>&nbsp;<big><a name="One">Courbes de Synth&egrave;se</a></big></td>
+          <td align="right"><small><a href="#" class="inTitle">Top of Page</a></small></td>
+        </tr>
+      </table>
+      <p name="content">
+        Faut que je cherche...
+      </p>
+    </p>
+    <p name="section">
+      <table width="100%" class="topTitle">
+        <tr>
+          <td>&nbsp;<big><a name="Two">Commentaires</a></big></td>
+          <td align="right"><small><a href="#" class="inTitle">Top of Page</a></small></td>
+        </tr>
+      </table>
+      <p name="content">
+        Plus tard...
+      </p>
+    </p>
+    <!-- The end -->
+    <hr>
+    <address>&copy; 2001, Oliv Cool Stuff Soft Strikes Again !</address>
+    <!--address><small>Send comments or ideas to <a href="mailto:Olivier.LeDiouris@oracle.com?cc=olivier@lediouris.net&subject=CO2+Polar+Plots">me</a></small></address-->
+  </body>
+</html>
+<!-- text below generated by server. PLEASE REMOVE -->
+<!-- Counter/Statistics data collection code -->
+<!-- script language="JavaScript" src="http://hostingprod.com/js_source/geov2.js"></script><script language="javascript">geovisit();</script><noscript><img src="http://visit.webhosting.yahoo.com/visit.gif?us1108951629" alt="setstats" border="0" width="1" height="1"></noscript -->
+<!-- IMG SRC="http://geo.yahoo.com/serv?s=76001404&t=1108951629" ALT=1 WIDTH=1 HEIGHT=1 -->
