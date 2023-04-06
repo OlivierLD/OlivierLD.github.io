@@ -44,6 +44,7 @@
 </head>
 <body>
 <h1>This is a Celestial Computer test</h1>
+<h4>User's position is hard-coded</h4>
 <table>
     <tr>
         <td style="vertical-align: top;">
@@ -91,6 +92,12 @@
 
 </body>
 <script type="text/javascript">
+
+	// Work around
+	const userPos = {
+			latitude: 47.677667,
+			longitude: -3.135667
+		  };
 
     const DELTA_T = 69.2201; // Will be re-calculated
 
