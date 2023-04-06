@@ -44,7 +44,7 @@
 </head>
 <body>
 <h1>This is a Celestial Computer test</h1>
-<h4>User's position is hard-coded</h4>
+<h4 id="where" style="color: silver;">User's position is hard-coded</h4>
 <table>
     <tr>
         <td style="vertical-align: top;">
@@ -199,6 +199,7 @@
         updateUTCDate();
         console.log('On Load, done.');
 
+        document.getElementById("where").innerText = `User's position is hard-coded to ${decToSex(userPos.latitude, "NS")} / ${decToSex(userPos.longitude, "EW")}`;
     };
 </script>
 </html>
