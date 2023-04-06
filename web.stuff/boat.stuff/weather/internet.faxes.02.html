@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--
  | This is a test, WiP.
- | Faxes from the Internet, rotated and re-scaled
+ | Faxes from the Internet, rotated and re-scaled, new origins.
  +-->
 <html>
 <head>
@@ -16,6 +16,45 @@
       padding: 0px;
       /* margin: auto; */
     }
+
+    /*  Tests...
+    .image-1 {
+        filter: invert(100%);
+        -webkit-filter: invert(100%);
+    }
+    .image-2 {
+        filter: sepia(100%);
+        -webkit-filter: sepia(100%);
+    }
+    .huerotate {
+        filter: hue-rotate(180deg);
+        -webkit-filter: hue-rotate(180deg);
+    }
+    */
+
+    .tooltip {
+      position: relative;
+      display: inline-block;
+      border-bottom: 1px dotted silver;
+    }
+
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      width: 240px;
+      background-color: black;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 5px 0;
+
+      /* Position the tooltip */
+      position: absolute;
+      z-index: 1;
+    }
+
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+    }
     </style>
     <script type="text/javascript">
         showSurface = (cb) => {
@@ -23,6 +62,8 @@
           let right = document.getElementById("right");
           right.style.display = cb.checked ? 'inline' : 'none';
           left.style.display = cb.checked ? 'inline' : 'none';
+          let fax500mb = document.getElementById("500mb");
+          fax500mb.style.marginTop = cb.checked ? '-575px' : '-30px';
         };
         show500mb = (cb) => {
           let fax500mb = document.getElementById("500mb");
@@ -31,7 +72,10 @@
     </script>
 </head>
 <body>
-  <h2>Faxes from the Internet</h2>
+  <h2 class="tooltip">
+    Faxes from the Internet
+    <span class="tooltiptext">3 faxes, reworked<br/><i>on the <b>client</b> side</i>.</span>
+  </h2>
 
 <!-- North-West Atlantic: https://tgftp.nws.noaa.gov/fax/PYAA12.gif -->
 <!-- North-East Atlantic: https://tgftp.nws.noaa.gov/fax/PYAA11.gif -->
@@ -40,12 +84,12 @@
   <!-- TODO Values for the faxes position (width, margins, etc) -->
 
   <div id="placeholder" class="fax-container" style="min-height: 600px; min-width: 1024px; padding-top: 40px;">
-      <img id="left" src="https://tgftp.nws.noaa.gov/fax/PYAA12.gif"></img>
-      <img id="right" src="https://tgftp.nws.noaa.gov/fax/PYAA11.gif"></img>
-      <img id="500mb" src="https://tgftp.nws.noaa.gov/fax/PPAA10.gif"></img>
+      <img id="left" class="huerotate" src="https://tgftp.nws.noaa.gov/fax/PYAA12.gif"></img>
+      <img id="right" class="image-1" src="https://tgftp.nws.noaa.gov/fax/PYAA11.gif"></img>
+      <img id="500mb" class="image-2" src="https://tgftp.nws.noaa.gov/fax/PPAA10.gif"></img>
   </div>
   <div style="padding-top: 0px;">
-      <!-- <input type="checkbox" id="show-surface" onchange="showSurface(this);" checked> Surface Faxes -->
+      <input type="checkbox" id="show-surface" onchange="showSurface(this);" checked> Surface Faxes
       <input type="checkbox" id="show-500mb" onchange="show500mb(this);" checked> 500mb Fax
   </div>
 </body>
