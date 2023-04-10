@@ -334,10 +334,10 @@ a.codeComment {
                 <a name="ZeroTwoFour">Lissage et calcul des coefficients du polyn&ocirc;me d'extrapolation</a>
                 <p name="liContent">
                   Les points de polaire ainsi obtenus sont port&eacute;s sur le graphique,et les coefficients du polyn&ocirc;me
-                  d'extrapolation sont calcul&eacute;s par la m&eacute;thode des moindres carr&eacute;s.
+                  d'extrapolation sont calcul&eacute;s par la <i><b>m&eacute;thode des moindres carr&eacute;s</b></i>.
                   <p name="sample">
                     <h5>Exemple</h5>
-                    On cherche &agrave; d&eacute;terminer une courbe du 2<sup><small>e</small></sup> degr&eacute;. Pour la commodit&eacute; de la notation,
+                    <i>On cherche &agrave; d&eacute;terminer une courbe du 2<sup><small>e</small></sup> degr&eacute;</i>. Pour la commodit&eacute; de la notation,
                     on prendra les points polaires coordonn&eacute;s comme suit :
                     <p align="center" class="flip">
                       <table>
@@ -533,21 +533,46 @@ a.codeComment {
   \end{vmatrix}^{-1}
   \times
   \begin{vmatrix}
-  \sum yx^2\\
-  \sum yx^1\\
-  \sum yx^0
+  \sum y \sum x^2\\
+  \sum y \sum x^1\\
+  \sum y \sum x^0
   \end{vmatrix}
                     \)
                   </p>
-                
-                  <i>Remarque :</i> Les termes &Sigma;x<sup><small>0</small></sup> repr&eacute;sentent le nombre
+                </p>
+                <p>
+                  <i>Remarque 1 :</i> Les termes &Sigma;x<sup><small>0</small></sup> repr&eacute;sentent le nombre
                   de mesures dans la courbe &agrave; lisser.
                 </p>
-                <p name="liContent">
+                <p>
+                  <i>Remarque 2 :</i> Pour r&eacute;soudre un polyn&ocirc;me du 3<sup><small>e</small></sup> degr&eacute; (comme <span class="latex">\(ax^3 + bx^2 + cx + d\)</span>), la matrice deviendrait :
+                  <p class="latex">
+                    \(
+  \begin{vmatrix}
+  a & b & c & d
+  \end{vmatrix}
+  =
+  \begin{vmatrix}
+  \sum x^6 & \sum x^5 & \sum x^4 & \sum x^3\\
+  \sum x^5 & \sum x^4 & \sum x^3 & \sum x^2\\
+  \sum x^4 & \sum x^3 & \sum x^2 & \sum x^1\\
+  \sum x^3 & \sum x^2 & \sum x^1 & \sum x^0
+  \end{vmatrix}^{-1}
+  \times
+  \begin{vmatrix}
+  \sum y \sum x^3\\
+  \sum y \sum x^2\\
+  \sum y \sum x^1\\
+  \sum y \sum x^0
+  \end{vmatrix}
+                    \)
+                  </p>
+                </p>
+              <p name="liContent">
                   Le travail de l'ordinateur lors du lissage consiste donc &agrave; inverser la matrice carr&eacute;e <span class="flip">
                   &Sigma;x<sup><small>0->2n</small></sup></span>  (\( \sum x^{0->2n} \)) et &agrave; la multiplier par la
-                  matrice colonne <span  class="flip">&Sigma;yx<sup><small>0->n</small></sup></span> (\( \sum yx^{0->n} \))
-                  pour obtenir la matrice ligne des coefficients du polyn&ocirc;me recherch&eacute;.
+                  matrice colonne <span  class="flip">&Sigma;yx<sup><small>0->n</small></sup></span> (\( \sum y \sum x^{0->n} \))
+                  pour obtenir la matrice ligne des coefficients du polyn&ocirc;me recherch&eacute; (n est le degr&eacute; du polyn&ocirc;me).
                 </p>
                 <p name="liContent">
                   Pour nos polaires, un polyn&ocirc;me du 4<small><sup>e</sup></small> degr&eacute; convient.
