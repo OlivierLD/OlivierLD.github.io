@@ -578,9 +578,9 @@ a.codeComment {
                   Pour nos polaires, un polyn&ocirc;me du 4<small><sup>e</sup></small> degr&eacute; convient.
                 </p>
                 <p name="liContent">
-                  Les courbes sont donc determin&eacute;es de 0 &agrave; 180&deg;. Il est &eacute;vident que nous n'avons pas de mesures
+                  Les courbes sont donc determin&eacute;es pour un angle de vent r&eacute;el (TWA) de 0 &agrave; 180&deg;. Il est &eacute;vident que nous n'avons pas de mesures
                   dans l'angle mort, aussi, pour l'homog&eacute;n&eacute;it&eacute; du travail de l'ordinateur, il existe syst&eacute;matiquement dans les
-                  fichiers un point de coodonn&eacute;es (0, 0).
+                  fichiers un point de coodonn&eacute;es (0, 0), qui signifie qu'on a une vitesse nulle quand on est face au vent.
                   Les &eacute;quations de nos polaires sont donc de la forme :
                   <pre class="flip">
   y = f(x) = ax<sup><small>4</small></sup> + bx<sup><small>3</small></sup> + cx<sup><small>2</small></sup> + dx + e
@@ -635,7 +635,8 @@ a.codeComment {
         </tr>
       </table>
       <p name="content">
-        Faut que je cherche...
+        <i>Vitesse maximum</i>, en fonction de la force du vent r&eacute;el.
+        <!-- TODO Graph WebComponent -->
       </p>
     </p>
     <p name="section">
@@ -646,7 +647,29 @@ a.codeComment {
         </tr>
       </table>
       <p name="content">
-        Plus tard...
+        Il est &eacute;vident que le nombre de mesures que nous avons effectu&eacute;es (environ 60.000) est &agrave; peine suffisant pour un travail correct.
+        Il est notamment difficile de cerner avec pr&eacute;cision le degr&eacute; (optimal) des polaires...
+        <br/>
+        N&eacute;anmoins, cette campagne nous aura permis d'entrevoir le r&ocirc;le du volet de courbure sur les foils.
+        <br/>
+        Du fait de ce nombre insuffisant de donn&eacute;es, il peut &ecirc;tre bon de consid&eacute;rer &eacute;galement les fichiers de points qui ont permis l'&eacute;laboration des polaires.
+        Les points - comme dit plus haut - ont &eacute;t&eacute; moyenn&eacute;s, et les diff&eacute;rences qui existent entre les donn&eacute;es avec et sans volet de foil n'apparaissent 
+        pas toujours aussi nettement dans les chiffres qu'&agrave; bord.
+        <br/>
+        Il apparait cependant que les courbes "avec" et "sans" le volet de foil se croisent, et que donc la pr&eacute;sence de ce volet soit un &eacute;l&eacute;ment positif.
+        <br/>
+        Il faut n&eacute;anmoins rester prudent quant &agrave; l'interpr&eacute;tation de ces courbes, relativement &agrave; la fa&ccedil;on d'utiliser ce volet de foil.
+        <br/>
+        R&eacute;p&eacute;tons que les mesures ont &eacute;t&eacute; r&eacute;alis&eacute;es avec le volet &agrave; z&eacute;ro ou &agrave; fond, et qu'il serait sans doute b&eacute;n&eacute;fique de nuancer ce braquage, et que d'autre part, de nouvelles
+        mesures sur une campagne plus &eacute;tendue nous permettrait sans doute d'en apprendre davantage, notamment dans le petit temps.
+        <br/>
+        De plus, ces mesures ont &eacute;t&eacute; r&eacute;alis&eacute;es dans des conditions de mer cl&eacute;mentes.
+        <br/>
+        Nous avons eu l'occasion de constater le r&ocirc;le du foil dans une mer plus mauvaise, sans avoir pu le constater lors ce cette campagne.
+        <p>
+          <hr/>
+          La Rochelle, 3 Juin 1987.
+        </p>
       </p>
     </p>
     <!-- The end -->
