@@ -11,6 +11,7 @@
   <head>
     <meta keyword="author" value="Olivier Le Diouris">
     <title>C&ocirc;te d'Or 2 (aka CO2)</title>
+    <link rel="icon" type="image/ico" href="../icons/hammerhead.02.ico">
     <style>
     /*
      * Oliv fecit, AD 2001, and after.
@@ -171,6 +172,9 @@ a.codeComment {
     </style>
     <!--script-- src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script-->
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <script type="module" src="../../../webcomponents/widgets/graph/GraphDisplay.js"></script>
+
   </head>
   <body>
     <small>
@@ -484,7 +488,7 @@ a.codeComment {
                         </p>
                       </li>
                     </ul>
-                    On change les termes en y de c&ocirc;t&eacute;, on simplifie par 2, et on obtient la r&eacute;solution matricielle suivante :
+                    On change les termes en \(y\) de c&ocirc;t&eacute;, on simplifie par 2, et on obtient la r&eacute;solution matricielle suivante :
                   </p>
                   <pre class="flip">
                     <table border="0">
@@ -547,7 +551,7 @@ a.codeComment {
                   de mesures dans la courbe &agrave; lisser.
                 </p>
                 <p>
-                  <i>Remarque 2.i :</i> Pour r&eacute;soudre un polyn&ocirc;me du 3<sup><small>e</small></sup> degr&eacute; (comme \(ax^3 + bx^2 + cx + d\)), l'&eacute;quation deviendrait :
+                  <i>Remarque 2.i :</i> Pour r&eacute;soudre un polyn&ocirc;me du 3<sup><small>e</small></sup> degr&eacute; (comme \(ax^3 + bx^2 + cx + d\)), l'&eacute;quation devient :
                   <p class="latex">
                     \(
   \begin{vmatrix}
@@ -571,7 +575,7 @@ a.codeComment {
                   </p>
                 </p>
                 <p>
-                  <i>Remarque 2.ii :</i> Et pour r&eacute;soudre un polyn&ocirc;me de degr&eacute; \(n\) (comme \(c_1x^n + c_2x^{n-1} + ... + c_{n+1}\)), l'&eacute;quation deviendrait :
+                  <i>Remarque 2.ii :</i> Et pour r&eacute;soudre un polyn&ocirc;me de degr&eacute; \(n\) (comme \(c_1x^n + c_2x^{n-1} + ... + c_{n+1}\)), l'&eacute;quation devient :
                   <p class="latex">
                     \(
   \begin{vmatrix}
@@ -656,13 +660,34 @@ a.codeComment {
     <p name="section">
       <table width="100%" class="topTitle">
         <tr>
-          <td>&nbsp;<big><a name="One">Courbes de Synth&egrave;se</a></big></td>
+          <td>&nbsp;<big><a name="One">Courbe(s) de Synth&egrave;se</a></big></td>
           <td align="right"><small><a href="#" class="inTitle">Top of Page</a></small></td>
         </tr>
       </table>
+      On n'affiche pas ici les courbes polaires. Ce qu'on veut savoir ici est si le volet de courbure des foils a un int&eacute;ret, ou non. <br/>
+      Pour &eacute;tablir cet &eacute;l&eacute;ment, il nous "suffit" de consid&eacute;rer les vitesses maximum atteintes dans les m&ecirc;mes conditions de vent avec, et sans le volet de foil.
       <p name="content">
-        <i>Vitesse maximum</i>, en fonction de la force du vent r&eacute;el.
-        <!-- TODO Graph WebComponent -->
+        <i>Vitesse maximum</i>, en fonction de la force du vent r&eacute;el : <br/>
+        <ul>
+          <li>En rouge, volet &agrave; z&eacute;ro</li>
+          <li>En cyan, volet &agrave; fond.</li>
+        </ul>
+        <!-- Graph WebComponent -->
+        <div id="generated-graph">
+          <!-- elmt.data contains the curve(s) to display -->
+          <graph-display id="polars-graph-01"
+                         tabindex="-1"
+                         class=""
+                         width="800"
+                         height="600"
+                         padding="5"
+                         hgrid="0:1"
+                         vgrid="0:1"
+                         value="null"
+                         label="Max BSP on TWS"
+                         title="Max BSP on TWS"></graph-display>
+        </div>
+
       </p>
     </p>
     <p name="section">
@@ -682,7 +707,7 @@ a.codeComment {
         Les points - comme dit plus haut - ont &eacute;t&eacute; moyenn&eacute;s, et les diff&eacute;rences qui existent entre les donn&eacute;es avec et sans volet de foil n'apparaissent 
         pas toujours aussi nettement dans les chiffres qu'&agrave; bord.
         <br/>
-        Il apparait cependant que les courbes "avec" et "sans" le volet de foil se croisent, et que donc la pr&eacute;sence de ce volet soit un &eacute;l&eacute;ment positif.
+        <i>Il apparait cependant que les courbes "avec" et "sans" le volet de foil se croisent, et que donc la pr&eacute;sence de ce volet soit un &eacute;l&eacute;ment positif.</i>
         <br/>
         Il faut n&eacute;anmoins rester prudent quant &agrave; l'interpr&eacute;tation de ces courbes, relativement &agrave; la fa&ccedil;on d'utiliser ce volet de foil.
         <br/>
@@ -704,7 +729,43 @@ a.codeComment {
     <!--address><small>Send comments or ideas to <a href="mailto:Olivier.LeDiouris@oracle.com?cc=olivier@lediouris.net&subject=CO2+Polar+Plots">me</a></small></address-->
   </body>
 </html>
-<!-- text below generated by server. PLEASE REMOVE -->
-<!-- Counter/Statistics data collection code -->
-<!-- script language="JavaScript" src="http://hostingprod.com/js_source/geov2.js"></script><script language="javascript">geovisit();</script><noscript><img src="http://visit.webhosting.yahoo.com/visit.gif?us1108951629" alt="setstats" border="0" width="1" height="1"></noscript -->
-<!-- IMG SRC="http://geo.yahoo.com/serv?s=76001404&t=1108951629" ALT=1 WIDTH=1 HEIGHT=1 -->
+<script type="text/javascript">
+
+// TODO More data, with a low pass filter
+let graphData = {  // The data for Max BSP on TWS
+    withGrid: true,
+    withXLabels: true,
+    withYLabels: true,
+    minX: 10,
+    maxX: 30,
+    minY: 8,
+    maxY: 30,
+    data: [ {
+            name: 'No pane',
+            lineColor: 'red',
+            fillColor: null, // 'rgba(0, 255, 0, 0.35)', // With gradient ?
+            thickness: 3,
+            x: [12.5, 14.8, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28],
+            values: [11.50, 13.50, 13.90, 14.70, 15.50, 16.75, 17.80, 19.00, 20.00, 21.00, 21.50, 21.80, 22.20, 22.90, 22.70, 23.00] // Same cardinality as x
+
+        }, {
+            name: 'Full pane',
+            lineColor: 'cyan',
+            fillColor: null, // With gradient ?
+            thickness: 3,
+            x: [12.5, 14.8, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28],
+            values: [11.50, 13.00, 13.30, 13.80, 14.50, 15.40, 16.40, 17.15, 18.20, 19.00, 20.10, 21.25, 22.40, 23.10, 24.25, 24.40] // Same cardinality as x
+        }]
+};
+
+let plotGraph = (id) => {
+  let elmt = document.getElementById(id);
+  elmt.data = graphData;
+  elmt.repaint();
+};
+
+window.onload = () => {
+  console.log('On load, plotting data on graph.');
+  plotGraph('polars-graph-01');
+};
+</script>
