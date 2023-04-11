@@ -5,6 +5,8 @@
    ! See https://www.mathjax.org/#gettingstarted
    !     https://docs.mathjax.org/en/latest/index.html
    !     https://www.overleaf.com/learn/latex/Matrices
+   !     https://latex-tutorial.com/matrices-in-latex/
+   !     https://ashki23.github.io/markdown-latex.html
    +-->
   <head>
     <meta keyword="author" value="Olivier Le Diouris">
@@ -545,7 +547,7 @@ a.codeComment {
                   de mesures dans la courbe &agrave; lisser.
                 </p>
                 <p>
-                  <i>Remarque 2 :</i> Pour r&eacute;soudre un polyn&ocirc;me du 3<sup><small>e</small></sup> degr&eacute; (comme \(ax^3 + bx^2 + cx + d\)), l'&eacute;quation deviendrait :
+                  <i>Remarque 2.i :</i> Pour r&eacute;soudre un polyn&ocirc;me du 3<sup><small>e</small></sup> degr&eacute; (comme \(ax^3 + bx^2 + cx + d\)), l'&eacute;quation deviendrait :
                   <p class="latex">
                     \(
   \begin{vmatrix}
@@ -563,6 +565,30 @@ a.codeComment {
   \sum y \sum x^3\\
   \sum y \sum x^2\\
   \sum y \sum x^1\\
+  \sum y \sum x^0
+  \end{vmatrix}
+                    \)
+                  </p>
+                </p>
+                <p>
+                  <i>Remarque 2.ii :</i> Et pour r&eacute;soudre un polyn&ocirc;me de degr&eacute; \(n\) (comme \(c_1x^n + c_2x^{n-1} + ... + c_{n+1}\)), l'&eacute;quation deviendrait :
+                  <p class="latex">
+                    \(
+  \begin{vmatrix}
+  c_1 & c_2 & \cdots & c_{n+1}
+  \end{vmatrix}
+  =
+  \begin{vmatrix}
+  \sum x^{2 \times n} & \sum x^{(2 \times n) - 1} & \cdots & \sum x^n\\
+  \sum x^{(2 \times n) - 1} & \sum x^{(2 \times n) - 2} & \cdots & \sum x^{n - 1}\\
+  \vdots & \vdots & \ddots & \vdots\\
+  \sum x^n & \sum x^{n - 1} & \cdots & \sum x^0
+  \end{vmatrix}^{-1}
+  \times
+  \begin{vmatrix}
+  \sum y \sum x^n\\
+  \sum y \sum x^{n - 1}\\
+  \vdots\\
   \sum y \sum x^0
   \end{vmatrix}
                     \)
