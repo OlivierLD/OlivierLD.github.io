@@ -8,6 +8,10 @@
     <title>spot.parser</title>
     <meta charset="UTF-8">
     <link rel="icon" type="image/jpg" href="../icons/hammerhead.02.ico">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+  
     <script type="text/javascript" src="js/date.proto.js"></script>
     <script type="text/javascript" src="analog.display/AnalogDisplay.js"></script>
     <!--script type="text/javascript" src="temperature/Thermometer.js"></script-->
@@ -178,26 +182,12 @@ Line.prototype.drawArrowhead = function(ctx, x, y, radians) {
   ctx.fill();
 };
     </script>
-    <!--script src="http://maps.googleapis.com/maps/api/js?v=3&amp;sensor=false&amp;key=AIzaSyDu5cW4UXjXZTswehBdIO8jCZdzUbk2v5o"
-            type="text/javascript"></script-->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-                
+
     <script type="text/javascript">
 let displayScale = 0.75;
 
 let displayTWD, displayTWS, displayPRMSL, displayRain, thermometer, graph, map;
 let withTWD = true;
- 
-window.onload = () => {
-   displayTWD   = new Direction('twdCanvas', 100 * displayScale, 45, 5);
-   displayTWS   = new AnalogDisplay('twsCanvas',   100 * displayScale,   50, 10, 1, true, 40);
-   displayPRMSL = new AnalogDisplay('prmslCanvas', 100 * displayScale, 1045, 10, 1, true, 50, 985, 0);
-   displayRain  = new Pluviometer('rainCanvas');
-   
-   loadMap();
-   setDefaultTimeZone();
-};
  
 function setDefaultTimeZone() {
 
@@ -410,8 +400,8 @@ function loadMap() {
   const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 		maxZoom: 19,
 		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-	}).addTo(map);
-
+	}).addTo(spotMap);
+  
   spotMap.addEventListener('mousemove', (event) => {
         // let lat = Math.round(event.latlng.lat * 100000) / 100000;
         // let lng = Math.round(event.latlng.lng * 100000) / 100000;
@@ -536,7 +526,6 @@ function showCustomAlert(text) {
   } else {
     customAlert.style.display = 'inline';
   }
-
 }
 
 function closeCustomAlert() {
@@ -914,4 +903,15 @@ info@saildocs.com, this will return the how-to document (about 5K).
     <hr/>
     &copy; 2013, 2022, OlivSoft.
   </body>
+  <script type="text/javascript">
+window.onload = () => {
+   displayTWD   = new Direction('twdCanvas', 100 * displayScale, 45, 5);
+   displayTWS   = new AnalogDisplay('twsCanvas',   100 * displayScale,   50, 10, 1, true, 40);
+   displayPRMSL = new AnalogDisplay('prmslCanvas', 100 * displayScale, 1045, 10, 1, true, 50, 985, 0);
+   displayRain  = new Pluviometer('rainCanvas');
+   
+   loadMap();
+   setDefaultTimeZone();
+};
+  </script>
 </html>
