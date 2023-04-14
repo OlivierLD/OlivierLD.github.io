@@ -22,9 +22,55 @@ a.list-link:hover {
   cursor: pointer;
   text-shadow: 4px 4px 8px black, 0 0 25px white, 0 0 10px cyan;
 }
+.shadow-menu a:link, .shadow-menu a:visited {
+  color: darkblue;
+  text-decoration: none;
+}
+.shadow-menu a:hover {
+  color: navy;
+  text-shadow: 2px 2px 4px grey, 0 0 25px white, 0 0 7px cyan;
+}
+.shadow-menu a:active {
+  color: DarkOrange;
+  text-shadow: 2px 2px 4px grey, 0 0 25px white, 0 0 7px cyan;
+}
+
+.close-icon {
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin-top: 2px;
+  margin-right: 7px;
+  cursor: pointer;
+}
+
+.close-icon:hover {
+  text-shadow: 2px 2px 4px grey, 0 0 25px white, 0 0 7px cyan;
+}
+.dialog-header {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.dialog-header-close {
+  float: right;
+}
+.dialog-header-close:hover {
+  color: cyan;
+  cursor: pointer;
+}
 	</style>
+	<script type="text/javascript" src="../astro/js/qrcode.js"></script>
 </head>
 <body>
+	<dialog id="qrcode-dialog" class="shadow-menu" style="width: 300px;">
+		<div class="dialog-header">
+		  <span>Scan this...</span>
+		  <span class="dialog-header-close" onclick="closeQRCodeDialog();">&times</span>
+		</div>
+		<div id="qrcode" style="width:250px; height:250px; margin:25px;"></div>
+	</dialog>
+
 	<h1>Misc boating links</h1>
 	<hr/>
 	<ul>
@@ -49,7 +95,10 @@ a.list-link:hover {
 	<br/>
 	<h3 style="margin: 3px 0 -15px 0;">Spi Ouest France 2023</h3>
 	<ul>
-		<li><a class="list-link" href="./spi.ouest.france.2023/index.html" target="_new">Some pictures</a></li>
+		<li>
+			<a class="list-link" href="./spi.ouest.france.2023/index.html" target="_new">Some pictures</a>
+			<button onclick="makeCode('spi.ouest.france.2023/index.html');">QR Code</button>
+		</li>
 		<li><a class="list-link" href="./spi.ouest.france.2023/spi.ouest.france.2023.html" target="_new">The races</a></li>
 	</ul>
 	<h3 style="margin: 3px 0 -15px 0;">Number Converters</h3>
@@ -151,4 +200,49 @@ a.list-link:hover {
 	<hr/>
 	<span style="font-style: italic;">That's it.</span>
 </body>
-</html>
+<script type="text/javascript">
+
+	let qrcode;
+	
+	let makeCode = (url) => {    
+		if (url === undefined) {
+			url = "index_00.html"; // Dummy
+		}
+		let docLoc = document.location.href;
+		let toDisplay = docLoc.substring(0, docLoc.lastIndexOf('/')) + "/" + url; // document.location + url;
+	
+		qrcode.makeCode(toDisplay);
+		showQRCodeDialog();
+	};
+	
+	let showQRCodeDialog = () => {
+		let qrDialog = document.getElementById("qrcode-dialog");
+		if (qrDialog.show !== undefined) {
+			qrDialog.show();
+		} else {
+			// alert(NO_DIALOG_MESSAGE);
+			qrDialog.style.display = 'inline';
+		}
+	};
+
+	let closeQRCodeDialog = () => {
+		let qrDialog = document.getElementById("qrcode-dialog");
+		if (qrDialog.close !== undefined) {
+			qrDialog.close();
+		} else {
+			// alert(NO_DIALOG_MESSAGE);
+			qrDialog.style.display = 'none';
+		}
+	};
+
+	window.onload = () => {
+		qrcode = new QRCode(document.getElementById("qrcode"), {
+			width:  250,
+			height: 250
+		});
+	
+		// makeCode();
+	}
+	
+	</script>
+	</html>
