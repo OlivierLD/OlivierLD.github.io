@@ -440,10 +440,10 @@ analog-display .analog-for-prmsl {
 
 /* Misc */
 #whatzat:hover {
-  color: orange;
+  /* color: orange; */
   cursor: pointer;
   /* text-shadow: rgba(128, 128, 128, .55) 0 1px 6px; */
-  text-shadow: 2px 2px 4px grey, 0 0 25px white, 0 0 7px cyan;
+  box-shadow: 2px 2px 4px grey, 0 0 25px white, 0 0 7px cyan;
 }
 
 .help-dialog {
@@ -643,8 +643,12 @@ let updateBoatContext = () => {
 	
 
 <div style="position: absolute; z-index: 10; margin: 20px;">
-	<span id="whatzat" title="What is that?" onclick="showAboutDialog();">
-		<img src="./drowning.png" style="width: 40px; border: 2px solid cyan; border-radius: 50%;"/>
+	<span>
+		<img src="./drowning.gif" 
+		     style="width: 40px; border: 2px solid cyan; border-radius: 50%;"
+			 id="whatzat" 
+			 title="What is that?" 
+			 onclick="showAboutDialog();"/>
 	</span>
 </div>
 
