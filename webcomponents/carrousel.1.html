@@ -859,55 +859,55 @@ let updateBoatContext = () => {
 </table>
 
 <!-- Sliders -->
-<table>
+<table style="margin: 2px; padding: 10px; border: 1px solid silver; border-radius: 5px;">
 	<!-- BSP, SOG, COG, AWS, AWA, HDC -->
-	<tr>
+	<tr style="color: white; font-weight: bold;">
 		<td>BSP:</td>
-		<td style="width: 500px;">
+		<td style="width: 800px;">
 			<input type="range" value="8.0" min="0" max="50" step="0.1" style="width: 90%;"
 					oninput="updateBoatContext(); _bsp01.value = this.value;" id="bsp01"/>
-			<output name="bsp" id="_bsp01" style="color: cyan;">8.0</output>
+			<output name="bsp" id="_bsp01">8.0</output> kn
 		</td>
 	</tr>
-	<tr>
+	<tr style="color: yellow; font-weight: bold;">
 		<td>SOG:</td>
-		<td style="width: 500px;">
+		<td style="width: 800px;">
 			<input type="range" value="8.2" min="0" max="50" step="0.1" style="width: 90%;"
 					oninput="updateBoatContext(); _sog01.value = this.value;" id="sog01"/>
-			<output name="sog" id="_sog01" style="color: cyan;">8.2</output>
+			<output name="sog" id="_sog01">8.2</output> kn
 		</td>
 	</tr>
-	<tr>
+	<tr style="color: yellow; font-weight: bold;">
 		<td>COG:</td>
-		<td style="width: 500px;">
+		<td style="width: 800px;">
 			<input type="range" value="215" min="0" max="360" step="1" style="width: 90%;"
 					oninput="updateBoatContext(); _cog01.value = this.value;" id="cog01"/>
-			<output name="awa" id="_cog01" style="color: cyan;">215</output>
+			<output name="awa" id="_cog01">215</output>&deg;
 		</td>
 	</tr>
-	<tr>
+	<tr style="color: cyan; font-weight: bold;">
 		<td>AWS:</td>
-		<td style="width: 500px;">
+		<td style="width: 800px;">
 			<input type="range" value="15.8" min="0" max="60" step="0.1" style="width: 90%;"
 					oninput="updateBoatContext(); _aws01.value = this.value;" id="aws01"/>
-			<output name="aws" id="_aws01" style="color: cyan;">15.8</output>
+			<output name="aws" id="_aws01">15.8</output> kn
 		</td>
 	</tr>
-	<tr>
+	<tr style="color: cyan; font-weight: bold;">
 		<td>AWA:</td>
-		<td style="width: 500px;">
+		<td style="width: 800px;">
 			<input type="range" value="-112" min="-180" max="180" step="1" style="width: 90%;"
 					oninput="updateBoatContext(); _awa01.value = this.value;" id="awa01"/>
-			<output name="awa" id="_awa01" style="color: cyan;">-112</output>
+			<output name="awa" id="_awa01">-112</output>&deg;
 		</td>
 	</tr>
-	<tr>
+	<tr style="color: lime; font-weight: bold;">
 		<td><span title="Compass Heading">HDG:</span></td>
-		<td style="width: 500px;">
+		<td style="width: 800px;">
 			<input type="range" value="235" min="0" max="360" step="1" style="width: 90%;"
 					oninput="updateBoatContext(); _hdc01.value = this.value;" id="hdc01"
 					title="From the compass"/>
-			<output name="hdc" id="_hdc01" style="color: cyan;">235</output>
+			<output name="hdc" id="_hdc01">235</output>&deg;
 		</td>
 	</tr>
 </table>
