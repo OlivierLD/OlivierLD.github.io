@@ -16,7 +16,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Carrousel</title>
+  <title>Carrousel Console</title>
   <style type="text/css">
 
 :root {
@@ -437,6 +437,40 @@ analog-display .analog-for-prmsl {
 	--value-font-size-factor: 0.75
 }
 
+/* Misc */
+#whatzat:hover {
+  color: orange;
+  cursor: pointer;
+  /* text-shadow: rgba(128, 128, 128, .55) 0 1px 6px; */
+  text-shadow: 2px 2px 4px grey, 0 0 25px white, 0 0 7px cyan;
+}
+
+.help-dialog {
+	background-color: rgba(0, 0, 0, 0.75);
+	padding: 2em;
+	color: silver;
+	border: 2px solid silver;
+	border-radius: 5px;
+	width: 800px;
+	margin-left: 200px; 
+	margin-top: 10px; 
+	z-index: 30;
+	box-shadow: 2px 2px 4px grey, 0 0 25px white, 0 0 7px cyan;
+}
+
+.dialog-header {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.dialog-header-close {
+  float: right;
+}
+.dialog-header-close:hover {
+  color: cyan;
+  cursor: pointer;
+}
+
   </style>
 
   <script type="module" src="widgets/analogdisplay/AnalogDisplay.js"></script>
@@ -447,6 +481,26 @@ analog-display .analog-for-prmsl {
   <script type="text/javascript" src="utils/NavigationHelper.js"></script>
 
   <script type="text/javascript">
+
+let showAboutDialog = () => {
+	let aboutDialog = document.getElementById("about-dialog");
+	if (aboutDialog.show !== undefined) {
+		aboutDialog.show();
+	} else {
+		alert(NO_DIALOG_MESSAGE);
+		aboutDialog.style.display = 'inline';
+	}
+};
+
+let closeAboutDialog = () => {
+	let aboutDialog = document.getElementById("about-dialog");
+	if (aboutDialog.close !== undefined) {
+		aboutDialog.close();
+	} else {
+		// alert(NO_DIALOG_MESSAGE);
+		aboutDialog.style.display = 'none';
+	}
+};
 
 const BSP_COEFF = 1;
 const HDG_OFFSET = 0;
@@ -559,6 +613,37 @@ let updateBoatContext = () => {
 
 </head>
 <body>
+
+<dialog id="about-dialog" class="help-dialog">
+	<div class="dialog-header">
+		<span>What this is...</span>
+		<span class="dialog-header-close" onclick="closeAboutDialog();">&times</span>
+	</div>
+	<div>
+		<!-- About content -->
+		<div style="margin-top: 15px;">
+			This page is part of a work in progress, its goal being to show <b>as much data</b> as possible, <b>as clearly</b> as possible,
+			on <b>one</b> page...
+			<br/>
+			Vast topic indeed.
+		</div>
+		<div style="margin-top: 15px;">
+			Boat and GPS data can be set using the sliders at the bottom.
+		</div>
+		<div style="margin-top: 15px;">
+			Here we want to show a carrousel of WebComponents, displaying boat data like, True Wind Speed (TWS), True Wind Angle (TWA), etc...
+			<br/>
+			Data are calculated from the data read from the boat sensors (BSP, AWA, AWS) and GPS data.
+			<br/>
+			The graph in the background shows a 2D representation of all the data.
+		</div>
+	</div>
+</dialog>
+	
+
+<div style="position: absolute; z-index: 10; margin: 20px;">
+	<span id="whatzat" style="font-size: 20px; padding: 10px; font-weight: bold; border: 2px solid cyan; border-radius: 50%;" title="What is that?" onclick="showAboutDialog();">?</span>
+</div>
 
 <table>
 	<tr>
