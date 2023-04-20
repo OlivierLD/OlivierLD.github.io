@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <!--
- ! From CodePen at https://codepen.io/jaskiranchhokar/pen/wmGXav
+ ! Taken from CodePen at https://codepen.io/jaskiranchhokar/pen/wmGXav
+ !
+ ! Work In Progress. Carrousel Console.
  !
  ! Original Config:
  ! - BSP: 8.0
@@ -37,6 +39,67 @@ html, body {
 	color: cyan;
 	font-family: 'Courier New', Courier, monospace;
 }
+
+/* Button tooltips, used below */
+.tooltip {
+	position: relative;
+	display: inline-block;
+	border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+	visibility: hidden;
+	width: 150px; 
+	background-color: silver;
+	color: navy;
+	text-transform: none;
+	text-align: center;
+	border-radius: 6px;
+	padding: 5px 0;
+	position: absolute;
+	z-index: 1;
+	top: 150%;
+	left: 50%;
+	margin-left: 85px;
+	/* Fade in tooltip - takes 1 second to go from 0% to 100% opac: */
+	opacity: 0;
+	transition: opacity 1s;
+}
+
+.tooltip .tooltiptext-right {
+	top: 5px;
+	left: 100%;
+	/*width: 200px;*/
+	margin-left: 10px;  /* Arrow hidden */
+}
+
+.tooltip .tooltiptext::after {
+	content: "";
+	position: absolute;
+	bottom: 100%;
+	left: 50%;
+	margin-left: -5px;
+	border-width: 5px;
+	border-style: solid;
+	border-color: transparent transparent silver transparent;
+}
+
+.tooltip .tooltiptext-right::after {
+	content: "";
+	position: absolute;
+	top: 50%;
+	margin-left: -110px;
+	margin-top: -5px;
+	border-width: 5px;
+	border-style: solid;
+	border-color: transparent silver transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+	visibility: visible;
+	opacity: 1;
+}
+
 
 /* 3D Slideshow */
 
@@ -440,7 +503,6 @@ analog-display .analog-for-prmsl {
 
 /* Misc */
 #whatzat:hover {
-  /* color: orange; */
   cursor: pointer;
   /* text-shadow: rgba(128, 128, 128, .55) 0 1px 6px; */
   box-shadow: 2px 2px 4px grey, 0 0 25px white, 0 0 7px cyan;
@@ -634,22 +696,25 @@ let updateBoatContext = () => {
 		<div style="margin-top: 15px;">
 			Here we want to show a carrousel of WebComponents, displaying boat data like, True Wind Speed (TWS), True Wind Angle (TWA), etc...
 			<br/>
-			Data are calculated from the data read from the boat sensors (BSP, AWA, AWS) and GPS data.
+			True Wind data are <i>calculated</i> from the data read from the boat sensors (BSP, AWA, AWS) and GPS data.
 			<br/>
 			The graph in the background shows a 2D representation of all the data.
 		</div>
+		<div style="margin-top: 15px;">
+			To stop the carrousel, just move the mouse on it.
+		</div>
+		<hr style="margin-top: 15px; margin-bottom: 5px;"/>
+		<i>OlivSoft never stops</i>
 	</div>
 </dialog>
-	
 
-<div style="position: absolute; z-index: 10; margin: 20px;">
-	<span>
-		<img src="./drowning.gif" 
-		     style="width: 40px; border: 2px solid cyan; border-radius: 50%;"
-			 id="whatzat" 
-			 title="What is that?" 
-			 onclick="showAboutDialog();"/>
-	</span>
+<div class="tooltip" style="position: absolute; z-index: 10; margin: 20px;">
+	<img src="./drowning.gif" 
+			style="width: 40px; border: 2px solid cyan; border-radius: 50%;"
+			id="whatzat" 
+			title="What is that?" 
+			onclick="showAboutDialog();"/>
+	<span class="tooltiptext tooltiptext-right">Heeeeelp!</span>
 </div>
 
 <table>
@@ -663,7 +728,7 @@ let updateBoatContext = () => {
 		  <div class="black-frame centered" style="background-color: rgba(0, 0, 0, var(--bg-transp));">
 			  <!-- TWS -->
 			  <analog-display class="analogdisplay-monochrome-orange"
-							  title="True Wind Speed in knots, rotate-digits: false"
+							  title="True Wind Speed in knots"
 							  id="tws-01"
 							  min-value="0"
 							  max-value="60"
@@ -716,7 +781,7 @@ let updateBoatContext = () => {
 		  <div class="black-frame centered" style="background-color: rgba(0, 0, 0, var(--bg-transp));">
 			  <!-- AWS -->
 			  <analog-display class="analogdisplay-monochrome-cyan"
-							  title="Apparent Wind Speed in knots, rotate-digits: false"
+							  title="Apparent Wind Speed in knots"
 							  id="aws-01"
 							  min-value="0"
 							  max-value="60"
@@ -752,7 +817,7 @@ let updateBoatContext = () => {
 		  <div class="black-frame centered" style="background-color: rgba(0, 0, 0, var(--bg-transp));">
 			  <!-- BSP -->
 			  <analog-display class="analogdisplay-monochrome-white"
-							  title="Boat Speed, rotate-digits: false"
+							  title="Boat Speed"
 							  id="bsp-01"
 							  min-value="0"
 							  max-value="15"
@@ -787,7 +852,7 @@ let updateBoatContext = () => {
 		  <div class="black-frame centered" style="background-color: rgba(0, 0, 0, var(--bg-transp));">
 			  <!-- SOG -->
 			  <analog-display class="analogdisplay-monochrome-yellow"
-							  title="Speed Over Ground, rotate-digits: false"
+							  title="Speed Over Ground"
 							  id="sog-01"
 							  min-value="0"
 							  max-value="15"
@@ -806,7 +871,7 @@ let updateBoatContext = () => {
 		  <div class="black-frame centered" style="background-color: rgba(0, 0, 0, var(--bg-transp));">
 			  <!-- COG -->
 			  <direction-display class="analogdisplay-monochrome-yellow"
-								 title="Coure Over Ground"
+								 title="Course Over Ground"
 								 id="cog-01"
 								 value="215"
 								 major-ticks="45"
@@ -862,7 +927,7 @@ let updateBoatContext = () => {
 <table style="margin: 2px; padding: 10px; border: 1px solid silver; border-radius: 5px;">
 	<!-- BSP, SOG, COG, AWS, AWA, HDC -->
 	<tr style="color: white; font-weight: bold;">
-		<td>BSP:</td>
+		<td title="Boat Speed">BSP:</td>
 		<td style="width: 800px;">
 			<input type="range" value="8.0" min="0" max="50" step="0.1" style="width: 90%;"
 					oninput="updateBoatContext(); _bsp01.value = this.value;" id="bsp01"/>
@@ -870,7 +935,7 @@ let updateBoatContext = () => {
 		</td>
 	</tr>
 	<tr style="color: yellow; font-weight: bold;">
-		<td>SOG:</td>
+		<td title="Speed Over Ground">SOG:</td>
 		<td style="width: 800px;">
 			<input type="range" value="8.2" min="0" max="50" step="0.1" style="width: 90%;"
 					oninput="updateBoatContext(); _sog01.value = this.value;" id="sog01"/>
@@ -878,7 +943,7 @@ let updateBoatContext = () => {
 		</td>
 	</tr>
 	<tr style="color: yellow; font-weight: bold;">
-		<td>COG:</td>
+		<td title="Course Over Ground">COG:</td>
 		<td style="width: 800px;">
 			<input type="range" value="215" min="0" max="360" step="1" style="width: 90%;"
 					oninput="updateBoatContext(); _cog01.value = this.value;" id="cog01"/>
@@ -886,7 +951,7 @@ let updateBoatContext = () => {
 		</td>
 	</tr>
 	<tr style="color: cyan; font-weight: bold;">
-		<td>AWS:</td>
+		<td title="Apparent Wind Angle">AWS:</td>
 		<td style="width: 800px;">
 			<input type="range" value="15.8" min="0" max="60" step="0.1" style="width: 90%;"
 					oninput="updateBoatContext(); _aws01.value = this.value;" id="aws01"/>
@@ -894,7 +959,7 @@ let updateBoatContext = () => {
 		</td>
 	</tr>
 	<tr style="color: cyan; font-weight: bold;">
-		<td>AWA:</td>
+		<td title="Apparent Wind Angle">AWA:</td>
 		<td style="width: 800px;">
 			<input type="range" value="-112" min="-180" max="180" step="1" style="width: 90%;"
 					oninput="updateBoatContext(); _awa01.value = this.value;" id="awa01"/>
@@ -902,11 +967,10 @@ let updateBoatContext = () => {
 		</td>
 	</tr>
 	<tr style="color: lime; font-weight: bold;">
-		<td><span title="Compass Heading">HDG:</span></td>
+		<td title="Heading (True)">HDG:</td>
 		<td style="width: 800px;">
 			<input type="range" value="235" min="0" max="360" step="1" style="width: 90%;"
-					oninput="updateBoatContext(); _hdc01.value = this.value;" id="hdc01"
-					title="From the compass"/>
+					oninput="updateBoatContext(); _hdc01.value = this.value;" id="hdc01"/>
 			<output name="hdc" id="_hdc01">235</output>&deg;
 		</td>
 	</tr>
