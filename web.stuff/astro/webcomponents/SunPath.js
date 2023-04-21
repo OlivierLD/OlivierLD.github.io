@@ -810,6 +810,10 @@ class SunPath extends HTMLElement {
 				let dayLightHours = Math.floor(dayLight / 3600);
 				let dayLightMins = Math.floor((dayLight - (dayLightHours * 3600)) / 60);
 				let dayLightSecs = Math.floor(dayLight - ((dayLightHours * 3600) + (dayLightMins * 60)));
+				// Workaround some wierd stuff...
+				while (dayLightHours > 24) {
+					dayLightHours -= 24;
+				}
 				let str = "Daylight " +
 						Utilities.lpad(dayLightHours.toString(), 2, '0') + ':' +
 						Utilities.lpad(dayLightMins.toString(), 2, '0') + ':' +
