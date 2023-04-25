@@ -141,7 +141,7 @@
         padding-top: 50px;
         height: 760px;
         width: 100%;
-        background-color: #202525;
+        /*background-color: #202525;*/
         box-sizing: border-box;
     }
     
@@ -182,7 +182,7 @@
         width: 190px;
         perspective: 1000px;
         position: relative;
-        padding-top: 80px;
+        padding-top: 20px;
     }
     
     .content-carrousel {
@@ -207,8 +207,8 @@
     }
     
     /* 
-        Degree step: 40 = 360 / 9. 9 = nb slides 
-                     51 ~= 360 / 7. 7 = nb slides
+        Degree step: 40 = 360 / 9  (9 = nb slides) 
+                     51 ~= 360 / 7 (7 = nb slides)
     */
     .content-carrousel figure:nth-child(1) {
         transform: rotateY(0deg) translateZ(300px);
@@ -256,11 +256,11 @@
     
     /* Display WebComponents */
     .black-frame {
-                padding: 3px;
-                margin: 1px;
-                border-radius: 5px;
-                border: 1px solid silver;
-            }
+        padding: 3px;
+        margin: 1px;
+        border-radius: 5px;
+        border: 1px solid silver;
+    }
     
     .centered {
         text-align: center;
@@ -273,19 +273,6 @@
     let onSlideShowClick = (src) => {
         console.log(">> Client side!! Slide " + src + " was clicked.");
         window.open(src, '_blank'); // This is an example
-    };
-
-    const TABS = ['kayak', 'todo', '2022', '2023']; // Add tabs here as needed
-
-    let openTab = (evt, tabNum) => {
-        let tabLinks = document.getElementsByClassName("tablinks");
-        for (let i=0; i<tabLinks.length; i++) {
-            tabLinks[i].className = tabLinks[i].className.replace(" active", ""); // Reset
-        }
-        for (let i=0; i<TABS.length; i++) {
-            document.getElementById(TABS[i]).style.display = (i === tabNum) ? 'block' : 'none';
-        }
-        evt.currentTarget.className += " active";
     };
 
     </script>    
