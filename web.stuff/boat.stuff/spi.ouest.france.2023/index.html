@@ -125,8 +125,11 @@
 
     <style type="text/css">
 
+/* Q: Where is the carrousel's vertical axis */
+
     :root {
         --bg-transp: 0.75;
+        --translate-z: 310px; /* Slide width, minimum */
     }
     
     /** {
@@ -145,7 +148,7 @@
         box-sizing: border-box;
     }
     
-    .slideshow-title {
+    /*.slideshow-title {
         font-family: 'Allerta Stencil';
         font-size: 62px;
         color: #fff;
@@ -154,9 +157,9 @@
         margin-top: 25%;
         letter-spacing: 3px;
         font-weight: 300;
-    }
+    }*/
     
-    .sub-heading {
+    /*.sub-heading {
         padding-top: 50px;
         font-size: 18px;
     } .sub-heading-two {
@@ -175,7 +178,7 @@
         font-size: 3px;
     } .sub-heading-nine {
         font-size: 1px;
-    }
+    }*/
     
     .entire-content {
         margin: auto;
@@ -188,7 +191,7 @@
     .content-carrousel {
         width: 100%;
         position: absolute;
-        float: right;
+        /*float: right;*/
         animation: rotar 15s infinite linear;
         transform-style: preserve-3d;
     }
@@ -199,7 +202,7 @@
     }
     
     .content-carrousel figure {
-        width: 140%;
+        width: 150%;
         height: 400px;
         border: 1px solid #3b444b;
         overflow: hidden;
@@ -208,24 +211,24 @@
     
     /* 
         Degree step: 40 = 360 / 9  (9 = nb slides) 
-                     51 ~= 360 / 7 (7 = nb slides)
+                     51 ~= 360 / 7 (7 = nb slides) => 0, 51, 102, 153, etc...
     */
     .content-carrousel figure:nth-child(1) {
-        transform: rotateY(0deg) translateZ(300px);
+        transform: rotateY(0deg) translateZ(var(--translate-z));
     } .content-carrousel figure:nth-child(2) {
-        transform: rotateY(51deg) translateZ(300px);
+        transform: rotateY(51deg) translateZ(var(--translate-z));
     } .content-carrousel figure:nth-child(3) {
-        transform: rotateY(102deg) translateZ(300px);
+        transform: rotateY(102deg) translateZ(var(--translate-z));
     } .content-carrousel figure:nth-child(4) {
-        transform: rotateY(153deg) translateZ(300px);
+        transform: rotateY(153deg) translateZ(var(--translate-z));
     } .content-carrousel figure:nth-child(5) {
-        transform: rotateY(204deg) translateZ(300px);
+        transform: rotateY(204deg) translateZ(var(--translate-z));
     } .content-carrousel figure:nth-child(6) {
-        transform: rotateY(255deg) translateZ(300px);
+        transform: rotateY(255deg) translateZ(var(--translate-z));
     } .content-carrousel figure:nth-child(7) {
-        transform: rotateY(306deg) translateZ(300px);
+        transform: rotateY(306deg) translateZ(var(--translate-z));
     } .content-carrousel figure:nth-child(8) {
-        transform: rotateY(357deg) translateZ(300px);
+        transform: rotateY(357deg) translateZ(var(--translate-z));
     }
     
     .shadow {
