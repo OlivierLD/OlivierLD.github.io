@@ -882,6 +882,7 @@ Date.prototype.format = function (dateFormat) {
 
 </script>
 <script type="module" src="./webcomponents/widgets/marquee/MarqueePanel.js"></script>
+<script type="text/javascript" src="./web.stuff/astro/js/qrcode.js"></script>
 
 </head>
 <body class="bg-gradient">
@@ -1242,6 +1243,14 @@ Date.prototype.format = function (dateFormat) {
     <!--button id="exit-weather-link" title="Close dialog">Close</button-->
   </dialog>
 
+  <dialog id="qrcode-dialog" class="shadow-menu" style="width: 340px; border-radius: 10px;">
+		<div class="dialog-header">
+		  <span>Scan this...</span>
+		  <span class="dialog-header-close" onclick="closeQRCodeDialog();">&times</span>
+		</div>
+		<div id="qrcode" style="width:250px; height:250px; margin:25px;"></div>
+	</dialog>
+
   <!--
     The Big Main Menu on the left
 
@@ -1286,7 +1295,8 @@ Date.prototype.format = function (dateFormat) {
       <div id="section-2" class="sub-section">
         <a class="active-link" href="./webcomponents/index.html" target="new">Index</a>
         <a class="active-link" href="./webcomponents/gallery.html" target="new">Oliv's gallery (WiP)</a>
-        <a class="active-link" href="./webcomponents/carrousel.1.html" target="new">A Carrousel Navigation Console (WiP)</a>
+        <a class="active-link" href="./webcomponents/carrousel.1.html" target="new" title="Work in Progress">A Carrousel Navigation Console</a>
+        <span style="padding-left: 250px;"><button class="button-link" title="QR Code for the Carrousel Console.&#13;Use it to reach it from other devices." onclick="makeCode('./webcomponents/carrousel.1.html');" style="border-radius: 4px; font-size: 40%;">QR Code</button></span>
       </div>
     </div>
 
@@ -2037,4 +2047,51 @@ Date.prototype.format = function (dateFormat) {
   })();
 
 </script>
+
+<script type="text/javascript">
+
+	let qrcode;
+	
+	let makeCode = (url) => {    
+		if (url === undefined) {
+			url = "index_00.html"; // Dummy
+		}
+		let docLoc = document.location.href;
+		let toDisplay = docLoc.substring(0, docLoc.lastIndexOf('/')) + "/" + url; // document.location + url;
+    console.log(`Making QRCode for ${toDisplay}`);
+		qrcode.makeCode(toDisplay);
+		showQRCodeDialog();
+	};
+	
+	let showQRCodeDialog = () => {
+		let qrDialog = document.getElementById("qrcode-dialog");
+		if (qrDialog.show !== undefined) {
+			qrDialog.show();
+		} else {
+			// alert(NO_DIALOG_MESSAGE);
+			qrDialog.style.display = 'inline';
+		}
+	};
+
+	let closeQRCodeDialog = () => {
+		let qrDialog = document.getElementById("qrcode-dialog");
+		if (qrDialog.close !== undefined) {
+			qrDialog.close();
+		} else {
+			// alert(NO_DIALOG_MESSAGE);
+			qrDialog.style.display = 'none';
+		}
+	};
+
+	window.onload = () => {
+		qrcode = new QRCode(document.getElementById("qrcode"), {
+			width:  250,
+			height: 250
+		});
+	
+		// makeCode();
+	}
+	
+</script>
+
 </html>
