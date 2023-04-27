@@ -2056,11 +2056,15 @@ Date.prototype.format = function (dateFormat) {
 		if (url === undefined) {
 			url = "index_00.html"; // Dummy
 		}
-		let docLoc = document.location.href;
-		let toDisplay = docLoc.substring(0, docLoc.lastIndexOf('/')) + "/" + url; // document.location + url;
-    console.log(`Making QRCode for ${toDisplay}`);
-		qrcode.makeCode(toDisplay);
-		showQRCodeDialog();
+    if (qrcode) {
+      let docLoc = document.location.href;
+      let toDisplay = docLoc.substring(0, docLoc.lastIndexOf('/')) + "/" + url; // document.location + url;
+      console.log(`Making QRCode for ${toDisplay}`);
+      qrcode.makeCode(toDisplay);
+      showQRCodeDialog();
+    } else {
+      alert("Not done loading yet...\nRe-try in a sec...");
+    }
 	};
 	
 	let showQRCodeDialog = () => {
@@ -2087,10 +2091,9 @@ Date.prototype.format = function (dateFormat) {
 		qrcode = new QRCode(document.getElementById("qrcode"), {
 			width:  250,
 			height: 250
-		});
-	
+	  });
 		// makeCode();
-	}
+  }
 	
 </script>
 
