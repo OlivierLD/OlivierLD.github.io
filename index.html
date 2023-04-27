@@ -1187,6 +1187,16 @@ Date.prototype.format = function (dateFormat) {
     </div>
   </div>
 
+  <dialog id="custom-alert" class="shadow-menu" style="width: 800px;">
+    <div class="dialog-header">
+      <span>Alert</span>
+      <span class="dialog-header-close" onclick="closeCustomAlert();">&times</span>
+    </div>
+    <div id="custom-alert-content">
+      <!-- Dynamic lert content -->
+    </div>
+  </dialog>
+
   <dialog id="about-dialog" class="shadow-menu" style="width: 800px;">
     <div class="dialog-header">
       <span>Where did you just land?...</span>
@@ -2053,6 +2063,7 @@ Date.prototype.format = function (dateFormat) {
 	let qrcode;
 	
 	let makeCode = (url) => {    
+    // alert("Aha!");
 		if (url === undefined) {
 			url = "index_00.html"; // Dummy
 		}
@@ -2087,7 +2098,34 @@ Date.prototype.format = function (dateFormat) {
 		}
 	};
 
+  // TODO Fading in and out.
+  let customAlertOpened = false;
+  let showCustomAlert = (content) => {
+    let customAlert = document.getElementById("custom-alert");
+    document.getElementById('custom-alert-content').innerText = content;
+		if (customAlert.show !== undefined) {
+			customAlert.show();
+		} else {
+			customAlert.style.display = 'inline';
+		}
+    customAlertOpened = true;
+    window.setTimeout(closeCustomAlert, 5000);
+  };
+
+  let closeCustomAlert = () => {
+    let customAlert = document.getElementById("custom-alert");
+		if (customAlert.close !== undefined) {
+			customAlert.close();
+		} else {
+			customAlert.style.display = 'none';
+		}
+    customAlertOpened = false;
+  };
+
 	window.onload = () => {
+
+    window.alert = showCustomAlert;
+
 		qrcode = new QRCode(document.getElementById("qrcode"), {
 			width:  250,
 			height: 250
