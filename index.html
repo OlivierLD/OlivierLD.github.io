@@ -2122,9 +2122,9 @@ Date.prototype.format = function (dateFormat) {
     customAlertOpened = false;
   };
 
-	window.onload = () => {
+  window.alert = showCustomAlert;  // Not in window.onload !
 
-    window.alert = showCustomAlert;
+  window.onload = () => {
 
 		qrcode = new QRCode(document.getElementById("qrcode"), {
 			width:  250,
