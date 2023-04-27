@@ -33,7 +33,7 @@
   z-index: -100;
 }
 .bg-data {
-  font-family: "Courier New",sans-serif;
+  font-family: "Courier New", sans-serif;
   font-size: 256px;
   font-weight: bold;
   color: lightskyblue;
@@ -49,7 +49,7 @@ html {
 }
 
 * {
-  box-sizing: border-box
+  box-sizing: border-box;
 }
 
 body {
@@ -1187,7 +1187,7 @@ Date.prototype.format = function (dateFormat) {
     </div>
   </div>
 
-  <dialog id="custom-alert" class="shadow-menu" style="width: 800px;">
+  <dialog id="custom-alert" class="shadow-menu" style="width: 800px; border: 2px solid cyan; margin-top: 50px;">
     <div class="dialog-header">
       <span>Alert</span>
       <span class="dialog-header-close" onclick="closeCustomAlert();">&times</span>
@@ -1306,7 +1306,7 @@ Date.prototype.format = function (dateFormat) {
         <a class="active-link" href="./webcomponents/index.html" target="new">Index</a>
         <a class="active-link" href="./webcomponents/gallery.html" target="new">Oliv's gallery (WiP)</a>
         <a class="active-link" href="./webcomponents/carrousel.1.html" target="new" title="Work in Progress">A Carrousel Navigation Console</a>
-        <span style="padding-left: 250px;"><button class="button-link" title="QR Code for the Carrousel Console.&#13;Use it to reach it from other devices." onclick="makeCode('./webcomponents/carrousel.1.html');" style="border-radius: 4px; font-size: 40%;">QR Code</button></span>
+        <span style="padding-left: 250px;"><button class="button-link" title="QR Code for the Carrousel Console.&#13;Use it to reach it from other devices." onclick="makeCode('./webcomponents/carrousel.1.html');" style="border-radius: 4px; font-size: 40%;">Carrousel QR Code</button></span>
       </div>
     </div>
 
@@ -2098,7 +2098,7 @@ Date.prototype.format = function (dateFormat) {
 		}
 	};
 
-  // TODO Fading in and out.
+  // TODO Fading in and out...
   let customAlertOpened = false;
   let showCustomAlert = (content) => {
     let customAlert = document.getElementById("custom-alert");
@@ -2131,7 +2131,7 @@ Date.prototype.format = function (dateFormat) {
 			height: 250
 	  });
 		// makeCode();
-  }
+  };
 	
 </script>
 
