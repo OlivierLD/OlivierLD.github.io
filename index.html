@@ -1193,7 +1193,7 @@ Date.prototype.format = function (dateFormat) {
       <span class="dialog-header-close" onclick="closeCustomAlert();">&times</span>
     </div>
     <div id="custom-alert-content">
-      <!-- Dynamic lert content -->
+      <!-- Dynamic alert content -->
     </div>
   </dialog>
 
@@ -1253,9 +1253,9 @@ Date.prototype.format = function (dateFormat) {
     <!--button id="exit-weather-link" title="Close dialog">Close</button-->
   </dialog>
 
-  <dialog id="qrcode-dialog" class="shadow-menu" style="width: 340px; border-radius: 10px;">
+  <dialog id="qrcode-dialog" class="shadow-menu" style="width: 340px; border-radius: 10px; background: silver;">
 		<div class="dialog-header">
-		  <span>Scan this...</span>
+		  <span style="color: cyan;">Scan this...</span>
 		  <span class="dialog-header-close" onclick="closeQRCodeDialog();">&times</span>
 		</div>
 		<div id="qrcode" style="width:250px; height:250px; margin:25px;"></div>
@@ -1306,7 +1306,7 @@ Date.prototype.format = function (dateFormat) {
         <a class="active-link" href="./webcomponents/index.html" target="new">Index</a>
         <a class="active-link" href="./webcomponents/gallery.html" target="new">Oliv's gallery (WiP)</a>
         <a class="active-link" href="./webcomponents/carrousel.1.html" target="new" title="Work in Progress">A Carrousel Navigation Console</a>
-        <span style="padding-left: 250px;"><button class="button-link" title="QR Code for the Carrousel Console.&#13;Use it to reach it from other devices." onclick="makeCode('./webcomponents/carrousel.1.html');" style="border-radius: 4px; font-size: 40%;">Carrousel QR Code</button></span>
+        <span style="padding-left: 250px;"><button class="button-link" title="QR Code for the Carrousel Console.&#13;Use it to reach it from other devices." onclick="makeCode('webcomponents/carrousel.1.html');" style="border-radius: 4px; font-size: 40%;">Carrousel QR Code</button></span>
       </div>
     </div>
 
