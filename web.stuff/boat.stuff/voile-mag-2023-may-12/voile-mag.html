@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+ | WiP.
+ | Available from http://leafletjs.com/
+ | Tutorials and examples at https://leafletjs.com/examples.html
+ | Note: No native way to change orientation
+ +-->
+<head>
+
+  <title>May 12, 2023 - Leaflet</title>
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!--link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" /-->
+  <!-- link rel="icon" type="image/ico" href="icons/hammerhead.02.ico" -->
+  <!-- link rel="icon" type="image/ico" href="icons/jellyfish.ico" -->
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+</head>
+<body style='font-family: "Source Code Pro", "Courier New", Helvetica, Geneva; font-weight: bold;'>
+
+<h1>Essais en mer, Birvidic 7 vs J24</h1>
+
+OpenSource JavaScript map API at <a href="https://leafletjs.com/" target="leaflet">leafletjs.com</a>. Zoom for details...
+
+<!--div id="mapid" style="width: 600px; height: 400px;"></div-->
+<div style="margin: 5px;">
+  <span id="curr-point" style="margin: 10px;"></span><span id="point-card" style="margin: 10px;"></span>
+  <button id="start-path" onclick="pathIdx = 0; drive();">Follow Path</button>
+  <button id="cancel-path" onclick="cancelDrive();" disabled>Cancel</button>
+  <button id="stop-path" onclick="stopDriving();" disabled>Pause</button>
+  <button id="resume-path" onclick="resumeDriving();" disabled>Resume</button>
+</div>
+<!--
+ | Try
+ | - map.panTo(new L.LatLng(40.737, -73.923));
+ | - map.setView(new L.LatLng(40.737, -73.923), 8);
+ | - map.flyTo(new L.LatLng(40.737, -73.923));
+ +-->
+
+<table>
+  <tr>
+    <td valign="top">
+      <!--div id="mapid" style="width: 1200px; height: 800px;"></div-->
+      <div id="mapid" style="width: 800px; height: 600px;" title="Zoom for details..."></div>
+    </td>
+    <td valign="top" align="right">
+      <div id="curr-pos"></div>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+
+    function decToSex(val, ns_ew) {
+        let absVal = Math.abs(val);
+        let intValue = Math.floor(absVal);
+        let dec = absVal - intValue;
+        let i = intValue;
+        dec *= 60;
+        let min = dec.toFixed(4);
+        while (min.length < 7) {
+            min = '0' + min;
+        }
+        let s = i + "°" + min + "'";
+
+        if (val < 0) {
+            s += (ns_ew === 'NS' ? 'S' : 'W');
+        } else {
+            s += (ns_ew === 'NS' ? 'N' : 'E');
+        }
+        return s;
+    }
+
+    let map = L.map('mapid'); // .setView([currentLatitude, currentLongitude], 13);
+
+    const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		maxZoom: 19,
+		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+	}).addTo(map);
+
+    let latlngs; // To be populated from JSON.
+
+    // Used as an example, See "// markers" below
+    let markers = [{
+        "latitude": 47.574220,
+        "longitude": -3.012335,
+        "name": "Downwind",
+        "description": "Nice kite (click to enlarge)\n<br/>\n<a href=\"pictures/01.jpeg\" target=\"_blank\"><img src=\"pictures/01.jpeg\" width=\"256\" height=\"auto\" alt=\"Click to enlarge\"/></a>"
+    }, {
+        "latitude": 47.556245,
+        "longitude": -3.009787,
+        "name": "Trying the kite",
+        "description": "First kite setting (click to enlarge)\n<br/>\n<a href=\"pictures/02.jpeg\" target=\"_blank\"><img src=\"pictures/02.jpeg\" width=\"256\" height=\"auto\" alt=\"Click to enlarge\"/></a>"
+    }, {
+        "latitude": 47.570372,
+        "longitude": -3.012200,
+        "name": "Upwind, side by side",
+        "description": "J24 &amp; Birvidic 7 (click to enlarge)\n<br/>\n<a href=\"pictures/03.jpeg\" target=\"_blank\"><img src=\"pictures/03.jpeg\" width=\"256\" height=\"auto\" alt=\"Click to enlarge\"/></a>"
+    }, {
+        "latitude": 47.563373,
+        "longitude": -3.011712,
+        "name": "Catch me if you can!",
+        "description": "Symetric &amp; asymetric kites (click to enlarge)\n<br/>\n<a href=\"pictures/04.jpeg\" target=\"_blank\"><img src=\"pictures/04.jpeg\" width=\"256\" height=\"auto\" alt=\"Click to enlarge\"/></a>"
+    }];
+
+    let trackData = './voile-mag.nmea.json';
+
+    let polyline = null;
+
+    let loadPathData = () => {
+        fetch(trackData)
+            .then(response => {
+                console.log(`Response: ${response.status} - ${response.statusText}`);
+                response.json().then(doc => {
+                    latlngs = doc;
+                    console.log(`Path data loaded, ${doc.length} elements`);
+
+                    if (polyline !== null) { // Remove if there was one already
+                        map.removeLayer(polyline);
+                    }
+                    // Process it here if needed
+                    document.getElementById('point-card').innerText = `${latlngs.length} points.`;
+                    polyline = L.polyline(latlngs, {color: 'red'}).addTo(map);
+                    // zoom the map to the polyline
+                    map.fitBounds(polyline.getBounds());
+
+                    // markers
+                    if (true) {
+                        markers.forEach(mark => {
+                            L.marker([(mark.latitude), (mark.longitude)], { title: mark.name })
+                                .addTo(map)
+                                .bindPopup('<b>' + mark.name + '</b><br/>' + mark.description); // .openPopup();
+                        });
+                    }
+                });
+            },
+            (error, errmess) => {
+                console.log("Ooch");
+                let message;
+                if (errmess) {
+                    let mess = JSON.parse(errmess);
+                    if (mess.message) {
+                        message = mess.message;
+                    }
+                }
+                console.debug("Failed to get Path data..." + (error ? JSON.stringify(error, null, 2) : ' - ') + ', ' + (message ? message : ' - '));
+            });
+    };
+
+    // To draw in pixels, see https://leafletjs.com/examples/extending/extending-2-layers.html
+    // Also https://codepen.io/adelaide01/pen/EXMwbY
+
+    let pathIdx = 0;
+    let keepDriving = true;
+    let cancelDriving = true;
+    let circle = null;
+    let marker = null;
+
+    map.addEventListener('mousemove', (event) => {
+        // let lat = Math.round(event.latlng.lat * 100000) / 100000;
+        // let lng = Math.round(event.latlng.lng * 100000) / 100000;
+        let lat = event.latlng.lat;
+        let lng = event.latlng.lng;
+        while (lng > 180) {
+            lng -= 360;
+        }
+        while (lng < -180) {
+            lng += 360;
+        }
+        if (cancelDriving) {
+            document.getElementById('curr-pos').innerHTML = `${decToSex(lat, "NS")}<br/>${decToSex(lng, "EW")}`;
+        }
+    });
+
+    // on button click
+    function drive() {
+
+        cancelDriving = false;
+
+        document.getElementById('start-path').disabled = true;
+        document.getElementById('cancel-path').disabled = false;
+        document.getElementById('stop-path').disabled = false;
+        document.getElementById('resume-path').disabled = true;
+        // Recurse it that one.
+        function moveTo(j) {
+            if (j < latlngs.length && !cancelDriving) {
+                let pos = latlngs[j];
+                if (keepDriving) {
+                    window.setTimeout(() => {
+                        document.getElementById('curr-pos').innerHTML = `${decToSex(pos.lat, "NS")}<br/>${decToSex(pos.lng, "EW")}`;
+                        document.getElementById('curr-point').innerText = `${j} /`;
+                        // map.setZoom(20);
+                        map.panTo(new L.LatLng(pos.lat, pos.lng));
+
+                        if (circle !== null) {
+                            map.removeLayer(circle);
+                        }
+                        if (marker !== null) {
+                            map.removeLayer(marker);
+                        }
+                        circle = L.circle([pos.lat, pos.lng], 50, {
+                            color: 'green',
+                            fillColor: '#30f',
+                            fillOpacity: 0.25
+                        });
+                        marker = L.marker([pos.lat, pos.lng]);
+                        circle.addTo(map);
+                        marker.addTo(map)
+
+                        pathIdx += 1; // 5;
+                        moveTo(pathIdx);
+                    }, 50);
+                }
+            } else {
+                document.getElementById('start-path').disabled = false;
+                document.getElementById('cancel-path').disabled = true;
+                document.getElementById('stop-path').disabled = true;
+                document.getElementById('resume-path').disabled = true;
+                document.getElementById('curr-point').innerText = "";
+                document.getElementById('curr-pos').innerHTML = "";
+                if (circle !== null) {
+                    map.removeLayer(circle);
+                }
+                if (marker !== null) {
+                    map.removeLayer(marker);
+                }
+                pathIdx = 0;
+            }
+        }
+        moveTo(pathIdx);
+    }
+
+    function cancelDrive() {
+        cancelDriving = true;
+        pathIdx = 0;
+    }
+
+    function stopDriving() {
+        keepDriving = !keepDriving;
+        document.getElementById('stop-path').disabled = true;
+        document.getElementById('resume-path').disabled = false;
+    }
+
+    function resumeDriving() {
+        keepDriving = !keepDriving;
+        drive();
+        document.getElementById('stop-path').disabled = false;
+        document.getElementById('resume-path').disabled = true;
+    }
+
+    window.onload = () => {
+      console.log("Loaded!");
+      loadPathData();
+    };
+
+</script>
+
+</body>
+</html>
