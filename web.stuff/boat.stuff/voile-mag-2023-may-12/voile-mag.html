@@ -25,9 +25,7 @@
 <body style='font-family: "Source Code Pro", "Courier New", Helvetica, Geneva; font-weight: bold;'>
 
 <h1>Essais en mer, Birvidic 700 vs J24</h1>
-<h3>Avec <a href="https://www.fr-lucas.com/" target="new">Fran&ccedil;ois Lucas</a> &agrave; bord du Birvidic 700</h3>
-
-OpenSource JavaScript map API at <a href="https://leafletjs.com/" target="leaflet">leafletjs.com</a>. Zoom for details...
+<h4>Avec <a href="https://www.fr-lucas.com/" target="new">Fran&ccedil;ois Lucas</a> &agrave; bord du Birvidic 700</h4>
 
 <!--div id="mapid" style="width: 600px; height: 400px;"></div-->
 <div style="margin: 5px;">
@@ -48,15 +46,18 @@ OpenSource JavaScript map API at <a href="https://leafletjs.com/" target="leafle
   <tr>
     <td valign="top">
       <!--div id="mapid" style="width: 1200px; height: 800px;"></div-->
-      <div id="mapid" style="width: 800px; height: 600px;" title="Zoom for details..."></div>
+      <div id="mapid" style="width: 1024px; height: 600px;" title="Zoom for details..."></div>
     </td>
-    <td valign="top" align="right">
+    <td valign="top" style="text-align: right;">
       <div id="curr-pos"></div>
     </td>
   </tr>
 </table>
 <hr/>
-<i style="color: silver;">OlivSoft never stops</i>
+<div style="color: silver;">
+  OpenSource JavaScript map API at <a href="https://leafletjs.com/" target="leaflet">leafletjs.com</a>. Zoom for details...<br/>
+  <i style="color: silver;">OlivSoft never stops</i>
+</div>
 
 <script type="text/javascript">
 
@@ -128,7 +129,7 @@ OpenSource JavaScript map API at <a href="https://leafletjs.com/" target="leafle
                         map.removeLayer(polyline);
                     }
                     // Process it here if needed
-                    document.getElementById('point-card').innerText = `${latlngs.length} points.`;
+                    document.getElementById('point-card').innerText = `${latlngs.length} data points.`;
                     polyline = L.polyline(latlngs, {color: 'red'}).addTo(map);
 
                     // zoom the map to the polyline
