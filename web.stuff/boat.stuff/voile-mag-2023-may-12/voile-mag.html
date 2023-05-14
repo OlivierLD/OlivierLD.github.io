@@ -16,6 +16,7 @@
   <!--link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" /-->
   <!-- link rel="icon" type="image/ico" href="icons/hammerhead.02.ico" -->
   <!-- link rel="icon" type="image/ico" href="icons/jellyfish.ico" -->
+  <link rel="icon" type="image/png" href="../small.boat.png">
 
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
@@ -24,7 +25,7 @@
 <body style='font-family: "Source Code Pro", "Courier New", Helvetica, Geneva; font-weight: bold;'>
 
 <h1>Essais en mer, Birvidic 700 vs J24</h1>
-<h3>Avec <a href="https://www.fr-lucas.com/" target="new">Francois Lucas</a> &agrave; bord du Birvidic 700</h3>
+<h3>Avec <a href="https://www.fr-lucas.com/" target="new">Fran&ccedil;ois Lucas</a> &agrave; bord du Birvidic 700</h3>
 
 OpenSource JavaScript map API at <a href="https://leafletjs.com/" target="leaflet">leafletjs.com</a>. Zoom for details...
 
@@ -88,7 +89,7 @@ OpenSource JavaScript map API at <a href="https://leafletjs.com/" target="leafle
 
     let latlngs; // To be populated from JSON.
 
-    // Used as an example, See "// markers" below
+    // Used as an example, See "// markers" below. Used to hold pictures.
     let markers = [{
         "latitude": 47.574220,
         "longitude": -3.012335,
@@ -103,7 +104,7 @@ OpenSource JavaScript map API at <a href="https://leafletjs.com/" target="leafle
         "latitude": 47.570372,
         "longitude": -3.012200,
         "name": "Upwind, side by side",
-        "description": "J24 &amp; Birvidic 7 (click to enlarge)\n<br/>\n<a href=\"pictures/03.jpeg\" target=\"_blank\"><img src=\"pictures/03.jpeg\" width=\"256\" height=\"auto\" alt=\"Click to enlarge\"/></a>"
+        "description": "J24 &amp; Birvidic 700 (click to enlarge)\n<br/>\n<a href=\"pictures/03.jpeg\" target=\"_blank\"><img src=\"pictures/03.jpeg\" width=\"256\" height=\"auto\" alt=\"Click to enlarge\"/></a>"
     }, {
         "latitude": 47.563373,
         "longitude": -3.011712,
@@ -129,8 +130,29 @@ OpenSource JavaScript map API at <a href="https://leafletjs.com/" target="leafle
                     // Process it here if needed
                     document.getElementById('point-card').innerText = `${latlngs.length} points.`;
                     polyline = L.polyline(latlngs, {color: 'red'}).addTo(map);
+
                     // zoom the map to the polyline
                     map.fitBounds(polyline.getBounds());
+
+                    // let tooltip = L.tooltip()
+                    //                 .setLatLng(L.latLng([0.0, 0.0]))
+                    //                 .setContent('Hello world!<br />This is a nice tooltip.')
+                    //                 .addTo(map);
+                    // Tooltips
+                    if (false) {
+                        let nb = 0;
+                        // debugger;
+                        latlngs.forEach(elmt => {
+                            // let latlng = L.latLng([elmt.lat, elmt.lng]);
+                            console.log(`At ${elmt.latInDegMinDec} / ${elmt.lngInDegMinDec}`);
+                            nb++;
+                            // let tooltip = L.tooltip()
+                            //                .setLatLng(L.latLng([elmt.lat, elmt.lng]))
+                            //                .setContent(elmt.latInDegMinDec + "<br/>" + elmt.lngInDegMinDec)
+                            //                .addTo(map);
+                        });
+                        console.log(`${nb} elements`);
+                    }
 
                     // markers
                     if (true) {
@@ -163,6 +185,7 @@ OpenSource JavaScript map API at <a href="https://leafletjs.com/" target="leafle
     let cancelDriving = true;
     let circle = null;
     let marker = null;
+    let tooltip = null;
 
     map.addEventListener('mousemove', (event) => {
         // let lat = Math.round(event.latlng.lat * 100000) / 100000;
@@ -178,6 +201,14 @@ OpenSource JavaScript map API at <a href="https://leafletjs.com/" target="leafle
         if (cancelDriving) {
             document.getElementById('curr-pos').innerHTML = `${decToSex(lat, "NS")}<br/>${decToSex(lng, "EW")}`;
         }
+        if (tooltip != null) {
+            map.removeLayer(tooltip);
+        }
+        tooltip = L.tooltip()
+                        .setLatLng(L.latLng([lat, lng]))
+                        .setContent(`${decToSex(lat, "NS")}<br/>${decToSex(lng, "EW")}`)
+                        .addTo(map);
+
     });
 
     // on button click
