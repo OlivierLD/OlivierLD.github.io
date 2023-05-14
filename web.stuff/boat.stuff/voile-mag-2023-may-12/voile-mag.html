@@ -12,10 +12,6 @@
 
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!--link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" /-->
-  <!-- link rel="icon" type="image/ico" href="icons/hammerhead.02.ico" -->
-  <!-- link rel="icon" type="image/ico" href="icons/jellyfish.ico" -->
   <link rel="icon" type="image/png" href="../small.boat.png">
 
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
@@ -77,6 +73,40 @@ body {
     background-color: rgba(192, 192, 192, 0.35);
 }
 
+button {
+  padding: 4px 20px;
+  /* give the background a gradient */
+  background: #ffae00; /* fallback for browsers that don't support gradients */
+  background: -webkit-linear-gradient(top, #ffae00, #d67600);
+  background: -moz-linear-gradient(top, #ffae00, #d67600);
+  background: -o-linear-gradient(top, #ffae00, #d67600);
+  background: linear-gradient(top, #ffae00, #d67600);
+  border: 2px outset #dad9d8;
+  /* style the text */
+  font-family: Lato, Verdana, Andika, Arial, sans-serif; /* Andkia is available at http://www.google.com/webfonts/specimen/Andika */
+  font-size: 0.8em;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #fff;
+  text-shadow: 0 1px 10px #000;
+  /* add to small curve to the corners of the button */
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  border-radius: 15px;
+  /* give the button a drop shadow */
+  -webkit-box-shadow: rgba(0, 0, 0, .55) 0 1px 6px;
+  -moz-box-shadow: rgba(0, 0, 0, .55) 0 1px 6px;
+  box-shadow: rgba(0, 0, 0, .55) 0 1px 6px;
+}
+
+button:hover, button:focus {
+  border: 2px solid #dad9d8;
+}
+
+button:disabled {
+    background: silver;  
+}
+
   </style>
 </head>
 <body>
@@ -117,7 +147,6 @@ body {
     </div>
 </dialog>
     
-
 <h1>Essais en mer, Birvidic 700 vs J24</h1>
 <table style="width: 100%;">
     <tr>
@@ -147,7 +176,7 @@ body {
   <tr>
     <td valign="top">
       <!--div id="mapid" style="width: 1200px; height: 800px;"></div-->
-      <div id="mapid" style="width: 1024px; height: 600px;"></div>
+      <div id="mapid" style="width: 1024px; height: 600px; box-shadow: 4px 4px 8px grey, 0 0 25px white, 0 0 7px cyan;"></div>
     </td>
     <td valign="top">
       <div id="curr-pos" style="text-align: right;" title="Cursor's position"></div>
@@ -351,7 +380,7 @@ body {
         document.getElementById('cancel-path').disabled = false;
         document.getElementById('stop-path').disabled = false;
         document.getElementById('resume-path').disabled = true;
-        // Recurse it that one.
+        // Recurse in that one.
         function moveTo(j) {
             if (j < latlngs.length && !cancelDriving) {
                 let pos = latlngs[j];
