@@ -137,7 +137,7 @@ body {
 <!--div id="mapid" style="width: 600px; height: 400px;"></div-->
 <div style="margin: 5px;">
   <span id="curr-point" style="margin: 10px;"></span><span id="point-card" style="margin: 10px;"></span>
-  <button id="start-path" onclick="pathIdx = 0; drive();">Follow Path</button>
+  <button id="start-path" onclick="pathIdx = 0; drive();">Replay</button>
   <button id="cancel-path" onclick="cancelDrive();" disabled>Cancel</button>
   <button id="stop-path" onclick="stopDriving();" disabled>Pause</button>
   <button id="resume-path" onclick="resumeDriving();" disabled>Resume</button>
@@ -334,6 +334,14 @@ body {
 
     });
 
+    function lpad(s, w, len) {
+        let str = s;
+        while (str.length < len) {
+            str = w + str;
+        }
+        return str;
+    }
+
     // on button click
     function drive() {
 
@@ -349,7 +357,13 @@ body {
                 let pos = latlngs[j];
                 if (keepDriving) {
                     window.setTimeout(() => {
-                        document.getElementById('curr-pos').innerHTML = `${decToSex(pos.lat, "NS")}<br/>${decToSex(pos.lng, "EW")}`;
+                        let displayData = `${decToSex(pos.lat, "NS")}<br/>${decToSex(pos.lng, "EW")}`;
+                        if (pos.cog && pos.cog != -1) {
+                            displayData = `${pos.rmcDate}<br/>` + displayData;
+                            displayData += `<br/>COG: ${lpad(pos.cog.toFixed(0), '0', 3)}&deg;<br/>SOG: ${pos.sog.toFixed(2)} kn`;
+
+                        }
+                        document.getElementById('curr-pos').innerHTML = displayData;
                         document.getElementById('curr-point').innerText = `${j} /`;
                         // map.setZoom(20);
                         map.panTo(new L.LatLng(pos.lat, pos.lng));
