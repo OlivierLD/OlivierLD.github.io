@@ -34,12 +34,105 @@ a.list-link:hover {
   cursor: pointer;
   text-shadow: 4px 4px 8px black, 0 0 25px white, 0 0 10px cyan;
 }
+.help-dialog {
+	background-color: rgba(0, 0, 0, 0.75);
+	padding: 2em;
+	color: silver;
+	border: 2px solid silver;
+	border-radius: 5px;
+	width: 800px;
+	margin-left: 200px; 
+	margin-top: 10px; 
+	z-index: 1000;
+	box-shadow: 2px 2px 4px grey, 0 0 25px white, 0 0 7px cyan;
+}
+
+.dialog-header {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.dialog-header-close {
+  float: right;
+}
+.dialog-header-close:hover {
+  color: cyan;
+  cursor: pointer;
+}
+
+#whatzat {
+    width: 40px; 
+    border: 2px solid silver; 
+    border-radius: 50%;
+}
+
+#whatzat:hover {
+    box-shadow: 2px 2px 4px grey, 0 0 25px white, 0 0 7px cyan;
+    cursor: pointer;
+}
+
+body {
+    font-family: "Source Code Pro", "Courier New", Helvetica, Geneva; 
+    font-weight: bold;
+    background-color: rgba(192, 192, 192, 0.35);
+}
+
   </style>
 </head>
-<body style='font-family: "Source Code Pro", "Courier New", Helvetica, Geneva; font-weight: bold;'>
+<body>
+
+<dialog id="about-dialog" class="help-dialog">
+    <div class="dialog-header">
+        <span>Help !...</span>
+        <span class="dialog-header-close" onclick="closeAboutDialog();">&times</span>
+    </div>
+    <hr/>
+    <div>
+        <!-- About content -->
+        <div style="margin-top: 15px;">
+            Map is draggable.
+            <br/>
+            Zoom in and out using the +/- on the chart.
+            <br/>
+            Click on the markers on the chart to display pictures.
+            <br/>
+            Click on the pictures to enlarge them.
+            <br/>
+            Use the links on the right to move from place to place (experimental).
+        </div>
+        <hr/>
+        <div style="margin-top: 15px;">
+            On peut draguer la carte.
+            <br/>
+            Utilisez les +/- sur la carte pour zoomer ou de-zoomer.
+            <br/>
+            Cliquez les marqueurs sur la carte pour afficher des images.
+            <br/>
+            Cliquez sur les images pour les agrandir.
+            <br/>
+            Utilisez les liens sur la droite pour aller de place en place (experimental).
+        </div>
+        <hr style="margin-top: 15px; margin-bottom: 5px;"/>
+        <i>OlivSoft never stops</i>
+    </div>
+</dialog>
+    
 
 <h1>Essais en mer, Birvidic 700 vs J24</h1>
-<h4>Avec <a class="list-link" href="https://www.fr-lucas.com/" target="new">Fran&ccedil;ois Lucas</a> &agrave; bord du Birvidic 700</h4>
+<table style="width: 100%;">
+    <tr>
+        <td>
+            <h4>Avec <a class="list-link" href="https://www.fr-lucas.com/" target="new">Fran&ccedil;ois Lucas</a> &agrave; bord du Birvidic 700</h4>
+        </td>
+        <td style="text-align: right; padding-right: 20px;">
+            <img src="./drowning.gif" 
+                 id="whatzat" 
+                 title="Heeeeeeelp !!" 
+                 onclick="showAboutDialog();"/>
+        </td>
+    </tr>
+</table>
+
 
 <!--div id="mapid" style="width: 600px; height: 400px;"></div-->
 <div style="margin: 5px;">
@@ -49,28 +142,22 @@ a.list-link:hover {
   <button id="stop-path" onclick="stopDriving();" disabled>Pause</button>
   <button id="resume-path" onclick="resumeDriving();" disabled>Resume</button>
 </div>
-<!--
- | Try
- | - map.panTo(new L.LatLng(40.737, -73.923));
- | - map.setView(new L.LatLng(40.737, -73.923), 8);
- | - map.flyTo(new L.LatLng(40.737, -73.923));
- +-->
 
-<table>
+<table width="100%">
   <tr>
     <td valign="top">
       <!--div id="mapid" style="width: 1200px; height: 800px;"></div-->
-      <div id="mapid" style="width: 1024px; height: 600px;" title="Zoom for details..."></div>
+      <div id="mapid" style="width: 1024px; height: 600px;"></div>
     </td>
     <td valign="top">
-      <div id="curr-pos" style="text-align: right;"></div>
+      <div id="curr-pos" style="text-align: right;" title="Cursor's position"></div>
       <hr style="margin-top: 24px;"/>
       <div>
-        Zoom to (for tests):
+        Fly to (for tests):
         <ul>
             <li><a class="list-link" href="#" onclick="flyToZoom(0);">Cale de mise &agrave; l'eau</a></li>
             <li><a class="list-link" href="#" onclick="flyToZoom(1);">Pointe de Kerbihan</a></li>
-            <li><a class="list-link" href="#" onclick="flyToZoom(2);">Ecole de Voile Oc&eacute;ane</a></li>
+            <li><a class="list-link" href="#" onclick="flyToZoom(2);">&Eacute;cole de Voile Oc&eacute;ane</a></li>
         </ul>
       </div>
     </td>
@@ -322,6 +409,26 @@ a.list-link:hover {
         document.getElementById('stop-path').disabled = false;
         document.getElementById('resume-path').disabled = true;
     }
+
+    let showAboutDialog = () => {
+        let aboutDialog = document.getElementById("about-dialog");
+        if (aboutDialog.show !== undefined) {
+            aboutDialog.show();
+        } else {
+            alert(NO_DIALOG_MESSAGE);
+            aboutDialog.style.display = 'inline';
+        }
+    };
+
+    let closeAboutDialog = () => {
+        let aboutDialog = document.getElementById("about-dialog");
+        if (aboutDialog.close !== undefined) {
+            aboutDialog.close();
+        } else {
+            // alert(NO_DIALOG_MESSAGE);
+            aboutDialog.style.display = 'none';
+        }
+    };
 
     window.onload = () => {
       console.log("Loaded!");
