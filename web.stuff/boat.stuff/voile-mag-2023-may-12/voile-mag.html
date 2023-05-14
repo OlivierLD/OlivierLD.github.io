@@ -21,11 +21,25 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 
+  <style type="text/css">
+.list-link {
+  color: white;
+  font-size: 20px;
+  text-shadow: 2px 2px 4px black, 0 0 25px white, 0 0 10px orange;
+  text-decoration: none;
+}
+a.list-link:hover {
+  color: cyan;
+  font-weight: bold;
+  cursor: pointer;
+  text-shadow: 4px 4px 8px black, 0 0 25px white, 0 0 10px cyan;
+}
+  </style>
 </head>
 <body style='font-family: "Source Code Pro", "Courier New", Helvetica, Geneva; font-weight: bold;'>
 
 <h1>Essais en mer, Birvidic 700 vs J24</h1>
-<h4>Avec <a href="https://www.fr-lucas.com/" target="new">Fran&ccedil;ois Lucas</a> &agrave; bord du Birvidic 700</h4>
+<h4>Avec <a class="list-link" href="https://www.fr-lucas.com/" target="new">Fran&ccedil;ois Lucas</a> &agrave; bord du Birvidic 700</h4>
 
 <!--div id="mapid" style="width: 600px; height: 400px;"></div-->
 <div style="margin: 5px;">
@@ -48,8 +62,17 @@
       <!--div id="mapid" style="width: 1200px; height: 800px;"></div-->
       <div id="mapid" style="width: 1024px; height: 600px;" title="Zoom for details..."></div>
     </td>
-    <td valign="top" style="text-align: right;">
-      <div id="curr-pos"></div>
+    <td valign="top">
+      <div id="curr-pos" style="text-align: right;"></div>
+      <hr style="margin-top: 24px;"/>
+      <div>
+        Zoom to (for tests):
+        <ul>
+            <li><a class="list-link" href="#" onclick="flyToZoom(0);">Cale de mise &agrave; l'eau</a></li>
+            <li><a class="list-link" href="#" onclick="flyToZoom(1);">Pointe de Kerbihan</a></li>
+            <li><a class="list-link" href="#" onclick="flyToZoom(2);">Ecole de Voile Oc&eacute;ane</a></li>
+        </ul>
+      </div>
     </td>
   </tr>
 </table>
@@ -90,8 +113,20 @@
 
     let latlngs; // To be populated from JSON.
 
+    const ZOOM_POSITIONS = [
+        new L.LatLng(47.578967, -3.012377),  // Cale de mise a l'eau
+        new L.LatLng(47.566867, -3.018310),  // Kerbihan
+        new L.LatLng(47.567470, -3.004113)   // Ecole de Voile Oceane
+    ];
+
+    function flyToZoom(idx) {
+        // map.panTo(ZOOM_POSITIONS[idx]);
+        // map.setView(ZOOM_POSITIONS[idx], 18);
+        map.flyTo(ZOOM_POSITIONS[idx]);
+    }
+
     // Used as an example, See "// markers" below. Used to hold pictures.
-    let markers = [{
+    const markers = [{
         "latitude": 47.574220,
         "longitude": -3.012335,
         "name": "Downwind",
