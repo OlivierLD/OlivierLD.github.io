@@ -250,6 +250,7 @@ class CompassRose extends HTMLElement {
 			if (tick % 15 === 0) {
 				let tk = tick;
 				while (tk < 0) { tk += 360 }
+				tk %= 360;
 				let txt = tk.toString();
 				if (tick % 45 === 0) {
 					if (tick === 0) { txt = "N"; }

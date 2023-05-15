@@ -63,8 +63,9 @@ a.list-link:hover {
 }
 
 #whatzat:hover {
-    box-shadow: 2px 2px 4px grey, 0 0 25px white, 0 0 7px cyan;
+    box-shadow: 5px 5px 10px rgb(78, 39, 39), 0 0 25px white, 0 0 7px cyan;
     cursor: pointer;
+    transform: scale3d(1.2, 1.2, 1.2);
 }
 
 body {
@@ -107,7 +108,46 @@ button:disabled {
     background: silver;  
 }
 
+compass-rose .day {
+  --bg-color: white;
+  --digit-color: #404040;
+  --with-gradient: true;
+  --display-background-gradient-from: gray;
+  --display-background-gradient-to: white;
+  --tick-color: darkGray;
+  --index-color: red;
+  --font: Arial;
+}
+
+.analogdisplay-day {
+	--bg-color: rgba(0, 0, 0, 0);
+	--digit-color: black;
+	--with-gradient: true;
+	--display-background-gradient-from: LightGrey;
+	--display-background-gradient-to: white; /* used if --withGradient: false */
+	--display-line-color: rgba(255, 255, 255, 0.5);
+	--label-fill-color: rgba(255, 255, 255, 0.5);
+	--with-display-shadow: true;
+	--shadow-color: rgba(0, 0, 0, 0.75);
+	--outline-color: DarkGrey;
+	--major-tick-color: black;
+	--minor-tick-color: black;
+	--value-color: grey;
+	--value-outline-color: black;
+	--value-nb-decimal: 1;
+	--hand-color: red;
+	--hand-outline-color: black;
+	--with-hand-shadow: true;
+	--knob-color: DarkGrey;
+	--knob-outline-color: black;
+	--font: Arial;
+	--value-font-size-factor: 1
+}
+
   </style>
+
+  <script type="module" src="../../../webcomponents/widgets/analogdisplay/AnalogDisplay.js"></script>
+  <script type="module" src="../../../webcomponents/widgets/compass/CompassRose.js"></script>
 </head>
 <body>
 
@@ -129,6 +169,8 @@ button:disabled {
             Click on the pictures to enlarge them.
             <br/>
             Use the links on the right to move from place to place (experimental).
+            <br/>
+            Try the "REPLAY" button to replay what was logged (zoom when replaying...).
         </div>
         <hr/>
         <div style="margin-top: 15px;">
@@ -141,13 +183,15 @@ button:disabled {
             Cliquez sur les images pour les agrandir.
             <br/>
             Utilisez les liens sur la droite pour aller de place en place (exp&eacute;rimental).
+            <br/>
+            Essayez le bouton "REPLAY" pour visualiser les donn&eacute;es enregistr&eacute;es (zoomez en mode REPLAY)
         </div>
         <hr style="margin-top: 15px; margin-bottom: 5px;"/>
         <i>OlivSoft never stops</i>
     </div>
 </dialog>
     
-<h1>Essais en mer, Birvidic 700 vs J24</h1>
+<h1 style="margin-left: 20px;">Essais en mer, Birvidic 700 vs J24</h1>
 <table style="width: 100%;">
     <tr>
         <td>
@@ -179,7 +223,29 @@ button:disabled {
       <div id="mapid" style="width: 1024px; height: 600px; box-shadow: 4px 4px 8px grey, 0 0 25px white, 0 0 7px cyan;"></div>
     </td>
     <td valign="top">
-      <div id="curr-pos" style="text-align: right;" title="Cursor's position"></div>
+      <div id="curr-pos" style="text-align: right;" title="Cursor's position">&nbsp;<br/>&nbsp;</div>
+      <div id="displays" style="text-align: center;" title="SOG and COG, available when REPLAYing">
+        <div id="UTC-date" style="text-align: center;" title="UTC Date">&nbsp;</div>
+        <analog-display class="analogdisplay-day"
+                        title="Speed Over Ground in knots"
+                        id="sog-01"
+                        min-value="0"
+                        max-value="15"
+                        value="0.0"
+                        major-ticks="1"
+                        minor-ticks="0.1"
+                        with-border="true"
+                        overlap="40"
+                        label="SOG"
+                        width="200"
+                        height="200"></analog-display>
+        <compass-rose id="cog-01"
+                      class="day"
+                      title="COG"
+                      value="000"
+                      width="250"
+                      height="50"></compass-rose>
+</div>
       <hr style="margin-top: 24px;"/>
       <div>
         Fly to (for tests):
@@ -271,7 +337,7 @@ button:disabled {
     let loadPathData = () => {
         fetch(trackData)
             .then(response => {
-                console.log(`Response: ${response.status} - ${response.statusText}`);
+                console.log(`Data Response: ${response.status} - ${response.statusText}`);
                 response.json().then(doc => {
                     latlngs = doc;
                     console.log(`Path data loaded, ${doc.length} elements`);
@@ -386,13 +452,17 @@ button:disabled {
                 let pos = latlngs[j];
                 if (keepDriving) {
                     window.setTimeout(() => {
-                        let displayData = `${decToSex(pos.lat, "NS")}<br/>${decToSex(pos.lng, "EW")}`;
-                        if (pos.cog && pos.cog != -1) {
-                            displayData = `${pos.rmcDate}<br/>` + displayData;
-                            displayData += `<br/>COG: ${lpad(pos.cog.toFixed(0), '0', 3)}&deg;<br/>SOG: ${pos.sog.toFixed(2)} kn`;
-
+                        let displayPos = `${decToSex(pos.lat, "NS")}<br/>${decToSex(pos.lng, "EW")}`;
+                        if (pos.rmcDate) {
+                            displayDate = `${pos.rmcDate}`;
+                            document.getElementById('UTC-date').innerHTML = displayDate;
                         }
-                        document.getElementById('curr-pos').innerHTML = displayData;
+                        if (pos.cog && pos.cog != -1) {
+                            document.getElementById('sog-01').value = pos.sog;
+                            document.getElementById('cog-01').value = pos.cog;
+                            // displayOG += `<br/>COG: ${lpad(pos.cog.toFixed(0), '0', 3)}&deg;<br/>SOG: ${pos.sog.toFixed(2)} kn`;
+                        }
+                        document.getElementById('curr-pos').innerHTML = displayPos;
                         document.getElementById('curr-point').innerText = `${j} /`;
                         // map.setZoom(20);
                         map.panTo(new L.LatLng(pos.lat, pos.lng));
@@ -422,7 +492,7 @@ button:disabled {
                 document.getElementById('stop-path').disabled = true;
                 document.getElementById('resume-path').disabled = true;
                 document.getElementById('curr-point').innerText = "";
-                document.getElementById('curr-pos').innerHTML = "";
+                document.getElementById('curr-pos').innerHTML = "&nbsp;<br/>&nbsp;";
                 if (circle !== null) {
                     map.removeLayer(circle);
                 }
@@ -438,6 +508,7 @@ button:disabled {
     function cancelDrive() {
         cancelDriving = true;
         pathIdx = 0;
+        document.getElementById('curr-pos').innerHTML = "&nbsp;<br/>&nbsp;";
     }
 
     function stopDriving() {
@@ -474,7 +545,7 @@ button:disabled {
     };
 
     window.onload = () => {
-      console.log("Loaded!");
+      console.log("Page Loaded!");
       loadPathData();
     };
 
