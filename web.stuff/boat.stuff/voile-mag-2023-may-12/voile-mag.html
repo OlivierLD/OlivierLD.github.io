@@ -292,7 +292,7 @@ compass-rose .day {
 <!--div id="mapid" style="width: 600px; height: 400px;"></div-->
 <div style="margin: 5px;">
   <span id="curr-point" style="margin: 10px;"></span><span id="point-card" style="margin: 10px;"></span>
-  <button id="start-path" onclick="pathIdx = 0; drive();">Replay</button>
+  <button id="start-path" onclick="pathIdx = INIT_PATH_IDX; /* 0; */ drive();">Replay</button>
   <button id="cancel-path" onclick="cancelDrive();" disabled>Cancel</button>
   <button id="stop-path" onclick="stopDriving();" disabled>Pause</button>
   <button id="resume-path" onclick="resumeDriving();" disabled>Resume</button>
@@ -494,7 +494,9 @@ compass-rose .day {
     // To draw in pixels, see https://leafletjs.com/examples/extending/extending-2-layers.html
     // Also https://codepen.io/adelaide01/pen/EXMwbY
 
-    let pathIdx = 0;
+    const INIT_PATH_IDX = 950; // 0;
+
+    let pathIdx = INIT_PATH_IDX;
     let keepDriving = true;
     let cancelDriving = true;
     let circle = null;
@@ -597,7 +599,7 @@ compass-rose .day {
                 if (marker !== null) {
                     map.removeLayer(marker);
                 }
-                pathIdx = 0;
+                pathIdx = INIT_PATH_IDX; // 0;
             }
         }
         moveTo(pathIdx);
@@ -605,7 +607,7 @@ compass-rose .day {
 
     function cancelDrive() {
         cancelDriving = true;
-        pathIdx = 0;
+        pathIdx = INIT_PATH_IDX; // 0;
         document.getElementById('curr-pos').innerHTML = "&nbsp;<br/>&nbsp;";
     }
 
