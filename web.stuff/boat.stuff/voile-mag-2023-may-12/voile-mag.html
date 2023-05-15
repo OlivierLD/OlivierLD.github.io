@@ -35,7 +35,7 @@ a.list-link:hover {
 dialog[open] {
     -webkit-animation: myFadeIn 3.0s ease normal;
 }
-  
+
 @-webkit-keyframes myFadeIn{
     from {
       opacity: 0;
@@ -159,6 +159,11 @@ compass-rose .day {
 	--value-font-size-factor: 1
 }
 
+.directiondisplay-01 {
+	--value-nb-decimal: 0;
+	--hand-color: rgba(255, 0, 0, 0.3);
+}
+
 .arrow {
     /*position: absolute;
     top: 50%;
@@ -206,6 +211,8 @@ compass-rose .day {
 
   <script type="module" src="../../../webcomponents/widgets/analogdisplay/AnalogDisplay.js"></script>
   <script type="module" src="../../../webcomponents/widgets/compass/CompassRose.js"></script>
+  <script type="module" src="../../../webcomponents/widgets/direction/DirectionDisplay.js"></script>
+  
 </head>
 <body>
 
@@ -314,6 +321,20 @@ compass-rose .day {
                         label="SOG"
                         width="200"
                         height="200"></analog-display>
+
+        <direction-display class="directiondisplay-01"
+                        title="COG, not animated"
+                        id="cog-02"
+                        value="000"
+                        major-ticks="45"
+                        minor-ticks="5"
+                        with-rose="true"
+                        with-border="true"
+                        label="COG"
+                        hand="boat"
+                        width="200"
+                        height="200"></direction-display>
+
         <compass-rose id="cog-01"
                       class="day"
                       title="COG"
@@ -535,6 +556,8 @@ compass-rose .day {
                         if (pos.cog && pos.cog != -1) {
                             document.getElementById('sog-01').value = pos.sog;
                             document.getElementById('cog-01').value = pos.cog;
+                            document.getElementById('cog-02').value = pos.cog;
+
                             // displayOG += `<br/>COG: ${lpad(pos.cog.toFixed(0), '0', 3)}&deg;<br/>SOG: ${pos.sog.toFixed(2)} kn`;
                         }
                         document.getElementById('curr-pos').innerHTML = displayPos;

@@ -80,7 +80,7 @@ class DirectionDisplay extends HTMLElement {
 			"with-rose",    // Boolean, draw the rose or not
 			"with-border",  // Boolean
 			"label",        // String
-			"hand",         // String. 'regular' (default) or 'wind'
+			"hand",         // String. 'regular' (default) or 'wind' -- TODO "boat"
 			"value"         // Float. Heading to display
 		];
 	}
@@ -161,7 +161,7 @@ class DirectionDisplay extends HTMLElement {
 				this._label = newVal;
 				break;
 			case "hand":
-				this._hand = (newVal === 'wind' ? 'wind' : 'regular');
+				this._hand = (newVal ? newVal : 'regular');
 				break;
 			default:
 				break;
@@ -345,7 +345,6 @@ class DirectionDisplay extends HTMLElement {
 		}
 		return colorConfig;
 	}
-
 
 	drawDisplay(directionValue) {
 
@@ -579,16 +578,21 @@ class DirectionDisplay extends HTMLElement {
 		let centerY = radius + 10;
 		context.moveTo(centerX, centerY);
 
-		// Left
-		let x = centerX - ((radius * 0.05) * Math.cos(Math.toRadians(dv))); //  - (Math.PI / 2))));
-		let y = centerY - ((radius * 0.05) * Math.sin(Math.toRadians(dv))); // - (Math.PI / 2))));
-		context.lineTo(x, y);
-		if (this.hand !== 'wind') { // Regular needle
+		// console.log(`This.hand=${this.hand}`);
+		let x;
+		let y;
+		if (this.hand === 'regular' || this.hand === 'wind') {
+			// Left
+			x = centerX - ((radius * 0.05) * Math.cos(Math.toRadians(dv))); //  - (Math.PI / 2))));
+			y = centerY - ((radius * 0.05) * Math.sin(Math.toRadians(dv))); // - (Math.PI / 2))));
+			context.lineTo(x, y);
+		}
+		if (this.hand === 'regular') { // Regular needle
 			// Tip
 			x = centerX - ((radius * 0.90) * Math.cos(Math.toRadians(dv) + (Math.PI / 2)));
 			y = centerY - ((radius * 0.90) * Math.sin(Math.toRadians(dv) + (Math.PI / 2)));
 			context.lineTo(x, y);
-		} else {                    // Then draw wind arrow
+		} else if (this.hand === 'wind') { // Then draw wind arrow
 			/*
 			    +-+
 			    | |
@@ -618,11 +622,36 @@ class DirectionDisplay extends HTMLElement {
 				y = centerY + ((pt.x * Math.sin(radAngle)) + (pt.y * Math.cos(radAngle)));
 				context.lineTo(x, y);
 			});
-		}
+		} else if (this.hand === 'boat') {
+			// console.log("Drawing boat needle...")
+			const BOAT_FACT = 0.8;
+			let boatPoints = [
+				{ x: 0, y: - radius * BOAT_FACT * 0.6 },               // Bow
+				{ x: radius * BOAT_FACT * 0.22, y: - radius * BOAT_FACT * 0.3 },   // Starboard, point one
+				{ x: radius * BOAT_FACT * 0.30, y: - radius * BOAT_FACT * 0.0 },   // Starboard, point two
+				{ x: radius * BOAT_FACT * 0.28, y: + radius * BOAT_FACT * 0.3 },   // Starboard, point three
+				{ x: radius * BOAT_FACT * 0.20, y: + radius * BOAT_FACT * 0.6 },   // Starboard, point four
+				{ x: BOAT_FACT * 0, y: + radius * BOAT_FACT * 0.6 },               // Mid-transom
+				{ x: - radius * BOAT_FACT * 0.20, y: + radius * BOAT_FACT * 0.6 }, // Port, point four
+				{ x: - radius * BOAT_FACT * 0.28, y: + radius * BOAT_FACT * 0.3 }, // Port, point three
+				{ x: - radius * BOAT_FACT * 0.30, y: - radius * BOAT_FACT * 0.0 }, // Port, point two
+				{ x: - radius * BOAT_FACT * 0.22, y: - radius * BOAT_FACT * 0.3 }, // Port, point one
+				{ x: BOAT_FACT * 0, y: - radius * BOAT_FACT * 0.6 }                // Bow
+			];
+			let radAngle = Math.toRadians(dv); // + (Math.PI / 2);
+			// Apply rotation to the points of the needle
+			boatPoints.forEach(pt => {
+				x = centerX + ((pt.x * Math.cos(radAngle)) - (pt.y * Math.sin(radAngle)));
+				y = centerY + ((pt.x * Math.sin(radAngle)) + (pt.y * Math.cos(radAngle)));
+				context.lineTo(x, y);
+			});
+		} 
 		// Right
-		x = centerX - ((radius * 0.05) * Math.cos(Math.toRadians(dv) + (2 * Math.PI / 2)));
-		y = centerY - ((radius * 0.05) * Math.sin(Math.toRadians(dv) + (2 * Math.PI / 2)));
-		context.lineTo(x, y);
+		if (this.hand === 'regular' || this.hand === 'wind') {
+			x = centerX - ((radius * 0.05) * Math.cos(Math.toRadians(dv) + (2 * Math.PI / 2)));
+			y = centerY - ((radius * 0.05) * Math.sin(Math.toRadians(dv) + (2 * Math.PI / 2)));
+			context.lineTo(x, y);
+		}
 
 		context.closePath();
 		context.fillStyle = this.directionColorConfig.handColor;
