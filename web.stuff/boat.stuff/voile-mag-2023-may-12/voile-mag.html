@@ -162,7 +162,7 @@ compass-rose .day {
 
 .directiondisplay-01 {
 	--value-nb-decimal: 0;
-	--hand-color: rgba(255, 0, 0, 0.3);
+	--hand-color: rgba(192, 192, 193, 0.25);
     --hand-outline-color: lime;
 }
 
@@ -358,7 +358,12 @@ compass-rose .day {
                            hand="boat"
                            width="200"
                            height="200"></direction-display>
-
+        <div>
+            <input type="radio" name="needle-shape" value="boat" onchange="setNeedleShape('cog-02', this);" checked>Mono
+            <input type="radio" name="needle-shape" value="cata" onchange="setNeedleShape('cog-02', this);">Cata
+            <input type="radio" name="needle-shape" value="tri" onchange="setNeedleShape('cog-02', this);">Tri
+            <input type="radio" name="needle-shape" value="plane" onchange="setNeedleShape('cog-02', this);">Plane
+        </div>
         <compass-rose id="cog-01"
                       class="day"
                       title="Course Over Ground"
@@ -385,6 +390,11 @@ compass-rose .day {
 </div>
 
 <script type="text/javascript">
+
+    function setNeedleShape(id, radio) {
+        // debugger;
+        document.getElementById(id).hand = radio.value;
+    }
 
     function decToSex(val, ns_ew) {
         let absVal = Math.abs(val);

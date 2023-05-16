@@ -673,6 +673,10 @@
                     document.getElementById('compass-03').value = directionValue;
                     document.getElementById('compass-04').value = directionValue;
                     document.getElementById('compass-05').value = directionValue;
+                    document.getElementById('compass-06').value = directionValue;
+                    document.getElementById('compass-07').value = directionValue;
+                    document.getElementById('compass-08').value = directionValue;
+                    document.getElementById('compass-09').value = directionValue;
                     directionValue += inc;
                     directionValue = directionValue % 360;
                 }, 50);
@@ -2007,6 +2011,7 @@
                    minor-ticks="5"
                    with-rose="true"
                    with-border="true"
+                   hand="regular|wind|boat|cata|tri|plane"
                    label="HDG"
                    width="200"
                    height="200">&lt;/direction-display>
@@ -2199,7 +2204,8 @@
 					<input type="checkbox" onchange="setRose(this, 'compass-05');" checked>With Rose
 				</div>
 			</td>
-
+        </tr>
+        <tr>
 			<td valign="top">
 				<div class="black-frame centered" style="background-color: black;">
 					<direction-display class="analogdisplay-monochrome-orange"
@@ -2235,6 +2241,117 @@
 					<br/>
 					<input type="checkbox" onchange="setBorder(this, 'compass-06');" checked>With Border
 					<input type="checkbox" onchange="setRose(this, 'compass-06');" checked>With Rose
+				</div>
+			</td>
+			<td valign="top">
+				<div class="black-frame centered" style="background-color: black;">
+					<direction-display class="analogdisplay-monochrome-orange"
+									   title="COG, not animated"
+									   id="compass-07"
+									   value="120"
+									   major-ticks="45"
+									   minor-ticks="5"
+									   with-rose="true"
+									   with-border="true"
+									   label="COG"
+									   hand="cata"
+									   width="200"
+									   height="200"></direction-display>
+				</div>
+				<div class="black-frame centered">
+					Value:
+					<input type="number"
+						   id="direction-value-07"
+						   placeholder="dir"
+						   title="Direction"
+						   style="width: 50px; text-align: right;"
+						   value="120"/>
+					<br/>
+					<button onclick="setData('direction-value-07', 'compass-07')"
+							title="Set value for the COG"
+							style="margin-top: 3px;">Direct
+					</button>
+					<button onclick="doAnimate('direction-value-07', 'compass-07', 1, true)"
+							title="Set value for the Direction"
+							style="margin-top: 3px;">Animate
+					</button>
+					<br/>
+					<input type="checkbox" onchange="setBorder(this, 'compass-07');" checked>With Border
+					<input type="checkbox" onchange="setRose(this, 'compass-07');" checked>With Rose
+				</div>
+			</td>
+			<td valign="top">
+				<div class="black-frame centered" style="background-color: black;">
+					<direction-display class="analogdisplay-monochrome-orange"
+									   title="COG, not animated"
+									   id="compass-08"
+									   value="120"
+									   major-ticks="45"
+									   minor-ticks="5"
+									   with-rose="true"
+									   with-border="true"
+									   label="COG"
+									   hand="tri"
+									   width="200"
+									   height="200"></direction-display>
+				</div>
+				<div class="black-frame centered">
+					Value:
+					<input type="number"
+						   id="direction-value-08"
+						   placeholder="dir"
+						   title="Direction"
+						   style="width: 50px; text-align: right;"
+						   value="120"/>
+					<br/>
+					<button onclick="setData('direction-value-08', 'compass-08')"
+							title="Set value for the COG"
+							style="margin-top: 3px;">Direct
+					</button>
+					<button onclick="doAnimate('direction-value-08', 'compass-08', 1, true)"
+							title="Set value for the Direction"
+							style="margin-top: 3px;">Animate
+					</button>
+					<br/>
+					<input type="checkbox" onchange="setBorder(this, 'compass-08');" checked>With Border
+					<input type="checkbox" onchange="setRose(this, 'compass-08');" checked>With Rose
+				</div>
+			</td>
+			<td valign="top">
+				<div class="black-frame centered" style="background-color: black;">
+					<direction-display class="analogdisplay-monochrome-orange"
+									   title="COG, not animated"
+									   id="compass-09"
+									   value="120"
+									   major-ticks="45"
+									   minor-ticks="5"
+									   with-rose="true"
+									   with-border="true"
+									   label="COG"
+									   hand="plane"
+									   width="200"
+									   height="200"></direction-display>
+				</div>
+				<div class="black-frame centered">
+					Value:
+					<input type="number"
+						   id="direction-value-09"
+						   placeholder="dir"
+						   title="Direction"
+						   style="width: 50px; text-align: right;"
+						   value="120"/>
+					<br/>
+					<button onclick="setData('direction-value-09', 'compass-09')"
+							title="Set value for the COG"
+							style="margin-top: 3px;">Direct
+					</button>
+					<button onclick="doAnimate('direction-value-09', 'compass-09', 1, true)"
+							title="Set value for the Direction"
+							style="margin-top: 3px;">Animate
+					</button>
+					<br/>
+					<input type="checkbox" onchange="setBorder(this, 'compass-09');" checked>With Border
+					<input type="checkbox" onchange="setRose(this, 'compass-09');" checked>With Rose
 				</div>
 			</td>
         </tr>

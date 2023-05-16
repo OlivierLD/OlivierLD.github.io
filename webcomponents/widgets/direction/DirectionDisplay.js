@@ -80,7 +80,7 @@ class DirectionDisplay extends HTMLElement {
 			"with-rose",    // Boolean, draw the rose or not
 			"with-border",  // Boolean
 			"label",        // String
-			"hand",         // String. 'regular' (default) or 'wind' -- TODO "boat"
+			"hand",         // String. 'regular' (default) or 'wind', "boat"
 			"value"         // Float. Heading to display
 		];
 	}
@@ -641,6 +641,137 @@ class DirectionDisplay extends HTMLElement {
 			let radAngle = Math.toRadians(dv); // + (Math.PI / 2);
 			// Apply rotation to the points of the needle
 			boatPoints.forEach(pt => {
+				x = centerX + ((pt.x * Math.cos(radAngle)) - (pt.y * Math.sin(radAngle)));
+				y = centerY + ((pt.x * Math.sin(radAngle)) + (pt.y * Math.cos(radAngle)));
+				context.lineTo(x, y);
+			});
+		} else if (this.hand === 'cata') {
+			// console.log("Drawing cata needle...")
+			const BOAT_FACT = 0.8;
+			let cataPoints = [
+				{ x: 0, y: - radius * BOAT_FACT * 0.142 }, // Arm, front, center 
+				/* STARBOARD HULL */
+				// Starboard
+				{ x: radius * BOAT_FACT * 0.142,  y: - radius * BOAT_FACT * 0.142 },  // Arm starboard, hull side
+				{ x: radius * BOAT_FACT * 0.2143, y: - radius * BOAT_FACT * 0.5714 }, // Starboard bow
+				{ x: radius * BOAT_FACT * 0.284,  y: - radius * BOAT_FACT * 0.142 },
+				{ x: radius * BOAT_FACT * 0.284,  y: radius * BOAT_FACT * 0 },
+				{ x: radius * BOAT_FACT * 0.284,  y: radius * BOAT_FACT * 0.142 },
+				{ x: radius * BOAT_FACT * 0.2571, y: radius * BOAT_FACT * 0.4286 },   // Starboard transom, ext
+				{ x: radius * BOAT_FACT * 0.1714, y: radius * BOAT_FACT * 0.4286 },   // Starboard transom, int
+				{ x: radius * BOAT_FACT * 0.142,  y: radius * BOAT_FACT * 0.142 },    // Arm, back, starboard, hull side
+				{ x: radius * BOAT_FACT * 0,      y: radius * BOAT_FACT * 0.142 },    // Arm, back, starboard, center
+				// Port
+				{ x: radius * BOAT_FACT * 0,      y: radius * BOAT_FACT * 0.142 },       
+				{ x: radius * BOAT_FACT * 0.142,  y: radius * BOAT_FACT * 0.142 },
+				{ x: radius * BOAT_FACT * 0.1714, y: radius * BOAT_FACT * 0.4286 },
+				{ x: radius * BOAT_FACT * 0.2571, y: radius * BOAT_FACT * 0.4286 },
+				{ x: radius * BOAT_FACT * 0.284,  y: radius * BOAT_FACT * 0.142 },
+				{ x: radius * BOAT_FACT * 0.284,  y: radius * BOAT_FACT * 0 },
+				{ x: radius * BOAT_FACT * 0.284,  y: - radius * BOAT_FACT * 0.142 },
+				{ x: radius * BOAT_FACT * 0.2143, y: - radius * BOAT_FACT * 0.5714 },
+				{ x: radius * BOAT_FACT * 0.142,  y: - radius * BOAT_FACT * 0.142 },
+				/* PORT HULL */
+				// Starboard
+				{ x: - radius * BOAT_FACT * 0.142,  y: - radius * BOAT_FACT * 0.142 },  // Arm starboard, hull side
+				{ x: - radius * BOAT_FACT * 0.2143, y: - radius * BOAT_FACT * 0.5714 }, // Starboard bow
+				{ x: - radius * BOAT_FACT * 0.284,  y: - radius * BOAT_FACT * 0.142 },
+				{ x: - radius * BOAT_FACT * 0.284,  y: radius * BOAT_FACT * 0 },
+				{ x: - radius * BOAT_FACT * 0.284,  y: radius * BOAT_FACT * 0.142 },
+				{ x: - radius * BOAT_FACT * 0.2571, y: radius * BOAT_FACT * 0.4286 },   // Starboard transom, ext
+				{ x: - radius * BOAT_FACT * 0.1714, y: radius * BOAT_FACT * 0.4286 },   // Starboard transom, int
+				{ x: - radius * BOAT_FACT * 0.142,  y: radius * BOAT_FACT * 0.142 },    // Arm, back, starboard, hull side
+				{ x: - radius * BOAT_FACT * 0,      y: radius * BOAT_FACT * 0.142 },    // Arm, back, starboard, center
+				// Port
+				{ x: - radius * BOAT_FACT * 0,      y: radius * BOAT_FACT * 0.142 },       
+				{ x: - radius * BOAT_FACT * 0.142,  y: radius * BOAT_FACT * 0.142 },
+				{ x: - radius * BOAT_FACT * 0.1714, y: radius * BOAT_FACT * 0.4286 },
+				{ x: - radius * BOAT_FACT * 0.2571, y: radius * BOAT_FACT * 0.4286 },
+				{ x: - radius * BOAT_FACT * 0.284,  y: radius * BOAT_FACT * 0.142 },
+				{ x: - radius * BOAT_FACT * 0.284,  y: radius * BOAT_FACT * 0 },
+				{ x: - radius * BOAT_FACT * 0.284,  y: - radius * BOAT_FACT * 0.142 },
+				{ x: - radius * BOAT_FACT * 0.2143, y: - radius * BOAT_FACT * 0.5714 },
+				{ x: - radius * BOAT_FACT * 0.142,  y: - radius * BOAT_FACT * 0.142 },
+
+				{ x: 0, y: - radius * BOAT_FACT * 0.142 }
+			];
+			let radAngle = Math.toRadians(dv); // + (Math.PI / 2);
+			// Apply rotation to the points of the needle
+			cataPoints.forEach(pt => {
+				x = centerX + ((pt.x * Math.cos(radAngle)) - (pt.y * Math.sin(radAngle)));
+				y = centerY + ((pt.x * Math.sin(radAngle)) + (pt.y * Math.cos(radAngle)));
+				context.lineTo(x, y);
+			});
+		} else if (this.hand === 'tri') {
+			// console.log("Drawing tri needle...")
+			const BOAT_FACT = 0.8;
+			let triPoints = [
+				{ x: 0, y: - radius * BOAT_FACT * 0.5714}, // Bow, center hull
+				// Starboard
+				{ x: radius * BOAT_FACT * 0.04286,   y: - radius * BOAT_FACT * 0.4286 },
+				{ x: radius * BOAT_FACT * 0.08571,   y: - radius * BOAT_FACT * 0.1429}, // Arm, front, starboard, inside
+				{ x: radius * BOAT_FACT * 0.2286,    y: - radius * BOAT_FACT * 0.1429}, // Arm, front, starboard, outside
+				{ x: radius * BOAT_FACT * 0.2571,    y: - radius * BOAT_FACT * 0.3714 }, // Outrigger bow
+				{ x: radius * BOAT_FACT * 0.2857,    y: - radius * BOAT_FACT * 0.2143 },
+				{ x: radius * BOAT_FACT * 0.2857,    y: radius * BOAT_FACT * 0.2143 },
+				{ x: radius * BOAT_FACT * 0.2714,    y: radius * BOAT_FACT * 0.3571 }, // Outrigger transom, ext
+				{ x: radius * BOAT_FACT * 0.2429,    y: radius * BOAT_FACT * 0.3571 }, // Outrigger transom, int
+				{ x: radius * BOAT_FACT * 0.2286,    y: radius * BOAT_FACT * 0.1429}, // Arm, back, starboard, outside
+				{ x: radius * BOAT_FACT * 0.08571,   y: radius * BOAT_FACT * 0.1429}, // Arm, back, starboard, inside
+				{ x: radius * BOAT_FACT * 0.04286,   y: radius * BOAT_FACT * 0.4286 }, // Main hull, transom starboard,
+				// Port
+				{ x: - radius * BOAT_FACT * 0.04286, y: radius * BOAT_FACT * 0.4286 },
+				{ x: - radius * BOAT_FACT * 0.08571, y: radius * BOAT_FACT * 0.1429},
+				{ x: - radius * BOAT_FACT * 0.2286,  y: radius * BOAT_FACT * 0.1429},
+				{ x: - radius * BOAT_FACT * 0.2429,  y: radius * BOAT_FACT * 0.3571 }, 
+				{ x: - radius * BOAT_FACT * 0.2714,  y: radius * BOAT_FACT * 0.3571 },
+				{ x: - radius * BOAT_FACT * 0.2857,  y: radius * BOAT_FACT * 0.2143 },
+				{ x: - radius * BOAT_FACT * 0.2857,  y: - radius * BOAT_FACT * 0.2143 },
+				{ x: - radius * BOAT_FACT * 0.2571,  y: - radius * BOAT_FACT * 0.3714 }, 
+				{ x: - radius * BOAT_FACT * 0.2286,  y: - radius * BOAT_FACT * 0.1429},
+				{ x: - radius * BOAT_FACT * 0.08571, y: - radius * BOAT_FACT * 0.1429},
+				{ x: - radius * BOAT_FACT * 0.04286, y: - radius * BOAT_FACT * 0.4286 },
+
+				{ x: 0, y: - radius * BOAT_FACT * 0.5714}, // Bow, center hull
+			];			
+			let radAngle = Math.toRadians(dv); // + (Math.PI / 2);
+			// Apply rotation to the points of the needle
+			triPoints.forEach(pt => {
+				x = centerX + ((pt.x * Math.cos(radAngle)) - (pt.y * Math.sin(radAngle)));
+				y = centerY + ((pt.x * Math.sin(radAngle)) + (pt.y * Math.cos(radAngle)));
+				context.lineTo(x, y);
+			});
+		} else if (this.hand === 'plane') {
+			// console.log("Drawing plane needle...")
+			const BOAT_FACT = 0.8;
+			let planePoints = [
+				{ x: 0, y: - radius * BOAT_FACT *  0.5714 }, // Nose
+				// Starboard
+				{ x: radius * BOAT_FACT * 0.04286, y: - radius * BOAT_FACT * 0.4286 },
+				{ x: radius * BOAT_FACT * 0.08571, y: - radius * BOAT_FACT * 0.2857 },
+				{ x: radius * BOAT_FACT * 0.5714, y: - radius * BOAT_FACT * 0.1429 },
+				{ x: radius * BOAT_FACT * 0.5714, y: 0 },
+				{ x: radius * BOAT_FACT * 0.08571, y: radius * BOAT_FACT * 0.07143 },
+				{ x: radius * BOAT_FACT * 0.04286, y: radius * BOAT_FACT * 0.2571 },
+				{ x: radius * BOAT_FACT * 0.2857, y: radius * BOAT_FACT * 0.3571 },
+				{ x: radius * BOAT_FACT * 0.2857, y: radius * BOAT_FACT * 0.4286 },
+				{ x: radius * BOAT_FACT * 0.01429, y: radius * BOAT_FACT * 0.40 },
+				// Port
+				{ x: - radius * BOAT_FACT * 0.01429, y: radius * BOAT_FACT * 0.40 },
+				{ x: - radius * BOAT_FACT * 0.2857, y: radius * BOAT_FACT * 0.4286 },
+				{ x: - radius * BOAT_FACT * 0.2857, y: radius * BOAT_FACT * 0.3571 },
+				{ x: - radius * BOAT_FACT * 0.04286, y: radius * BOAT_FACT * 0.2571 },
+				{ x: - radius * BOAT_FACT * 0.08571, y: radius * BOAT_FACT * 0.07143 },
+				{ x: - radius * BOAT_FACT * 0.5714, y: 0 },
+				{ x: - radius * BOAT_FACT * 0.5714, y: - radius * BOAT_FACT * 0.1429 },
+				{ x: - radius * BOAT_FACT * 0.08571, y: - radius * BOAT_FACT * 0.2857 },
+				{ x: - radius * BOAT_FACT * 0.04286, y: - radius * BOAT_FACT * 0.4286 },
+
+				{ x: 0, y: - radius * BOAT_FACT *  0.5714 }
+			];			
+			let radAngle = Math.toRadians(dv); // + (Math.PI / 2);
+			// Apply rotation to the points of the needle
+			planePoints.forEach(pt => {
 				x = centerX + ((pt.x * Math.cos(radAngle)) - (pt.y * Math.sin(radAngle)));
 				y = centerY + ((pt.x * Math.sin(radAngle)) + (pt.y * Math.cos(radAngle)));
 				context.lineTo(x, y);
