@@ -69,6 +69,7 @@ dialog[open] {
 .dialog-header-close:hover {
   color: cyan;
   cursor: pointer;
+  text-shadow: 5px 5px 10px rgb(78, 39, 39), 0 0 25px white, 0 0 7px cyan;
 }
 
 #whatzat {
@@ -218,48 +219,65 @@ compass-rose .day {
 
 <dialog id="about-dialog" class="help-dialog" style="color: cyan;">
     <div class="dialog-header">
-        <span>Help !...</span>
-        <span class="dialog-header-close" onclick="closeAboutDialog();">&times</span>
+        <table width="100%">
+            <tr>
+              <td>Help !...</td>
+              <td style="padding-left: 20px;">
+                <span>
+                    <img src="../code/n.gif" width="48" title="NC" style="vertical-align: middle; padding: 5px;">
+                    <br/>
+                    <img src="../code/c.gif" width="48" title="NC" style="vertical-align: middle; padding: 5px;">
+                </span>
+              </td>
+              <td>
+                <span class="dialog-header-close" onclick="closeAboutDialog();">&times</span>
+              </td>
+            </tr>
+        </table>
+        
     </div>
     <hr/>
     <div>
-        <!-- About content -->
-        <div style="margin-top: 15px;">
-            Featuring:
-            <ul>
-                <li>LeafLet Map API</li>
-                <li>WebComponents</li>
-                <li>HTML5/CSS3/ES6</li>
-                <li>...and so on!</li>
-            </ul>
-        </div>
-        <hr/>
-        <div style="margin-top: 15px;">
-            Map is draggable.
-            <br/>
-            Zoom in and out using the +/- on the chart (or double-click, and shift + double-click)
-            <br/>
-            Click on the markers on the chart to display pictures.
-            <br/>
-            Click on the pictures to enlarge them.
-            <br/>
-            Use the links on the right to move from place to place (experimental).
-            <br/>
-            Try the "REPLAY" button to replay what was logged (zoom when replaying..., it's worth it).
-        </div>
-        <hr/>
-        <div style="margin-top: 15px;">
-            On peut draguer la carte.
-            <br/>
-            Utilisez les +/- sur la carte pour zoomer ou de-zoomer (ou bien un double-click, et shift + double-click).
-            <br/>
-            Cliquez les marqueurs sur la carte pour afficher des images.
-            <br/>
-            Cliquez sur les images pour les agrandir.
-            <br/>
-            Utilisez les liens sur la droite pour aller de place en place (exp&eacute;rimental).
-            <br/>
-            Essayez le bouton "REPLAY" pour visualiser les donn&eacute;es enregistr&eacute;es (zoomez en mode REPLAY..., &ccedil;a vaut le coup).
+        <div id="help-content" style="max-height: 390px; overflow-y: scroll;">
+            <!-- About content -->
+            <div style="margin-top: 15px;">
+                A simple Leaflet interface to visualize and replay data logged when sailing.<br/><br/>
+                <i>Featuring</i>:
+                <ul>
+                    <li>LeafLet Map API</li>
+                    <li>WebComponents</li>
+                    <li>HTML5/CSS3/ES6</li>
+                    <li>...and so on!</li>
+                </ul>
+            </div>
+            <hr/>
+            <div style="margin-top: 15px;">
+                Map is draggable.
+                <br/>
+                Zoom in and out using the +/- on the chart (or double-click, and shift + double-click)
+                <br/>
+                Click on the markers on the chart to display pictures.
+                <br/>
+                Click on the pictures to enlarge them.
+                <br/>
+                Use the links on the right to move from place to place (experimental).
+                <br/>
+                Try the "REPLAY" button to replay what was logged (zoom when replaying..., it's worth it).
+            </div>
+            <hr/>
+            <div style="margin-top: 15px;">
+                On peut draguer la carte.
+                <br/>
+                Utilisez les +/- sur la carte pour zoomer ou de-zoomer (ou bien un double-click, et shift + double-click).
+                <br/>
+                Cliquez les marqueurs sur la carte pour afficher des images.
+                <br/>
+                Cliquez sur les images pour les agrandir.
+                <br/>
+                Utilisez les liens sur la droite pour aller de place en place (exp&eacute;rimental).
+                <br/>
+                Essayez le bouton "REPLAY" pour visualiser les donn&eacute;es enregistr&eacute;es (zoomez en mode REPLAY..., &ccedil;a vaut le coup).
+            </div>
         </div>
         <hr style="margin-top: 15px; margin-bottom: 5px;"/>
         <i>OlivSoft never stops</i>
@@ -298,6 +316,7 @@ compass-rose .day {
   <button id="resume-path" onclick="resumeDriving();" disabled>Resume</button>
 </div>
 
+<!-- Map, and controls -->
 <table width="100%">
   <tr>
     <td valign="top">
@@ -306,10 +325,11 @@ compass-rose .day {
     </td>
     <td valign="top">
       <div id="curr-pos" style="text-align: right;" title="Cursor's position">&nbsp;<br/>&nbsp;</div>
-      <div id="displays" style="text-align: center;" title="SOG and COG,&#13;available when REPLAYing">
+      <div id="displays" style="text-align: center; border: 2px solid rgba(0, 0, 255, 0.5); border-radius: 5px;" title="SOG and COG,&#13;available when REPLAYing">
+        <div style="padding-left: 10px; color: blue; text-align: left; font-style: italic;">Replay Status</div>
         <div id="UTC-date" style="text-align: center;" title="UTC Date">&nbsp;</div>
         <analog-display class="analogdisplay-day"
-                        title="Speed Over Ground in knots"
+                        title="Speed Over Ground&#13;in knots"
                         id="sog-01"
                         min-value="0"
                         max-value="15"
@@ -323,7 +343,7 @@ compass-rose .day {
                         height="200"></analog-display>
 
         <direction-display class="directiondisplay-01"
-                        title="COG, not animated"
+                        title="Course Over Ground"
                         id="cog-02"
                         value="000"
                         major-ticks="45"
@@ -337,7 +357,7 @@ compass-rose .day {
 
         <compass-rose id="cog-01"
                       class="day"
-                      title="COG"
+                      title="Course Over Ground"
                       value="000"
                       width="250"
                       height="50"></compass-rose>
@@ -468,7 +488,7 @@ compass-rose .day {
                         console.log(`${nb} elements`);
                     }
 
-                    // markers
+                    // markers on the chart
                     if (true) {
                         markers.forEach(mark => {
                             L.marker([(mark.latitude), (mark.longitude)], { title: mark.name })
@@ -535,10 +555,11 @@ compass-rose .day {
         return str;
     }
 
-    // on button click
+    // on "REPLAY" button click
     function drive() {
 
         cancelDriving = false;
+        keepDriving = true;
 
         document.getElementById('start-path').disabled = true;
         document.getElementById('cancel-path').disabled = false;
@@ -593,6 +614,7 @@ compass-rose .day {
                 document.getElementById('resume-path').disabled = true;
                 document.getElementById('curr-point').innerText = "";
                 document.getElementById('curr-pos').innerHTML = "&nbsp;<br/>&nbsp;";
+                cancelDriving = true;
                 if (circle !== null) {
                     map.removeLayer(circle);
                 }
@@ -602,6 +624,7 @@ compass-rose .day {
                 pathIdx = INIT_PATH_IDX; // 0;
             }
         }
+        console.log(`Start replaying, at idx ${pathIdx}`);
         moveTo(pathIdx);
     }
 
@@ -609,16 +632,21 @@ compass-rose .day {
         cancelDriving = true;
         pathIdx = INIT_PATH_IDX; // 0;
         document.getElementById('curr-pos').innerHTML = "&nbsp;<br/>&nbsp;";
+        document.getElementById('start-path').disabled = false;
+        document.getElementById('cancel-path').disabled = true;
+        document.getElementById('stop-path').disabled = true;
+        document.getElementById('resume-path').disabled = true;
+        document.getElementById('curr-point').innerText = "";
     }
 
-    function stopDriving() {
-        keepDriving = !keepDriving;
+    function stopDriving() {         // Pause
+        keepDriving = false; // !keepDriving;
         document.getElementById('stop-path').disabled = true;
         document.getElementById('resume-path').disabled = false;
     }
 
     function resumeDriving() {
-        keepDriving = !keepDriving;
+        keepDriving = true; // !keepDriving;
         drive();
         document.getElementById('stop-path').disabled = false;
         document.getElementById('resume-path').disabled = true;
