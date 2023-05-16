@@ -361,8 +361,8 @@ compass-rose .day {
                       value="000"
                       width="250"
                       height="50"></compass-rose>
-</div>
-      <hr style="margin-top: 24px;"/>
+      </div>
+      <!--hr style="margin-top: 10px;"/-->
       <div>
         <span style="margin-left: 10px;">Fly to (for tests):</span>
         <ul>
@@ -424,7 +424,7 @@ compass-rose .day {
     }
 
     // Used as an example, See "// markers" below. Used to hold pictures.
-    const markers = [{
+    const MARKERS = [{
         "latitude": 47.574220,
         "longitude": -3.012335,
         "name": "Downwind",
@@ -490,7 +490,7 @@ compass-rose .day {
 
                     // markers on the chart
                     if (true) {
-                        markers.forEach(mark => {
+                        MARKERS.forEach(mark => {
                             L.marker([(mark.latitude), (mark.longitude)], { title: mark.name })
                                 .addTo(map)
                                 .bindPopup('<b>' + mark.name + '</b><br/>' + mark.description); // .openPopup();
@@ -571,6 +571,7 @@ compass-rose .day {
                 let pos = latlngs[j];
                 if (keepDriving) {
                     window.setTimeout(() => {
+                        // 1 - Data
                         let displayPos = `${decToSex(pos.lat, "NS")}<br/>${decToSex(pos.lng, "EW")}`;
                         if (pos.rmcDate) {
                             displayDate = `${pos.rmcDate}`;
@@ -585,6 +586,8 @@ compass-rose .day {
                         }
                         document.getElementById('curr-pos').innerHTML = displayPos;
                         document.getElementById('curr-point').innerText = `${j} /`;
+
+                        // 2 - Chart (centered on pos) and graphic
                         // map.setZoom(20);
                         map.panTo(new L.LatLng(pos.lat, pos.lng));
 
