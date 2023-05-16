@@ -324,7 +324,10 @@ compass-rose .day {
       <div id="mapid" style="width: 1024px; height: 600px; box-shadow: 4px 4px 8px grey, 0 0 25px white, 0 0 7px cyan;"></div>
     </td>
     <td valign="top">
-      <div id="curr-pos" style="text-align: right;" title="Cursor's position">&nbsp;<br/>&nbsp;</div>
+      <div style="border: 2px solid black; border-radius: 5px;">
+        <div style="padding-left: 10px; color: black; text-align: left; font-style: italic;">Position</div>
+        <div id="curr-pos" style="text-align: right; padding: 2px; margin-top: -10px;" title="Cursor's position">&nbsp;<br/>&nbsp;</div>
+      </div>  
       <div id="displays" style="text-align: center; border: 2px solid rgba(0, 0, 255, 0.5); border-radius: 5px;" title="SOG and COG,&#13;available when REPLAYing">
         <div style="padding-left: 10px; color: blue; text-align: left; font-style: italic;">Replay Status</div>
         <div id="UTC-date" style="text-align: center;" title="UTC Date">&nbsp;</div>
@@ -343,17 +346,17 @@ compass-rose .day {
                         height="200"></analog-display>
 
         <direction-display class="directiondisplay-01"
-                        title="Course Over Ground"
-                        id="cog-02"
-                        value="000"
-                        major-ticks="45"
-                        minor-ticks="5"
-                        with-rose="true"
-                        with-border="true"
-                        label="COG"
-                        hand="boat"
-                        width="200"
-                        height="200"></direction-display>
+                           title="Course Over Ground"
+                           id="cog-02"
+                           value="000"
+                           major-ticks="45"
+                           minor-ticks="5"
+                           with-rose="true"
+                           with-border="true"
+                           label="COG"
+                           hand="boat"
+                           width="200"
+                           height="200"></direction-display>
 
         <compass-rose id="cog-01"
                       class="day"
