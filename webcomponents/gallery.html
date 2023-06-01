@@ -2354,6 +2354,43 @@
 					<input type="checkbox" onchange="setRose(this, 'compass-09');" checked>With Rose
 				</div>
 			</td>
+			<td valign="top">
+				<div class="black-frame centered" style="background-color: black;">
+					<direction-display class="analogdisplay-monochrome-orange"
+									   title="COG, not animated"
+									   id="compass-10"
+									   value="120"
+									   major-ticks="45"
+									   minor-ticks="5"
+									   with-rose="true"
+									   with-border="true"
+									   label="COG"
+									   hand="arrow"
+									   width="200"
+									   height="200"></direction-display>
+				</div>
+				<div class="black-frame centered">
+					Value:
+					<input type="number"
+						   id="direction-value-10"
+						   placeholder="dir"
+						   title="Direction"
+						   style="width: 50px; text-align: right;"
+						   value="120"/>
+					<br/>
+					<button onclick="setData('direction-value-10', 'compass-10')"
+							title="Set value for the COG"
+							style="margin-top: 3px;">Direct
+					</button>
+					<button onclick="doAnimate('direction-value-10', 'compass-10', 1, true)"
+							title="Set value for the Direction"
+							style="margin-top: 3px;">Animate
+					</button>
+					<br/>
+					<input type="checkbox" onchange="setBorder(this, 'compass-10');" checked>With Border
+					<input type="checkbox" onchange="setRose(this, 'compass-10');" checked>With Rose
+				</div>
+			</td>
         </tr>
 		<tr>
 			<td colspan="5">
