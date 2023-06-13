@@ -47,6 +47,7 @@
 	<script type="module" src="widgets/compassglobe/CompassGlobe.js"></script>
 	<script type="module" src="widgets/scale/ColoredScale.js"></script>
 	<script type="module" src="widgets/beaufort/Beaufort.js"></script>
+	<script type="module" src="widgets/chartlessmap/ChartlessMap.js"></script>
 
 	<script type="text/javascript" src="utils/NavigationHelper.js"></script>
 
@@ -7797,6 +7798,288 @@ function plotBarographRC(graphId, recenter, lineColor='lime', graphLabel='Rework
 </div>
 <hr/>     
  
+<!--
+    CHARTLESS MAP
+ +-->
+ <div style="cursor: pointer;" onclick="showHide('chartless-map');" tabindex="0"><b><u><a id="a-chartless" href="#a-chartless">Chartless Map</a></u></b></div>
+ <script type="text/javascript">
+ 
+ function doAfterChartlessMap(id) {
+     callAfter(id);
+     document.getElementById(id).repaint();
+ }
+ 
+ function callAfter(id) {
+     let chartLessMap = document.getElementById(id);
+     // Draw something on the chart, the center of the chart, in red.
+     chartLessMap.setDoAfter((elmt, context) => {
+     
+         console.log("Chartless Map, on the doAfter method.");
+         
+         // let center = ChartlessMap.posToCanvas(this._centerLat, this._centerLng, this._projection, this._centerLat, this._centerLng, this._chartWidth, this._width, this._height);
+         let center = elmt.posToCanvas(elmt._centerLat, elmt._centerLng);
+         // Plot center
+         context.save();
+     
+         context.beginPath();
+         context.strokeStyle = 'red';
+         context.lineWidth = 1;
+         console.log(`Plotting chart center on ${center.x} x ${center.y}`);
+         context.moveTo(center.x, center.y - 20);
+         context.lineTo(center.x, center.y + 20);
+     
+         context.moveTo(center.x - 20, center.y);
+         context.lineTo(center.x + 20, center.y);
+         context.stroke();
+         context.closePath();
+     
+         context.beginPath();
+         context.lineWidth = 4;
+         context.arc(center.x, center.y, 10, 0, 2 * Math.PI, false);
+         context.stroke();
+         context.closePath();
+     
+         context.restore();
+     });
+ }
+ 
+ const trackData = 'trackData.json';
+ let trackColor = 'navy';
+ function animateTrack(id) {
+ 
+     const map = document.getElementById(id);
+ 
+     let loadPathData = () => {
+         map.chartWidth = 0.125; // THAT is a zoom...
+         let latlngsData = [];
+         let idx = 0;
+ 
+         map.setDoAfter((elmt, context) => {
+             // console.log(`Plotting track of ${idx + 1} points.`);
+ 
+             // Plot Center
+             if (true) {
+                 let center = elmt.posToCanvas(elmt._centerLat, elmt._centerLng);
+ 
+                 context.save();
+         
+                 context.beginPath();
+                 context.strokeStyle = 'red';
+                 context.lineWidth = 1;
+                 // console.log(`Plotting chart center on ${center.x} x ${center.y}`);
+                 context.moveTo(center.x, center.y - 20);
+                 context.lineTo(center.x, center.y + 20);
+             
+                 context.moveTo(center.x - 20, center.y);
+                 context.lineTo(center.x + 20, center.y);
+                 context.stroke();
+                 context.closePath();
+             
+                 context.beginPath();
+                 context.lineWidth = 4;
+                 context.arc(center.x, center.y, 10, 0, 2 * Math.PI, false);
+                 context.stroke();
+                 context.closePath();
+             
+                 context.restore();
+             }
+ 
+             // Markers
+             let markerAndTrackColor = 'navy';
+ 
+             markers = [
+                 { label: "Oyster Point Port",
+                    latitude: 37.664375,
+                    longitude: -122.369182,
+                    type: "red" },
+                 { label: "Oyster Point Starboard",
+                    latitude: 37.664015,
+                    longitude: -122.369162,
+                    type: "green" },
+                 { label: "The dock",
+                    latitude: 37.664245,
+                    longitude: -122.380255,
+                    type: "default" }
+             ];
+             let markerRadius = 10;
+             let beaconHeight = 2 * markerRadius;
+             markers.forEach(marker => {
+                 let extraMess = [];
+                 elmt.plotMark(context, marker, markerRadius, beaconHeight, markerAndTrackColor, extraMess); // method defined in the ChartlessMap WebComp.
+             });
+ 
+ 
+             // The points of the track
+             context.beginPath();
+             context.strokeStyle = trackColor;
+             context.lineWidth = 1;
+             for (let i=0; i<idx; i++) {
+                 let pos = latlngsData[i];
+                 let canvasCoord = elmt.posToCanvas(pos.lat, pos.lng);
+                 // console.log(`Line to ${canvasCoord.x} / ${canvasCoord.y}`)
+                 if (i === 0) {
+                     context.moveTo(canvasCoord.x, canvasCoord.y);
+                 } else {
+                     context.lineTo(canvasCoord.x, canvasCoord.y);
+                 }
+             }
+             context.stroke();
+             context.closePath();
+ 
+         });        
+ 
+         fetch(trackData)
+             .then(response => {
+                 console.log(`Data Response: ${response.status} - ${response.statusText}`);
+                 response.json().then(doc => {
+                     latlngsData = doc;
+                     console.log(`Path data loaded, ${doc.length} elements`);
+ 
+                     let func = (i) => {
+                         let pos = latlngsData[i];
+                         // console.log(`Plotting el[${i}], ${pos.lat} /  ${pos.lng}`);
+                         map.centerLat = pos.lat;
+                         map.centerLng = pos.lng;
+                         map.repaint();
+                         if (i < latlngsData.length - 1) {
+                             idx += 1;
+                             window.setTimeout(() => {
+                                 func(idx);
+                             }, 10);
+                         } else {
+                             console.log("Done with the track");
+                         }
+                     };
+ 
+                     // window.setTimeout(() => {
+                         func(idx);
+                     // }, 100);
+ 
+                 });
+             });
+     }
+ 
+     loadPathData();
+ }
+ 
+ function onSlider(event) {
+     let chart = document.getElementById('chartless-map-01');
+     chart.chartWidth = this.value;
+ }
+ 
+ function chartMouseMoveFeedback(moveData) {
+     // console.log(`Move Data: ${JSON.stringify(moveData)}`);
+     let chart = document.getElementById('chartless-map-01');
+     chart.title = `${chart.decToSex(moveData.pos.lat, "NS")} / ${chart.decToSex(moveData.pos.lng, "EW")}`;
+     document.getElementById('cursor-X').innerText = moveData.x;
+     document.getElementById('cursor-Y').innerText = moveData.y;
+     document.getElementById('cursor-POS').innerText = `${chart.decToSex(moveData.pos.lat, "NS")} / ${chart.decToSex(moveData.pos.lng, "EW")}`;
+ }
+ 
+ let setStyle = (opt) => {
+     document.getElementById('chartless-map-01').className = opt.value;
+     switch (opt.value) {
+         case 'chartless-map-03':
+             trackColor = 'cyan';
+             break;
+         case 'chartless-map-02':
+             trackColor = 'blue';
+             break;
+         case 'chartless-map-01':
+         default:
+             trackColor = 'navy';
+             break;
+     }
+ 
+ 
+ 
+     document.getElementById('chartless-map-01').repaint();
+ };
+ 
+ 
+     </script>
+     <div id="chartless-map" class="smooth">
+     <table>
+         <tr>
+             <td valign="top">
+                 <pre style="font-weight: bold; text-align: left; color: white; vertical-align: top; margin-top: 6px;">
+ &lt;chartless-map id="chartless-map-01"
+                 class="chartless-map-01"
+                 center-lat="47.677667"
+                 center-lng="-3.135667"
+                 chart-width="5.0"
+                 width="800"
+                 height="600">&lt;/chartless-map>
+                 </pre>
+             </td>
+             <td valign="top">
+                 Can be used to plot a grid, markers, tracks... without having to have a cartography available. (or a device supporting it).<br/>
+                 Only Mercator projection is supported for now.<br/>
+                 Map is draggable and zoomable.<br/>
+                 See how to use the <code>doAfter</code> callback.<br/>
+                 See how to use the <code>_mouseMoveFeedback</code> callback.<br/>
+                 Use the slider at the bottom to change the chart's scale.
+             </td>
+         </tr>
+     </table>
+     <table>
+         <tr>
+             <td valign="top">
+                 <div class="black-frame centered">
+                     <chartless-map id="chartless-map-01"
+                                    class="chartless-map-01"
+                                    center-lat="47.677667"
+                                    center-lng="-3.135667"
+                                    chart-width="5.0"
+                                    width="800"
+                                    height="600"></chartless-map>
+                 </div>
+             </td>
+             <td valign="top">
+ 
+                 <table>
+                     <tr>
+                         <td>Style:</td>
+                         <td>
+                             <select id="chart-style" onchange="setStyle(this);" style="width: 100px; font-family: 'Courier New';">
+                                 <option value="chartless-map-01" selected>Light</option>
+                                 <option value="chartless-map-02">Dark</option>
+                                 <option value="chartless-map-03">Darker</option>
+                             </select>
+                         </td>
+                     </tr>
+                     <tr>
+                         <td>
+                             Cursor: <br/>
+                             X <span id="cursor-X"></span><br/>
+                             Y <span id="cursor-Y"></span><br/>
+                             Pos: <span id="cursor-POS"></span>
+                         </td>
+                     </tr>
+                 </table>
+             </td>
+         </tr>
+         <tr>
+             <td>
+                 <!-- A slider for the chart scale -->
+                 <div id="div-slider" style="color: white; text-shadow: 4px 4px 8px gray, 0 0 25px white, 0 0 10px orange;">
+                     Chart Width:
+                     <input type="range" id="scale-slider" value="5.0" min="0.01" max="10.0" step="0.01" style="width: 600px;" title="Chart's width in degrees"
+                             oninput="onSlider.call(this, event); sliderValue01.value = `${parseFloat(this.value).toFixed(2)}&deg;`;"/>
+                     <output name="padding" id="sliderValue01" style="">5.00&deg;</output>
+                 </div>
+             </td>
+         </tr>
+         <tr> 
+             <td>
+                 <button onclick="doAfterChartlessMap('chartless-map-01');">Set Call After</button>
+                 <button onclick="animateTrack('chartless-map-01');">Read track data</button>
+             </td>
+         </tr>
+     </table>
+ </div>  
+<hr/> 
+
 <!-- End of Demo Components -->
 
 </div> <!-- Inner Container -->
@@ -7823,6 +8106,7 @@ function plotBarographRC(graphId, recenter, lineColor='lime', graphLabel='Rework
             let i = (((val - startIdx) / 96) + firstWeekDayIdx) % 7;
             return DAYS[i]; 
         });
+        document.getElementById('chartless-map-01').setMouseMoveFeedback(chartMouseMoveFeedback);
     }
 </script>
 

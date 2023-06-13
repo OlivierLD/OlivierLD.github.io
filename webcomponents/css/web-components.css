@@ -774,3 +774,22 @@ compass-display .green {
 	--value-nb-decimal: 1;
 	--font: Arial;
 }
+
+.chartless-map-01 {
+	--bg-color: rgba(255, 255, 255, 0.85);
+	--grid-color: rgba(0, 0, 0, 0.7);
+	--fg-color: gray;
+	--value-font: 'Courier New';
+}
+.chartless-map-02 {
+	--bg-color: rgba(0, 0, 0, 0.65);
+	--grid-color: lime;
+	--fg-color: lime;
+	--value-font: 'Courier New';
+}
+.chartless-map-03 {
+	--bg-color: rgba(0, 0, 0, 1.0);
+	--grid-color: cyan;
+	--fg-color: cyan;
+	--value-font: 'Courier New';
+}
