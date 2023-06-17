@@ -1062,7 +1062,7 @@
             let gc = worldMap.computeGreatCircle(from, to, 50);
             if (false) { // DEBUG
                 gc.forEach(gcp => {
-                    console.log("Z: %s\272, %s / %s", gcp.z.toFixed(1), worldMap.decToSex(gcp.pos.lat, "NS"), worldMap.decToSex(gcp.pos.lng, "EW"));
+                    console.log("Z: %s\xba, %s / %s", gcp.z.toFixed(1), worldMap.decToSex(gcp.pos.lat, "NS"), worldMap.decToSex(gcp.pos.lng, "EW"));
                 });
             }
 
@@ -4674,14 +4674,14 @@ map.addEventListener('mousemove', evt => {
             let vmgs = NavigationHelper.vmgCalculator(sog, cog, tw.twd, tw.twa, bsp, hdg, b2wp);
 
             let resContent =
-                'LWY:' + lwy.toFixed(1) + '\272 \n' +
-                'True HDG:' + hdg.toFixed(1) + '\272 \n' +
+                'LWY:' + lwy.toFixed(1) + '\xba \n' +
+                'True HDG:' + hdg.toFixed(1) + '\xba \n' +
                 'TWS:' + tw.tws.toFixed(2) + ' kts\n' +
-                'TWA:' + tw.twa.toFixed(1) + '\272 \n' +
-                'TWD:' + tw.twd.toFixed(1) + '\272 \n' +
-                'D:' + Decl.toFixed(1) + '\272 \n' +
-                'd:' + dev.toFixed(1) + '\272 \n' +
-                'Current Dir:' + current.cdr.toFixed(1) + '\272 \n' +
+                'TWA:' + tw.twa.toFixed(1) + '\xba \n' +
+                'TWD:' + tw.twd.toFixed(1) + '\xba \n' +
+                'D:' + Decl.toFixed(1) + '\xba \n' +
+                'd:' + dev.toFixed(1) + '\xba \n' +
+                'Current Dir:' + current.cdr.toFixed(1) + '\xba \n' +
                 'Current Speed:' + current.csp.toFixed(2) + ' kts';
 
             console.log(resContent);
@@ -8066,7 +8066,7 @@ function plotBarographRC(graphId, recenter, lineColor='lime', graphLabel='Rework
                      Chart Width:
                      <input type="range" id="scale-slider" value="5.0" min="0.01" max="10.0" step="0.01" style="width: 600px;" title="Chart's width in degrees"
                              oninput="onSlider.call(this, event); sliderValue01.value = `${parseFloat(this.value).toFixed(2)}&deg;`;"/>
-                     <output name="padding" id="sliderValue01" style="">5.00&deg;</output>
+                     <output name="padding" id="sliderValue01" style="cursor: default;">5.00&deg;</output>
                  </div>
              </td>
          </tr>
