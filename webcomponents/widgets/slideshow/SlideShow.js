@@ -264,7 +264,7 @@ class SlideShow extends HTMLElement {
 				this._height = parseInt(newVal);
 				break;
 			case "slideclick":
-				this._onclick = newVal;
+				this._onclick = window[newVal];
 				break;
 			default:
 				break;
@@ -279,7 +279,7 @@ class SlideShow extends HTMLElement {
 	}
 
 	set slideclick(callback) {
-		this._onclick = callback;
+		this._onclick = window[callback];
 	}
 
 	set width(val) {
