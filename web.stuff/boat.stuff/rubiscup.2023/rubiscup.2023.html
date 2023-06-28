@@ -382,7 +382,7 @@ compass-rose .day {
 <table style="width: 100%;">
     <tr>
         <td>
-            <h1 style="padding-left: 10px;">Rubi's Cup 2023 - Replay Logged Data</h1>
+            <h1 style="padding-left: 10px;"><a href="http://www.cngx.fr" target="_new">Rubi's Cup 2023</a> - Replay Logged Data</h1>
         </td>
         <td style="text-align: right; padding-right: 20px;">
             <img src="../dives/drowning.gif"
@@ -702,11 +702,6 @@ compass-rose .day {
                             oneMark.addTo(map)
                                    .bindPopup('<b>' + mark.name + '</b><br/>' + mark.content); // .openPopup();
                         });
-                        // try {
-                        //     document.getElementById("slide-show-01").slideclick = onSlideShowClick;
-                        // } catch (err) {
-                        //     console.log(`Oops: ${JSON.stringify(err)}`);
-                        // }
                     }
                 });
             },
@@ -776,24 +771,6 @@ compass-rose .day {
             str = w + str;
         }
         return str;
-    }
-
-    function setLabels(cb, id) {
-        let bo = document.getElementById(id);
-        bo.withLabels = cb.checked;
-    }
-
-    const TABS = ['one', 'two'];
-
-    function openTab(evt, tabNum) {
-        let tabLinks = document.getElementsByClassName("tablinks");
-        for (let i=0; i<tabLinks.length; i++) {
-            tabLinks[i].className = tabLinks[i].className.replace(" active", ""); // Reset
-        }
-        for (let i=0; i<TABS.length; i++) {
-            document.getElementById(TABS[i]).style.display = (i === tabNum) ? 'block' : 'none';
-        }
-        evt.currentTarget.className += " active";
     }
 
     // Recurse in that one.
