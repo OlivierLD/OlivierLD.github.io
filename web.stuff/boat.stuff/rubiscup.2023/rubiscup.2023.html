@@ -665,8 +665,16 @@ compass-rose .day {
                     if (polyline !== null) { // Remove if there was one already
                         map.removeLayer(polyline);
                     }
+                    // Calculate min-max speed
+                    let minSog = 1000.0;
+                    let maxSog = 0.0;
+                    latlngs.forEach(el => {
+                        minSog = Math.min(minSog, el.sog);
+                        maxSog = Math.max(maxSog, el.sog);
+                    });
+
                     // Process it here if needed
-                    document.getElementById('point-card').innerText = `${latlngs.length} data points.`;
+                    document.getElementById('point-card').innerText = `${latlngs.length} data points. Min SOG ${minSog.toFixed(2)} kts, Max SOG ${maxSog.toFixed(2)} kts`;
                     document.getElementById('data-slider').max = latlngs.length;
                     document.getElementById('point-origin').innerText = `from ${trackData}.`;
                     polyline = L.polyline(latlngs, {color: 'red'}).addTo(map);
