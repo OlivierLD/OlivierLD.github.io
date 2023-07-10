@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <!--
+ | Real Time Celestial status
+ |
  | All the skill in the "compute" function below, invoked on click.
  | Dynamic background test.
  | Some (if not many) functions returning baot data are faked (or simulated)
@@ -333,6 +335,7 @@ let setGeolocation = (slider) => {
 // expandCollapseSetPosData
 let userPosDataExpanded = false;
 let userDateExpanded = false;
+let useHelpExpanded = false;
 
 let expandCollapseSetPosData = () => {
 
@@ -359,6 +362,19 @@ let expandCollapseDateData = () => {
         document.getElementById('date-char').innerHTML = '&#9660;';
     }
     userDateExpanded = !userDateExpanded;
+};
+
+let expandCollapseHelpData = () => {
+    document.getElementById('user-help-widgets').classList.toggle('visible-div');
+
+    if (useHelpExpanded) {
+        // document.getElementById('user-date-widgets').style.display = 'none';
+        document.getElementById('date-char').innerHTML = '&#9658;';
+    } else {
+        // document.getElementById('user-date-widgets').style.display = 'block';
+        document.getElementById('date-char').innerHTML = '&#9660;';    
+    }
+    useHelpExpanded = !useHelpExpanded;
 };
 
 let updatePosition = () => {
@@ -1501,13 +1517,27 @@ let toggleForeground = () => {
 </div>
 
 <div id="full-foreground" style="display: block;">
-    <div style="padding: 6px; border: 0px solid rgba(0, 255, 255, 0.25); border-radius: 5px;">
+    <div style="padding: 6px; border: 0px solid rgba(0, 255, 255, 0.25); border-radius: 5px; margin-top: 50px;">
         <small>
             Once the page is loaded, all calculations and renderings happen only in the browser, it generates absolutely NO network traffic.<br/>
             Guaranteed <b><i>0%</i></b> external libraries (100% pure organic HTML5/CSS3/ES6), no GMO.
         </small>
     </div>
     <table style="width: 96%;">
+        <tr>
+            <td style="vertical-align: top;" colspan="1">
+                <div style="border: 0px solid rgba(0, 255, 255, 0.25); border-radius: 5px;">
+                    <div id="user-help-switch" onclick="expandCollapseHelpData();" title="Click to expand/collase"
+                         style="margin: 3px; padding-left: 5px; padding-right: 5px; cursor: pointer;"><span id="date-char">&#9658;</span> Help !</div>
+                        <div id="user-help-widgets" class="smooth" style="padding: 2px; border: 1px solid rgba(0, 255, 255, 0.25); border-radius: 5px;">
+                            <i>How-to:</i> Use the hamburger (&#8801;) at the top left to set the background parameters (Wandering bodies, Sunlight, Real Time...)
+                            <br/>
+                            Then you can show or hide the computed data... And you can use the "Help" in the sliding menu.
+                        </div>
+                    </div>    
+                </td>
+            </td>
+        </tr>
         <tr>
             <td style="text-align: left;" colspan="1">
                 <div style="border: 0px solid rgba(0, 255, 255, 0.25); border-radius: 5px;">
@@ -1641,11 +1671,6 @@ let toggleForeground = () => {
             </td>
         </tr>
     </table>
-    <p style="margin: 20px;">
-        <i>How-to:</i> Use the hamburger (&#8801;) at the top left to set the background parameters (Wandering bodies, Sunlight, Real Time...)
-        <br/>
-        Then you can show or hide the computed data... And you can use the "Help" in the sliding menu.
-    </p>
     <h2 style="margin-left: 10px; color: rgba(255, 255, 255, 0.5);">Heading and PRMSL are <i>simulated</i></h2>
 
     <button class="tooltip" onclick="showHideData();" style="margin: 10px;">Show/Hide Computed Data
