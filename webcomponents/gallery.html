@@ -3998,12 +3998,13 @@ map.addEventListener('mousemove', evt => {
 	<table>
 		<tr>
 			<td>
-                                        <pre style="font-weight: bold; text-align: left; color: white; vertical-align: top; margin-top: 6px;">
+                <pre style="font-weight: bold; text-align: left; color: white; vertical-align: top; margin-top: 6px;">
 &lt;sky-map id="sky-map-01"
-          width="600"
-          height="600"
-          latitude="35"/>
-                                        </pre>
+         class="skymap-display-01"
+         width="600"
+         height="600"
+         latitude="35"/>
+                </pre>
 				<button onclick="showHideSiblingWidget(this);">Show/Hide widget</button>
 			</td>
 		</tr>
@@ -4011,6 +4012,7 @@ map.addEventListener('mousemove', evt => {
 			<td valign="top">
 				<div class="black-frame centered">
 					<sky-map id="sky-map-01"
+                             class="skymap-display-01"
 							 width="600"
 							 height="600"
 							 latitude="35"/>
@@ -4033,20 +4035,46 @@ map.addEventListener('mousemove', evt => {
 				<input type="checkbox" onchange="setSkyGrid('sky-map-01', this);" checked>Sky grid.
 				<input type="checkbox" onchange="setWanderingBodiesSM('sky-map-01', this);">Wandering bodies.
 			</td>
+			<td valign="top">
+				<div class="black-frame centered">
+					<sky-map id="sky-map-02"
+                             class="skymap-display-02"
+							 width="600"
+							 height="600"
+							 latitude="35"/>
+				</div>
+				Type:
+				<select onchange="setMapType('sky-map-02', this);">
+					<option value="STARFINDER" selected>Star Finder</option>
+					<option value="SKYMAP">Sky Map</option>
+				</select>
+				Hemisphere:
+				<select onchange="setHemisphere('sky-map-02', this);">
+					<option value="N" selected>North</option>
+					<option value="S">South</option>
+				</select>
+				<input type="checkbox" onchange="setWithStars('sky-map-02', this);" checked>Stars.
+				<input type="checkbox" onchange="setWithConst('sky-map-02', this);" checked>Const.
+				<input type="checkbox" onchange="setStarNames('sky-map-02', this);" checked>Star Names.
+				<input type="checkbox" onchange="setConstNames('sky-map-02', this);">Const Names.
+				<input type="checkbox" onchange="setVisibleSky('sky-map-02', this);" checked>Visible sky.
+				<input type="checkbox" onchange="setSkyGrid('sky-map-02', this);" checked>Sky grid.
+				<input type="checkbox" onchange="setWanderingBodiesSM('sky-map-02', this);">Wandering bodies.
+			</td>
 		</tr>
 		<tr>
-			<td>
+			<td colspan="2">
 				<h5 style="color: cyan;">LHA Aries / Date</h5>
 				<input type="range" value="0" min="-180" max="180" style="width: 90%;"
-					   oninput="setLHAAries('sky-map-01', this.value); lhaAries.value = (parseInt(this.value) >= 0 ? parseInt(this.value) : parseInt(this.value) + 360);"/>
+					   oninput="setLHAAries('sky-map-01', this.value); setLHAAries('sky-map-02', this.value); lhaAries.value = (parseInt(this.value) >= 0 ? parseInt(this.value) : parseInt(this.value) + 360);"/>
 				<output name="lhaAries" id="lhaAries" style="color: cyan;">0</output>
 			</td>
 		</tr>
 		<tr>
-			<td>
+			<td colspan="2">
 				<h5 style="color: cyan;">Latitude</h5>
 				<input type="range" value="35" min="1" max="89" style="width: 90%;"
-					   oninput="setObserverLatitude('sky-map-01', this.value); obsLat.value = this.value;"/>
+					   oninput="setObserverLatitude('sky-map-01', this.value); setObserverLatitude('sky-map-02', this.value); obsLat.value = this.value;"/>
 				<output name="obsLat" id="obsLat" style="color: cyan;">35</output>
 			</td>
 		</tr>
