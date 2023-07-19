@@ -242,7 +242,7 @@
             ]
           };
           graph.data = graphData;
-          graph.label = `WH at ${dateFmt.formatDate(new Date(now), 'd-M-y H:i')}, ${wh.toFixed(2)} ${station.displayUnit}`;
+          graph.label = `WH at ${dateFmt.formatDate(new Date(now), 'd-M-y H:i')} UTC, ${wh.toFixed(2)} ${station.displayUnit}`;
           graph.repaint();
        } else {
           console.log(`${location} NOT found.`);
@@ -251,7 +251,7 @@
           table.innerHTML = '';
           let graph = document.getElementById("tide-graph-01");
           graph.data = null;
-          graph.label = '';
+          graph.label = 'Oops';
           graph.repaint();
        }
     }
