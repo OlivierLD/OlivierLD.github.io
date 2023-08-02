@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8">
+	<title>Naviguer sans électricité</title>
+	<link rel="icon" type="image/jpg" href="../../palm.04.jpg">
+	<style type="text/css">
+* {
+	font-family: "Source Code Pro", "Courier New", "Helvetica Neue", "Lato", Verdana, Helvetica, Geneva, sans-serif;
+	color: navy;
+	background-color: silver;
+}
+
+button.button-link:hover {
+  text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 10px orange;
+  box-shadow: 2px 2px 4px #2196f3;
+}
+
+.list-link {
+  color: white;
+  font-size: 20px;
+  text-shadow: 2px 2px 4px black, 0 0 25px white, 0 0 10px orange;
+  text-decoration: none;
+}
+a.list-link:hover {
+  color: cyan;
+  font-weight: bold;
+  cursor: pointer;
+  text-shadow: 4px 4px 8px black, 0 0 25px white, 0 0 10px cyan;
+}
+.shadow-menu a:link, .shadow-menu a:visited {
+  color: darkblue;
+  text-decoration: none;
+}
+.shadow-menu a:hover {
+  color: navy;
+  text-shadow: 2px 2px 4px grey, 0 0 25px white, 0 0 7px cyan;
+}
+.shadow-menu a:active {
+  color: DarkOrange;
+  text-shadow: 2px 2px 4px grey, 0 0 25px white, 0 0 7px cyan;
+}
+
+.close-icon {
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin-top: 2px;
+  margin-right: 7px;
+  cursor: pointer;
+}
+
+.close-icon:hover {
+  text-shadow: 2px 2px 4px grey, 0 0 25px white, 0 0 7px cyan;
+}
+.dialog-header {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.dialog-header-close {
+  float: right;
+}
+.dialog-header-close:hover {
+  color: cyan;
+  cursor: pointer;
+}
+	</style>
+</head>
+<body>
+    <h1>Naviguer sans électricité</h1>
+    <p>
+        Cette page rassemble plusieurs liens vers des documents concernant la navigation et ses techniques,
+        surtout celles qui existaient avant que les bateaux disposent d'électricité à bord, et ce dans l'intention 
+        de ne pas laisser se perdre les compétences nécessaires à leur mise en œuvre.
+        <br/>
+        Pour plusieurs raisons:
+        <ul>
+            <li>Ces techniques fonctionnent toujours</li>
+            <li>Ça ne s'apprend pas en poussant un bouton</li>
+            <li>On n'est pas a l'abri d'une panne électrique</li>
+        </ul>
+        Le premier document de la liste est un aide-memoire qui rassemble les explications necessaires pour mettre en œuvre les techniques
+        mentionnées ci-dessus. 
+    </p>
+    <ul>
+        <li>
+            <a class="list-link" href="./nse.html" target="nse-1">Naviguer sans électricité</a>
+            <br/>
+            Ce document est un document HTML (une page web), destiné à être visualisé dans un navigateur, ou imprimé à partir de celui-ci.
+            Il peut ainsi devenir un document papier, un pdf, etc.
+            <br/>
+            La version imprimable comporte des sauts de page et autres artifacts qui - bien évidement - n'existent pas dans le version web.
+            <br/>
+            Pour l'imprimer, il ne faut pas hésiter à utiliser les paramètres disponibles à partir du navigateur (affichage des en-têtes et pieds de pages,
+            numeros de page, échelle du document, etc) pour obtenir un résultat satisfaisant.
+        </li>
+        <li>
+            Tables et abaques. Tous ces documents sont publiables à partir du code disponible dans 
+            le git repository <a class="list-link" href="https://github.com/OlivierLD/ROB" target="robert">ROBERT</a>.
+            <ul>
+                <li><a class="list-link" target="tables" href="./tables.and.docs/03.dieumegard.A4.pdf">Tables de Dieumegard</a></li>
+                <li><a class="list-link" target="tables" href="./tables.and.docs/04.bataille.A4.pdf">Tables de Bataille</a></li>
+                <li><a class="list-link" target="tables" href="./tables.and.docs/02.corrections.A4.pdf">Tables de correction des hauteurs</a></li>
+                <li><a class="list-link" target="tables" href="./tables.and.docs/05.minutes-to-decimal.A4.pdf">Tables de conversion (minutes, en heures, en degrés, etc)</a></li>
+                <li><a class="list-link" target="tables" href="./tables.and.docs/07.dieumegard.form.A4.pdf">Formulaire pour les tables de Dieumegard</a></li>
+                <li><a class="list-link" target="tables" href="./tables.and.docs/08.bataille.form.A4.pdf">Formulaire pour les tables de Bataille</a></li>
+                <li><a class="list-link" target="tables" href="./tables.and.docs/09.LunarClearingBlankSheet.A4.pdf">Formulaire pour les distances lunaires</a></li>
+            </ul>
+        </li>
+        <li>
+            Documents divers
+            <ul>
+                <li>
+                    Canevas Mercator
+                    <ul>
+                        <li><a class="list-link" target="canvas" href="./tables.and.docs/mercator.pdf">Canevas Mercator</a></li>
+                        <li><a class="list-link" target="canvas" href="./tables.and.docs/mercator_11x17.pdf">Canevas Mercator 11"x17"</a></li>
+                        <li><a class="list-link" target="canvas" href="./tables.and.docs/mercator_17x22.pdf">Canevas Mercator 17"x22"</a></li>
+                    </ul>
+                </li>
+                <li>
+                    Plotting Sheets
+                    <ul>
+                        <li><a class="list-link" target="canvas" href="./tables.and.docs/f1-plottingSheet.pdf">Amana's Plotting Sheet</a></li>
+                    </ul>
+                </li>
+                <li>
+                    Presentations
+                    <ul>
+                        <li><a class="list-link" target="pres" href="./presentations/NavAstroIntro_en.pdf">Introduction to Celestial Navigation (in English)</a></li>
+                        <li><a class="list-link" target="pres" href="./presentations/NavAstroIntro_fr.pdf">Introduction à la navigation astronomique (en français)</a></li>
+                    </ul>
+                </li>
+                <li>
+                    Feuilles de calcul
+                    <ul>
+                        <li>
+                            <a class="list-link" target="spreadsheets" href="./tables.and.docs/Conversions.ods">Tables de Conversion</a> (Original du
+                                  <a href="./tables.and.docs/05.minutes-to-decimal.A4.pdf" target="tables">document ci-dessus</a>)
+                        </li>
+                        <li><a class="list-link" target="spreadsheets" href="./tables.and.docs/dieumegard.bataille.usage.ods">Utilisation des tables de Dieumegard et Bataille</a></li>
+                        <li><a class="list-link" target="tuto" href="./tutorials/dieumegard.bataille.tuto.html">Utilisation des tables de Dieumegard et Bataille, comme ci-dessus, en version Web</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</body>
+</html>
