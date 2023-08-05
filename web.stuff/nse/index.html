@@ -65,7 +65,63 @@ a.list-link:hover {
   color: cyan;
   cursor: pointer;
 }
+
+/* 
+ * For the trees 
+ */
+/* Remove default bullets */
+ul, #accordion {
+  list-style-type: none;
+}
+
+/* Remove margins and padding from the parent ul */
+#accordion {
+  margin: 0;
+  padding: 0;
+}
+
+/* Style the caret/arrow */
+.caret {
+  cursor: pointer;
+  user-select: none; /* Prevent text selection */
+}
+
+/* Create the caret/arrow with a unicode, and style it */
+.caret::before {
+  content: "\25B6";
+  color: navy;
+  display: inline-block;
+  margin-right: 6px;
+}
+
+/* Rotate the caret/arrow icon when clicked on (using JavaScript) */
+.caret-down::before {
+  transform: rotate(90deg);
+}
+
+/* Hide the nested list */
+.nested {
+  display: none;
+}
+
+/* Show the nested list when the user clicks on the caret/arrow (with JavaScript) */
+.active {
+  display: block;
+}
 	</style>
+    <script type="text/javascript">
+window.onload = () => {        
+
+    let toggler = document.getElementsByClassName("caret");
+
+    for (let i = 0; i < toggler.length; i++) {
+        toggler[i].addEventListener("click", (evt) => {
+            evt.currentTarget.parentElement.querySelector(".nested").classList.toggle("active");
+            evt.currentTarget.classList.toggle("caret-down");
+        });
+    }        
+}
+    </script>
 </head>
 <body>
     <h1>Naviguer sans &eacute;lectricit&eacute;</h1>
@@ -85,7 +141,7 @@ a.list-link:hover {
         <br/>
         Les sections suivantes rassemblent des liens qui pointent vers des documents souvent mentionn&eacute;s dans le premier de la liste.
     </p>
-    <ul>
+    <ul id="accordion">
         <li>
             <a class="list-link" href="./nse.html" target="nse-1">Naviguer sans &eacute;lectricit&eacute;</a>
             <br/>
@@ -99,9 +155,9 @@ a.list-link:hover {
             num&eacute;ros de page, &eacute;chelle du document, etc) pour obtenir un r&eacute;sultat satisfaisant.
         </li>
         <li>
-            Tables et abaques. <i>Tous</i> ces documents sont publiables &agrave; partir du code disponible dans 
-            le git repository <a class="list-link" href="https://github.com/OlivierLD/ROB" target="robert">ROBERT</a>.
-            <ul>
+            <span class="caret"><b>Tables et abaques.</b>&nbsp;<i>Tous</i> ces documents sont publiables &agrave; partir du code disponible dans 
+                le git repository <a class="list-link" href="https://github.com/OlivierLD/ROB" target="robert">ROBERT</a>.</span>
+            <ul class="nested">
                 <li><a class="list-link" target="tables" href="./tables.and.docs/03.dieumegard.A4.pdf">Tables de Dieumegard</a></li>
                 <li><a class="list-link" target="tables" href="./tables.and.docs/04.bataille.A4.pdf">Tables de Bataille</a></li>
                 <li><a class="list-link" target="tables" href="./tables.and.docs/02.corrections.A4.pdf">Tables de correction des hauteurs</a></li>
@@ -112,40 +168,40 @@ a.list-link:hover {
             </ul>
         </li>
         <li>
-            Documents divers
-            <ul>
+            <span class="caret"><b>Documents divers</b></span>
+            <ul class="nested">
                 <li>
-                    Canevas Mercator
-                    <ul>
+                    <span class="caret"><b>Canevas Mercator</b></span>
+                    <ul class="nested">
                         <li><a class="list-link" target="canvas" href="./tables.and.docs/mercator.pdf">Canevas Mercator</a></li>
                         <li><a class="list-link" target="canvas" href="./tables.and.docs/mercator_11x17.pdf">Canevas Mercator 11"x17"</a></li>
                         <li><a class="list-link" target="canvas" href="./tables.and.docs/mercator_17x22.pdf">Canevas Mercator 17"x22"</a></li>
                     </ul>
                 </li>
                 <li>
-                    Plotting Sheets
-                    <ul>
+                    <span class="caret"><b>Plotting Sheets</b></span>
+                    <ul class="nested">
                         <li><a class="list-link" target="canvas" href="./tables.and.docs/f1-plottingSheet.pdf">Amana's Plotting Sheet</a></li>
                     </ul>
                 </li>
                 <li>
-                    Pr&eacute;sentations
-                    <ul>
+                    <span class="caret"><b>Pr&eacute;sentations</b></span>
+                    <ul class="nested">
                         <li><a class="list-link" target="pres" href="./presentations/NavAstroIntro_en.pdf">Introduction to Celestial Navigation (in English)</a></li>
                         <li><a class="list-link" target="pres" href="./presentations/NavAstroIntro_fr.pdf">Introduction &agrave; la navigation astronomique (en fran&ccedil;ais)</a></li>
                     </ul>
                 </li>
                 <li>
-                    Feuilles de calcul
-                    <ul>
+                    <span class="caret"><b>Feuilles de calcul</b></span>
+                    <ul class="nested">
                         <li>
                             <a class="list-link" target="spreadsheets" href="./tables.and.docs/Conversions.ods">Tables de Conversion</a>, pour LibreOffice (Original du
                             document <a class="list-link" href="./tables.and.docs/05.minutes-to-decimal.A4.pdf" target="tables">ci-dessus</a>). A nice drag-n-drop exercice...
                         </li>
                         <li><a class="list-link" target="spreadsheets" href="./tables.and.docs/dieumegard.bataille.usage.ods">Utilisation des tables de Dieumegard et Bataille</a>, pour LibreOffice</li>
                         <li>
-                            Pour v&eacute;rifier ses calculs, on-line, avec les tables (logarithmes ou Dieumegard-Bataille), et apprendre &agrave; s'en servir&nbsp;:
-                            <ul>
+                            <span class="caret">Pour v&eacute;rifier ses calculs, on-line, avec les tables (logarithmes ou Dieumegard-Bataille), et apprendre &agrave; s'en servir&nbsp;:</span>
+                            <ul class="nested">
                                 <li><a class="list-link" target="tuto" href="./tutorials/dieumegard.bataille.tuto.html">Utilisation des tables de Dieumegard et Bataille</a>, comme ci-dessus, en (pure) version Web</li>
                                 <li><a class="list-link" target="tuto" href="./tutorials/logarithmes.tuto.html">Utilisation des tables de logarithmes</a>, pour le calcul de He &amp; Z, en (pure) version Web</li>
                             </ul>
