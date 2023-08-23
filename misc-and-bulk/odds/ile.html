@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<!--
+    Intends to generate a possibly printer-ready document, with appropriate page breaks and so.
+    This doc should be both visualizable and printable.
+
+    https://www.sitepoint.com/css-printer-friendly-pages/
+
+    Lorem Ipsum generator: https://lorem-ipsum.perbang.dk/
+    https://css-tricks.com/almanac/properties/p/page-break/
+    https://www.w3.org/TR/CSS21/generate.html#counters
+
+    For LaTeX: https://www.overleaf.com/learn
+    https://ashki23.github.io/markdown-latex.html
+    https://latexbase.com/d/bd875c05-4a8d-4605-a1dd-0a472f941efa
+    
+
+    CSS text decoration: https://www.zonecss.fr/faq/decoration-du-texte-avec-css.html
+    CSS borders: https://www.w3schools.com/css/css_border.asp
+
+    TODO/PENDING: Page numbers.
+    See https://css-tricks.com/a-perfect-table-of-contents-with-html-css/
+
+ +-->
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>&Icirc;le</title>
+    <!--author>Olivier Le Diouris</author-->
+    <link rel="stylesheet" href="main.css" />
+    <!-- link rel="stylesheet" media="screen" href="main.css" /-->
+    <link rel="stylesheet" media="print" href="print.css" />
+
+    <!--style type="text/css">
+@page {
+    size: A4;
+    margin: 0; 
+}        
+    </style-->
+</head>
+<body>
+
+<div id="screen-warning" class="screen-only screen-warning">
+    <div style="display: grid; grid-template-columns: auto auto;">
+        <p style="margin: 10px;">
+            The following document is designed to be visualized from a web browser, or printed from it. 
+            The printed version will have page breaks and other formattings that will not be displayed from the web browser.<br/>
+            When printing, you will have the possibility - from the dialog showing up in the browser - to hide or show different 
+            data like headers, footers, page numbers, etc.
+        </p>
+        <p style="margin: 10px;">
+            Le document qui suit est con&ccedil;u pour &ecirc;tre visualis&eacute; dans un navigateur web, ou imprim&eacute; &agrave; partir ce celui-ci.
+            La version imprim&eacute;e comporte des sauts de page et autres formattages qui ne seront pas visibles &agrave; partir du navigateur.<br/>
+            Lors de l'impression, vous aurez la possibilit&eacute; - &agrave; partir des boites de dialogue du navigateur - de faire appara&icirc;tre ou pas
+            des donn&eacute;es comme les en-t&ecirc;tes et bas de page, num&eacute;ros de page, etc.
+        </p>
+    </div>
+    <hr/>
+</div>
+
+<div class="front-page in-the-middle">
+    <!--h3 style="text-align: center;">Olivier Le Diouris</h3-->
+    <h1 style="text-align: center; font-size: 3em;">&Icirc;le</h1>
+</div>
+
+<div class="blank-for-print"></div>
+
+<hr class="screen-only"/>
+
+<div class="content">
+    <h1>I</h1>
+
+    L’île n’est pas grande. Quelques kilomètres de diamètre tout au plus. Vue du village, sur la côte sud – celle qui est sableuse, bordée de plages encastrées dans des pointes de roche – elle monte doucement vers une colline, un ballon, au relief doux, sans rien sur quoi l’œil puisse s’accrocher, émergeant de la forêt, sa couleur brune, marron clair plus qu’ocre jaune contrastant délicatement avec le vert émeraude du feuillage des arbres. En bas, de l’autre côté du ballon, où réapparait la forêt, une crevasse, large de quelques dizaines de mètres et environ dix fois plus profonde, traverse quasiment toute l’île, ne s’arrêtant qu’à quelques kilomètres des rivages, mais dont chacune des extrémités s’évanouit mystérieusement dans des marécages. Enfin, de l’autre côté de la crevasse, jaillit la Montagne. Franche, nette, abrupte, au relief découpé, déchiré, où aucune végétation n’a de prise, et qui s’élance vers le ciel, comme si une flèche lancée des profondeurs de la terre en avait propulsé la surface vers les nuages... La face nord tombe directement dans l’océan, plus vite encore que ne monte la face sud. La Montagne a le marron foncé des schistes et le gris du granit, bleuté certains matins brumeux, ou lors de certaines nuits, aux alentours de la pleine lune.
+    Parfois, au sommet s’accumulent des nuages que, bien qu’ils semblent impalpables, elle semble retenir d’une poigne inflexible…
+    <br/>
+    Il semble que nul ne pourra jamais atteindre le sommet de la Montagne, tant son aspect inspire une peur respectueuse à quiconque lève les yeux vers elle.
+    Quand bien même un fou, un dément à n’en pas douter, projetterait d’en faire l’ascension, il lui faudrait d’abord franchir la crevasse. Il est exclus qu’il puisse en faire le tour, à cause des marécages, bien trop spongieux pour soutenir le poids d’un homme. Une végétation luxuriante y prolifère.
+    La Montagne est le domaine des oiseaux. On aperçoit parfois ce qu’on suppose être des rapaces, de grands oiseaux en tout cas, qui décrivent de puissantes arabesques sur les flancs rocheux.
+    Certains prétendent que des oiseaux de mer, surtout des pétrels, nichent dans les anfractuosités de la face nord. Personne n’a jamais pu savoir si ces oiseaux existent. Les pétrels sont ces oiseaux qui avec les albatros, hantent les tempêtes, d’après les « légendes » du temps de la marine en bois…
+    L’île ne possède aucune embarcation, ce qui aurait éventuellement permis d’aller s’en assurer par voie maritime.
+    <br/>
+    On voit bien des oiseaux sur la côte sud, mais jamais de pétrels. Uniquement des mouettes et des goélands, parfois des sternes. Et on sait où ils nichent, dans les rochers à quelques kilomètres dans l’ouest du village.
+    En permanence, de violents courants cernent l’île. On en a déjà vu certains qui, bien que prétendus bons nageurs, se sont fait emporter, s’étant trop éloignés du rivage. Ils ne sont jamais parvenus à regagner la grève, et personne n’aurait de toutes façons pu leur porter assistance.
+    <br/>
+    La Mer aussi, sur l’île, inspire le respect.
+    <br/>
+    Le village est composé de huttes de pierres, plus que de véritables maisons, qui forment un ensemble sans structure précise… Les rues, toutes en terre sableuse, ne sont que vaguement définies. Elles ne sont en fait constituées que par les espaces laissés libres entre les maisons, plus ou moins au hasard… Au centre du village, il y a cependant une place qui ne peut être l’effet du hasard. Il n’y a pas de mairie, pas d’église, pas de boutiques…
+    À intervalles réguliers autour du village, des bâtiments d’allure plus régulière et plus rigoureuse que les huttes, aux angles droits, à un étage et peintes en blanc, marquent les limites – quoique distantes d’environ une vingtaine de mètres des dernières habitations – du village. Ce sont les demeures des vigiles. Les vigiles portent tous la même tenue, le même uniforme. Ils sont habillés en bleu foncé, avec une casquette assortie, un ceinturon soutient la gaine de leur revolver. Les vigiles ne se mêlent pas aux gens du village. Ils restent entre eux. Ils surveillent de l’extérieur. On n’en voit jamais à plus d’un quart d’heure du village, ni au-delà du petit ruisseau qui coule à l’est du village, et qui lui procure l’eau douce dont il a besoin…
+    Le village proprement dit est le domaine des Exilés. Les Exilés doivent être à peu près un millier à habiter le village, ce sont eux qui ont construit leurs maisons.
+    Environ une fois par an – environ, car les Exilés ne devant plus connaître d’autres terres que celle de l’île ont oublié le temps et les calendriers – un grand navire mouille au large de la côte sud. D’autres vigiles débarquent, et ceux qui étaient sur l’île rembarquent alors. Le navire ne reste que quelques heures, puis ré-appareille. Parfois, de nouveaux Exilés débarquent. Aucun n’a jamais pu ré-embarquer ; même clandestinement. Les nouveaux trouvent toujours des maisons vides dans le village.
+    Apparement, les Exilés sont libres d’aller et venir comme ils le désirent. Ils cultivent des champs de blé et de mais dans l’est du village, au-delà du ruisseau. La forêt leur procure un terrain de chasse. De cueillette aussi. La pêche ne donne pas grand-chose. On ne peut la pratiquer que de la plage. Il y avait un bateau, avant, une barque avec des rames. Un jour, on avait eu l’idée d’y gréer un mât. Le lendemain, l’embarcation avait disparu. On dit que les vigiles l’ont poussée dans l’eau et que le courant l’a emportée. Mais personne n’est sûr de rien. Et personne n’a reconstruit de bateau…
+    La chasse se pratique avec des lances, en creusant des pièges, le gibier est abondant… Il y a peu d’accidents de chasse, et ils ne sont qu’exceptionnellement mortels.
+    Des groupes existent au sein des Exilés. Ces groupes ont leurs champs, qu’ils cultivent ainsi à plusieurs. Les groupes restent dissociés, de même qu’il existe des individus qui vivent quasiment seuls, ou à deux ou trois…
+    Aucune animosité n’existe entre les groupes. Ceux qui le veulent peuvent rester à l’écart des autres ; ceux-là vivent surtout de cueillette, et d’un peu de chasse… La forêt leur procure toutes sortes de baies, de fruits ou d’espèces de légumes, en abondantes quantités.
+    La vie semble couler doucement, régulièrement. Tout semble évident, et aucun problème ne semble se poser aux habitants du village… 
+    <br/>
+    Paisible, en somme...
+</div>
+<div class="content">
+    <h1>II</h1>
+    Dans les colonies d’oiseaux des rochers de l’ouest du village, mouettes, goélands et sternes couvaient. En fait à cette heure-là, ils devaient plutôt dormir… Ils ne criaient plus comme ils le font toute la journée, de ces cris perçants qu’ils jettent en allongeant le cou…, sauf les sternes, qui elles émettent plutôt un son qu’elles ne poussent un cri.
+    Le soleil allait incessamment être caché par les rochers…
+    Venant du village, Julius Lachmé se dirigeait vers le soleil… Dire qu’il se dirigeait dépasse les faits, il allait vers les rochers, lentement, les mains dans les poches, apparement très absorbé par ses pieds nus qu’il voyait s’enfoncer dans le sable humide où il laissait des empreintes, gommées par les vagues qui montaient à l’assaut de la grève. La mer remontait. Puis levant la tête de ses pieds, il regarda devant lui, et accéléra l’allure, en direction des rochers.
+    Marchant ainsi, face au soleil qu’on apercevait encore, il respirait, la tête légèrement en arrière,… sans ôter les mains de ses poches, il sentait ses cheveux lui caresser le dos, et son visage crispé se détendit pour sourire…
+    Il s’arrêta puis se retourna pour considérer son ombre qui grandissait… Elle était au moins cinq fois plus grande que lui !.. Ses jambes paraissaient immenses, son corps étroit… Sa tête comme une grosse olive oblongue… Puis il regarda plus haut, vers le village… il remonta des yeux celles de ses traces qui étaient encore intactes… Aux abords du village, il vit un vigile, qui manifestement l’observait, depuis quand, il ne savait pas, mais il l’observait, c’était sûr…
+    Julius le regarda un moment, dans cette attitude… provocatrice, puis fit brusquement volte-face et se hâta vers les rochers, courant par moments… Quelques minutes plus tard il se retourna à nouveau : le vigile avait disparu. Il n’en continua pas moins de progresser à vive allure vers le repère des oiseaux… Peu de temps après il entra dans l’ombre projetée par les rochers, et ensuite, à la base des premiers. Il les escaladait vite, ce n’était pas la première fois. Il montait à travers les rochers aussi facilement que s’il avait gravi un escalier, ses mains et ses pieds trouvaient instantanément leur place, sans aucune hésitation, ses mouvements étaient précis…
+    En une dizaine de minutes, il était arrivé au point le plus haut de l’amas de rocs. La colonie d’oiseaux ne niche pas de ce côté, à cause des vents qui soufflent le plus souvent de l’est,… les faibles piaillements que les oiseaux émettent à ces heures du début de la nuit lui parvenaient depuis l’autre côté de la pointe. Il n’y avait pas eu un souffle de vent depuis le début de l’après midi.
+    Il se tenait debout sur un rocher plat, et semblait contempler le soleil couchant. Pas un nuage… le ciel était vide et le soleil rayonnait sur tout l’horizon, qui virait lentement au rouge, teintant de même la mer où il se reflétait…
+    Se retournant, Julius aperçut le village, où les murs des maisons, encore éclairés, éclataient d’une blancheur qu’ils n’ont à aucune autre heure du jour… Au dessus des maisons, le ciel était bleu de Prusse, de plus en plus foncé…
+    Puis Julius regarda à nouveau vers l’ouest, le soleil continuait son inexorable descente, de plus en plus accentuée, comme un plongeon…
+    Il s’assit sur le rocher plat, les paumes jointes entre les genoux, le dos vouté… le soleil venait de tangenter l’horizon, de puissants rayons bombardaient le ciel, alors que le soleil glissait en silence, s’insinuant dans l’océan… L’énorme disque solaire semblait s’aplatir sur la surface de l’eau, comme prêt à rebondir vers le zénith…
+        Néanmoins, il s’enfonça lentement vers le nadir…
+    Les yeux de Julius furent arrêtés par la surface quand le soleil eut fini de sombrer. Il se remit sur ses pieds, puis vit le village plongé dans l’ombre. Il chercha quelque chose au dessus des maisons, dans le ciel noircissant… et murmura « un nouveau soleil est mort ». Il expira profondément, puis entama doucement sa descente vers le village.
+    Devant une de leurs maisons, un groupe de vigiles était là… ils discutaient.
+</div>
+<div class="content">
+    <h1>III</h1>
+    Il allait bientôt y avoir une année que Julius vivait sur l’île. Comme tous les autres, il était arrivé par le grand bateau qui passe une fois par an. Il avait trouvé une maison vide au village, et s’y était installé, sans que personne ne lui dise rien. Les Exilés communiquent peu entre eux.
+    La première connaissance qu’il avait faite – pour ainsi dire la seule – avait été celle de celui que les autres appelaient « le vieux ». Il devait avoir entre cinquante et soixante ans, il était grand et son corps semblait ne pas avoir vieilli, seules les rides de son visage qui trahissaient son age.
+    Maintenant que le vieux n’était plus là, depuis un mois ou deux, on supposait qu’il était mort, bien que personne n’ait découvert son cadavre. On ne s’en était pas inquiété, on avait juste dit « le vieux est mort »… Et puis rien d’autre.
+    À son arrivée, Julius avait avec lui un coffre, où il avait rangé des affaires. Il avait déposé ce coffre dans sa maison, et depuis il n’avait pas bougé. La maison qu’il avait trouvée était meublée ; un lit, une table et deux chaises. Il y  avait maintenant en plus le coffre dans un coin, et aussi une caisse en bois, où  il rangeait de la vaisselle.
+    Sa maison était en fait constituée d’une pièce, avec une grande cheminée sur un mur, il y avait une porte en bois, et deux fenêtres, orientées l’une au sud-ouest, l’autre au nord-est, en vis-à-vis. Il y avait également une petite ouverture dans le mur sud-est, fermée par un volet en bois, de l’intérieur.
+    La maison était située à la lisière du village, au sud-ouest.
+    À son retour des rochers, Julius ouvrit en grand une de ses deux fenêtres, et s’assit sur une chaise, devant la table. Puis le menton dans les mains, il regardait la mer, qui continuait à monter. Soudain il se leva, ouvrit le coffre, et en sortit une bouteille, puis prit un verre dans la caisse en bois. Il alla se rasseoir. Il versa un peu de la liqueur contenue dans la bouteille, puis continua à observer l’océan. C’est le vieux qui lui avait communiqué la recette de cette espèce d’alcool. Quelques semaines avant qu’il ne disparaisse, Julius l’avait trouvé chez lui, un verre à la main, contemplant l’extérieur par sa fenêtre ouverte sur la mer, plein sud. Le vieux l’avait bien entendu rentrer, mais n’avait pas bougé. Il faisait ça souvent. Il attendait que son visiteur l’ait vu ne pas le regarder, et au moment où celui-ci allait dire quelque chose – bonjour sans doute – il prenait la parole, de sa voix lente et égale, mais ferme et sans équivoque, « Bonjour Julius, tu ne trouves pas qu’il fait beau ? ». Julius lui rendait souvent visite. Le vieux passait pour un excentrique, il ne vivait pas comme tout le monde. On disait qu’il racontait n’importe quoi, qu’il faisait n’importe quoi… On le voyait parfois des heures entières sur la plage, tournant le dos à la mer, regardant le sommet de la Montagne. On le perdait de vue quand la nuit tombait, et au matin, il n’était plus là. Lui adresser la parole était vain, car ses réponses étaient folles, disait-on…
+    « Bonjour vieux ! », « Est-ce qu’il pleut toujours chez toi ? »
+    Certains lui adressaient la parole pour s’amuser, et riaient ensemble de ses réponses. Le vieux souriait aussi, quand il les voyait rire, un peu comme si ce jeu l’amusait lui aussi…
+    Certains le prétendaient sorcier et l’évitaient ; d’autres le tenaient pour fou, et s’en amusaient.
+    C’est lui qui avait le premier abordé Julius, peu de temps après son arrivée sur l’île. Il lui avait demandé l’heure… « Je suis désolé, je n’ai plus de montre... » « Oh ça ne fait rien, je m’en doutais bien un peu… Mais ne t’en fais pas, on s’y fait vite !.. ». Il était parti sans avoir laissé à Julius le temps de réagir.
+    Julius l’avait revu plusieurs fois, dehors, dans le village, le vieux le saluait en souriant, souvent sans rien dire ni s’arrêter. Quelques fois, Julius l’avait questionné sur la topographie de l’île, ceci lui semblait être le seul sujet abordable avec cet homme dont il ne savait rien, et qui semblait être là depuis longtemps… Les réponses du vieux ne le désarmèrent pas. En fait, elles l’intéressaient. Il leur soupçonnait un sens certain… « Qu’y a-t-il derrière la colline ? » « Rien de ce qu’on peut y voir ! » Au début, elles le déconcertaient…, sans pour autant lui paraître folles ou insensées, il lui semblait plutôt que c’était lui qui ne les comprenait pas. Puis petit à petit, au fur et à mesure de ces paroles dans les rues, il en était arrivé à rendre visite au vieux chez lui. Le vieux le laissait faire, et l’accueillait à chaque fois…, mais jamais ne se rendait chez Julius.
+    « Ça fait une heure que je vois tourner un requin devant la plage. Ça faisait longtemps que ca ne m’était plus arrivé. Alors je bois un coup ! »
+    Julius scruta la mer, mais ne vit rien qui ressemblât à un requin, ni même à un aileron… « Qu’est-ce que tu bois ? » « Ma bouteille ! ». Julius vit une bouteille à moitié remplie d’un liquide translucide, posée sur la table. « Tu en veux ? » demanda le vieux en versant un verre « Qu’est-ce que c’est ? ». Le vieux lui tendit le verre, en souriant de ses yeux brillants… Julius y porta les lèvres et en absorba une petite gorgée… Ça avait le goût d’un alcool fort, parfumé avec diverses sortes de fruits – sans doute – qu’il ignorait... « Ça te plait ? », s’enquit le vieux. « Oui, c’est bon… Tu fais ça comment ? » « C’est une recette à moi, je te montrerai ! ». Le vieux avait emmené Julius dans la forêt, où ils avaient récolté les ingrédients de sa liqueur. Ils les avaient ensuite pilés, et mélangés à de l’eau chaude, puis après diverses manipulations, on laissait reposer ainsi plusieurs jours, puis on filtrait, on mettait en bouteilles, et on laissait fermenter quelques mois… On distillait ensuite, à l’aide d’un alambic, fabriqué par le vieux, pour obtenir enfin le produit final. Le vieux avait chez lui des quantités de bouteilles.
+    À sa disparition, Julius avait été chez lui pour y prendre des bouteilles vides et l’alambic. Puis il avait fait de la liqueur, suivant fidèlement la méthode du vieux. Et cet alcool qu’il avait bû chez le vieux était le même que celui qu’il buvait en ce moment, devant sa fenêtre ouverte.
+    Puis soudain, à travers les vagues – peut-être celles du verre d’alcool qu’il tenait en main – il se prit à penser à ce qu’il avait laissé quand il était parti pour l’île. Il pensa aux choses, aux gens qu’il avait presque réussi à oublier depuis son arrivée, mais qui surgissaient ce soir, comme un fossoyeur surgit de la tombe qu’il creuse.
+    Il vida son verre d’un trait, et alla chercher au fond de son coffre, sous les vêtements, du papier, puis un crayon, et à la fin, une enveloppe.
+        Il faisait sombre dans la pièce : il alluma une bougie qu’il figea sur la table.
+        Sachant pertinemment à qui, il ne savait pas au juste quoi écrire. Il mâchouillait son crayon, puis écrivit :
+    
+    Je t’écris juste pour te donner de mes nouvelles, sachant bien que je ne pourrai pas recevoir des tiennes…Comment vas-tu ? Que fais-tu maintenant ?
+    Il faudra que je finisse par m’habituer à ton absence…
+    Je tâcherai de trouver quelqu’un pour poster cette lettre, qui partira par le prochain bateau.
+    Je vis dans une île, avec la mer autour de moi et la montagne au milieu !
+    Je ne sais même pas quand tu recevras cette lettre.
+            Julius
+    
+    Il relut plusieurs fois, puis plia le papier en quatre, le fourra dans l’enveloppe, inscrivit l’adresse dessus et la déposa sur la table.
+    Il y avait presqu’un an qu’il était là ; on lui avait dit que le bateau passait tous les ans, il ne devrait donc plus tarder…, comme les vigiles changent paraît-il tous les ans, il pourrait sans doute confier sa lettre à l’un d’eux, qui la posterait à son arrivée… Ça devrait marcher comme ça…
+    Empoignant la bouteille restée sur la table, il s’emplit un nouveau verre. Il se dirigea vers sa fenêtre. On voyait la lune au sud, au dessus de la mer, à quelques jours sans doute de son premier quartier. Les vagues dispersaient la lumière qui se reflétait dans l’eau. On aurait dit une espèce de chemin lumineux, lunaire, qui naissait à l’horizon – derrière peut-être – et qui arrivait juste aux pieds de Julius, par l’effort d’imagination qu’il fit pour le prolonger à travers la terre du rivage. 
+    Il vida doucement son verre, en regardant les traces ainsi laissées par la lune, sans expression précise sur le visage. Le verre qu’il buvait était un heureux prétexte à cette dissimulation. Puis le verre vidé, il le plaqua à l’envers d’un coup sec sur la table, où vacilla la flamme de la bougie.
+    Son visage prit tout à coup une allure mi-hargneuse mi-désolée… D’un revers de la main, il précipita la bougie sur le mur. Un court moment se passa sans que rien ne bouge. Puis serrant les poings et les dents, il piétina la bougie inerte. Sous l’effet des coups de pied, la bougie se brisa en plusieurs morceaux, jusqu’ à n’être plus que des miettes, agglomérées autour du fil qui avait été la mèche.
+    Julius avisa la table… La bouteille, le verre vide, le crayon et la lettre…
+    Il se précipita vers la porte, puis se catapulta dehors.
+    D’un pas rapide, il se dirigea vers la plage. À quelques centaines de mètres, assis devant sa maison, un vigile astiquait quelque chose de brillant, à l’aide d’un chiffon blanc. Arrivé à portée de voix, Julius lui lança « Quand est-ce qu’il arrive votre putain de bateau ? ». Le vigile surpris s’arrêta d’astiquer, d’un pouce il releva sa casquette, puis ricana « Il arrive demain. Mais si tu comptes embarquer, tu te fais des illusions, mon petit ! ».
+    Le vigile ricanait. Julius fit volte-face, et s’en retourna chez lui, fort du renseignement qu’il venait d’obtenir, à l’allure à laquelle il était venu, de le même façon…
+    Le vigile avait repris son astiquage.
+</div>
+<div class="content">
+    <h1>IV</h1>
+    Parfois – environ tous les mois – les Exilés organisaient une chasse. Tous y prenaient part de leur plein gré. Personne n’était obligé. Il y avait aussi une fête après. L’île avait ses vedettes… Le meilleur chasseur, le meilleur lutteur, le meilleur coureur, le meilleur tireur, à l’arc ou au javelot… Et au cours de concours, on se disputait ces titres. Les fêtes duraient rarement plus de deux jours, chasse comprise. Deux fois dans l’année, la fête durait une semaine – sept jours, plutôt.
+    C’était des occasions pour les Exilés de se retrouver. Car bien que l’île ne fût pas très habitée, chacun avait quelque chose à faire qui l’occupait suffisamment pour ne pas avoir le temps – ou l’envie – d’aller discuter avec le voisin.
+    Les fêtes, c’était un peu comme des vacances, les deux grandes surtout. On lâchait tout, on ne cultivait plus les champs (les fêtes avaient lieu de telle sorte qu’ils nécessitaient moins de travail à ces époques-là) ; c’était aussi l’occasion de faire vraiment connaissance avec les nouveaux Exilés, installés depuis le dernier passage du bateau, on leur souhaitait « officiellement » la bienvenue, chacun au nom de tous.
+    Puis venait le jour de la chasse, après les premiers concours, avant les derniers. Chacun avait minutieusement préparé son matériel… affûté les couteaux, taillé de nouvelles flèches, fabriqué de nouveaux arcs, de nouvelles lances…
+    Le gibier ramené était consommé le soir même, il y avait un grand repas sur la place du village, au milieu des maisons… On sortait toutes les tables et toutes les chaises, on allumait un grand feu...
+    Le lendemain on rangeait les tables dans les maisons, on enlevait les cendres laissées par le feu sur la place, et on continuait la fête avec les autres concours. Le village était décoré de banderoles de couleur accrochées entre les maisons…
+    Puis après le dernier concours, on enlevait les banderoles, et tout ce qui eût pu rappeler la fête disparaissait. Et la vie reprenait son cours habituel. Jusqu’aux prochaines fêtes.
+    Tout le monde allait aux fêtes, ça plaisait bien.
+    Julius y allait. Il y en avait eu deux grandes depuis son arrivée. La prochaine aurait lieu bientôt, à ce qu’on disait. Julius n’aimait pas ça, il y allait quand même. En règle générale, depuis la disparition du vieux, il voyait le minimum de gens. Il était l’ami du vieux – pour ainsi dire le seul ami du vieux. Cependant, ce manque d’amis ne semblait pas avoir pesé sur le vieux avant l’arrivée de Julius ; depuis le moment où Julius avait fait sa connaissance, il était toujours resté égal à lui-même, encore qu’on ait du mal à parler d’égalité quand on avait vu ce qui pétillait dans ses yeux et dans son sourire…
+    - À sa disparition, Julius avait alors réalisé ce qu’il représentait, le vieux. Il laissait un vide. Un vide important, et difficile à combler. D’autant plus difficile à combler que nul ne pouvait dire si le vieux était mort ou non. On l’a dit, on ne l’a pas prouvé. Julius eût préféré qu’il fut mort. S’il ne l’était pas, c’est que le vieux l’aurait abandonné… Et il ne comprenait pas pourquoi il l’aurait laissé au village pour partir, vers la forêt, la colline, la Montagne peut-être…
+    Non, ça n’était pas possible, le vieux devait être mort… Les deux fêtes qu’il avait connues s’étaient déroulées en compagnie du vieux. Avec lui, il avait participé à la décoration du village avec les banderoles de couleur. Le vieux accomplissait ses gestes avec la précision de ceux qu’on a répétés souvent.
+    « Tu vois Julius, ce qu’il y a de bien, c’est qu’en tendant les banderoles entre les maisons, comme elles sont rapprochées, ces bouts de chiffon peuvent avoir n’importe quelle couleur, on ne les voit pas si on sort du village. »
+    Le vieux semblait toujours se réjouir des fêtes, et chacun se réjouissait à coup sûr de sa présence. On riait de lui, et il le prenait bien, il semblait même parfois provoquer ces moqueries par ses comportements… bizarres.
+    Le soir de la chasse – le jour du grand feu (« Tu as déjà pensé à ce feu, Julius ? Est-ce que tu as déjà pensé à ce qu’on peut en voir de la forêt ? Ah ça ! Ça n’est pas comme les chiffons ! Des chiffons, on peut en faire de toutes les couleurs ; des flammes comme ça, il n’y a que le feu pour en faire !… et ça les fait rigoler. »), le vieux racontait souvent une histoire, une histoire fantastique, dont ses yeux n’étaient pas les moindres acteurs, quoique le public ne semblât pas en être toujours conscient…
+    Le vieux n’était maintenant plus là, et Julius avait décidé qu’il n’irait pas à la prochaine fête. De toutes façons, il n’y allait que parce que le vieux était là. En sa présence, il se sentait comme protégé des autres, du bruit des autres… Et puis il ne voulait pas quitter le vieux et le laisser seul avec les autres, il ne voulait pas les laisser se moquer de lui sans qu’il soit là pour le regarder, pour le VOIR !, pour essayer de comprendre les raisons de son comportement, qui faisait tant rire les autres. Au début, il ne comprenait pas. Puis un jour, il a compris pourquoi le vieux était comme ça. « Dis-donc, pourquoi tu fais toujours autant le pitre quand il y a quelqu’un ? ». « Si je te le disais, tu n’aurais plus besoin de chercher... ». Il parlait toujours avec le sourire. Toujours avec le même sourire, avec une espèce de… malice dedans, un peu espiègle…
+    « Si je te le disais, tu n’aurais plus besoin de CHERCHER... ». Le langage du vieux, c’était lui, lui et son comportement. Et il parlait ainsi à tout le monde. Tous ceux qui le voyaient pouvaient comprendre. À condition de le regarder. Il semblait à Julius que le vieux essuyait pas mal d’échecs en se comportant ainsi… « Qu’est-ce que tu veux que je leur dise d’autre ? Hein ! S’ils ne comprennent pas ça, c’est qu’ils n’ont pas besoin de moi, ni moi d’eux. Alors ils rigolent. Et moi aussi. De bon cœur, tu peux me croire ! ». Et le vieux avait ri. Puis il avait ajouté « De toutes façons, tu es venu : tu es là. ». Et le vieux avait souri.
+    
+    C’est quasiment sûr, le vieux est mort, pensait Julius. Qu’est-ce qui a bien pu lui arriver ?…
+    Julius ne savait pas faire le clown. Il était devenu seul, sans le vieux. Il repensait souvent à lui…, quand il buvait de sa liqueur. Il aimait bien ça, ça lui tournait un peu la tête, et ça lui rappelait le vieux, ou plutôt, ça rappelait le vieux.
+    Depuis le départ du vieux, les jours se faisaient un peu trop lourds, le soleil un peu écrasant de chaleur – sauf le soir, ou le matin tôt, et les nuits étaient souvent moites.
+    La liqueur dissipait la moiteur de la nuit, bien que Julius ne la perde jamais de vue. Il la voyait exister, mais la subissait moins, lui semblait-il (en fait, il ne lui semblait rien. Il était sûr que la moiteur persistait, tout ce qui changeait, c’est qu’il commençait de se saouler la gueule. Et dans son cas, ça avait un nom : c’était de la lâcheté. Il savait très bien tout ça. Et c’est pour ça qu’il n’arrivait jamais à prendre de vraies cuites. Il s’en serait trop voulu. Ça lui aurait été impardonnable).
+    Un soir comme ceux-là, une question lui avait comme résonné dans la tête, au sujet du vieux. Où est-ce qu’il a pris ses yeux ? Puis de la même manière que la question était venue, une espèce de réponse l’avait assailli. En tout cas c’est sûr, ça n’est pas moi qui les lui ai donnés ! Qu’est-ce c’était que cette question ? Qu’est-ce que c’était que cette réponse ?
+    Le lendemain, Julius se souvenait d’avoir pleuré. Il se souvenait même d’avoir pleuré beaucoup. Il ne se rappelait plus trop pourquoi... «J’étais bourré, sans doute. »
+    (Et il savait pertinemment pourquoi il avait pleuré, et il savait aussi qu’il n’était pas assez bourré pour ne pas s’en rappeler. Mais il ne voulait pas se le dire. De toutes façons, ça n’aurait servi à rien qu’il ne se fasse pas semblant d’avoir oublié. Alors…), Et ce jour-là, il a été toute la journée sur les plages, à donner des coups de pied négligents dans les vagues, en marchant le long des côtes sud.
+    Alors il a vraiment compris que quand le vieux était… parti, il avait aussi emporté de lui le sentiment qu’il comptait pour quelqu’un. Ça lui crevait les yeux : il ne servait à rien à personne. Même pas à lui-même.
+    Et puis que faire sur cette île ? Que faire qui n’ait déjà été fait, qu’on puisse refaire sans répéter la même chose ?
+    Et de la lisière du village, des vigiles regardaient Julius arpenter la plage...
+</div>
+<div class="content">
+    <h1>V</h1>
+    Le bateau venait de mouiller devant l’île. Les vigiles avaient sorti des coffres de chez eux, et ils commençaient à venir les entasser sur la plage.
+    Il était impossible que les Exilés n’aient pas vu le bateau, pourtant, aucun ne semblait y prêter attention. En vrai, ils évitaient d’y poser les yeux. Le village était silencieux, et non calme.
+        Julius vit le bateau au mouillage en se levant. La mer était calme, tout juste ridée par le vent, qui venait du soleil. Il vit aussi la masse bleu-foncé des vigiles attroupés sur la plage.
+    Une grande barque venait de quitter le bateau, et se dirigeait vers la plage. Julius saisit son enveloppe, restée sur la table, et bondit dehors en direction des vigiles.
+        Quand il arriva à la plage, le grand canot à moteur touchait le sable de la grève et les nouveaux vigiles commençaient à débarquer, alors que les anciens chargeaient leurs coffres à bord. Julius s’adressa à celui qui etait le plus en arrière du groupe. « Vous pourriez poster ça quand vous arriverez ? » Le vigile acquiesça dans un sourire et glissa soigneusement la lettre dans une poche de sa veste, puis sans plus se préoccuper de Julius, continua son embarquement. Julius fit quelques pas en arrière et s’assit sur le sable, essayant de ne pas perdre son vigile des yeux. Il ne put bientôt plus suivre que la barque qui s’éloignait, puis lorsqu’elle passa devant l’étrave du bateau pour aller aborder sur son tribord, Julius n’eut plus d’autre ressource que de fixer la masse du navire. La chaine de son ancre descendait quasiment droit dans l’eau, et la cheminée fumait.
+        Quelques instants s’écoulèrent, puis après un bref coup de sirène, le navire avança lentement, se déhalant sur son mouillage ; l’ancre fut hissée à poste, puis le navire fit demi-tour, brassant l’eau sous sa voute, pour finalement disparaître derrière la pointe ouest de l’île.
+    
+    Julius se leva alors doucement et se dirigea vers la lisière des vagues. Il fit plusieurs pas dans l’eau, doucement, levant parfois les yeux vers la pointe ouest.
+    Puis ramassant sur le sable ce qui lui semblait être un morceau de papier échoué, il reconnu son écriture, l’adresse qu’il avait écrite, et enfin sa lettre…
+    «  Vous pourriez poster ça quand vous arriverez ? »
+    « ... » Le vigile avait souri.
+    Ultime, il leva encore une fois son visage face à la pointe ouest, puissamment bombardée par les rayons du soleil, mais jamais cette fois-ci pour la cause de Julius. De toutes façons, il lui semblait que les rochers ne tenaient – ou donnait l’apparence de ne tenir – aucun compte du bombardement, ironiquement, certes.
+    Le bateau avait maintenant depuis longtemps quitté la pointe.
+</div>
+<div class="content">
+    <h1>VI</h1>
+    Aucun nouvel exilé n’était arrivé par le bateau, cette année. Rien ne devait donc changer (quoique rien n’aurait vraiment changé non plus, si des nouveaux avaient débarqué). De toutes façons, personne ne semblait avoir remarqué le passage du bateau. Personne ne semblait en avoir été affecté. « Se peut-il qu’ils aient déjà essayé de confier des lettres aux vigiles ? » « Quelle est cette indifférence de leur part, est-ce qu’elle est réelle ou feinte ? »
+    Assis sur la plage, tout près des vagues, en tenant à la main son enveloppe mouillée, Julius refaisait des yeux la route du navire, jusqu’à la pointe, il la refit plusieurs fois, puis baissant les yeux, son regard chût sur les vagues, celles-là mêmes qui lui avaient rapporté la lettre. Il ne savait trop que penser, si tant est qu’il y eut quelque chose à en penser… Il n’arrivait pas à éprouver quoi que ce soit envers le vigile à qui il avait confié l’enveloppe, soit qu’il ne l’ait pas vu assez longtemps, soit qu’il ne fût pas responsable. Sa lettre était partie, et pas arrivée, un peu comme s’il l’avait lancée dans le vent, et que le vent la lui avait brusquement soufflée au visage. Nul n’était responsable, pas même le vent, insensible au poids de la lettre. S’il y avait un coupable, un responsable, c’était bien lui-même. Ce syllogisme idiot lui traversa l’esprit : s’il ne l’avait pas lancée, elle n’aurait pas manqué son but, il était en fait doublement coupable : envers lui-même, et envers le destinataire de la lettre.
+    La mer, arrivée à ses orteils, cessait de monter. À moitié conscient de ce phénomène, Julius bondit sur ses pieds, et refermant son poing sur l’enveloppe, il la lançât de toutes ses forces en direction de l’océan « Prends ça ! Emmène-la ! Que personne ne la lise ! PERSONNE ! JAMAIS ! ». La lettre, prise par le vent, fit quelques vire-voltes, et alla doucement se poser à la surface de l’eau… Julius s’enfuit en courant vers le village, ou plutôt dans la direction opposée à la mer…
+    
+    C’était comme si le monde le brûlait, il ne pouvait le toucher. Dans le ciel, un nuage pareil à un flocon flottait, quelque part au dessus de l’océan. Le sommet de la Montagne était nu, et le soleil le bombardait lui aussi.
+    Soudain, le monde se renversa, il faisait maintenant nuit ; la lune descendait, pleine et rigoureusement ronde, derrière la Montagne, dans un halo transparent et vert pâle ; au sommet de la Montagne était un arbre sans feuille, à l’écorce ridée, les racines s’extirpant vers le ciel, et les branches enfoncées dans le roc ; perché sur la plus haute racine, un oiseau noir, pareil à un corbeau, se tenait de profil, et quand la lune passa derrière lui, qu’il fut au centre de l’incandescence vert pâle, il poussa un cri, rauque et bref.
+    La lune sombra peu après derrière la Montagne, et la nuit fut alors complète. Julius se retourna. Sur l’horizon, par delà l’océan, était une forêt, faite d’arbres nus, déracinés et retournés, semblables à celui du sommet de la Montagne, toute cette forêt baignait dans une lueur vert pâle ; des centaines d’oiseaux noirs étaient perchés sur les racines tortueuses, et brusquement, mais en douceur, ils s’envolèrent tous hors du halo, quelque part au dessus et sur la droite, dans un bruissement d’ailes, qui reflétaient, au cours de l’envol, l’horriblement douce lueur vert pâle… Puis le halo s’estompa, laissant les arbres, la forêt, contraster avec l’ombre de la nuit : le noir visible sur du sombre !
+    Alors, la pesanteur re-conquit ses droits : le soleil re-apparut. La mer avait considérablement baissé, et ses pas sur la grève semblaient avoir jailli du sable humide. Il regagna le village, la lettre jetée lui laissant un vide, un trou dans la main.
+    Arrivé sur l’herbe sèche du haut de la plage, en regardant derrière lui, il vit une mouette tourner au dessus de l’eau, en rond, scrutant quelque chose à la surface, puis reprendre son vol, en direction du soleil, dans le doux mouvement ouaté de ses ailes.
+    Il s’assit, face à l’horizon, où il cherchait les spectres déracinés qu’il y avait vu : rien. Seul persistait l’azur forcené du ciel sans nuage. Le soleil à mi-course faisait étinceler la mer sous lui, éblouissant. Il cherchait ses arbres, ses oiseaux… Une risée lui apporta des cris de mouettes, qui lui firent tourner la tête en direction des rochers. Un groupe de ces palmipèdes se disputait un morceau de poisson. Sitôt qu’une mouette l’attrapait, elle tentait de prendre son envol, afin de l’emmener en lieu sûr, mais les autres, levant leurs ailes, lui interdisait toute fuite, et lui arrachaient le morceau de poisson. La dispute portait uniquement sur le morceau, elles ne cherchaient nullement à se frapper entre elles, si bien que lorsque l’une d’elle l’avala d’un coup et en entier, la dispute et les cris cessèrent, le groupe se dispersa, chaque mouette se dandinant sur ses pattes, et roulant des épaules, elles remettaient leurs ailes en place…
+    
+    L’une d’elles, arrivée à la pointe d’une petite corniche s’arrêta un moment, face au sud, renversa la tête en arrière et lança deux séries de cris – des cris comme en lancent toutes les mouettes.
+    Puis poussant la corniche de ses deux pattes, elle ouvrit les ailes, et partit à toute allure raser la surface des flots.
+</div>
+
+<hr class="screen-only"/>
+
+<div id="last-page" class="content doc-section in-the-middle" style="margin-right: 30px; font-style: italic;">
+    R&eacute;dig&eacute; je sais plus quand pour la premi&egrave;re &eacute;dition.
+</div>
+
+</body>
+</html>

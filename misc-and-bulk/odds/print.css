@@ -1,0 +1,29 @@
+/*
+ * Pending: Page numbers, indexes, ...
+ */
+
+* {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 20px;
+}
+
+.table-content, .content, .blank-for-print {
+    page-break-before: always;
+}
+
+.doc-section {
+    page-break-inside: avoid;
+}
+
+.in-the-middle {
+    margin-top: 400px;
+}
+
+.screen-only {
+    display: none;
+}
+
+.toc {
+    text-decoration: none;
+    color: inherit;
+}
