@@ -680,7 +680,7 @@
                 Pas &agrave; la main, les calculs sont &eacute;normes, tant pour les tables de mar&eacute;e que pour les &eacute;ph&eacute;m&eacute;rides astronomiques.
                 <br/>
                 C'est l&agrave; qu'on reparle d'informatique. Il est simple de confier ce genre de calculs &agrave; un ordinateur, 
-                de fa&ccedil;on &agrave; calculer publier ces almanachs &agrave; terre, avant de partir.
+                de fa&ccedil;on &agrave; calculer et publier ces almanachs &agrave; terre, avant de partir.
             </p>
         </div>
         <div class="doc-section">
@@ -3010,15 +3010,15 @@
             On consid&egrave;re donc que la forme g&eacute;n&eacute;rique d'une courbe de d&eacute;viation est
             <div class="postit">
             $$
-            d = a + (b \times \cos r) + (c \times \cos r) + (d \times \sin 2r) + (e \times \cos 2r)
+            dev = a + (b \times \cos r) + (c \times \cos r) + (d \times \sin 2r) + (e \times \cos 2r)
             $$
             </div>
             ce qui n'est manifestement pas un polyn&ocirc;me.
             <br/>
-            Dans l'&eacute;quation ci-dessus, <code>r</code> est le Cap Compas, <code>d</code> est la d&eacute;viation (&delta; entre <code>HDG</code> et <code>HDM</code>).<br/>
+            Dans l'&eacute;quation ci-dessus, <code>r</code> est le Cap Compas, <code>dev</code> est la d&eacute;viation (&delta; entre <code>HDG</code> et <code>HDM</code>).<br/>
             On cherche donc &agrave; d&eacute;finir une fonction <code>f</code> pour laquelle la d&eacute;viation <code>d</code> est obtneu en fournissant <code>r</code>:
             <div class="postit">
-                $$ d = f(r) $$
+                $$ dev = f(r) $$
             </div>
             Les &eacute;l&eacute;ments du nuage de points dont on dispose (&eacute;labor&eacute; &agrave; partir du logging) sont d&eacute;finis en
             <div class="postit">
@@ -3030,9 +3030,9 @@
             <div class="postit">
                 $ \begin{vmatrix} a & b & c & d & e \end{vmatrix} $
             </div>
-            La dimension des matrices &agrave; g&eacute;rer est donc cette fois-ci 5.
+            La dimension des matrices &agrave; g&eacute;rer est donc cette fois-ci 5. On applique la m&eacute;thode des moindres carr&eacute;s, d&eacute;crite ci-dessus.
             <br/>
-            On obtient les coefficients en r&eacute;solvant&nbsp;:
+            On obtient les coefficients $ \begin{vmatrix} a & b & c & d & e \end{vmatrix} $ en r&eacute;solvant&nbsp;:
             <div class="postit">
                 $$   
   \begin{vmatrix}
@@ -3046,18 +3046,18 @@
 \times
 
  \begin{vmatrix}
-  &\sum_{i=0}^{n}\ d \\
-  &\sum_{i=0}^{n}\ d.sin(r) \\
-  &\sum_{i=0}^{n}\ d.cos(r) \\
-  &\sum_{i=0}^{n}\ d.sin(2r) \\
-  &\sum_{i=0}^{n}\ d.cos(2r)
+  &\sum_{i=0}^{n}\ dev \\
+  &\sum_{i=0}^{n}\ dev.sin(r) \\
+  &\sum_{i=0}^{n}\ dev.cos(r) \\
+  &\sum_{i=0}^{n}\ dev.sin(2r) \\
+  &\sum_{i=0}^{n}\ dev.cos(2r)
  \end{vmatrix}
 
  $$
             </div>
             Fastoche&nbsp;!
             <br>
-            Pour plus de d&eacute;tails, voir aussi <a href="https://htmlpreview.github.io/?https://github.com/OlivierLD/ROB/blob/master/raspberry-sailor/Swing/Deviation-Tool/README.html" target="dev-curve">https://htmlpreview.github.io/?https://github.com/OlivierLD/ROB/blob/master/raspberry-sailor/Swing/Deviation-Tool/README.html</a>
+            <span class="screen-only">Pour plus de d&eacute;tails, voir aussi <a href="https://htmlpreview.github.io/?https://github.com/OlivierLD/ROB/blob/master/raspberry-sailor/Swing/Deviation-Tool/README.html" target="dev-curve">https://htmlpreview.github.io/?https://github.com/OlivierLD/ROB/blob/master/raspberry-sailor/Swing/Deviation-Tool/README.html</a></span>
         </p>
     </div>
 </div>
@@ -3065,7 +3065,7 @@
 <div class="screen-only">
     <h2>Notebooks</h2>
     <p>
-        Pour les accros de la programmation, deux notebooks:
+        Pour les accros de la programmation, deux notebooks, pour l'azimuth et la hauteur estim&eacute;e:
         <ul>
             <li><a href="https://github.com/OlivierLD/ROB/blob/master/astro-computer/AstroComputer/notebooks/Z_and_He_byHand_Java.ipynb" target="NB">En Java</a></li>
             <li><a href="https://github.com/OlivierLD/ROB/blob/master/astro-computer/AstroComputer/notebooks/Z_and_He_byHand_python.ipynb" target="NB">En Python</a></li>
