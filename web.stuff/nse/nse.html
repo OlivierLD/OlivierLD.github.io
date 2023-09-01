@@ -26,6 +26,7 @@
     <meta charset="UTF-8">
     <title>Naviguer sans &eacute;lectricit&eacute;</title>
     <!--author>Olivier Le Diouris</author-->
+    <link rel="icon" type="image/png" href="./sextant.png">
     <script type="text/x-mathjax-config">
   MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
     </script>
@@ -3007,7 +3008,7 @@
     <div class="doc-section">
         <h3><a name="least-square-dev">Cas d'une courbe de d&eacute;viation</a></h3>
         <p>
-            On cherche ici &agrave; &eacute;laborer une courbe de d&eacute;viation, &agrave; partir de points enregistr&eacute;s de la station NMEA du bord.
+            On cherche ici &agrave; &eacute;laborer une courbe de d&eacute;viation, &agrave; partir de points enregistr&eacute;s depuis la station NMEA du bord.
             <br/>
             On consid&egrave;re donc que la forme g&eacute;n&eacute;rique d'une courbe de d&eacute;viation est
             <div class="postit">
@@ -3018,17 +3019,18 @@
             ce qui n'est manifestement pas un polyn&ocirc;me.
             <br/>
             Dans l'&eacute;quation ci-dessus, <code>r</code> est le Cap Compas, <code>dev</code> est la d&eacute;viation (&delta; entre <code>HDG</code> et <code>HDM</code>).<br/>
-            On cherche donc &agrave; d&eacute;finir une fonction <code>f</code> pour laquelle la d&eacute;viation <code>d</code> est obtenue en fournissant <code>r</code>:
+            On cherche donc &agrave; d&eacute;finir une fonction <code>f</code> pour laquelle la d&eacute;viation <code>dev</code> est obtenue en fournissant <code>r</code>:
             <div class="postit">
                 $$ dev = f(r) $$
             </div>
-            Gr&agrave;ce au logging, on dispose d'un nuage de points qui comportent chacun au moins les informations suivantes&nbsp;:
+            Gr&acirc;ce au logging, on dispose d'un nuage de points qui comportent chacun au moins les informations suivantes&nbsp;:
             <ul>
                 <li>HDC (Heading Compass)</li>
                 <li>COG (Course Over Ground)</li>
             </ul>
             Le logging doit s'effectuer sans courant, et sans d&eacute;rive, de fa&ccedil;on &agrave; &ecirc;tre s&ucirc;r que la diff&eacute;rence entre le cap compas <code>HDC</code> (corrig&eacute; de la d&eacute;clinaison locale)
-            et la route fond (<code>COG</code>) est bien la d&eacute;viation <code>d</code>, que l'on cherche.
+            et la route fond (<code>COG</code>) est bien la d&eacute;viation <code>d</code>, que l'on cherche. Pas de d&eacute;rive, pas de courant, la route fond est &eacute;gale &agrave; la route surface, qui est &eacute;gale au 
+            cap vrai du bateau<span class="screen-only"> (voir <a href="#05-1-5">ici</a>)</span>.
             <br/>
             Les &eacute;l&eacute;ments du nuage de points dont on dispose (&eacute;labor&eacute; &agrave; partir du logging) sont d&eacute;finis en
             <div class="postit">
@@ -3043,8 +3045,10 @@
             La dimension des matrices &agrave; g&eacute;rer est donc cette fois-ci 5. On applique la m&eacute;thode des moindres carr&eacute;s, d&eacute;crite ci-dessus.
             <br/>
             On obtient les coefficients $ \begin{vmatrix} a & b & c & d & e \end{vmatrix} $ en r&eacute;solvant&nbsp;:
-            <div class="postit">
+            <div class="postit smaller">
                 $$   
+  \begin{vmatrix} a & b & c & d & e \end{vmatrix} 
+                =
   \begin{vmatrix}
   &n  &\sum_{i=0}^{n}\sin(r)  &\sum_{i=0}^{n}\cos(r)  &\sum_{i=0}^{n}\sin(2r)  &\sum_{i=0}^{n}\cos(2r) \\
   &\sum_{i=0}^{n}\sin(r)  &\sum_{i=0}^{n}\sin(r)^2  &\sum_{i=0}^{n}\sin(r)cos(r)  &\sum_{i=0}^{n}\sin(2r)sin(r))  &\sum_{i=0}^{n}\cos(2r)sin(r) \\
