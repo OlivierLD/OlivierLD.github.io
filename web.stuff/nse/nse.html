@@ -3016,7 +3016,8 @@
             dev = a + (b \times \cos r) + (c \times \cos r) + (d \times \sin 2r) + (e \times \cos 2r)
             $$
             </div>
-            ce qui n'est manifestement pas un polyn&ocirc;me.
+            ce qui n'est manifestement pas un polyn&ocirc;me, mais comme ce sont les coefficients de la formule qu'on cherche,
+            la m&eacute;thode des moindres carr&eacute;s peut s'appliquer.
             <br/>
             Dans l'&eacute;quation ci-dessus, <code>r</code> est le Cap Compas, <code>dev</code> est la d&eacute;viation (&delta; entre <code>HDG</code> et <code>HDM</code>).<br/>
             On cherche donc &agrave; d&eacute;finir une fonction <code>f</code> pour laquelle la d&eacute;viation <code>dev</code> est obtenue en fournissant <code>r</code>:
@@ -3072,9 +3073,9 @@
             Fastoche&nbsp;!
             <br>
             <span class="screen-only">
-                Pour plus de d&eacute;tails, voir aussi <a href="https://htmlpreview.github.io/?https://github.com/OlivierLD/ROB/blob/master/raspberry-sailor/Swing/Deviation-Tool/README.html" target="dev-curve">https://htmlpreview.github.io/?https://github.com/OlivierLD/ROB/blob/master/raspberry-sailor/Swing/Deviation-Tool/README.html</a>,
-                et aussi <a href="https://github.com/OlivierLD/ROB/tree/master/raspberry-sailor/Swing/Deviation-Tool" target="ROB">ici</a>, pour un exemple
-                complet, partant du fichier de log, passant par le calcul des coefficients, et aboutissant &agrave; l'affichage de la courbe de d&eacute;viation.
+                Pour plus de d&eacute;tails, voir aussi <a href="https://htmlpreview.github.io/?https://github.com/OlivierLD/ROB/blob/master/raspberry-sailor/Swing/Deviation-Tool/README.html" target="dev-curve">ce document</a>,
+                et aussi <a href="https://github.com/OlivierLD/ROB/tree/master/raspberry-sailor/Swing/Deviation-Tool" target="ROB">celui-ci</a>, pour un exemple
+                complet (incluant le code pour la r&eacute;solution des matrices), partant du fichier de log, passant par le calcul des coefficients, et aboutissant &agrave; l'affichage de la courbe de d&eacute;viation.
             </span>
         </p>
     </div>
