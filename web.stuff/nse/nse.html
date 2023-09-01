@@ -3007,6 +3007,8 @@
     <div class="doc-section">
         <h3><a name="least-square-dev">Cas d'une courbe de d&eacute;viation</a></h3>
         <p>
+            On cherche ici &agrave; &eacute;laborer une courbe de d&eacute;viation, &agrave; partir de points enregistr&eacute;s de la station NMEA du bord.
+            <br/>
             On consid&egrave;re donc que la forme g&eacute;n&eacute;rique d'une courbe de d&eacute;viation est
             <div class="postit">
             $$
@@ -3016,10 +3018,18 @@
             ce qui n'est manifestement pas un polyn&ocirc;me.
             <br/>
             Dans l'&eacute;quation ci-dessus, <code>r</code> est le Cap Compas, <code>dev</code> est la d&eacute;viation (&delta; entre <code>HDG</code> et <code>HDM</code>).<br/>
-            On cherche donc &agrave; d&eacute;finir une fonction <code>f</code> pour laquelle la d&eacute;viation <code>d</code> est obtneu en fournissant <code>r</code>:
+            On cherche donc &agrave; d&eacute;finir une fonction <code>f</code> pour laquelle la d&eacute;viation <code>d</code> est obtenue en fournissant <code>r</code>:
             <div class="postit">
                 $$ dev = f(r) $$
             </div>
+            Gr&agrave;ce au logging, on dispose d'un nuage de points qui comportent chacun au moins les informations suivantes&nbsp;:
+            <ul>
+                <li>HDC (Heading Compass)</li>
+                <li>COG (Course Over Ground)</li>
+            </ul>
+            Le logging doit s'effectuer sans courant, et sans d&eacute;rive, de fa&ccedil;on &agrave; &ecirc;tre s&ucirc;r que la diff&eacute;rence entre le cap compas <code>HDC</code> (corrig&eacute; de la d&eacute;clinaison locale)
+            et la route fond (<code>COG</code>) est bien la d&eacute;viation <code>d</code>, que l'on cherche.
+            <br/>
             Les &eacute;l&eacute;ments du nuage de points dont on dispose (&eacute;labor&eacute; &agrave; partir du logging) sont d&eacute;finis en
             <div class="postit">
                 $$ P_{d}^{HDC} = P_{d}^{r} = P_{y}^{x} $$
