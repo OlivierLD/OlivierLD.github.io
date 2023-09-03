@@ -2943,18 +2943,49 @@
     Les points peuvent &ecirc;tre d&eacute;finis (coordonn&eacute;s) de diff&eacute;rentes mani&egrave;res, un cap compas (HDC, pour HeaDing Compass) et une route fond (COG, pour Course Over Ground)
     pour une courbe de d&eacute;viation, un angle de vent r&eacute;el et une vitesse du bateau pour des polaires, etc.<br/><br/>
     Pour la commodit&eacute; de la notation, on prendra les points coordonn&eacute;s g&eacute;n&eacute;riquement, comme suit&nbsp;:
-    <div class="postit">
+    <table>
+        <tr>
+            <td>
+                <div class="postit">
+                    $$
+                       P^{HDC}_{COG} = P^x_y
+                    $$
+                </div>
+            </td>
+            <td>
+                , &eacute;crit aussi
+            </td>
+            <td>
+                <div class="postit">
+                    $$
+                       y = f(x)
+                    $$
+                </div>
+            </td>
+            <td>
+                o&ugrave;
+            </td>
+            <td>
+                <div class="postit">
+                    $$
+                       f(x) = ax^2 + bx + c
+                    $$
+                </div>
+            </td>
+        </tr>
+    </table>
+    <!--div class="postit">
     $$
-       P^{HDC}_{COG} = P^x_y
+       P^{HDC}_{COG} = P^x_y, ecrit aussi f(x) = y, ou f(x) = ax^2 + bx + c
     $$
-    </div>
-    On cherche les coefficients <code>a</code>, <code>b</code>, <code>c</code> et <code>d</code> d'un polyn&ocirc;me pour lequel
+    </div-->
+    Donc, pour tous les points $(x, y)$ du nuage de donn&eacute;es enregistr&eacute;es, on cherche les coefficients <code>a</code>, <code>b</code>, <code>c</code> et <code>d</code> d'un polyn&ocirc;me pour lequel
     <div class="postit">
     $$
     ax^2 + bx + c
     $$
     </div>
-    est le plus proche possible de <code>y</code>, c'est &agrave; dire que la somme
+    est le plus proche possible de <code>y</code>, c'est &agrave; dire que la diff&eacute;rence
     <div class="postit">    
     $$
     ax^2 + bx + c - y
@@ -2963,13 +2994,17 @@
     soit la plus petite possible, donc, que pour tous les points enregistr&eacute;s, le carr&eacute; de cette diff&eacute;rence soit le plus proche possible de z&eacute;ro 
     (on &eacute;l&egrave;ve au carr&eacute; pour supprimer le signe, d'o&ugrave; le nom de la m&eacute;thode), et donc que le cumul de ces diff&eacute;rences soit en d&eacute;finitive la plus petite possible. <br/>
     Ceci revient &agrave; calculer les coefficients <code>a</code>, <code>b</code> et <code>c</code> pour lesquels la d&eacute;riv&eacute;e premi&egrave;re de cette sommation des carr&eacute;s des diff&eacute;rences 
-    par rapport &agrave; chacun des coefficients <code>a</code>, <code>b</code> et <code>c</code> est nulle&nbsp;:
+    par rapport &agrave; chacun des coefficients <code>a</code>, <code>b</code> et <code>c</code> est nulle, ce qui s'&eacute;crit&nbsp;:
     <div class="postit">
-    $ ([\Sigma(ax^2 + bx + c - y)^2])' = 0 $    
+    $$ ([\Sigma(ax^2 + bx + c - y)^2])' = 0 $$    
     </div>
     On d&eacute;veloppe la somme avant de d&eacute;river&nbsp;:
-    <div class="postit">
-    $ S = a^2\Sigma x^4 + 2ab\Sigma x^3 + 2ac\Sigma x^2 - 2a\Sigma yx^2 + b^2\Sigma x^2 + 2bc\Sigma x - 2b\Sigma yx + c^2\Sigma x^0 - 2c\Sigma y + \Sigma y^2 $
+    <div class="postit smaller-plus">
+    $
+    
+    S = a^2\Sigma x^4 + 2ab\Sigma x^3 + 2ac\Sigma x^2 - 2a\Sigma yx^2 + b^2\Sigma x^2 + 2bc\Sigma x - 2b\Sigma yx + c^2\Sigma x^0 - 2c\Sigma y + \Sigma y^2 
+    
+    $
     </div>
     On d&eacute;rive l'expression ainsi obtenue
     <ul>
@@ -3010,6 +3045,48 @@
         <p>
             On cherche ici &agrave; &eacute;laborer une courbe de d&eacute;viation, &agrave; partir de points enregistr&eacute;s depuis la station NMEA du bord.
             <br/>
+            Dans ce contexte, la station doit comporter un GPS, et un compas (compas &eacute;lectronique, donc). Le GPS permettra &agrave; la station NMEA de g&eacute;n&eacute;rer des cha&icirc;nes RMC - qui vont contenir 
+            la route fond (Course Over Ground, aka COG), le compas fournira &agrave; la station ce dont elle a besoin pour g&eacute;n&eacute;rer les Caps Compas (Heading, aka HDG, HDM, etc, suivant les stations).
+            <br/>
+            Le fichier contenant les informations produites par la station NMEA aura ainsi une allure comme ceci&nbsp;:
+            <pre class="postit">
+    . . .
+    $IIRMC,190402,A,0854.980,S,14006.028,W,00.0,008,031110,10,E,A*07
+    $IIVHW,,,126,M,00.0,N,,*61
+    $IIVLW,02839,N,000.0,N*53
+    $IIVWR,027,R,07.2,N,,,,*61
+    $IIDPT,012.3,+0.7,*40
+    $IIGLL,0854.979,S,14006.029,W,190403,A,A*56
+    $IIHDG,126,,,10,E*16
+    . . .
+            </pre>
+            On note que le fichier peut contenir d'autres donn&eacute;es (<code>VHW</code>, <code>DPT</code>, <code>GLL</code>, <code>VLW</code>, etc), qu'on ignorera ici.
+            <br/>
+            Ce fichier sera ensuite travaill&eacute; pour produire un document o&ugrave; ne figureront que les donn&eacute;es qui nous concernent ici, &agrave; savoir la d&eacute;viation en fonction du cap.
+            <br/>
+            Par exemple (en JSON ici)&nbsp;:
+            <pre class="postit">
+    [
+        { "hdc": 210.000000, "dev": 4.000000 },
+        { "hdc": 210.000000, "dev": 4.000000 },
+        { "hdc": 210.000000, "dev": -1.000000 },
+        { "hdc": 210.000000, "dev": -2.000000 },
+        { "hdc": 208.000000, "dev": -4.000000 }
+        . . .
+    ]  
+            </pre>
+            <div class="screen-only">
+                <p>
+                    Plus de d&eacute;tails sur ces op&eacute;rations sont disponibles dans d'autres documents&nbsp;:
+                    <ul>
+                        <li><a href="https://github.com/OlivierLD/ROB/blob/master/raspberry-sailor/Swing/Deviation-Tool/notebooks/LogfileToDeviation.ipynb" target="NB">Jupyter Notebook, en Java</a></li>
+                        <li><a href="https://htmlpreview.github.io/?https://github.com/OlivierLD/ROB/blob/master/raspberry-sailor/Swing/Deviation-Tool/README.html" target="dev-curve">Sur le proc&eacute;d&eacute;</a></li>
+                        <li><a href="https://github.com/OlivierLD/ROB/tree/master/raspberry-sailor/Swing/Deviation-Tool" target="ROB">Avec des exemples</a></li>
+                    </ul>
+                </p>
+            </div>
+            <br/>
+            <br/>
             On consid&egrave;re donc que la forme g&eacute;n&eacute;rique d'une courbe de d&eacute;viation est
             <div class="postit">
             $$
@@ -3019,7 +3096,7 @@
             ce qui n'est manifestement pas un polyn&ocirc;me, mais comme ce sont les coefficients de la formule qu'on cherche,
             la m&eacute;thode des moindres carr&eacute;s peut s'appliquer.
             <br/>
-            Dans l'&eacute;quation ci-dessus, <code>r</code> est le Cap Compas, <code>dev</code> est la d&eacute;viation (&delta; entre <code>HDG</code> et <code>HDM</code>).<br/>
+            Dans l'&eacute;quation ci-dessus, <code>r</code> est le Cap Compas, <code>dev</code> est la d&eacute;viation (&delta; entre <code>HDC</code> et <code>HDM</code>, cap compas et cap magn&eacute;tique<span class="screen-only">, voir <a href="#05-1-5">ici</a></span>).<br/>
             On cherche donc &agrave; d&eacute;finir une fonction <code>f</code> pour laquelle la d&eacute;viation <code>dev</code> est obtenue en fournissant <code>r</code>:
             <div class="postit">
                 $$ dev = f(r) $$
@@ -3029,8 +3106,10 @@
                 <li>HDC (Heading Compass)</li>
                 <li>COG (Course Over Ground)</li>
             </ul>
-            Le logging doit s'effectuer sans courant, et sans d&eacute;rive, de fa&ccedil;on &agrave; &ecirc;tre s&ucirc;r que la diff&eacute;rence entre le cap compas <code>HDC</code> (corrig&eacute; de la d&eacute;clinaison locale)
-            et la route fond (<code>COG</code>) est bien la d&eacute;viation <code>d</code>, que l'on cherche. Pas de d&eacute;rive, pas de courant, la route fond est &eacute;gale &agrave; la route surface, qui est &eacute;gale au 
+            Le logging doit s'effectuer sans courant, et sans d&eacute;rive, de fa&ccedil;on &agrave; &ecirc;tre s&ucirc;r que la diff&eacute;rence entre 
+            le cap compas <code>HDC</code> (corrig&eacute; de la d&eacute;clinaison locale)
+            et la route fond (<code>COG</code>) est bien la d&eacute;viation <code>d</code>, que l'on cherche. Pas de d&eacute;rive, pas de courant, 
+            la route fond est &eacute;gale &agrave; la route surface, qui est &eacute;gale au 
             cap vrai du bateau<span class="screen-only"> (voir <a href="#05-1-5">ici</a>)</span>.
             <br/>
             Les &eacute;l&eacute;ments du nuage de points dont on dispose (&eacute;labor&eacute; &agrave; partir du logging) sont d&eacute;finis en
