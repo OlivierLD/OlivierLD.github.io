@@ -22,6 +22,10 @@
     display: none;
 }
 
+.print-only {
+    display: block;
+}
+
 .toc {
     text-decoration: none;
     color: inherit;

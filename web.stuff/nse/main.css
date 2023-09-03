@@ -42,6 +42,10 @@ h5 {
     border-top: 2px solid black;
 }
   
+.print-only {
+    display: none;
+}
+
 /* 
    Believe it or not, that works 
    <pouet-pouet>Duh</pouet-pouet> 
