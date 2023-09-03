@@ -4,22 +4,31 @@
   <title>Landing page for Misc stuff</title>
   <link rel="icon" type="image/jpg" href="../palm.04.jpg">
   <style type="text/css">
+    :root {
+        background: linear-gradient(white 2px, transparent 2px)-2px -2px/100px 100px,
+        linear-gradient(90deg, white 2px, transparent 2px)-2px -2px/100px 100px,
+        linear-gradient(rgba(255,255,255,.3) 1px, transparent 1px)-1px -1px/20px 20px,
+        linear-gradient(90deg, rgba(255,255,255,.3) 1px, transparent 1px)-1px -1px/20px 20px, #457B9D;
+        /* background-size:  100px 100px, 20px 20px, 20px 20px;
+          background-position:-2px -2px, -2px -2px, -1px -1px, -1px -1px; */
+    }
+
     * {
         font-family: "Source Code Pro", "Courier New", "Helvetica Neue", "Lato", Verdana, Helvetica, Geneva, sans-serif;
         color: navy;
-        background-color: silver;
+        /* background-color: silver; */
     }
     .list-link {
-      color: white;
-      font-size: 20px;
-      text-shadow: 2px 2px 4px black, 0 0 25px white, 0 0 10px orange;
+        color: white;
+        font-size: 20px;
+        text-shadow: 2px 2px 4px black, 0 0 25px white, 0 0 10px orange;
         text-decoration: none;
     }
     a.list-link:hover {
-      color: cyan;
-      font-weight: bold;
-      cursor: pointer;
-      text-shadow: 4px 4px 8px black, 0 0 25px white, 0 0 10px cyan;
+        color: cyan;
+        font-weight: bold;
+        cursor: pointer;
+        text-shadow: 4px 4px 8px black, 0 0 25px white, 0 0 10px cyan;
     }
     </style>
 </head>
@@ -233,11 +242,11 @@
 
 </svg>
 
-    <hr/>
+    <hr style="border-color: silver;"/>
     <ul>
-		<li><a class="list-link" href="oracle/index.oracle.html">Oracle things</a></li>        
-		<li><a class="list-link" href="../web.stuff/belz/index.html">At home</a></li>        
-		<li><a class="list-link" href="./odds/ile.html" target="ile">&Icirc;le</a></li>        
+      <li><a class="list-link" href="oracle/index.oracle.html">Oracle things</a></li>        
+      <li><a class="list-link" href="../web.stuff/belz/index.html">At home</a></li>        
+      <li><a class="list-link" href="./odds/ile.html" target="ile">&Icirc;le</a></li>        
     </ul>
 
 </body>  
