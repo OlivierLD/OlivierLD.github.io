@@ -22,7 +22,7 @@
     display: none;
 }
 
-.print-only {
+.print-only {  /* overrides the one in main.css */
     display: block;
 }
 
