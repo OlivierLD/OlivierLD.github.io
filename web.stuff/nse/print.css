@@ -18,6 +18,10 @@
     margin-top: 400px;
 }
 
+.below {
+    margin-top: 100px;
+}
+
 .screen-only {
     display: none;
 }
