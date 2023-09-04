@@ -2756,17 +2756,38 @@
               - 0,7655
               + 2,3456
               </pre>
-            On veut trouver 1,7029, mais c'est moins facile, davantage d'erreurs sont possible, surtout si &ccedil;a souffle...
+            On veut trouver <code>1,7035</code>, mais c'est moins facile, davantage d'erreurs sont possibles, surtout si &ccedil;a souffle...
             <br/>
-            Mais avec, comme <code>-0,7655 = 1 - 0,2345</code>:
+            Mais, comme <code>-0,7655 = 0,2345 - 1</code>&nbsp;:
             <pre>
                 0,1234
-              + <span class="overlined">1</span>,2345
+              + <span class="overlined-red" style="color: red;">1</span>,2345
               + 2,3456
               </pre>
               On fait une <i>addition</i>, mais en retranchant les valeurs surlign&eacute;es lors de l'addition des caract&eacute;ristiques.
               <br/>
-              Et on arrive au m&ecirc;me resultat sans s'&ecirc;tre encombr&eacute; avec des retenues. CQFD.
+              Et on arrive au m&ecirc;me r&eacute;sultat sans s'&ecirc;tre encombr&eacute; avec des retenues. CQFD.
+              <p>
+                Plus en d&eacute;tail, pour &ecirc;tre s&ucirc;r&nbsp;: <br/>
+                Pour les mantisses&nbsp;:
+                <pre>
+                    0,1234
+                  + <span class="overlined">1</span>,2345
+                  + 2,3456
+                  ----------
+                  ...,7035
+                </pre>
+                Pour les caract&eacute;ristiques&nbsp;:
+                <pre>
+                  + 0,....
+                  <b>-</b> 1,.... (surlign&eacute;, donc n&eacute;gatif ! )
+                  + 2,....
+                  --------
+                    1,....
+                </pre>
+                On assemble caract&eacute;ristique (<code>1</code>) et mantisse (<code>7035</code>)&nbsp;: <code>1,7035</code>.<br/>
+                Voil&agrave;.
+              </p>
         </div>
         <br/>
         <b><i>&Agrave; propos des caract&eacute;ristiques surlign&eacute;es&nbsp;:</i></b>

@@ -42,6 +42,10 @@ h5 {
     border-top: 2px solid black;
 }
   
+.overlined-red {
+    border-top: 2px solid red;
+}
+
 .print-only {
     display: none;
 }
