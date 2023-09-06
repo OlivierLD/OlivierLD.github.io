@@ -2742,27 +2742,27 @@
             <br/>
             Par exemple, si on pose l'addition suivante:
             <pre>
-                0,1234
-              + 1,2345
-              + 2,3456
+  0,1234
++ 1,2345
++ 2,3456
             </pre>
             On trouve bien &eacute;videmment
             <pre>
-                3.7035
+  3.7035
             </pre>
             Mais si on pose
             <pre>
-                0,1234
-              - 0,7655
-              + 2,3456
+  0,1234
+- 0,7655
++ 2,3456
               </pre>
             On veut trouver <code>1,7035</code>, mais c'est moins facile, davantage d'erreurs sont possibles, surtout si &ccedil;a souffle...
             <br/>
             Mais, comme <code>-0,7655 = 0,2345 - 1</code>&nbsp;:
             <pre>
-                0,1234
-              + <span class="overlined-red" style="color: red;">1</span>,2345
-              + 2,3456
+  0,1234
++ <span class="overlined-red" style="color: red;">1</span>,2345
++ 2,3456
               </pre>
               On fait une <i>addition</i> des mantisses, mais en retranchant les valeurs surlign&eacute;es lors de l'addition des caract&eacute;ristiques.
               <br/>
@@ -2771,19 +2771,19 @@
                 Plus en d&eacute;tails, pour &ecirc;tre s&ucirc;r&nbsp;: <br/>
                 Pour les mantisses&nbsp;:
                 <pre>
-                    0,1234
-                  + <span class="overlined">1</span>,2345
-                  + 2,3456
-                  ----------
-                  ...,7035
+  0,1234
++ <span class="overlined">1</span>,2345
++ 2,3456
+----------
+...,7035
                 </pre>
                 Pour les caract&eacute;ristiques&nbsp;:
                 <pre>
-                  + 0,....
-                  <b>-</b> 1,.... (surlign&eacute;, donc n&eacute;gatif ! )
-                  + 2,....
-                  --------
-                    1,....
+  0,....
+<b>-</b> 1,.... (surlign&eacute;, donc n&eacute;gatif ! )
++ 2,....
+--------
+  1,....
                 </pre>
                 On assemble les r&eacute;sultats obtenus, caract&eacute;ristique (<code>1</code>) et mantisse (<code>7035</code>)&nbsp;: <code>1,7035</code>.<br/>
                 Ainsi, ces deux fa&ccedil;ons de poser le m&ecirc;me probl&egrave;me sont &eacute;quivalentes&nbsp;:
@@ -2791,20 +2791,20 @@
                     <tr>
                         <td>
                             <pre>
-                                0,1234
-                              + <span class="overlined">1</span>,2345
-                              + 2,3456
-                              ----------
-                                1,7035
+  0,1234
++ <span class="overlined">1</span>,2345
++ 2,3456
+----------
+  1,7035
                             </pre>
                         </td>
                         <td>
                             <pre>
-                                0,1234
-                              - 0,7655
-                              + 2,3456
-                              ----------
-                                1,7035
+  0,1234 
+- 0,7655
++ 2,3456
+----------
+  1,7035
                             </pre>
                         </td>
                     </tr>
