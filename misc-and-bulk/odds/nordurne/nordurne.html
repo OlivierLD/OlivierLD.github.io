@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<!--
+    Intends to generate a possibly printer-ready document, with appropriate page breaks and so.
+    This doc should be both visualizable and printable.
+
+    https://www.sitepoint.com/css-printer-friendly-pages/
+
+    Lorem Ipsum generator: https://lorem-ipsum.perbang.dk/
+    https://css-tricks.com/almanac/properties/p/page-break/
+    https://www.w3.org/TR/CSS21/generate.html#counters
+
+    For LaTeX: https://www.overleaf.com/learn
+    https://ashki23.github.io/markdown-latex.html
+    https://latexbase.com/d/bd875c05-4a8d-4605-a1dd-0a472f941efa
+    
+
+    CSS text decoration: https://www.zonecss.fr/faq/decoration-du-texte-avec-css.html
+    CSS borders: https://www.w3schools.com/css/css_border.asp
+
+    TODO/PENDING: Page numbers.
+    See https://css-tricks.com/a-perfect-table-of-contents-with-html-css/
+
+ +-->
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Nordurne</title>
+    <!--author>Olivier Le Diouris</author-->
+    <link rel="stylesheet" href="../main.css" />
+    <!-- link rel="stylesheet" media="screen" href="../main.css" /-->
+    <link rel="stylesheet" media="print" href="../print.css" />
+
+    <!--style type="text/css">
+@page {
+    size: A4;
+    margin: 0; 
+}        
+    </style-->
+</head>
+<body>
+
+<div id="screen-warning" class="screen-only screen-warning">
+    <div style="display: grid; grid-template-columns: auto auto;">
+        <p style="margin: 10px;">
+            <b>Note:</b><br/>
+            The following document is designed to be visualized from a web browser, or printed from it. 
+            The printed version will have page breaks and other formattings that will not be displayed from the web browser.<br/>
+            When printing, you will have the possibility - from the dialog showing up in the browser - to hide or show different 
+            data like headers, footers, page numbers, etc.
+        </p>
+        <p style="margin: 10px;">
+            <b>Note:</b><br/>
+            Le document qui suit est con&ccedil;u pour &ecirc;tre visualis&eacute; dans un navigateur web, ou imprim&eacute; &agrave; partir ce celui-ci.
+            La version imprim&eacute;e comporte des sauts de page et autres formattages qui ne seront pas visibles &agrave; partir du navigateur.<br/>
+            Lors de l'impression, vous aurez la possibilit&eacute; - &agrave; partir des boites de dialogue du navigateur - de faire appara&icirc;tre ou pas
+            des donn&eacute;es comme les en-t&ecirc;tes et bas de page, num&eacute;ros de page, etc.
+        </p>
+    </div>
+    <hr/>
+</div>
+
+<div class="front-page">
+    <!--h3 style="text-align: center;">Olivier Le Diouris</h3-->
+    <h1 style="text-align: center; font-size: 3em;">Nordurne</h1>
+
+    <div style="text-align: center;">
+        <img src="../tri.n.skull.jpg" style="height: 720px;"/>
+    </div>
+
+</div>
+
+<div class="blank-for-print"></div>
+
+<hr class="screen-only"/>
+
+<div class="content">
+    <h1>I</h1>
+    <p>
+        . . .
+    </p>
+</div>
+
+<hr class="screen-only"/>
+
+<div id="last-page" class="content doc-section in-the-middle" style="margin-right: 30px; font-style: italic;">
+    R&eacute;dig&eacute; je sais plus quand (1980, ou avant...) pour la premi&egrave;re version.
+    <br/>
+    Re-travaill&eacute; &agrave; partir de 2023...
+</div>
+
+</body>
+</html>
