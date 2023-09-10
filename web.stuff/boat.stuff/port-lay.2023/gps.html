@@ -461,8 +461,17 @@ compass-rose .day {
                     </tr>
                 </table>
             </div>
+            <!--hr style="margin-top: 10px;"/-->
           </div>
-      </div>
+        </div>
+
+        <div>
+            <span style="margin-left: 10px;">Fly to:</span>
+            <ul>
+                <li><a class="list-link" href="#" onclick="flyToZoom(0);">Port Lay</a></li>
+            </ul>
+        </div>
+        
     </td>
   </tr>
 </table>
@@ -511,7 +520,7 @@ compass-rose .day {
     let latlngs; // To be populated from JSON.
 
     const ZOOM_POSITIONS = [
-        new L.LatLng(37.663680, -122.378633)   // Harbormaster 37 39.8208 N 122 22.7180 W
+        new L.LatLng(47.645652, -3.460055)   // Port Lay
     ];
 
     function flyToZoom(idx) {
@@ -524,8 +533,8 @@ compass-rose .day {
     const MARKERS = [{
         "latitude": 47.643457,
         "longitude": -3.460737,
-        "name": "AirnB",
-        "description": "Staying here.\n<br/>\n<!--a href=\"pictures/01.jpeg\" target=\"_blank\"><img src=\"pictures/01.jpeg\" width=\"256\" height=\"auto\" alt=\"Click to enlarge\"/></a-->"
+        "name": "AirBnB",
+        "description": "Staying here."
     }, {
         "latitude": 47.645912,
         "longitude": -3.459578,
@@ -533,7 +542,7 @@ compass-rose .day {
         "description": "Let's go!\n<br/>\n<a href=\"godille.01.jpg\" target=\"_blank\"><img src=\"godille.01.jpg\" width=\"256\" height=\"auto\" alt=\"Click to enlarge\"/></a>"
     }];
 
-    const trackData = './godille.nmea.json';
+    const trackData = './godille.nmea.json'; // Already trimmed.
 
     let polyline = null;
 
@@ -544,7 +553,7 @@ compass-rose .day {
                 response.json().then(doc => {
                     if (true) {
                         latlngs = doc; 
-                    } else {
+                    } else {  // in case a trim is needed.
                         latlngs = [];
                         // WiP: offset, limit
                         for (let i=484; i<=662; i++) {
