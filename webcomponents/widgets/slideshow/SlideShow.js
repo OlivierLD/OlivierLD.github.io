@@ -293,6 +293,9 @@ class SlideShow extends HTMLElement {
 		this._shadowRoot = val;
 	}
 
+	get slideclick() {
+		return this._onclick;
+	}
 	get width() {
 		return this._width;
 	}
@@ -436,7 +439,11 @@ class SlideShow extends HTMLElement {
 							// On Slide Click:
 							slide.addEventListener('click', () => {
 								console.log(`${src} was clicked, invoking user's callback.`);
-								self._onclick(src);
+								if (self._onclick !== undefined) {
+									self._onclick(src);
+								} else {
+									console.log("_onclick not defined...");
+								}
 							});
 
 							let textDiv = document.createElement('div');
