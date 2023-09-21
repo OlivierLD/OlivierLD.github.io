@@ -203,7 +203,9 @@ class SlideShow extends HTMLElement {
 		};
 
 		// Slide click. Do nothing by default.
-		this._onclick = src => {};
+		this._onclick = (src) => {
+			console.log("Default onclick: nothing");
+		};
 
 	}
 
@@ -265,6 +267,7 @@ class SlideShow extends HTMLElement {
 				break;
 			case "slideclick":
 				this._onclick = window[newVal];
+				// this._onclick = newVal;
 				break;
 			default:
 				break;
@@ -279,7 +282,8 @@ class SlideShow extends HTMLElement {
 	}
 
 	set slideclick(callback) {
-		this._onclick = window[callback];
+		// this._onclick = window[callback];
+		this._onclick = callback;
 	}
 
 	set width(val) {
@@ -439,10 +443,11 @@ class SlideShow extends HTMLElement {
 							// On Slide Click:
 							slide.addEventListener('click', () => {
 								console.log(`${src} was clicked, invoking user's callback.`);
-								if (self._onclick !== undefined) {
+								if (self._onclick) {
 									self._onclick(src);
 								} else {
 									console.log("_onclick not defined...");
+									console.log("this._onclick:" + this._onclick);
 								}
 							});
 
