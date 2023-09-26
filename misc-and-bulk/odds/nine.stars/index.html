@@ -69,13 +69,162 @@ Pour l’élément enfant il n’y a pas de calcul, il dépend de ton élément 
             return 11 - index;
         };
 
+        const NB_DAY = [
+            31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31
+        ];
+        const JAN = 1;
+        const FEB = 2;
+        const MAR = 3;
+        const APR = 4;
+        const MAY = 5;
+        const JUN = 6;
+        const JUL = 7;
+        const AUG = 8;
+        const SEP = 9;
+        const OCT = 10;
+        const NOV = 11;
+        const DEC = 12;
+
+        let birthBetween = (birthMonth, birthDay, fromMonth, fromDay, toMonth, toDay) => {
+            let fromNbDay = fromDay;
+            for (let i=0; i<(fromMonth - 2); i++) {
+                fromNbDay += NB_DAY[i];
+            }
+            let toNbDay = toDay;
+            for (let i=0; i<(toMonth - 2); i++) {
+                toNbDay += NB_DAY[i];
+            }
+            let birthNbDay = birthDay;
+            for (let i=0; i<(birthMonth - 2); i++) {
+                birthNbDay += NB_DAY[i];
+            }
+            if (toMonth < fromMonth) {
+                toNbDay += 365;
+                if (birthMonth < fromMonth) {
+                    birthNbDay += 365;
+                }
+            }
+            return (birthNbDay >= fromNbDay && birthNbDay <= toNbDay);
+        };
+
+        let findYouth = (adultIndex, month, day) => {
+            let index = 0;
+
+            if (birthBetween(month, day, FEB, 4, MAR, 5)) {
+                if (adultIndex === 1 || adultIndex === 4 || adultIndex === 7) {
+                    index = 8;
+                } else if (adultIndex === 2 || adultIndex === 5 || adultIndex === 8) {
+                    index = 2;
+                } else if (adultIndex === 3 || adultIndex === 6 || adultIndex === 9) {
+                    index = 5;
+                }
+            } else if (birthBetween(month, day, MAR, 6, APR, 4)) {
+                if (adultIndex === 1 || adultIndex === 4 || adultIndex === 7) {
+                    index = 7;
+                } else if (adultIndex === 2 || adultIndex === 5 || adultIndex === 8) {
+                    index = 1;
+                } else if (adultIndex === 3 || adultIndex === 6 || adultIndex === 9) {
+                    index = 4;
+                }
+            } else if (birthBetween(month, day, APR, 5, MAY, 5)) {
+                if (adultIndex === 1 || adultIndex === 4 || adultIndex === 7) {
+                    index = 6;
+                } else if (adultIndex === 2 || adultIndex === 5 || adultIndex === 8) {
+                    index = 9;
+                } else if (adultIndex === 3 || adultIndex === 6 || adultIndex === 9) {
+                    index = 3;
+                }
+            } else if (birthBetween(month, day, MAY, 6, JUN, 5)) {
+                if (adultIndex === 1 || adultIndex === 4 || adultIndex === 7) {
+                    index = 5;
+                } else if (adultIndex === 2 || adultIndex === 5 || adultIndex === 8) {
+                    index = 8;
+                } else if (adultIndex === 3 || adultIndex === 6 || adultIndex === 9) {
+                    index = 2;
+                }
+            } else if (birthBetween(month, day, JUN, 6, JUL, 7)) {
+                if (adultIndex === 1 || adultIndex === 4 || adultIndex === 7) {
+                    index = 4;
+                } else if (adultIndex === 2 || adultIndex === 5 || adultIndex === 8) {
+                    index = 7;
+                } else if (adultIndex === 3 || adultIndex === 6 || adultIndex === 9) {
+                    index = 1;
+                }
+            } else if (birthBetween(month, day, JUL, 8, AUG, 7)) {
+                if (adultIndex === 1 || adultIndex === 4 || adultIndex === 7) {
+                    index = 3;
+                } else if (adultIndex === 2 || adultIndex === 5 || adultIndex === 8) {
+                    index = 6;
+                } else if (adultIndex === 3 || adultIndex === 6 || adultIndex === 9) {
+                    index = 9;
+                }
+            } else if (birthBetween(month, day, AUG, 8, SEP, 7)) {
+                if (adultIndex === 1 || adultIndex === 4 || adultIndex === 7) {
+                    index = 2;
+                } else if (adultIndex === 2 || adultIndex === 5 || adultIndex === 8) {
+                    index = 5;
+                } else if (adultIndex === 3 || adultIndex === 6 || adultIndex === 9) {
+                    index = 8;
+                }
+            } else if (birthBetween(month, day, SEP, 8, OCT, 8)) {
+                if (adultIndex === 1 || adultIndex === 4 || adultIndex === 7) {
+                    index = 1;
+                } else if (adultIndex === 2 || adultIndex === 5 || adultIndex === 8) {
+                    index = 4;
+                } else if (adultIndex === 3 || adultIndex === 6 || adultIndex === 9) {
+                    index = 7;
+                }
+            } else if (birthBetween(month, day, OCT, 9, NOV, 7)) {
+                if (adultIndex === 1 || adultIndex === 4 || adultIndex === 7) {
+                    index = 9;
+                } else if (adultIndex === 2 || adultIndex === 5 || adultIndex === 8) {
+                    index = 3;
+                } else if (adultIndex === 3 || adultIndex === 6 || adultIndex === 9) {
+                    index = 6;
+                }
+            } else if (birthBetween(month, day, NOV, 8, DEC, 7)) {
+                if (adultIndex === 1 || adultIndex === 4 || adultIndex === 7) {
+                    index = 8;
+                } else if (adultIndex === 2 || adultIndex === 5 || adultIndex === 8) {
+                    index = 2;
+                } else if (adultIndex === 3 || adultIndex === 6 || adultIndex === 9) {
+                    index = 5;
+                }
+            } else if (birthBetween(month, day, DEC, 8, JAN, 5)) {
+                if (adultIndex === 1 || adultIndex === 4 || adultIndex === 7) {
+                    index = 7;
+                } else if (adultIndex === 2 || adultIndex === 5 || adultIndex === 8) {
+                    index = 1;
+                } else if (adultIndex === 3 || adultIndex === 6 || adultIndex === 9) {
+                    index = 4;
+                }
+            } else if (birthBetween(month, day, JAN, 6, FEB, 3)) {
+                if (adultIndex === 1 || adultIndex === 4 || adultIndex === 7) {
+                    index = 6;
+                } else if (adultIndex === 2 || adultIndex === 5 || adultIndex === 8) {
+                    index = 9;
+                } else if (adultIndex === 3 || adultIndex === 6 || adultIndex === 9) {
+                    index = 3;
+                }
+            }
+            return index;
+        };
+
         let process = () => {
             let yearValue = document.getElementById('year-value').value;
+            let monthValue = document.getElementById('month-value').value;
+            let dayValue = document.getElementById('day-value').value;
+
             console.log(`Read year ${yearValue}`);
-            let index = findAdult(yearValue);
-            let adultElement = `${NINE_STARS[index - 1]} ${index}`;
+            let adultIndex = findAdult(yearValue);
+            let adultElement = `${NINE_STARS[adultIndex - 1]} ${adultIndex}`;
             console.log(`Adult: ${adultElement}`);
-            let htmlContent = `&Eacute;l&eacute;ment adulte : ${adultElement}`;
+            let childIndex = findYouth(adultIndex, parseInt(monthValue), parseInt(dayValue));
+            let childElement = `${NINE_STARS[childIndex - 1]} ${childIndex}`;
+
+            let htmlContent = `&Eacute;l&eacute;ment adulte : ${adultElement}` + 
+                              '<br/>' +
+                              `&Eacute;l&eacute;ment enfant : ${childElement}`;
             document.getElementById('result').innerHTML = htmlContent;
         };
 
@@ -100,7 +249,7 @@ Pour l’élément enfant il n’y a pas de calcul, il dépend de ton élément 
     </select>
     <input id="day-value" type="number" min="1" width="2" placeholder="day" style="text-align: right; width: 100px;" value="1"/>
     <br/>
-    <button onclick="process();">Process</button>
+    <button onclick="process();" style="border-radius: 5px; margin: 5px;">Calcul</button>
     <hr/>
     <div id="result">
 
