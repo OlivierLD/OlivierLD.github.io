@@ -12,13 +12,53 @@
     /*font-size: 2em;*/
 }        
 
+*:focus {
+    text-shadow: 2px 2px 4px black, 0 0 25px white, 0 0 10px orange;
+}
+
 body {
     background-color: silver;
     font-size: 2em;
 }
+h1 {
+    color: navy;
+    text-shadow: 2px 2px 4px black, 0 0 25px white, 0 0 10px orange;
+}
 input, select, button {
     font-size: 1.5em;
+    border-radius: 6px;
 }
+button {
+  padding: 4px 20px;
+  /* give the background a gradient */
+  background: #ffae00; /* fallback for browsers that don't support gradients */
+  background: -webkit-linear-gradient(top, #ffae00, #d67600);
+  background: -moz-linear-gradient(top, #ffae00, #d67600);
+  background: -o-linear-gradient(top, #ffae00, #d67600);
+  background: linear-gradient(top, #ffae00, #d67600);
+  border: 2px outset #dad9d8;
+  /* style the text */
+  font-family: Lato, Verdana, Andika, Arial, sans-serif; /* Andkia is available at http://www.google.com/webfonts/specimen/Andika */
+  font-size: 0.8em;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #fff;
+  text-shadow: 0 1px 10px #000;
+  /* add to small curve to the corners of the button */
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  border-radius: 15px;
+  /* give the button a drop shadow */
+  -webkit-box-shadow: rgba(0, 0, 0, .55) 0 1px 6px;
+  -moz-box-shadow: rgba(0, 0, 0, .55) 0 1px 6px;
+  box-shadow: rgba(0, 0, 0, .55) 0 1px 6px;
+}
+
+/* NOW STYLE THE BUTTON'S HOVER STATE */
+button:hover, button:focus {
+  border: 2px solid #dad9d8;
+}
+
 
     </style>
     <script type="text/javascript">
@@ -268,7 +308,7 @@ Pour l’élément enfant il n’y a pas de calcul, il dépend de ton élément 
 
     </div>
     <hr/>
-    <i><small>OlivSoft never stops</small></i>
+    <i><small style="color: cyan;">OlivSoft never stops</small></i>
 </body>
 <script type="text/javascript">
 
