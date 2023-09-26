@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>9 &Eacute;toiles</title>
+	<!--link rel="icon" type="image/png" href="../../misc.pix/hummingbird.png"-->
+	<!--link rel="stylesheet" href="../../css/stylesheet.css"-->
+	<style type="text/css">
+* {
+    font-family: 'Courier New', Courier, monospace;
+    /*font-size: 2em;*/
+}        
+
+body {
+    background-color: silver;
+    font-size: 2em;
+}
+input, select, button {
+    font-size: 1.5em;
+}
+
+    </style>
+    <script type="text/javascript">
+
+/*
+Olivier né le 06/03/1959
+
+L’année correspond à l’élément adulte. Pour les chinois, nous passons à l’âge adulte lorsque nous devenons autonomes, 
+indépendants financièrement; c’est pourquoi une femme au foyer par exemple, sera le plus souvent sous l’influence de 
+son élément enfant; c’est sur lui qu’elle va se reposer.
+
+Donc: 1+9+5+9= 24 -> 2+4=6 11-6=5 => Terre 5
+Ou
+29/06/1964 => 1+9+6+4 = 20 11-2=9 => Feu
+
+9 étoiles:
+1 Eau; 2 Terre; 3 Bois; 4 Bois; 5 Terre; 6 Métal; 7 Métal; 8 Terre; 9 Feu
+
+Pour l’élément enfant il n’y a pas de calcul, il dépend de ton élément adulte et du jour et mois de naissance, les 2 combinés.
+
+ */
+
+        const NINE_STARS = [
+          "Eau",   // 1
+          "Terre", // 2 
+          "Bois",  // 3
+          "Bois",  // 4
+          "Terre", // 5
+          "Métal", // 6
+          "Métal", // 7
+          "Terre", // 8
+          "Feu"    // 9
+        ];
+
+        let findAdult = (year) => {
+            let index = 0;
+            let finalStr = year;
+            while (finalStr.length > 1) {
+                let sum = 0;
+                for (let i=0; i<finalStr.length; i++) {
+                    sum += (parseInt(finalStr.substring(i, i+1)));
+                }
+                console.log(`Sum: ${sum}`);
+                finalStr = sum.toFixed(0);
+            }
+            index = parseInt(finalStr);
+
+            return 11 - index;
+        };
+
+        let process = () => {
+            let yearValue = document.getElementById('year-value').value;
+            console.log(`Read year ${yearValue}`);
+            let index = findAdult(yearValue);
+            let adultElement = `${NINE_STARS[index - 1]} ${index}`;
+            console.log(`Adult: ${adultElement}`);
+            let htmlContent = `&Eacute;l&eacute;ment adulte : ${adultElement}`;
+            document.getElementById('result').innerHTML = htmlContent;
+        };
+
+    </script>
+</head>
+<body>
+    <h2>9 &Eacute;toiles</h2>
+    <input id="year-value" type="number" min="0" width="4" placeholder="year" style="text-align: right; width: 200px;"/>
+    <select id="month-value">
+        <option value="1" selected>Jan</option>
+        <option value="2">Feb</option>
+        <option value="3">Mar</option>
+        <option value="4">Apr</option>
+        <option value="5">May</option>
+        <option value="6">Jun</option>
+        <option value="7">Jul</option>
+        <option value="8">Aug</option>
+        <option value="9">Sep</option>
+        <option value="10">Oct</option>
+        <option value="11">Nov</option>
+        <option value="12">Dec</option>
+    </select>
+    <input id="day-value" type="number" min="1" width="2" placeholder="day" style="text-align: right; width: 100px;" value="1"/>
+    <br/>
+    <button onclick="process();">Process</button>
+    <hr/>
+    <div id="result">
+
+    </div>
+    <hr/>
+    <i><small>OlivSoft never stops</small></i>
+</body>
+<script type="text/javascript">
+
+window.onload = () => {
+    console.log("Loaded.");
+};
+
+</script>
+</html>
