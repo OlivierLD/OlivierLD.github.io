@@ -50,6 +50,13 @@ h5 {
     display: none;
 }
 
+/* "Small" screens */
+@media screen and (max-width: 1000px) { /* TODO investigate that one... */
+    .screen-only {
+        display: none;
+    }
+}  
+
 /* 
    Believe it or not, that works 
    <pouet-pouet>Duh</pouet-pouet> 
