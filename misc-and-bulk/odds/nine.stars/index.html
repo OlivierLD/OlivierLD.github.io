@@ -126,7 +126,7 @@ Pour l’élément enfant il n’y a pas de calcul, il dépend de ton élément 
         const DEC = 12;
 
         const MONTHS = [
-            "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+            "Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"
         ];
 
         let birthBetween = (birthMonth, birthDay, fromMonth, fromDay, toMonth, toDay) => {
@@ -274,7 +274,8 @@ Pour l’élément enfant il n’y a pas de calcul, il dépend de ton élément 
             let childIndex = findYouth(adultIndex, parseInt(monthValue), parseInt(dayValue));
             let childElement = `${NINE_STARS[childIndex - 1]} ${childIndex}`;
 
-            let htmlContent = `&Eacute;l&eacute;ment adulte : ${adultElement}` + 
+            let htmlContent = `<b>${dayValue} ${MONTHS[monthValue - 1]} ${yearValue}</b>` + "<br/>" +
+                              `&Eacute;l&eacute;ment adulte : ${adultElement}` + 
                               '<br/>' +
                               `&Eacute;l&eacute;ment enfant : ${childElement}`;
             document.getElementById('result').innerHTML = htmlContent;
@@ -287,18 +288,18 @@ Pour l’élément enfant il n’y a pas de calcul, il dépend de ton élément 
     <span>Date de naissance&nbsp;:</span>
     <input id="year-value" type="number" min="0" placeholder="Year" title="Ann&eacute;e de naissance" style="text-align: right; width: 200px;"/>
     <select id="month-value" title="Mois de naissance">
-        <option value="1" selected>Jan</option>
-        <option value="2">Feb</option>
-        <option value="3">Mar</option>
-        <option value="4">Apr</option>
-        <option value="5">May</option>
-        <option value="6">Jun</option>
-        <option value="7">Jul</option>
-        <option value="8">Aug</option>
-        <option value="9">Sep</option>
-        <option value="10">Oct</option>
-        <option value="11">Nov</option>
-        <option value="12">Dec</option>
+        <option value="1" selected>Janvier</option>
+        <option value="2">F&eacute;vrier</option>
+        <option value="3">Mars</option>
+        <option value="4">Avril</option>
+        <option value="5">Mai</option>
+        <option value="6">Juin</option>
+        <option value="7">Juillet</option>
+        <option value="8">Ao&ucirc;t</option>
+        <option value="9">Septembre</option>
+        <option value="10">Octobre</option>
+        <option value="11">Novembre</option>
+        <option value="12">D&eacute;cembre</option>
     </select>
     <input id="day-value" type="number" min="1" max="31" placeholder="day" title="Jour du mois de naissance" style="text-align: right; width: 100px;" value="1"/>
     <br/>
