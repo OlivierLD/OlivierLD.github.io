@@ -85,17 +85,21 @@ Pour l’élément enfant il n’y a pas de calcul, il dépend de ton élément 
         const NOV = 11;
         const DEC = 12;
 
+        const MONTHS = [
+            "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+        ];
+
         let birthBetween = (birthMonth, birthDay, fromMonth, fromDay, toMonth, toDay) => {
             let fromNbDay = fromDay;
-            for (let i=0; i<(fromMonth - 2); i++) {
+            for (let i=0; i<(fromMonth - 1); i++) {
                 fromNbDay += NB_DAY[i];
             }
             let toNbDay = toDay;
-            for (let i=0; i<(toMonth - 2); i++) {
+            for (let i=0; i<(toMonth - 1); i++) {
                 toNbDay += NB_DAY[i];
             }
             let birthNbDay = birthDay;
-            for (let i=0; i<(birthMonth - 2); i++) {
+            for (let i=0; i<(birthMonth - 1); i++) {
                 birthNbDay += NB_DAY[i];
             }
             if (toMonth < fromMonth) {
@@ -104,6 +108,10 @@ Pour l’élément enfant il n’y a pas de calcul, il dépend de ton élément 
                     birthNbDay += 365;
                 }
             }
+            console.log(`Birth ${birthDay} ${MONTHS[birthMonth -1]}: Day #${birthNbDay}`);
+            console.log(`From  ${fromDay} ${MONTHS[fromMonth -1]}: Day #${fromNbDay}`);
+            console.log(`To    ${toDay} ${MONTHS[toMonth -1]}: Day #${toNbDay}`);
+
             return (birthNbDay >= fromNbDay && birthNbDay <= toNbDay);
         };
 
