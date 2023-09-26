@@ -4,7 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>9 &Eacute;toiles</title>
-	<!--link rel="icon" type="image/png" href="../../misc.pix/hummingbird.png"-->
+	<link rel="icon" type="image/png" href="./stars-group.png">
 	<!--link rel="stylesheet" href="../../css/stylesheet.css"-->
 	<style type="text/css">
 * {
@@ -220,6 +220,10 @@ Pour l’élément enfant il n’y a pas de calcul, il dépend de ton élément 
 
         let process = () => {
             let yearValue = document.getElementById('year-value').value;
+            if (yearValue.trim().length === 0) {
+                alert('Saisir au moins une année... Merci.');
+                return;
+            }
             let monthValue = document.getElementById('month-value').value;
             let dayValue = document.getElementById('day-value').value;
 
@@ -240,8 +244,9 @@ Pour l’élément enfant il n’y a pas de calcul, il dépend de ton élément 
 </head>
 <body>
     <h1>9 &Eacute;toiles...</h1>
-    <input id="year-value" type="number" min="0" width="4" placeholder="year" style="text-align: right; width: 200px;"/>
-    <select id="month-value">
+    <span>Date de naissance&nbsp;:</span>
+    <input id="year-value" type="number" min="0" placeholder="Year" title="Ann&eacute;e de naissance" style="text-align: right; width: 200px;"/>
+    <select id="month-value" title="Mois de naissance">
         <option value="1" selected>Jan</option>
         <option value="2">Feb</option>
         <option value="3">Mar</option>
@@ -255,9 +260,9 @@ Pour l’élément enfant il n’y a pas de calcul, il dépend de ton élément 
         <option value="11">Nov</option>
         <option value="12">Dec</option>
     </select>
-    <input id="day-value" type="number" min="1" width="2" placeholder="day" style="text-align: right; width: 100px;" value="1"/>
+    <input id="day-value" type="number" min="1" max="31" placeholder="day" title="Jour du mois de naissance" style="text-align: right; width: 100px;" value="1"/>
     <br/>
-    <button onclick="process();" style="border-radius: 5px; margin: 5px;">Calcul</button>
+    <button onclick="process();" style="border-radius: 5px; margin: 5px;" title="En avant !">Calcul</button>
     <hr/>
     <div id="result">
 
