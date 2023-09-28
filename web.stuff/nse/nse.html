@@ -1816,7 +1816,7 @@
                 <p>
                     Avec une table de logarithmes, le calcul d'une hauteur comporte <b>12</b> &eacute;tapes, et le calcul de l'azimut en comporte <b>12</b> &eacute;galement.
                     <br/>
-                    &agrave; vos marques&nbsp;!
+                    &Agrave; vos marques&nbsp;!
                 </p>
                 <p class="screen-only">
                     Pour ceux que la manipulation de ces tables int&eacute;resse, 
@@ -1824,7 +1824,7 @@
                     &eacute;tape par &eacute;tape.
                 </p>
                 <p>
-                    Comme d&eacute;j&agrave; mentionn&eacute;, on cherche donc &agrave; r&eacute;soudre les formules suivantes&nbsp;:
+                    Comme d&eacute;j&agrave; mentionn&eacute;, on cherche donc &agrave; r&eacute;soudre lit&eacute;ralement les formules suivantes&nbsp;:
                     <div class="postit">
                         $$
                         He = \arcsin \left( (\sin(L).\sin(D)) + (\cos(L).\cos(D).\cos(AHL)) \right)
@@ -1839,7 +1839,7 @@
                     <br>
                     Voir &agrave; leur sujet l'appendice <a href="#logarithms">Utilisation simplifi&eacute;e des tables de logarithmes</a>.
                     <br/>
-                    Je pr&eacute;f&egrave;re personnellement utiliser les tables de Bouvart et Ratinet, malheureusement pas encore disponibles on-line (que je sache).
+                    Je pr&eacute;f&egrave;re personnellement utiliser les tables de Bouvart et Ratinet, malheureusement pas encore disponibles on-line (voir n&eacute;anmoins <a href="https://books.google.fr/books?id=XTENGa6RvUcC&dq=editions%3AOCLC489715537&source=gbs_book_other_versions">https://books.google.fr/books?id=XTENGa6RvUcC&dq=editions%3AOCLC489715537&source=gbs_book_other_versions</a>).
                     Leur utilisation est cependant tr&egrave;s similaire &agrave; ce qui est expos&eacute; ici.
                     <h5><a name="05-2-9-2-7-1">Calcul de la hauteur estim&eacute;e</a></h5>
                     <p>
@@ -1890,8 +1890,24 @@
                                 <li>Tables am&eacute;ricaines</li>
                                 <li>Tables fran&ccedil;aises (Bouvart et Ratinet)</li>
                             </ul>
+                            <p>
                             <i>Le but de ces tables est strictement identique, mais les conventions qu'elles utilisent sont parfois diff&eacute;rentes,
-                            et mf&eacute;ritent d'&eacute;tre evoqu&eacute;es.</i>
+                            et m&eacute;ritent d'&ecirc;tre evoqu&eacute;es.</i>
+                            <br/><br/>
+                            Une diff&eacute;rence importante concerne la fa&ccedil;on d'afficher les valeurs n&eacute;gatives des logarithmes.<br/>
+                            Un gros avantage des tables de logarithmes est de r&eacute;duire multiplications et divisions &agrave; des additions et soustractions.<br/>
+                            Parmi les membres d'une addition, des valeurs n&eacute;gatives peuvent &ecirc;tre &agrave; l'origine d'erreurs, d'o&ugrave; les diff&eacute;rentes options prises par 
+                            les auteurs des tables pour tenter d'&eacute;clipser cette difficult&eacute;.<br/>
+                            Par exemple&nbsp;:<br/>
+                            <code>log(sin(37&deg;46'))</code>, dont la valeur est <code>-0.21293</code>.
+                            <br/>
+                            <ul>
+                              <li>Les tables am&eacute;ricaines afficheront <code>9.78707</code>, &agrave; lire <code>9.78707 - 10</code></li>
+                              <li>Les tables de Bouvart et Ratinet <code><span class="overlined">1</span>,78707</code>, &agrave; lire <code>0.78707 - 1</code></li>
+                            </ul>
+                            Des exemples seront donn&eacute;s plus avant dans le pr&eacute;sent document.
+                            <br/>
+                            Encore une fois, ces notations sont strictement &eacute;quivalentes. Il s'agit juste d'&ecirc;tre pr&eacute;venu. Et accessoirement d'utiliser celles qu'on pr&eacute;f&egrave;re.
                         </p>
                     </p>
 
