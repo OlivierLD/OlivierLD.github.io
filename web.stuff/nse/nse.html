@@ -23,6 +23,11 @@
         https://www.michaelperrin.fr/blog/2019/11/printing-the-web-part-2-html-and-css-for-printing-books,
         to use with https://www.princexml.com/ 
 
+    Google books. logarithm tables:
+    - By Charles Babbage !!  https://www.google.fr/books/edition/Table_of_the_Logarithms_of_the_Natural_N/P11HAAAAYAAJ?hl=en&gbpv=1&dq=subject:%22Logarithms%22&printsec=frontcover
+    - American tables: https://www.google.fr/books/edition/Logarithmic_and_Other_Mathematical_Table/u3zmAAAAMAAJ?hl=en&gbpv=1&dq=logarithm+table&printsec=frontcover
+    - Bouvart et Ratinet: https://books.google.fr/books?id=XTENGa6RvUcC&dq=editions%3AOCLC489715537&source=gbs_book_other_versions
+
  +-->
 <html lang="fr">
 <head>
@@ -1802,9 +1807,9 @@
                     Il s'agit surtout ici de d&eacute;montrer la validit&eacute; de la m&eacute;thode.
                     <br/>
                     Ceci peut &ecirc;tre vu plut&ocirc;t comme un exercice de style...
-                    <br/>
-                    <i>Ceux qui ne veulent pas s'encombrer avec des logarithmes (ou qui n'&eacute;coutaient pas en math) peuvent aller directement &agrave; la section <a href="#05-2-9-2-8">Avec des tables de navigation</a>.</i>
-                    <br/>
+                    <p style="margin: 30px;">
+                        <i>Ceux qui ne veulent pas s'encombrer avec des logarithmes (ou qui n'&eacute;coutaient pas en math) peuvent aller directement &agrave; la section <a href="#05-2-9-2-8">Avec des tables de navigation</a>.</i>
+                    </p>
                     Ceux que &ccedil;a persiste &agrave; int&eacute;resser peuvent se rafra&icirc;chir la m&eacute;moire au sujet de la 
                     manipulation de ces ustensiles dans la section <a href="#logarithms">Utilisation simplifi&eacute;e des tables de logarithmes</a>.
                 </p>
@@ -1859,7 +1864,7 @@
                             <br/>
                             <code>cos(AHL) = cos(12&deg;26.5')</code> arrondi &agrave; <code>cos(12&deg;26')</code>
                         </p>
-                        <div class="indent-one-italic">
+                        <div class="indent-one-italic" style="margin-top: 10px;">
                             La fa&ccedil;on d'effectuer ce calcul avec les tables de logarithmes est d&eacute;taill&eacute;e dans les pages qui suivent.
                         </div>
                         <br/>
@@ -1879,10 +1884,21 @@
                             <li>Ainsi, <code>He = 44&deg;33.5'</code></li>
                         </ol>
                         <p>
-                            Voyons maintenant comment en arriver l&agrave;.
+                            Voyons maintenant comment en arriver l&agrave;.<br/>
+                            Afin de pouvoir s'adresser au plus grand nombre, on fera ces calculs &agrave; l'aide de
+                            <ul>
+                                <li>Tables am&eacute;ricaines</li>
+                                <li>Tables fran&ccedil;aises (Bouvart et Ratinet)</li>
+                            </ul>
+                            <i>Le but de ces tables est strictement identique, mais les conventions qu'elles utilisent sont parfois diff&eacute;rentes,
+                            et mf&eacute;ritent d'&eacute;tre evoqu&eacute;es.</i>
                         </p>
                     </p>
+
+                    <!-- Table US -->
                     <div class="content slack-on-top">
+                        <b><i>- Avec des tables am&eacute;ricaines</i></b>
+                        <br/><br/>
                         <b>&Eacute;tape 1/12 - Recherche de log(sin(37&deg;46'))</b>
                         <div style="text-align: center;"><img src="images/log.01.jpg" width="60%" alt="Recherche de log(sin(37&deg;46'))" title="Recherche de log(sin(37&deg;46'))"></div>
                         On trouve&nbsp;: <code>log(sin(37&deg;46')) = 9.78707</code> soit <code>9.78707 – 10 = -0.21293</code>
@@ -1890,7 +1906,7 @@
                     <div class="content slack-on-top">
                         <b>&Eacute;tape 2/12 - Recherche de log(sin(6&deg;11'))</b>
                         <div style="text-align: center;"><img src="images/log.02.jpg" width="60%" alt="Recherche de log(sin(6&deg;11'))" title="Recherche de log(sin(6&deg;11'))"></div>
-                        On trouve&nbsp;: <code>log(sin(6&deg;11')) = 9.03226</code> soit <code>9.03226 – 10 = -0.96734</code>
+                        On trouve&nbsp;: <code>log(sin(6&deg;11')) = 9.03226</code> soit <code>9.03226 – 10 = -0.96774</code>
                     </div>
                     <div class="content slack-on-top">
                         <b>&Eacute;tape 3/12 - Recherche de log(cos(37&deg;46'))</b>
@@ -1959,6 +1975,117 @@
                         On l'a eu&nbsp;!
                     </div>
 
+                    <!-- Table B & R -->
+                    <div class="content slack-on-top">
+                        <b><i>- Avec les tables Bouvart &amp; Ratinet</i></b>
+                        <br/><br/>
+                        <b>&Eacute;tape 1/12 - Recherche de log(sin(37&deg;46'))</b>
+                        <div style="text-align: center; margin: 10px;"><img src="images/log.br.01-01.jpg" width="60%" alt="Recherche de log(sin(37&deg;46'))" title="Recherche de log(sin(37&deg;46'))"></div>
+                        On trouve&nbsp;: <code>log(sin(37&deg;46')) = <span class="overlined">1</span>,78707 </code> (notez la caract&eacute;ristique surlign&eacute;e) soit cette fois-ci <code>-1 + 0.78707 = -0.21293</code>
+                    </div>
+                    <div class="content slack-on-top">
+                        <b>&Eacute;tape 2/12 - Recherche de log(sin(6&deg;11'))</b>
+                        <div style="text-align: center; margin: 10px;"><img src="images/log.br.02-01.jpg" width="60%" alt="Recherche de log(sin(6&deg;11'))" title="Recherche de log(sin(6&deg;11'))"></div>
+                        On trouve&nbsp;: <code>log(sin(6&deg;11')) = <span class="overlined">1</span>,03226 </code> (notez la caract&eacute;ristique surlign&eacute;e) soit cette fois-ci <code>-1 + 0.03226 = -0.96774</code>
+                    </div>
+                    <div class="content slack-on-top">
+                        <b>&Eacute;tape 3/12 - Recherche de log(cos(37&deg;46'))</b>
+                        <div style="text-align: center; margin: 10px;"><img src="images/log.br.01-02.jpg" width="60%" alt="Recherche de log(cos(37&deg;46'))" title="Recherche de log(cos(37&deg;46'))"></div>
+                        On trouve&nbsp;: <code>log(cos(37&deg;46')) = <span class="overlined">1</span>,89791 </code> (notez la caract&eacute;ristique surlign&eacute;e) soit cette fois-ci <code>-1 + 0.89791 = -0.10209</code>
+                    </div>
+                    <div class="content slack-on-top">
+                        <b>&Eacute;tape 4/12 - Recherche de log(cos(6&deg;11'))</b>
+                        <div style="text-align: center; margin: 10px;"><img src="images/log.br.02-02.jpg" width="60%" alt="Recherche de log(cos(6&deg;11'))" title="Recherche de log(cos(6&deg;11'))"></div>
+                        On trouve&nbsp;: <code>log(cos(6&deg;11')) = <span class="overlined">1</span>,99747 </code> (notez la caract&eacute;ristique surlign&eacute;e) soit cette fois-ci <code>-1 + 0.99747 = -0.00253</code>
+                    </div>
+                    <div class="content slack-on-top">
+                        <b>&Eacute;tape 5/12 - Recherche de log(cos(12&deg;26'))</b>
+                        <div style="text-align: center; margin: 10px;"><img src="images/log.br.03-01.jpg" width="60%" alt="Recherche de log(cos(12&deg;26'))" title="Recherche de log(cos(12&deg;26'))"></div>
+                        On trouve&nbsp;: <code>log(cos(12&deg;26')) = <span class="overlined">1</span>,98969 </code> (notez la caract&eacute;ristique surlign&eacute;e) soit cette fois-ci <code>-1 + 0.98969 = -0.01031</code>
+                    </div>
+                    <div class="content slack-on-top">
+                        <b>&Eacute;tape 6 &amp; 7/12 - Recherche de sin(L).sin(D)</code></b>
+                        <br/>
+                        Donc, avec les valeurs trouv&eacute;es ci-dessus, on calcule <code>log(sin(L).sin(D)) = -0.21293 – 0.96774 = -1.18067</code>.
+                        <br/>
+                        On pose la formule suivante, avec ses caract&eacute;ristiques, surlign&eacute;es ou non, on additionne les mantisses:
+                        <pre>
+    <span class="overlined">1</span>,78707 </code>
+    <span class="overlined">1</span>,03226 </code> 
+    --------
+    0,81933
+                        </pre>
+                        On additionne les caract&eacute;ristiques - celles qui sont surlign&eacute;es sont n&eacute;gatives, on trouve <code>-2</code>, le r&eacute;sultat final 
+                        est ainsi <code>0,81933 - 2</code>, soit <code>-1.18067</code>.<br/>
+                        On garde cette formule <code>0,81933 - 2</code>, afin d'avoir un nombre compris entre <code>0</code> et <code>1</code>, <code>-2</code> sera la puissance de <code>10</code>.
+                        <br/>
+                        On cherche de quel nombre cette valeur <code>0,81933</code> est le logarithme.
+                        <div style="text-align: center; margin: 10px;"><img src="images/log.br.04-01.jpg" width="60%" alt="Recherche de sin(L).sin(D)" title="Recherche de sin(L).sin(D)"></div>
+                        Pour <code>N = 650</code> on a <code>81 291</code>.<br/>
+                        Pour <code>N = 659</code> on a <code>81 928</code> dans la <code>6</code><sup><small>e</small></sup> colonne, le prochain est <code>81 935</code> => diff&eacute;rence tabulaire (<code>935 - 928</code>) = <code>7</code>.<br/>
+                        Comme on est dans la <code>6</code><sup><small>e</small></sup> colonne, on a maintenant <code>N = 6596</code>.<br/>
+                        On cherche <code>81 933</code>, <code>5</code> au dessus de <code>81 928</code>, on trouve <code>3,5</code> dans la petit table de droite <code>DT 7</code>.<br/>
+                        Ce qui donne finalement <code>N = 659635</code>, lu <code>6,59635</code>.<br/>
+
+                        Ainsi, <code>sin(L).sin(D) = 10<sup>(-1.18067)</sup>=10<sup>(0.81933 – 2)</sup>=6.5935.10<sup>-2</sup>=0.0659635</code>
+                        <br/>
+                        Attention, comme la d&eacute;clinaison est n&eacute;gative (S), son sinus est n&eacute;gatif aussi. 
+                        <br/>
+                        On a donc <code><b>sin(L).sin(D) = -0.0659635</b></code>.
+                    </div>
+                    <div class="content slack-on-top">
+                        <b>&Eacute;tape 8 &amp; 9/12 - Recherche de cos(L).cos(D).cos(AHL)</b>
+                        <br/>
+                        Donc, toujours avec les m&ecirc;mes valeurs, on calcule <code>log(cos(L).cos(D).cos(AHL)) = -0.10209 – 0.00253 – 0.01031 = -0.11493</code>.
+                        <br/>
+                        On pose la formule suivante, avec ses caract&eacute;ristiques, surlign&eacute;es ou non, on additionne les mantisses:
+                        <pre>
+    <span class="overlined">1</span>,89791 </code>
+    <span class="overlined">1</span>,99747 </code> 
+    <span class="overlined">1</span>,98969 </code> 
+    --------
+    2,88507
+                        </pre>
+                        3 caract&eacute;ritiques &agrave; <code>1</code> surlign&eacute;es, 2 de retenue, &ccedil;a fait <code>(-3 + 2 = -1)</code>, on a donc finalement <code>10<sup>(0.88507 - 1)</sup></code>
+
+                        <br/>
+                        On cherche &agrave; nouveau de quel nombre cette valeur est le logarithme.
+                        <div style="text-align: center; margin: 10px;"><img src="images/log.br.05-01.jpg" width="60%" alt="Recherche de cos(L).cos(D).cos(AHL)" title="Recherche de cos(L).cos(D).cos(AHL)"></div>
+                        On trouve <code>N = 767</code> pour <code>88508</code>, dans la <code>5</code><sup><small>e</small></sup> colonne, on prendra donc <code>N = 7675</code>.<br/>
+                        Ainsi, <code>cos(L).cos(D).cos(AHL) = 10<sup>(-0.11493)</sup> = 
+                            10<sup>(0.88507 – 1)</sup> = 
+                            7.675.10<sup>-1</sup> = 
+                            0.7675
+                            </code>.
+                        <br/>
+                        Le fait que la d&eacute;clinaison soit n&eacute;gative n'affecte pas le signe du cosinus.    
+                    </div>
+                    <div class="content slack-on-top">
+                        <b>&Eacute;tape 10/12 - Recherche de sin(L).sin(D) + cos(L).cos(D).cos(AHL)</b>
+                        <br/>
+                        Avec les valeurs ainsi calcul&eacute;es, on d&eacute;termine que
+                        <code>sin(L).sin(D) + cos(L).cos(D).cos(AHL) = -0.0659635 + 0.7675 = 0.7015365</code>.
+
+                        <br/>
+                        Ensuite, <code>log(0.7015365) = log(7.015365.10<sup>-1</sup>) = log(7.015365) – 1</code>.
+                        <br/>
+                        Quel est le logarithme de cette valeur&nbsp;?
+                        <div style="text-align: center; margin: 10px;"><img src="images/log.br.05-02.jpg" width="60%" alt="Recherche de sin(L).sin(D) + cos(L).cos(D).cos(AHL)" title="Recherche de sin(L).sin(D) + cos(L).cos(D).cos(AHL)"></div>
+                        On trouve <code>0.84603 10<sup>-1</sup></code>.
+                    </div>
+                    <div class="content slack-on-top">
+                        <b>&Eacute;tape 11 &amp; 12/12 - Recherche de He</b>
+                        <br/>
+                        On cherche ce nombre (<code>0.84603 10<sup>-1</sup></code>, soit <code><span class="overlined">1</span>,84603</code>) dans la partie de la table consacr&eacute;e &agrave; la trigonom&eacute;trie, dans la colonne "sinus".
+                        <div style="text-align: center; margin: 10px;"><img src="images/log.br.06-01.jpg" width="60%" alt="Recherche de He" title="Recherche de He"></div>
+                        On trouve <code><span class="overlined">1</span>,84605</code> dans la table, pour la hauteur estim&eacute;e <b>He 44&deg;33'</b>.
+                        <br/>
+                        La hauteur observ&eacute;e &eacute;tant de 44&deg;32.69', &ccedil;a nous fait un intercept de moins d'une minute d'arc, plus loin de l'astre.
+                        <br/>
+                        On l'a eu&nbsp;!
+                    </div>
+
+
                     <div class="content">
                         <h5><a name="05-2-9-2-7-2">Calcul de l'azimuth</a></h5>
                         <p>
@@ -2010,7 +2137,10 @@
                                 <li><code>log(arctan(Z)) = 0.49815 – 1</code></li>
                                 <li>Ainsi, <code>Z = 17&deg;29'</code></li>
                             </ol>
+                            <!-- Tables US -->
                             <div class="content slack-on-top">
+                                <b><i>- Avec des tables am&eacute;ricaines</i></b>
+                                <br/><br/>
                                 <b>&Eacute;tape 1/12 - Recherche de log(tan(-6&deg;11'))</b>
                                 <div style="text-align: center;"><img src="images/log.10.jpg" width="60%" alt="Recherche de log(tan(-6&deg;11'))" title="Recherche de log(tan(-6&deg;11'))"></div>
                                 Avec la valeur absolue de la d&eacute;clinaison, on trouve&nbsp;: <code>log(tan(6&deg;11')) = 9.03479</code> soit <code>9.03479 – 10 = -0.96521</code>
@@ -2028,7 +2158,7 @@
                                 Donc <code>log(cos(L).tan(D)) = -0.10209 -0.96521 = -1.06730 = 0.93270 – 2.</code>
                                 <br/>
                                 De quel nombre cette valeur est-elle le logarithme&nbsp;?
-                                <div style="text-align: center;"><img src="images/log.12.png" width="60%" alt="Recherche de Recherche de cos(L).tan(D)" title="Recherche de Recherche de cos(L).tan(D)"></div>
+                                <div style="text-align: center;"><img src="images/log.12.png" width="60%" alt="Recherche de cos(L).tan(D)" title="Recherche de cos(L).tan(D)"></div>
                                 On a donc <code>cos(L).tan(D) = 10 (0.93270 – 2) = 10<sup>0.93270</sup>.10-2 = 8.5645 10<sup>-2</sup> = 0.085645</code>.
                                 <br/>
                                 <i>Attention</i>&nbsp;: D est Sud, et notre latitude estim&eacute;e est Nord. 
@@ -2044,7 +2174,7 @@
                                 Donc, <code>log(sin(L).cos(AHL)) = -0.21293 -0.01031 = -0.22324 = 0.77676 – 1</code>.
                                 <br/>
                                 Quel est le nombre dont cette valeur est le logarithme&nbsp;?
-                                <div style="text-align: center;"><img src="images/log.13.png" width="60%" alt="Recherche de Recherche de sin(L).cos(AHL)" title="Recherche de Recherche de sin(L).cos(AHL)"></div>
+                                <div style="text-align: center;"><img src="images/log.13.png" width="60%" alt="Recherche de sin(L).cos(AHL)" title="Recherche de sin(L).cos(AHL)"></div>
                                 On trouve <code>sin(L).cos(AHL) = 10<sup>(0.77676 – 1)</sup> = 10<sup>0.77676</sup>.10<sup>-1</sup> = 5.9810.10<sup>-1</sup> = 0.59810 </code>
                             </div>
                             <div class="content slack-on-top">
@@ -2054,7 +2184,7 @@
                                 <br/>
                                 On a <code>log(sin(AHL)) = -0.66695</code>.
                                 <br/>
-                                De quel nombre est-ce le logarithme&nbsp;?
+                                De quel nombre <code>-0.683745</code> est-il le logarithme&nbsp;?
                                 <div style="text-align: center;"><img src="images/log.14.png" width="60%" alt="Recherche de sin(AHL)/(cos(L).tan(D))−(sin(L).cos(AHL))" title="Recherche de sin(AHL)/(cos(L).tan(D))−(sin(L).cos(AHL))"></div>
                                 On trouve <code>log(0.683745) = log(6.83745.10-1) = 0.834900 – 1 = -0.16510</code>.
                             </div>
@@ -2069,6 +2199,103 @@
                                 </div>
                                 On a donc <code>log(atan(Z)) = 0.49815 – 1</code>, not&eacute; <code>9.49815</code> pour la partie des tables consacr&eacute;e &agrave; la trigonom&eacute;trie.
                                 <div style="text-align: center;"><img src="images/log.15.png" width="60%" alt="Recherche de Z" title="Recherche de Z"></div>
+                                On trouve ainsi 17&deg;29', qu'on arrondit &agrave; 17&deg;.
+                                <br/>
+                                L et D sont de signes diff&eacute;rents, donc l'azimut est &agrave; porter &agrave; partir du p&ocirc;le abaiss&eacute;, 
+                                donc Sud puisque notre latitude en Nord.
+                                <br/>
+                                L'astre est d&eacute;j&agrave; pass&eacute; au m&eacute;ridien, l'azimut est donc &agrave; porter vers l'ouest.
+                                <br/>
+                                L'azimut <b>Z</b> se lit donc <b>S 17 W</b> (&ccedil;a se lit&nbsp;: &agrave; partir du S, 17&deg; vers l'W), soit <b>197&deg;</b>.
+                                <br/>
+                                De m&ecirc;me que dans le cas de la hauteur m&eacute;ridienne, on constate qu'il n'y a pas lieu de s'emporter 
+                                sur la pr&eacute;cision du calcul, celle de la minute suffit largement (ce qui simplifie les acc&egrave;s &agrave; la table de logarithmes), 
+                                puisqu'encore une fois, la mesure effectu&eacute;e au sextant ne peut pas pr&eacute;tendre aller au-del&agrave;.
+                                <br/>
+                                <br/>
+                                Cette derni&egrave;re &eacute;tape conclut l'exercice&nbsp;!
+                            </div>
+
+                            <!-- Table B & R -->
+                            <div class="content slack-on-top">
+                                <b><i>- Avec les tables Bouvart &amp; Ratinet</i></b>
+                                <br/><br/>
+                                <b>&Eacute;tape 1/12 - Recherche de log(tan(-6&deg;11'))</b>
+                                <div style="text-align: center; margin: 10px;"><img src="images/log.br.02-03.jpg" width="60%" alt="Recherche de log(tan(-6&deg;11'))" title="Recherche de log(tan(-6&deg;11'))"></div>
+                                Avec la valeur absolue de la d&eacute;clinaison, on trouve&nbsp;: <code>log(tan(6&deg;11')) = <span class="overlined">1</span>,03479</code> soit <code>-0.96521</code>
+                            </div>
+                            <div class="content slack-on-top">
+                                <b>&Eacute;tape 2/12 - Recherche de log(sin(12&deg;26'))</b>
+                                <div style="text-align: center; margin: 10px;"><img src="images/log.br.03-02.jpg" width="60%" alt="Recherche delog(sin(12&deg;26'))" title="Recherche de log(sin(12&deg;26'))"></div>
+                                On trouve&nbsp;: <code>log(sin(12&deg;26')) = <span class="overlined">1</span>,33305</code></code> soit -0.66695</code>
+                            </div>
+                            <div class="content slack-on-top">
+                                <b>&Eacute;tape 3, 4 &amp; 5/12 - Recherche de cos(L).tan(D)</b>
+                                <br/>
+                                On a d&eacute;j&agrave; <code>log(cos(L))</code>, c'est <code><span class="overlined">1</span>,89791</code>, soit <code>-0.10209</code>.
+                                <br/>
+                                On pose la formule suivante, avec ses caract&eacute;ristiques, surlign&eacute;es ou non, on additionne les mantisses:
+                                <pre>
+    <span class="overlined">1</span>,89791 </code> 
+    <span class="overlined">1</span>,03479 </code>
+    --------
+    0.93270
+                                </pre>
+                                2 caract&eacute;ristiques &agrave; 1, surlign&eacute;es, pas de retenue, &ccedil;a fait <code>-1</code>.<br/>
+                                Donc <code>log(cos(L).tan(D)) = <code><span class="overlined">2</span>,93270</code> = 0.93270 – 2.</code>
+                                <br/>
+                                De quel nombre cette valeur est-elle le logarithme&nbsp;?
+                                <div style="text-align: center; margin: 10px;"><img src="images/log.br.10-01.jpg" width="60%" alt="Recherche de cos(L).tan(D)" title="Recherche de cos(L).tan(D)"></div>
+                                On a donc <code>cos(L).tan(D) = 10 (0.93270 – 2) = 10<sup>0.93270</sup>.10-2 = 8.5645 10<sup>-2</sup> = 0.085645</code>.
+                                <br/>
+                                <i>Attention</i>&nbsp;: D est Sud, et notre latitude estim&eacute;e est Nord. 
+                                Il faut garder ce d&eacute;tail en t&ecirc;te, on s'en servira pour tracer l'azimut.
+                                La valeur trouv&eacute;e sera comprise entre 0&deg; et 90&deg;, il s'agira de savoir si on la porte &agrave; partir du nord ou &agrave; partir du sud, 
+                                vers l'est ou vers l'ouest.
+                            </div>
+                            <div class="content slack-on-top">
+                                <b>&Eacute;tape 6, 7, 8 &amp; 9/12 - Recherche de sin(L).cos(AHL)</b>
+                                <br/>
+                                On a d&eacute;ja <code>log(sin(L)) = <span class="overlined">1</span>,78707</code> = -0.21293</code>, et <code>log(cos(AHL)) = <span class="overlined">1</span>,98969</code> = -0.01031</code>
+                                <br/>
+                                On pose la formule suivante, avec ses caract&eacute;ristiques, surlign&eacute;es ou non, on additionne les mantisses:
+                                <pre>
+    <span class="overlined">1</span>,78707 </code> 
+    <span class="overlined">1</span>,98969 </code>
+    --------
+    1.77676
+                                </pre>
+                                2 caract&eacute;ristiques &agrave; <code>1</code> surlign&eacute;es, <code>1</code> de retenue, &ccedil;a fait <code>-1</code>.
+                                <br/>
+                                Donc, <code>log(sin(L).cos(AHL)) = 0.77676 – 1</code>.
+                                <br/>
+                                Quel est le nombre dont cette valeur est le logarithme&nbsp;?
+                                <div style="text-align: center; margin: 10px;"><img src="images/log.br.08-01.jpg" width="60%" alt="Recherche de sin(L).cos(AHL)" title="Recherche de sin(L).cos(AHL)"></div>
+                                <code>N = 598</code> pour <code>77 677</code>, dans la colonne <code>1</code>, &ccedil;a fait <code>5981</code>.<br/>
+                                On trouve <code>sin(L).cos(AHL) = 10<sup>(0.77676 – 1)</sup> = 10<sup>0.77676</sup>.10<sup>-1</sup> = 5.9810.10<sup>-1</sup> = 0.59810 </code>
+                            </div>
+                            <div class="content slack-on-top">
+                                <b>&Eacute;tape 10/12 - Recherche de sin(AHL)/(cos(L).tan(D))−(sin(L).cos(AHL))</b>
+                                <br>
+                                <i>Le d&eacute;nominateur <code>log(cos(L).tan(D))−(sin(L).cos(AHL))</code> devient alors <code>(-0.085645 - 0.59810) = <b>-0.683745</b></code></i>.
+                                <br/>
+                                On a <code>log(sin(AHL)) = -0.66695</code>.
+                                <br/>
+                                De quel nombre <code>-0.683745</code> est-il le logarithme&nbsp;?
+                                <div style="text-align: center; margin: 10px;"><img src="images/log.br.04-02.jpg" width="60%" alt="Recherche de sin(AHL)/(cos(L).tan(D))−(sin(L).cos(AHL))" title="Recherche de sin(AHL)/(cos(L).tan(D))−(sin(L).cos(AHL))"></div>
+                                On trouve <code>log(0.683745) = log(6.83745.10-1) = 0.834900 – 1 = -0.16513</code>.
+                            </div>
+                            <div class="content slack-on-top">
+                                <b>&Eacute;tape 11 &amp; 12/12 - Recherche de Z</b>
+                                <br>
+                                Donc,
+                                <div class="postit">
+                                    $$
+                                    log\left(\dfrac{sin(AHL)}{-0.683745}\right) = -0.66695 - (-0.16513) = -0.50182 = 0.49818 - 1
+                                    $$
+                                </div>
+                                On a donc <code>log(atan(Z)) = 0.49818 – 1</code>, not&eacute; <code><span class="overlined">1</span>,49818</code> pour la partie des tables consacr&eacute;e &agrave; la trigonom&eacute;trie.
+                                <div style="text-align: center;"><img src="images/log.br.09-01.jpg" width="60%" alt="Recherche de Z" title="Recherche de Z"></div>
                                 On trouve ainsi 17&deg;29', qu'on arrondit &agrave; 17&deg;.
                                 <br/>
                                 L et D sont de signes diff&eacute;rents, donc l'azimut est &agrave; porter &agrave; partir du p&ocirc;le abaiss&eacute;, 
@@ -2685,13 +2912,14 @@
         <br/>
         En tant que document imprim&eacute;, &ccedil;a ne tombe pas en panne en cas de coupure de courant, d'o&ugrave; son int&eacute;r&ecirc;t ici.
         <br/>
-        Leur usage n'est cependant pas toujours intuitif..., d'o&ugrave; ce paragraphe.
+        Leur usage n'est cependant pas toujours compl&egrave;tement intuitif..., d'o&ugrave; ce paragraphe.
     </p>
     <p>
         Ceci est plut&ocirc;t un exercice de style… Ou alors destin&eacute; &agrave; ceux qui auraient oubli&eacute; 
-        leurs tables (Dieumegard et Bataille) de calcul, et pas leurs tables de log. 
+        leurs tables (Dieumegard et Bataille) de calcul, et pas leurs tables de log&nbsp;; ce qui est improbable, certes. 
         <br/>
-        C'est n&eacute;anmoins int&eacute;ressant, d'autant plus que &ccedil;a fonctionne.
+        C'est n&eacute;anmoins int&eacute;ressant, d'autant plus que &ccedil;a fonctionne. La complexit&eacute; du processus est pr&eacute;cisement ce qui a donn&eacute; lieu
+        &agrave; l'&eacute;laboration des tables de calcul comme celles de Dieumegard &amp; Bataille.
     </p>
     <p>
         <i><b>Les tables donnent les logarithmes <span style="color: red;">d&eacute;cimaux</span></b></i>.
