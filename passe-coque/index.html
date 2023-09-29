@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Passe-Coque</title>
+	<!--link rel="icon" type="image/png" href="../../misc.pix/hummingbird.png"-->
+	<link rel="stylesheet" href="./passe-coque.css">
+	<!--script type="module" src="../../webcomponents/widgets/slideshow/SlideShow.js"></script-->
+	<style type="text/css">
+:root {
+  --small-screen-width: 500px;
+}
+
+* {
+	font-family: "Open Sans", "DejaVu Sans", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}		
+
+h1 {
+	font-size: 4em;
+	font-weight: 600;
+	text-align: center;
+}
+@media screen and (max-width: var(--small-screen-width)) {
+	h1 {
+		font-size: 3em;
+	}
+}
+
+    </style>
+</head>
+<script type="text/javascript">
+
+	let clack = (origin) => {
+		console.log(`Click on ${origin.innerText}`);
+	}
+	
+</script>
+	
+<body>
+	<!--
+		- Accueil
+		- Qui sommes nous
+			- Passe-Coque, c'est quoi ?
+			- Notre equipe
+			- L'association
+			- La SCIC : Eco-village Nautique
+		- Nos actions
+			- Transmettre
+			- Renover
+			- Partager
+			- Nos formations
+			- Associations paretenaires
+		- La flotte
+			- Les bateaux
+			- Les projets a saisir
+			- Le boat club
+		- Nous rejoindre
+			- Faire un don
+			- Inverstir dans la SCIC
+			- Votre projet associatif
+		- En savoir plus
+			- Contact
+			- Actualite
+			- Visiter le chantier
+			- Partenaires
+	-->
+	<div id="nav-menu" style="margin-left: -48px; margin-top: -8px;">
+		<ul id="navigation"  style="display: grid; grid-template-columns: auto auto auto auto auto auto;"> <!-- Columns must match the menu below... -->
+			<li><a href="#" onclick="clack(this);">Acceuil</a></li>
+			<li>
+				<a href="#">Qui sommes-nous&nbsp;?</a>
+				<ul>
+					<li><a href="#" onclick="clack(this);">Passe-Coque, c'est quoi ?</a></li>
+					<li><a href="#" onclick="clack(this);">Notre &eacute;quipe</a></li>
+					<li><a href="#" onclick="clack(this);">L'association</a></li>
+					<li><a href="#" onclick="clack(this);">La SCIC : Eco-village Nautique</a></li>
+					<!--li>
+						<a href="#">Service 3 &raquo;</a>
+						<ul>
+							<li><a href="#" onclick="clack(this);">SubMenu 1</a></li>
+							<li><a href="#" onclick="clack(this);">SubMenu 2</a></li>
+							<li><a href="#" onclick="clack(this);">SubMenu 3</a></li>
+							<li><a href="#" onclick="clack(this);">SubMenu 4</a></li>
+						</ul>					
+					</li-->					
+					<!--li><a href="#" onclick="clack(this);">Service 4</a></li-->
+				</ul>
+			</li>
+			<li>
+				<a href="#"  onclick="clack(this);">Nos actions</a>
+				<ul>
+					<li><a href="#" onclick="clack(this);">Transmettre</a></li>
+					<li><a href="#" onclick="clack(this);">Renover</a></li>
+					<li><a href="#" onclick="clack(this);">Partager</a></li>
+					<li><a href="#" onclick="clack(this);">Nos formations</a></li>
+					<li><a href="#" onclick="clack(this);">Associations partenaires</a></li>
+				</ul>
+			</li>
+			<li>
+				<a href="#"  onclick="clack(this);">La flotte</a>
+				<ul>
+					<li><a href="#" onclick="clack(this);">Les bateaux</a></li>
+					<li><a href="#" onclick="clack(this);">Les projets &agrave; saisir</a></li>
+					<li><a href="#" onclick="clack(this);">Le boat-club</a></li>
+				</ul>
+			</li>
+			<li>
+				<a href="#"  onclick="clack(this);">Nous rejoindre</a>
+				<ul>
+					<li><a href="#" onclick="clack(this);">Faire un don</a></li>
+					<li><a href="#" onclick="clack(this);">Inverstir dans la SCIC</a></li>
+					<li><a href="#" onclick="clack(this);">Votre projet associatif</a></li>
+				</ul>
+			</li>
+			<li>
+				<a href="#"  onclick="clack(this);">En savoir plus</a>
+				<ul>
+					<li><a href="#" onclick="clack(this);">Contact</a></li>
+					<li><a href="#" onclick="clack(this);">Actualit&eacute;</a></li>
+					<li><a href="#" onclick="clack(this);">Visiter le chantier</a></li>
+					<li><a href="#" onclick="clack(this);">Partenaires</a></li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+		
+
+	<br/>
+		
+    <h1>Passe-Coque</h1>
+
+</body>    
+</html>
