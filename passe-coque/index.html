@@ -4,12 +4,13 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Passe-Coque</title>
-	<!--link rel="icon" type="image/png" href="../../misc.pix/hummingbird.png"-->
+	<link rel="icon" type="image/png" href="./infinity.png">
 	<link rel="stylesheet" href="./passe-coque.css">
 	<!--script type="module" src="../../webcomponents/widgets/slideshow/SlideShow.js"></script-->
 	<style type="text/css">
+
 :root {
-  --small-screen-width: 500px;
+  --small-screen-width: 1000px;
 }
 
 * {
@@ -24,9 +25,11 @@ h1 {
 	text-align: center;
 	text-shadow: 2px 2px 4px black, 0 0 25px white, 0 0 7px cyan;
 }
-@media screen and (max-width: var(--small-screen-width)) {
+/* @media screen and (max-width: var(--small-screen-width)) { */
+@media screen and (max-width: 1000px) { /* No var... */
 	h1 {
-		font-size: 3em;
+		color: red;
+		font-size: 4em;
 	}
 }
 
@@ -127,7 +130,6 @@ h1 {
 			</li>
 		</ul>
 	</div>
-		
 
 	<br/>
 		
