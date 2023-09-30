@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<!-- 
+	TODO 
+	- Multilingue
+	- Background
+-->
 <head>
 	<meta charset="UTF-8">
 	<title>Passe-Coque</title>
@@ -23,8 +27,36 @@ h1 {
 	font-size: 4em;
 	font-weight: 600;
 	text-align: center;
+	color: blue;
 	text-shadow: 2px 2px 4px black, 0 0 25px white, 0 0 7px cyan;
 }
+
+.background {
+  /*color: #999999;*/
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  top: 0;
+  left: 0;
+  z-index: -100;
+}
+.bg-data {
+  font-family: "Courier New", sans-serif;
+  font-size: 256px;
+  font-weight: bold;
+  color: lightskyblue;
+  text-align: center;
+  /* margin-top: 125px; */
+  /* margin-left: 20px; */
+  overflow-y: scroll;
+}
+
+html {
+  display: table;
+  width: 100%;
+  height: 100%;
+}
+
 /* @media screen and (max-width: var(--small-screen-width)) { */
 @media screen and (max-width: 1000px) { /* No var... */
 	h1 {
@@ -38,7 +70,7 @@ h1 {
 <script type="text/javascript">
 
 	let clack = (origin) => {
-		console.log(`Click on ${origin.innerText}`);
+		console.log(`Click on ${origin.innerText}, id ${origin.id}`);
 	}
 	
 </script>
@@ -73,14 +105,14 @@ h1 {
 	-->
 	<div id="nav-menu" style="margin-left: -48px; margin-top: -8px;">
 		<ul id="navigation"  style="display: grid; grid-template-columns: auto auto auto auto auto auto;"> <!-- Columns must match the menu below... -->
-			<li><a href="#" onclick="clack(this);">Acceuil</a></li>
+			<li><a href="#" onclick="clack(this);" id="1">Acceuil</a></li>
 			<li>
-				<a href="#">Qui sommes-nous&nbsp;?</a>
+				<a href="#" id="2">Qui sommes-nous&nbsp;?</a>
 				<ul>
-					<li><a href="#" onclick="clack(this);">Passe-Coque, c'est quoi ?</a></li>
-					<li><a href="#" onclick="clack(this);">Notre &eacute;quipe</a></li>
-					<li><a href="#" onclick="clack(this);">L'association</a></li>
-					<li><a href="#" onclick="clack(this);">La SCIC : Eco-village Nautique</a></li>
+					<li><a href="#" onclick="clack(this);" id="21">Passe-Coque, c'est quoi ?</a></li>
+					<li><a href="#" onclick="clack(this);" id="22">Notre &eacute;quipe</a></li>
+					<li><a href="#" onclick="clack(this);" id="23">L'association</a></li>
+					<li><a href="#" onclick="clack(this);" id="24">La SCIC : Eco-village Nautique</a></li>
 					<!--li>
 						<a href="#">Service 3 &raquo;</a>
 						<ul>
@@ -94,38 +126,38 @@ h1 {
 				</ul>
 			</li>
 			<li>
-				<a href="#"  onclick="clack(this);">Nos actions</a>
+				<a href="#" onclick="clack(this);" id="3">Nos actions</a>
 				<ul>
-					<li><a href="#" onclick="clack(this);">Transmettre</a></li>
-					<li><a href="#" onclick="clack(this);">Renover</a></li>
-					<li><a href="#" onclick="clack(this);">Partager</a></li>
-					<li><a href="#" onclick="clack(this);">Nos formations</a></li>
-					<li><a href="#" onclick="clack(this);">Associations partenaires</a></li>
+					<li><a href="#" onclick="clack(this);" id="31">Transmettre</a></li>
+					<li><a href="#" onclick="clack(this);" id="32">R&eacute;nover</a></li>
+					<li><a href="#" onclick="clack(this);" id="33">Partager</a></li>
+					<li><a href="#" onclick="clack(this);" id="34">Nos formations</a></li>
+					<li><a href="#" onclick="clack(this);" id="35">Associations partenaires</a></li>
 				</ul>
 			</li>
 			<li>
-				<a href="#"  onclick="clack(this);">La flotte</a>
+				<a href="#"  onclick="clack(this);" id="4">La flotte</a>
 				<ul>
-					<li><a href="#" onclick="clack(this);">Les bateaux</a></li>
-					<li><a href="#" onclick="clack(this);">Les projets &agrave; saisir</a></li>
-					<li><a href="#" onclick="clack(this);">Le boat-club</a></li>
+					<li><a href="#" onclick="clack(this);" id="41">Les bateaux</a></li>
+					<li><a href="#" onclick="clack(this);" id="42">Les projets &agrave; saisir</a></li>
+					<li><a href="#" onclick="clack(this);" id="43">Le boat-club</a></li>
 				</ul>
 			</li>
 			<li>
-				<a href="#"  onclick="clack(this);">Nous rejoindre</a>
+				<a href="#"  onclick="clack(this);" id="5">Nous rejoindre</a>
 				<ul>
-					<li><a href="#" onclick="clack(this);">Faire un don</a></li>
-					<li><a href="#" onclick="clack(this);">Inverstir dans la SCIC</a></li>
-					<li><a href="#" onclick="clack(this);">Votre projet associatif</a></li>
+					<li><a href="#" onclick="clack(this);" id="51">Faire un don</a></li>
+					<li><a href="#" onclick="clack(this);" id="52">Inverstir dans la SCIC</a></li>
+					<li><a href="#" onclick="clack(this);" id="53">Votre projet associatif</a></li>
 				</ul>
 			</li>
 			<li>
-				<a href="#"  onclick="clack(this);">En savoir plus</a>
+				<a href="#"  onclick="clack(this);" id="6">En savoir plus</a>
 				<ul>
-					<li><a href="#" onclick="clack(this);">Contact</a></li>
-					<li><a href="#" onclick="clack(this);">Actualit&eacute;</a></li>
-					<li><a href="#" onclick="clack(this);">Visiter le chantier</a></li>
-					<li><a href="#" onclick="clack(this);">Partenaires</a></li>
+					<li><a href="#" onclick="clack(this);" id="61">Contact</a></li>
+					<li><a href="#" onclick="clack(this);" id="62">Actualit&eacute;</a></li>
+					<li><a href="#" onclick="clack(this);" id="63">Visiter le chantier</a></li>
+					<li><a href="#" onclick="clack(this);" id="64">Partenaires</a></li>
 				</ul>
 			</li>
 		</ul>
@@ -133,7 +165,83 @@ h1 {
 
 	<br/>
 		
-    <h1>Passe-Coque</h1>
+	<div class="background">
+		<div class="bg-data" id="bg-data">
+			<img src="../backgrounds/la.licorne.jpeg" style="width: 100%; height: auto; opacity: 0.5;">
+		</div>
+	</div>
+
+	<div>
+		<a href="#" onclick="switchLanguage();"><image id="lang-flag" src="./usa.gif" alt="US Flag" title="Switch to English"></image></a>
+	</div>
+	<h1>Passe-Coque</h1>
+	<div>
+
+	</div>
+	<hr/>
+	<small>&copy; <i>2023, Passe-Coque</i></small>
 
 </body>    
+<script type="text/javascript">
+
+const DEFAULT_LANG = "FR";
+let currentLang = DEFAULT_LANG; // Init value
+
+let updateMenu = () => {
+	document.getElementById("1").innerHTML = (currentLang === "FR" ? "Accueil" : "Home");
+
+	document.getElementById("2").innerHTML = (currentLang === "FR" ? "Qui sommes-nous&nbsp;?" : "Who we are");
+	document.getElementById("21").innerHTML = (currentLang === "FR" ? "Passe-Coque, c'est quoi&nbsp;?" : "Passe-Coque, what's that?");
+	document.getElementById("22").innerHTML = (currentLang === "FR" ? "Notre &eacute;quipe" : "Our team");
+	document.getElementById("23").innerHTML = (currentLang === "FR" ? "L'association" : "The association");
+	document.getElementById("24").innerHTML = (currentLang === "FR" ? "La SCIC : Eco-village Nautique" : "The SCIC: Nautical Eco-village");
+
+	document.getElementById("3").innerHTML = (currentLang === "FR" ? "Nos actions" : "Our actions");
+	document.getElementById("31").innerHTML = (currentLang === "FR" ? "Transmettre" : "Transmit");
+	document.getElementById("32").innerHTML = (currentLang === "FR" ? "R&eacute;nover" : "Refit");
+	document.getElementById("33").innerHTML = (currentLang === "FR" ? "Partager" : "Share");
+	document.getElementById("34").innerHTML = (currentLang === "FR" ? "Nos formations" : "Our trainings");
+	document.getElementById("35").innerHTML = (currentLang === "FR" ? "Associations partenaires" : "Partner associations");
+
+	document.getElementById("4").innerHTML = (currentLang === "FR" ? "La flotte" : "The fleet");
+	document.getElementById("41").innerHTML = (currentLang === "FR" ? "Les bateaux" : "The boats");
+	document.getElementById("42").innerHTML = (currentLang === "FR" ? "Les projets" : "The projects");
+	document.getElementById("43").innerHTML = (currentLang === "FR" ? "Le boat-club" : "The boat-club");
+
+	document.getElementById("5").innerHTML = (currentLang === "FR" ? "Nous rejoindre" : "Join us");
+	document.getElementById("51").innerHTML = (currentLang === "FR" ? "Faire un don" : "Make a gift");
+	document.getElementById("52").innerHTML = (currentLang === "FR" ? "Inverstir dans la SCIC" : "Invest in the SCIC");
+	document.getElementById("53").innerHTML = (currentLang === "FR" ? "Votre projet associatif" : "Your association project");
+
+	document.getElementById("6").innerHTML = (currentLang === "FR" ? "En savoir plus" : "Know more");
+	document.getElementById("61").innerHTML = (currentLang === "FR" ? "Contact" : "Contact");
+	document.getElementById("62").innerHTML = (currentLang === "FR" ? "Actualit&eacute;" : "News");
+	document.getElementById("63").innerHTML = (currentLang === "FR" ? "Visiter le chantier" : "Visit the shipyard");
+	document.getElementById("64").innerHTML = (currentLang === "FR" ? "Partenaires" : "Partners");
+};
+
+let switchLanguage = () => {
+	let flagElement = document.getElementById("lang-flag");
+	if (currentLang === "FR") { // Then switch to EN
+		flagElement.src = "./france.gif";
+		flagElement.alt = "Drapeau français";
+		flagElement.title = "En français";
+		currentLang = "EN";
+	} else {
+		flagElement.src = "./usa.gif";
+		flagElement.alt = "US Flag";
+		flagElement.title = "Switch to English";
+		currentLang = "FR";
+	}
+	// Le reste...
+	updateMenu();
+};
+
+
+window.onload = () => {
+	console.log("Loaded !");
+};
+
+</script>
+
 </html>
