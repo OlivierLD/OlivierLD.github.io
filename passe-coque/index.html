@@ -8,6 +8,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Passe-Coque</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="icon" type="image/png" href="./infinity.png">
 	<link rel="stylesheet" href="./passe-coque.css">
 	<!--script type="module" src="../../webcomponents/widgets/slideshow/SlideShow.js"></script-->
@@ -67,13 +68,6 @@ html {
 
     </style>
 </head>
-<script type="text/javascript">
-
-	let clack = (origin) => {
-		console.log(`Click on ${origin.innerText}, id ${origin.id}`);
-	}
-	
-</script>
 	
 <body>
 	<!--
@@ -175,7 +169,7 @@ html {
 		<a href="#" onclick="switchLanguage();"><image id="lang-flag" src="./usa.gif" alt="US Flag" title="Switch to English"></image></a>
 	</div>
 	<h1>Passe-Coque</h1>
-	<div>
+	<div id="current-content">
 
 	</div>
 	<hr/>
@@ -186,6 +180,39 @@ html {
 
 const DEFAULT_LANG = "FR";
 let currentLang = DEFAULT_LANG; // Init value
+
+let clack = (origin) => {
+	console.log(`Click on ${origin.innerText}, id ${origin.id}`);
+
+	let contentName = `${origin.id}_${currentLang}.html`;
+	let contentPlaceHolder = document.getElementById("current-content");
+
+	fetch(contentName)
+            .then(response => {  // Warning... the NOT_FOUND error lands here, apparently.
+                console.log(`Data Response: ${response.status} - ${response.statusText}`);
+                response.text().then(doc => {
+                    console.log(`Path data loaded, ${doc.length} elements`);
+					contentPlaceHolder.innerHTML = doc;
+                });
+            },
+            (error, errmess) => {
+                console.log("Ooch");
+                let message;
+                if (errmess) {
+                    let mess = JSON.parse(errmess);
+                    if (mess.message) {
+                        message = mess.message;
+                    }
+                }
+                console.debug("Failed to get Path data..." + (error ? JSON.stringify(error, null, 2) : ' - ') + ', ' + (message ? message : ' - '));
+				// Plus tard...
+				contentPlaceHolder.innerHTML = "<b>&Ccedil;a vient...</b>";
+
+            });
+
+
+
+}
 
 let updateMenu = () => {
 	document.getElementById("1").innerHTML = (currentLang === "FR" ? "Accueil" : "Home");
