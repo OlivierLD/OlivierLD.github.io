@@ -349,16 +349,20 @@ let clack = (origin) => {
 	fetch(contentName)
             .then(response => {  // Warning... the NOT_FOUND error lands here, apparently.
                 console.log(`Data Response: ${response.status} - ${response.statusText}`);
-                response.text().then(doc => {
-                    console.log(`Path data loaded, ${doc.length} elements`);
-					// Some specific cases here
-					if (origin.id === "23") {
-						document.getElementById("dialog-content").innerHTML = doc;
-						showAboutDialog();
-					} else {
-						contentPlaceHolder.innerHTML = doc;
-					}
-                });
+				if (response.status !== 200) { // There is a problem...
+					contentPlaceHolder.innerHTML = `Fetching ${contentName}...<br/> Data Response: ${response.status} - ${response.statusText}<br/><b>&Ccedil;a vient...</b>`;
+				} else {
+					response.text().then(doc => {
+						console.log(`Path data loaded, ${doc.length} elements`);
+						// Some specific cases here
+						if (origin.id === "23") {
+							document.getElementById("dialog-content").innerHTML = doc;
+							showAboutDialog();
+						} else {
+							contentPlaceHolder.innerHTML = doc;
+						}
+					});
+				}
             },
             (error, errmess) => {
                 console.log("Ooch");
