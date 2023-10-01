@@ -16,6 +16,7 @@
 
 :root {
   --small-screen-width: 1000px;
+  --slider-scale: 0.5;
 }
 
 * {
@@ -30,6 +31,15 @@ h1 {
 	text-align: center;
 	color: blue;
 	text-shadow: 2px 2px 4px black, 0 0 25px white, 0 0 7px cyan;
+}
+
+dialog {
+	background: rgba(25, 25, 25, 0.75);
+	color: silver;
+	width: 400px;
+	top: 50px;
+	border: 2px solid orange;
+	border-radius: 10px;
 }
 
 .text-content {
@@ -60,10 +70,106 @@ h1 {
   overflow-y: scroll;
 }
 
+/* For the switch (slider) */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: calc(var(--slider-scale) * 60px);
+  height: calc(var(--slider-scale) * 34px);
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: calc(var(--slider-scale) * 26px);
+  width: calc(var(--slider-scale) * 26px);
+  left: calc(var(--slider-scale) * 4px);
+  bottom: calc(var(--slider-scale) * 4px);
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196f3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196f3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(calc(var(--slider-scale) * 26px));
+  -ms-transform: translateX(calc(var(--slider-scale) * 26px));
+  transform: translateX(calc(var(--slider-scale) * 26px));
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: calc(var(--slider-scale) * 34px);
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+/* Switch grid */
+.switch-container {
+  display: grid;
+  grid-template-columns: calc(var(--slider-scale) * 80px) 200px;
+  width: 500px;
+}
+.switch-element {
+  place-self: flex-start;
+}
+
+.dialog-header {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.dialog-header-close {
+  float: right;
+}
+.dialog-header-close:hover {
+  color: cyan;
+  cursor: pointer;
+}
+
 html {
   display: table;
   width: 100%;
   height: 100%;
+}
+
+a:link {
+	color: #0000a0
+}
+
+a:active {
+	color: #8080ff
+}
+
+a:visited {
+	color: #8080ff
 }
 
 /* @media screen and (max-width: var(--small-screen-width)) { */
@@ -78,7 +184,19 @@ html {
 </head>
 	
 <body>
+
+	<dialog id="about-dialog" class="shadow-menu" style="width: 800px;">
+		<div class="dialog-header">
+		  <span><!-- Empty title --></span>
+		  <span class="dialog-header-close" onclick="closeAboutDialog();">&times</span>
+		</div>
+		<div id="dialog-content">
+		  <!-- Content goes here -->
+		</div>
+	</dialog>
+
 	<!--
+		** Structure du menu **
 		- Accueil
 		- Qui sommes nous
 			- Passe-Coque, c'est quoi ?
@@ -174,9 +292,21 @@ html {
 		</div>
 	</div>
 
-	<div>
-		<a href="#" onclick="switchLanguage();"><image id="lang-flag" src="./usa.gif" alt="US Flag" title="Switch to English"></image></a>
-	</div>
+	<div id="top-container" style="display: grid; grid-template-columns: auto auto;" >
+		<div>
+			<a href="#" onclick="switchLanguage();"><image id="lang-flag" src="./usa.gif" alt="US Flag" title="Switch to English"></image></a>
+		</div>
+		<div style="display: inline; justify-content: end;">
+			<!--div class="switch-container" title="On or off">
+				<label class="switch switch-element">
+				<input id="time-bg-slider" type="checkbox" onchange="manageTimeBGClick(this);">
+				<span class="slider round"></span>
+				</label>
+				<span class="switch-element">BG System Time Display</span>
+			</div-->
+		</div>
+	</div>  
+	
 	<h1>Passe-Coque</h1>
 	<div id="current-content" class="text-content">
 
@@ -190,6 +320,26 @@ html {
 const DEFAULT_LANG = "FR";
 let currentLang = DEFAULT_LANG; // Init value
 
+let showAboutDialog = () => {
+    let aboutDialog = document.getElementById("about-dialog");
+    if (aboutDialog.show !== undefined) {
+      aboutDialog.show();
+    } else {
+      alert(NO_DIALOG_MESSAGE);
+      aboutDialog.style.display = 'inline';
+    }
+};
+
+let closeAboutDialog = () => {
+    let aboutDialog = document.getElementById("about-dialog");
+    if (aboutDialog.close !== undefined) {
+      aboutDialog.close();
+    } else {
+      // alert(NO_DIALOG_MESSAGE);
+      aboutDialog.style.display = 'none';
+    }
+};
+
 let clack = (origin) => {
 	console.log(`Click on ${origin.innerText}, id ${origin.id}`);
 
@@ -201,7 +351,13 @@ let clack = (origin) => {
                 console.log(`Data Response: ${response.status} - ${response.statusText}`);
                 response.text().then(doc => {
                     console.log(`Path data loaded, ${doc.length} elements`);
-					contentPlaceHolder.innerHTML = doc;
+					// Some specific cases here
+					if (origin.id === "23") {
+						document.getElementById("dialog-content").innerHTML = doc;
+						showAboutDialog();
+					} else {
+						contentPlaceHolder.innerHTML = doc;
+					}
                 });
             },
             (error, errmess) => {
@@ -223,7 +379,7 @@ let clack = (origin) => {
 
 }
 
-let updateMenu = () => {
+let updateMenu = () => { // Multilang aspect.
 	document.getElementById("1").innerHTML = (currentLang === "FR" ? "Accueil" : "Home");
 
 	document.getElementById("2").innerHTML = (currentLang === "FR" ? "Qui sommes-nous&nbsp;?" : "Who we are");

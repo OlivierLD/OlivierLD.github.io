@@ -1807,15 +1807,6 @@ Date.prototype.format = function (dateFormat) {
     BG_INTERVAL = (cb.checked ? FAST_BG_INTERVAL : SLOW_BG_INTERVAL);
   }
 
-  function manageTimeBGClick(cb) {
-    if (cb.checked) { // Start
-      bgTime = true;
-    } else { // Stop
-      bgTime = false;
-      document.getElementById('bg-data').innerText = '';
-    }
-  }
-
   let slideIndex = 1;
   showSlides(slideIndex);
 
