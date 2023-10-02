@@ -228,7 +228,7 @@ a:visited {
 	-->
 	<div id="nav-menu" style="margin-left: -48px; margin-top: -8px;">
 		<ul id="navigation"  style="display: grid; grid-template-columns: 80px 120px auto auto auto auto auto;"> <!-- Columns must match the menu below... -->
-			<li><a href="#" onclick="switchLanguage();"><image id="lang-flag" src="./usa.gif" alt="US Flag" title="Switch to English"></image></a></li>
+			<li><a href="#" onclick="switchLanguage();"><image id="lang-flag" src="./us_uk_flag.png" alt="US/UK Flag" title="Switch to English" style="width: 27px;"></image></a></li>
 			<li><a href="#" onclick="clack(this);" id="1"><image src="./logo.passe-coque.png" style="width: 16px;" title="Passe-Coque"/> Accueil</a></li>
 			<li>
 				<a href="#" id="2">Qui sommes-nous&nbsp;?&nbsp;&#9660;</a>
@@ -433,7 +433,7 @@ let switchLanguage = () => {
 		flagElement.title = "En français";
 		currentLang = "EN";
 	} else {
-		flagElement.src = "./usa.gif";
+		flagElement.src = "us_uk_flag.png"; // "./usa.gif";
 		flagElement.alt = "US Flag";
 		flagElement.title = "Switch to English";
 		currentLang = "FR";
