@@ -287,8 +287,9 @@ a:visited {
 		
 	<div class="background">
 		<div class="bg-data" id="bg-data">
-			<!--img src="../backgrounds/la.licorne.jpeg" style="width: 100%; height: auto; opacity: 0.5;"-->
-			<img src="./cognac.keel.jpg" style="width: 50%; height: auto; opacity: 0.5;">
+			<!--img id="bg-image" src="../backgrounds/la.licorne.jpeg" style="width: 100%; height: auto; opacity: 0.5;"-->
+			<!--img id="bg-image" src="./cognac.keel.jpg" style="width: 50%; height: auto; opacity: 0.5;"-->
+			<img id="bg-image" src="./photos.michel.01/quille.coraxy.jpg" style="width: 100%; height: auto; opacity: 0.5;">
 		</div>
 	</div>
 
@@ -296,14 +297,15 @@ a:visited {
 		<div>
 			<a href="#" onclick="switchLanguage();"><image id="lang-flag" src="./usa.gif" alt="US Flag" title="Switch to English"></image></a>
 		</div>
-		<div style="display: inline; justify-content: end;">
-			<!--div class="switch-container" title="On or off">
+		<div style="width: 100%; display: flex; justify-content: end;">
+			<!--span style="font-style: italic;">Dummy placeholder</span-->
+			<div class="switch-container" style="justify-content: end;" title="On or off">
 				<label class="switch switch-element">
-				<input id="time-bg-slider" type="checkbox" onchange="manageTimeBGClick(this);">
+				<input id="time-bg-slider" type="checkbox" onchange="startBGAnimation(this);">
 				<span class="slider round"></span>
 				</label>
-				<span class="switch-element">BG System Time Display</span>
-			</div-->
+				<span class="switch-element">Slide show</span>
+			</div>
 		</div>
 	</div>  
 	
@@ -311,8 +313,10 @@ a:visited {
 	<div id="current-content" class="text-content">
 
 	</div>
-	<hr/>
-	<small style="font-style: italic;">&copy; 2023, Passe-Coque</small>
+	<div style="width: 100%; position: fixed; bottom: 0; left: 10px; margin-bottom: 10px;">
+		<hr/>
+		<small style="font-style: italic;">&copy; 2023, Passe-Coque</small>
+	</div>
 
 </body>    
 <script type="text/javascript">
@@ -355,7 +359,9 @@ let clack = (origin) => {
 					response.text().then(doc => {
 						console.log(`Path data loaded, ${doc.length} elements`);
 						// Some specific cases here
-						if (origin.id === "23") {
+						if (origin.id === "1") { // Move this higher. No need to load 1_xx.html...
+							document.location.reload();
+						} else if (origin.id === "23") {
 							document.getElementById("dialog-content").innerHTML = doc;
 							showAboutDialog();
 						} else {
@@ -432,9 +438,54 @@ let switchLanguage = () => {
 	updateMenu();
 };
 
+const BG_IMAGES = 
+/*[
+	"../backgrounds/la.licorne.jpeg",
+	"../backgrounds/next_wave.jpg"
+];*/
+
+[ "jeff.01/DSCF2058.jpg",        "jeff.01/IMG_0319.jpg",        "jeff.01/IMG_6647.jpg",        "jeff.01/IMG_8100.jpg",       "jeff.01/P1010473.jpg",
+  "jeff.01/DSC_0519.jpg",        "jeff.01/IMG_0336.jpg",        "jeff.01/IMG_6662.jpg",        "jeff.01/IMG_9441.jpg",
+  "jeff.01/IMG_0207.jpg",        "jeff.01/IMG_0486.jpg",        "jeff.01/IMG_6663.jpg",        "jeff.01/IMG_9893.jpg",
+  "jeff.01/IMG_0218.jpg",        "jeff.01/IMG_1082.jpg",        "jeff.01/IMG_8034.jpg",        "jeff.01/P1000587.jpg" ];
+
+const BG_INTERVAL = 3000; // in ms
+
+let current_bg_image_index = 0;
+let bgAnimation;
+
+let startBGAnimation = (cb) => {
+	if (cb) {
+		if (!cb.checked) {
+			clearInterval(bgAnimation);
+			bgAnimation = null;
+		} else {
+			bgAnimation = setInterval(() => {
+				current_bg_image_index += 1;
+				if (current_bg_image_index >= BG_IMAGES.length) {
+					current_bg_image_index = 0;
+				}
+				document.getElementById("bg-image").src = BG_IMAGES[current_bg_image_index];
+			}, BG_INTERVAL); // in ms.
+		}
+	} else { // Previous behavior
+		if (bgAnimation !== undefined) {
+		clearInterval(bgAnimation);
+		}
+		// setTimeout(darkenBackground, 1);
+		bgAnimation = setInterval(() => {
+			current_bg_image_index += 1;
+			if (current_bg_image_index >= BG_IMAGES.length) {
+				current_bg_image_index = 0;
+			}
+			document.getElementById("bg-image").src = BG_IMAGES[current_bg_image_index];
+		}, BG_INTERVAL); // in ms.
+	}
+};
 
 window.onload = () => {
 	console.log("Loaded !");
+	// startBGAnimation();
 };
 
 </script>
