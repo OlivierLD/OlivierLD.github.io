@@ -229,7 +229,7 @@ a:visited {
 	<div id="nav-menu" style="margin-left: -48px; margin-top: -8px;">
 		<ul id="navigation"  style="display: grid; grid-template-columns: 80px 120px auto auto auto auto auto;"> <!-- Columns must match the menu below... -->
 			<li><a href="#" onclick="switchLanguage();"><image id="lang-flag" src="./us_uk_flag.png" alt="US/UK Flag" title="Switch to English" style="width: 27px;"></image></a></li>
-			<li><a href="#" onclick="clack(this);" id="1"><image src="./logo.passe-coque.png" style="width: 16px;" title="Passe-Coque"/> Accueil</a></li>
+			<li><a href="#" onclick="clack(this);" id="1"><image src="./logo.passe-coque.png" style="width: 16px;" title="Passe-Coque"/><span id="home-label"> Accueil</span></a></li>
 			<li>
 				<a href="#" id="2">Qui sommes-nous&nbsp;?&nbsp;&#9660;</a>
 				<ul>
@@ -393,7 +393,7 @@ let clack = (origin) => {
 }
 
 let updateMenu = () => { // Multilang aspect.
-	document.getElementById("1").innerHTML = (currentLang === "FR" ? "Accueil" : "Home");
+	document.getElementById("home-label").innerHTML = (currentLang === "FR" ? "Accueil" : "Home");
 
 	document.getElementById("2").innerHTML = (currentLang === "FR" ? "Qui sommes-nous&nbsp;?" : "Who we are");
 	document.getElementById("21").innerHTML = (currentLang === "FR" ? "Passe-Coque, c'est quoi&nbsp;?" : "Passe-Coque, what's that?");
