@@ -43,7 +43,9 @@ dialog {
 }
 
 .text-content {
-	text-shadow: 2px 2px 4px black, 0 0 25px white, 0 0 7px cyan;
+	/* text-shadow: 2px 2px 4px black, 0 0 25px white, 0 0 7px cyan; */
+	color: blue;
+	/* font-weight: bold; */
 }
 
 #lang-flag:hover {
@@ -197,6 +199,7 @@ a:visited {
 
 	<!--
 		** Structure du menu **
+		▼ = &#9660;
 		- Accueil
 		- Qui sommes nous
 			- Passe-Coque, c'est quoi ?
@@ -224,10 +227,11 @@ a:visited {
 			- Partenaires
 	-->
 	<div id="nav-menu" style="margin-left: -48px; margin-top: -8px;">
-		<ul id="navigation"  style="display: grid; grid-template-columns: auto auto auto auto auto auto;"> <!-- Columns must match the menu below... -->
-			<li><a href="#" onclick="clack(this);" id="1">Acceuil</a></li>
+		<ul id="navigation"  style="display: grid; grid-template-columns: 80px 120px auto auto auto auto auto;"> <!-- Columns must match the menu below... -->
+			<li><a href="#" onclick="switchLanguage();"><image id="lang-flag" src="./usa.gif" alt="US Flag" title="Switch to English"></image></a></li>
+			<li><a href="#" onclick="clack(this);" id="1"><image src="./logo.passe-coque.png" style="width: 16px;" title="Passe-Coque"/> Accueil</a></li>
 			<li>
-				<a href="#" id="2">Qui sommes-nous&nbsp;?</a>
+				<a href="#" id="2">Qui sommes-nous&nbsp;?&nbsp;&#9660;</a>
 				<ul>
 					<li><a href="#" onclick="clack(this);" id="21">Passe-Coque, c'est quoi ?</a></li>
 					<li><a href="#" onclick="clack(this);" id="22">Notre &eacute;quipe</a></li>
@@ -246,7 +250,7 @@ a:visited {
 				</ul>
 			</li>
 			<li>
-				<a href="#" onclick="clack(this);" id="3">Nos actions</a>
+				<a href="#" onclick="clack(this);" id="3">Nos actions&nbsp;&#9660;</a>
 				<ul>
 					<li><a href="#" onclick="clack(this);" id="31">Transmettre</a></li>
 					<li><a href="#" onclick="clack(this);" id="32">R&eacute;nover</a></li>
@@ -256,7 +260,7 @@ a:visited {
 				</ul>
 			</li>
 			<li>
-				<a href="#"  onclick="clack(this);" id="4">La flotte</a>
+				<a href="#"  onclick="clack(this);" id="4">La flotte&nbsp;&#9660;</a>
 				<ul>
 					<li><a href="#" onclick="clack(this);" id="41">Les bateaux</a></li>
 					<li><a href="#" onclick="clack(this);" id="42">Les projets &agrave; saisir</a></li>
@@ -264,7 +268,7 @@ a:visited {
 				</ul>
 			</li>
 			<li>
-				<a href="#"  onclick="clack(this);" id="5">Nous rejoindre</a>
+				<a href="#"  onclick="clack(this);" id="5">Nous rejoindre&nbsp;&#9660;</a>
 				<ul>
 					<li><a href="#" onclick="clack(this);" id="51">Faire un don</a></li>
 					<li><a href="#" onclick="clack(this);" id="52">Inverstir dans la SCIC</a></li>
@@ -272,7 +276,7 @@ a:visited {
 				</ul>
 			</li>
 			<li>
-				<a href="#"  onclick="clack(this);" id="6">En savoir plus</a>
+				<a href="#"  onclick="clack(this);" id="6">En savoir plus&nbsp;&#9660;</a>
 				<ul>
 					<li><a href="#" onclick="clack(this);" id="61">Contact</a></li>
 					<li><a href="#" onclick="clack(this);" id="62">Actualit&eacute;</a></li>
@@ -295,7 +299,7 @@ a:visited {
 
 	<div id="top-container" style="display: grid; grid-template-columns: auto auto;" >
 		<div>
-			<a href="#" onclick="switchLanguage();"><image id="lang-flag" src="./usa.gif" alt="US Flag" title="Switch to English"></image></a>
+			<!--a href="#" onclick="switchLanguage();"><image id="lang-flag" src="./usa.gif" alt="US Flag" title="Switch to English"></image></a-->
 		</div>
 		<div style="width: 100%; display: flex; justify-content: end;">
 			<!--span style="font-style: italic;">Dummy placeholder</span-->
@@ -309,7 +313,7 @@ a:visited {
 		</div>
 	</div>  
 	
-	<h1>Passe-Coque</h1>
+	<!--h1>Passe-Coque</h1-->
 	<div id="current-content" class="text-content">
 
 	</div>

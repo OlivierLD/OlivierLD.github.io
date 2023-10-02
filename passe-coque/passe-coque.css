@@ -79,7 +79,7 @@ ul#navigation li a {
 
 ul#navigation li a:hover {
 	background: #f8f8f8;
-	color: #282828;
+	color: orange;
 	font-weight: bold;
 	/* text-shadow: 1px 1px 2px black, 0 0 15px white, 0 0 3px cyan; */
 }
