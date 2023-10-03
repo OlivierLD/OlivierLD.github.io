@@ -2,21 +2,20 @@
 <html lang="en">
 <!-- 
 	TODO 
-	- Multilingue
-	- Background
+	- ...
 -->
 <head>
 	<meta charset="UTF-8">
 	<title>Passe-Coque</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="icon" type="image/png" href="./infinity.png">
-	<link rel="stylesheet" href="./passe-coque.css">
-	<!--script type="module" src="../../webcomponents/widgets/slideshow/SlideShow.js"></script-->
+	<link rel="stylesheet" href="../css/stylesheet.css" type="text/css"/>
 	<style type="text/css">
 
 :root {
   --small-screen-width: 1000px;
   --slider-scale: 0.5;
+  --expanded-nav-width: 450px;
 }
 
 * {
@@ -28,7 +27,12 @@
 h1 {
 	font-size: 4em;
 	font-weight: 600;
-	text-align: center;
+	/* text-align: center; */
+	color: blue;
+	text-shadow: 2px 2px 4px black, 0 0 25px white, 0 0 7px cyan;
+}
+
+h2 {
 	color: blue;
 	text-shadow: 2px 2px 4px black, 0 0 25px white, 0 0 7px cyan;
 }
@@ -182,6 +186,126 @@ a:visited {
 	}
 }
 
+.active-link {
+  color: white;
+  font-size: 20px;
+  text-shadow: 2px 2px 4px black, 0 0 25px white, 0 0 10px orange;
+}
+
+.bold-link {
+   font-weight: bold;
+}
+
+.sidenav:hover {
+  font-size: 24px;
+}
+
+.no-shadow {
+  text-shadow: none;
+}
+
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  /*  background-color: rgba(0, 0, 0, 0.6); */
+  background-image: linear-gradient(rgba(0, 0, 255, 0.6), rgba(0, 0, 0, 0.6));
+  overflow-x: hidden;
+  transition: 1.0s;
+  padding-top: 60px;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 18px;
+  color: silver; /* #818181; */
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover, .offcanvas a:focus {
+  color: white; /* #f1f1f1; */
+  /*cursor: not-allowed;*/
+}
+
+a.no-click {
+  color: white; /* #f1f1f1; */
+  cursor: not-allowed;
+}
+
+#close-nav-button:hover {
+  color: cyan;
+  cursor: pointer;
+}
+
+a.active-link:hover {
+  color: cyan;
+  cursor: pointer;
+}
+
+span.expand-collapse:hover {
+  color: cyan;
+  cursor: pointer;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 24px;
+  margin-left: 50px;
+  margin-bottom: 20px;
+}
+
+.switch-lang {
+  position: absolute;
+  top: 0;
+}
+
+.sub-section {
+  /* display: none; */
+  visibility: hidden;
+  opacity: 0;
+  height: 0;
+  transition: opacity 0.5s linear, height 0.5s ease-in-out;
+  margin-left: 24px;
+}
+
+.sub-section-desc {
+  margin-left: 30px;
+  font-size: 14px;
+  color: orange;
+  font-style: italic;
+  text-shadow: 2px 2px 4px black, 0 0 25px white, 0 0 7px cyan;
+}
+
+.enhanced {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  margin-bottom: 5px;
+  margin-left: 7px;
+  font-size: 16px;
+  color: orange;
+  font-style: italic;
+  font-weight: bold;
+  text-shadow: 4px 4px 8px navy, 0 0 25px blue, 0 0 7px cyan;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {
+    padding-top: 15px;
+  }
+
+  .sidenav a {
+    font-size: 18px;
+  }
+}
+
     </style>
 </head>
 	
@@ -196,6 +320,8 @@ a:visited {
 		  <!-- Content goes here -->
 		</div>
 	</dialog>
+
+	<h1 style="width: 100%;"><span id="hamburger" style="cursor: pointer;" onclick="openNav()" onmouseover="openNav()" title="Hamburger">&nbsp; &#8801;</span> <span id="my-name">Passe-Coque </span></h1>
 
 	<!--
 		** Structure du menu **
@@ -226,66 +352,71 @@ a:visited {
 			- Visiter le chantier
 			- Partenaires
 	-->
-	<div id="nav-menu" style="margin-left: -48px; margin-top: -8px;">
-		<ul id="navigation"  style="display: grid; grid-template-columns: 80px 120px auto auto auto auto auto;"> <!-- Columns must match the menu below... -->
-			<li><a href="#" onclick="switchLanguage();"><image id="lang-flag" src="./us_uk_flag.png" alt="US/UK Flag" title="Switch to English" style="width: 27px;"></image></a></li>
-			<li><a href="#" onclick="clack(this);" id="1"><image src="./logo.passe-coque.png" style="width: 16px;" title="Passe-Coque"/><span id="home-label"> Accueil</span></a></li>
-			<li>
-				<a href="#" id="2">Qui sommes-nous&nbsp;?&nbsp;&#9660;</a>
-				<ul>
-					<li><a href="#" onclick="clack(this);" id="21">Passe-Coque, c'est quoi ?</a></li>
-					<li><a href="#" onclick="clack(this);" id="22">Notre &eacute;quipe</a></li>
-					<li><a href="#" onclick="clack(this);" id="23">L'association</a></li>
-					<li><a href="#" onclick="clack(this);" id="24">La SCIC : Eco-village Nautique</a></li>
-					<!--li>
-						<a href="#">Service 3 &raquo;</a>
-						<ul>
-							<li><a href="#" onclick="clack(this);">SubMenu 1</a></li>
-							<li><a href="#" onclick="clack(this);">SubMenu 2</a></li>
-							<li><a href="#" onclick="clack(this);">SubMenu 3</a></li>
-							<li><a href="#" onclick="clack(this);">SubMenu 4</a></li>
-						</ul>					
-					</li-->					
-					<!--li><a href="#" onclick="clack(this);">Service 4</a></li-->
-				</ul>
-			</li>
-			<li>
-				<a href="#" onclick="clack(this);" id="3">Nos actions&nbsp;&#9660;</a>
-				<ul>
-					<li><a href="#" onclick="clack(this);" id="31">Transmettre</a></li>
-					<li><a href="#" onclick="clack(this);" id="32">R&eacute;nover</a></li>
-					<li><a href="#" onclick="clack(this);" id="33">Partager</a></li>
-					<li><a href="#" onclick="clack(this);" id="34">Nos formations</a></li>
-					<li><a href="#" onclick="clack(this);" id="35">Associations partenaires</a></li>
-				</ul>
-			</li>
-			<li>
-				<a href="#"  onclick="clack(this);" id="4">La flotte&nbsp;&#9660;</a>
-				<ul>
-					<li><a href="#" onclick="clack(this);" id="41">Les bateaux</a></li>
-					<li><a href="#" onclick="clack(this);" id="42">Les projets &agrave; saisir</a></li>
-					<li><a href="#" onclick="clack(this);" id="43">Le boat-club</a></li>
-				</ul>
-			</li>
-			<li>
-				<a href="#"  onclick="clack(this);" id="5">Nous rejoindre&nbsp;&#9660;</a>
-				<ul>
-					<li><a href="#" onclick="clack(this);" id="51">Faire un don</a></li>
-					<li><a href="#" onclick="clack(this);" id="52">Inverstir dans la SCIC</a></li>
-					<li><a href="#" onclick="clack(this);" id="53">Votre projet associatif</a></li>
-				</ul>
-			</li>
-			<li>
-				<a href="#"  onclick="clack(this);" id="6">En savoir plus&nbsp;&#9660;</a>
-				<ul>
-					<li><a href="#" onclick="clack(this);" id="61">Contact</a></li>
-					<li><a href="#" onclick="clack(this);" id="62">Actualit&eacute;</a></li>
-					<li><a href="#" onclick="clack(this);" id="63">Visiter le chantier</a></li>
-					<li><a href="#" onclick="clack(this);" id="64">Partenaires</a></li>
-				</ul>
-			</li>
-		</ul>
+  <!--
+    The Big Main Menu on the left
+
+    ◄ = &#9668;
+    ► = &#9658;
+    ▼ = &#9660;
+    ▲ = &#9650;
+  -->
+  <div id="side-nav" class="sidenav" onmouseleave="closeNav()"> <!-- Restored... -->
+	<div style="width: 100%; display: grid; grid-template-columns: auto auto;">
+		<a href="javascript:void(0)" class="active-link switch-lang" style="text-align: left;" onclick="switchLanguage()"><image id="lang-flag" src="./us_uk_flag.png" alt="US/UK Flag" title="Switch to English" style="width: 27px;"></image></a>
+		<a href="javascript:void(0)" id="close-nav-button" class="closebtn" onclick="closeNav();">&times;</a>
 	</div>
+
+    <a href="javascript:void(0)" class="active-link" style="margin-top: 10px;" onclick="clack(this);" id="1"><span id="home-label"> Accueil</span></a>
+
+    <div> 
+      <a href="javascript:void(0)" onclick="showHideSection(this, 'section-1');"><span class="expand-collapse">&#9658;&nbsp;</span><span id="2">Qui sommes-nous ?</span></a>
+      <div id="section-1" class="sub-section">
+        <a class="active-link" href="#" onclick="clack(this);" id="21">Passe-Coque, c'est quoi ?</a>
+        <a class="active-link" href="#" onclick="clack(this);" id="22">Notre &eacute;quipe</a>
+        <a class="active-link" href="#" onclick="clack(this);" id="23">L'association</a>
+        <a class="active-link" href="#" onclick="clack(this);" id="24">La SCIC : Eco-village Nautique</a>
+      </div>
+    </div>
+    <div>
+      <a href="javascript:void(0)" onclick="showHideSection(this, 'section-2');"><span class="expand-collapse">&#9658;&nbsp;</span><span id="3">Nos actions</span></a>
+      <div id="section-2" class="sub-section">
+        <a class="active-link" href="#" onclick="clack(this);" id="31">Transmettre</a>
+        <a class="active-link" href="#" onclick="clack(this);" id="32">R&eacute;nover</a>
+        <a class="active-link" href="#" onclick="clack(this);" id="33">Partager</a>
+        <a class="active-link" href="#" onclick="clack(this);" id="34">Nos formations</a>
+        <a class="active-link" href="#" onclick="clack(this);" id="35">Associations partenaires</a>
+      </div>
+    </div>
+
+    <div>
+		<a href="javascript:void(0)" onclick="showHideSection(this, 'section-3');"><span class="expand-collapse">&#9658;&nbsp;</span><span id="4">La flotte</span></a>
+		<div id="section-3" class="sub-section">
+		  <a class="active-link" href="#" onclick="clack(this);" id="41">Les bateaux</a>
+		  <a class="active-link" href="#" onclick="clack(this);" id="42">Les projets &agrave; saisir</a>
+		  <a class="active-link" href="#" onclick="clack(this);" id="43">Le boat club</a>
+		</div>
+	</div>
+
+    <div>
+		<a href="javascript:void(0)" onclick="showHideSection(this, 'section-4');"><span class="expand-collapse">&#9658;&nbsp;</span><span id="5">Nous rejoindre</span></a>
+		<div id="section-4" class="sub-section">
+		  <a class="active-link" href="#" onclick="clack(this);" id="51">Faire un don</a>
+		  <a class="active-link" href="#" onclick="clack(this);" id="52">Inverstir dans la SCIC</a>
+		  <a class="active-link" href="#" onclick="clack(this);" id="53">Votre projet associatif</a>
+		</div>
+	</div>
+
+    <div>
+		<a href="javascript:void(0)" onclick="showHideSection(this, 'section-5');"><span class="expand-collapse">&#9658;&nbsp;</span><span id="6">En savoir plus</span></a>
+		<div id="section-5" class="sub-section">
+		  <a class="active-link" href="#" onclick="clack(this);" id="61">Contect</a>
+		  <a class="active-link" href="#" onclick="clack(this);" id="62">Actualit&eacute;</a>
+		  <a class="active-link" href="#" onclick="clack(this);" id="63">Visiter le chantier</a>
+		  <a class="active-link" href="#" onclick="clack(this);" id="64">Partenaires</a>
+		</div>
+	</div>
+
+  </div>
 
 	<br/>
 		
@@ -347,6 +478,44 @@ let closeAboutDialog = () => {
       aboutDialog.style.display = 'none';
     }
 };
+
+let openNav = () => {
+	document.getElementById("side-nav").style.width =  getComputedStyle(document.documentElement).getPropertyValue('--expanded-nav-width'); // "450px";
+};
+
+let closeNav = () => {
+	document.getElementById("side-nav").style.width = "0";
+};
+
+let showSection = (id) => {
+	//document.getElementById(id).style.display = 'inline-block';
+	document.getElementById(id).style.visibility = 'visible';
+	document.getElementById(id).style.opacity = 1;
+	document.getElementById(id).style.height = 'auto';
+};
+
+let hideSection = (id) => {
+	//document.getElementById(id).style.display = 'none';
+	document.getElementById(id).style.visibility = 'hidden';
+	document.getElementById(id).style.opacity = 0;
+	document.getElementById(id).style.height = 0;
+};
+
+
+const COLLAPSED_LINE = "&#9658;&nbsp;";
+const EXPANDED_LINE = "&#9660;&nbsp;";
+
+let showHideSection = (obj, id) => {
+	let innerSpan = obj.querySelector('.expand-collapse');
+	if (document.getElementById(id).style.visibility === 'visible') {  // Then hide it
+		innerSpan.innerHTML = COLLAPSED_LINE;
+		hideSection(id);
+	} else { // Show it
+		innerSpan.innerHTML = EXPANDED_LINE;
+		showSection(id);
+	}
+};
+
 
 let clack = (origin) => {
 	console.log(`Click on ${origin.innerText}, id ${origin.id}`);
