@@ -64,9 +64,11 @@ let showHideSection = (obj, id) => {
 let clack = (origin) => {
 	console.log(`Click on ${origin.innerText}, id ${origin.id}`);
 
-	let contentName = `${origin.id}_${currentLang}.html`;
+    let originId = origin.id.replace('_', '');
+
+	let contentName = `${originId}_${currentLang}.html`;
     // Specific content rule(s)
-	if (origin.id === "62") { 
+	if (originId === "62") { 
 		contentName = "carrousel.html";
 	}
 	let contentPlaceHolder = document.getElementById("current-content");
@@ -83,12 +85,12 @@ let clack = (origin) => {
 						// Some specific cases here
 						/* if (origin.id === "1") { // Move this higher. No need to load 1_xx.html ?..
 							document.location.reload();
-						} else */ if (origin.id === "23") {
+						} else */ if (originId === "23") {
 							document.getElementById("dialog-content").innerHTML = doc;
 							showAboutDialog();
 						} else {
 							contentPlaceHolder.innerHTML = doc;
-                            if (origin.id === "22") {
+                            if (originId === "22") {
                                 showSlides(currentSlide);
                             }
 						}
@@ -114,51 +116,54 @@ let clack = (origin) => {
 }
 
 let updateMenu = () => { // Multilang aspect.
-	document.getElementById("home-label").innerHTML = (currentLang === "FR" ? "Accueil" : "Home");
+    document.querySelectorAll("#home-label").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Accueil" : "Home"));
 
-	document.getElementById("2").innerHTML = (currentLang === "FR" ? "Qui sommes-nous&nbsp;?" : "Who we are");
-	document.getElementById("21").innerHTML = (currentLang === "FR" ? "Passe-Coque, c'est quoi&nbsp;?" : "Passe-Coque, what's that?");
-	document.getElementById("22").innerHTML = (currentLang === "FR" ? "Notre &eacute;quipe" : "Our team");
-	document.getElementById("23").innerHTML = (currentLang === "FR" ? "L'association" : "The association");
-	document.getElementById("24").innerHTML = (currentLang === "FR" ? "La SCIC : Eco-village Nautique" : "The SCIC: Nautical Eco-village");
+	document.querySelectorAll("#_2").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Qui sommes-nous&nbsp;?" : "Who we are"));
+	document.querySelectorAll("#_21").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Passe-Coque, c'est quoi&nbsp;?" : "Passe-Coque, what's that?"));
+	document.querySelectorAll("#_22").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Notre &eacute;quipe" : "Our team"));
+	document.querySelectorAll("#_23").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "L'association" : "The association"));
+	document.querySelectorAll("#_24").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "La SCIC : Eco-village Nautique" : "The SCIC: Nautical Eco-village"));
 
-	document.getElementById("3").innerHTML = (currentLang === "FR" ? "Nos actions" : "Our actions");
-	document.getElementById("31").innerHTML = (currentLang === "FR" ? "Transmettre" : "Transmit");
-	document.getElementById("32").innerHTML = (currentLang === "FR" ? "R&eacute;nover" : "Refit");
-	document.getElementById("33").innerHTML = (currentLang === "FR" ? "Partager" : "Share");
-	document.getElementById("34").innerHTML = (currentLang === "FR" ? "Nos formations" : "Our trainings");
-	document.getElementById("35").innerHTML = (currentLang === "FR" ? "Associations partenaires" : "Partner associations");
+	document.querySelectorAll("#_3").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Nos actions" : "Our actions"));
+	document.querySelectorAll("#_31").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Transmettre" : "Transmit"));
+	document.querySelectorAll("#_32").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "R&eacute;nover" : "Refit"));
+	document.querySelectorAll("#_33").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Partager" : "Share"));
+	document.querySelectorAll("#_34").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Nos formations" : "Our trainings"));
+	document.querySelectorAll("#_35").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Associations partenaires" : "Partner associations"));
 
-	document.getElementById("4").innerHTML = (currentLang === "FR" ? "La flotte" : "The fleet");
-	document.getElementById("41").innerHTML = (currentLang === "FR" ? "Les bateaux" : "The boats");
-	document.getElementById("42").innerHTML = (currentLang === "FR" ? "Les projets" : "The projects");
-	document.getElementById("43").innerHTML = (currentLang === "FR" ? "Le boat-club" : "The boat-club");
+	document.querySelectorAll("#_4").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "La flotte" : "The fleet"));
+	document.querySelectorAll("#_41").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Les bateaux" : "The boats"));
+	document.querySelectorAll("#_42").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Les projets" : "The projects"));
+	document.querySelectorAll("#_43").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Le boat-club" : "The boat-club"));
 
-	document.getElementById("5").innerHTML = (currentLang === "FR" ? "Nous rejoindre" : "Join us");
-	document.getElementById("51").innerHTML = (currentLang === "FR" ? "Faire un don" : "Make a donation");
-	document.getElementById("52").innerHTML = (currentLang === "FR" ? "Inverstir dans la SCIC" : "Invest in the SCIC");
-	document.getElementById("53").innerHTML = (currentLang === "FR" ? "Votre projet associatif" : "Your association project");
+	document.querySelectorAll("#_5").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Nous rejoindre" : "Join us"));
+	document.querySelectorAll("#_51").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Faire un don" : "Make a donation"));
+	document.querySelectorAll("#_52").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Inverstir dans la SCIC" : "Invest in the SCIC"));
+	document.querySelectorAll("#_53").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Votre projet associatif" : "Your association project"));
 
-	document.getElementById("6").innerHTML = (currentLang === "FR" ? "En savoir plus" : "Know more");
-	document.getElementById("61").innerHTML = (currentLang === "FR" ? "Contact" : "Contact");
-	document.getElementById("62").innerHTML = (currentLang === "FR" ? "Actualit&eacute;s" : "News");
-	document.getElementById("63").innerHTML = (currentLang === "FR" ? "Visiter le chantier" : "Visit the shipyard");
-	document.getElementById("64").innerHTML = (currentLang === "FR" ? "Partenaires" : "Partners");
+	document.querySelectorAll("#_6").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "En savoir plus" : "Know more"));
+	document.querySelectorAll("#_61").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Contact" : "Contact"));
+	document.querySelectorAll("#_62").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Actualit&eacute;s" : "News"));
+	document.querySelectorAll("#_63").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Visiter le chantier" : "Visit the shipyard"));
+	document.querySelectorAll("#_64").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Partenaires" : "Partners"));
 };
 
 let switchLanguage = () => {
-	let flagElement = document.getElementById("lang-flag");
-	if (currentLang === "FR") { // Then switch to EN
-		flagElement.src = "./france.gif";
-		flagElement.alt = "Drapeau français";
-		flagElement.title = "En français";
-		currentLang = "EN";
-	} else {
-		flagElement.src = "us_uk_flag.png"; // "./usa.gif";
-		flagElement.alt = "US Flag";
-		flagElement.title = "Switch to English";
-		currentLang = "FR";
-	}
+    if (currentLang === "FR") { // Then switch to EN
+        document.querySelectorAll("#lang-flag").forEach(flagElement => {
+            flagElement.src = "./france.gif";
+            flagElement.alt = "Drapeau français";
+            flagElement.title = "En français";
+        });
+        currentLang = "EN";
+    } else {
+        document.querySelectorAll("#lang-flag").forEach(flagElement => {
+            flagElement.src = "us_uk_flag.png"; // "./usa.gif";
+            flagElement.alt = "US Flag";
+            flagElement.title = "Switch to English";
+        });
+        currentLang = "FR";
+    }
 	// Le reste...
 	updateMenu();
 };
