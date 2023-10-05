@@ -79,9 +79,9 @@ let clack = (origin) => {
 					response.text().then(doc => {
 						console.log(`Code data loaded, length: ${doc.length}.`);
 						// Some specific cases here
-						if (origin.id === "1") { // Move this higher. No need to load 1_xx.html...
+						/* if (origin.id === "1") { // Move this higher. No need to load 1_xx.html ?..
 							document.location.reload();
-						} else if (origin.id === "23") {
+						} else */ if (origin.id === "23") {
 							document.getElementById("dialog-content").innerHTML = doc;
 							showAboutDialog();
 						} else {
