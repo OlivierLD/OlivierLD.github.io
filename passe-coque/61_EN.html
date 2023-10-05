@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <title>Contact</title>
+  <!--link rel="icon" type="image/jpg" href="palm.04.jpg"-->
+  <!--link rel="stylesheet" href="../css/stylesheet.css" type="text/css"/-->
+  <link rel="stylesheet" href="./passe-coque.css" type="text/css"/>
+  <script type="text/javascript" src="./passe-coque.js"></script>
+</head>
+<body> <!-- style="color: orange; background-color: rgba(0, 0, 0, 0.25);" -->
+    <h1>Contact</h1>
+    <div style="width: 100%; text-align: center;">
+        <img src="./images/passe-coque-press.jpeg">
+    </div>
+    <div style="border: 3px solid blue; border-radius: 10px; padding: 20px;">
+        <table style="margin: auto;">
+            <tr>
+                <td><input type="text" id="first-name" placeholder="First Name"></td>
+                <td><input type="text" id="last-name" placeholder="Last Name"></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <button onclick="sendEmail(document.getElementById('first-name').value, document.getElementById('last-name').value);">Send</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <hr/>
+    <div>
+        <b style="font-weight: bold;">Association Passe-Coque</b>
+        <br/>
+        Clos de la vieille ferme
+        <br/>
+        3 rue des presses
+        <br/>
+        56 470 Saint Philibert
+    </div>
+    <hr/>
+</body>
+</html>

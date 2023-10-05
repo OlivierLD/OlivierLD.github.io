@@ -356,3 +356,8 @@ function showSlides(n) {
     }
 }
 
+let sendEmail = (first, last) => {
+    console.log(`Sending email from ${first}, ${last}`);
+    let sender = `Message from ${first} ${last}\n`;
+    window.open(`mailto:contact@passeurdecoute.fr?subject=${encodeURI(sender)}`);
+};
