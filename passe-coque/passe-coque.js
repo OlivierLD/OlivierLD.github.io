@@ -65,10 +65,12 @@ let clack = (origin) => {
 	console.log(`Click on ${origin.innerText}, id ${origin.id}`);
 
 	let contentName = `${origin.id}_${currentLang}.html`;
-	let contentPlaceHolder = document.getElementById("current-content");
-	if (origin.id === "62") {
+    // Specific content rule(s)
+	if (origin.id === "62") { 
 		contentName = "carrousel.html";
 	}
+	let contentPlaceHolder = document.getElementById("current-content");
+    
 
 	fetch(contentName)
             .then(response => {  // Warning... the NOT_FOUND error lands here, apparently.
