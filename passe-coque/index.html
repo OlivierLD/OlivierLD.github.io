@@ -160,8 +160,25 @@
 <script type="text/javascript">
 
 window.onload = () => {
-	console.log("Loaded !");
+	console.log("Loaded!");
+	console.log(`${window.location.href} loaded !`);
+	// debugger;
 	// startBGAnimation();
+	console.log(`Width: ${window.innerWidth}, Height: ${window.innerHeight}`);
+	if (window.innerWidth < 1000 || window.innerHeight < 500) {
+		console.log(`Redirecting from Location : ${window.location}`);
+		let redirected;
+		if (window.location.href.includes('index.html')) {
+			redirected = window.location.href.replace('index.html', 'index.2.html');
+		} else {
+			if (window.location.href.endsWith('/')) {
+				redirected = window.location.href + 'index.2.html';
+			} else {
+				redirected = window.location.href + '/index.2.html';
+			}
+		}
+		window.location.href = redirected;
+	}
 };
 
 </script>
