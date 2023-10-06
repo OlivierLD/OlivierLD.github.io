@@ -30,11 +30,15 @@ ol, ul {
     /* margin-top: 0; */
 }
 
-#nav {
+#nav-menu {
+	position: fixed; 
+	top: 0; 
+	/* left: 10px;  */
+	/* margin-bottom: 10px; */
 	/* position: relative; */
     /* position: absolute; */
 	/* width: 620px; */
-    /* width: 100%; */
+    width: 100%;
 	/* margin: 0 auto; */
 }
 

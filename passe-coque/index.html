@@ -60,9 +60,9 @@
 			- Visiter le chantier
 			- Partenaires
 	-->
-	<div id="nav-menu" style="margin-left: -48px; margin-top: -8px;">
-		<ul id="navigation"  style="display: grid; grid-template-columns: 120px auto auto auto auto auto 80px;"> <!-- Columns must match the menu below... -->
-			<li><a href="javascript:void(0)" onclick="clack(this);" id="_1"><image src="./logo.passe-coque.png" style="width: 16px;" title="Passe-Coque"/>&nbsp;&nbsp;<span id="home-label">Accueil</span></a></li>
+	<div id="nav-menu" style="display: none; margin-left: -48px;">
+		<ul id="navigation"  style="display: grid; grid-template-columns: 250px auto auto auto auto auto 80px;"> <!-- Columns must match the menu below... -->
+			<li><a href="javascript:void(0)" onclick="clack(this);" id="_1"><image src="./logo.passe-coque.png" style="width: 16px;" title="Passe-Coque"/>&nbsp;&nbsp;<span id="home-label">Passe-Coque - Accueil</span></a></li>
 			<li>
 				<a href="javascript:void(0)" id="_2">Qui sommes-nous&nbsp;?&nbsp;&#9660;</a>
 				<ul>
@@ -83,7 +83,7 @@
 				</ul>
 			</li>
 			<li>
-				<a href="javascript:void(0)" onclick="clack(this);" id="_3">Nos actions&nbsp;&#9660;</a>
+				<a href="javascript:void(0)" id="_3">Nos actions&nbsp;&#9660;</a>
 				<ul>
 					<li><a href="javascript:void(0)" onclick="clack(this);" id="_31">Transmettre</a></li>
 					<li><a href="javascript:void(0)" onclick="clack(this);" id="_32">R&eacute;nover</a></li>
@@ -93,7 +93,7 @@
 				</ul>
 			</li>
 			<li>
-				<a href="javascript:void(0)"  onclick="clack(this);" id="_4">La flotte&nbsp;&#9660;</a>
+				<a href="javascript:void(0)" id="_4">La flotte&nbsp;&#9660;</a>
 				<ul>
 					<li><a href="javascript:void(0)" onclick="clack(this);" id="_41">Les bateaux</a></li>
 					<li><a href="javascript:void(0)" onclick="clack(this);" id="_42">Les projets &agrave; saisir</a></li>
@@ -101,7 +101,7 @@
 				</ul>
 			</li>
 			<li>
-				<a href="javascript:void(0)"  onclick="clack(this);" id="_5">Nous rejoindre&nbsp;&#9660;</a>
+				<a href="javascript:void(0)" id="_5">Nous rejoindre&nbsp;&#9660;</a>
 				<ul>
 					<li><a href="javascript:void(0)" onclick="clack(this);" id="_51">Faire un don</a></li>
 					<li><a href="javascript:void(0)" onclick="clack(this);" id="_52">Investir dans la SCIC</a></li>
@@ -109,7 +109,7 @@
 				</ul>
 			</li>
 			<li>
-				<a href="javascript:void(0)"  onclick="clack(this);" id="_6">En savoir plus&nbsp;&#9660;</a>
+				<a href="javascript:void(0)" id="_6">En savoir plus&nbsp;&#9660;</a>
 				<ul>
 					<li><a href="javascript:void(0)" onclick="clack(this);" id="_61">Contact</a></li>
 					<li><a href="javascript:void(0)" onclick="clack(this);" id="_62">Actualit&eacute;</a></li>
@@ -200,21 +200,23 @@
 		</div>
 	</div>
 
-	<div id="top-container" style="display: grid; grid-template-columns: auto auto;" >
-		<div>
-			<!--a href="javascript:void(0)" onclick="switchLanguage();"><image id="lang-flag" src="./usa.gif" alt="US Flag" title="Switch to English"></image></a-->
-		</div>
-		<div style="width: 100%; display: flex; justify-content: end;">
-			<!--span style="font-style: italic;">Dummy placeholder</span-->
-			<div class="switch-container" style="justify-content: end;" title="On or off">
-				<label class="switch switch-element">
-				<input id="time-bg-slider" type="checkbox" onchange="startBGAnimation(this);">
-				<span class="slider round"></span>
-				</label>
-				<span class="switch-element">Slide show</span>
+	<div style="display: none;">
+		<div id="top-container" style="display: grid; grid-template-columns: auto auto;" >
+			<div>
+				<!--a href="javascript:void(0)" onclick="switchLanguage();"><image id="lang-flag" src="./usa.gif" alt="US Flag" title="Switch to English"></image></a-->
 			</div>
-		</div>
-	</div>  
+			<div style="width: 100%; display: flex; justify-content: end;">
+				<!--span style="font-style: italic;">Dummy placeholder</span-->
+				<div class="switch-container" style="justify-content: end;" title="On or off">
+					<label class="switch switch-element">
+					<input id="time-bg-slider" type="checkbox" onchange="startBGAnimation(this);">
+					<span class="slider round"></span>
+					</label>
+					<span class="switch-element">Slide show</span>
+				</div>
+			</div>
+		</div>  
+	</div>
 	
 	<!--h1>Passe-Coque</h1-->
 	<div id="current-content" class="text-content">

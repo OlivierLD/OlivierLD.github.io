@@ -12,15 +12,16 @@
     <div style="width: 100%; text-align: center;">
         <img src="./images/passe-coque-press.jpeg">
     </div>
-    <div style="border: 3px solid blue; border-radius: 10px; padding: 20px;">
+    <div style="border: 3px solid blue; border-radius: 10px; padding: 20px; background: rgba(255, 255, 255, 0.6);">
         <table style="margin: auto;">
             <tr>
+                <td>Your first and last name:</td>
                 <td><input type="text" id="first-name" placeholder="First Name"></td>
                 <td><input type="text" id="last-name" placeholder="Last Name"></td>
             </tr>
             <tr>
-                <td colspan="2">
-                    <button onclick="sendEmail(document.getElementById('first-name').value, document.getElementById('last-name').value);">Send</button>
+                <td colspan="3">
+                    <button onclick="sendEmail(document.getElementById('first-name').value, document.getElementById('last-name').value);">Send a message</button>
                 </td>
             </tr>
         </table>
@@ -33,7 +34,7 @@
         <br/>
         3 rue des presses
         <br/>
-        56 470 Saint Philibert
+        56470 Saint Philibert
     </div>
     <hr/>
 </body>
