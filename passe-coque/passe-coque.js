@@ -361,3 +361,20 @@ let sendEmail = (first, last) => {
     let sender = `Message from ${first} ${last}\n`;
     window.open(`mailto:contact@passeurdecoute.fr?subject=${encodeURI(sender)}`);
 };
+
+let getQueryParameterByName = (name, url) => {
+    if (!url) {
+        url = window.location.href;
+    }
+    name = name.replace(/[\[\]]/g, "\\$&");
+    let regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) {
+        return null;
+    }
+    if (!results[2]) {
+        return '';
+    }
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+};
+

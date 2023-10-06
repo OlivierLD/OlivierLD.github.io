@@ -262,6 +262,12 @@ window.onload = () => {
 		navMenu.style.display = 'block';
 		sideBar.style.display = 'none';
 	}
+
+	let userLang = getQueryParameterByName('lang');
+	if (userLang && userLang === 'EN') {
+		switchLanguage();
+	}
+	// TODO Maybe some day other QS prms...
 };
 
 </script>
