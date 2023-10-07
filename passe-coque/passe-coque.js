@@ -122,6 +122,8 @@ let clack = (origin) => {
 let updateMenu = () => { // Multilang aspect.
     document.querySelectorAll("#home-label").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Passe-Coque - Accueil" : "Passe-Coque - Home"));
 
+    // "_11", Qr Code, no update needed.
+
 	document.querySelectorAll("#_2").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Qui sommes-nous&nbsp;?&nbsp;&#9660;" : "Who we are&nbsp;&#9660;"));
 	document.querySelectorAll("#_21").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Passe-Coque, c'est quoi&nbsp;?" : "Passe-Coque, what's that?"));
 	document.querySelectorAll("#_22").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Notre &eacute;quipe" : "Our team"));
@@ -386,10 +388,11 @@ let qrcode;
 
 let makeCode = (url) => {    
 	if (url === undefined) {
-		url = "index.html";
-	}
-	let docLoc = document.location.href;
-	let toDisplay = docLoc.substring(0, docLoc.lastIndexOf('/')) + "/" + url; // document.location + url;
+		url = document.location.href;
+	} 
+    console.log(`QR Code for ${url}`);
+	let docLoc = url;
+	let toDisplay = docLoc; // .substring(0, docLoc.lastIndexOf('/')) + "/" + url; // document.location + url;
 
   	qrcode.makeCode(toDisplay);
     // qrcode.style.display = 'block';
