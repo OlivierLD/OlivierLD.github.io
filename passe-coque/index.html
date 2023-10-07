@@ -15,6 +15,7 @@
 	<style type="text/css">
 		/* Empty */
     </style>
+	<script type="text/javascript" src="./qrcode.js"></script>
 	<script type="text/javascript" src="./passe-coque.js"></script>
 </head>
 	
@@ -61,7 +62,12 @@
 	-->
 	<div id="nav-menu" style="display: none; margin-left: -48px;">
 		<ul id="navigation"  style="display: grid; grid-template-columns: 250px auto auto auto auto auto 80px;"> <!-- Columns must match the menu below... -->
-			<li><a href="javascript:void(0)" onclick="clack(this);" id="_1"><image src="./logo.passe-coque.png" style="width: 16px;" title="Passe-Coque"/>&nbsp;&nbsp;<span id="home-label">Passe-Coque - Accueil</span></a></li>
+			<li>
+				<a href="javascript:void(0)" onclick="clack(this);" id="_1"><image src="./logo.passe-coque.png" style="width: 16px;" title="Passe-Coque"/>&nbsp;&nbsp;<span id="home-label">Passe-Coque - Accueil</span></a>
+				<ul>
+					<li><a href="javascript:void(0)" onclick="clack(this);" id="_11">QR Code</a></li>
+				</ul>
+			</li>
 			<li>
 				<a href="javascript:void(0)" id="_2">Qui sommes-nous&nbsp;?&nbsp;&#9660;</a>
 				<ul>
@@ -217,6 +223,8 @@
 		</div>  
 	</div>
 	
+	<div id="qrcode" style="display:none; width:250px; height:250px; margin:25px;"></div>
+
 	<!--h1>Passe-Coque</h1-->
 	<div id="current-content" class="text-content">
 
@@ -232,6 +240,15 @@
 window.onload = () => {
 	console.log("Loaded!");
 	console.log(`${window.location.href} loaded !`);
+
+	qrcode = new QRCode(document.getElementById("qrcode"), {
+		width:  250,
+		height: 250
+	});
+
+	// makeCode(); // On request only
+
+
 	// debugger;
 	// startBGAnimation();
 	console.log(`Width: ${window.innerWidth}, Height: ${window.innerHeight}`);

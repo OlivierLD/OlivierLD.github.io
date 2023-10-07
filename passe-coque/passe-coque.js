@@ -66,6 +66,13 @@ let clack = (origin) => {
 
     let originId = origin.id.replace('_', '');
 
+    if (originId === '11') {
+        makeCode(document.location.href);
+        return;
+    } else {
+        document.getElementById("qrcode").style.display = 'none'; // Improve this ?..
+    }
+
 	let contentName = `${originId}_${currentLang}.html`;
     // Specific content rule(s)
 	if (originId === "62") { 
@@ -73,7 +80,6 @@ let clack = (origin) => {
 	}
 	let contentPlaceHolder = document.getElementById("current-content");
     
-
 	fetch(contentName)
             .then(response => {  // Warning... the NOT_FOUND error lands here, apparently.
                 console.log(`Data Response: ${response.status} - ${response.statusText}`);
@@ -110,8 +116,6 @@ let clack = (origin) => {
 				// Plus tard...
 				contentPlaceHolder.innerHTML = "<b>&Ccedil;a vient...</b>";
             });
-
-
 
 }
 
@@ -378,3 +382,16 @@ let getQueryParameterByName = (name, url) => {
     return decodeURIComponent(results[2].replace(/\+/g, " "));
 };
 
+let qrcode;
+
+let makeCode = (url) => {    
+	if (url === undefined) {
+		url = "index.html";
+	}
+	let docLoc = document.location.href;
+	let toDisplay = docLoc.substring(0, docLoc.lastIndexOf('/')) + "/" + url; // document.location + url;
+
+  	qrcode.makeCode(toDisplay);
+    // qrcode.style.display = 'block';
+    document.getElementById("qrcode").style.display = 'block';
+};
