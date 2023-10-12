@@ -58,6 +58,25 @@ canvas {
     margin: 0 auto;
 }
   
+.pc-button {
+    background-color: orange;
+    color: white;
+    border: 1px solid silver;
+    border-radius: 3px;
+}
+
+.background_container {
+    background-image: url("./photos.michel.01/quille.coraxy.jpg");
+    /* background-position-y: bottom; */
+    /* background-position: center; */
+    background-position: 0 350px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* <= This one */
+    z-index: -1;
+    opacity: 0.5;
+}
+
 .text-content {
     /* text-shadow: 2px 2px 4px black, 0 0 25px white, 0 0 7px cyan; */
     margin-top: 50px; /* Depends on the menu's thickness */
