@@ -120,7 +120,7 @@ let clack = (origin) => {
 }
 
 let updateMenu = () => { // Multilang aspect.
-    document.querySelectorAll("#home-label").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Passe-Coque - Accueil" : "Passe-Coque - Home"));
+    document.querySelectorAll("#home-label").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Accueil" : "Home"));
 
     // "_11", Qr Code, no update needed.
 
@@ -185,12 +185,17 @@ const BG_IMAGES =
   "jeff.01/IMG_0207.jpg",        "jeff.01/IMG_0486.jpg",        "jeff.01/IMG_6663.jpg",        "jeff.01/IMG_9893.jpg",
   "jeff.01/IMG_0218.jpg",        "jeff.01/IMG_1082.jpg",        "jeff.01/IMG_8034.jpg",        "jeff.01/P1000587.jpg" ]; */
 
-[ "./photos.michel.01/quille.coraxy.jpg",
-  "./photos.michel.02/01.jpg",
-  "./photos.michel.02/02.jpg",
-  "./photos.michel.02/03.jpg" ];  
+// [ "./photos.michel.01/quille.coraxy.jpg",
+//   "./photos.michel.02/01.jpg",
+//   "./photos.michel.02/02.jpg",
+//   "./photos.michel.02/03.jpg" ];  
 
-const BG_INTERVAL = 10000; // in ms
+[ "./images/houat.png",
+  "./images/mouillage.01.png",
+  "./images/mouillage.02.png",
+  "./images/sunset.png" ];  
+
+const BG_INTERVAL = 5000; // in ms
 
 let current_bg_image_index = 0;
 let bgAnimation;
@@ -396,5 +401,5 @@ let makeCode = (url) => {
 
   	qrcode.makeCode(toDisplay);
     // qrcode.style.display = 'block';
-    document.getElementById("qrcode").style.display = 'block';
+    document.getElementById("qrcode").style.display = 'block'; // Show it ! (Hidden otherwise)
 };
