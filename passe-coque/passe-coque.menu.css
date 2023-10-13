@@ -1,20 +1,5 @@
 /*
-html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline; 
-}
-article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
-	display: block; 
-}
-body {
-	line-height: 1; 
-	font:12px/20px Arial;
-	background:#e0f3ff;
-}
+  This is for the scrolling menu.
 */
 ol, ul {
 	list-style: none; 
@@ -161,7 +146,7 @@ ul#navigation ul li a {
 }
 
 ul#navigation ul li:first-child {
-	margin-top: 30px;  /* Related to padding: 25px 10px; in ul#navigation li a */
+	margin-top: 36px;  /* Related to padding: 25px 10px; in ul#navigation li a, and #nav-menu font-size */
 }
 
 /* ul#navigation li a.first {
