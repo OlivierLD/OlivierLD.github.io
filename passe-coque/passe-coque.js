@@ -201,10 +201,10 @@ const BG_IMAGES =
 //   "./photos.michel.02/02.jpg",
 //   "./photos.michel.02/03.jpg" ];  
 
-[ "./images/houat.png",
-  "./images/mouillage.01.png",
-  "./images/mouillage.02.png",
-  "./images/sunset.png" ];  
+[ "./images/houat.jpg",
+  "./images/mouillage.01.jpg",
+  "./images/mouillage.02.jpg",
+  "./images/sunset.jpg" ];  
 
 const BG_INTERVAL = 5000; // in ms
 
