@@ -60,9 +60,9 @@
 			- Visiter le chantier
 			- Partenaires
 	-->
-	<div id="nav-menu" style="display: none; margin-left: -8px; background: rgba(245, 245, 245, 0.5);">
+	<div id="nav-menu" style="display: none; margin-left: -8px;">
 		<div style="float: left;">
-			<a href="javascript:void(0)" onclick="clack(this);" id="_1"><image src="./logo.passe-coque.png" style="width: 48px; padding: 10px 10px;" title="Passe-Coque"/></a>
+			<a href="javascript:void(0)" onclick="clack(this);" id="_1"><image src="./logo.passe-coque.png" style="width: 48px; padding: 14px 10px;" title="Passe-Coque"/></a>
 		</div>
 		<div style="margin-left: -48px; float: right;">
 			<ul id="navigation"  style="display: grid; grid-template-columns: auto auto auto auto auto auto 80px;"> <!-- Columns must match the menu below... -->
@@ -73,7 +73,7 @@
 					</ul-->
 				</li>
 				<li>
-					<a href="javascript:void(0)" id="_2">Qui sommes-nous&nbsp;?&nbsp;<span style="font-size: 0.75em;">&#9660;</span></a>
+					<a href="javascript:void(0)" id="_2">Qui sommes-nous&nbsp;?&nbsp;<!--span style="font-size: 0.75em;">&#9660;</span--></a>
 					<ul>
 						<li><a href="javascript:void(0)" onclick="clack(this);" id="_21">Passe-Coque, c'est quoi&nbsp;?</a></li>
 						<li><a href="javascript:void(0)" onclick="clack(this);" id="_22">Notre &eacute;quipe</a></li>
@@ -92,7 +92,7 @@
 					</ul>
 				</li>
 				<li>
-					<a href="javascript:void(0)" id="_3">Nos actions&nbsp;<span style="font-size: 0.75em;">&#9660;</span></a>
+					<a href="javascript:void(0)" id="_3">Nos actions&nbsp;<!--span style="font-size: 0.75em;">&#9660;</span--></a>
 					<ul>
 						<li><a href="javascript:void(0)" onclick="clack(this);" id="_31">Transmettre</a></li>
 						<li><a href="javascript:void(0)" onclick="clack(this);" id="_32">R&eacute;nover</a></li>
@@ -102,7 +102,7 @@
 					</ul>
 				</li>
 				<li>
-					<a href="javascript:void(0)" id="_4">La flotte&nbsp;<span style="font-size: 0.75em;">&#9660;</span></a>
+					<a href="javascript:void(0)" id="_4">La flotte&nbsp;<!--span style="font-size: 0.75em;">&#9660;</span--></a>
 					<ul>
 						<li><a href="javascript:void(0)" onclick="clack(this);" id="_41">Les bateaux</a></li>
 						<li><a href="javascript:void(0)" onclick="clack(this);" id="_42">Les projets &agrave; saisir</a></li>
@@ -110,7 +110,7 @@
 					</ul>
 				</li>
 				<li>
-					<a href="javascript:void(0)" id="_5">Nous rejoindre&nbsp;<span style="font-size: 0.75em;">&#9660;</span></a>
+					<a href="javascript:void(0)" id="_5">Nous rejoindre&nbsp;<!--span style="font-size: 0.75em;">&#9660;</span--></a>
 					<ul>
 						<li><a href="javascript:void(0)" onclick="clack(this);" id="_51">Faire un don</a></li>
 						<li><a href="javascript:void(0)" onclick="clack(this);" id="_52">Investir dans la SCIC</a></li>
@@ -118,7 +118,7 @@
 					</ul>
 				</li>
 				<li>
-					<a href="javascript:void(0)" id="_6">En savoir plus&nbsp;<span style="font-size: 0.75em;">&#9660;</span></a>
+					<a href="javascript:void(0)" id="_6">En savoir plus&nbsp;<!--span style="font-size: 0.75em;">&#9660;</span--></a>
 					<ul>
 						<li><a href="javascript:void(0)" onclick="clack(this);" id="_61">Contact</a></li>
 						<li><a href="javascript:void(0)" onclick="clack(this);" id="_62">Actualit&eacute;</a></li>
@@ -202,7 +202,7 @@
 		</div>
 	</div>
 		
-	<div class="background">
+	<div class="background"> <!-- Was background-container -->
 		<div class="bg-data" id="bg-data">
 			<!--img id="bg-image" src="../backgrounds/la.licorne.jpeg" style="width: 100%; height: auto; opacity: 0.5;"-->
 			<!--img id="bg-image" src="./cognac.keel.jpg" style="width: 50%; height: auto; opacity: 0.5;"-->
@@ -210,17 +210,14 @@
 			<img id="bg-image" src="./images/houat.png" style="width: 100%; height: auto; /*opacity: 0.5;*/">
 		</div>
 
-		<div style="margin-top: -80px;">
+		<div style="margin-top: -80px; min-height: 200px; padding-top: 30px;">
 			<div style="text-align: center;">
 				<h2>Passe-Coque</h2>
 			</div>
 			<div style="margin: 0 10%; text-align: left;">
-				L'association Passe-Coque, n&eacute;e en 2019 dans 
-				le Morbihan, met en &oelig;uvre l'id&eacute;e toute simple
-				de sauver et restaurer des bateaux abandonn&eacute;s
-				ou promis &agrave; la d&eacute;construction, pour ensuite les
-				transmettre &agrave; des associations, &eacute;coles de voile ou ONG,
-				qui permettront de favoriser l'acc&egrave;s &agrave; la voile
+				L'association Passe-Coque, n&eacute;e en 2019 dans le Morbihan, met en &oelig;uvre l'id&eacute;e toute simple
+				de sauver et restaurer des bateaux abandonn&eacute;s ou promis &agrave; la d&eacute;construction, pour ensuite les
+				transmettre &agrave; des associations, &eacute;coles de voile ou ONG, qui permettront de favoriser l'acc&egrave;s &agrave; la voile
 				au plus grand nombre en naviguant utile à travers des projets &eacute;cologiques, sociaux, humanitaires et solidaires.
 			</div>
 		</div>
@@ -264,7 +261,7 @@
 
 			</div>
 		</div>
-		<div class="background_container" style="min-height: 50px;">
+		<div class="background-container" style="min-height: 50px;">
 			<!-- img id="bg-image-2" src="./photos.michel.01/quille.coraxy.jpg" style="width: 100%; opacity: 0.5; z-index: -10;" -->
 			<div style="min-height: 200px;">
 				<div style="display: grid; grid-template-columns: 50% 50%;">
@@ -284,17 +281,19 @@
 							<button class="pc-button">En savoir plus</button>
 						</p>
 					</div>
-					<div style="border: 1px solid rgb(225, 219, 219); border-radius: 3px; padding: 5px; margin: 15px;">
+					<div style="border: 1px solid rgb(225, 219, 219); border-radius: 3px; padding: 5px; margin: 15px; min-height: 500px;">
 						<h3>Le projet d'Eco-Village Nautique</h3>
 						<p style="text-align: left;">
-							Duh...
+							Duh...<br/>
+							Duh...<br/>
+							Duh...<br/>
 						</p>
 						<p style="text-align: left;">
 							<button class="pc-button">En savoir plus</button>
 						</p>
 					</div>
 	
-				</div>>
+				</div>
 		    </div>
 		</div>
 
