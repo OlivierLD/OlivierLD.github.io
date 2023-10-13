@@ -61,10 +61,13 @@ let showHideSection = (obj, id) => {
 	}
 };
 
+var currentContext = "1"; // Default, Home page.
+
 let clack = (origin) => {
 	console.log(`Click on ${origin.innerText}, id ${origin.id}`);
 
     let originId = origin.id.replace('_', '');
+    currentContext = originId;
 
     if (originId === '11') {
         makeCode(document.location.href);
@@ -172,6 +175,14 @@ let switchLanguage = () => {
     }
 	// Le reste...
 	updateMenu();
+
+    // Update currently displayed content
+    let newId = `_${currentContext}`;
+    let el = document.createElement("div");
+	el.id = newId;
+	clack(el);
+
+    clack(el);
 };
 
 const BG_IMAGES = 
