@@ -5,16 +5,8 @@ ol, ul {
 	list-style: none; 
 }
 
-/* Main Styles */	
+/* Main Menu Styles */	
 	
-#wrapper {
-	/* width: 620px; */
-    /* width: 100%; */
-	/* margin: 0 auto; */
-	/* margin-top: 100px; */
-    /* margin-top: 0; */
-}
-
 #nav-menu {
 	position: fixed; 
 	top: 0; 

@@ -59,10 +59,20 @@ canvas {
 }
   
 .pc-button {
+    position: relative;
     background-color: orange;
     color: white;
     border: 1px solid silver;
     border-radius: 3px;
+}
+
+/* .pc-button:after {
+    position: absolute;
+    z-index: -1;
+} */
+
+.pc-button:hover {
+    box-shadow: 4px 4px 8px black, 0 0 25px white, 0 0 10px cyan;
 }
 
 .background-container:after {
@@ -109,7 +119,7 @@ canvas {
     text-align: center;
     top: 0;
     left: 0;
-    z-index: -100;
+    z-index: -100; /* Carefull with that one, makes buttons unreacheable! */
 }
 
 .bg-data {

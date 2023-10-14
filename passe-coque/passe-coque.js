@@ -64,9 +64,13 @@ let showHideSection = (obj, id) => {
 var currentContext = "1"; // Default, Home page.
 
 let clack = (origin) => {
-	console.log(`Click on ${origin.innerText}, id ${origin.id}`);
-
-    let originId = origin.id.replace('_', '');
+    let originId = '';
+    if (typeof(origin) === 'string') {
+        originId = origin.replace('_', '');
+    } else {
+        console.log(`Click on ${origin.innerText}, id ${origin.id}`);
+        originId = origin.id.replace('_', '');
+    }
     currentContext = originId;
 
     if (originId === '11') {
@@ -235,7 +239,11 @@ let startBGAnimation = (cb) => {
 			if (current_bg_image_index >= BG_IMAGES.length) {
 				current_bg_image_index = 0;
 			}
-			document.getElementById("bg-image").src = BG_IMAGES[current_bg_image_index];
+            try {
+			    document.getElementById("bg-image").src = BG_IMAGES[current_bg_image_index];
+            } catch (err) {
+                console.log(`Managed error ${JSON.stringify(err)}`);
+            }
 		}, BG_INTERVAL); // in ms.
 	}
 };
