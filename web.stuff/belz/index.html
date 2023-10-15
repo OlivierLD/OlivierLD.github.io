@@ -321,6 +321,7 @@
             <li><a class="list-link" href="#deck-shade">De l'ombre sur la terrasse</a></li>
             <li><a class="list-link" href="#the-swing">Un portique !</a></li>
             <li><a class="list-link" href="#port-tinduff">Week-end &agrave; Port Tinduff</a></li>
+            <li><a class="list-link" href="#groix-08-oct">Deux jours &agrave; Groix</a>
         </ul>
 
         <h2><a name="new-planters">Printemps. Nouveaux bacs &agrave; plantes dans le jardin</a></h2>
@@ -408,7 +409,6 @@
 
         <div id="mapid" style="width: 1200px; height: 600px;"></div>
 
-
         <small style="font-style: italic;">Click the images to enlarge</small>
         <br/>
         <div style="height: 600px; margin: 2px;">
@@ -428,6 +428,10 @@
                 <slide-show-image src="./images/PortTinduff.11.jpg" title="Voile-aviron &agrave; Port Tinduff, p&eacute;tole..." desc="Voile-aviron &agrave; Port Tinduff, p&eacute;tole..."></slide-show-image>
             </slide-show>
         </div>    
+
+        <h2><a name="groix-08-oct">2 jours &agrave;</a> Groix, 8-9 octobre</h2>
+
+        <div id="mapid-2" style="width: 1200px; height: 600px;"></div>
 
     </div>
 
@@ -465,7 +469,121 @@
                 .addTo(map)
                 .bindPopup(`Port Tinduff`)
                 .bindTooltip("Port Tinduff, Rade de Brest, Finist&egrave;re");
+        
+        // Groix Leaflet
+        const groixLat = 47.636526;
+        const groixLng = -3.463199;
+        let map2 = L.map('mapid-2');
+        const tiles2 = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map2);
+        let boundsGroix = [[groixLat - 0.025, groixLng - 0.025], 
+                           [groixLat + 0.025, groixLng + 0.025]];
+        map2.fitBounds(boundsGroix);
 
-    };
+        let imgSrc = "./images/Groix.Oct.2023.01.jpg";
+        let lat = 47.643763, lng = -3.437558;
+        let legend = "Port Tudy";
+        L.marker([lat, lng])
+                .addTo(map2)
+                .bindPopup(`<b>${legend}</b><br/><a href="${imgSrc}" target="new"><img src='${imgSrc}' width='200' title='Click to enlarge'></a>`)
+                .bindTooltip(`${legend}`);
+
+        imgSrc = "./images/Groix.Oct.2023.02.jpg";
+        lat = 47.643763 + 0.001; 
+        lng = -3.437558 + 0.001;
+        legend = "Thonier &quot;Biche&quot;";
+        L.marker([lat, lng])
+                .addTo(map2)
+                .bindPopup(`<b>${legend}</b><br/><a href="${imgSrc}" target="new"><img src='${imgSrc}' width='200' title='Click to enlarge'></a>`)
+                .bindTooltip(`${legend}`);
+
+        imgSrc = "./images/Groix.Oct.2023.03.jpg";
+        lat = 47.653055; 
+        lng = -3.496857;
+        legend = "Pen Men";
+        L.marker([lat, lng])
+                .addTo(map2)
+                .bindPopup(`<b>${legend}</b><br/><a href="${imgSrc}" target="new"><img src='${imgSrc}' width='200' title='Click to enlarge'></a>`)
+                .bindTooltip(`${legend}`);
+
+        imgSrc = "./images/Groix.Oct.2023.04.jpg";
+        lat = 47.652247; 
+        lng = -3.502435;
+        legend = "Pen Men";
+        L.marker([lat, lng])
+                .addTo(map2)
+                .bindPopup(`<b>${legend}</b><br/><a href="${imgSrc}" target="new"><img src='${imgSrc}' width='200' title='Click to enlarge'></a>`)
+                .bindTooltip(`${legend}`);
+
+        imgSrc = "./images/Groix.Oct.2023.05.jpg";
+        lat = 47.651870; 
+        lng = -3.510847;
+        legend = "Pen Men";
+        L.marker([lat, lng])
+                .addTo(map2)
+                .bindPopup(`<b>${legend}</b><br/><a href="${imgSrc}" target="new"><img src='${imgSrc}' width='200' title='Click to enlarge'></a>`)
+                .bindTooltip(`${legend}`);
+
+        imgSrc = "./images/Groix.Oct.2023.07.jpg";
+        lat = 47.647187; 
+        lng = -3.514495;
+        legend = "Au sud de Pen Men";
+        L.marker([lat, lng])
+                .addTo(map2)
+                .bindPopup(`<b>${legend}</b><br/><a href="${imgSrc}" target="new"><img src='${imgSrc}' width='200' title='Click to enlarge'></a>`)
+                .bindTooltip(`${legend}`);
+        
+        imgSrc = "./images/Groix.Oct.2023.08.jpg";
+        lat = 47.647187 - 0.0001; 
+        lng = -3.514495 + 0.0001;
+        legend = "Au sud de Pen Men";
+        L.marker([lat, lng])
+                .addTo(map2)
+                .bindPopup(`<b>${legend}</b><br/><a href="${imgSrc}" target="new"><img src='${imgSrc}' width='200' title='Click to enlarge'></a>`)
+                .bindTooltip(`${legend}`);
+
+        // Port St Nicolas
+        imgSrc = "./images/Groix.Oct.2023.16.jpg";
+        lat = 47.632222; 
+        lng = -3.482307;
+        legend = "Port St Nic.";
+        L.marker([lat, lng])
+                .addTo(map2)
+                .bindPopup(`<b>${legend}</b><br/><a href="${imgSrc}" target="new"><img src='${imgSrc}' width='200' title='Click to enlarge'></a>`)
+                .bindTooltip(`${legend}`);
+
+        // Locmaria
+        imgSrc = "./images/Groix.Oct.2023.19.jpg";
+        lat = 47.628073; 
+        lng = -3.435568;
+        legend = "Locmaria";
+        L.marker([lat, lng])
+                .addTo(map2)
+                .bindPopup(`<b>${legend}</b><br/><a href="${imgSrc}" target="new"><img src='${imgSrc}' width='200' title='Click to enlarge'></a>`)
+                .bindTooltip(`${legend}`);
+
+        // Beudeff                
+        imgSrc = "./images/Groix.Oct.2023.21.jpg";
+        lat = 47.642593; 
+        lng = -3.448380;
+        legend = "Ti Beudeff";
+        L.marker([lat, lng])
+                .addTo(map2)
+                .bindPopup(`<b>${legend}</b><br/><a href="${imgSrc}" target="new"><img src='${imgSrc}' width='200' title='Click to enlarge'></a>`)
+                .bindTooltip(`${legend}`);
+
+        // Herisson                
+        imgSrc = "./images/Groix.Oct.2023.22.jpg";
+        lat = 47.642967; 
+        lng = -3.454363;
+        legend = "Beast of the southern west";
+        L.marker([lat, lng])
+                .addTo(map2)
+                .bindPopup(`<b>${legend}</b><br/><a href="${imgSrc}" target="new"><img src='${imgSrc}' width='200' title='Click to enlarge'></a>`)
+                .bindTooltip(`${legend}`);
+
+};
 </script>
 </html>
