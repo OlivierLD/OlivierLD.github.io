@@ -5,6 +5,10 @@
 	<meta charset="UTF-8">
 	<title>Belz, en Bretagne</title>
 	<link rel="icon" type="image/png" href="../../misc.pix/hummingbird.png">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+
 	<link rel="stylesheet" href="../../css/stylesheet.css">
 	<script type="module" src="../../webcomponents/widgets/slideshow/SlideShow.js"></script>
 	<style type="text/css">
@@ -401,6 +405,10 @@
         </div>    
 
         <h2><a name="port-tinduff">Week-end &agrave; Port Tinduff</a>, 22-24 septembre</h2>
+
+        <div id="mapid" style="width: 1200px; height: 600px;"></div>
+
+
         <small style="font-style: italic;">Click the images to enlarge</small>
         <br/>
         <div style="height: 600px; margin: 2px;">
@@ -438,6 +446,26 @@
 		document.getElementById("slide-show-deck").slideclick = onSlideShowClick;
 		document.getElementById("slide-show-swing").slideclick = onSlideShowClick;
 		document.getElementById("slide-show-port-tinduff").slideclick = onSlideShowClick;
+
+        // Plot Port Tinduff 
+        let map = L.map('mapid');
+        const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+
+        const portTinduffLat = 48.335402;
+        const portTinduffLng = -4.368657;
+
+        let bounds = [[portTinduffLat - 0.25, portTinduffLng - 0.25], 
+                      [portTinduffLat + 0.25, portTinduffLng + 0.25]];
+        map.fitBounds(bounds);
+
+        L.marker([portTinduffLat, portTinduffLng])
+                .addTo(map)
+                .bindPopup(`Port Tinduff`)
+                .bindTooltip("Port Tinduff, Rade de Brest, Finist&egrave;re");
+
     };
 </script>
 </html>
