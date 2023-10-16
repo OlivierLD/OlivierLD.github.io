@@ -17,7 +17,8 @@
 	/* width: 620px; */
     width: 100%;
 	/* margin: 0 auto; */
-	background: rgba(245, 245, 245, 0.75); 
+	/* background: rgba(245, 245, 245, 0.75); */
+	background: rgba(255, 255, 255, 0.85); /* 0.75); */
 	font-size: 20px;
 }
 

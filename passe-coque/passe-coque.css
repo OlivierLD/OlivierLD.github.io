@@ -103,7 +103,7 @@ canvas {
 
 .text-content {
     /* text-shadow: 2px 2px 4px black, 0 0 25px white, 0 0 7px cyan; */
-    margin-top: 50px; /* Depends on the menu's thickness */
+    margin-top: 55px; /* Depends on the menu's thickness */
     color: black; /*blue;*/
     /* font-weight: bold; */
 }
