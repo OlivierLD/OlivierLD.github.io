@@ -167,6 +167,7 @@
 OpenSource JavaScript map API at <a href="https://leafletjs.com/" target="leaflet">leafletjs.com</a>
 
 <h1>Great Circles and Rhumblines</h1>
+<small>Two leaflet layers. Street Map and Sat View.</small>
 
 <!--div id="mapid" style="width: 600px; height: 400px;"></div-->
 <div style="margin: 5px;">
@@ -231,9 +232,17 @@ OpenSource JavaScript map API at <a href="https://leafletjs.com/" target="leafle
 
     let map = L.map('mapid'); // .setView([51.505, -0.09], 13);
 
+    let mbAttr = 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community';
+    let mbUrl = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
+
+    const satLayer = L.tileLayer(mbUrl, {id: 'mapbox.streets', attribution: mbAttr, opacity: 1.0});
+    satLayer.addTo(map);
+
+
     const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 		maxZoom: 19,
-		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        opacity: 0.5
 	}).addTo(map);
 
     // let polyline = L.polyline(latlngs, {color: 'red'}).addTo(map);
