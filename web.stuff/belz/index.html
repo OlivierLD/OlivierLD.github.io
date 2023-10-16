@@ -455,20 +455,22 @@
         let mbUrl = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
 
 
-        let base_layer = L.tileLayer(mbUrl, {id: 'mapbox.streets', attribution: mbAttr});
+        let base_layer = L.tileLayer(mbUrl, {id: 'mapbox.streets', attribution: mbAttr, opacity: 1.0});
 
         const SAT_VIEW = false;
 
         // Plot Port Tinduff 
         let map = L.map('mapid');
-        if (!SAT_VIEW) {
+        // A test here: adding 2 layers, streetview on top of satview. Hence the opacity.
+        // if (SAT_VIEW) {
+            base_layer.addTo(map);
+        // } else {
             const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 maxZoom: 19,
-                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+                opacity: 0.5
             }).addTo(map);
-        } else {
-            base_layer.addTo(map);
-        }
+        // }
 
         const portTinduffLat = 48.335402;
         const portTinduffLng = -4.368657;
