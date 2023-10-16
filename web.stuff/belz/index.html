@@ -544,11 +544,32 @@
                 .bindPopup(`<b>${legend}</b><br/><a href="${imgSrc}" target="new"><img src='${imgSrc}' width='200' title='Click to enlarge'></a>`)
                 .bindTooltip(`${legend}`);
 
+        // Ducks!
+        imgSrc = "./images/Groix.Oct.2023.14.jpg";
+        lat = 47.635797; 
+        lng = -3.484613;
+        legend = "Couac&nbsp;!";
+        L.marker([lat, lng])
+                .addTo(map2)
+                .bindPopup(`<b>${legend}</b><br/><a href="${imgSrc}" target="new"><img src='${imgSrc}' width='200' title='Click to enlarge'></a>`)
+                .bindTooltip(`${legend}`);
+
+
         // Port St Nicolas
         imgSrc = "./images/Groix.Oct.2023.16.jpg";
         lat = 47.632222; 
         lng = -3.482307;
         legend = "Port St Nic.";
+        L.marker([lat, lng])
+                .addTo(map2)
+                .bindPopup(`<b>${legend}</b><br/><a href="${imgSrc}" target="new"><img src='${imgSrc}' width='200' title='Click to enlarge'></a>`)
+                .bindTooltip(`${legend}`);
+
+        // Trou de l'enfer
+        imgSrc = "./images/Groix.Oct.2023.18.jpg";
+        lat = 47.622215; 
+        lng = -3.464020;
+        legend = "Trou de l'enfer";
         L.marker([lat, lng])
                 .addTo(map2)
                 .bindPopup(`<b>${legend}</b><br/><a href="${imgSrc}" target="new"><img src='${imgSrc}' width='200' title='Click to enlarge'></a>`)
@@ -584,6 +605,23 @@
                 .bindPopup(`<b>${legend}</b><br/><a href="${imgSrc}" target="new"><img src='${imgSrc}' width='200' title='Click to enlarge'></a>`)
                 .bindTooltip(`${legend}`);
 
+        // Quehello        
+        lat = 47.631468; 
+        lng = -3.472760;
+        legend = "Qu&eacute;h&eacute;llo";
+        L.marker([lat, lng])
+                .addTo(map2)
+                .bindPopup(`<b>${legend}</b>`)
+                .bindTooltip(`${legend}`);
+
+        // AirBnB
+        lat = 47.642738; 
+        lng = -3.459168;
+        legend = "AirBnB";
+        L.marker([lat, lng])
+                .addTo(map2)
+                .bindPopup(`<b>${legend}</b>`)
+                .bindTooltip(`${legend}`);
 };
 </script>
 </html>
