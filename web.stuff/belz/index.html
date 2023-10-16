@@ -451,12 +451,24 @@
 		document.getElementById("slide-show-swing").slideclick = onSlideShowClick;
 		document.getElementById("slide-show-port-tinduff").slideclick = onSlideShowClick;
 
+        let mbAttr = 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community';
+        let mbUrl = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
+
+
+        let base_layer = L.tileLayer(mbUrl, {id: 'mapbox.streets', attribution: mbAttr});
+
+        const SAT_VIEW = false;
+
         // Plot Port Tinduff 
         let map = L.map('mapid');
-        const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
-            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        }).addTo(map);
+        if (!SAT_VIEW) {
+            const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            }).addTo(map);
+        } else {
+            base_layer.addTo(map);
+        }
 
         const portTinduffLat = 48.335402;
         const portTinduffLng = -4.368657;
@@ -464,6 +476,7 @@
         let bounds = [[portTinduffLat - 0.25, portTinduffLng - 0.25], 
                       [portTinduffLat + 0.25, portTinduffLng + 0.25]];
         map.fitBounds(bounds);
+        // also see: map = L.map("map").setView([37.75, -122.23], 10);
 
         L.marker([portTinduffLat, portTinduffLng])
                 .addTo(map)
@@ -474,10 +487,16 @@
         const groixLat = 47.636526;
         const groixLng = -3.463199;
         let map2 = L.map('mapid-2');
-        const tiles2 = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
-            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        }).addTo(map2);
+        if (!SAT_VIEW) {
+            const tiles2 = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            }).addTo(map2);
+        } else {
+            let base_layer_2 = L.tileLayer(mbUrl, {id: 'mapbox.streets', attribution: mbAttr});
+            base_layer_2.addTo(map2);
+        }
+
         let boundsGroix = [[groixLat - 0.025, groixLng - 0.025], 
                            [groixLat + 0.025, groixLng + 0.025]];
         map2.fitBounds(boundsGroix);
