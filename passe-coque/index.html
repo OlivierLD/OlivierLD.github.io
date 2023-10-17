@@ -34,36 +34,39 @@
 	<!--
 		** Structure du menu **
 		▼ = &#9660;
-		- Accueil
-		- Qui sommes nous
+		- Accueil - 1
+		- Qui sommes nous - 2
 			- Passe-Coque, c'est quoi ?
 			- Notre equipe
-			- L'association
-			- La SCIC : Eco-village Nautique
-		- Nos actions
+			- Projet : Eco-village Nautique
+		- Nos actions - 3
 			- Transmettre
 			- Renover
 			- Partager
-			- Nos formations
-			- Associations partenaires
-		- La flotte
+			- Formations
+			- Partenaires
+		- La flotte - 4
 			- Les bateaux
 			- Les projets a saisir
-			- Le boat club
-		- Nous rejoindre
+		- Nous soutenir - 5
+			- Adherer
 			- Faire un don
-			- Investir dans la SCIC
-			- Votre projet associatif
-		- En savoir plus
+			- Investir dans l'Eco-Village
+		- En savoir plus - 6
 			- Contact
-			- Actualite
+			- On parle de nous / presse
 			- Visiter le chantier
 			- Partenaires
 	-->
 	<div id="nav-menu" style="display: none; margin-left: -8px;">
-		<div style="float: left;">
-			<!--a href="javascript:void(0)" onclick="clack(this);" id="_1"><image src="./logo.passe-coque.png" style="width: 48px; padding: 14px 10px;" title="Passe-Coque"/></a-->
-			<a href="javascript:void(0)" onclick="clack(this);" id="_1" style="text-decoration: none;"><img src="./logo.only.png" style="width: 80px; padding: 0px 20px;" title="Passe-Coque"/><!--span>Passe-Coque</span--></a>
+		<div style="float: left; display: grid; grid-template-columns: auto auto;">
+			<div>
+				<!--a href="javascript:void(0)" onclick="clack(this);" id="_1"><image src="./logo.passe-coque.png" style="width: 48px; padding: 14px 10px;" title="Passe-Coque"/></a-->
+				<a href="javascript:void(0)" onclick="clack(this);" id="_1" style="text-decoration: none;"><img src="./logo.only.png" style="width: 80px; padding: 0px 20px;" title="Passe-Coque"/></a>
+			</div>
+			<div style="height: 100%; padding: 25px 10px;">
+				<span style="font-weight: bold; color: blue;">Passe-Coque</span>
+			</div>
 		</div>
 		<div style="margin-left: -48px; float: right;">
 			<ul id="navigation" style="display: grid; grid-template-columns: auto auto auto auto auto auto 80px;"> <!-- Columns must match the menu below... -->
@@ -78,8 +81,7 @@
 					<ul>
 						<li><a href="javascript:void(0)" onclick="clack(this);" id="_21">Passe-Coque, c'est quoi&nbsp;?</a></li>
 						<li><a href="javascript:void(0)" onclick="clack(this);" id="_22">Notre &eacute;quipe</a></li>
-						<li><a href="javascript:void(0)" onclick="clack(this);" id="_23">L'association</a></li>
-						<li><a href="javascript:void(0)" onclick="clack(this);" id="_24">La SCIC : Eco-village Nautique</a></li>
+						<li><a href="javascript:void(0)" onclick="clack(this);" id="_23">Projet : Eco-village Nautique</a></li>
 						<!--li>
 							<a href="javascript:void(0)">Service 3 &raquo;</a>
 							<ul>
@@ -98,8 +100,8 @@
 						<li><a href="javascript:void(0)" onclick="clack(this);" id="_31">Transmettre</a></li>
 						<li><a href="javascript:void(0)" onclick="clack(this);" id="_32">R&eacute;nover</a></li>
 						<li><a href="javascript:void(0)" onclick="clack(this);" id="_33">Partager</a></li>
-						<li><a href="javascript:void(0)" onclick="clack(this);" id="_34">Nos formations</a></li>
-						<li><a href="javascript:void(0)" onclick="clack(this);" id="_35">Associations partenaires</a></li>
+						<li><a href="javascript:void(0)" onclick="clack(this);" id="_34">Formations</a></li>
+						<li><a href="javascript:void(0)" onclick="clack(this);" id="_35">Partenaires</a></li>
 					</ul>
 				</li>
 				<li>
@@ -107,22 +109,21 @@
 					<ul>
 						<li><a href="javascript:void(0)" onclick="clack(this);" id="_41">Les bateaux</a></li>
 						<li><a href="javascript:void(0)" onclick="clack(this);" id="_42">Les projets &agrave; saisir</a></li>
-						<li><a href="javascript:void(0)" onclick="clack(this);" id="_43">Le boat-club</a></li>
 					</ul>
 				</li>
 				<li>
-					<a href="javascript:void(0)" id="_5">Nous rejoindre&nbsp;</a>
+					<a href="javascript:void(0)" id="_5">Nous soutenir&nbsp;</a>
 					<ul>
-						<li><a href="javascript:void(0)" onclick="clack(this);" id="_51">Faire un don</a></li>
-						<li><a href="javascript:void(0)" onclick="clack(this);" id="_52">Investir dans la SCIC</a></li>
-						<li><a href="javascript:void(0)" onclick="clack(this);" id="_53">Votre projet associatif</a></li>
+						<li><a href="javascript:void(0)" onclick="clack(this);" id="_51">Adh&eacute;rer</a></li>
+						<li><a href="javascript:void(0)" onclick="clack(this);" id="_52">Faire un don</a></li>
+						<li><a href="javascript:void(0)" onclick="clack(this);" id="_53">Investir dans l'Eco-Village</a></li>
 					</ul>
 				</li>
 				<li>
 					<a href="javascript:void(0)" id="_6">En savoir plus&nbsp;</a>
 					<ul>
 						<li><a href="javascript:void(0)" onclick="clack(this);" id="_61">Contact</a></li>
-						<li><a href="javascript:void(0)" onclick="clack(this);" id="_62">Actualit&eacute;</a></li>
+						<li><a href="javascript:void(0)" onclick="clack(this);" id="_62">On parle de nous</a></li>
 						<li><a href="javascript:void(0)" onclick="clack(this);" id="_63">Visiter le chantier</a></li>
 						<li><a href="javascript:void(0)" onclick="clack(this);" id="_64">Partenaires</a></li>
 					</ul>
@@ -135,7 +136,7 @@
 	<br/>
 
 	  <!--
-    The Big Main Menu on the left
+    The Big Main Sliding Menu on the left
 
     ◄ = &#9668;
     ► = &#9658;
@@ -165,50 +166,48 @@
 			<a href="javascript:void(0)" class="active-link" style="margin-top: 10px;" onclick="clack(this);" id="_1"><span id="home-label"> Accueil</span></a>
 
 			<div> 
-			<a href="javascript:void(0)" onclick="showHideSection(this, 'section-1');"><span class="expand-collapse">&#9658;&nbsp;</span><span id="_2">Qui sommes-nous ?</span></a>
-			<div id="section-1" class="sub-section">
-				<a class="active-link" href="javascript:void(0)" onclick="clack(this);" id="_21">Passe-Coque, c'est quoi ?</a>
-				<a class="active-link" href="javascript:void(0)" onclick="clack(this);" id="_22">Notre &eacute;quipe</a>
-				<a class="active-link" href="javascript:void(0)" onclick="clack(this);" id="_23">L'association</a>
-				<a class="active-link" href="javascript:void(0)" onclick="clack(this);" id="_24">La SCIC : Eco-village Nautique</a>
-			</div>
+				<a href="javascript:void(0)" onclick="showHideSection(this, 'section-1');"><span class="expand-collapse">&#9658;&nbsp;</span><span id="_2">Qui sommes-nous ?</span></a>
+				<div id="section-1" class="sub-section">
+					<a class="active-link" href="javascript:void(0)" onclick="clack(this);" id="_21">Passe-Coque, c'est quoi ?</a>
+					<a class="active-link" href="javascript:void(0)" onclick="clack(this);" id="_22">Notre &eacute;quipe</a>
+					<a class="active-link" href="javascript:void(0)" onclick="clack(this);" id="_23">Projet : Eco-village Nautique</a>
+				</div>
 			</div>
 			<div>
-			<a href="javascript:void(0)" onclick="showHideSection(this, 'section-2');"><span class="expand-collapse">&#9658;&nbsp;</span><span id="3">Nos actions</span></a>
-			<div id="section-2" class="sub-section">
-				<a class="active-link" href="javascript:void(0)" onclick="clack(this);" id="_31">Transmettre</a>
-				<a class="active-link" href="javascript:void(0)" onclick="clack(this);" id="_32">R&eacute;nover</a>
-				<a class="active-link" href="javascript:void(0)" onclick="clack(this);" id="_33">Partager</a>
-				<a class="active-link" href="javascript:void(0)" onclick="clack(this);" id="_34">Nos formations</a>
-				<a class="active-link" href="javascript:void(0)" onclick="clack(this);" id="_35">Associations partenaires</a>
-			</div>
+				<a href="javascript:void(0)" onclick="showHideSection(this, 'section-2');"><span class="expand-collapse">&#9658;&nbsp;</span><span id="3">Nos actions</span></a>
+				<div id="section-2" class="sub-section">
+					<a class="active-link" href="javascript:void(0)" onclick="clack(this);" id="_31">Transmettre</a>
+					<a class="active-link" href="javascript:void(0)" onclick="clack(this);" id="_32">R&eacute;nover</a>
+					<a class="active-link" href="javascript:void(0)" onclick="clack(this);" id="_33">Partager</a>
+					<a class="active-link" href="javascript:void(0)" onclick="clack(this);" id="_34">Formations</a>
+					<a class="active-link" href="javascript:void(0)" onclick="clack(this);" id="_35">Partenaires</a>
+				</div>
 			</div>
 
 			<div>
 				<a href="javascript:void(0)" onclick="showHideSection(this, 'section-3');"><span class="expand-collapse">&#9658;&nbsp;</span><span id="_4">La flotte</span></a>
 				<div id="section-3" class="sub-section">
-				<a class="active-link" href="javascript:void(0)" onclick="clack(this);" id="_41">Les bateaux</a>
-				<a class="active-link" href="javascript:void(0)" onclick="clack(this);" id="_42">Les projets &agrave; saisir</a>
-				<a class="active-link" href="javascript:void(0)" onclick="clack(this);" id="_43">Le boat club</a>
+					<a class="active-link" href="javascript:void(0)" onclick="clack(this);" id="_41">Les bateaux</a>
+					<a class="active-link" href="javascript:void(0)" onclick="clack(this);" id="_42">Les projets &agrave; saisir</a>
 				</div>
 			</div>
 
 			<div>
-				<a href="javascript:void(0)" onclick="showHideSection(this, 'section-4');"><span class="expand-collapse">&#9658;&nbsp;</span><span id="_5">Nous rejoindre</span></a>
+				<a href="javascript:void(0)" onclick="showHideSection(this, 'section-4');"><span class="expand-collapse">&#9658;&nbsp;</span><span id="_5">Nous soutenir</span></a>
 				<div id="section-4" class="sub-section">
-				<a class="active-link" href="javascript:void(0)" onclick="clack(this);" id="_51">Faire un don</a>
-				<a class="active-link" href="javascript:void(0)" onclick="clack(this);" id="_52">Investir dans la SCIC</a>
-				<a class="active-link" href="javascript:void(0)" onclick="clack(this);" id="_53">Votre projet associatif</a>
+					<a class="active-link" href="javascript:void(0)" onclick="clack(this);" id="_51">Adh&eacute;rer</a>
+					<a class="active-link" href="javascript:void(0)" onclick="clack(this);" id="_52">Faire un don</a>
+					<a class="active-link" href="javascript:void(0)" onclick="clack(this);" id="_53">Investir dans l'Eco-Village</a>
 				</div>
 			</div>
 
 			<div>
 				<a href="javascript:void(0)" onclick="showHideSection(this, 'section-5');"><span class="expand-collapse">&#9658;&nbsp;</span><span id="_6">En savoir plus</span></a>
 				<div id="section-5" class="sub-section">
-				<a class="active-link" href="javascript:void(0)" onclick="clack(this);" id="_61">Contact</a>
-				<a class="active-link" href="javascript:void(0)" onclick="clack(this);" id="_62">Actualit&eacute;s</a>
-				<a class="active-link" href="javascript:void(0)" onclick="clack(this);" id="_63">Visiter le chantier</a>
-				<a class="active-link" href="javascript:void(0)" onclick="clack(this);" id="_64">Partenaires</a>
+					<a class="active-link" href="javascript:void(0)" onclick="clack(this);" id="_61">Contact</a>
+					<a class="active-link" href="javascript:void(0)" onclick="clack(this);" id="_62">On parle de nous</a>
+					<a class="active-link" href="javascript:void(0)" onclick="clack(this);" id="_63">Visiter le chantier</a>
+					<a class="active-link" href="javascript:void(0)" onclick="clack(this);" id="_64">Partenaires</a>
 				</div>
 			</div>
 
