@@ -84,7 +84,9 @@ let clack = (origin) => {
     // Specific content rule(s)
 	if (originId === "62") { 
 		contentName = "carrousel.html";
-	}
+	} else if (originId === "32" || originId === "33") {
+        contentName = `31_${currentLang}.html`; // 31, 32 & 33, same doc, different anchor (hashtag).
+    }
 	let contentPlaceHolder = document.getElementById("current-content");
     
 	fetch(contentName)
@@ -105,6 +107,16 @@ let clack = (origin) => {
 							contentPlaceHolder.innerHTML = doc;
                             if (originId === "22") {
                                 showSlides(currentSlide);
+                            } else if (originId === "31" || originId === "32" || originId === "33") {
+                                const overflow = document.getElementById('action-container');
+                                let hashtag = (originId === "31") ? '01' : ((originId === "32") ? '02' : '03');
+                                const anchor = document.querySelector(`a[name='${hashtag}']`);
+                                
+                                const rectOverflow = overflow.getBoundingClientRect();
+                                const rectAnchor = anchor.getBoundingClientRect();
+
+                                // Set the scroll position of the overflow container
+                                overflow.scrollTop = rectAnchor.top - rectOverflow.top;
                             }
 						}
 					});
@@ -140,8 +152,8 @@ let updateMenu = () => { // Multilang aspect.
 	document.querySelectorAll("#_31").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Transmettre" : "Transmit"));
 	document.querySelectorAll("#_32").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "R&eacute;nover" : "Refit"));
 	document.querySelectorAll("#_33").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Partager" : "Share"));
-	document.querySelectorAll("#_34").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Formations" : "Trainings"));
-	document.querySelectorAll("#_35").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Partenaires" : "Partners"));
+	// document.querySelectorAll("#_34").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Formations" : "Trainings"));
+	// document.querySelectorAll("#_35").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Partenaires" : "Partners"));
 
 	document.querySelectorAll("#_4").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "La flotte&nbsp;" : "The fleet&nbsp;"));
 	document.querySelectorAll("#_41").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Les bateaux" : "The boats"));
