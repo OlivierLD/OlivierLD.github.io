@@ -16,6 +16,8 @@
       display: grid;
       grid-template-columns: auto;
       padding: 0px;
+      min-height: 800px;
+      min-width: 1024px;
       /* margin: auto; */
     }
 
@@ -73,7 +75,7 @@
           let sfc = document.getElementById("surface");
           sfc.style.display = cb.checked ? 'inline' : 'none';
           let fax500mb = document.getElementById("500mb");
-          fax500mb.style.marginTop = cb.checked ? '-760px' : '-0px';
+          fax500mb.style.marginTop = cb.checked ? '-760px' : '30px';
           if (!cb.checked) {
             set500mbOpacity('1.0');
           } else {
@@ -102,7 +104,7 @@
 <!-- North Pacific 500mb: https://tgftp.nws.noaa.gov/fax/PPBA10.gif -->
 
 
-  <div id="placeholder" class="fax-container" style="min-height: 600px; min-width: 1024px;">
+  <div id="placeholder" class="fax-container">
       <img id="surface" src="https://ocean.weather.gov/P_sfc_full_ocean_color.png"></img>
       <img id="500mb" src="https://tgftp.nws.noaa.gov/fax/PPBA10.gif"></img>
   </div>
