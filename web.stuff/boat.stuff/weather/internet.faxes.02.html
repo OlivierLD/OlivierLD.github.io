@@ -17,7 +17,7 @@
       /* margin: auto; */
     }
 
-    /*  Tests...
+    /*  Tests... 
     .image-1 {
         filter: invert(100%);
         -webkit-filter: invert(100%);
@@ -57,23 +57,44 @@
     }
     </style>
     <script type="text/javascript">
-        showSurface = (cb) => {
+      let surfaceFaxesVisible = () => {
+          let left = document.getElementById("left");
+          return !(left.style.display === 'none');
+      };  
+      let set500mbOpacity = val => {
+        let fax500mb = document.getElementById("500mb");
+        fax500mb.style.opacity = val;
+      };
+
+      // Show/Hide surface faxes
+      let showSurface = (cb) => {
           let left = document.getElementById("left");
           let right = document.getElementById("right");
           right.style.display = cb.checked ? 'inline' : 'none';
           left.style.display = cb.checked ? 'inline' : 'none';
           let fax500mb = document.getElementById("500mb");
           fax500mb.style.marginTop = cb.checked ? '-575px' : '-30px';
-        };
-        show500mb = (cb) => {
+          if (!cb.checked) {
+            set500mbOpacity('1.0');
+          } else {
+            set500mbOpacity('0.5');
+          }
+      };
+      // Show/Hide 500mb fax
+      let show500mb = (cb) => {
           let fax500mb = document.getElementById("500mb");
           fax500mb.style.display = cb.checked ? 'inline' : 'none';
-        };
+          if (cb.checked && !surfaceFaxesVisible()) {
+            set500mbOpacity('1.0');
+          } else {
+            set500mbOpacity('0.5');
+          }
+      };
     </script>
 </head>
 <body>
   <h2 class="tooltip">
-    Faxes from the Internet
+    Faxes from the Internet, North Atlantic
     <span class="tooltiptext">3 faxes, reworked<br/><i>on the <b>client</b> side</i>.</span>
   </h2>
 
@@ -94,26 +115,35 @@
   </div>
 </body>
 <script type="text/javascript">
+    // On Load: Rework the faxes loaded above, in the placeholder div.
+    // Margins can be tuned with the debugger (inspector).
     window.onload = () => {
       const leftFax = document.getElementById('left');
+      const rightFax = document.getElementById('right');
+      const fax500mb = document.getElementById('500mb');
+
+      // Surface, left fax
       leftFax.style.width = '600px';
       leftFax.style.height = 'auto';
       leftFax.style.transform = 'rotate(90deg)';
-      leftFax.style.filter = 'opacity(1.0)';
+      /* leftFax.style.filter = 'opacity(1.0)';  */    // In the background.
+      leftFax.style.opacity = '1.0';      // Another option, same as above.
 
-      const rightFax = document.getElementById('right');
+      // Surface, right fax
       rightFax.style.width = '600px';
       rightFax.style.height = 'auto';
       rightFax.style.transform = 'rotate(90deg)';
-      rightFax.style.filter = 'opacity(1.0)';
+      /* rightFax.style.filter = 'opacity(1.0)';  */   // In the background (see z-index)
+      rightFax.style.opacity = '1.0';      // Another option, same as above.
       rightFax.style.marginLeft = '-33px';
       rightFax.style.zIndex = '-1';
 
-      const fax500mb = document.getElementById('500mb');
+      // 500mb fax
       fax500mb.style.width = '919px';
       fax500mb.style.height = 'auto';
       // fax500mb.style.transform = 'rotate(0deg)';
-      fax500mb.style.filter = 'opacity(0.5)';
+      /* fax500mb.style.filter = 'opacity(0.5)'; */    // Foreground, not opaque (see z-index)
+      fax500mb.style.opacity = '0.5';     // Foreground, not opaque (see z-index)
       fax500mb.style.marginLeft = '62px';
       fax500mb.style.marginTop = '-575px';
       fax500mb.style.zIndex = '1';
