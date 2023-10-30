@@ -65,7 +65,17 @@ a.list-link:hover {
   color: cyan;
   cursor: pointer;
 }
-	</style>
+
+.sub-section {
+  /* display: none; */
+  visibility: hidden;
+  opacity: 0;
+  height: 0;
+  transition: opacity 0.5s linear, height 0.5s ease-in-out;
+  margin-left: 24px;
+}
+
+</style>
 	<script type="text/javascript" src="../astro/js/qrcode.js"></script>
 </head>
 <body>
@@ -106,53 +116,56 @@ a.list-link:hover {
 
 	<br/>
 	<br/>
-	<h3 style="margin: 3px 0 -15px 0;">Spi Ouest France 2023</h3>
-	<ul>
-		<li>
-			<a class="list-link" href="./spi.ouest.france.2023/index.html" target="_new">Some pictures</a>
-			<button class="button-link" onclick="makeCode('spi.ouest.france.2023/index.html');" style="border-radius: 4px;">QR Code</button>
-		</li>
-		<li><a class="list-link" href="./spi.ouest.france.2023/spi.ouest.france.2023.html" target="_new">The races</a></li>
-	</ul>
-	<h3 style="margin: 3px 0 -15px 0;">Essais Voile-Magazine, 12 mai 2023</h3>
-	<ul>
-		<li>
-			<a class="list-link" href="./voile-mag-2023-may-12/voile-mag.html" target="_new">The Track data (with pictures)</a>
-			<button class="button-link" onclick="makeCode('voile-mag-2023-may-12/voile-mag.html');" style="border-radius: 4px;">QR Code</button>
-		</li>
-	</ul>
-	<h3 style="margin: 3px 0 -15px 0;">Dives-sur-mer, 28 mai 2023</h3>
-	<ul>
-		<li>
-			<a class="list-link" href="./dives/gps.html" target="_new">The Track data</a>
-			<button class="button-link" onclick="makeCode('dives/GPS.html');" style="border-radius: 4px;">QR Code</button>
-		</li>
-	</ul>
 
-	<!-- http://localhost:8080/web.stuff/boat.stuff/rubiscup.2023/rubiscup.2023.html# -->
-	<h3 style="margin: 3px 0 -15px 0;">Rubi's Cup 2023, Groix</h3>
-	<ul>
-		<li>
-			<a class="list-link" href="./rubiscup.2023/rubiscup.2023.html" target="_new">Tracks and pictures</a>
-			<button class="button-link" onclick="makeCode('rubiscup.2023/rubiscup.2023.html');" style="border-radius: 4px;">QR Code</button>
-		</li>
-	</ul>
+	<h3><a href="javascript:void(0)" class="list-link" title="News Reports" onclick="showHideSection(this, 'section-reports');"><span class="expand-collapse">&#9658;&nbsp;</span>News Reports</a></h3>
+    <div id="section-reports" class="sub-section">
+		<h3 style="margin: 3px 0 -15px 0;">Spi Ouest France 2023</h3>
+		<ul>
+			<li>
+				<a class="list-link" href="./spi.ouest.france.2023/index.html" target="_new">Some pictures</a>
+				<button class="button-link" onclick="makeCode('spi.ouest.france.2023/index.html');" style="border-radius: 4px;">QR Code</button>
+			</li>
+			<li><a class="list-link" href="./spi.ouest.france.2023/spi.ouest.france.2023.html" target="_new">The races</a></li>
+		</ul>
+		<h3 style="margin: 3px 0 -15px 0;">Essais Voile-Magazine, 12 mai 2023</h3>
+		<ul>
+			<li>
+				<a class="list-link" href="./voile-mag-2023-may-12/voile-mag.html" target="_new">The Track data (with pictures)</a>
+				<button class="button-link" onclick="makeCode('voile-mag-2023-may-12/voile-mag.html');" style="border-radius: 4px;">QR Code</button>
+			</li>
+		</ul>
+		<h3 style="margin: 3px 0 -15px 0;">Dives-sur-mer, 28 mai 2023</h3>
+		<ul>
+			<li>
+				<a class="list-link" href="./dives/gps.html" target="_new">The Track data</a>
+				<button class="button-link" onclick="makeCode('dives/GPS.html');" style="border-radius: 4px;">QR Code</button>
+			</li>
+		</ul>
+		<!-- http://localhost:8080/web.stuff/boat.stuff/rubiscup.2023/rubiscup.2023.html# -->
+		<h3 style="margin: 3px 0 -15px 0;">Rubi's Cup 2023, Groix</h3>
+		<ul>
+			<li>
+				<a class="list-link" href="./rubiscup.2023/rubiscup.2023.html" target="_new">Tracks and pictures</a>
+				<button class="button-link" onclick="makeCode('rubiscup.2023/rubiscup.2023.html');" style="border-radius: 4px;">QR Code</button>
+			</li>
+		</ul>
+		<h3 style="margin: 3px 0 -15px 0;">A walk in Kervoine, Belz</h3>
+		<ul>
+			<li>
+				<a class="list-link" href="./walking/walking.kervoine.html" target="_new">Tracks</a>
+				<button class="button-link" onclick="makeCode('walking/walking.kervoine.html');" style="border-radius: 4px;">QR Code</button>
+			</li>
+		</ul>
+		<h3 style="margin: 3px 0 -15px 0;">Championnat de Godille, Port Lay, Groix</h3>
+		<ul>
+			<li>
+				<a class="list-link" href="./port-lay.2023/gps.html" target="_new">Tracks &amp; Pictures</a>
+				<button class="button-link" onclick="makeCode('port-lay.2023/gps.html');" style="border-radius: 4px;">QR Code</button>
+			</li>
+		</ul>
+	</div>
 
-	<h3 style="margin: 3px 0 -15px 0;">A walk in Kervoine, Belz</h3>
-	<ul>
-		<li>
-			<a class="list-link" href="./walking/walking.kervoine.html" target="_new">Tracks</a>
-			<button class="button-link" onclick="makeCode('walking/walking.kervoine.html');" style="border-radius: 4px;">QR Code</button>
-		</li>
-	</ul>
-
-	<h3 style="margin: 3px 0 -15px 0;">Championnat de Godille, Port Lay, Groix</h3>
-	<ul>
-		<li>
-			<a class="list-link" href="./port-lay.2023/gps.html" target="_new">Tracks &amp; Pictures</a>
-			<button class="button-link" onclick="makeCode('port-lay.2023/gps.html');" style="border-radius: 4px;">QR Code</button>
-		</li>
-	</ul>
+	<br/>
 
 	<h3 style="margin: 3px 0 -15px 0;">3D-printed blocks</h3>
 	<ul>
@@ -164,50 +177,53 @@ a.list-link:hover {
 	   <li><a class="list-link" href="./misc/num.converter.html" target="_new">Dec-to-Sex converter (functional <i>and</i> good looking)</a></li>
 	</ul>
 	<hr/>
-	<ul>
-		<li><a class="list-link" href="spot/spot.parser.html" target="SPOT">SPOT Parser</a></li>
-		<li><a class="list-link" href="https://earth.nullschool.net/" target="WindOnEarth" title="A cool one, try it.">Wind on planet Earth</a></li>
-		<li><a class="list-link" href="http://weather.gmdss.org/" target="NAVTEXT">Navtex, worldwide</a></li>
-		<li><a class="list-link" href="https://public.wmo.int/en" target="WMO">World Meteorological Organization (WMO)</a></li>
-		<li><a class="list-link" href="https://ocean.weather.gov/" target="OPC">US Ocean Prediction Center (OPC)</a></li>
-		<li><a class="list-link" href="https://www.noaa.gov/" target="NOAA">US National Oceanographic and Atmospheric Admininstration (NOAA)</a></li>
-		<li><a class="list-link" href="http://weather.gmdss.org/" target="WWMIWS">Worldwide Met-Ocean Information and Warning Service (WWMIWS)</a></li>	
-		<li>
-			<h3 style="margin: 3px;">NOAA Weather Faxes (US)</h3>
-			<ul>
-				<li><a class="list-link" href="https://www.weather.gov/marine/radiofax_charts" target="NOAA_faxes">Fax Master Index</a></li>
-				<li>
-					<h3 style="margin: 3px;">Paficic</h3>
-					<ul>
-						<li><a class="list-link" href="https://tgftp.nws.noaa.gov/fax/PYBA90.gif" target="NOAA_faxes">North Pacific Surface Analysis, East part</a></li>
-						<li><a class="list-link" href="https://tgftp.nws.noaa.gov/fax/PYBA91.gif" target="NOAA_faxes">North Pacific Surface Analysis, West part</a></li>
-						<li><a class="list-link" href="https://tgftp.nws.noaa.gov/fax/PPBA10.gif" target="NOAA_faxes">North Pacific 500mb Analysis</a></li>
-						<li><a class="list-link" href="https://tgftp.nws.noaa.gov/fax/PJBA99.gif" target="NOAA_faxes">North Pacific Sea State Analysis</a></li>
-						<li><a class="list-link" href="https://tgftp.nws.noaa.gov/fax/PWFA11.gif" target="NOAA_faxes">Central Pacific Streamlines</a></li>
+	<h3><a href="javascript:void(0)" class="list-link" title="Weather" onclick="showHideSection(this, 'section-weather');"><span class="expand-collapse">&#9658;&nbsp;</span>Weather, faxes, etc.</a></h3>
+    <div id="section-weather" class="sub-section">
+		<ul>
+			<li><a class="list-link" href="spot/spot.parser.html" target="SPOT">SPOT Parser</a></li>
+			<li><a class="list-link" href="https://earth.nullschool.net/" target="WindOnEarth" title="A cool one, try it.">Wind on planet Earth</a></li>
+			<li><a class="list-link" href="http://weather.gmdss.org/" target="NAVTEXT">Navtex, worldwide</a></li>
+			<li><a class="list-link" href="https://public.wmo.int/en" target="WMO">World Meteorological Organization (WMO)</a></li>
+			<li><a class="list-link" href="https://ocean.weather.gov/" target="OPC">US Ocean Prediction Center (OPC)</a></li>
+			<li><a class="list-link" href="https://www.noaa.gov/" target="NOAA">US National Oceanographic and Atmospheric Admininstration (NOAA)</a></li>
+			<li><a class="list-link" href="http://weather.gmdss.org/" target="WWMIWS">Worldwide Met-Ocean Information and Warning Service (WWMIWS)</a></li>	
+			<li>
+				<h3 style="margin: 3px;">NOAA Weather Faxes (US)</h3>
+				<ul>
+					<li><a class="list-link" href="https://www.weather.gov/marine/radiofax_charts" target="NOAA_faxes">Fax Master Index</a></li>
+					<li>
+						<h3 style="margin: 3px;">Paficic</h3>
+						<ul>
+							<li><a class="list-link" href="https://tgftp.nws.noaa.gov/fax/PYBA90.gif" target="NOAA_faxes">North Pacific Surface Analysis, East part</a></li>
+							<li><a class="list-link" href="https://tgftp.nws.noaa.gov/fax/PYBA91.gif" target="NOAA_faxes">North Pacific Surface Analysis, West part</a></li>
+							<li><a class="list-link" href="https://tgftp.nws.noaa.gov/fax/PPBA10.gif" target="NOAA_faxes">North Pacific 500mb Analysis</a></li>
+							<li><a class="list-link" href="https://tgftp.nws.noaa.gov/fax/PJBA99.gif" target="NOAA_faxes">North Pacific Sea State Analysis</a></li>
+							<li><a class="list-link" href="https://tgftp.nws.noaa.gov/fax/PWFA11.gif" target="NOAA_faxes">Central Pacific Streamlines</a></li>
 
-						<li><a class="list-link" href="https://ocean.weather.gov/P_sfc_full_ocean_color.png" target="NOAA_faxes">North Pacific Surface Analysis, color</a></li>
-						<li><a class="list-link" href="https://ocean.weather.gov/shtml/P_00hr500.gif" target="NOAA_faxes">North Pacific 500mb Analysis, color</a></li>
-					</ul>
-			    </li>
-				<li>
-					<h3 style="margin: 3px;">Atlantic</h3>
-					<ul>
-						<li><a class="list-link" href="https://tgftp.nws.noaa.gov/fax/PYAA12.gif" target="NOAA_faxes">North-West Atlantic Surface Analysis</a></li>
-						<li><a class="list-link" href="https://tgftp.nws.noaa.gov/fax/PYAA11.gif" target="NOAA_faxes">North-East Atlantic Surface Analysis</a></li>
-						<li><a class="list-link" href="https://tgftp.nws.noaa.gov/fax/PPAA10.gif" target="NOAA_faxes">North Atlantic 500mb Analysis</a></li>
-						<li><a class="list-link" href="https://tgftp.nws.noaa.gov/fax/PJAA99.gif" target="NOAA_faxes">North Atlantic Sea State Analysis</a></li>
-					</ul>
-				</li>
-				<li>
-					<h3 style="margin: 3px;">WiP</h3>
-					<ul>
-						<li><a class="list-link" href="weather/internet.faxes.NAtl.html" target="WiP" title="moved, rescaled, rotated">Several Atlantic faxes, reworked on the client side...</a></li>
-						<li><a class="list-link" href="weather/internet.faxes.NPac.html" target="WiP" title="moved, rescaled, rotated">Several Pacific faxes, reworked on the client side...</a></li>
-					</ul>
-				</li>		
-			</ul>
-		</li>
-	</ul>
+							<li><a class="list-link" href="https://ocean.weather.gov/P_sfc_full_ocean_color.png" target="NOAA_faxes">North Pacific Surface Analysis, color</a></li>
+							<li><a class="list-link" href="https://ocean.weather.gov/shtml/P_00hr500.gif" target="NOAA_faxes">North Pacific 500mb Analysis, color</a></li>
+						</ul>
+					</li>
+					<li>
+						<h3 style="margin: 3px;">Atlantic</h3>
+						<ul>
+							<li><a class="list-link" href="https://tgftp.nws.noaa.gov/fax/PYAA12.gif" target="NOAA_faxes">North-West Atlantic Surface Analysis</a></li>
+							<li><a class="list-link" href="https://tgftp.nws.noaa.gov/fax/PYAA11.gif" target="NOAA_faxes">North-East Atlantic Surface Analysis</a></li>
+							<li><a class="list-link" href="https://tgftp.nws.noaa.gov/fax/PPAA10.gif" target="NOAA_faxes">North Atlantic 500mb Analysis</a></li>
+							<li><a class="list-link" href="https://tgftp.nws.noaa.gov/fax/PJAA99.gif" target="NOAA_faxes">North Atlantic Sea State Analysis</a></li>
+						</ul>
+					</li>
+					<li>
+						<h3 style="margin: 3px;">WiP</h3>
+						<ul>
+							<li><a class="list-link" href="weather/internet.faxes.NAtl.html" target="WiP" title="moved, rescaled, rotated">Several Atlantic faxes, reworked on the client side...</a></li>
+							<li><a class="list-link" href="weather/internet.faxes.NPac.html" target="WiP" title="moved, rescaled, rotated">Several Pacific faxes, reworked on the client side...</a></li>
+						</ul>
+					</li>		
+				</ul>
+			</li>
+		</ul>
+	</div>
 	<hr/>
 	<h3>UI examples, build the parameter file driving the <a href="https://github.com/OlivierLD/ROB/tree/master/raspberry-sailor/NMEA-multiplexer" target="_new">NMEA Multiplexer</a> and related Nav Servers.</h3>
 	<ul>
@@ -243,22 +259,24 @@ a.list-link:hover {
 	<ul>
 		<li><a class="list-link" href="../iss/ISS.GPS.api.html" target="new">ISS...</a></li>
 	</ul-->
-	<h3>Navigation documents (pdf)</h3>
-	<ul>
-		<li><a class="list-link" href="misc/documents/mercator_11x17.pdf" target="new">Mercator Templates</a></li>
-		<li><a class="list-link" href="misc/documents/PlottingSheet.pdf" target="new">Amana's Universal Plotting Sheet</a></li>
-		<li>
-			Not to loose. To be upgraded
-			<ul>
-				<li><a class="list-link" href="http://www.lediouris.net/navigation/" target="new">Miscellaneous navigation documents (in French)</a></li>
-				<li><a class="list-link" href="https://www.lediouris.net/original/sailing/dashboard/tutorial/gettingstarted/index.html" target="new">Getting started...</a></li>
-				<li><a class="list-link" href="https://www.lediouris.net/original/sailing/ocsss/calibration.html" target="new">Calibration</a></li>
-				<li><a class="list-link" href="https://www.lediouris.net/original/sailing/ocsss/tackloss.html" target="new">Tack Loss</a></li>
-				<li><a class="list-link" href="https://www.lediouris.net/original/sailing/" target="new">Sailing in the SF Bay</a></li>
-				<li><a class="list-link" href="http://www.lediouris.net/ww/" target="new">Weather Wizard</a></li>
-			</ul>
-		</li>
-	</ul>
+	<h3><a href="javascript:void(0)" class="list-link" title="Documents" onclick="showHideSection(this, 'section-documents');"><span class="expand-collapse">&#9658;&nbsp;</span>Navigation Documents (pdf)</a></h3>
+    <div id="section-documents" class="sub-section">
+		<ul>
+			<li><a class="list-link" href="misc/documents/mercator_11x17.pdf" target="new">Mercator Templates</a></li>
+			<li><a class="list-link" href="misc/documents/PlottingSheet.pdf" target="new">Amana's Universal Plotting Sheet</a></li>
+			<li>
+				Not to loose. To be upgraded
+				<ul>
+					<li><a class="list-link" href="http://www.lediouris.net/navigation/" target="new">Miscellaneous navigation documents (in French)</a></li>
+					<li><a class="list-link" href="https://www.lediouris.net/original/sailing/dashboard/tutorial/gettingstarted/index.html" target="new">Getting started...</a></li>
+					<li><a class="list-link" href="https://www.lediouris.net/original/sailing/ocsss/calibration.html" target="new">Calibration</a></li>
+					<li><a class="list-link" href="https://www.lediouris.net/original/sailing/ocsss/tackloss.html" target="new">Tack Loss</a></li>
+					<li><a class="list-link" href="https://www.lediouris.net/original/sailing/" target="new">Sailing in the SF Bay</a></li>
+					<li><a class="list-link" href="http://www.lediouris.net/ww/" target="new">Weather Wizard</a></li>
+				</ul>
+			</li>
+		</ul>
+	</div>
 	<hr/>
 	<span style="font-style: italic;">That's it.</span>
 </body>
@@ -294,6 +312,34 @@ a.list-link:hover {
 		} else {
 			// alert(NO_DIALOG_MESSAGE);
 			qrDialog.style.display = 'none';
+		}
+	};
+
+	let showSection = (id) => {
+	//document.getElementById(id).style.display = 'inline-block';
+		document.getElementById(id).style.visibility = 'visible';
+		document.getElementById(id).style.opacity = 1;
+		document.getElementById(id).style.height = 'auto';
+	};
+
+	let hideSection = (id) => {
+	//document.getElementById(id).style.display = 'none';
+		document.getElementById(id).style.visibility = 'hidden';
+		document.getElementById(id).style.opacity = 0;
+		document.getElementById(id).style.height = 0;
+	};
+
+	const COLLAPSED_LINE = "&#9658;&nbsp;";
+	const EXPANDED_LINE = "&#9660;&nbsp;";
+
+	let showHideSection = (obj, id) => {
+		let innerSpan = obj.querySelector('.expand-collapse');
+		if (document.getElementById(id).style.visibility === 'visible') {  // Then hide it
+			innerSpan.innerHTML = COLLAPSED_LINE;
+			hideSection(id);
+		} else { // Show it
+			innerSpan.innerHTML = EXPANDED_LINE;
+			showSection(id);
 		}
 	};
 
