@@ -46,9 +46,7 @@ embed {
 
 const TABS = [   // Add tabs here as needed
   { id: 'one', name: 'Earth', url: 'https://earth.nullschool.net/#current/wind/surface/level/orthographic=-22.32,45.08,1243' },
-  { id: 'two', name: 'Windy', url: 'https://www.windy.com/?47.647,-3.330,11,i:pressure' },
   { id: 'three', name: 'WindGuru', url: 'https://www.windguru.cz/map/' },
-  { id: 'four', name: 'Surf Forecast', url: 'https://www.surf-forecast.com/ ' },
   { id: 'five', name: 'NOAA Faxes', url: 'https://olivierld.github.io/web.stuff/boat.stuff/weather/internet.faxes.NAtl.html' }
 ];
 
@@ -72,13 +70,18 @@ let openTab = (evt, tabNum) => {
   <!-- The tabs. Add them here on demand -->
   <div class="tab" style="margin-top: 10px; display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto;"> <!-- TODO Improve the grid-template... -->
       <button id="one" class="tablinks active" onclick="openTab(event, 0);">Earth</button>
-      <button id="two" class="tablinks" onclick="openTab(event, 1);">Windy</button>
-      <button id="three" class="tablinks" onclick="openTab(event, 2);">WindGuru</button>
-      <button id="four" class="tablinks" onclick="openTab(event, 3);">Surf Forecast</button>
-      <button id="five" class="tablinks" onclick="openTab(event, 4);">NOAA Faxes</button>
+      <button id="three" class="tablinks" onclick="openTab(event, 1);">WindGuru</button>
+      <button id="five" class="tablinks" onclick="openTab(event, 2);">NOAA Faxes</button>
   </div>
   <div style="height: 600px; width: 100%;">
     <embed id="content" src="https://earth.nullschool.net/#current/wind/surface/level/orthographic=-22.32,45.08,1243" style="height: 100%; width: 100%;"></embed>
+  </div>
+  <div style="margin-top: 10px;">
+    Others...
+    <ul>
+      <li><a href="https://www.windy.com/?47.647,-3.330,11,i:pressure" target="next">Windy</a></li>
+      <li><a href="https://www.surf-forecast.com/" target="next">Surf Forecast</a></li>
+    </ul>
   </div>
 </body>
 <script type="text/javascript">
