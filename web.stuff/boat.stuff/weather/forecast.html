@@ -47,7 +47,8 @@ embed {
 const TABS = [   // Add tabs here as needed
   { id: 'one', name: 'Earth', url: 'https://earth.nullschool.net/#current/wind/surface/level/orthographic=-22.32,45.08,1243' },
   { id: 'three', name: 'WindGuru', url: 'https://www.windguru.cz/map/' },
-  { id: 'five', name: 'NOAA Faxes', url: 'https://olivierld.github.io/web.stuff/boat.stuff/weather/internet.faxes.NAtl.html' }
+  { id: 'five', name: 'NOAA Faxes', url: 'https://olivierld.github.io/web.stuff/boat.stuff/weather/internet.faxes.NAtl.html' },
+  { id: 'six', name: 'Ventusky', url: 'https://www.ventusky.com/?p=49.0;-9.7;5&l=wind-10m&t=20231101/2100&m=icon' }
 ];
 
 let openTab = (evt, tabNum) => {
@@ -72,6 +73,7 @@ let openTab = (evt, tabNum) => {
       <button id="one" class="tablinks active" onclick="openTab(event, 0);">Earth</button>
       <button id="three" class="tablinks" onclick="openTab(event, 1);">WindGuru</button>
       <button id="five" class="tablinks" onclick="openTab(event, 2);">NOAA Faxes</button>
+      <button id="six" class="tablinks" onclick="openTab(event, 3);">Ventusky</button>
   </div>
   <div style="height: 600px; width: 100%;">
     <embed id="content" src="https://earth.nullschool.net/#current/wind/surface/level/orthographic=-22.32,45.08,1243" style="height: 100%; width: 100%;"></embed>
@@ -84,6 +86,7 @@ let openTab = (evt, tabNum) => {
       <li><a href="https://www.windguru.cz/map/" target="next">WindGuru</a></li>
       <li><a href="https://www.surf-forecast.com/" target="next">Surf Forecast</a></li>
       <li><a href="https://olivierld.github.io/web.stuff/boat.stuff/weather/internet.faxes.NAtl.html" target="next">NOAA Faxes</a></li>
+      <li><a href="https://www.ventusky.com/?p=49.0;-9.7;5&l=wind-10m&t=20231101/2100&m=icon" target="next">Ventusky</a></li>
     </ul>
   </div>
 </body>
