@@ -59,11 +59,6 @@
     .tooltip:hover .tooltiptext {
       visibility: visible;
     }
-
-    .transparent {
-      mix-blend-mode: multiply;
-    }
-
     </style>
     <script type="text/javascript">
       let surfaceFaxesVisible = () => {
@@ -81,21 +76,21 @@
           sfc.style.display = cb.checked ? 'inline' : 'none';
           let fax500mb = document.getElementById("500mb");
           fax500mb.style.marginTop = cb.checked ? '-760px' : '30px';
-          // if (!cb.checked) {
-          //   set500mbOpacity('1.0');
-          // } else {
-          //   set500mbOpacity('0.5');
-          // }
+          if (!cb.checked) {
+            set500mbOpacity('1.0');
+          } else {
+            set500mbOpacity('0.5');
+          }
       };
       // Show/Hide 500mb fax
       let show500mb = (cb) => {
           let fax500mb = document.getElementById("500mb");
           fax500mb.style.display = cb.checked ? 'inline' : 'none';
-          // if (cb.checked && !surfaceFaxesVisible()) {
-          //   set500mbOpacity('1.0');
-          // } else {
-          //   set500mbOpacity('0.5');
-          // }
+          if (cb.checked && !surfaceFaxesVisible()) {
+            set500mbOpacity('1.0');
+          } else {
+            set500mbOpacity('0.5');
+          }
       };
     </script>
 </head>
@@ -108,14 +103,14 @@
 <!-- North Pacific Surface: https://ocean.weather.gov/P_sfc_full_ocean_color.png -->
 <!-- North Pacific 500mb: https://tgftp.nws.noaa.gov/fax/PPBA10.gif -->
 
-  <div style="padding-top: 0px; margin-bottom: 20px;">
-    <input type="checkbox" id="show-surface" onchange="showSurface(this);" checked> Surface Faxes
-    <input type="checkbox" id="show-500mb" onchange="show500mb(this);" checked> 500mb Fax
-  </div>
 
   <div id="placeholder" class="fax-container">
       <img id="surface" src="https://ocean.weather.gov/P_sfc_full_ocean_color.png"></img>
-      <img id="500mb" class="transparent" src="https://tgftp.nws.noaa.gov/fax/PPBA10.gif"></img>
+      <img id="500mb" src="https://tgftp.nws.noaa.gov/fax/PPBA10.gif"></img>
+  </div>
+  <div style="padding-top: 0px;">
+      <input type="checkbox" id="show-surface" onchange="showSurface(this);" checked> Surface Faxes
+      <input type="checkbox" id="show-500mb" onchange="show500mb(this);" checked> 500mb Fax
   </div>
 </body>
 <script type="text/javascript">
@@ -137,7 +132,7 @@
       fax500mb.style.height = 'auto';
       // fax500mb.style.transform = 'rotate(0deg)';
       /* fax500mb.style.filter = 'opacity(0.5)'; */    // Foreground, not opaque (see z-index)
-      // fax500mb.style.opacity = '0.5';     // Foreground, not opaque (see z-index)
+      fax500mb.style.opacity = '0.5';     // Foreground, not opaque (see z-index)
       fax500mb.style.marginLeft = '5px';
       fax500mb.style.marginTop = '-760px';
       fax500mb.style.zIndex = '1';
