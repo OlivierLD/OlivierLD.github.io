@@ -16,7 +16,6 @@
       height: 100%;
       margin: 0;
       padding: 0;
-      /*background: #000;*/ 
     }
   
     .fax-container {
@@ -105,7 +104,7 @@
       };
     </script>
 </head>
-<body>
+<body style="background-color: #fff;">
   <h2 class="tooltip">
     Faxes from the Internet, North Atlantic
     <span class="tooltiptext">3 faxes, reworked<br/><i>on the <b>client</b> side</i>.</span>
@@ -115,16 +114,15 @@
 <!-- North-East Atlantic: https://tgftp.nws.noaa.gov/fax/PYAA11.gif -->
 <!-- North Atlantic 500mb: https://tgftp.nws.noaa.gov/fax/PPAA10.gif -->
 
-  <!-- TODO Values for the faxes position (width, margins, etc) -->
+  <div style="padding-top: 0px; margin-bottom: 20px;">
+    <input type="checkbox" id="show-surface" onchange="showSurface(this);" checked> Surface Faxes
+    <input type="checkbox" id="show-500mb" onchange="show500mb(this);" checked> 500mb Fax
+  </div>
 
   <div id="placeholder" class="fax-container" style="min-height: 600px; min-width: 1024px; padding-top: 40px;">
       <img id="left" class="huerotate" src="https://tgftp.nws.noaa.gov/fax/PYAA12.gif"></img>
       <img id="right" class="image-1" src="https://tgftp.nws.noaa.gov/fax/PYAA11.gif"></img>
       <img id="500mb" class="image-2" src="https://tgftp.nws.noaa.gov/fax/PPAA10.gif"></img>
-  </div>
-  <div style="padding-top: 0px;">
-      <input type="checkbox" id="show-surface" onchange="showSurface(this);" checked> Surface Faxes
-      <input type="checkbox" id="show-500mb" onchange="show500mb(this);" checked> 500mb Fax
   </div>
 </body>
 <script type="text/javascript">
