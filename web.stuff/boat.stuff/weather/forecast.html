@@ -37,10 +37,16 @@
 }
 
 embed {
-  border: solid 2px black;
-  border-radius: 5px;
+  height: 100%; 
+  width: 100%;
 }
 
+.resizable {
+  border: solid 2px black;
+  border-radius: 5px;
+  resize: both;
+  overflow: auto;
+}
     </style>
     <script type="text/javascript">
 
@@ -75,8 +81,8 @@ let openTab = (evt, tabNum) => {
       <button id="five" class="tablinks" onclick="openTab(event, 2);">NOAA Faxes</button>
       <button id="six" class="tablinks" onclick="openTab(event, 3);">Ventusky</button>
   </div>
-  <div style="height: 600px; width: 100%;">
-    <embed id="content" src="https://earth.nullschool.net/#current/wind/surface/level/orthographic=-22.32,45.08,1243" style="height: 100%; width: 100%;"></embed>
+  <div class="resizable" style="height: 600px; width: 100%;">
+    <embed id="content" src="https://earth.nullschool.net/#current/wind/surface/level/orthographic=-22.32,45.08,1243"></embed>
   </div>
   <div style="margin-top: 10px;">
     The same, and more...
