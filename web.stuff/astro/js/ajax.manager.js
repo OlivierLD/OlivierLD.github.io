@@ -33,7 +33,7 @@ function getPromise(
     verb,                         // GET, PUT, DELETE, POST, etc
     happyCode,                    // if met, resolve, otherwise fail.
     data = null,             // payload, when needed (PUT, POST...)
-    show = true,          // Show the traffic [true]|false
+    show = true,             // Show the traffic [true]|false
     headers = null) {        // Array of { name: '', value: '' }
 
     if (show === true) {
