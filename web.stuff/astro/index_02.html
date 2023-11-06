@@ -197,6 +197,9 @@ let transformDataForWorldWebComp = json => {
     if (json.stars !== undefined) {
         newObj.stars = json.stars;
     }
+    if (json.constellations !== undefined) {
+        newObj.constellations = json.constellations;
+    }
     
     return newObj;
 };
@@ -256,6 +259,11 @@ let setWanderingBodies = (wcId, cb) => {
 
 let setStars = (wcId, cb) => {
 	document.getElementById(wcId).withStars = (cb.checked ? 'true' : 'false');
+	document.getElementById(wcId).repaint();
+};
+
+let setConstellations = (wcId, cb) => {
+	document.getElementById(wcId).withConstellations = (cb.checked ? 'true' : 'false');
 	document.getElementById(wcId).repaint();
 };
 
@@ -1228,6 +1236,14 @@ let toggleForeground = () => {
                           <span class="slider round"></span>
                         </label>
                         <span class="switch-element">Display Stars</span>
+                    </div>
+                    <!--input type="checkbox" onchange="withStars = this.checked; setStars('world-map-01', this);"/>Stars -->
+                    <div class="switch-container" style="margin-left: 30px;" title="Display constellations">
+                        <label class="switch switch-element">
+                          <input id="constellations-slider" type="checkbox" onchange="withConstellations = this.checked; setConstellations('world-map-01', this);">
+                          <span class="slider round"></span>
+                        </label>
+                        <span class="switch-element">With Constellations</span>
                     </div>
                     <!--input type="checkbox" onchange="setTropics('world-map-01', this);"/>Tropics -->
                     <div class="switch-container" style="margin-left: 30px;" title="Display polar circles and tropics">

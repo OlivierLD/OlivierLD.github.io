@@ -81,6 +81,7 @@ class WorldMap extends HTMLElement {
 			"with-moonlight",         // Boolean. Default false
 			"with-wandering-bodies",  // Boolean. Default false
 			"with-stars",             // Boolean. Default false
+			"with-constellations",    // Boolean. Default false
 			"with-tropics",           // Boolean. Default false
 			"with-anti-sun-moon",     // Boolean. Default false
 
@@ -148,6 +149,7 @@ class WorldMap extends HTMLElement {
 		this._with_moonlight        = false;
 		this._with_wandering_bodies = false;
 		this._with_stars            = false;
+		this._with_constellations   = false;
 		this._with_tropics          = false;
 		this._with_anti_sun_moon    = false;
 
@@ -260,6 +262,9 @@ class WorldMap extends HTMLElement {
 			case "with-stars":
 				this._with_stars = ('true' === newVal);
 				break;
+			case "with-constellations":
+				this._with_constellations = ('true' === newVal);
+				break;
 			case "with-tropics":
 				this._with_tropics = ('true' === newVal);
 				break;
@@ -327,6 +332,9 @@ class WorldMap extends HTMLElement {
 	set withStars(val) {
 		this.setAttribute("with-stars", val);
 	}
+	set withConstellations(val) {
+		this.setAttribute("with-constellations", val);
+	}
 	set withTropics(val) {
 		this.setAttribute("with-tropics", val);
 	}
@@ -389,6 +397,9 @@ class WorldMap extends HTMLElement {
 	}
 	get withStars() {
 		return this._with_stars;
+	}
+	get withConstellations() {
+		return this._with_constellations;
 	}
 	get withTropics() {
 		return this._with_tropics;
@@ -842,7 +853,7 @@ class WorldMap extends HTMLElement {
 		context.beginPath();
 		context.fillStyle = color;
 		context.arc(pt.x, pt.y, radius, 0, radius * Math.PI);
-//	context.stroke();
+		//	context.stroke();
 		context.fill();
 		context.closePath();
 	}
@@ -893,6 +904,67 @@ class WorldMap extends HTMLElement {
 				WorldMap.fillCircle(context, { x: body.x + deltaX, y: body.y + deltaY}, 3, color);
 			}
 		}
+		context.restore();
+	}
+
+	drawConstellation(context, userPos, color, constellation) {
+		// debugger;
+		// console.log(`Displaying constellation ${constellation.name}`);
+		context.save();
+		let minX = Number.MAX_VALUE;
+		let maxX = -Number.MAX_VALUE;
+		let minY = Number.MAX_VALUE;
+		let maxY = -Number.MAX_VALUE;
+		constellation.lines.forEach(line => {
+			let lngFrom = WorldMap.haToLongitude(line.from.gha);
+			let bodyFrom = this.getPanelPoint(line.from.dec, lngFrom);
+			let thisFromPointIsBehind = this.isBehind(Math.toRadians(line.from.dec), Math.toRadians(lngFrom - this.globeViewLngOffset));
+			let lngTo = WorldMap.haToLongitude(line.to.gha);
+			let bodyTo = this.getPanelPoint(line.to.dec, lngTo);
+			let thisToPointIsBehind = this.isBehind(Math.toRadians(line.to.dec), Math.toRadians(lngTo- this.globeViewLngOffset));
+			if ((!thisFromPointIsBehind && !thisToPointIsBehind) || this.transparentGlobe) {
+				// context.fillStyle = color;
+				// if (!isStar) { // Body name, on the ground
+				// 	context.fillText(name, Math.round(body.x) + 3, Math.round(body.y) - 3);
+				// }
+				let deltaXFrom = bodyFrom.x - userPos.x;
+				let deltaYFrom = bodyFrom.y - userPos.y;
+				let deltaXTo = bodyTo.x - userPos.x;
+				let deltaYTo = bodyTo.y - userPos.y;
+
+				// Line, from-to
+				context.setLineDash([0]);
+				context.strokeStyle = color;
+				context.beginPath();
+				context.moveTo(bodyFrom.x + deltaXFrom, bodyFrom.y + deltaYFrom);
+				context.lineTo(bodyTo.x + deltaXTo, bodyTo.y + deltaYTo);
+				context.stroke();
+				context.closePath();
+				// Min & Max
+				minX = Math.min(minX, bodyFrom.x + deltaXFrom);
+				maxX = Math.max(maxX, bodyFrom.x + deltaXFrom);
+				minX = Math.min(minX, bodyTo.x + deltaXTo);
+				maxX = Math.max(maxX, bodyTo.x + deltaXTo);
+
+				minY = Math.min(minY, bodyFrom.y + deltaYFrom);
+				maxY = Math.max(maxY, bodyFrom.y + deltaYFrom);
+				minY = Math.min(minY, bodyTo.y + deltaYTo);
+				maxY = Math.max(maxY, bodyTo.y + deltaYTo);
+
+				context.closePath();
+			}
+		});
+		// Draw Constellation name
+		context.beginPath();
+		let text = constellation.name;
+		let metrics = context.measureText(text);
+		// TODO A style for the constellation name
+		context.fillText(text,
+			minX + ((maxX - minX) / 2) - (metrics.width / 2),
+			minY + ((maxY - minY) / 2) + (10 / 2)); 
+		// context.fillText(constellation.name, minX, minY);
+		context.closePath();
+
 		context.restore();
 	}
 
@@ -1537,6 +1609,16 @@ class WorldMap extends HTMLElement {
 					let instance = this;
 					this.astronomicalData.stars.forEach((star, idx) => {
 						instance.positionBody(context, userPos, instance.worldmapColorConfig.starsColor, star.name, star.decl, star.gha, false, true);
+					});
+				}
+
+				if (this.astronomicalData.constellations !== undefined && this.withConstellations) {
+					let instance = this;
+					this.astronomicalData.constellations.forEach((constellation, idx) => {
+						// TODO Fix this
+						console.log("Displaying constellations on the WorldMap...");
+						instance.drawConstellation(context, userPos, instance.worldmapColorConfig.starsColor, constellation);
+						// instance.positionBody(context, userPos, instance.worldmapColorConfig.starsColor, star.name, star.decl, star.gha, false, true);
 					});
 				}
 			}

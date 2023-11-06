@@ -30,6 +30,7 @@ import * as Jupiter from './jupiter.js';
 import * as Saturn from './saturn.js';
 
 import STAR_CATALOG from './stars.js';
+import CONSTELLATION_LIST from './constellations.js';
 
 const EPS0_2000 = 23.439291111; // Reference
 
@@ -54,7 +55,7 @@ let T, T2, T3, T4, T5, TE, TE2, TE3, TE4, TE5, Tau, Tau2, Tau3, Tau4, Tau5, delt
  * @param second Number, UTC second
  * @param delta_t Number, DeltaT
  */
-export function calculate(year, month, day, hour, minute, second, delta_t, noPlanets=false, withStars=true) {
+export function calculate(year, month, day, hour, minute, second, delta_t, noPlanets=false, withStars=true, withConstellations=true) {
 
 	epoch = new Date(`${year}-${lpad(month, '0', 2)}-${lpad(day, '0', 2)} ${lpad(hour, '0', 2)}:${lpad(minute, '0', 2)}:${lpad(second, '0', 2)} GMT+0000`).getTime();
 
@@ -73,7 +74,7 @@ export function calculate(year, month, day, hour, minute, second, delta_t, noPla
 	calculatePolaris();
 	calculateMoonPhase();
 	calculateWeekDay();
-	return gatherOutput(noPlanets, withStars);
+	return gatherOutput(noPlanets, withStars, withConstellations);
 }
 
 export function isLeapYear(year) {
@@ -1366,74 +1367,90 @@ function getStar(name) {
 	return null;
 }
 
-function getStarPos(starName) {
-	let star = getStar(starName);
-	if (star !== null) {
-		// Read catalog
-		let RAstar0 = 15.0 * star.ra;
-		let DECstar0 = star.dec;
-		let dRAstar = 15.0 * star.deltaRA / 3600.0;
-		let dDECstar = star.deltaD / 3600.0;
-		let par = star.par / 3600.0;
+function calcStarPos(ra, dec, deltaRA, deltaD, starPar) {
+	let RAstar0 = 15.0 * ra;
+	let DECstar0 = dec;
+	let dRAstar = 15.0 * deltaRA / 3600.0;
+	let dDECstar = deltaD / 3600.0;
+	let par = starPar / 3600.0;
 
-		//Equatorial coordinates at Julian Date T (mean equinox and equator 2000.0)
-		let RAstar1 = RAstar0 + TE * dRAstar;
-		let DECstar1 = DECstar0 + TE * dDECstar;
+	// Equatorial coordinates at Julian Date T (mean equinox and equator 2000.0)
+	let RAstar1 = RAstar0 + TE * dRAstar;
+	let DECstar1 = DECstar0 + TE * dDECstar;
 
-		//Mean obliquity of ecliptic at 2000.0 in degrees
+	// Mean obliquity of ecliptic at 2000.0 in degrees
 //    let eps0_2000 = 23.439291111;
 
-		//Transformation to ecliptic coordinates in radians (mean equinox and equator 2000.0)
-		let lambdastar1 = Math.atan2((Utils.sind(RAstar1) * Utils.cosd(EPS0_2000) + Utils.tand(DECstar1) * Utils.sind(EPS0_2000)), Utils.cosd(RAstar1));
-		let betastar1 = Math.asin(Utils.sind(DECstar1) * Utils.cosd(EPS0_2000) - Utils.cosd(DECstar1) * Utils.sind(EPS0_2000) * Utils.sind(RAstar1));
+	// Transformation to ecliptic coordinates in radians (mean equinox and equator 2000.0)
+	let lambdastar1 = Math.atan2((Utils.sind(RAstar1) * Utils.cosd(EPS0_2000) + Utils.tand(DECstar1) * Utils.sind(EPS0_2000)), Utils.cosd(RAstar1));
+	let betastar1 = Math.asin(Utils.sind(DECstar1) * Utils.cosd(EPS0_2000) - Utils.cosd(DECstar1) * Utils.sind(EPS0_2000) * Utils.sind(RAstar1));
 
-		//Precession
-		let eta = Math.toRadians(47.0029 * TE - 0.03302 * TE2 + 0.00006 * TE3) / 3600.0;
-		let PI0 = Math.toRadians(174.876384 - (869.8089 * TE + 0.03536 * TE2) / 3600.0);
-		let p0 = Math.toRadians(5029.0966 * TE + 1.11113 * TE2 - 0.0000006 * TE3) / 3600.0;
-		let A1 = Math.cos(eta) * Math.cos(betastar1) * Math.sin(PI0 - lambdastar1) - Math.sin(eta) * Math.sin(betastar1);
-		let B1 = Math.cos(betastar1) * Math.cos(PI0 - lambdastar1);
-		let C1 = Math.cos(eta) * Math.sin(betastar1) + Math.sin(eta) * Math.cos(betastar1) * Math.sin(PI0 - lambdastar1);
-		let lambdastar2 = p0 + PI0 - Math.atan2(A1, B1);
-		let betastar2 = Math.asin(C1);
+	// Precession
+	let eta = Math.toRadians(47.0029 * TE - 0.03302 * TE2 + 0.00006 * TE3) / 3600.0;
+	let PI0 = Math.toRadians(174.876384 - (869.8089 * TE + 0.03536 * TE2) / 3600.0);
+	let p0 = Math.toRadians(5029.0966 * TE + 1.11113 * TE2 - 0.0000006 * TE3) / 3600.0;
+	let A1 = Math.cos(eta) * Math.cos(betastar1) * Math.sin(PI0 - lambdastar1) - Math.sin(eta) * Math.sin(betastar1);
+	let B1 = Math.cos(betastar1) * Math.cos(PI0 - lambdastar1);
+	let C1 = Math.cos(eta) * Math.sin(betastar1) + Math.sin(eta) * Math.cos(betastar1) * Math.sin(PI0 - lambdastar1);
+	let lambdastar2 = p0 + PI0 - Math.atan2(A1, B1);
+	let betastar2 = Math.asin(C1);
 
-		//Annual parallax
-		let par_lambda = Math.toRadians(par * Math.sin(Math.toRadians(Lsun_true) - lambdastar2) / Math.cos(betastar2));
-		let par_beta = -Math.toRadians(par * Math.sin(betastar2) * Math.cos(Math.toRadians(Lsun_true) - lambdastar2));
+	//Annual parallax
+	let par_lambda = Math.toRadians(par * Math.sin(Math.toRadians(Lsun_true) - lambdastar2) / Math.cos(betastar2));
+	let par_beta = -Math.toRadians(par * Math.sin(betastar2) * Math.cos(Math.toRadians(Lsun_true) - lambdastar2));
 
-		lambdastar2 += par_lambda;
-		betastar2 += par_beta;
+	lambdastar2 += par_lambda;
+	betastar2 += par_beta;
 
-		// Nutation in longitude
-		lambdastar2 += Math.toRadians(deltaPsi);
+	// Nutation in longitude
+	lambdastar2 += Math.toRadians(deltaPsi);
 
-		// Aberration
+	// Aberration
 //    let kappa = Math.toRadians(20.49552) / 3600.0;
 //    let pi0 = Math.toRadians(102.93735 + 1.71953 * TE + 0.00046 * TE2);
 //    let e = 0.016708617 - 0.000042037 * TE - 0.0000001236 * TE2;
 
-		let dlambdastar = (e * kappa * Math.cos(pi0 - lambdastar2) - kappa * Math.cos(Math.toRadians(Lsun_true) - lambdastar2)) / Math.cos(betastar2);
-		let dbetastar = -kappa * Math.sin(betastar2) * (Math.sin(Math.toRadians(Lsun_true) - lambdastar2) - e * Math.sin(pi0 - lambdastar2));
+	let dlambdastar = (e * kappa * Math.cos(pi0 - lambdastar2) - kappa * Math.cos(Math.toRadians(Lsun_true) - lambdastar2)) / Math.cos(betastar2);
+	let dbetastar = -kappa * Math.sin(betastar2) * (Math.sin(Math.toRadians(Lsun_true) - lambdastar2) - e * Math.sin(pi0 - lambdastar2));
 
-		lambdastar2 += dlambdastar;
-		betastar2 += dbetastar;
+	lambdastar2 += dlambdastar;
+	betastar2 += dbetastar;
 
-		// Transformation back to equatorial coordinates in radians
-		let RAstar2 = Math.atan2((Math.sin(lambdastar2) * Utils.cosd(eps) - Math.tan(betastar2) * Utils.sind(eps)), Math.cos(lambdastar2));
-		let DECstar2 = Math.asin(Math.sin(betastar2) * Utils.cosd(eps) + Math.cos(betastar2) * Utils.sind(eps) * Math.sin(lambdastar2));
+	// Transformation back to equatorial coordinates in radians
+	let RAstar2 = Math.atan2((Math.sin(lambdastar2) * Utils.cosd(eps) - Math.tan(betastar2) * Utils.sind(eps)), Math.cos(lambdastar2));
+	let DECstar2 = Math.asin(Math.sin(betastar2) * Utils.cosd(eps) + Math.cos(betastar2) * Utils.sind(eps) * Math.sin(lambdastar2));
 
-		// Lunar distance of star TODO Manage it.
-		let starMoonDist = Math.toDegrees(Math.acos(Utils.sind(DECMoon) * Math.sin(DECstar2) + Utils.cosd(DECMoon) * Math.cos(DECstar2) * Utils.cosd(RAMoon - Math.toDegrees(RAstar2))));
+	// Lunar distance of star TODO Manage it.
+	let starMoonDist = Math.toDegrees(Math.acos(Utils.sind(DECMoon) * Math.sin(DECstar2) + Utils.cosd(DECMoon) * Math.cos(DECstar2) * Utils.cosd(RAMoon - Math.toDegrees(RAstar2))));
 
-		// Finals
-		let GHAstar = GHAAtrue - Math.toDegrees(RAstar2);
-		let SHAstar = 360 - Math.toDegrees(RAstar2);
-		let DECstar = Math.toDegrees(DECstar2);
-		return {
-			gha: GHAstar,
-			sha: SHAstar,
-			dec: DECstar
-		}
+	// Finals
+	let GHAstar = GHAAtrue - Math.toDegrees(RAstar2);
+	let SHAstar = 360 - Math.toDegrees(RAstar2);
+	let DECstar = Math.toDegrees(DECstar2);
+	return {
+		gha: GHAstar,
+		sha: SHAstar,
+		dec: DECstar
+	};
+}
+
+/**
+ * Calculate the actual position of a star.
+ * D & GHA from  Dec & RA
+ * @param {string} starName 
+ * @returns 
+ */
+function getStarPos(starName) {
+	let star = getStar(starName);
+	if (star !== null) {
+		// Read catalog
+		let RAstar0 = /*15.0 * */ star.ra;
+		let DECstar0 = star.dec;
+		let dRAstar = star.deltaRA; // 15.0 * star.deltaRA / 3600.0;
+		let dDECstar = star.deltaD; // star.deltaD / 3600.0;
+		let par = star.par; // / 3600.0;
+
+		return calcStarPos(RAstar0, DECstar0, dRAstar, dDECstar, par); // TODO 3 last prms ?
 	} else {
 		console.log(starName + " not found in the catalog...");
 		return null;
@@ -1448,8 +1465,18 @@ export function sightReduction(lat, lng, ahg, dec) {
 	return Utils.sightReduction(lat, lng, ahg, dec);
 }
 
+function getObjByName(list, name) {
+	let found;
+	list.forEach(elmt => {
+		if (elmt.name === name) {
+			found = elmt;
+		}
+	});
+	return found;
+}
+
 // Data output. Might be tweaked to fit user's needs.
-function gatherOutput(noPlanets=false, withStars=false) {
+function gatherOutput(noPlanets=false, withStars=false, withConstellations=false) {
 	// Sun
 	let fmtGHASun = outHA(GHASun);
 	let fmtRASun = outRA(RASun);
@@ -1732,6 +1759,73 @@ function gatherOutput(noPlanets=false, withStars=false) {
 		outForm.stars = stars;
 	}
 
+	if (withConstellations) {
+		let constellations = [];
+		CONSTELLATION_LIST.forEach(constellation => {
+			// constellations.push(constellation);  // No transformation here. As is.
+            /*
+{
+    "name": "Ursa Minor",
+    "stars": [
+      {
+        "name": "Polaris",
+        "ra": 2.53030278,
+        "d": 89.26417
+      },
+      {
+		. . .
+	  }],
+	  "lines": [
+      {
+        "from": "Polaris",
+        "to": "delta"
+      }, {
+		. . .
+	  }]
+	}	  
+			 */
+			console.log(`Calculating constellation ${constellation.name}`);
+			let calculatedConst = {
+				name: constellation.name,
+				stars: [],
+				lines: []
+			};
+			constellation.stars.forEach(star => {
+				let starPos = calcStarPos(star.ra, star.d, 0, 0, 0);
+				/*
+				returns a {
+					"gha": 153.49921713436314,
+					"sha": 314.0563891164498,
+					"dec": 89.3645354836899
+				}
+				*/
+				// console.log(`Calculated ${star.name}`);
+				calculatedConst.stars.push({ name: star.name, gha: starPos.gha, dec: starPos.dec });
+			});
+			try {
+				// calculatedConst.lines = constellation.lines;
+				constellation.lines.forEach(line => {
+					let from = line.from;
+					let to = line.to;
+					let starFrom = getObjByName(calculatedConst.stars, from);
+					let starTo = getObjByName(calculatedConst.stars, to);
+					if (starFrom && starTo) {
+						calculatedConst.lines.push({
+							from: {name: from, gha: starFrom.gha, dec: starFrom.dec},
+							to: {name: to, gha: starTo.gha, dec: starTo.dec}
+						});
+					} else {
+						console.log(`Oops! in ${calculatedConst.name}, ${from} is ${JSON.stringify(starFrom)}, ${to} is ${JSON.stringify(starTo)}`);
+					}
+				});
+			} catch (err) {
+				console.log(`Ah ben merde! For ${constellation.name}, ${JSON.stringify(err)}`);
+				debugger;
+			}
+			constellations.push(calculatedConst);
+		});
+		outForm.constellations = constellations;
+	}
 	return outForm;
 }
 
