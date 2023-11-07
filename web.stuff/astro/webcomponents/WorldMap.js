@@ -978,9 +978,9 @@ class WorldMap extends HTMLElement {
 				try {
 					for (let r=0; document.styleSheets[s].cssRules !== null && r<document.styleSheets[s].cssRules.length; r++) {
 						let selector = document.styleSheets[s].cssRules[r].selectorText;
-						//			console.log(">>> ", selector);
+						// console.log(">>> ", selector);
 						if (selector !== undefined && (selector === '.' + cssClassName || (selector.indexOf('.' + cssClassName) > -1 && selector.indexOf(WORLD_MAP_TAG_NAME) > -1))) { // Cases like "tag-name .className"
-							//				console.log("  >>> Found it! [%s]", selector);
+							// console.log("  >>> Found it! [%s]", selector);
 							let cssText = document.styleSheets[s].cssRules[r].style.cssText;
 							let cssTextElems = cssText.split(";");
 							cssTextElems.forEach((elem) => {
