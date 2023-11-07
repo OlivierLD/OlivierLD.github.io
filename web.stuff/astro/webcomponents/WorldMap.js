@@ -923,10 +923,6 @@ class WorldMap extends HTMLElement {
 			let bodyTo = this.getPanelPoint(line.to.dec, lngTo);
 			let thisToPointIsBehind = this.isBehind(Math.toRadians(line.to.dec), Math.toRadians(lngTo- this.globeViewLngOffset));
 			if ((!thisFromPointIsBehind && !thisToPointIsBehind) || this.transparentGlobe) {
-				// context.fillStyle = color;
-				// if (!isStar) { // Body name, on the ground
-				// 	context.fillText(name, Math.round(body.x) + 3, Math.round(body.y) - 3);
-				// }
 				let deltaXFrom = bodyFrom.x - userPos.x;
 				let deltaYFrom = bodyFrom.y - userPos.y;
 				let deltaXTo = bodyTo.x - userPos.x;
@@ -956,6 +952,11 @@ class WorldMap extends HTMLElement {
 		});
 		// Draw Constellation name
 		context.beginPath();
+		let font = context.font;
+		if (!font.includes('italic')) {
+			context.font = `italic ${font}`;
+		}
+		context.fillStyle = 'silver'; // TODO A CSS entry
 		let text = constellation.name;
 		let metrics = context.measureText(text);
 		// TODO A style for the constellation name
@@ -1614,11 +1615,9 @@ class WorldMap extends HTMLElement {
 
 				if (this.astronomicalData.constellations !== undefined && this.withConstellations) {
 					let instance = this;
+					// console.log("Displaying constellations on the WorldMap...");
 					this.astronomicalData.constellations.forEach((constellation, idx) => {
-						// TODO Fix this
-						console.log("Displaying constellations on the WorldMap...");
 						instance.drawConstellation(context, userPos, instance.worldmapColorConfig.starsColor, constellation);
-						// instance.positionBody(context, userPos, instance.worldmapColorConfig.starsColor, star.name, star.decl, star.gha, false, true);
 					});
 				}
 			}

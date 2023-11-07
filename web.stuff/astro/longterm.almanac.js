@@ -1784,7 +1784,7 @@ function gatherOutput(noPlanets=false, withStars=false, withConstellations=false
 	  }]
 	}	  
 			 */
-			console.log(`Calculating constellation ${constellation.name}`);
+			// console.log(`Calculating constellation ${constellation.name}`);
 			let calculatedConst = {
 				name: constellation.name,
 				stars: [],
