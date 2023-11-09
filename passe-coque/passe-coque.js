@@ -100,7 +100,8 @@ let clack = (origin) => {
 						// Some specific cases here
 						/* if (origin.id === "1") { // Move this higher. No need to load 1_xx.html ?..
 							document.location.reload();
-						} else */ if (originId === "23") {
+						} else */ 
+                        if (false && originId === "23") { // Not used, an example of a dialog. Content inserted in the <dialog>
 							document.getElementById("dialog-content").innerHTML = doc;
 							showAboutDialog();
 						} else {
@@ -251,9 +252,12 @@ let startBGAnimation = (cb) => {
 				current_bg_image_index = 0;
 			}
             try {
-			    document.getElementById("bg-image").src = BG_IMAGES[current_bg_image_index];
+                let slideShowContainer = document.getElementById("bg-image");
+                if (slideShowContainer) {
+			        slideShowContainer.src = BG_IMAGES[current_bg_image_index];
+                } // else, on another page...
             } catch (err) {
-                console.log(`Managed error ${JSON.stringify(err)}`);
+                console.log(`Managed error ${JSON.stringify(err)} (${err})`);
             }
 		}, BG_INTERVAL); // in ms.
 	}

@@ -583,3 +583,17 @@ span.expand-collapse:hover {
     font-size: 14px;
 }
   
+.filler {
+    min-height: 50px;
+}
+
+.citation-overlay {
+    font-style: italic;
+    font-size: 2em;
+    /*z-index: 10;*/
+    text-align: left;
+    position: absolute;
+    top: 30%;
+    left: 5%;
+    transform: translate(-5%, -30%);
+}
