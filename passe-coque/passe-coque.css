@@ -587,13 +587,25 @@ span.expand-collapse:hover {
     min-height: 50px;
 }
 
+.title-overlay {
+    font-style: italic;
+    /* font-size: 2em; */
+    /* z-index: 10; */
+    text-align: left;
+    position: relative;
+    top: 80px;
+    left: 20px;
+    /* transform: translate(-5%, 10%); */
+    background: transparent;
+}
+
 .citation-overlay {
     font-style: italic;
     font-size: 2em;
     /*z-index: 10;*/
     text-align: left;
-    position: absolute;
-    top: 30%;
-    left: 5%;
-    transform: translate(-5%, -30%);
+    position: relative;
+    top: -600px;
+    left: 20px;
+    /* transform: translate(-5%, -30%); */
 }

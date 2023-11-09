@@ -84,6 +84,8 @@ let clack = (origin) => {
     // Specific content rule(s)
 	if (originId === "62") { 
 		contentName = "carrousel.html";
+	} else if (originId === "22" || originId === "23") {
+        contentName = `21_${currentLang}.html`; // 21, 22 & 23, same doc, different anchor (hashtag).
 	} else if (originId === "32" || originId === "33") {
         contentName = `31_${currentLang}.html`; // 31, 32 & 33, same doc, different anchor (hashtag).
     }
@@ -106,8 +108,22 @@ let clack = (origin) => {
 							showAboutDialog();
 						} else {
 							contentPlaceHolder.innerHTML = doc;
-                            if (originId === "22") {
+                            if (false && originId === "22") {  // Not used.
                                 showSlides(currentSlide);
+                            } else if (originId === "21" || originId === "22" || originId === "23") {
+                                window.setTimeout(() => {
+                                    const overflow = document.getElementById('action-container-2');
+                                    let hashtag = (originId === "21") ? '01' : ((originId === "22") ? '02' : '03');
+                                    const anchor = document.querySelector(`a[name='${hashtag}']`);
+                                    
+                                    const rectOverflow = overflow.getBoundingClientRect();
+                                    const rectAnchor = anchor.getBoundingClientRect();
+    
+                                        // Set the scroll position of the overflow container
+                                    overflow.scrollTop = rectAnchor.top - rectOverflow.top;
+                                    console.log(`Origin: ${originId}: scrolltop: ${overflow.scrollTop}`);
+                                }, 200);
+                                console.log("Now scrolling.")
                             } else if (originId === "31" || originId === "32" || originId === "33") {
                                 const overflow = document.getElementById('action-container');
                                 let hashtag = (originId === "31") ? '01' : ((originId === "32") ? '02' : '03');
@@ -116,8 +132,12 @@ let clack = (origin) => {
                                 const rectOverflow = overflow.getBoundingClientRect();
                                 const rectAnchor = anchor.getBoundingClientRect();
 
-                                // Set the scroll position of the overflow container
-                                overflow.scrollTop = rectAnchor.top - rectOverflow.top;
+                                // window.setTimeout(() => {
+                                    // Set the scroll position of the overflow container
+                                    overflow.scrollTop = rectAnchor.top - rectOverflow.top;
+                                    console.log("Now Scrolling !");
+                                //}, 1000);
+                                // console.log("Scrolling !");
                             }
 						}
 					});
