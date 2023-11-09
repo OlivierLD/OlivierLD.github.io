@@ -595,6 +595,7 @@ span.expand-collapse:hover {
     position: relative;
     top: 80px;
     left: 20px;
+    margin-top: -40px;
     /* transform: translate(-5%, 10%); */
     background: transparent;
 }
