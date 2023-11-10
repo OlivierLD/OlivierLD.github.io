@@ -1,34 +1,40 @@
-<h2>Nos actions</h2>
-<div style="width: 100%; text-align: center;">
-    <img src="./images/passe-coque-press.jpeg">
-</div>
+<dialog id="info-tx-dialog" class="shadow-menu" style="width: 800px; margin-top: 30px; z-index: 2;">
+	<div class="dialog-header">
+		<span><!-- Empty title --></span>
+		<span class="dialog-header-close" onclick="closeInfoTxDialog();">&times</span>
+	</div>
+	<div id="dialog-tx-content">
+		<!-- Content goes here -->
+	</div>
+</dialog>
+
 <div>
-    <ul>
-        <li><a href="#01" onclick="">Transmettre</a></li>
-        <li><a href="#02" onclick="">R&eacute;nover</a></li>
-        <li><a href="#03" onclick="">Partager</a></li>
-    </ul>
-</div>
-<div id="action-container" style="border: 3px solid blue; border-radius: 10px; margin: 20px; padding: 20px; background: rgba(255, 255, 255, 0.6); height: 300px; overflow-y: scroll;">
-    <a name="01"><h3>Transmettre</h3></a><br/>
-    <div id="transmit">
-        Lorem ipsum dolor sit amet, placerat nam eget donec pellentesque, eu in per dolor, hendrerit mattis aliquet proin faucibus lorem. Vitae tristique. Tellus dolor rutrum mi libero nec, erat sit aliquam rhoncus, egestas hymenaeos, eleifend vestibulum congue. Dolor eu tellus justo libero. Tellus dui, elit ac in sit eget, dui turpis, mi at diam adipiscing mauris lorem, hymenaeos ultrices dictumst. Duis lacus cursus placerat ipsum. Pulvinar luctus parturient quis, suspendisse suscipit non at amet. Sed pellentesque faucibus, risus sodales wisi placerat ornare, fermentum tincidunt, malesuada nec.
-        Amet culpa nisl varius, vel malesuada sociis eros quam. Nonummy nunc ligula convallis, cum feugiat viverra urna vel. Sit primis mi ornare sociis, nunc pede orci hac id, erat vel phasellus sed ante, enim urna commodo morbi nulla, augue eget vestibulum scelerisque. Turpis sit ullamcorper. Fermentum velit justo urna ullamcorper nunc maecenas, adipiscing nec quis, ridiculus esse volutpat tortor ipsum nullam.
-        Tellus aenean, justo consectetuer, sit mollis. Suspendisse ac wisi accumsan proin et, nullam vitae enim, sed commodo massa. Cras suspendisse, libero viverra consectetuer, amet faucibus magna pharetra nulla curabitur conubia, arcu dignissim id elit libero, at rutrum donec tincidunt id. Quis nulla nulla ac neque erat, sem leo viverra curabitur per, est cras egestas tristique nec est dui. Quam sed, lectus per, vestibulum eu tempor arcu dolor, sed phasellus. Vel per velit eu eget, pede natoque fringilla dui.
-        Aliquam pulvinar maecenas augue quis pulvinar nibh, justo commodo mauris at, nullam elit ad blandit amet, aliquet aliquet ante sit. Sit sed orci, luctus consequat amet bibendum integer euismod sodales. Orci penatibus iaculis, vitae orci convallis. Scelerisque ligula amet ultricies risus. At dictumst metus, morbi feugiat nulla vel justo sit ut, pellentesque venenatis mauris suspendisse etiam, in dolor quisque ut est pellentesque magna. Mollis sodales ut dapibus.
-    </div>
-    <a name="02"><h3>R&eacute;nover</h3></a><br/>
-    <div id="refit">
-        Lorem ipsum dolor sit amet, placerat nam eget donec pellentesque, eu in per dolor, hendrerit mattis aliquet proin faucibus lorem. Vitae tristique. Tellus dolor rutrum mi libero nec, erat sit aliquam rhoncus, egestas hymenaeos, eleifend vestibulum congue. Dolor eu tellus justo libero. Tellus dui, elit ac in sit eget, dui turpis, mi at diam adipiscing mauris lorem, hymenaeos ultrices dictumst. Duis lacus cursus placerat ipsum. Pulvinar luctus parturient quis, suspendisse suscipit non at amet. Sed pellentesque faucibus, risus sodales wisi placerat ornare, fermentum tincidunt, malesuada nec.
-        Amet culpa nisl varius, vel malesuada sociis eros quam. Nonummy nunc ligula convallis, cum feugiat viverra urna vel. Sit primis mi ornare sociis, nunc pede orci hac id, erat vel phasellus sed ante, enim urna commodo morbi nulla, augue eget vestibulum scelerisque. Turpis sit ullamcorper. Fermentum velit justo urna ullamcorper nunc maecenas, adipiscing nec quis, ridiculus esse volutpat tortor ipsum nullam.
-        Tellus aenean, justo consectetuer, sit mollis. Suspendisse ac wisi accumsan proin et, nullam vitae enim, sed commodo massa. Cras suspendisse, libero viverra consectetuer, amet faucibus magna pharetra nulla curabitur conubia, arcu dignissim id elit libero, at rutrum donec tincidunt id. Quis nulla nulla ac neque erat, sem leo viverra curabitur per, est cras egestas tristique nec est dui. Quam sed, lectus per, vestibulum eu tempor arcu dolor, sed phasellus. Vel per velit eu eget, pede natoque fringilla dui.
-        Aliquam pulvinar maecenas augue quis pulvinar nibh, justo commodo mauris at, nullam elit ad blandit amet, aliquet aliquet ante sit. Sit sed orci, luctus consequat amet bibendum integer euismod sodales. Orci penatibus iaculis, vitae orci convallis. Scelerisque ligula amet ultricies risus. At dictumst metus, morbi feugiat nulla vel justo sit ut, pellentesque venenatis mauris suspendisse etiam, in dolor quisque ut est pellentesque magna. Mollis sodales ut dapibus.
-    </div>
-    <a name="03"><h3>Partager</h3></a><br/>
-    <div id="share">
-        Lorem ipsum dolor sit amet, placerat nam eget donec pellentesque, eu in per dolor, hendrerit mattis aliquet proin faucibus lorem. Vitae tristique. Tellus dolor rutrum mi libero nec, erat sit aliquam rhoncus, egestas hymenaeos, eleifend vestibulum congue. Dolor eu tellus justo libero. Tellus dui, elit ac in sit eget, dui turpis, mi at diam adipiscing mauris lorem, hymenaeos ultrices dictumst. Duis lacus cursus placerat ipsum. Pulvinar luctus parturient quis, suspendisse suscipit non at amet. Sed pellentesque faucibus, risus sodales wisi placerat ornare, fermentum tincidunt, malesuada nec.
-        Amet culpa nisl varius, vel malesuada sociis eros quam. Nonummy nunc ligula convallis, cum feugiat viverra urna vel. Sit primis mi ornare sociis, nunc pede orci hac id, erat vel phasellus sed ante, enim urna commodo morbi nulla, augue eget vestibulum scelerisque. Turpis sit ullamcorper. Fermentum velit justo urna ullamcorper nunc maecenas, adipiscing nec quis, ridiculus esse volutpat tortor ipsum nullam.
-        Tellus aenean, justo consectetuer, sit mollis. Suspendisse ac wisi accumsan proin et, nullam vitae enim, sed commodo massa. Cras suspendisse, libero viverra consectetuer, amet faucibus magna pharetra nulla curabitur conubia, arcu dignissim id elit libero, at rutrum donec tincidunt id. Quis nulla nulla ac neque erat, sem leo viverra curabitur per, est cras egestas tristique nec est dui. Quam sed, lectus per, vestibulum eu tempor arcu dolor, sed phasellus. Vel per velit eu eget, pede natoque fringilla dui.
-        Aliquam pulvinar maecenas augue quis pulvinar nibh, justo commodo mauris at, nullam elit ad blandit amet, aliquet aliquet ante sit. Sit sed orci, luctus consequat amet bibendum integer euismod sodales. Orci penatibus iaculis, vitae orci convallis. Scelerisque ligula amet ultricies risus. At dictumst metus, morbi feugiat nulla vel justo sit ut, pellentesque venenatis mauris suspendisse etiam, in dolor quisque ut est pellentesque magna. Mollis sodales ut dapibus.
-    </div>
+    <h2>Transmettre</h2>
+    <div class="background-container-2" style="min-height: 50px;">
+        <div> <!-- image on top -->
+            <img src="./images/transmit/transmettre.01.png" width="100%">
+        </div>
+        <div style="text-align: left; padding: 20px;">
+            <span style="font-weight: 400;">Transmettre</span>, c'est la raison d'&ecirc;tre de Passe-Coque qui accompagne depuis 2019 associations et porteurs de projets dans le 
+            domaine de l'&eacute;conomie sociale et solidaire afin de cr&eacute;er un trait d'union entre des bateaux sans projets et des projets sans bateaux.<br/>
+            D&eacute;couvrez les projets que Passe-Coque a accompagn&eacute;&nbsp;:
+        </div>
+        <div style="display: grid; grid-template-columns: auto auto auto;">
+            <div id="tx-01" style="padding: 30px; z-index: 1;" onclick="clickOnTxPix(this);" onmouseover="mouseOnTxPix(this);">
+                <img src="./images/transmit/tx.01.png" width="100%">
+            </div>
+            <div style="padding: 30px;">
+                <img src="./images/transmit/tx.02.png" width="100%">
+            </div>
+            <div style="padding: 30px;">
+                <img src="./images/transmit/tx.03.png" width="100%">
+            </div>
+            <div style="padding: 30px;">
+                <img src="./images/transmit/tx.04.png" width="100%">
+            </div>
+        </div>
+        <div id="info-tx" style="display: none;">
+        
+        </div>
+    </div>    
 </div>

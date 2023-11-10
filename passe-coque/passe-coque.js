@@ -84,10 +84,10 @@ let clack = (origin) => {
     // Specific content rule(s)
 	if (originId === "62") { 
 		contentName = "carrousel.html";
-	} else if (originId === "22" || originId === "23") {
+	} else if (originId === "22" || originId === "23") { // Menu 2, special management, see below (ONE page only)
         contentName = `21_${currentLang}.html`; // 21, 22 & 23, same doc, different anchor (hashtag).
-	} else if (originId === "32" || originId === "33") {
-        contentName = `31_${currentLang}.html`; // 31, 32 & 33, same doc, different anchor (hashtag).
+	// } else if (originId === "32" || originId === "33") {
+    //    contentName = `31_${currentLang}.html`; // 31, 32 & 33, same doc, different anchor (hashtag).
     }
 	let contentPlaceHolder = document.getElementById("current-content");
     
@@ -110,7 +110,7 @@ let clack = (origin) => {
 							contentPlaceHolder.innerHTML = doc;
                             if (false && originId === "22") {  // Not used.
                                 showSlides(currentSlide);
-                            } else if (originId === "21" || originId === "22" || originId === "23") {
+                            } else if (originId === "21" || originId === "22" || originId === "23") { // Menu 2, One page only, with anchors.
                                 window.setTimeout(() => {
                                     const overflow = document.getElementById('action-container-2');
                                     let hashtag = (originId === "21") ? '01' : ((originId === "22") ? '02' : '03');
@@ -124,20 +124,20 @@ let clack = (origin) => {
                                     console.log(`Origin: ${originId}: scrolltop: ${overflow.scrollTop}`);
                                 }, 200);
                                 console.log("Now scrolling.")
-                            } else if (originId === "31" || originId === "32" || originId === "33") {
-                                const overflow = document.getElementById('action-container');
-                                let hashtag = (originId === "31") ? '01' : ((originId === "32") ? '02' : '03');
-                                const anchor = document.querySelector(`a[name='${hashtag}']`);
+                            // } else if (originId === "31" || originId === "32" || originId === "33") {
+                            //     const overflow = document.getElementById('action-container');
+                            //     let hashtag = (originId === "31") ? '01' : ((originId === "32") ? '02' : '03');
+                            //     const anchor = document.querySelector(`a[name='${hashtag}']`);
                                 
-                                const rectOverflow = overflow.getBoundingClientRect();
-                                const rectAnchor = anchor.getBoundingClientRect();
+                            //     const rectOverflow = overflow.getBoundingClientRect();
+                            //     const rectAnchor = anchor.getBoundingClientRect();
 
-                                // window.setTimeout(() => {
-                                    // Set the scroll position of the overflow container
-                                    overflow.scrollTop = rectAnchor.top - rectOverflow.top;
-                                    console.log("Now Scrolling !");
-                                //}, 1000);
-                                // console.log("Scrolling !");
+                            //     // window.setTimeout(() => {
+                            //         // Set the scroll position of the overflow container
+                            //         overflow.scrollTop = rectAnchor.top - rectOverflow.top;
+                            //         console.log("Now Scrolling !");
+                            //     //}, 1000);
+                            //     // console.log("Scrolling !");
                             }
 						}
 					});
@@ -156,7 +156,6 @@ let clack = (origin) => {
 				// Plus tard...
 				contentPlaceHolder.innerHTML = "<b>&Ccedil;a vient...</b>";
             });
-
 }
 
 let updateMenu = () => { // Multilang aspect.
@@ -456,4 +455,69 @@ let makeCode = (url) => {
   	qrcode.makeCode(toDisplay);
     // qrcode.style.display = 'block';
     document.getElementById("qrcode").style.display = 'block'; // Show it ! (Hidden otherwise)
+};
+
+// Mouse behavior, on some specific pages (or snippets)
+let clickOnTxPix = (origin) => {
+    console.log(`Click on ${origin.id}`);
+    // TODO Set the content
+    let dynamicContentContainer = document.getElementById("dialog-tx-content");
+    if (origin.id === 'tx-01') {
+        let contentName = `tx-01_${currentLang}.html`;
+        fetch(contentName)
+            .then(response => {  // Warning... the NOT_FOUND error lands here, apparently.
+                console.log(`Data Response: ${response.status} - ${response.statusText}`);
+                if (response.status !== 200) { // There is a problem...
+                    dynamicContentContainer.innerHTML = `Fetching ${contentName}...<br/> Data Response: ${response.status} - ${response.statusText}<br/><b>&Ccedil;a vient...</b>`;
+                } else {
+                    response.text().then(doc => {
+                        console.log(`Code data loaded, length: ${doc.length}.`);
+                        dynamicContentContainer.innerHTML = doc;
+                    });
+                }
+            },
+            (error, errmess) => {
+                console.log("Ooch");
+                let message;
+                if (errmess) {
+                    let mess = JSON.parse(errmess);
+                    if (mess.message) {
+                        message = mess.message;
+                    }
+                }
+                console.debug("Failed to get code data..." + (error ? JSON.stringify(error, null, 2) : ' - ') + ', ' + (message ? message : ' - '));
+                // Plus tard...
+                dynamicContentContainer.innerHTML = "<b>&Ccedil;a vient...</b>";
+            });
+
+    } else {
+        content = "More soon...";
+    }
+    // dynamicContentContainer.innerHTML = content;
+    showInfoTxDialog();
+};
+
+let mouseOnTxPix = (origin) => {
+    console.log(`Mouse on ${origin.id}`);
+    origin.title = (currentLang === 'FR') ? "Vas-y, clique !" : "Click for more.";
+};
+
+let showInfoTxDialog = () => {
+    let infoTxDialog = document.getElementById("info-tx-dialog");
+    if (infoTxDialog.show !== undefined) {
+        infoTxDialog.show();
+    } else {
+      alert(NO_DIALOG_MESSAGE);
+      infoTxDialog.style.display = 'inline';
+    }
+};
+
+let closeInfoTxDialog = () => {
+    let infoTxDialog = document.getElementById("info-tx-dialog");
+    if (infoTxDialog.close !== undefined) {
+        infoTxDialog.close();
+    } else {
+      // alert(NO_DIALOG_MESSAGE);
+      infoTxDialog.style.display = 'none';
+    }
 };

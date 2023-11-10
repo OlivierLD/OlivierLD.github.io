@@ -34,8 +34,8 @@ h2 {
 }
 
 dialog {
-    background: rgba(25, 25, 25, 0.75);
-    color: silver;
+    background: silver; /*rgba(25, 25, 25, 0.75); */
+    color: navy;
     width: 400px;
     top: 50px;
     border: 2px solid orange;
@@ -99,6 +99,33 @@ canvas {
     padding: 50px;
     font-weight: bold;
     text-align: center;
+}
+
+.background-container-2:after {
+    content: '';
+    /* background: url("./photos.michel.02/02.jpg") no-repeat center center; */
+    background: url("./images/roof.evasion.jpg");
+
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* <= This one */
+
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.5; /* Here is your opacity */
+}
+
+.background-container-2 {
+    position: relative;
+    width: 90%;  /* if 100%, too big for a tablet... */
+    padding: 50px;
+    font-weight: bold;
+    text-align: center;
+    z-index: 0; /* Tweak this. -1 may prevent onclick and onmouseover behaviors... */
 }
 
 .text-content {
