@@ -457,11 +457,13 @@ let makeCode = (url) => {
     document.getElementById("qrcode").style.display = 'block'; // Show it ! (Hidden otherwise)
 };
 
+const DIALOG_OPTION = true;
+
 // Mouse behavior, on some specific pages (or snippets)
 let clickOnTxPix = (origin) => {
     console.log(`Click on ${origin.id}`);
     // TODO Set the content
-    let dynamicContentContainer = document.getElementById("dialog-tx-content");
+    let dynamicContentContainer = DIALOG_OPTION ? document.getElementById("dialog-tx-content") : document.getElementById("info-tx");
     if (origin.id === 'tx-01') {
         let contentName = `tx-01_${currentLang}.html`;
         fetch(contentName)
@@ -494,7 +496,11 @@ let clickOnTxPix = (origin) => {
         content = "More soon...";
     }
     // dynamicContentContainer.innerHTML = content;
-    showInfoTxDialog();
+    if (DIALOG_OPTION) {
+        showInfoTxDialog();
+    } else {
+        dynamicContentContainer.style.display = 'block';
+    }
 };
 
 let mouseOnTxPix = (origin) => {
