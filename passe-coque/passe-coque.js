@@ -464,37 +464,33 @@ let clickOnTxPix = (origin) => {
     console.log(`Click on ${origin.id}`);
     // TODO Set the content
     let dynamicContentContainer = DIALOG_OPTION ? document.getElementById("dialog-tx-content") : document.getElementById("info-tx");
-    if (origin.id === 'tx-01') {
-        let contentName = `tx-01_${currentLang}.html`;
-        fetch(contentName)
-            .then(response => {  // Warning... the NOT_FOUND error lands here, apparently.
-                console.log(`Data Response: ${response.status} - ${response.statusText}`);
-                if (response.status !== 200) { // There is a problem...
-                    dynamicContentContainer.innerHTML = `Fetching ${contentName}...<br/> Data Response: ${response.status} - ${response.statusText}<br/><b>&Ccedil;a vient...</b>`;
-                } else {
-                    response.text().then(doc => {
-                        console.log(`Code data loaded, length: ${doc.length}.`);
-                        dynamicContentContainer.innerHTML = doc;
-                    });
+    let contentName = `${origin.id}_${currentLang}.html`; // Like 'tx-01_FR.html'
+    fetch(contentName)
+        .then(response => {  // Warning... the NOT_FOUND error lands here, apparently.
+            console.log(`Data Response: ${response.status} - ${response.statusText}`);
+            if (response.status !== 200) { // There is a problem...
+                dynamicContentContainer.innerHTML = `Fetching ${contentName}...<br/> Data Response: ${response.status} - ${response.statusText}<br/><b>&Ccedil;a vient...</b>`;
+            } else {
+                response.text().then(doc => {
+                    console.log(`${contentName} code data loaded, length: ${doc.length}.`);
+                    dynamicContentContainer.innerHTML = doc;
+                });
+            }
+        },
+        (error, errmess) => {
+            console.log("Ooch");
+            let message;
+            if (errmess) {
+                let mess = JSON.parse(errmess);
+                if (mess.message) {
+                    message = mess.message;
                 }
-            },
-            (error, errmess) => {
-                console.log("Ooch");
-                let message;
-                if (errmess) {
-                    let mess = JSON.parse(errmess);
-                    if (mess.message) {
-                        message = mess.message;
-                    }
-                }
-                console.debug("Failed to get code data..." + (error ? JSON.stringify(error, null, 2) : ' - ') + ', ' + (message ? message : ' - '));
-                // Plus tard...
-                dynamicContentContainer.innerHTML = "<b>&Ccedil;a vient...</b>";
-            });
+            }
+            console.debug("Failed to get code data..." + (error ? JSON.stringify(error, null, 2) : ' - ') + ', ' + (message ? message : ' - '));
+            // Plus tard...
+            dynamicContentContainer.innerHTML = `<b>${contentName} ${currentLang === 'FR' ? ' introuvable...' : ' not found...'}</b>`;
+        });
 
-    } else {
-        content = "More soon...";
-    }
     // dynamicContentContainer.innerHTML = content;
     if (DIALOG_OPTION) {
         showInfoTxDialog();
@@ -505,7 +501,13 @@ let clickOnTxPix = (origin) => {
 
 let mouseOnTxPix = (origin) => {
     console.log(`Mouse on ${origin.id}`);
-    origin.title = (currentLang === 'FR') ? "Vas-y, clique !" : "Click for more.";
+    // origin.title = (currentLang === 'FR') ? "Vas-y, clique !" : "Click for more.";
+    let tooltipHolder = origin.querySelector('span');
+    if (tooltipHolder) {
+        tooltipHolder.innerHTML = (currentLang === 'FR') ? "Vas-y,<br/>clique sur la photo !" : "Click the picture<br/>for more.";
+    } else { // Just in case no <span> child is found...
+        origin.title = (currentLang === 'FR') ? "Vas-y, clique !" : "Click for more.";
+    }
 };
 
 let showInfoTxDialog = () => {
