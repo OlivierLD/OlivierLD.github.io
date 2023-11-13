@@ -1,1 +1,71 @@
-<h2>Partager</h2>
+<dialog id="info-tx-dialog" class="shadow-menu" style="width: 800px; margin-top: 30px; z-index: 3;">
+	<div class="dialog-header">
+		<span><!-- Empty title --></span>
+		<span class="dialog-header-close" onclick="closeInfoTxDialog();">&times</span>
+	</div>
+	<div id="dialog-tx-content">
+		<!-- Content goes here -->
+	</div>
+</dialog>
+
+<div>
+    
+    <div class="background-container-3" style="min-height: 50px;">
+        <div class="container"> <!-- image on top -->
+            <img src="./images/share/sof.2023.png" width="100%">
+            <div class="text-block">
+                Partager
+            </div>
+        </div>
+        <div style="text-align: left; padding: 20px;">
+            <p>
+                <span style="font-weight: 900;">Le partage</span>, c'est l'&acirc;me de Passe-Coque. 
+                Pour nous, le bateau n'est pas une finalit&eacute; mais un moyen. Un moyen de se d&eacute;placer bien sûr mais aussi un moyen de voyager, 
+                de d&eacute;couvrir, de se d&eacute;couvrir et de partager.
+                Nous souhaitons faire vivre nos bateaux au-del&agrave; des projets qui les ont vu rena&icirc;tre.
+                Rejoignez le Passe-Coque Club et venez naviguer &agrave; moindre frais tout au long de l'ann&eacute;e.
+            </p>
+            <p>
+                Notre club est ouvert &agrave; toutes et &agrave; tous, peu importe votre exp&eacute;rience. Nos forfaits s'adaptent &agrave; vos revevus ! 
+                Nos skippers b&eacute;n&eacute;voles vous accompagneront pour vos premières sorties.<br/>
+            </p>
+            <hr/>
+        </div>
+        <div style="display: grid; grid-template-columns: 33% 33% 33%;">
+            <div id="tx-05" class="tooltip" style="padding: 30px; z-index: 1;" onclick="clickOnTxPix(this);" onmouseover="mouseOnTxPix(this);">
+                <img src="./images/transmit/tx.05.png" width="100%">
+                <span>PlaceHolder</span>
+            </div>
+            <div style="padding: 30px; z-index: 1;">
+                More here soon
+            </div>
+            <div style="padding: 30px; z-index: 1;">
+                More here soon
+            </div>
+        </div>
+        <div id="info-tx" style="display: none;">
+            <!-- See DIALOG_OPTION = false -->
+        </div>
+        <!-- Transmettre, Partager -->
+        <div style="border: 2px solid silver; padding: 20px; display: grid; grid-template-columns: 50% 50%;">
+            <div style="border: 2px solid navy; margin: 30px; padding: 30px; text-align: left;">
+                TRANSMETTRE
+                <p>
+                    <a href="#" onclick="clack('_31');">D&Eacute;COUVREZ LES PROJETS ENGAG&Eacute;S</a>.
+                </p>
+            </div>
+            <div style="border: 2px solid navy; margin: 30px; padding: 30px; text-align: left;">
+                RENOVER
+            </div>
+        </div>
+        <!-- Pour continuer... -->
+        <div style="margin-top: 20px; border: 2px solid silver; padding: 20px; display: grid; grid-template-columns: 50% 50%;">
+            <div style="margin: 30px; padding: 30px; text-align: left; background: rgba(255, 255, 255, 0.65);">
+                <p>Pour continuer nos d&eacute;veloppements et la r&eacute;habilitation des bateaux, nous avons besoin de vous.</p>
+                <p>Pour financer la location de nos locaux, pour commander les pi&egrave;ces n&eacute;cessaires ou payer les services associ&eacute;s (grutages, etc)</p>
+                <p>Vous pouvez faire un don (d&eacute;fiscalisable) <a href="#" onclick="clack('_52');">ICI</a> ou inverstir dans notre projet d'&eacute;covillage <a href="#" onclick="clack('_53');">ICI</a>.</p>
+            </div>
+        </div>
+
+    </div>    
+</div>
