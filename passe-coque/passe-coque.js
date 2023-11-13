@@ -510,6 +510,10 @@ let mouseOnTxPix = (origin) => {
     }
 };
 
+let mouseOnRftPix = (origin) => {
+
+};
+
 let showInfoTxDialog = () => {
     let infoTxDialog = document.getElementById("info-tx-dialog");
     if (infoTxDialog.show !== undefined) {
