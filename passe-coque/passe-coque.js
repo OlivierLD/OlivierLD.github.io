@@ -503,15 +503,19 @@ let mouseOnTxPix = (origin) => {
     console.log(`Mouse on ${origin.id}`);
     // origin.title = (currentLang === 'FR') ? "Vas-y, clique !" : "Click for more.";
     let tooltipHolder = origin.querySelector('span');
-    if (tooltipHolder) {
+    if (false && tooltipHolder) {
         tooltipHolder.innerHTML = (currentLang === 'FR') ? "Vas-y,<br/>clique sur la photo !" : "Click the picture<br/>for more.";
     } else { // Just in case no <span> child is found...
-        origin.title = (currentLang === 'FR') ? "Vas-y, clique !" : "Click for more.";
+        origin.title = (currentLang === 'FR') ? "Cliquer pour plus d'info" : "Click for more.";
+        origin.style.cursor = 'pointer';
+        // let image = origin.querySelector('img');
+        // if (image) {
+        //     image.style.opacity = 1.0;
+        // }
     }
 };
 
 let mouseOnRftPix = (origin) => {
-
 };
 
 let showInfoTxDialog = () => {

@@ -44,8 +44,6 @@
 			- Renover                          32
 			- Partager                         33
 		- La flotte - 4
-			- Les bateaux                      41
-			- Les projets a saisir             42
 		- Nous soutenir - 5
 			- Adherer                          51
 			- Faire un don                     52
@@ -103,11 +101,11 @@
 					</ul>
 				</li>
 				<li>
-					<a href="javascript:void(0)" id="_4">La flotte&nbsp;</a>
-					<ul>
+					<a href="javascript:void(0)" onclick="clack(this);" id="_4">La flotte&nbsp;</a>
+					<!--ul>
 						<li><a href="javascript:void(0)" onclick="clack(this);" id="_41">Les bateaux</a></li>
 						<li><a href="javascript:void(0)" onclick="clack(this);" id="_42">Les projets &agrave; saisir</a></li>
-					</ul>
+					</ul-->
 				</li>
 				<li>
 					<a href="javascript:void(0)" id="_5">Nous soutenir&nbsp;</a>
@@ -183,11 +181,12 @@
 			</div>
 
 			<div>
-				<a href="javascript:void(0)" onclick="showHideSection(this, 'section-3');"><span class="expand-collapse">&#9658;&nbsp;</span><span id="_4">La flotte</span></a>
+				<a href="javascript:void(0)" class="active-link" style="margin-top: 10px;" onclick="clack(this);" id="_4">La flotte</a>
+				<!--a href="javascript:void(0)" onclick="showHideSection(this, 'section-3');"><span class="expand-collapse">&#9658;&nbsp;</span><span id="_4">La flotte</span></a>
 				<div id="section-3" class="sub-section">
 					<a class="active-link" href="javascript:void(0)" onclick="clack(this);" id="_41">Les bateaux</a>
 					<a class="active-link" href="javascript:void(0)" onclick="clack(this);" id="_42">Les projets &agrave; saisir</a>
-				</div>
+				</div-->
 			</div>
 
 			<div>
@@ -234,7 +233,7 @@
 		<!-- Not used for now -->
 	</div>
 
-	<div id="current-content" class="text-content">
+	<div id="current-content" class="text-content" style="margin-left: -8px;">
 		<!-- Everything, content goes here -->
 	</div>
 
