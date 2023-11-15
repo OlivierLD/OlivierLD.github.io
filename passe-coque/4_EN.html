@@ -1,5 +1,4 @@
-<h1>The boats</h1>
-
+<!--
 <ul>
   <li>Arpège</li>
   <li>Cognac</li>
@@ -26,3 +25,88 @@
   <li>Ketch Acier 13m</li>
   <li>Selection</li>
 </ul>
+-->
+<dialog id="info-tx-dialog" class="shadow-menu" style="width: 800px; margin-top: 30px; z-index: 3;">
+	<div class="dialog-header">
+		<span><!-- Empty title --></span>
+		<span class="dialog-header-close" onclick="closeInfoTxDialog();">&times</span>
+	</div>
+	<div id="dialog-tx-content">
+		<!-- Content goes here -->
+	</div>
+</dialog>
+
+<div>
+    
+    <div class="background-container-4" style="min-height: 50px;">
+        <div class="container"> <!-- image on top -->
+            <img src="./images/share/sof.2023.png" width="100%">
+            <div class="text-block" style="display: none;">
+                The fleet
+            </div>
+        </div>
+        <div style="text-align: left; padding: 20px; background: white; display: grid; grid-template-columns: 50% 50%;">
+            <div>
+                <span style="font-weight: 900; font-size: 1.1em">The fleet</span> of Passe-Coque. 
+                <br/>
+                . . .
+            </div>
+            <div>
+              <table>
+                <tr>
+                  <td style="vertical-align: top;">Filters:</td>
+                  <td style="vertical-align: top;">
+                    <ul>
+                      <li>The full fleet</li>
+                      <li>Old boats</li>
+                      <li>Passe-Coque Club</li>
+                      <li>Projects to grab</li>
+                    </ul>
+
+                  </td>
+                </tr>
+              </table>
+            </div>
+        </div>
+        <div style="text-align: left; padding: 20px; background: white;">
+          Vous &ecirc;tes propri&eacute;taires d'un voilier que vous souhaitez faire vivre ou revivre, contacter nous <a href="#" onclick="clack('_61')">ICI</a>.
+        </div>
+        <div style="display: grid; grid-template-columns: 33% 33% 33%;">
+            <div id="tx-05" class="tooltip click-for-more" style="padding: 30px; z-index: 1;" onclick="clickOnTxPix(this);" onmouseover="mouseOnTxPix(this);">
+                <img src="./images/transmit/tx.05.png" width="100%">
+                <span>PlaceHolder</span>
+            </div>
+            <div style="padding: 30px; z-index: 1;">
+                More here soon
+            </div>
+            <div style="padding: 30px; z-index: 1;">
+                More here soon
+            </div>
+        </div>
+        <div id="info-tx" style="display: none;">
+            <!-- See DIALOG_OPTION = false -->
+        </div>
+        <!-- Transmettre, Partager -->
+        <div style="border: 2px solid silver; padding: 20px; display: grid; grid-template-columns: 50% 50%;">
+            <div style="border: 2px solid navy; margin: 30px; padding: 30px; text-align: left;">
+                TRANSMETTRE
+                <p>
+                    <a href="#" onclick="clack('_31');">D&Eacute;COUVREZ LES PROJETS ENGAG&Eacute;S</a>.
+                </p>
+            </div>
+            <div style="border: 2px solid navy; margin: 30px; padding: 30px; text-align: left;">
+                RENOVER
+            </div>
+        </div>
+        <!-- Pour continuer... -->
+        <div style="margin-top: 20px; border: 2px solid silver; padding: 20px; display: grid; grid-template-columns: 50% 50%;">
+            <div style="margin: 30px; padding: 30px; text-align: left; background: rgba(255, 255, 255, 0.65);">
+                <p>La charte du Passe-Coque Club&nbsp;:</p>
+                <p>
+                    . . .
+                </p>
+            </div>
+        </div>
+
+    </div>    
+</div>

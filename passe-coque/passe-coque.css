@@ -10,8 +10,9 @@
 }
   
 * {
-    font-family: "Chalkboard", "Open Sans", "DejaVu Sans", sans-serif;
+    font-family: Arial, "Chalkboard", "Open Sans", "DejaVu Sans", sans-serif;
     font-weight: 400;
+    font-size: 20px;
     font-style: normal;
 }	
 
