@@ -130,6 +130,7 @@ div.tooltip:hover span {
 
 .image-plus-text {
     position: relative;
+    text-align: center;
     margin: 10px;
     border: 2px solid silver;
     border-radius: 5px;
@@ -145,6 +146,7 @@ div.tooltip:hover span {
     left: 0%;
     right: 0%;
     width: inherit;
+    text-align: left;
     background-color: rgba(161, 156, 156, 0.65);
     color: navy;
     padding: 20px;
