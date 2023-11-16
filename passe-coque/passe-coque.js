@@ -537,3 +537,44 @@ let closeInfoTxDialog = () => {
       infoTxDialog.style.display = 'none';
     }
 };
+
+let aboutSomeone = (who) => {
+    console.log(`About ${who.id}`);
+    let aboutDialog = document.getElementById("about-dialog");
+    let dialogContent = document.getElementById("dialog-content");
+
+    let contentName = `about_${who.id}_${currentLang}.html`;
+
+    fetch(contentName)
+        .then(response => {  // Warning... the NOT_FOUND error lands here, apparently.
+            console.log(`Data Response: ${response.status} - ${response.statusText}`);
+            if (response.status !== 200) { // There is a problem...
+                dialogContent.innerHTML = `Fetching ${contentName}...<br/> Data Response: ${response.status} - ${response.statusText}<br/><b>&Ccedil;a vient...</b>`;
+            } else {
+                response.text().then(doc => {
+                    console.log(`${contentName} code data loaded, length: ${doc.length}.`);
+                    dialogContent.innerHTML = doc;
+                });
+            }
+        },
+        (error, errmess) => {
+            console.log("Ooch");
+            let message;
+            if (errmess) {
+                let mess = JSON.parse(errmess);
+                if (mess.message) {
+                    message = mess.message;
+                }
+            }
+            console.debug("Failed to get code data..." + (error ? JSON.stringify(error, null, 2) : ' - ') + ', ' + (message ? message : ' - '));
+            // Plus tard...
+            dialogContent.innerHTML = `<b>${contentName} ${currentLang === 'FR' ? ' introuvable...' : ' not found...'}</b>`;
+        });
+
+    if (aboutDialog.show !== undefined) {
+        aboutDialog.show();
+    } else {
+      // alert(NO_DIALOG_MESSAGE);
+      aboutDialog.style.display = 'inline';
+    }
+};
