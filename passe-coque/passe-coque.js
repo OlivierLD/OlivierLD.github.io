@@ -710,6 +710,7 @@ let fillOutFleet = filter => {
         img.style.width = "100%";
         div.appendChild(img);
         let span = document.createElement('span');
+        span.style = "position: relative; bottom: 60px; color: white;";
         span.innerHTML = `${boat.name}<br/>${boat.type}`;
         div.appendChild(span);
         container.appendChild(div);
