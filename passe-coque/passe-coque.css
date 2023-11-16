@@ -128,6 +128,28 @@ div.tooltip:hover span {
     /* padding-right: 20px; */
 }
 
+.image-plus-text {
+    position: relative;
+    margin: 10px;
+    border: 2px solid silver;
+    border-radius: 5px;
+}
+
+.image-plus-text:hover {
+    box-shadow: 4px 4px 8px black, 0 0 25px white, 0 0 10px cyan;
+}
+
+.image-plus-text span {
+    position: absolute;
+    bottom: 0%;
+    left: 0%;
+    right: 0%;
+    width: inherit;
+    background-color: rgba(161, 156, 156, 0.65);
+    color: navy;
+    padding: 20px;
+}
+
 .background-container:after {
     content: '';
     /* background: url("./photos.michel.02/02.jpg") no-repeat center center; */
