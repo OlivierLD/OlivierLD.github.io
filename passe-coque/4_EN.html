@@ -57,22 +57,21 @@
                   <td style="vertical-align: top;">Filters:</td>
                   <td style="vertical-align: top;">
                     <ul>
-                      <li><input type="radio" name="filter" value="1" checked>The full fleet</li>
-                      <li><input type="radio" name="filter" value="2">Old boats</li>
-                      <li><input type="radio" name="filter" value="3">Passe-Coque Club</li>
-                      <li><input type="radio" name="filter" value="4">Projects to grab</li>
+                      <li><input type="radio" name="filter" value="1" onchange="updateFilter(this);">The full fleet</li>
+                      <li><input type="radio" name="filter" value="2" onchange="updateFilter(this);">Old boats</li>
+                      <li><input type="radio" name="filter" value="3" onchange="updateFilter(this);">Passe-Coque Club</li>
+                      <li><input type="radio" name="filter" value="4" onchange="updateFilter(this);">Projects to grab</li>
                     </ul>
-
                   </td>
                 </tr>
               </table>
             </div>
         </div>
         <div style="text-align: left; padding: 20px; background: white;">
-          Vous &ecirc;tes propri&eacute;taires d'un voilier que vous souhaitez faire vivre ou revivre, contacter nous <a href="#" onclick="clack('_61')">ICI</a>.
+          You own a boat, and you wish to give it a new life, contact us <a href="#" onclick="clack('_61')">HERE</a>.
         </div>
-        <div style="display: grid; grid-template-columns: 33% 33% 33%;">
-            <div id="tx-05" class="tooltip click-for-more" style="padding: 30px; z-index: 1;" onclick="clickOnTxPix(this);" onmouseover="mouseOnTxPix(this);">
+        <div id="fleet-container" style="display: grid; grid-template-columns: 33% 33% 33%;">
+            <!--div id="tx-05" class="tooltip click-for-more" style="padding: 30px; z-index: 1;" onclick="clickOnTxPix(this);" onmouseover="mouseOnTxPix(this);">
                 <img src="./images/transmit/tx.05.png" width="100%">
                 <span>PlaceHolder</span>
             </div>
@@ -81,7 +80,7 @@
             </div>
             <div style="padding: 30px; z-index: 1;">
                 More here soon
-            </div>
+            </div-->
         </div>
         <div id="info-tx" style="display: none;">
             <!-- See DIALOG_OPTION = false -->
@@ -89,19 +88,19 @@
         <!-- Transmettre, Partager -->
         <div style="border: 2px solid silver; padding: 20px; display: grid; grid-template-columns: 50% 50%;">
             <div style="border: 2px solid navy; margin: 30px; padding: 30px; text-align: left;">
-                TRANSMETTRE
+                TRANSMIT
                 <p>
-                    <a href="#" onclick="clack('_31');">D&Eacute;COUVREZ LES PROJETS ENGAG&Eacute;S</a>.
+                    <a href="#" onclick="clack('_31');">DISCOVER THE PROJECTS</a>.
                 </p>
             </div>
             <div style="border: 2px solid navy; margin: 30px; padding: 30px; text-align: left;">
-                RENOVER
+                REFIT
             </div>
         </div>
         <!-- Pour continuer... -->
         <div style="margin-top: 20px; border: 2px solid silver; padding: 20px; display: grid; grid-template-columns: 50% 50%;">
             <div style="margin: 30px; padding: 30px; text-align: left; background: rgba(255, 255, 255, 0.65);">
-                <p>La charte du Passe-Coque Club&nbsp;:</p>
+                <p>The Passe-Coque Club's chart:</p>
                 <p>
                     . . .
                 </p>

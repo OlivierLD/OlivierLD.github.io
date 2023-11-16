@@ -29,12 +29,11 @@
                   <td style="vertical-align: top;">Filtres&nbsp;:</td>
                   <td style="vertical-align: top;">
                     <ul>
-                      <li><input type="radio" name="filter" value="1" checked>Toute la flotte</li>
-                      <li><input type="radio" name="filter" value="2">Anciens bateaux</li>
-                      <li><input type="radio" name="filter" value="3">Passe-Coque Club</li>
-                      <li><input type="radio" name="filter" value="4">Projets &agrave; saisir</li>
+                      <li><input type="radio" name="filter" value="1" onchange="updateFilter(this);">Toute la flotte</li>
+                      <li><input type="radio" name="filter" value="2" onchange="updateFilter(this);">Anciens bateaux</li>
+                      <li><input type="radio" name="filter" value="3" onchange="updateFilter(this);">Passe-Coque Club</li>
+                      <li><input type="radio" name="filter" value="4" onchange="updateFilter(this);">Projets &agrave; saisir</li>
                     </ul>
-
                   </td>
                 </tr>
               </table>
@@ -43,17 +42,17 @@
         <div style="text-align: left; padding: 20px; background: white;">
           Vous &ecirc;tes propri&eacute;taires d'un voilier que vous souhaitez faire vivre ou revivre, contacter nous <a href="#" onclick="clack('_61')">ICI</a>.
         </div>
-        <div style="display: grid; grid-template-columns: 33% 33% 33%;">
-            <div id="tx-05" class="tooltip click-for-more" style="padding: 30px; z-index: 1;" onclick="clickOnTxPix(this);" onmouseover="mouseOnTxPix(this);">
+        <div id="fleet-container" style="display: grid; grid-template-columns: 33% 33% 33%;">
+            <!--div id="tx-05" class="tooltip-stby image-plus-text" style="padding: 30px; z-index: 1;" onclick="clickOnBoatPix(this);" onmouseover="mouseOnTxPix(this);">
                 <img src="./images/transmit/tx.05.png" width="100%">
                 <span>PlaceHolder</span>
-            </div>
-            <div style="padding: 30px; z-index: 1;">
+            </div-->
+            <!--div style="padding: 30px; z-index: 1;">
                 More here soon
             </div>
             <div style="padding: 30px; z-index: 1;">
                 More here soon
-            </div>
+            </div-->
         </div>
         <div id="info-tx" style="display: none;">
             <!-- See DIALOG_OPTION = false -->

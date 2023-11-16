@@ -518,6 +518,45 @@ let mouseOnTxPix = (origin) => {
 let mouseOnRftPix = (origin) => {
 };
 
+let clickOnBoatPix = (origin) => {
+    console.log(`Click on ${origin.id}`);
+    // TODO Set the content
+    let dynamicContentContainer = DIALOG_OPTION ? document.getElementById("dialog-tx-content") : document.getElementById("info-tx");
+    let contentName = `${origin.id}_${currentLang}.html`; // Like 'tx-01_FR.html'
+    fetch(contentName)
+        .then(response => {  // Warning... the NOT_FOUND error lands here, apparently.
+            console.log(`Data Response: ${response.status} - ${response.statusText}`);
+            if (response.status !== 200) { // There is a problem...
+                dynamicContentContainer.innerHTML = `Fetching ${contentName}...<br/> Data Response: ${response.status} - ${response.statusText}<br/><b>&Ccedil;a vient...</b>`;
+            } else {
+                response.text().then(doc => {
+                    console.log(`${contentName} code data loaded, length: ${doc.length}.`);
+                    dynamicContentContainer.innerHTML = doc;
+                });
+            }
+        },
+        (error, errmess) => {
+            console.log("Ooch");
+            let message;
+            if (errmess) {
+                let mess = JSON.parse(errmess);
+                if (mess.message) {
+                    message = mess.message;
+                }
+            }
+            console.debug("Failed to get code data..." + (error ? JSON.stringify(error, null, 2) : ' - ') + ', ' + (message ? message : ' - '));
+            // Plus tard...
+            dynamicContentContainer.innerHTML = `<b>${contentName} ${currentLang === 'FR' ? ' introuvable...' : ' not found...'}</b>`;
+        });
+
+    // dynamicContentContainer.innerHTML = content;
+    if (DIALOG_OPTION) {
+        showInfoTxDialog();
+    } else {
+        dynamicContentContainer.style.display = 'block';
+    }
+};
+
 let showInfoTxDialog = () => {
     let infoTxDialog = document.getElementById("info-tx-dialog");
     if (infoTxDialog.show !== undefined) {
@@ -577,4 +616,103 @@ let aboutSomeone = (who) => {
       // alert(NO_DIALOG_MESSAGE);
       aboutDialog.style.display = 'inline';
     }
+};
+
+const CLUB = 2;
+const OLD_BOAT = 3;
+const TO_GRAB = 4;
+
+// TODO See if there is a better place for this hard-coded list...
+const THE_FLEET = [
+    {
+        name: "Eh'Tak",
+        id: "eh-tak",
+        pix: "./images/boats/eh-tak.jpg",
+        type: "Shipman 28",
+        category: CLUB
+    },
+    {
+        name: "Pordin-Nancq",
+        id: "pordin-nancq",
+        pix: "./images/boats/pordin.jpg",
+        type: "Carter 37",
+        category: OLD_BOAT
+    },
+    {
+        name: "Jehu",
+        id: "jehu",
+        pix: "./images/boats/jehu.jpg",
+        type: "J24",
+        category: TO_GRAB
+    },
+    {
+        name: "Manu Aviri",
+        id: "manu-aviri",
+        pix: "./images/boats/manu-aviri.jpg",
+        type: "Comanche",
+        category: CLUB
+    }
+];
+
+let updateFilter = radio => {
+    console.log(`Update filter on ${radio}`);
+    switch (radio.value) {
+        case '1':
+            console.log("No filter");
+            fillOutFleet(null);
+            break;
+        case '2':
+            console.log("Old boats");
+            fillOutFleet(OLD_BOAT);
+            break;
+        case '3':
+            console.log("Passe-Coque Club");
+            fillOutFleet(CLUB);
+            break;
+        case '4':
+            console.log("À saisir");
+            fillOutFleet(TO_GRAB);
+            break;
+        default:
+            break;
+    }
+};
+
+let fillOutFleet = filter => {
+
+    let container = document.getElementById('fleet-container');
+    // drop all childs
+    while (container.hasChildNodes()) {
+        container.removeChild(container.lastChild);
+    }
+    // Build new list
+    let newList = [];
+    // Filter here
+    THE_FLEET.forEach(boat => {
+        if (filter === null || boat.category == filter) {
+            console.log(`Filter ${filter}, adding ${boat.name}`);
+            newList.push(boat);
+        }
+    });
+    console.log(`Displaying ${newList.length} boats.`);
+    // Populate. based on new list
+    newList.forEach(boat => {
+        let div = document.createElement('div');
+        div.id = boat.id;
+        div.class = "image-plus-text";
+        div.style = "padding: 30px; z-index: 1;";
+        // div.title = boat.name;
+        div.onclick = function() { clickOnBoatPix(this); }; 
+        div.onmouseover = function() { mouseOnTxPix(this); };
+        let img = document.createElement('img');
+        img.src = boat.pix;
+        // img.width = "100%";
+        img.style.width = "100%";
+        div.appendChild(img);
+        let span = document.createElement('span');
+        span.innerHTML = `${boat.name}<br/>${boat.type}`;
+        div.appendChild(span);
+        container.appendChild(div);
+    });
+    console.log("Done with fillOutFleet");
 };
