@@ -636,6 +636,11 @@ button:hover, button:focus {
   cursor: pointer;
 }
 
+.help-header:hover {
+  color: orangered;
+  font-size: 1.5em;
+}
+
 .smooth {
     /*height: 0;*/
     /*visibility: hidden;*/
@@ -1008,7 +1013,7 @@ Date.prototype.format = function (dateFormat) {
             title="Background image title">BG Image title</span>
     </div>     
   </div>
-  <small style="margin-left: 5px;">&gt; &nbsp;Work (constantly) in Progress. Use the hamburger below to display the menu. See kebab on the right.</small>
+  <small class="help-header" style="margin-left: 5px; margin-top: -10px; position: absolute;">&gt; &nbsp;Work (constantly) in Progress. Use the hamburger (&#8801;) below to display the menu. See kebab (&#8942;) on the right.</small>
   <!--h1 style="font-style: normal;">&nbsp; &#9776;&nbsp; &#8801;</h1-->
   <h1 title="The background is dynamic, its image is changing!&#013;Use the hamburger on the left to reach the menu.&#013;Also see the kebab on the right."
       style="width: 100%; font-style: normal; text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px silver;"><span id="hamburger" style="cursor: pointer;" onclick="openNav()" onmouseover="openNav()" title="Hamburger">&nbsp; &#8801;</span> <span id="my-name">OlivierLD </span><span id="kebab" style="float: right; margin-top: -50px;" title="Kebab,&#013;Extra links...." onclick="showKebabMenu()" onmouseover="showKebabMenu()">&#8942;&nbsp;&nbsp;&nbsp;</span></h1>
