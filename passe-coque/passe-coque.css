@@ -18,7 +18,7 @@
 
 body {
     width: 100%;
-    background-color: rgba(192, 192, 192, 0.5);
+    background-color: white; /* rgba(192, 192, 192, 0.5); */
     /* background-image: radial-gradient(silver, gray); */
 }
 
@@ -137,7 +137,8 @@ div.tooltip:hover span {
 }
 
 .image-plus-text:hover {
-    box-shadow: 4px 4px 8px black, 0 0 25px white, 0 0 10px cyan;
+    /* box-shadow: 4px 4px 8px black, 0 0 25px white, 0 0 10px cyan; */
+    box-shadow: 4px 4px 8px black, 0 0 25px white, 0 0 10px silver;
 }
 
 .image-plus-text span {

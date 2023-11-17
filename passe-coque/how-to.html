@@ -78,13 +78,18 @@ a.list-link:hover {
         Les images du haut de la home page ont un rapport de <code>3.5:1</code>. Au format <code>jpg</code>, une dimension de <code>1500 x 429</code> semble &ecirc;tre la bonne.
     </div>
     <div>
-        La traduction est assurr&eacute;e par la fonction <code>updateMenu</code>, d&eacute;finie dans <code>passe-coque.js</code>. <br/>
+        La traduction (des menus) est assurr&eacute;e par la fonction <code>updateMenu</code>, d&eacute;finie dans <code>passe-coque.js</code>. <br/>
+    </div>
+    <div style="margin-top: 30px;">
+        <b>Tout le site</b> se comporte comme une SPA (Single Page Application). La page <code>index.html</code> reste toutjours affich&eacute;e, le contenu 
+        de la <code>div</code> "<code>current-content</code>" est chang&eacute; dynamiquement en fonction des choix de l'utilisateur. Encore une fois,
+        voir &agrave; ce sujet le code de la fonction <code>clack</code>, dans le fichier <code>passe-coque.js</code>.
     </div>
     <div style="margin-top: 30px;">
         <b>La flotte</b>&nbsp;: La liste des bateaux est un JSON Object <code>THE_FLEET</code> dans <code>passe-coque.js</code>.<br/>
         Les fonctions <code>updateFilter</code> et <code>fillOutFleet</code> etablissent la liste des bateaux, en fonction de la valeur des filtres 
         (radio-boutons).<br/>
-        Les images de bateau ont une taille de 376x376.
+        Les images de bateau ont une taille de 376 &times; 376.
     </div>
     <div style="margin-top: 30px;">
         La suite arrive...

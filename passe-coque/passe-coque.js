@@ -631,28 +631,32 @@ const THE_FLEET = [
         id: "eh-tak",
         pix: "./images/boats/eh-tak.jpg",
         type: "Shipman 28",
-        category: CLUB
+        category: CLUB,
+        base: "&Eacute;tel"
     },
     {
         name: "Pordin-Nancq",
         id: "pordin-nancq",
         pix: "./images/boats/pordin.jpg",
         type: "Carter 37",
-        category: OLD_BOAT
+        category: OLD_BOAT,
+        base: "Locmiquelic"
     },
     {
         name: "Jehu",
         id: "jehu",
         pix: "./images/boats/jehu.jpg",
         type: "J24",
-        category: TO_GRAB
+        category: TO_GRAB,
+        base: "Saint Philibert"
     },
     {
         name: "Manu Aviri",
         id: "manu-aviri",
         pix: "./images/boats/manu-aviri.jpg",
         type: "Comanche",
-        category: CLUB
+        category: CLUB,
+        base: "&Eacute;tel"
     }
 ];
 
@@ -703,7 +707,7 @@ let fillOutFleet = filter => {
         div.id = boat.id;
         div.classList.add("image-plus-text");
         // div.class = "image-plus-text";
-        div.style = "padding: 30px; z-index: 1; max-height: 400px; max-width: 376px;";
+        div.style = "padding: 10px; z-index: 1; max-height: 460px; max-width: 376px;";
         // div.title = boat.name;
         div.onclick = function() { clickOnBoatPix(this); }; 
         div.onmouseover = function() { mouseOnTxPix(this); };
@@ -713,8 +717,8 @@ let fillOutFleet = filter => {
         // img.style.width = "100%";
         div.appendChild(img);
         let span = document.createElement('span');
-        span.style = "position: relative; display: block; color: white; bottom: 88px; ";
-        span.innerHTML = `${boat.name}<br/>${boat.type}`;
+        span.style = "position: relative; display: block; color: white; bottom: 4px;";
+        span.innerHTML = `${boat.name}<br/>${boat.type}, ${boat.base}`;
         div.appendChild(span);
         // Badge
         let badge = document.createElement('div');
