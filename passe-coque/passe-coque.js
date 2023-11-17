@@ -138,6 +138,10 @@ let clack = (origin) => {
                             //         console.log("Now Scrolling !");
                             //     //}, 1000);
                             //     // console.log("Scrolling !");
+                            } else if (originId === "4") {
+                                window.setTimeout(() => {
+                                    fillOutFleet(null); // Populate default (full) boat list
+                                }, 500);
                             }
 						}
 					});
