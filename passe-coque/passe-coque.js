@@ -701,7 +701,7 @@ let fillOutFleet = filter => {
         div.id = boat.id;
         div.classList.add("image-plus-text");
         // div.class = "image-plus-text";
-        div.style = "padding: 30px; z-index: 1; max-height: 400px;";
+        div.style = "padding: 30px; z-index: 1; max-height: 400px; max-width: 376px;";
         // div.title = boat.name;
         div.onclick = function() { clickOnBoatPix(this); }; 
         div.onmouseover = function() { mouseOnTxPix(this); };
