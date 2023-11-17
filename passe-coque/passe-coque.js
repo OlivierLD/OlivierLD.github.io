@@ -701,7 +701,7 @@ let fillOutFleet = filter => {
         div.id = boat.id;
         div.classList.add("image-plus-text");
         // div.class = "image-plus-text";
-        div.style = "padding: 30px; z-index: 1;";
+        div.style = "padding: 30px; z-index: 1; max-height: 400px;";
         // div.title = boat.name;
         div.onclick = function() { clickOnBoatPix(this); }; 
         div.onmouseover = function() { mouseOnTxPix(this); };
@@ -719,13 +719,13 @@ let fillOutFleet = filter => {
         badge.classList.add("badge");
         if (boat.category === OLD_BOAT) {
             badge.classList.add("badge-old");
-            badge.innerHTML = "Old boat";
+            badge.innerHTML = "Old<br/>boat";
         } else if (boat.category === CLUB) {
             badge.classList.add("badge-pc");
-            badge.innerHTML = "PC Club";
+            badge.innerHTML = "PC<br/>Club";
         } else if (boat.category === TO_GRAB) {
             badge.classList.add("badge-grab");
-            badge.innerHTML = (currentLang === 'FR') ? "A saisir" : "Grab it!";
+            badge.innerHTML = (currentLang === 'FR') ? "&Agrave;<br/>saisir" : "Grab<br/>it!";
         }
         div.appendChild(badge);
         container.appendChild(div);
