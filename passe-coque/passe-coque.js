@@ -699,7 +699,8 @@ let fillOutFleet = filter => {
     newList.forEach(boat => {
         let div = document.createElement('div');
         div.id = boat.id;
-        div.class = "image-plus-text";
+        div.classList.add("image-plus-text");
+        // div.class = "image-plus-text";
         div.style = "padding: 30px; z-index: 1;";
         // div.title = boat.name;
         div.onclick = function() { clickOnBoatPix(this); }; 
@@ -707,12 +708,26 @@ let fillOutFleet = filter => {
         let img = document.createElement('img');
         img.src = boat.pix;
         // img.width = "100%";
-        img.style.width = "100%";
+        // img.style.width = "100%";
         div.appendChild(img);
         let span = document.createElement('span');
-        span.style = "position: relative; bottom: 60px; color: white;";
+        span.style = "position: relative; display: block; color: white; bottom: 88px; ";
         span.innerHTML = `${boat.name}<br/>${boat.type}`;
         div.appendChild(span);
+        // Badge
+        let badge = document.createElement('div');
+        badge.classList.add("badge");
+        if (boat.category === OLD_BOAT) {
+            badge.classList.add("badge-old");
+            badge.innerHTML = "Old boat";
+        } else if (boat.category === CLUB) {
+            badge.classList.add("badge-pc");
+            badge.innerHTML = "PC Club";
+        } else if (boat.category === TO_GRAB) {
+            badge.classList.add("badge-grab");
+            badge.innerHTML = (currentLang === 'FR') ? "A saisir" : "Grab it!";
+        }
+        div.appendChild(badge);
         container.appendChild(div);
     });
     console.log("Done with fillOutFleet");

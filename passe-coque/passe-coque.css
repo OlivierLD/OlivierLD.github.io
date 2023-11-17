@@ -152,6 +152,27 @@ div.tooltip:hover span {
     padding: 20px;
 }
 
+.badge {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    border: 2px solid black;
+    border-radius: 50%;
+    bottom: 420px;
+    left: 260px;
+    padding-top: 10px;
+}
+
+.badge-pc {
+    background: rgba(255, 115, 0, 0.25);
+}
+.badge-old {
+    background: rgba(0, 102, 255, 0.25);
+}
+.badge-grab {
+    background: rgba(0, 255, 4, 0.25);
+}
+
 .background-container:after {
     content: '';
     /* background: url("./photos.michel.02/02.jpg") no-repeat center center; */
