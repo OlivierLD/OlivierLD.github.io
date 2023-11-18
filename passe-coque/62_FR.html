@@ -2,7 +2,7 @@
     
     <div class="background-container-x" style="min-height: 50px;">
         <div class="container"> <!-- image on top -->
-            <img src="./images/actu/actu-header.png" width="100%">
+            <img src="./actu/actu-header.png" width="100%">
             <div class="text-block" style="display: none;">
                 Actualit&eacute;s
             </div>
@@ -18,21 +18,24 @@
                 <tr>
                   <td style="vertical-align: top;">Filtres&nbsp;:</td>
                   <td style="vertical-align: top;">
-                    <input type="radio" name="filter" value="a1" onchange="updateFilter(this);" checked>Toute l'actu<br/>
-                    <input type="radio" name="filter" value="a2" onchange="updateFilter(this);">2023&nbsp;
-                    <input type="radio" name="filter" value="a3" onchange="updateFilter(this);">2022&nbsp;
-                    <input type="radio" name="filter" value="a4" onchange="updateFilter(this);">2021&nbsp;
-                    <input type="radio" name="filter" value="a5" onchange="updateFilter(this);">2020&nbsp;
-                    <input type="radio" name="filter" value="a6" onchange="updateFilter(this);">2019<br/>
-                    <input type="radio" name="filter" value="a7" onchange="updateFilter(this);">Communiqu&eacute;s<br/>
-                    <input type="radio" name="filter" value="a8" onchange="updateFilter(this);">News Letters
+                    <!-- See INFO_SECTION in passe-coque.js -->
+                    <input type="radio" name="filter" value="all" onchange="updateInfoFilter(this);">Toute l'actu<br/>
+
+                    <input type="radio" name="filter" value="a2023" onchange="updateInfoFilter(this);">2023&nbsp;
+                    <input type="radio" name="filter" value="a2022" onchange="updateInfoFilter(this);">2022&nbsp;
+                    <input type="radio" name="filter" value="a2021" onchange="updateInfoFilter(this);">2021&nbsp;
+                    <input type="radio" name="filter" value="a2020" onchange="updateInfoFilter(this);">2020&nbsp;
+                    <input type="radio" name="filter" value="a2019" onchange="updateInfoFilter(this);">2019<br/>
+
+                    <input type="radio" name="filter" value="aComm" onchange="updateInfoFilter(this);">Communiqu&eacute;s<br/>
+                    <input type="radio" name="filter" value="aNews" onchange="updateInfoFilter(this);">News Letters
                   </td>
                 </tr>
               </table>
             </div>
         </div>
 
-        <div id="actu-container" style="display: block; background: white;">
+        <div id="actu-container" style="display: block; background: white; margin: 20px;">
             <!--div id="tx-05" class="image-plus-text" style="padding: 10px; z-index: 1; max-height: 460px; max-width: 376px; cursor: pointer;" onclick="clickOnBoatPix(this);" onmouseover="mouseOnTxPix(this);">
                 <img src="./images/boats/eh-tak.jpg" width="100%">
                 <span style="position: relative; display: block; color: white; bottom: 4px;">Place<br/>Holder</span>
@@ -43,8 +46,10 @@
             </div-->
             <div style="padding: 30px; z-index: 1;">
                 More here soon
-            </div-->
+            </div>
         </div>
+
+        <div id="bottom-filler" style="min-height: 80px;"></div>
 
     </div>    
 </div>

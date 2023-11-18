@@ -672,6 +672,45 @@ const THE_FLEET = [
     }
 ];
 
+const INFO_SECTION = [
+    { 
+        section: "2023",
+        content: [
+            {
+                date: "Chepakan",
+                title: "Carter Cup",
+                content: "./actu/2023/carter.cup.html"
+            },
+            {
+                date: "Chepakan",
+                title: "Passe-Coque Trophy",
+                content: "./actu/2023/passe-coque.trophy.html"
+            }
+        ]
+    },
+
+    {
+        section: "news",
+        content: [
+            {
+              date: "",
+              title: "All news letters",
+              content: "./actu/newsletters.html"
+            }
+        ]
+    },
+    {
+        section: "communications",
+        content: [
+            {
+                date: "",
+                title: "All Communications",
+                content: "./actu/communications.html"
+              }
+          ]
+    }
+];
+
 let updateFilter = radio => {
     console.log(`Update filter on ${radio}`);
     switch (radio.value) {
@@ -699,7 +738,7 @@ let updateFilter = radio => {
 let fillOutFleet = filter => {
 
     let container = document.getElementById('fleet-container');
-    // drop all childs
+    // drop all children
     while (container.hasChildNodes()) {
         container.removeChild(container.lastChild);
     }
@@ -749,4 +788,88 @@ let fillOutFleet = filter => {
         container.appendChild(div);
     });
     console.log("Done with fillOutFleet");
+};
+
+let updateInfoFilter = radio => {
+    console.log(`Update filter on ${radio.value}`);
+    switch (radio.value) {
+        case 'all':
+            console.log("No filter");
+            fillOutActu(null);
+            break;
+        case 'a2023':
+            console.log("2023");
+            fillOutActu('2023');
+            break;
+        // TODO More here
+        case 'aComm':
+            console.log("Communications");
+            fillOutActu('communications'); // See INFO_SECTION
+            break;
+        case 'aNews':
+            console.log("News");
+            fillOutActu("news"); // See INFO_SECTION
+            break;
+        default:
+            break;
+    }
+};
+
+let fillOutActu = filter => {
+    // Populate the div named actu-container
+    let container = document.getElementById('actu-container');
+    // drop all children
+    while (container.hasChildNodes()) {
+        container.removeChild(container.lastChild);
+    }
+    // Build new list
+    let newList = [];
+    // Filter here
+    INFO_SECTION.forEach(section => {
+        if (filter === null || section.section == filter) {
+            console.log(`Filter ${filter}, adding '${section.section}'`);
+            newList.push(section);
+        }
+    });
+    console.log(`Displaying ${newList.length} section(s).`);
+    newList.forEach(section => {
+        // Create new div for this section
+        let sectionDiv = document.createElement('div');
+        // Now loop on sub-elements in the section
+        section.content.forEach(event => {
+            // title: "Passe-Coque Trophy"
+            // content: "./actu/2023/passe-coque.trophy.html"
+            console.log(`Adding event ${event.title}`);
+            let eventDiv = document.createElement('div');
+            sectionDiv.appendChild(eventDiv);
+            console.log(`Now fetching ${event.content}`); // TODO Language !!
+            fetch(event.content)
+                .then(response => {  // Warning... the NOT_FOUND error lands here, apparently.
+                    console.log(`Data Response: ${response.status} - ${response.statusText}`);
+                    if (response.status !== 200) { // There is a problem...
+                        eventDiv.innerHTML = `Fetching ${event.content}...<br/> Data Response: ${response.status} - ${response.statusText}<br/><b>&Ccedil;a vient...</b>`;
+                    } else {
+                        response.text().then(doc => {
+                            console.log(`${event.content} code data loaded, length: ${doc.length}.`);
+                            eventDiv.innerHTML = doc;
+                        });
+                    }
+                },
+                (error, errmess) => {
+                    console.log("Ooch");
+                    let message;
+                    if (errmess) {
+                        let mess = JSON.parse(errmess);
+                        if (mess.message) {
+                            message = mess.message;
+                        }
+                    }
+                    console.debug("Failed to get code data..." + (error ? JSON.stringify(error, null, 2) : ' - ') + ', ' + (message ? message : ' - '));
+                    // Plus tard...
+                    eventDiv.innerHTML = `<b>${contentName} ${currentLang === 'FR' ? ' introuvable...' : ' not found...'}</b>`;
+                });
+        });
+        container.appendChild(sectionDiv);
+    });
+
 };
