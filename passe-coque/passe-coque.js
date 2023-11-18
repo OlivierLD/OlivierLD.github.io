@@ -661,6 +661,14 @@ const THE_FLEET = [
         type: "Comanche",
         category: CLUB,
         base: "&Eacute;tel"
+    },
+    {
+        name: "Pen Duick",
+        id: "pen-duick",
+        pix: "./images/boats/pen.duick.jpg",
+        type: "W. Fife",
+        category: OLD_BOAT,
+        base: "Lorient"
     }
 ];
 

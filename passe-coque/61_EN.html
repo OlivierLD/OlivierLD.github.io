@@ -1,41 +1,33 @@
-<!DOCTYPE html>
-<html lang="en-US">
-<head>
-  <title>Contact</title>
-  <!--link rel="icon" type="image/jpg" href="palm.04.jpg"-->
-  <!--link rel="stylesheet" href="../css/stylesheet.css" type="text/css"/-->
-  <link rel="stylesheet" href="./passe-coque.css" type="text/css"/>
-  <script type="text/javascript" src="./passe-coque.js"></script>
-</head>
-<body> <!-- style="color: orange; background-color: rgba(0, 0, 0, 0.25);" -->
-    <h1>Contact</h1>
-    <div style="width: 100%; text-align: center;">
-        <img src="./images/passe-coque-press.jpeg">
-    </div>
-    <div style="border: 3px solid blue; border-radius: 10px; padding: 20px; background: rgba(255, 255, 255, 0.6);">
-        <table style="margin: auto;">
-            <tr>
-                <td>Your first and last name:</td>
-                <td><input type="text" id="first-name" placeholder="First Name"></td>
-                <td><input type="text" id="last-name" placeholder="Last Name"></td>
-            </tr>
-            <tr>
-                <td colspan="3">
-                    <button onclick="sendEmail(document.getElementById('first-name').value, document.getElementById('last-name').value);">Send a message</button>
-                </td>
-            </tr>
-        </table>
-    </div>
-    <hr/>
-    <div>
-        <b style="font-weight: bold;">Association Passe-Coque</b>
-        <br/>
-        Clos de la vieille ferme
-        <br/>
-        3 rue des presses
-        <br/>
-        56470 Saint Philibert
-    </div>
-    <hr/>
-</body>
-</html>
+<div style="width: 100%; text-align: center;">
+    <img src="./images/la.cardinal.jpg" width="100%">
+</div>
+
+<div style="text-align: left; padding: 20px; background: white;">
+    You're leading a project, and you need a boat, or you just wish to contact us. <br/>
+    Contact us at +33 02 XX XX XX or by email, using the following form:
+</div>
+
+<div style="margin: 10px; border: 3px solid blue; border-radius: 10px; padding: 20px; background: rgba(255, 255, 255, 0.6);">
+    <table style="margin: auto;">
+        <tr>
+            <td>Your first and last name:</td>
+            <td><input type="text" id="first-name" placeholder="First Name"></td>
+            <td><input type="text" id="last-name" placeholder="Last Name"></td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <button onclick="sendEmail(document.getElementById('first-name').value, document.getElementById('last-name').value);">Send a message</button>
+            </td>
+        </tr>
+    </table>
+</div>
+<hr/>
+<div style="margin: 50px;">
+    <b style="font-weight: bold;">Association Passe-Coque</b>
+    <br/>
+    Clos de la vieille ferme
+    <br/>
+    3 rue des presses
+    <br/>
+    56470 Saint Philibert
+</div>
