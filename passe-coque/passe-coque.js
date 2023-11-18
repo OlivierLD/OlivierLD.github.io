@@ -142,6 +142,10 @@ let clack = (origin) => {
                                 window.setTimeout(() => {
                                     fillOutFleet(null); // Populate default (full) boat list
                                 }, 500);
+                            } else if (originId === "62") {
+                                window.setTimeout(() => {
+                                    fillOutActu(null); // Populate default (full) news list
+                                }, 500);
                             }
 						}
 					});
@@ -688,7 +692,46 @@ const INFO_SECTION = [
             }
         ]
     },
-
+    {   
+        section: "2022",
+        content: [
+            {
+                date: "2022",
+                title: "2022",
+                content: "./actu/2022/year.html"
+            }
+        ]
+    },
+    {   
+        section: "2021",
+        content: [
+            {
+                date: "2021",
+                title: "2021",
+                content: "./actu/2021/year.html"
+            }
+        ]
+    },
+    {   
+        section: "2020",
+        content: [
+            {
+                date: "2020",
+                title: "2020",
+                content: "./actu/2020/year.html"
+            }
+        ]
+    },
+    {   
+        section: "2019",
+        content: [
+            {
+                date: "2019",
+                title: "2019",
+                content: "./actu/2019/year.html"
+            }
+        ]
+    },
     {
         section: "news",
         content: [
@@ -801,7 +844,22 @@ let updateInfoFilter = radio => {
             console.log("2023");
             fillOutActu('2023');
             break;
-        // TODO More here
+        case 'a2022':
+            console.log("2022");
+            fillOutActu('2022');
+            break;
+        case 'a2021':
+            console.log("2021");
+            fillOutActu('2021');
+            break;
+        case 'a2020':
+            console.log("2020");
+            fillOutActu('2020');
+            break;
+        case 'a2019':
+            console.log("2019");
+            fillOutActu('2019');
+            break;
         case 'aComm':
             console.log("Communications");
             fillOutActu('communications'); // See INFO_SECTION
