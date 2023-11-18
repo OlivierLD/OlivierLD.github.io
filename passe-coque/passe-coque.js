@@ -82,7 +82,7 @@ let clack = (origin) => {
 
 	let contentName = `${originId}_${currentLang}.html`;
     // Specific content rule(s)
-	if (originId === "62") { 
+	if (false && originId === "62") {  // Not used...
 		contentName = "carrousel.html";
 	} else if (originId === "22" || originId === "23") { // Menu 2, special management, see below (ONE page only)
         contentName = `21_${currentLang}.html`; // 21, 22 & 23, same doc, different anchor (hashtag).
