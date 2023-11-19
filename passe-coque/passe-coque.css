@@ -9,11 +9,17 @@
     --slide-height: 400px;   */
 }
   
+@font-face {
+    font-family: "Montserrat";
+    src: url(fonts/montserrat/Montserrat-Regular.ttf) format("truetype");
+}
+
 * {
-    font-family: Arial, "Chalkboard", "Open Sans", "DejaVu Sans", sans-serif;
+    font-family: "Montserrat", Arial, "Chalkboard", "Open Sans", "DejaVu Sans", sans-serif;
     font-weight: 400;
     font-size: 20px;
     font-style: normal;
+    color: darkblue;
 }	
 
 body {
