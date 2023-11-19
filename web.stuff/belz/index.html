@@ -328,6 +328,7 @@
             <li><a class="list-link" href="#port-tinduff">Week-end &agrave; Port Tinduff</a></li>
             <li><a class="list-link" href="#groix-08-oct">Deux jours &agrave; Groix</a></li>
             <li><a class="list-link" href="#windy-2023-11">Windy!</a></li>
+            <li><a class="list-link" href="#the-floor">Refaire le parquet</a></li>
         </ul>
 
         <h2><a name="new-planters">Printemps. Nouveaux bacs &agrave; plantes dans le jardin</a></h2>
@@ -446,6 +447,21 @@
             <li>Temp&ecirc;te Domingos, 4-Nov-2023</li>
         </ul>    
         <img src="./images/baro.jpeg" width="98%">
+
+        <h2><a name="the-floor">Refaire le parquet</a></h2>
+        <small style="font-style: italic;">Click the images to enlarge</small>
+        <br/>
+        <!-- L'"accastillage" sera realis&eacute; avec une imprimante 3D. Voir <a href="../boat.stuff/misc/3d.printed.blocks.html" target="3D">ici</a> pour plus de d&eacute;tails. -->
+        <div style="height: 600px; margin: 2px;">
+            <slide-show id="slide-show-floor"
+                        width="800"
+                        height="600">
+                <slide-show-image src="./images/floor.01.jpg" title="Avant" desc="Avant, lattes disjointes,&#13;et craduingues..."></slide-show-image>
+                <slide-show-image src="./images/floor.02.jpg" title="Apr&egrave;s" desc="Joint, et vernis"></slide-show-image>
+                <slide-show-image src="./images/floor.03.jpg" title="Sous la table" desc="Sous la table"></slide-show-image>
+            </slide-show>
+        </div>    
+
     </div>
 
     <hr/>
@@ -463,6 +479,7 @@
 		document.getElementById("slide-show-deck").slideclick = onSlideShowClick;
 		document.getElementById("slide-show-swing").slideclick = onSlideShowClick;
 		document.getElementById("slide-show-port-tinduff").slideclick = onSlideShowClick;
+		document.getElementById("slide-show-floor").slideclick = onSlideShowClick;
 
         let mbAttr = 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community';
         let mbUrl = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
