@@ -799,18 +799,19 @@ let fillOutFleet = filter => {
     newList.forEach(boat => {
         let div = document.createElement('div');
         div.id = boat.id;
-        div.classList.add("image-plus-text");
+        div.classList.add("boat-image-plus-text");
         // div.class = "image-plus-text";
-        div.style = "padding: 10px; z-index: 1; max-height: 460px; max-width: 376px;";
+        div.style = "padding: 10px; z-index: 1; max-height: 390px; max-width: 300px;";
         // div.title = boat.name;
         div.onclick = function() { clickOnBoatPix(this); }; 
         div.onmouseover = function() { mouseOnTxPix(this); };
         let img = document.createElement('img');
         img.src = boat.pix;
         // img.width = "100%";
-        // img.style.width = "100%";
+        img.style.width = "100%";
         div.appendChild(img);
-        let span = document.createElement('span');
+        // Name and type
+        let span = document.createElement('span'); 
         span.style = "position: relative; display: block; color: white; bottom: 4px;";
         span.innerHTML = `${boat.name}<br/>${boat.type}, ${boat.base}`;
         div.appendChild(span);

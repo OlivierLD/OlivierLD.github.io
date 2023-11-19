@@ -131,9 +131,10 @@ div.tooltip:hover span {
 .image-plus-text {
     position: relative;
     text-align: center;
-    margin: 10px;
+    margin: 10px;  /* Between Frames */
     border: 2px solid silver;
     border-radius: 5px;
+    background-color: rgba(161, 156, 156, 0.65);
 }
 
 .image-plus-text:hover {
@@ -141,12 +142,42 @@ div.tooltip:hover span {
     box-shadow: 4px 4px 8px black, 0 0 25px white, 0 0 10px silver;
 }
 
-.image-plus-text span {
-    position: absolute;
+.image-plus-text div {
+    position: relative;
     bottom: 0%;
     left: 0%;
     right: 0%;
-    width: inherit;
+    /* width: inherit; */
+    text-align: left;
+    background-color: transparent; /* rgba(161, 156, 156, 0.65); */
+    color: navy;
+    padding: 20px;
+}
+
+.board-image {
+    width: 100%;
+}
+
+.boat-image-plus-text {
+    position: relative;
+    text-align: center;
+    margin: 10px;  /* Between Frames */
+    border: 2px solid silver;
+    border-radius: 5px;
+    /* background-color: rgba(161, 156, 156, 0.65); */
+}
+
+.boat-image-plus-text:hover {
+    /* box-shadow: 4px 4px 8px black, 0 0 25px white, 0 0 10px cyan; */
+    box-shadow: 4px 4px 8px black, 0 0 25px white, 0 0 10px silver;
+}
+
+.boat-image-plus-text span {
+    position: relative;
+    bottom: 0%;
+    left: 0%;
+    right: 0%;
+    /* width: inherit; */
     text-align: left;
     background-color: rgba(161, 156, 156, 0.65);
     color: navy;
@@ -159,8 +190,8 @@ div.tooltip:hover span {
     height: 60px;
     border: 2px solid black;
     border-radius: 50%;
-    bottom: 420px;
-    left: 260px;
+    bottom: 380px;
+    left: 214px;
     padding-top: 10px;
 }
 
