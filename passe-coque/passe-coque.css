@@ -20,7 +20,8 @@
     /* font-weight: 400; */
     font-size: 20px;
     font-style: normal;
-    color: darkblue;
+    color: rgb(0, 64, 92); /* darkblue; */
+    line-height: 1.5em;
 }	
 
 body {
@@ -441,7 +442,7 @@ html {
 }
   
 a:link {
-    color: #0000a0
+    /* color: #0000a0 */
 }
   
 a:active {
