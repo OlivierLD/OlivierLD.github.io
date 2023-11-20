@@ -38,7 +38,7 @@ h1 {
 }
 
 h2 {
-    color: blue;
+    /* color: blue; */
     /* text-shadow: 2px 2px 4px black, 0 0 25px white, 0 0 7px cyan; */
 }
 
@@ -234,7 +234,7 @@ div.tooltip:hover span {
     position: relative;
     width: 100%;  /* if 100%, too big for a tablet ?... */
     padding: 50px;
-    font-weight: bold;
+    /* font-weight: bold; */
     text-align: center;
 }
 
@@ -259,7 +259,7 @@ div.tooltip:hover span {
     position: relative;
     width: 100%;  /* if 100%, too big for a tablet... */
     /* padding: 50px; */
-    font-weight: bold;
+    /* font-weight: bold; */
     text-align: center;
     z-index: 0; /* Tweak this. -1 may prevent onclick and onmouseover behaviors... */
 }
@@ -285,7 +285,7 @@ div.tooltip:hover span {
     position: relative;
     width: 100%;  /* if 100%, too big for a tablet... */
     /* padding: 50px; */
-    font-weight: bold;
+    /* font-weight: bold; */
     text-align: center;
     z-index: 0; /* Tweak this. -1 may prevent onclick and onmouseover behaviors... */
 }
@@ -311,7 +311,7 @@ div.tooltip:hover span {
     position: relative;
     width: 100%;  /* if 100%, too big for a tablet... */
     /* padding: 50px; */
-    font-weight: bold;
+    /* font-weight: bold; */
     text-align: center;
     z-index: 0; /* Tweak this. -1 may prevent onclick and onmouseover behaviors... */
 }

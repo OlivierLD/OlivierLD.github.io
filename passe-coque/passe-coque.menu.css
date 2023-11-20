@@ -43,7 +43,7 @@ ul#navigation li {
 	display: inline;
 	/* font-size: 12px; */
 	font-weight: bold;
-	color: blue;
+	color: darkblue;
 	margin: 0;
 	padding: 0;
 	float: left;
@@ -54,7 +54,7 @@ ul#navigation li {
 
 ul#navigation li a {
 	padding: 25px 10px;
-	color: blue;
+	color: darkblue;
 	/* text-shadow: 1px 1px 0px #fff; */
 	text-decoration: none;
 	width: 100%;
