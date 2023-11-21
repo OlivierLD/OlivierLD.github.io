@@ -21,7 +21,7 @@
     font-size: 20px;
     font-style: normal;
     color: rgb(0, 64, 92); /* darkblue; */
-    line-height: 1.5em;
+    line-height: 2em; /* 1.5em; */
 }	
 
 body {
@@ -41,6 +41,7 @@ h1 {
 h2 {
     /* color: blue; */
     /* text-shadow: 2px 2px 4px black, 0 0 25px white, 0 0 7px cyan; */
+    font-size: 1.2em;
 }
 
 dialog {
@@ -121,6 +122,10 @@ div.tooltip:hover span {
 .container {
     position: relative;
 }
+
+.top-container {
+    margin-top: -36px;
+}
   
   /* Bottom right text */
 .text-block {
@@ -136,17 +141,28 @@ div.tooltip:hover span {
     /* padding-right: 20px; */
 }
 
+.white-outlined {
+    text-shadow: 1px 0 0 silver, 0 -1px 0 silver, 0 1px 0 silver, -1px 0 0 silver; /* Character outline */
+}
+
 .image-plus-text {
     position: relative;
     text-align: center;
     margin: 10px;  /* Between Frames */
+    background-color: white; /* rgba(161, 156, 156, 0.65); */
+}
+
+.image-plus-text img {
     border: 2px solid silver;
     border-radius: 5px;
-    background-color: rgba(161, 156, 156, 0.65);
 }
 
 .image-plus-text:hover {
-    /* box-shadow: 4px 4px 8px black, 0 0 25px white, 0 0 10px cyan; */
+    /* box-shadow: 4px 4px 8px black, 0 0 25px white, 0 0 10px silver; */
+    cursor: pointer;
+}
+
+.image-plus-text img:hover {
     box-shadow: 4px 4px 8px black, 0 0 25px white, 0 0 10px silver;
 }
 
@@ -156,9 +172,9 @@ div.tooltip:hover span {
     left: 0%;
     right: 0%;
     /* width: inherit; */
-    text-align: left;
+    text-align: center;
     background-color: transparent; /* rgba(161, 156, 156, 0.65); */
-    color: navy;
+    /* color: navy; */
     padding: 20px;
 }
 
@@ -201,6 +217,7 @@ div.tooltip:hover span {
     bottom: 380px;
     left: 214px;
     padding-top: 10px;
+    line-height: 1.0em;
 }
 
 .badge-pc {
@@ -211,6 +228,28 @@ div.tooltip:hover span {
 }
 .badge-grab {
     background: rgba(0, 255, 4, 0.25);
+}
+
+.data-header-div {
+    margin: 0 100px 0 100px;
+    text-align: center;
+}
+
+.data-div {
+    margin: 40px 100px 40px 100px;
+}
+
+.txt-img-div {
+    display: grid; grid-template-columns: 50% 50%;
+    margin: 20px 0 40px 0;
+}
+
+.txt-div {
+    padding: 0 80px 0 20px;
+}
+
+.img-div {
+    text-align: center;
 }
 
 .background-container:after {
