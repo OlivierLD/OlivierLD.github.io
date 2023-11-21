@@ -259,6 +259,8 @@ window.onload = () => {
 	console.log("Loaded!");
 	console.log(`${window.location.href} loaded !`);
 
+	window.translate = translate;
+
 	qrcode = new QRCode(document.getElementById("qrcode"), {
 		width:  250,
 		height: 250

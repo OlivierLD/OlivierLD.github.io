@@ -681,7 +681,7 @@ const INFO_SECTION = [
         section: "2023",
         content: [
             {
-                date: "Chepakan",
+                date: "Aug-2023",
                 title: "Carter Cup",
                 content: "./actu/2023/carter.cup.html"
             },
@@ -932,3 +932,27 @@ let fillOutActu = filter => {
     });
 
 };
+
+// Dynamic translation, for the actu section
+let translate = (actuId) => {
+    console.log(`${actuId} : ${(currentLang === 'FR') ? "En français" : "I'll speak english"}`);
+
+    switch (actuId) {
+        case 'cc-2023': // Carter Cup 2023
+            if (currentLang === 'EN') {  // Then translate
+                let dateField = document.getElementById('cc-2023').querySelector('h2');
+                if (dateField) {
+                    dateField.innerText = "Carter Cup, August 2023";
+                }
+                let contentField01 = document.getElementById('cc-2023').querySelector('#content-01');
+                if (contentField01) {
+                    contentField01.innerHTML = 'Jimmy was a winner!';
+                }
+                // etc...
+            }
+            break;
+        default:
+            break;
+    }
+};
+
