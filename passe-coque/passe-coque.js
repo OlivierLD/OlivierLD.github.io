@@ -673,6 +673,38 @@ const THE_FLEET = [
         type: "W. Fife",
         category: OLD_BOAT,
         base: "Lorient"
+    },
+    {
+        name: "Blue Arpege",
+        id: "dummy-boat",
+        pix: "./images/boats/dummy.boat.jpg",
+        type: "Arp&egrave;ge",
+        category: OLD_BOAT,
+        base: "Saint Philibert"
+    },
+    {
+        name: "Melkart",
+        id: "dummy-boat",
+        pix: "./images/boats/dummy.boat.jpg",
+        type: "Evasion 32",
+        category: OLD_BOAT,
+        base: "&Eacute;tel"
+    },
+    {
+        name: "Dzim Boom",
+        id: "dummy-boat",
+        pix: "./images/boats/dummy.boat.jpg",
+        type: "Nicholson 33",
+        category: CLUB,
+        base: "La Trinit&eacute;"
+    },
+    {
+        name: "Evgeni Prigogin",
+        id: "dummy-boat",
+        pix: "./images/boats/dummy.boat.jpg",
+        type: "Boom 415",
+        category: TO_GRAB,
+        base: "Moscow"
     }
 ];
 
@@ -801,7 +833,7 @@ let fillOutFleet = filter => {
         div.id = boat.id;
         div.classList.add("boat-image-plus-text");
         // div.class = "image-plus-text";
-        div.style = "padding: 10px; z-index: 1; max-height: 390px; max-width: 300px;";
+        div.style = "padding: 10px; z-index: 1; max-height: 420px; max-width: 300px;"; // TODO Make this class
         // div.title = boat.name;
         div.onclick = function() { clickOnBoatPix(this); }; 
         div.onmouseover = function() { mouseOnTxPix(this); };
@@ -812,7 +844,7 @@ let fillOutFleet = filter => {
         div.appendChild(img);
         // Name and type
         let span = document.createElement('span'); 
-        span.style = "position: relative; display: block; color: white; bottom: 4px;";
+        span.style = "position: relative; display: block; bottom: 4px;";
         span.innerHTML = `${boat.name}<br/>${boat.type}, ${boat.base}`;
         div.appendChild(span);
         // Badge
