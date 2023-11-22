@@ -257,7 +257,7 @@ div.tooltip:hover span {
     /* background: url("./photos.michel.02/02.jpg") no-repeat center center; */
     background: url("./photos.michel.02/02.jpg");
 
-    background-size: cover;
+    background-size: auto; /* cover; */
     background-repeat: no-repeat;
     background-attachment: fixed; /* <= This one */
 
@@ -276,6 +276,7 @@ div.tooltip:hover span {
     padding: 50px;
     /* font-weight: bold; */
     text-align: center;
+    z-index: 0;
 }
 
 .background-container-2:after {

@@ -705,6 +705,14 @@ const THE_FLEET = [
         type: "Boom 415",
         category: TO_GRAB,
         base: "Moscow"
+    },
+    {
+        name: "A la tienne",
+        id: "dummy-boat",
+        pix: "./images/boats/dummy.boat.jpg",
+        type: "Cognac",
+        category: OLD_BOAT,
+        base: "Saint Philibert"
     }
 ];
 
@@ -965,7 +973,8 @@ let fillOutActu = filter => {
 
 };
 
-// Dynamic translation, for the actu section
+// Dynamic translation, for the actu section.
+// We assume all data are already in French.
 let translate = (actuId) => {
     console.log(`${actuId} : ${(currentLang === 'FR') ? "En français" : "I'll speak english"}`);
 
