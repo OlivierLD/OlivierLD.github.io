@@ -145,6 +145,13 @@ div.tooltip:hover span {
     text-shadow: 1px 0 0 silver, 0 -1px 0 silver, 0 1px 0 silver, -1px 0 0 silver; /* Character outline */
 }
 
+.boat-frame {
+    padding: 10px; 
+    z-index: 1; 
+    max-height: 420px; 
+    max-width: 300px;
+}
+
 .image-plus-text {
     position: relative;
     text-align: center;
@@ -194,6 +201,7 @@ div.tooltip:hover span {
     border: 2px solid silver;
     border-radius: 5px;
     /* background-color: rgba(161, 156, 156, 0.65); */
+    background: white;
 }
 
 .boat-image-plus-text:hover {
