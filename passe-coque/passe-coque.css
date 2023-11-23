@@ -244,6 +244,7 @@ div.tooltip:hover span {
     margin: 20px 0 40px 0;
 }
 .txt-div {
+    margin-top: -20px;
     padding: 0 80px 0 20px;
 }
 .img-div {
