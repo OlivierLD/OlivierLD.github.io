@@ -840,7 +840,6 @@ let fillOutFleet = filter => {
         let div = document.createElement('div');
         div.id = boat.id;
         div.classList.add("boat-image-plus-text");
-        // div.class = "image-plus-text";
         // div.style = "padding: 10px; z-index: 1; max-height: 420px; max-width: 300px;"; // See below. Make this class
         div.classList.add("boat-frame");
         // div.title = boat.name;
