@@ -379,9 +379,9 @@ div.tooltip:hover span {
 
 .bg-data {
     font-family: "Courier New", sans-serif;
-    font-size: 256px;
-    font-weight: bold;
-    color: lightskyblue;
+    /* font-size: 256px; */
+    /* font-weight: bold; */
+    /* color: lightskyblue; */
     text-align: center;
     /* margin-top: 125px; */
     /* margin-left: 20px; */

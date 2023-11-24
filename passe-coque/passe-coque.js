@@ -249,7 +249,11 @@ const BG_IMAGES =
   "./images/mouillage.01.jpg",
   "./images/mouillage.02.jpg",
   "./images/sunset.jpg",
-  "./images/evo.png" ];  
+  "./images/evo.png",
+  "./images/slideshow.01.png",
+  "./images/slideshow.02.png",
+  "./images/slideshow.03.png",
+  "./images/slideshow.04.png" ];  
 
 const BG_INTERVAL = 5000; // in ms
 
