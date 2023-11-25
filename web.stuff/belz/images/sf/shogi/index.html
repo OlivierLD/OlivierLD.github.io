@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Make a shogi</title>
+    <!--script type="module" src="../../js/slide-show.min.js"></script-->
+    <script type="module" src="../../../../../webcomponents/widgets/slideshow/SlideShow.js"></script>
+  </head>
+  <style>
+  body {
+    color : cyan;
+    font-weight: normal;
+    font-size: 10pt;
+    font-family: "Lato", Verdana, Helvetica, Geneva, sans-serif;
+    /* background-position: top left; */
+    /* background-repeat: repeat; */
+  	/* background-image: url("bground.jpg"); */
+    /* background-image: linear-gradient(white, silver); */
+  }
+
+  h1 {
+    color: silver;
+    font-style: italic;
+    font-size: 26pt;
+  /*font-family: Verdana, Arial, Helvetica, Geneva;*/
+    padding-left: 5pt;
+    padding-bottom: 1pt;
+    padding-top: 1pt;
+  }
+  h2 {
+    color: silver;
+    font-size: 12pt;
+  /*font-family: Verdana, Arial, Helvetica, Geneva;*/
+    padding-left: 5pt;
+    margin-bottom: 1pt;
+    margin-top: 1pt;
+  }
+  h3 {
+    color: silver;
+    font-style: italic;
+    font-weight: bold;
+    font-size: 11pt;
+  /*font-family: Verdana, Arial, Helvetica, Geneva;*/
+    padding-left: 5pt;
+    margin-bottom: 1pt;
+    margin-top: 1pt;
+  }
+  h4 {
+    color: silver;
+    font-style: italic;
+    font-weight: bold;
+    font-size: 10pt;
+  /*font-family: Verdana, Arial, Helvetica, Geneva;*/
+    padding-left: 5pt;
+    margin-bottom: 1pt;
+    margin-top: 1pt;
+  }
+  h5 {
+    color: silver;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 10pt;
+  /*font-family: Verdana, Arial, Helvetica, Geneva;*/
+    padding-left: 5pt;
+    margin-bottom: 1pt;
+    margin-top: 1pt;
+  }
+  h6 {
+    font-style: italic;
+    font-weight: normal;
+    font-size: 10pt;
+  /*font-family: Verdana, Arial, Helvetica, Geneva;*/
+    padding-left: 5pt;
+    margin-bottom: 1pt;
+    margin-top: 1pt;
+  }
+  li {
+    font-weight: normal;
+    font-size: 10pt;
+  /*font-family: Verdana, Arial, Helvetica, Geneva;*/
+  }
+  dt {
+    font-size: 10pt;
+    font-weight: bold;
+  /*font-family: Verdana, Arial, Helvetica, Geneva;*/
+  }
+  dd {
+    font-size: 10pt;
+    font-weight: normal;
+  /*font-family: Verdana, Arial, Helvetica, Geneva;*/
+  }
+  p {
+    font-size: 10pt;
+    font-weight: normal;
+  /*font-family: Verdana, Arial, Helvetica, Geneva;*/
+  }
+  td {
+    font-size: 10pt;
+  /*font-family: Verdana, Arial, Helvetica, Geneva;*/
+  }
+  small {
+    font-size: 8pt;
+  /*font-family: Verdana, Arial, Helvetica, Geneva;*/
+  }
+  blockquote {
+    font-style: italic;
+    font-size: 10pt;
+  /*font-family: Verdana, Arial, Helvetica, Geneva;*/
+  }
+  em {
+    font-size: 10pt;
+    font-style: italic;
+    font-weight: bold;
+  /*font-family: Verdana, Arial, Helvetica, Geneva;*/
+  }
+  pre {
+    margin-top: 0px;
+    font-size: 9pt;
+    font-family: "Source Code Pro", "Courier New", Helvetica, Geneva;
+  /*background-color: #d3d3d3;*/
+  }
+  address {
+    font-size: 8pt;
+  /*font-family: Verdana, Arial, Helvetica, Geneva;*/
+  }
+  img {
+    vertical-align: middle;
+  }
+  .red {
+    color:red;
+  }
+
+  a:link { color : #0000A0}
+  a:active { color: #8080FF}
+  a:visited { color : #8080FF}
+
+  .landscape {
+    width: 800px;
+    height: 450px;
+    margin: 10px;
+  }
+
+  .portrait {
+    width: 450px;
+    height: 800px;
+    margin: 10px;
+  }
+  </style>
+  <body>
+    <!--h2>Faire un Shogi</h2-->
+    <p>
+      Le plan est <a href="shogi.pdf">ici</a>.
+    </p>
+    <!--p>
+      La premi&egrave;re op&eacute;ration est la construction du moule. La courbe sera celle du si&egrave;ge du shogi, marqu&eacute;e "COURBURE DU SIEGE" sur le plan.
+      <br/>
+      <a href="16.moule.jpg" target="pix"><img src="16.moule.jpg" class="landscape" title="Le moule"></a>
+    </p>
+    <p>
+      Je d&eacute;coupe ensuite 3 morceaux de contre-plaqu&eacute; pour le si&egrave;ge (de 6 mm d'&eacute;paisseur, 4 mm serait sans doute au moins aussi bien, mais je n'en trouve pas ici).
+      <br/>
+      <a href="01.siege.jpg" target="pix"><img src="01.siege.jpg" class="landscape" title="3 plis"></a>
+      <br/>
+      <a href="02.siege.jpg" target="pix"><img src="02.siege.jpg" class="landscape" title="Essai de courbure"></a>
+      <br/>
+      <a href="03.siege.jpg" target="pix"><img src="03.siege.jpg" class="landscape" title="Pr&eacute;sentation sur le moule"></a>
+    </p>
+    <p>
+      Je colle ensuite les 3 plis ensemble, j'utilise de la <a href="http://www.titebond.com/product/glues/e8d40b45-0ab3-49f7-8a9c-b53970f736af">Titebound III</a>, l'&eacute;quivalent doit
+      exister partout.
+      <br/>
+      <a href="04.collage.siege.jpg" target="pix"><img src="04.collage.siege.jpg" class="portrait" title="Collage"></a>
+      <br/>
+      <a href="05.collage.siege.jpg" target="pix"><img src="05.collage.siege.jpg" class="landscape" title="Collage"></a>
+      <br/>
+      <a href="06.collage.siege.jpg" target="pix"><img src="06.collage.siege.jpg" class="landscape" title="Collage"></a>
+      <br/>
+      <a href="07.collage.siege.jpg" target="pix"><img src="07.collage.siege.jpg" class="landscape" title="Collage"></a>
+      <br/>
+      <a href="08.collage.siege.jpg" target="pix"><img src="08.collage.siege.jpg" class="landscape" title="Collage"></a>
+      <br/>
+      <a href="09.collage.siege.jpg" target="pix"><img src="09.collage.siege.jpg" class="landscape" title="Collage"></a>
+      <br/>
+      <a href="10.collage.siege.jpg" target="pix"><img src="10.collage.siege.jpg" class="landscape" title="Collage"></a>
+      <br/>
+      <a href="11.sechage.siege" target="pix"><img src="11.sechage.siege.jpg" class="landscape" title="S&eacute;chage"></a>
+      <br/>
+      Je laisse s&eacute;cher 24 heures.
+    </p>
+    <p>
+      On passe ensuite au d&eacute;moulage et au d&eacute;coupage
+      <br/>
+      <a href="12.demoulage.jpg" target="pix"><img src="12.demoulage.jpg" class="landscape" title="D&eacute;moulage"></a>
+      <br/>
+      <a href="13.demoulage.jpg" target="pix"><img src="13.demoulage.jpg" class="landscape" title="D&eacute;moulage"></a>
+      <br/>
+      Le gabarit est marqu&eacute; "SIEGE" sur le plan.
+      <br/>
+      <a href="14.decoupage.jpg" target="pix"><img src="14.decoupage.jpg" class="landscape" title="D&eacute;coupage"></a>
+      <br/>
+      <a href="15.decoupage.jpg" target="pix"><img src="15.decoupage.jpg" class="landscape" title="D&eacute;coupage"></a>
+    </p>
+    <p>
+      On entame la construction du pied, ses &eacute;l&eacute;ments sont marqu&eacute;s "PIED" et "ENTRETOISE" sur le plan. On a ici une entretoise
+      de chaque côt&eacute; du pied, on peut aussi n'en avoir qu'une au milieu.
+      <br/>
+      <a href="17.pieds.et.entretoises.jpg" target="pix"><img src="17.pieds.et.entretoises.jpg" class="landscape" title="Les &eacute;l&eacute;ments du pied"></a>
+      <br/>
+      <a href="18.collage.pied.jpg" target="pix"><img src="18.collage.pied.jpg" class="landscape" title="Collage du pied"></a>
+      <br/>
+      <a href="19.collage.pied.jpg" target="pix"><img src="19.collage.pied.jpg" class="landscape" title="Collage du pied"></a>
+    </p>
+    <p>
+      Le dessus du pied est ajust&eacute; au rabot pour &eacute;pouser la courbure du si&egrave;ge, où il est ensuite coll&eacute;.
+      <br/>
+      <a href="22.deux.entretoises.jpg" target="pix"><img src="22.deux.entretoises.jpg" class="landscape" title="Avec le pied"></a>
+    </p>
+    <p>
+      On peut m&ecirc;me faire des dessins
+      <br/>
+      <a href="20.sec.jpg" target="pix"><img src="20.sec.jpg" class="landscape" title="Avec un dessin"></a>
+    </p>
+    <p>
+      On peut improviser toutes sortes de variantes
+      <br/>
+      <a href="23.une.entretoise.jpg" target="pix"><img src="23.une.entretoise.jpg" class="landscape" title="Chantourn&eacute;"></a>
+      <br/>
+      <a href="21.variante.jpg" target="pix"><img src="21.variante.jpg" class="landscape" title="Chantourn&eacute;"></a>
+    </p>
+    <hr/-->
+
+    <p style="text-align: center;">
+      La premi&egrave;re op&eacute;ration est la construction du moule. La courbe sera celle du si&egrave;ge du shogi, marqu&eacute;e "COURBURE DU SIEGE" sur le plan.
+      <br/>
+      <a href="16.moule.jpg" target="pix"><img src="16.moule.jpg" class="landscape" width="600"
+                                               height="337" title="Le moule"></a>
+    </p>
+    <p>
+      Je d&eacute;coupe ensuite 3 morceaux de contre-plaqu&eacute; pour le si&egrave;ge (de 6 mm d'&eacute;paisseur, 4 mm serait sans doute au moins aussi bien, mais je n'en trouve pas ici).
+      <br/>
+      <slide-show id="slide-show-01"
+                  width="600"
+                  height="337">
+        <slide-show-image src="./01.siege.jpg" title="3 plis"></slide-show-image>
+        <slide-show-image src="./02.siege.jpg" title="Essai de courbure"></slide-show-image>
+        <slide-show-image src="./03.siege.jpg" title="Pr&eacute;sentation sur le moule"></slide-show-image>
+      </slide-show>
+    </p>
+    <p>
+      Je colle ensuite les 3 plis ensemble, j'utilise de la <a href="http://www.titebond.com/product/glues/e8d40b45-0ab3-49f7-8a9c-b53970f736af">Titebound III</a>, l'&eacute;quivalent doit
+      exister partout.
+      <br/>
+      <slide-show id="slide-show-02"
+                  width="600"
+                  height="337">
+        <slide-show-image src="04.collage.siege.02.jpg" title="Collage"></slide-show-image>
+        <slide-show-image src="05.collage.siege.jpg" title="Collage"></slide-show-image>
+        <slide-show-image src="06.collage.siege.jpg" title="Collage"></slide-show-image>
+        <slide-show-image src="07.collage.siege.jpg" title="Collage"></slide-show-image>
+        <slide-show-image src="08.collage.siege.jpg" title="Collage"></slide-show-image>
+        <slide-show-image src="09.collage.siege.jpg" title="Collage"></slide-show-image>
+        <slide-show-image src="10.collage.siege.jpg" title="Collage"></slide-show-image>
+        <slide-show-image src="11.sechage.siege.jpg" title="S&eacute;chage"></slide-show-image>
+      </slide-show>
+      <br/>
+      Je laisse s&eacute;cher 24 heures.
+    </p>
+    <p>
+      On passe ensuite au d&eacute;moulage et au d&eacute;coupage
+      <br/>
+      <slide-show id="slide-show-03"
+                  width="600"
+                  height="337">
+        <slide-show-image src="12.demoulage.jpg" title="D&eacute;moulage"></slide-show-image>
+        <slide-show-image src="13.demoulage.jpg" title="D&eacute;moulage"></slide-show-image>
+      </slide-show>
+      <br/>
+      Le gabarit est marqu&eacute; "SIEGE" sur le plan.
+      <br/>
+      <slide-show id="slide-show-04"
+                  width="600"
+                  height="337">
+        <slide-show-image src="14.decoupage.jpg" title="D&eacute;coupage"></slide-show-image>
+        <slide-show-image src="15.decoupage.jpg" title="D&eacute;coupage"></slide-show-image>
+      </slide-show>
+    </p>
+    <p>
+      On entame la construction du pied, ses &eacute;l&eacute;ments sont marqu&eacute;s "PIED" et "ENTRETOISE" sur le plan. On a ici une entretoise
+      de chaque côt&eacute; du pied, on peut aussi n'en avoir qu'une au milieu.
+      <br/>
+      <slide-show id="slide-show-05"
+                  width="600"
+                  height="337">
+        <slide-show-image src="17.pieds.et.entretoises.jpg" title="Les &eacute;l&eacute;ments du pied"></slide-show-image>
+        <slide-show-image src="18.collage.pied.jpg" title="Collage du pied"></slide-show-image>
+        <slide-show-image src="19.collage.pied.jpg" title="Collage du pied"></slide-show-image>
+      </slide-show>
+    </p>
+    <p style="text-align: center;">
+      Le dessus du pied est ajust&eacute; au rabot pour &eacute;pouser la courbure du si&egrave;ge, o&ugrave; il est ensuite coll&eacute;.
+      <br/>
+      <a href="22.deux.entretoises.jpg" target="pix"><img src="22.deux.entretoises.jpg" width="600"
+                                                          height="337" title="Avec le pied"></a>
+    </p>
+    <p style="text-align: center;">
+      On peut m&ecirc;me faire des dessins
+      <br/>
+      <a href="20.sec.jpg" target="pix"><img src="20.sec.jpg" width="600"
+                                             height="337" title="Avec un dessin"></a>
+    </p>
+    <p>
+      On peut improviser toutes sortes de variantes
+      <br/>
+      <slide-show id="slide-show-06"
+                  width="600"
+                  height="337">
+        <slide-show-image src="23.une.entretoise.jpg" title="Chantourn&eacute;"></slide-show-image>
+        <slide-show-image src="21.variante.jpg" title="Chantourn&eacute;"></slide-show-image>
+      </slide-show>
+    </p>
+
+    <i>Oliv did it</i>
+  </body>
+</html>
