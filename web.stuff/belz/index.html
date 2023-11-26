@@ -140,6 +140,10 @@
             z-index: -1;
             opacity: 0.5; /* Here is your opacity */
         }
+
+        .sf-style {
+            text-shadow: 2px 2px 4px black, 0 0 25px white, 0 0 10px orange;
+        }
 	</style>
 
     <script type="text/javascript">
@@ -149,7 +153,8 @@
         window.open(src, '_blank'); // This is an example
     };
 
-    const TABS = ['kayak', 'todo', 'sf-home', '2022', '2023']; // Add tabs here as needed, by id.
+    // Add tabs here  at will,as needed, by div id.
+    const TABS = ['kayak', 'todo', 'sf-home', '2022', '2023']; 
 
     let openTab = (evt, tabNum) => {
         let tabLinks = document.getElementsByClassName("tablinks");
@@ -269,10 +274,12 @@
         <span style="font-style: italic;">And more to come</span>
     </div>
 
-    <div id="sf-home" style="display: none; overflow-y: scroll;"> <!-- class="bg-sf" -->
-        <h1>San Francisco, CA</h1>
-        <img src="./images/sf/ocean.beach.2.jpg" width="100%">
-        <br/>
+    <!-- From the past... -->
+    <div id="sf-home" style="display: none; max-height: 1024px; overflow-y: scroll; color: cyan;"> <!-- class="bg-sf" -->
+        <div style="">
+            <img src="./images/sf/ocean.beach.2.jpg" width="98%" style="opacity: 0.4; position: fixed; z-index: -1;">
+        </div>
+        <h1 class="sf-style">San Francisco, CA</h1>
         <ul>
             <li><a class="list-link" href="#sf-moved-in">Just moved in</a></li>
             <li><a class="list-link" href="#sf-yard">The yard</a></li>
@@ -594,13 +601,22 @@
 
         <h3>Hand blades</h3>
         . . .
+        
         <h3>Shogi</h3>
         <div style="text-align: center;">
-            <iframe src="./images/sf/shogi/index.html" style="width: 90%; min-height: 600px;"></iframe>
+            <iframe src="./images/sf/shogi/index.html" style="width: 90%; min-height: 600px; padding: 10px; border: 2px solid whitesmoke; border-radius: 15px;"></iframe>
         </div>
 
         <h3>Other wood stuff</h3>
-        . . .
+        <div>
+            <h4>Knives</h4>
+            <div style="text-align: center;">
+                <iframe src="./images/sf/wood/knives/slideshow.html" style="width: 90%; min-height: 600px; padding: 10px; border: 2px solid whitesmoke; border-radius: 15px;"></iframe>
+            </div>
+            <h4>Misc</h4>
+            
+
+        </div>>
 
     <div>
 
