@@ -184,7 +184,7 @@
     <div class="tab" style="margin-top: 10px; display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto;"> <!-- TODO Improve the grid-template... -->
         <button class="tablinks" onclick="openTab(event, 0);">Kayak</button>
         <button class="tablinks" onclick="openTab(event, 1);">ToDo</button>
-        <button class="tablinks" onclick="openTab(event, 2);">From the past</button>
+        <button class="tablinks" onclick="openTab(event, 2);">...From the past</button>
         <button class="tablinks" onclick="openTab(event, 3);">2022</button>
         <button class="tablinks active" onclick="openTab(event, 4);">2023</button>
     </div>
@@ -279,7 +279,7 @@
         <div>
             <img src="./images/sf/ocean.beach.2.jpg" width="98%" style="opacity: 0.4; position: fixed; z-index: -1;">
         </div>
-        <h1 class="sf-style">San Francisco, CA</h1>
+        <h1 class="sf-style"><a name="sf-top">San Francisco, CA</a></h1>
         <span style="margin: 10px;">This is a bunch of raw pictures, from time time we were living in San Francisco, CA.</span>
         <ul>
             <li><a class="list-link" href="#sf-moved-in">Just moved in</a></li>
@@ -291,9 +291,9 @@
             <li><a class="list-link" href="#sf-home-brewing">Home brewing</a></li>
         </ul>
         <!-- Now, the data -->
-        <h2><a name="sf-moved-in">Oct 2011, Just moved in, 2010 48th Avenue.</a></h2>
-        <small style="font-style: italic;">Click the images to enlarge</small>
-
+        <div><h2><a name="sf-moved-in" style="float: left;">Oct 2011, Just moved in, 2010 48th Avenue.</a></h2> <a href="#sf-top" style="float: right;">Top</a></div>
+        <br/>
+        <div style="font-style: italic;"><small>Click the images to enlarge</small></div>
         <div style="height: 600px; margin: 2px;">
             <slide-show id="slide-show-moved-in"
                         width="800"
@@ -317,7 +317,8 @@
             </slide-show>
         </div>    
 
-        <h2><a name="sf-yard">The yard</a></h2>
+        <div><h2><a name="sf-yard" style="float: left;">The yard</a></h2> <a href="#sf-top" style="float: right;">Top</a></div>
+        <br/>
         <div style="height: 600px; margin: 2px;">
             <slide-show id="slide-show-the-yard"
                         width="800"
@@ -387,7 +388,8 @@
             </slide-show>
         </div>    
 
-        <h2><a name="sf-deck">The deck</a></h2>
+        <div><h2><a name="sf-deck" style="float: left;">The deck</a></h2> <a href="#sf-top" style="float: right;">Top</a></div>
+        <br/>
         <div style="height: 600px; margin: 2px;">
             <slide-show id="slide-show-the-deck"
                         width="800"
@@ -444,11 +446,12 @@
             </slide-show>
         </div>    
 
-        <h2><a name="sf-wip">Work in Progress</a></h2>
+        <div><h2><a name="sf-wip" style="float: left;">Work in Progress</a></h2> <a href="#sf-top" style="float: right;">Top</a></div>
+        <br/>
         <div style="min-height: 600px; margin: 2px;">
             <h3>The kitchen</h3>
             <div>
-                <slide-show id="slide-show-kitchen"
+                <slide-show id="slide-show-sf-kitchen"
                             width="800"
                             height="600">
                     <slide-show-image src="./images/sf/kitchen/001.jpg" title="The ceiling" desc="The ceiling"></slide-show-image>
@@ -548,7 +551,8 @@
             </div>
         </div>    
 
-        <h2><a name="sf-the-roof">A lantern</a></h2>
+        <div><h2><a name="sf-the-roof" style="float: left;">A lantern</a></h2> <a href="#sf-top" style="float: right;">Top</a></div>
+        <br/>
         <div style="height: 600px; margin: 2px;">
             <slide-show id="slide-show-lantern"
                         width="800"
@@ -583,7 +587,8 @@
             </slide-show>
         </div>    
 
-        <h2><a name="sf-wood-work">Wood work, etc</a></h2>
+        <div><h2><a name="sf-wood-work" style="float: left;">Wood work, etc</a></h2> <a href="#sf-top" style="float: right;">Top</a></div>
+        <br/>
         <h3>Sand Dollars</h3>
         <div>
             <slide-show id="slide-show-sand-dollars"
@@ -654,11 +659,8 @@
 
         </div>
 
-    <div>
-
-    </div>
-
-        <h2><a name="sf-home-brewing">Home brewing</a></h2>
+        <div><h2><a name="sf-home-brewing" style="float: left;">Home brewing</a></h2> <a href="#sf-top" style="float: right;">Top</a></div>
+        <br/>
         <div>
             <slide-show id="slide-show-beer"
                         width="800"
@@ -911,6 +913,21 @@
 		document.getElementById("slide-show-swing").slideclick = onSlideShowClick;
 		document.getElementById("slide-show-port-tinduff").slideclick = onSlideShowClick;
 		document.getElementById("slide-show-floor").slideclick = onSlideShowClick;
+
+		document.getElementById("slide-show-moved-in").slideclick = onSlideShowClick;
+		document.getElementById("slide-show-the-yard").slideclick = onSlideShowClick;
+		document.getElementById("slide-show-the-deck").slideclick = onSlideShowClick;
+		document.getElementById("slide-show-sf-kitchen").slideclick = onSlideShowClick;
+		document.getElementById("slide-show-bathroom").slideclick = onSlideShowClick;
+		document.getElementById("slide-show-livingroom").slideclick = onSlideShowClick;
+		document.getElementById("slide-show-first-floor").slideclick = onSlideShowClick;
+		document.getElementById("slide-show-roof-deck").slideclick = onSlideShowClick;
+		document.getElementById("slide-show-lantern").slideclick = onSlideShowClick;
+		document.getElementById("slide-show-sand-dollars").slideclick = onSlideShowClick;
+		document.getElementById("slide-show-hand-blades").slideclick = onSlideShowClick;
+		document.getElementById("slide-show-wood-work").slideclick = onSlideShowClick;
+        document.getElementById("slide-show-beer").slideclick = onSlideShowClick;
+
 
         let mbAttr = 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community';
         let mbUrl = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
