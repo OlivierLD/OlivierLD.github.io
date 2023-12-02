@@ -173,6 +173,9 @@
     <h1 class="tooltip">Belz Home, 56550. 
         <span class="tooltiptext" style="font-size: 14px;">N 47&deg; 40.66' / W 3&deg; 08.14'</span>
     </h1>
+    <div id="loading-message" style="width: 100%; text-align: center; display: block;">
+        <h1 style="color: orange;">Loading, please wait...</h1>
+    </div>
     <br/>
     <small>
         <a class="list-link" href="http://www.horaire-maree.fr/maree/Belz/" target="BelzTides">Mar&eacute;es &agrave; Belz</a>
@@ -895,6 +898,9 @@
 
 <script>
     window.onload = () => { // Important: window.onload
+
+        document.getElementById("loading-message").style.display = "none"; // Hide loading message
+
 		document.getElementById("slide-show-kitchen").slideclick = onSlideShowClick;
 		document.getElementById("slide-show-kitchen-2").slideclick = onSlideShowClick;
 
