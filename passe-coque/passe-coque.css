@@ -873,3 +873,7 @@ span.expand-collapse:hover {
     left: 20px;
     /* transform: translate(-5%, -30%); */
 }
+
+.page-bottom {
+    color: white !important;
+}
