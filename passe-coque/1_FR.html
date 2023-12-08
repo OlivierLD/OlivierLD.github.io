@@ -119,8 +119,7 @@
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
                     </iframe -->
                 </div>
-            
-            
+                        
             </div>
         </div>
 
@@ -141,14 +140,28 @@
                 </td>
                 <td width="50%" style="text-align: center; vertical-align: top; color: white;">
                     <h2 style="color: white;">Abonnez vous &agrave; notre newsletter !</h2>
-                    Dis-nous un peu qui tu es...
+                    <div style="display: grid; grid-template-columns: auto auto;">
+                        <span style="color: white; text-align: right; margin: 0 10px 0 0;">Votre nom&nbsp;:&nbsp;</span>
+                        <input type="text" placeholder="Pr&eacute;nom & Nom" id="first-last-name" size="20">
+                        <span style="color: white; text-align: right; margin: 0 10px 0 0;">Email&nbsp;:&nbsp;</span>
+                        <input type="text" placeholder="Email" id="user-email" size="20">
+                    </div>
+                    <div style="text-align: center; padding: 10px 0 0 0;">
+                        <button onclick="subscribeNewsLetter();">Souscrire</button>
+                    </div>
                 </td>
                 <td width="25%" style="vertical-align: top; color: white;">
                     <h2 style="color: white;">Passe-Coque Club</h2>
+                    <ul style="color: white; list-style-type: none;">
+                        <li class="social-network-link" style="color: white;" onclick="networkSubscribe('Facebook');"><img src="./logos/facebook.png" width="40" style="vertical-align: middle; padding: 0 10px 0 0;">&nbsp;Sur Facebook</li>
+                        <li class="social-network-link" style="color: white;" onclick="networkSubscribe('Linkedin');"><img src="./logos/linkedin.png" width="40" style="vertical-align: middle; padding: 5px 10px 0 0;">&nbsp;Sur Linkedin</li>
+                        <li class="social-network-link" style="color: white;" onclick="networkSubscribe('Instagram');"><img src="./logos/instagram.jpg" width="40" style="vertical-align: middle; padding: 5px 10px 0 0;">&nbsp;Sur Instagram</li>
+                    </ul>
                 </td>
             </tr>
         </table>
     </div>
+
     <!-- To keep seing the content above the copyright -->
     <div id="bottom-filler" style="height: 50px;"></div>
 </div>

@@ -1001,3 +1001,13 @@ let translate = (actuId) => {
     }
 };
 
+let networkSubscribe = (type) => {
+    alert(`Reaching ${type}.\nSoon.`);
+};
+
+let subscribeNewsLetter = () => {
+    let userName = document.getElementById('first-last-name').value;
+    let userEmail = document.getElementById('user-email').value;
+    alert(`News Letter subscription for ${userName}, ${userEmail}`);
+};
+

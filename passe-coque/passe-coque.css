@@ -877,3 +877,7 @@ span.expand-collapse:hover {
 .page-bottom {
     color: white !important;
 }
+
+.social-network-link:hover{
+    cursor: pointer;
+}

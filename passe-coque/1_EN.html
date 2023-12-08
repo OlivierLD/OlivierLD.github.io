@@ -101,24 +101,65 @@
                         <button class="pc-button" onclick="clack('_21');">Learn more</button>
                     </p>
                 </div>
-                <div style="border: 1px solid rgb(225, 219, 219); border-radius: 3px; padding: 10px; margin: 15px; min-height: 500px;">
-                    <h3>The Nautical Eco-Village Project</h3>
-                    <p style="text-align: left;">
-                        <img src="./images/life.on.mars.jpeg" width="400">
-                    </p>
-                    <p style="text-align: left;">
-                        <button class="pc-button" onclick="clack('_23');">Learn more</button>
-                    </p>
+                <div style="text-align: center;">
+                    <!-- https://www.w3schools.com/html/html5_video.asp -->
+                    <!--video width="640" height="480" controls>
+                        <source src="https://drive.google.com/file/d/1xpXolvSuAs3JWEu05nWucKhfrTYZjLJb/view?usp=sharing" type="video/mp4">
+                        <source src="movie.ogg" type="video/ogg">
+                      Your browser does not support the video tag.
+                    </video-->
+                    <iframe src="https://drive.google.com/file/d/1bEH4euR0QUveWV4hMShwfsoYoNqRMpkx/preview" width="640" height="480" allow="autoplay"></iframe>
+                    <!--
+                        https://youtu.be/70zdg_qhtLk
+                    -->
+                    <!-- iframe width="560" height="315" 
+                            src="https://www.youtube.com/embed/70zdg_qhtLk?si=_pESnl_5mnh0hEA1" 
+                            title="YouTube video player" frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
+                    </iframe -->
                 </div>
 
             </div>
         </div>
     </div>
 
-    <div style="min-height: 200px; margin: 20px;">
-        And More stuff down there!<br/>
-        Legal stuff and other marvels.
+    <div style="min-height: 200px; margin: -10px 0 0 0; background-color: orange; color: white;">
+        <table class="page-bottom" style="width: 98%; color: white; margin: 10px;">
+            <tr>
+                <td width="25%" style="vertical-align: top; color: white;">
+                    <h2 style="color: white;">Association Passe-Coque</h2>
+                    12<sup><small style="color: white;">bis</small></sup> Z.A. de Kerran
+                    <br/>
+                    56470 Saint Philibert
+                    <br/>
+                    <a href="mailto:contact@passeurdecoute.fr" style="color: white;">contact@passeurdecoute.fr</a>
+                    <br/>
+                    Tel: +33 02 XX XX XX XX
+                </td>
+                <td width="50%" style="text-align: center; vertical-align: top; color: white;">
+                    <h2 style="color: white;">Subscribe to our newsletter!</h2>
+                    <div style="display: grid; grid-template-columns: auto auto;">
+                        <span style="color: white; text-align: right; margin: 0 10px 0 0;">Your name:&nbsp;</span>
+                        <input type="text" placeholder="First and last name" id="first-last-name" size="20">
+                        <span style="color: white; text-align: right; margin: 0 10px 0 0;">Email&nbsp;:&nbsp;</span>
+                        <input type="text" placeholder="Email" id="user-email" size="20">
+                    </div>
+                    <div style="text-align: center; padding: 10px 0 0 0;">
+                        <button onclick="subscribeNewsLetter();">Subscribe</button>
+                    </div>
+                </td>
+                <td width="25%" style="vertical-align: top; color: white;">
+                    <h2 style="color: white;">Passe-Coque Club</h2>
+                    <ul style="color: white; list-style-type: none;">
+                        <li class="social-network-link" style="color: white;" onclick="networkSubscribe('Facebook');"><img src="./logos/facebook.png" width="40" style="vertical-align: middle; padding: 0 10px 0 0;">&nbsp;On Facebook</li>
+                        <li class="social-network-link" style="color: white;" onclick="networkSubscribe('Linkedin');"><img src="./logos/linkedin.png" width="40" style="vertical-align: middle; padding: 5px 10px 0 0;">&nbsp;On Linkedin</li>
+                        <li class="social-network-link" style="color: white;" onclick="networkSubscribe('Instagram');"><img src="./logos/instagram.jpg" width="40" style="vertical-align: middle; padding: 5px 10px 0 0;">&nbsp;On Instagram</li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
     </div>
+
     <!-- To keep seing the content above the copyright -->
     <div id="bottom-filler" style="height: 50px;"></div>
 </div>
