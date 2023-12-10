@@ -878,6 +878,11 @@ span.expand-collapse:hover {
     color: white !important;
 }
 
-.social-network-link:hover{
+.social-network-link:hover {
     cursor: pointer;
+}
+
+.scroll-button:hover {
+    cursor: pointer;
+    box-shadow: 4px 4px 8px black, 0 0 25px white, 0 0 10px silver;
 }

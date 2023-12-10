@@ -1011,3 +1011,10 @@ let subscribeNewsLetter = () => {
     alert(`News Letter subscription for ${userName}, ${userEmail}`);
 };
 
+let scrollTheTeam = (dir) => {
+    console.log(`Scrolling, ${dir}`);
+    let container = document.getElementById("team-container");
+    let nbPeople = container.querySelectorAll('div.image-plus-text').length;
+    let step = container.clientWidth / nbPeople;
+    container.scrollLeft += (step * dir);
+};
