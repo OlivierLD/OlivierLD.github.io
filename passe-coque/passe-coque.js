@@ -577,6 +577,7 @@ let clickOnBoatPix = (origin) => {
 
 let showInfoTxDialog = () => {
     let infoTxDialog = document.getElementById("info-tx-dialog");
+    window.scrollTo(0, 0); // Scroll on top, for Safari...
     if (infoTxDialog.show !== undefined) {
         infoTxDialog.show();
     } else {
@@ -1133,4 +1134,18 @@ let scrollTheTeam = (dir) => {
     let nbPeople = container.querySelectorAll('div.image-plus-text').length;
     let step = container.clientWidth / nbPeople;
     container.scrollLeft += (step * dir);
+};
+
+let openTab = (evt, tabName) => {
+    let tabLinks = document.getElementsByClassName("tablinks"); // Tabs/Buttons
+
+    for (let i=0; i<tabLinks.length; i++) {
+        tabLinks[i].className = tabLinks[i].className.replace(" tab-active", ""); // Reset
+    }
+    let divSections = document.querySelectorAll(".tab-section");
+
+    for (let i=0; i<divSections.length; i++) {
+        divSections[i].style.display = (divSections[i].id === tabName) ? 'block' : 'none';
+    }
+    evt.currentTarget.className += " tab-active";
 };

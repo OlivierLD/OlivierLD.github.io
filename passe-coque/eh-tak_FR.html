@@ -1,16 +1,33 @@
-<div style="display: grid; grid-template-columns: auto auto;">
-    <img src="./images/boats/eh-tak.jpg" width="100%">
-    <div style="padding: 14px;">
-        <h2>Eh'Tak</h2>
-        Shipman 28, bas&eacute; &agrave; Etel<br/>
-        Blah Blah Blah...
+
+<div class="tab" style="margin-top: 30px; margin-bottom: 10px; display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto;"> <!-- TODO Improve the grid-template... -->
+    <button class="tablinks tab-active" onclick="openTab(event, 'eh-tak-01');" title="Sommaire">Sommaire</button>
+    <button class="tablinks" onclick="openTab(event, 'eh-tak-02');">Photos</button>
+    <button class="tablinks" onclick="openTab(event, 'eh-tak-03');">Contact</button>
+</div>
+
+<div id="eh-tak-01" class="tab-section" style="display: block;">
+    <div style="display: grid; grid-template-columns: auto auto;">
+        <img src="./images/boats/eh-tak.jpg" width="100%">
+        <div style="padding: 14px;">
+            <h2>Eh'Tak</h2>
+            Shipman 28, bas&eacute; &agrave; Etel<br/>
+            <ul>
+                <li>Un super beau bateau</li>
+                <li>En bon &eacute;tat</li>
+                <li>Avec un moteur qui marche</li>
+                <li>Un aviron de godille</li>
+                <li>Des voiles nickel</li>
+            </ul>
+            Id&eacute;al, en somme !
+        </div>
+    </div>
+    <div>
+        <h2>Le Bateau</h2>
+        Shipman 28
     </div>
 </div>
-<div>
-    <h2>Le Bateau</h2>
-    Shipman 28
-</div>
-<div>
+
+<div id="eh-tak-02" class="tab-section" style="display: none;">
     <slide-show id="eh-tak-slide-show"
                 width="800"
                 height="400">
@@ -20,11 +37,11 @@
         <slide-show-image src="./images/boats/ehtak/RubisCup.07.jpeg" title="Eh Tak - 4"></slide-show-image>
         <slide-show-image src="./images/boats/ehtak/RubisCup.08.jpeg" title="Eh Tak - 5"></slide-show-image>
     </slide-show>
-
 </div>
-<div>
+
+<div id="eh-tak-03" class="tab-section" style="display: none;">
     <h2>Plus d'infos...</h2>
     Contact : Jeff Allais.<br/>
     T&eacute;l : . . .<br/>
-    Email : . . .
+    Email : jeff@passeurdecoute.fr
 </div>
