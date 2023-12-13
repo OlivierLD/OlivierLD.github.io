@@ -345,7 +345,7 @@ fromDecimal = () => {
     // Int part (degrees)
     let degrees = Math.floor(originalValue);
     let decimalPart = originalValue - degrees; // Wierd stuff here, 122.3 - 122 returns 0.29999999999999716...
-    decimalPart = Math.round(decimalPart * 100_000) / 100_000;
+    decimalPart = Math.round(decimalPart * 100000) / 100000;
 
     let decimalMin = decimalPart * 60;
     // Minutes

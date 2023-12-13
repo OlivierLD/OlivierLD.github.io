@@ -2122,10 +2122,10 @@ export function getSunDataForAllDay(bodyData, delta_t, latitude, longitude, step
 	let to = bodyData.setTime;
 
 	if (bodyData.sunTransitTime !== 0) { // Parameter for the full path, or just positive elevations?
-		from = bodyData.sunTransitTime - (12 * 3_600_000);
-		to = bodyData.sunTransitTime + (12 * 3_600_000);
+		from = bodyData.sunTransitTime - (12 * 3600000);
+		to = bodyData.sunTransitTime + (12 * 3600000);
 	}
-	const _STEP_MINUTES = 1_000 * 60 * (step == null ? 10 : step); // In ms. Default 10 minutes.
+	const _STEP_MINUTES = 1000 * 60 * (step == null ? 10 : step); // In ms. Default 10 minutes.
 	let sunPath = [];
 
 	// Now calculate the Sun Path

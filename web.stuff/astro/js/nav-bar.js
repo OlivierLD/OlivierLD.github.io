@@ -733,7 +733,7 @@ let setSunPathData = () => {
         elem1.saturnPos = { he: srSaturn.alt, z: srSaturn.Z }; // saturnPos;
         elem1.repaint();
     };
-    sunPathUpdater = window.setInterval(bodiesUpdater, 1_000);
+    sunPathUpdater = window.setInterval(bodiesUpdater, 1000);
 
     elem1.sunRise = { time:  sunBodyData.riseTime, z:  sunBodyData.riseZ };
     elem1.sunSet = { time:  sunBodyData.setTime, z:  sunBodyData.setZ };
