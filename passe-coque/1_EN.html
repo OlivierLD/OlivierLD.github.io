@@ -108,7 +108,7 @@
                         <source src="movie.ogg" type="video/ogg">
                       Your browser does not support the video tag.
                     </video-->
-                    <iframe src="https://drive.google.com/file/d/1bEH4euR0QUveWV4hMShwfsoYoNqRMpkx/preview" width="640" height="480" allow="autoplay"></iframe>
+                    <iframe src="https://drive.google.com/file/d/1bEH4euR0QUveWV4hMShwfsoYoNqRMpkx/preview" width="640" height="360" allow="autoplay"></iframe>
                     <!--
                         https://youtu.be/70zdg_qhtLk
                     -->
@@ -123,21 +123,24 @@
         </div>
     </div>
 
-    <div style="min-height: 200px; margin: -10px 0 0 0; background-color: orange; color: white; padding: 5px; margin: 5px;">
+    <div style="min-height: 200px; margin: -10px 0 0 0; background-color: orange; color: white;">
         <table class="page-bottom" style="width: 98%; color: white; margin: 10px;">
             <tr>
-                <td width="25%" style="vertical-align: top; color: white;">
+                <td width="25%" style="vertical-align: top; color: white; padding: 5px; margin: 5px; line-height: 1em;">
                     <h2 style="color: white;">Association Passe-Coque</h2>
-                    12<sup><small style="color: white;">bis</small></sup> Z.A. de Kerran
+                    12<sup><small style="color: white; font-size: 0.75em;">bis</small></sup> Z.A. de Kerran
                     <br/>
                     56470 Saint Philibert
                     <br/>
-                    <a href="mailto:contact@passeurdecoute.fr" style="color: white;">contact@passeurdecoute.fr</a>
+                    <a href="mailto:contact@passeurdecoute.fr" style="color: white;">contact[at]passeurdecoute.fr</a>
                     <br/>
                     Tel: +33 02 XX XX XX XX
                 </td>
                 <td width="50%" style="text-align: center; vertical-align: top; color: white; padding: 5px; margin: 5px;">
                     <h2 style="color: white;">Subscribe to our newsletter!</h2>
+                    <div style="font-style: italic; color: white; line-height: 1em; margin-bottom: 10px;">
+                        Never miss anything about our news and projects each month: Boats - projects - events.
+                    </div>
                     <div style="display: grid; grid-template-columns: auto auto;">
                         <span style="color: white; text-align: right; margin: 0 10px 0 0;">Your name:&nbsp;</span>
                         <input type="text" placeholder="First and last name" id="first-last-name" size="20">
@@ -149,12 +152,16 @@
                     </div>
                 </td>
                 <td width="25%" style="vertical-align: top; color: white; padding: 5px; margin: 5px;">
-                    <h2 style="color: white;">Passe-Coque Club</h2>
-                    <ul style="color: white; list-style-type: none;">
+                    <a href="#" onclick="clack('_33');" style="text-decoration: none;"><h2 style="color: white;">Passe-Coque Club</h2></a>
+                    <!--ul style="color: white; list-style-type: none;">
                         <li class="social-network-link" style="color: white;" onclick="networkSubscribe('Facebook');"><img src="./logos/facebook.png" width="40" style="vertical-align: middle; padding: 0 10px 0 0;">&nbsp;On Facebook</li>
                         <li class="social-network-link" style="color: white;" onclick="networkSubscribe('Linkedin');"><img src="./logos/linkedin.png" width="40" style="vertical-align: middle; padding: 5px 10px 0 0;">&nbsp;On Linkedin</li>
                         <li class="social-network-link" style="color: white;" onclick="networkSubscribe('Instagram');"><img src="./logos/instagram.jpg" width="40" style="vertical-align: middle; padding: 5px 10px 0 0;">&nbsp;On Instagram</li>
-                    </ul>
+                    </ul-->
+                    <div style="text-align: right;">
+                        <a href="https://www.facebook.com/pj.jannin" target="FB" title="FaceBook"><img src="./logos/facebook.png" width="40" style="vertical-align: middle;"></a>
+                        <a href="https://www.linkedin.com/company/passe-coque" target="LI" title="LinkedIn"><img src="./logos/linkedin.png" width="40" style="vertical-align: middle;"></a>
+                    </div>
                 </td>
             </tr>
         </table>

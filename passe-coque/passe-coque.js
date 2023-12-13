@@ -95,7 +95,7 @@ let clack = (origin) => {
             .then(response => {  // Warning... the NOT_FOUND error lands here, apparently.
                 console.log(`Data Response: ${response.status} - ${response.statusText}`);
 				if (response.status !== 200) { // There is a problem...
-					contentPlaceHolder.innerHTML = `Fetching ${contentName}...<br/> Data Response: ${response.status} - ${response.statusText}<br/><b>&Ccedil;a vient...</b>`;
+					contentPlaceHolder.innerHTML = `Fetching ${contentName}...<br/> Data Response: ${response.status} - ${response.statusText}<br/><b>En d&eacute;veloppement...</b>`;
 				} else {
 					response.text().then(doc => {
 						console.log(`Code data loaded, length: ${doc.length}.`);
@@ -162,7 +162,11 @@ let clack = (origin) => {
                 }
                 console.debug("Failed to get code data..." + (error ? JSON.stringify(error, null, 2) : ' - ') + ', ' + (message ? message : ' - '));
 				// Plus tard...
-				contentPlaceHolder.innerHTML = "<b>&Ccedil;a vient...</b>";
+                if (currentLang === 'FR') {
+				    contentPlaceHolder.innerHTML = "<b>Cette page est en cours de d&eacute;veloppememnt. Revenez bient&ocirc;t&nbsp;!</b>";
+                } else {
+				    contentPlaceHolder.innerHTML = "<b>This page is being developped. Please come back soon!</b>";
+                }
             });
 }
 
@@ -483,7 +487,7 @@ let clickOnTxPix = (origin) => {
         .then(response => {  // Warning... the NOT_FOUND error lands here, apparently.
             console.log(`Data Response: ${response.status} - ${response.statusText}`);
             if (response.status !== 200) { // There is a problem...
-                dynamicContentContainer.innerHTML = `Fetching ${contentName}...<br/> Data Response: ${response.status} - ${response.statusText}<br/><b>&Ccedil;a vient...</b>`;
+                dynamicContentContainer.innerHTML = `Fetching ${contentName}...<br/> Data Response: ${response.status} - ${response.statusText}<br/><b>En d&eacute;veloppement...</b>`;
             } else {
                 response.text().then(doc => {
                     console.log(`${contentName} code data loaded, length: ${doc.length}.`);
@@ -541,7 +545,7 @@ let clickOnBoatPix = (origin) => {
         .then(response => {  // Warning... the NOT_FOUND error lands here, apparently.
             console.log(`Data Response: ${response.status} - ${response.statusText}`);
             if (response.status !== 200) { // There is a problem...
-                dynamicContentContainer.innerHTML = `Fetching ${contentName}...<br/> Data Response: ${response.status} - ${response.statusText}<br/><b>&Ccedil;a vient...</b>`;
+                dynamicContentContainer.innerHTML = `Fetching ${contentName}...<br/> Data Response: ${response.status} - ${response.statusText}<br/><b>En d&eacute;veloppement...</b>`;
             } else {
                 response.text().then(doc => {
                     console.log(`${contentName} code data loaded, length: ${doc.length}.`);
@@ -602,7 +606,7 @@ let aboutSomeone = (who) => {
         .then(response => {  // Warning... the NOT_FOUND error lands here, apparently.
             console.log(`Data Response: ${response.status} - ${response.statusText}`);
             if (response.status !== 200) { // There is a problem...
-                dialogContent.innerHTML = `Fetching ${contentName}...<br/> Data Response: ${response.status} - ${response.statusText}<br/><b>&Ccedil;a vient...</b>`;
+                dialogContent.innerHTML = `Fetching ${contentName}...<br/> Data Response: ${response.status} - ${response.statusText}<br/><b>En d&eacute;veloppement...</b>`;
             } else {
                 response.text().then(doc => {
                     console.log(`${contentName} code data loaded, length: ${doc.length}.`);
@@ -655,11 +659,11 @@ const THE_FLEET = [
         base: "Locmiquelic"
     },
     {
-        name: "Jehu",
-        id: "jehu",
-        pix: "./images/boats/jehu.jpg",
-        type: "J24",
-        category: TO_GRAB,
+        name: "Coraxy",
+        id: "dummy-boat",
+        pix: "./images/boats/dummy.boat.jpg",
+        type: "Cognac",
+        category: CLUB,
         base: "Saint Philibert"
     },
     {
@@ -678,13 +682,13 @@ const THE_FLEET = [
         category: OLD_BOAT,
         base: "Lorient"
     },
-    {
-        name: "Blue Arpege",
+    { // WANITA TOO : First Class 12. 5000 € 		    transfert organisé en 2024
+        name: "Wanita Too",
         id: "dummy-boat",
         pix: "./images/boats/dummy.boat.jpg",
-        type: "Arp&egrave;ge",
+        type: "First Class 12",
         category: OLD_BOAT,
-        base: "Saint Philibert"
+        base: "?"
     },
     {
         name: "Melkart",
@@ -694,29 +698,141 @@ const THE_FLEET = [
         category: OLD_BOAT,
         base: "&Eacute;tel"
     },
-    {
-        name: "Dzim Boom",
+    { // MIRELLA  Maica 12m 50
+        name: "Mirella",
+        id: "dummy-boat",
+        pix: "./images/boats/dummy.boat.jpg",
+        type: "Maica 12,50",
+        category: CLUB,
+        base: "?"
+    },
+    { // IMAGINE Selection
+        name: "Imagine",
+        id: "dummy-boat",
+        pix: "./images/boats/dummy.boat.jpg",
+        type: "Selection",
+        category: TO_GRAB,
+        base: "?"
+    },
+    { // 
+        name: "Tri Yann",
+        id: "dummy-boat",
+        pix: "./images/boats/dummy.boat.jpg",
+        type: "Trimaran Allegro",
+        category: TO_GRAB,
+        base: "?"
+    },
+    { 
+        name: "Rozen an Avel",
+        id: "dummy-boat",
+        pix: "./images/boats/dummy.boat.jpg",
+        type: "Arp&egrave;ge",
+        category: TO_GRAB,
+        base: "Saint Philibert"
+    },
+    { 
+        name: "La R&ecirc;veuse",
+        id: "dummy-boat",
+        pix: "./images/boats/dummy.boat.jpg",
+        type: "Damien 40",
+        category: TO_GRAB,
+        base: "?"
+    },
+    { 
+        name: "Taapuna",
+        id: "dummy-boat",
+        pix: "./images/boats/dummy.boat.jpg",
+        type: "Edel 660",
+        category: TO_GRAB,
+        base: "?"
+    },
+    { 
+        name: "L'heure bleue",
+        id: "dummy-boat",
+        pix: "./images/boats/dummy.boat.jpg",
+        type: "Arp&egrave;ge",
+        category: TO_GRAB,
+        base: "?"
+    },
+    { 
+        name: "Jolly Jumper",
+        id: "dummy-boat",
+        pix: "./images/boats/dummy.boat.jpg",
+        type: "First 325",
+        category: TO_GRAB,
+        base: "?"
+    },
+    { 
+        name: "Melvan",
+        id: "dummy-boat",
+        pix: "./images/boats/dummy.boat.jpg",
+        type: "Karat&eacute;",
+        category: TO_GRAB,
+        base: "?"
+    },
+    { 
+        name: "Saigane",
+        id: "dummy-boat",
+        pix: "./images/boats/dummy.boat.jpg",
+        type: "Dufour 2800",
+        category: TO_GRAB,
+        base: "?"
+    },
+    { 
+        name: "Trehudal",
         id: "dummy-boat",
         pix: "./images/boats/dummy.boat.jpg",
         type: "Nicholson 33",
+        category: TO_GRAB,
+        base: "La Trinit&eacute;"
+    },
+    { 
+        name: "Jules Verne",
+        id: "dummy-boat",
+        pix: "./images/boats/dummy.boat.jpg",
+        type: "Sir 520",
+        category: TO_GRAB,
+        base: "?"
+    },
+    { 
+        name: "Stiren ar Mor",
+        id: "dummy-boat",
+        pix: "./images/boats/dummy.boat.jpg",
+        type: "Ghibli",
         category: CLUB,
         base: "La Trinit&eacute;"
     },
-    {
-        name: "Evgeni Prigogin",
+    { 
+        name: "Coevic 2",
         id: "dummy-boat",
         pix: "./images/boats/dummy.boat.jpg",
-        type: "Boom 415",
+        type: "Mirage 28",
         category: TO_GRAB,
-        base: "Moscow"
+        base: "?"
     },
-    {
-        name: "A la tienne",
+    { 
+        name: "Ma Enez",
         id: "dummy-boat",
         pix: "./images/boats/dummy.boat.jpg",
-        type: "Cognac",
-        category: OLD_BOAT,
-        base: "Saint Philibert"
+        type: "Symphonie",
+        category: TO_GRAB,
+        base: "?"
+    },
+    { 
+        name: "Saudade",
+        id: "dummy-boat",
+        pix: "./images/boats/dummy.boat.jpg",
+        type: "Super Arlequin",
+        category: TO_GRAB,
+        base: "?"
+    },
+    { 
+        name: "Imagine",
+        id: "dummy-boat",
+        pix: "./images/boats/dummy.boat.jpg",
+        type: "Selection",
+        category: TO_GRAB,
+        base: "?"
     }
 ];
 
@@ -950,7 +1066,7 @@ let fillOutActu = filter => {
                 .then(response => {  // Warning... the NOT_FOUND error lands here, apparently.
                     console.log(`Data Response: ${response.status} - ${response.statusText}`);
                     if (response.status !== 200) { // There is a problem...
-                        eventDiv.innerHTML = `Fetching ${event.content}...<br/> Data Response: ${response.status} - ${response.statusText}<br/><b>&Ccedil;a vient...</b>`;
+                        eventDiv.innerHTML = `Fetching ${event.content}...<br/> Data Response: ${response.status} - ${response.statusText}<br/><b>En d&eacute;veloppement...</b>`;
                     } else {
                         response.text().then(doc => {
                             console.log(`${event.content} code data loaded, length: ${doc.length}.`);
