@@ -641,7 +641,7 @@ const CLUB = 2;
 const OLD_BOAT = 3;
 const TO_GRAB = 4;
 
-// TODO See if there is a better place for this hard-coded list...
+// TODO See if there is a better place for this hard-coded list, like a json to fetch...
 const THE_FLEET = [
     {
         name: "Eh'Tak",
@@ -657,7 +657,7 @@ const THE_FLEET = [
         pix: "./images/boats/pordin.jpg",
         type: "Carter 37",
         category: OLD_BOAT,
-        base: "Locmiquelic"
+        base: "Locmiqu&eacute;lic"
     },
     {
         name: "Coraxy",
@@ -683,13 +683,13 @@ const THE_FLEET = [
         category: OLD_BOAT,
         base: "Lorient"
     },
-    { // WANITA TOO : First Class 12. 5000 € 		    transfert organisé en 2024
+    { 
         name: "Wanita Too",
         id: "dummy-boat",
         pix: "./images/boats/dummy.boat.jpg",
         type: "First Class 12",
         category: OLD_BOAT,
-        base: "?"
+        base: "Somewhere"
     },
     {
         name: "Melkart",
@@ -699,29 +699,29 @@ const THE_FLEET = [
         category: OLD_BOAT,
         base: "&Eacute;tel"
     },
-    { // MIRELLA  Maica 12m 50
+    {
         name: "Mirella",
         id: "dummy-boat",
         pix: "./images/boats/dummy.boat.jpg",
         type: "Maica 12,50",
         category: CLUB,
-        base: "?"
+        base: "Somewhere"
     },
-    { // IMAGINE Selection
+    { 
         name: "Imagine",
         id: "dummy-boat",
         pix: "./images/boats/dummy.boat.jpg",
         type: "Selection",
         category: TO_GRAB,
-        base: "?"
+        base: "Somewhere"
     },
-    { // 
+    { 
         name: "Tri Yann",
         id: "dummy-boat",
         pix: "./images/boats/dummy.boat.jpg",
         type: "Trimaran Allegro",
         category: TO_GRAB,
-        base: "?"
+        base: "Saint Philibert"
     },
     { 
         name: "Rozen an Avel",
@@ -737,7 +737,7 @@ const THE_FLEET = [
         pix: "./images/boats/dummy.boat.jpg",
         type: "Damien 40",
         category: TO_GRAB,
-        base: "?"
+        base: "Somewhere"
     },
     { 
         name: "Taapuna",
@@ -745,7 +745,7 @@ const THE_FLEET = [
         pix: "./images/boats/dummy.boat.jpg",
         type: "Edel 660",
         category: TO_GRAB,
-        base: "?"
+        base: "Somewhere"
     },
     { 
         name: "L'heure bleue",
@@ -753,7 +753,7 @@ const THE_FLEET = [
         pix: "./images/boats/dummy.boat.jpg",
         type: "Arp&egrave;ge",
         category: TO_GRAB,
-        base: "?"
+        base: "Somewhere"
     },
     { 
         name: "Jolly Jumper",
@@ -761,7 +761,7 @@ const THE_FLEET = [
         pix: "./images/boats/dummy.boat.jpg",
         type: "First 325",
         category: TO_GRAB,
-        base: "?"
+        base: "Somewhere"
     },
     { 
         name: "Melvan",
@@ -769,7 +769,7 @@ const THE_FLEET = [
         pix: "./images/boats/dummy.boat.jpg",
         type: "Karat&eacute;",
         category: TO_GRAB,
-        base: "?"
+        base: "Somewhere"
     },
     { 
         name: "Saigane",
@@ -777,7 +777,7 @@ const THE_FLEET = [
         pix: "./images/boats/dummy.boat.jpg",
         type: "Dufour 2800",
         category: TO_GRAB,
-        base: "?"
+        base: "Somewhere"
     },
     { 
         name: "Trehudal",
@@ -793,7 +793,7 @@ const THE_FLEET = [
         pix: "./images/boats/dummy.boat.jpg",
         type: "Sir 520",
         category: TO_GRAB,
-        base: "?"
+        base: "Somewhere"
     },
     { 
         name: "Stiren ar Mor",
@@ -809,7 +809,7 @@ const THE_FLEET = [
         pix: "./images/boats/dummy.boat.jpg",
         type: "Mirage 28",
         category: TO_GRAB,
-        base: "?"
+        base: "Somewhere"
     },
     { 
         name: "Ma Enez",
@@ -817,7 +817,7 @@ const THE_FLEET = [
         pix: "./images/boats/dummy.boat.jpg",
         type: "Symphonie",
         category: TO_GRAB,
-        base: "?"
+        base: "Somewhere"
     },
     { 
         name: "Saudade",
@@ -825,7 +825,7 @@ const THE_FLEET = [
         pix: "./images/boats/dummy.boat.jpg",
         type: "Super Arlequin",
         category: TO_GRAB,
-        base: "?"
+        base: "Somewhere"
     },
     { 
         name: "Imagine",
@@ -833,7 +833,7 @@ const THE_FLEET = [
         pix: "./images/boats/dummy.boat.jpg",
         type: "Selection",
         category: TO_GRAB,
-        base: "?"
+        base: "Somewhere"
     }
 ];
 
@@ -973,7 +973,7 @@ let fillOutFleet = filter => {
         div.appendChild(img);
         // Name and type
         let span = document.createElement('span'); 
-        span.style = "position: relative; display: block; bottom: 4px;";
+        span.style = "position: relative; display: block; bottom: 4px; line-height: 1.1em;";
         span.innerHTML = `${boat.name}<br/>${boat.type}, ${boat.base}`;
         div.appendChild(span);
         // Badge
