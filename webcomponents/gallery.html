@@ -7429,8 +7429,15 @@ function plotBarographRC(graphId, recenter, lineColor='lime', graphLabel='Rework
                         let x = evt.clientX - rect.left; // x position within the element.
                         let y = evt.offsetY - rect.height; // evt.clientY - rect.top;  // y position within the element. // TODO The value is to big by ~6... rect.height ?
                         // console.log(`MouseMove on graph: ${x}, ${y}`);
+                        // theGraph.title = `Mouse at ${x}, ${y}`;
                         // Tooltip: Use theGraph.data.minX/maxX/minY/maxY if needed...
-                        theGraph.title = `Mouse at ${x}, ${y}`;
+                        let height = theGraph.height;
+                        let minY = theGraph.data.minY;
+                        let maxY = theGraph.data.maxY;
+                        let deltaY = maxY - minY;
+                        let correctedY = height - y;
+                        let yValue = minY + ((correctedY / height) * deltaY);
+                        theGraph.title = `Mouse at ${x}, ${y}:&#13; ${yValue.toFixed(1)} hPa`;
                     });
                 </script>
             </td>
