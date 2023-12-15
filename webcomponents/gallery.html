@@ -7419,6 +7419,20 @@ function plotBarographRC(graphId, recenter, lineColor='lime', graphLabel='Rework
 				<div style="padding: 5px;">
 					<button onclick="plotBarographRC('graph-04', AS_IS, 'purple', 'PRMSL');">Plot PRMSL</button>
 				</div>
+                <script type="text/javascript">
+                    let graph = document.getElementById('graph-04');
+                    // Display in tooltip : absc / ord...
+                    graph.addEventListener('mousemove', evt => {
+                        // wow !
+                        let theGraph = evt.target;
+                        let rect = theGraph.getBoundingClientRect();
+                        let x = evt.clientX - rect.left; // x position within the element.
+                        let y = evt.offsetY - rect.height; // evt.clientY - rect.top;  // y position within the element. // TODO The value is to big by ~6... rect.height ?
+                        // console.log(`MouseMove on graph: ${x}, ${y}`);
+                        // Tooltip: Use theGraph.data.minX/maxX/minY/maxY if needed...
+                        theGraph.title = `Mouse at ${x}, ${y}`;
+                    });
+                </script>
             </td>
         </tr>    
 	</table>
