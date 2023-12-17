@@ -742,9 +742,9 @@ const THE_FLEET = [
     { 
         name: "Taapuna",
         id: "dummy-boat",
-        pix: "./images/boats/dummy.boat.jpg",
+        pix: "./images/boats/taapuna.png",
         type: "Edel 660",
-        category: TO_GRAB,
+        category: CLUB,
         base: "Somewhere"
     },
     { 
@@ -859,7 +859,12 @@ const INFO_SECTION = [
             {
                 date: "2022",
                 title: "2022",
-                content: "./actu/2022/year.html"
+                content: "./actu/2022/news.01.html"
+            },
+            {
+                date: "2022",
+                title: "2022",
+                content: "./actu/2022/news.02.html"
             }
         ]
     },
@@ -948,6 +953,15 @@ let fillOutFleet = filter => {
     }
     // Build new list
     let newList = [];
+    // Sort by name ?
+    THE_FLEET.sort((a, b) => {
+        if (a.name > b.name) {
+            return 1;
+        } else if (a.name < b.name) {
+            return -1;
+        }
+        return 0;
+    });
     // Filter here
     THE_FLEET.forEach(boat => {
         if (filter === null || boat.category == filter) {
