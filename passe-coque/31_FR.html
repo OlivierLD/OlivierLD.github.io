@@ -24,33 +24,82 @@
         <div style="text-align: left; padding: 40px 60px; background: white; margin-top: -20px; text-align: center;">
             <span style="font-weight: 900; font-size: 1.1em;">Transmettre</span>, c'est la raison d'&ecirc;tre de Passe-Coque qui accompagne depuis 2019 associations et porteurs de projets dans le 
             domaine de l'&eacute;conomie sociale et solidaire afin de cr&eacute;er un trait d'union entre des bateaux sans projets et des projets sans bateaux.<br/>
-            <hr/>
+            <hr style="margin: 10px 0 30px 0;"/>
             D&eacute;couvrez les projets que Passe-Coque a accompagn&eacute;&nbsp;:
-            <div style="display: grid; grid-template-columns: 25% 25% 25% 25%; background: white; margin: 0 50px 0 50px;">
-                <div id="tx-01" class="tooltip boat-image-plus-text boat-frame" onclick="clickOnTxPix(this);" onmouseover="mouseOnTxPix(this);">
+            <div id="project-container" style="display: grid; grid-template-columns: 25% 25% 25% 25%; background: white; /*margin: 0 50px 0 50px;*/">
+                <!--
+                    Coraxy - Cognac
+                    Tri Yann - Allegro
+                    Afri'can - Felicie, Presles
+                    Taapuna - Edel 660
+                    Manu Aiviri - Comanche
+                    L'Heure Bleue - Arpege
+                    Jolly Jumper - First 325
+                    Saigane - Dufour 2800
+                    Eh'Tak - Shipman 28
+                    Stiren ar Mor - Ghibli
+                    Coevic 2 - Mirage 28
+                    Saudade - Super Arlequin, Voile Magazine
+                -->
+                <div id="tx-01" class="boat-image-plus-text boat-frame project-frame"onclick="clickOnTxPix(this);" onmouseover="mouseOnTxPix(this);">
                     <img src="./images/transmit/tx.01.png" width="100%">
-                    <span>Vas-y, clique sur la photo !</span>
-                    <div>Nav'Solidaire<br/>Bateau&nbsp;: XXX</div>
+                    <span style="position: relative; display: block; bottom: 4px; line-height: 1.1em;">Nav'Solidaire<br/>Bateau&nbsp;: XXX</span>
                 </div>
-                <div id="tx-02" class="tooltip boat-image-plus-text boat-frame" onclick="clickOnTxPix(this);" onmouseover="mouseOnTxPix(this);">
+                <div id="tx-02" class="boat-image-plus-text boat-frame project-frame" onclick="clickOnTxPix(this);" onmouseover="mouseOnTxPix(this);">
                     <img src="./images/transmit/tx.02.png" width="100%">
-                    <span>PlaceHolder</span>
-                    <div>Voyages en Patrimoine<br/>Bateau&nbsp;: XXX</div>
+                    <span style="position: relative; display: block; bottom: 4px; line-height: 1.1em;">Voyages en Patrimoine<br/>Bateau&nbsp;: XXX</span>
                 </div>
-                <div id="tx-03" class="tooltip boat-image-plus-text boat-frame" onclick="clickOnTxPix(this);" onmouseover="mouseOnTxPix(this);">
+                <div id="tx-03" class="boat-image-plus-text boat-frame project-frame" onclick="clickOnTxPix(this);" onmouseover="mouseOnTxPix(this);">
                     <img src="./images/transmit/tx.03.png" width="100%">
-                    <span>PlaceHolder</span>
-                    <div>Cap Melvan<br/>Bateau&nbsp;: Karate 33</div>
+                    <span style="position: relative; display: block; bottom: 4px; line-height: 1.1em;">Cap Melvan<br/>Bateau&nbsp;: Karate 33</span>
                 </div>
-                <div id="tx-04" class="tooltip boat-image-plus-text boat-frame" onclick="clickOnTxPix(this);" onmouseover="mouseOnTxPix(this);">
+                <div id="tx-04" class="boat-image-plus-text boat-frame project-frame" onclick="clickOnTxPix(this);" onmouseover="mouseOnTxPix(this);">
                     <img src="./images/transmit/tx.04.png" width="100%">
-                    <span>PlaceHolder</span>
-                    <div>Voile Magazine<br/>Bateau&nbsp;: Super Arlequin</div>
+                    <span style="position: relative; display: block; bottom: 4px; line-height: 1.1em;">Saudade<br/>Bateau&nbsp;: Super Arlequin</span>
                 </div>
-                <div id="tx-05" class="tooltip boat-image-plus-text boat-frame" onclick="clickOnTxPix(this);" onmouseover="mouseOnTxPix(this);">
+                <div id="tx-05" class="boat-image-plus-text boat-frame project-frame" onclick="clickOnTxPix(this);" onmouseover="mouseOnTxPix(this);">
                     <img src="./images/transmit/tx.05.png" width="100%">
-                    <span>PlaceHolder</span>
-                    <div>Eh'Tak<br/>Bateau&nbsp;: Shipman 28</div>
+                    <span style="position: relative; display: block; bottom: 4px; line-height: 1.1em;">Eh'Tak<br/>Bateau&nbsp;: Shipman 28</span>
+                </div>
+                <div id="tx-06" class="boat-image-plus-text boat-frame project-frame" onclick="clickOnTxPix(this);" onmouseover="mouseOnTxPix(this);">
+                    <img src="./images/boats/dummy.boat.jpg" width="100%">
+                    <span style="position: relative; display: block; bottom: 4px; line-height: 1.1em;">Coraxy<br/>Bateau&nbsp;: Cognac</span>
+                </div>
+                <div id="tx-07" class="boat-image-plus-text boat-frame project-frame" onclick="clickOnTxPix(this);" onmouseover="mouseOnTxPix(this);">
+                    <img src="./images/boats/dummy.boat.jpg" width="100%">
+                    <span style="position: relative; display: block; bottom: 4px; line-height: 1.1em;">Tri Yann<br/>Bateau&nbsp;: Trimaran Allegro</span>
+                </div>
+                <div id="tx-08" class="boat-image-plus-text boat-frame project-frame" onclick="clickOnTxPix(this);" onmouseover="mouseOnTxPix(this);">
+                    <img src="./images/boats/dummy.boat.jpg" width="100%">
+                    <span style="position: relative; display: block; bottom: 4px; line-height: 1.1em;">Afri'can<br/>Bateau&nbsp;: F&eacute;licie, Presles</span>
+                </div>
+                <div id="tx-09" class="boat-image-plus-text boat-frame project-frame" onclick="clickOnTxPix(this);" onmouseover="mouseOnTxPix(this);">
+                    <img src="./images/boats/taapuna.png" width="100%">
+                    <span style="position: relative; display: block; bottom: 4px; line-height: 1.1em;">Taapuna<br/>Bateau&nbsp;: Edel 660</span>
+                </div>
+                <div id="tx-10" class="boat-image-plus-text boat-frame project-frame" onclick="clickOnTxPix(this);" onmouseover="mouseOnTxPix(this);">
+                    <img src="./images/boats/manu-aviri.jpg" width="100%">
+                    <span style="position: relative; display: block; bottom: 4px; line-height: 1.1em;">Manu Aviri<br/>Bateau&nbsp;: Comanche</span>
+                </div>
+                <div id="tx-11" class="boat-image-plus-text boat-frame project-frame" onclick="clickOnTxPix(this);" onmouseover="mouseOnTxPix(this);">
+                    <img src="./images/boats/dummy.boat.jpg" width="100%">
+                    <span style="position: relative; display: block; bottom: 4px; line-height: 1.1em;">L'Heure Bleue<br/>Bateau&nbsp;: Arp&egrave;ge</span>
+                </div>
+                <div id="tx-12" class="boat-image-plus-text boat-frame project-frame" onclick="clickOnTxPix(this);" onmouseover="mouseOnTxPix(this);">
+                    <img src="./images/boats/dummy.boat.jpg" width="100%">
+                    <span style="position: relative; display: block; bottom: 4px; line-height: 1.1em;">Jolly Jumper<br/>Bateau&nbsp;: First 325</span>
+                </div>
+                <div id="tx-13" class="boat-image-plus-text boat-frame project-frame" onclick="clickOnTxPix(this);" onmouseover="mouseOnTxPix(this);">
+                    <img src="./images/boats/dummy.boat.jpg" width="100%">
+                    <span style="position: relative; display: block; bottom: 4px; line-height: 1.1em;">Saigane<br/>Bateau&nbsp;: Dufour 2800</span>
+                </div>
+                <div id="tx-14" class="boat-image-plus-text boat-frame project-frame" onclick="clickOnTxPix(this);" onmouseover="mouseOnTxPix(this);">
+                    <img src="./images/boats/dummy.boat.jpg" width="100%">
+                    <span style="position: relative; display: block; bottom: 4px; line-height: 1.1em;">Stiren ar Mor<br/>Bateau&nbsp;: Ghibli</span>
+                </div>
+                <div id="tx-15" class="boat-image-plus-text boat-frame project-frame" onclick="clickOnTxPix(this);" onmouseover="mouseOnTxPix(this);">
+                    <img src="./images/boats/dummy.boat.jpg" width="100%">
+                    <span style="position: relative; display: block; bottom: 4px; line-height: 1.1em;">Coevic 2<br/>Bateau&nbsp;: Mirage 28</span>
                 </div>
             </div>
         </div>

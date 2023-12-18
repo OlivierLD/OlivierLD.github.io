@@ -183,6 +183,10 @@ div.tooltip:hover span {
     padding: 20px;
 }
 
+.project-frame {
+    margin: 0 20px 0 20px;
+}
+
 .board-image {
     width: 100%;
 }

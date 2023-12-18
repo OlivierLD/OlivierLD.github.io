@@ -761,7 +761,7 @@ const THE_FLEET = [
         pix: "./images/boats/dummy.boat.jpg",
         type: "First 325",
         category: TO_GRAB,
-        base: "Somewhere"
+        base: "Les Sables d'Olonne"
     },
     { 
         name: "Melvan",
@@ -793,7 +793,7 @@ const THE_FLEET = [
         pix: "./images/boats/dummy.boat.jpg",
         type: "Sir 520",
         category: TO_GRAB,
-        base: "Somewhere"
+        base: "Saint Philibert"
     },
     { 
         name: "Stiren ar Mor",
