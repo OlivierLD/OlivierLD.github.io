@@ -220,7 +220,7 @@ div.tooltip:hover span {
     position: relative;
     width: 70px;
     height: 60px;
-    border: 2px solid black;
+    border: 2px solid transparent; /*black;*/
     border-radius: 50%;
     bottom: 380px;
     left: 214px;
@@ -236,7 +236,7 @@ div.tooltip:hover span {
     margin-bottom: 6px;
 }
 
-.badge-pc {
+/* .badge-pc {
     background: rgba(255, 115, 0, 0.25);
 }
 .badge-old {
@@ -244,7 +244,7 @@ div.tooltip:hover span {
 }
 .badge-grab {
     background: rgba(0, 255, 4, 0.25);
-}
+} */
 
 .data-header-div {
     margin: 0 100px 0 100px;
