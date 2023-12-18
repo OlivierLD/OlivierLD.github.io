@@ -181,9 +181,9 @@ let updateMenu = () => { // Multilang aspect.
 	document.querySelectorAll("#_23").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Projet : Eco-village Nautique" : "Project: Nautical Eco-village"));
 
 	document.querySelectorAll("#_3").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Nos actions&nbsp;" : "Our actions&nbsp;"));
-	document.querySelectorAll("#_31").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Transmettre" : "Transmitting"));
-	document.querySelectorAll("#_32").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "R&eacute;nover" : "Refitting"));
-	document.querySelectorAll("#_33").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Partager" : "Sharing"));
+	document.querySelectorAll("#_31").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Transmettre - <i style='font-style: italic;'>Les assos</i>" : "Transmitting - <i style='font-style: italic;'>Associations</i>"));
+	document.querySelectorAll("#_32").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "R&eacute;nover - <i style='font-style: italic;'>Le chantier</i>" : "Refitting - <i style='font-style: italic;'>The shipyard</i>"));
+	document.querySelectorAll("#_33").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Partager - <i style='font-style: italic;'>Le Club</i>" : "Sharing - <i style='font-style: italic;'>The Club</i>"));
 	// document.querySelectorAll("#_34").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Formations" : "Trainings"));
 	// document.querySelectorAll("#_35").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Partenaires" : "Partners"));
 
@@ -998,13 +998,13 @@ let fillOutFleet = filter => {
         badge.classList.add("badge");
         if (boat.category === OLD_BOAT) {
             badge.classList.add("badge-old");
-            badge.innerHTML = "Old<br/>boat";
+            badge.innerHTML = '<span style="font-size: 2.0em; background: transparent;">😢</span>'; // "Old<br/>boat";
         } else if (boat.category === CLUB) {
             badge.classList.add("badge-pc");
-            badge.innerHTML = "PC<br/>Club";
+            badge.innerHTML = '<span>😎</span>'; // "PC<br/>Club";
         } else if (boat.category === TO_GRAB) {
             badge.classList.add("badge-grab");
-            badge.innerHTML = (currentLang === 'FR') ? "&Agrave;<br/>saisir" : "Grab<br/>it!";
+            badge.innerHTML = '<span>🤩</span>'; // (currentLang === 'FR') ? "&Agrave;<br/>saisir" : "Grab<br/>it!";
         }
         div.appendChild(badge);
         container.appendChild(div);
@@ -1138,7 +1138,7 @@ let translate = (actuId) => {
                 }
                 let contentField01 = document.getElementById('fam-2023').querySelector('#content-01');
                 if (contentField01) {
-                    contentField01.innerHTML = 'Passe-Coque won the prize!';
+                    contentField01.innerHTML = 'Passe-Coque wins the "Audelor et R&eacute;gion Bretagne" prize, and a 5000€ check, for the creation of the boat-club of the association.';
                 }
                 // etc...
             }

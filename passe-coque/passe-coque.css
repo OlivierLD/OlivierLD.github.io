@@ -227,6 +227,15 @@ div.tooltip:hover span {
     padding-top: 10px;
     line-height: 1.0em;
 }
+.badge span {
+    font-size: 2.0em; 
+    background: transparent;
+    position: absolute;
+    vertical-align: middle;
+    padding-left: 18px;
+    margin-bottom: 6px;
+}
+
 .badge-pc {
     background: rgba(255, 115, 0, 0.25);
 }
