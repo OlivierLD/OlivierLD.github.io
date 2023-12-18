@@ -842,11 +842,14 @@ const INFO_SECTION = [
         section: "2023",
         content: [
             {
+                date: "Oct-2023",
+                title: "Festival des aventuriers",
+                content: "./actu/2023/fam.html"
+            },{
                 date: "Aug-2023",
                 title: "Carter Cup",
                 content: "./actu/2023/carter.cup.html"
-            },
-            {
+            },{
                 date: "Chepakan",
                 title: "Passe-Coque Trophy",
                 content: "./actu/2023/passe-coque.trophy.html"
@@ -1123,6 +1126,19 @@ let translate = (actuId) => {
                 let contentField01 = document.getElementById('cc-2023').querySelector('#content-01');
                 if (contentField01) {
                     contentField01.innerHTML = 'Jimmy was a winner!';
+                }
+                // etc...
+            }
+            break;
+        case 'fam-2023': // Festival dea Aventuries de la Mer 2023
+            if (currentLang === 'EN') {  // Then translate
+                let dateField = document.getElementById('fam-2023').querySelector('h2');
+                if (dateField) {
+                    dateField.innerText = "Festival des Aventuriers de la Mer, October 2023";
+                }
+                let contentField01 = document.getElementById('fam-2023').querySelector('#content-01');
+                if (contentField01) {
+                    contentField01.innerHTML = 'Passe-Coque won the prize!';
                 }
                 // etc...
             }
