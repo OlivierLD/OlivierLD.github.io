@@ -95,7 +95,7 @@ let clack = (origin) => {
             .then(response => {  // Warning... the NOT_FOUND error lands here, apparently.
                 console.log(`Data Response: ${response.status} - ${response.statusText}`);
 				if (response.status !== 200) { // There is a problem...
-					contentPlaceHolder.innerHTML = `Fetching ${contentName}...<br/> Data Response: ${response.status} - ${response.statusText}<br/><b>En d&eacute;veloppement...</b>`;
+					contentPlaceHolder.innerHTML = `Fetching ${contentName}...<br/> Data Response: ${response.status} - ${response.statusText}<br/><b>En d&eacute;veloppement...<br/>Disponible prochainement.</b>`;
 				} else {
 					response.text().then(doc => {
 						console.log(`Code data loaded, length: ${doc.length}.`);
@@ -487,7 +487,7 @@ let clickOnTxPix = (origin) => {
         .then(response => {  // Warning... the NOT_FOUND error lands here, apparently.
             console.log(`Data Response: ${response.status} - ${response.statusText}`);
             if (response.status !== 200) { // There is a problem...
-                dynamicContentContainer.innerHTML = `Fetching ${contentName}...<br/> Data Response: ${response.status} - ${response.statusText}<br/><b>En d&eacute;veloppement...</b>`;
+                dynamicContentContainer.innerHTML = `Fetching ${contentName}...<br/> Data Response: ${response.status} - ${response.statusText}<br/><b>En d&eacute;veloppement...<br/>Disponible prochainement.</b>`;
             } else {
                 response.text().then(doc => {
                     console.log(`${contentName} code data loaded, length: ${doc.length}.`);
@@ -545,7 +545,7 @@ let clickOnBoatPix = (origin) => {
         .then(response => {  // Warning... the NOT_FOUND error lands here, apparently.
             console.log(`Data Response: ${response.status} - ${response.statusText}`);
             if (response.status !== 200) { // There is a problem...
-                dynamicContentContainer.innerHTML = `Fetching ${contentName}...<br/> Data Response: ${response.status} - ${response.statusText}<br/><b>En d&eacute;veloppement...</b>`;
+                dynamicContentContainer.innerHTML = `Fetching ${contentName}...<br/> Data Response: ${response.status} - ${response.statusText}<br/><b>En d&eacute;veloppement...<br/>Disponible prochainement.</b>`;
             } else {
                 response.text().then(doc => {
                     console.log(`${contentName} code data loaded, length: ${doc.length}.`);
@@ -607,7 +607,7 @@ let aboutSomeone = (who) => {
         .then(response => {  // Warning... the NOT_FOUND error lands here, apparently.
             console.log(`Data Response: ${response.status} - ${response.statusText}`);
             if (response.status !== 200) { // There is a problem...
-                dialogContent.innerHTML = `Fetching ${contentName}...<br/> Data Response: ${response.status} - ${response.statusText}<br/><b>En d&eacute;veloppement...</b>`;
+                dialogContent.innerHTML = `Fetching ${contentName}...<br/> Data Response: ${response.status} - ${response.statusText}<br/><b>En d&eacute;veloppement...<br/>Disponible prochainement.</b>`;
             } else {
                 response.text().then(doc => {
                     console.log(`${contentName} code data loaded, length: ${doc.length}.`);
@@ -1084,7 +1084,7 @@ let fillOutActu = filter => {
                 .then(response => {  // Warning... the NOT_FOUND error lands here, apparently.
                     console.log(`Data Response: ${response.status} - ${response.statusText}`);
                     if (response.status !== 200) { // There is a problem...
-                        eventDiv.innerHTML = `Fetching ${event.content}...<br/> Data Response: ${response.status} - ${response.statusText}<br/><b>En d&eacute;veloppement...</b>`;
+                        eventDiv.innerHTML = `Fetching ${event.content}...<br/> Data Response: ${response.status} - ${response.statusText}<br/><b>En d&eacute;veloppement...<br/>Disponible prochainement.</b>`;
                     } else {
                         response.text().then(doc => {
                             console.log(`${event.content} code data loaded, length: ${doc.length}.`);
