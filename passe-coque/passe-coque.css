@@ -267,7 +267,7 @@ div.tooltip:hover span {
 .background-container:after {
     content: '';
     /* background: url("./photos.michel.02/02.jpg") no-repeat center center; */
-    background: url("./photos.michel.02/02.jpg");
+    background: url("./images/coraxy.jpg");
 
     background-size: 100%; /* auto; */ /* cover; */
     background-repeat: no-repeat;
