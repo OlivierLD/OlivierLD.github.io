@@ -846,6 +846,14 @@ const INFO_SECTION = [
                 title: "Festival des aventuriers",
                 content: "./actu/2023/fam.html"
             },{
+                date: "Sep-2023",
+                title: "Forum Asso",
+                content: "./actu/2023/forum.html"
+            },{
+                date: "Sep-2023",
+                title: "Assises de la mer",
+                content: "./actu/2023/assises.html"
+            },{
                 date: "Aug-2023",
                 title: "Carter Cup",
                 content: "./actu/2023/carter.cup.html"
