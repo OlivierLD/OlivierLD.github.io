@@ -1,18 +1,63 @@
-<div style="display: grid; grid-template-columns: auto auto;">
-    <img src="./images/boats/eh-tak.jpg" width="100%">
-    <div style="padding: 14px;">
-        <h2>Eh'Tak</h2>
-        Shipman 28, based in Etel<br/>
-        Blah Blah Blah...
+<div style="min-height: 600px;">
+    <div class="tab" style="margin-top: 30px; margin-bottom: 10px; display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto;"> <!-- TODO Improve the grid-template... -->
+        <button class="tablinks tab-active" onclick="openTab(event, 'eh-tak-01');" title="Sommaire">Sommaire</button>
+        <button class="tablinks" onclick="openTab(event, 'eh-tak-02');">Photos</button>
+        <button class="tablinks" onclick="openTab(event, 'eh-tak-03');">Contact</button>
     </div>
-</div>
-<div>
-    <h2>The boat</h2>
-    Shipman 28
-</div>
-<div>
-    <h2>More info...</h2>
-    Contact: Jeff Allais.<br/>
-    Tel: . . .<br/>
-    Email: . . .
+
+    <div id="eh-tak-01" class="tab-section" style="display: block;">
+        <div style="display: grid; grid-template-columns: auto auto;">
+            <img src="./images/boats/eh-tak.jpg" width="100%">
+            <div style="padding: 14px;">
+                <h2>Eh'Tak</h2>
+                Shipman 28, based in &Eacute;tel<br/>
+                <ul>
+                    <li>Segel Jacht Shipyard (Sweden)</li>
+                    <li>Launched: 1973</li>
+                </ul>
+            </div>
+        </div>
+        <div>
+            <h2>The boat</h2>
+            <div>
+                Built in nearly 1000 units in the 1970s, this family keelboat was designed by Swedish architect Olle Enderlein. 
+                With a draft of 1.55m and a beam of only 2.60m, this small family cruising sailboat is an ideal partner for cruising along the coast. 
+                It is equipped with 4 to 5 beds: 2 people in the front cabin, 1 person in the rear bunk and 1 to 2 people can sleep in the cockpit where the sliding 
+                dining table gives way to a final berth. 
+                The boat is equipped with toilets and a two-burner gas stove. A fridge container (not powered) but cleverly placed at the bottom of the hold keeps food cool.        
+            </div>
+            <h2>Son histoire</h2>
+            <div>
+                Named Eh'Tak in tribute to the name given to the astral cartography used by the Polynesian peoples, this charming sailboat with its inimitable 
+                Nordic style has already had many lives. Its last owner, Werner Hesslauer - a doctor of Swiss-German origin, carried out major salvage 
+                work to put it back on its feet (the boat having been abandoned).
+                Werner had to reluctantly part with the boat for family reasons with the wish that the boat continues to sail usefully with associations.
+            </div>
+            <h2>Associative projects</h2>
+            <div>
+                The boat is currently being refitted to accommodate a new gas stove and a gas connection (replacing a kerosene stove, considered too dangerous).
+                The boat will join the Passe-Coque Club from 2024 in order to bring the joys of coastal cruising to as many people as possible.
+            </div>
+        </div>
+    </div>
+
+    <div id="eh-tak-02" class="tab-section" style="display: none;">
+        <slide-show id="eh-tak-slide-show"
+                    width="800"
+                    height="400">
+            <slide-show-image src="./images/boats/ehtak/RubisCup.04.jpeg" title="Eh Tak - 1"></slide-show-image>
+            <slide-show-image src="./images/boats/ehtak/RubisCup.05.jpeg" title="Eh Tak - 2"></slide-show-image>
+            <slide-show-image src="./images/boats/ehtak/RubisCup.06.jpeg" title="Eh Tak - 3"></slide-show-image>
+            <slide-show-image src="./images/boats/ehtak/RubisCup.07.jpeg" title="Eh Tak - 4"></slide-show-image>
+            <slide-show-image src="./images/boats/ehtak/RubisCup.08.jpeg" title="Eh Tak - 5"></slide-show-image>
+        </slide-show>
+    </div>
+
+    <div id="eh-tak-03" class="tab-section" style="display: none;">
+        <h2>More info...</h2>
+        Referent: Jean-Fran&ccedil;ois Allais.<br/>
+        Tel: +33 6 35 59 18 80<br/>
+        Email: jeff[@]passeurdecoute.fr<br/>
+        Boat Club availability: YES
+    </div>
 </div>
