@@ -147,6 +147,10 @@ ul#navigation ul li a {
 	z-index: 100;
 }
 
+ul#navigation ul li a * {
+	color: #616161;
+}
+
 ul#navigation ul li:first-child {
 	margin-top: 36px;  /* Related to padding: 25px 10px; in ul#navigation li a, and #nav-menu font-size */
 }
