@@ -668,7 +668,7 @@ const THE_FLEET = [
         base: "Saint Philibert"
     },
     {
-        name: "Manu Aviri",
+        name: "Manu Oviri",
         id: "manu-aviri",
         pix: "./images/boats/manu-aviri.jpg",
         type: "Comanche",
