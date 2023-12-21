@@ -661,15 +661,15 @@ const THE_FLEET = [
     },
     {
         name: "Coraxy",
-        id: "dummy-boat",
-        pix: "./images/boats/dummy.boat.jpg",
+        id: "coraxy",
+        pix: "./images/boats/coraxy.png",
         type: "Cognac",
         category: CLUB,
         base: "Saint Philibert"
     },
     {
         name: "Manu Oviri",
-        id: "manu-aviri",
+        id: "manu-oviri",
         pix: "./images/boats/manu-aviri.jpg",
         type: "Comanche",
         category: CLUB,
@@ -741,11 +741,11 @@ const THE_FLEET = [
     },
     { 
         name: "Taapuna",
-        id: "dummy-boat",
+        id: "taapuna",
         pix: "./images/boats/taapuna.png",
         type: "Edel 660",
         category: CLUB,
-        base: "Somewhere"
+        base: "Rivi&egrave;re de Saint Philibert"
     },
     { 
         name: "L'heure bleue",
@@ -813,16 +813,16 @@ const THE_FLEET = [
     },
     { 
         name: "Ma Enez",
-        id: "dummy-boat",
-        pix: "./images/boats/dummy.boat.jpg",
+        id: "ma-enez",
+        pix: "./images/boats/ma.enez.png",
         type: "Symphonie",
         category: TO_GRAB,
-        base: "Somewhere"
+        base: "La Trinit&eacute;"
     },
     { 
         name: "Saudade",
-        id: "dummy-boat",
-        pix: "./images/boats/dummy.boat.jpg",
+        id: "saudade",
+        pix: "./images/boats/saudade.png",
         type: "Super Arlequin",
         category: TO_GRAB,
         base: "Somewhere"
