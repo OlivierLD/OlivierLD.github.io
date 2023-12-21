@@ -829,11 +829,11 @@ const THE_FLEET = [
     },
     { 
         name: "Imagine",
-        id: "dummy-boat",
-        pix: "./images/boats/dummy.boat.jpg",
-        type: "Selection",
+        id: "imagine",
+        pix: "./images/boats/selection.png",
+        type: "Selection 37",
         category: TO_GRAB,
-        base: "Somewhere"
+        base: "Ouistreham"
     }
 ];
 
