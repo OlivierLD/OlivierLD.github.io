@@ -806,7 +806,7 @@ const THE_FLEET = [
     { 
         name: "Coevic 2",
         id: "coevic-2",
-        pix: "./images/boats/coevic.2.png",
+        pix: "./images/boats/coevic-2.png",
         type: "Mirage 28",
         category: TO_GRAB,
         base: "Lorient"
