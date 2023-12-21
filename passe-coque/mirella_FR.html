@@ -1,0 +1,59 @@
+
+<div style="min-height: 600px;">
+    <div class="tab" style="margin-top: 30px; margin-bottom: 10px; display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto;"> <!-- TODO Improve the grid-template... -->
+        <button class="tablinks tab-active" onclick="openTab(event, 'mirella-01');" title="Sommaire">Sommaire</button>
+        <button class="tablinks" onclick="openTab(event, 'mirella-02');">Photos</button>
+        <button class="tablinks" onclick="openTab(event, 'mirella-03');">Contact</button>
+    </div>
+
+    <div id="mirella-01" class="tab-section" style="display: block;">
+        <div style="display: grid; grid-template-columns: auto auto;">
+            <img src="./images/boats/mirella.png" width="100%">
+            <div style="padding: 14px;">
+                <h2>Mirella</h2>
+                Le bateau est au Chantier du Grand Val &agrave; Minihic sur Rance pour un refit complet qui devrait prendre un an.<br/>
+                Chantier : Constructions M&eacute;caniques de Normandie (CMN).<br/>
+                Ce projet est li&eacute; &agrave; la valeur patrimoniale de ce bateau.
+            </div>
+        </div>
+        <div>
+            <h2>Le Bateau</h2>
+            <div>
+                <ul>
+                    <li>Ann&eacute;e : 1964 </li>
+                    <li>Mirella est le n°3 sur 5 construits</li>
+                    <li>Construction en bois moul&eacute;</li>
+                    <li>Longueur de coque : 12,40 m</li>
+                    <li>Largeur : 3,15 m</li>
+                    <li>Tirant d'eau : 1,98 m</li>
+                </ul>            
+            </div>
+        </div>
+    </div>
+
+    <div id="mirella-02" class="tab-section" style="display: none;">
+        <slide-show id="eh-tak-slide-show"
+                    width="600"
+                    height="400">
+            <slide-show-image src="./images/boats/mirella/01.jpg" title="Mirella - 1"></slide-show-image>
+            <slide-show-image src="./images/boats/mirella/02.jpg" title="Mirella - 2"></slide-show-image>
+            <slide-show-image src="./images/boats/mirella/03.jpg" title="Mirella - 3"></slide-show-image>
+            <slide-show-image src="./images/boats/mirella/04.jpg" title="Mirella - 4"></slide-show-image>
+            <slide-show-image src="./images/boats/mirella/05.jpg" title="Mirella - 5"></slide-show-image>
+            <slide-show-image src="./images/boats/mirella/06.jpg" title="Mirella - 6"></slide-show-image>
+            <slide-show-image src="./images/boats/mirella/07.jpg" title="Mirella - 7"></slide-show-image>
+            <slide-show-image src="./images/boats/mirella/08.jpg" title="Mirella - 8"></slide-show-image>
+            <slide-show-image src="./images/boats/mirella/09.jpg" title="Mirella - 9"></slide-show-image>
+            <slide-show-image src="./images/boats/mirella/10.jpg" title="Mirella - 10"></slide-show-image>
+            <slide-show-image src="./images/boats/mirella/11.jpg" title="Mirella - 11"></slide-show-image>
+            <slide-show-image src="./images/boats/mirella/12.jpg" title="Mirella - 12"></slide-show-image>
+        </slide-show>
+    </div>
+
+    <div id="mirella-03" class="tab-section" style="display: none;">
+        <h2>Plus d'infos...</h2>
+        R&eacute;f&eacute;rent : Juan Maria Andr&egrave;s<br/>
+        Tel : + 33 6 68 21 01 10  <br/>
+        Email : andres.juan@wanadoo.fr
+    </div>
+</div>
