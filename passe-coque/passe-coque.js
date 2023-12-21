@@ -796,9 +796,9 @@ const THE_FLEET = [
         base: "Saint Philibert"
     },
     { 
-        name: "Stiren ar Mor",
+        name: "Stiren er Mor",
         id: "dummy-boat",
-        pix: "./images/boats/dummy.boat.jpg",
+        pix: "./images/boats/stiren.er.mor.png",
         type: "Ghibli",
         category: CLUB,
         base: "La Trinit&eacute;"
