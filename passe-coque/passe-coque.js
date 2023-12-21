@@ -701,11 +701,11 @@ const THE_FLEET = [
     },
     {
         name: "Mirella",
-        id: "dummy-boat",
-        pix: "./images/boats/dummy.boat.jpg",
+        id: "mirella",
+        pix: "./images/boats/mirella.png",
         type: "Maica 12,50",
         category: CLUB,
-        base: "Somewhere"
+        base: "Minihic"
     },
     { 
         name: "Imagine",
@@ -796,7 +796,7 @@ const THE_FLEET = [
         base: "Saint Philibert"
     },
     { 
-        name: "Stiren er Mor",
+        name: "Stiren ar Mor",
         id: "dummy-boat",
         pix: "./images/boats/stiren.er.mor.png",
         type: "Ghibli",
@@ -805,11 +805,11 @@ const THE_FLEET = [
     },
     { 
         name: "Coevic 2",
-        id: "dummy-boat",
-        pix: "./images/boats/dummy.boat.jpg",
+        id: "coevic-2",
+        pix: "./images/boats/coevic.2.png",
         type: "Mirage 28",
         category: TO_GRAB,
-        base: "Somewhere"
+        base: "Lorient"
     },
     { 
         name: "Ma Enez",
