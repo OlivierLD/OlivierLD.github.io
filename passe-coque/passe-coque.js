@@ -728,7 +728,7 @@ const THE_FLEET = [
         id: "dummy-boat",
         pix: "./images/boats/dummy.boat.jpg",
         type: "Arp&egrave;ge",
-        category: TO_GRAB,
+        category: OLD_BOAT,
         base: "Saint Philibert"
     },
     { 
