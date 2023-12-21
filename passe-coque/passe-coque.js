@@ -708,14 +708,6 @@ const THE_FLEET = [
         base: "Minihic"
     },
     { 
-        name: "Imagine",
-        id: "dummy-boat",
-        pix: "./images/boats/dummy.boat.jpg",
-        type: "Selection",
-        category: TO_GRAB,
-        base: "Somewhere"
-    },
-    { 
         name: "Tri Yann",
         id: "dummy-boat",
         pix: "./images/boats/dummy.boat.jpg",
