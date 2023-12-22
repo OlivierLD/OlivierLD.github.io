@@ -823,7 +823,7 @@ const THE_FLEET = [
         name: "Imagine",
         id: "imagine",
         pix: "./images/boats/selection.png",
-        type: "Selection 37",
+        type: "Selection&nbsp;37",
         category: TO_GRAB,
         base: "Ouistreham"
     }
