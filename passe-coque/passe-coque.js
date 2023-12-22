@@ -777,7 +777,7 @@ const THE_FLEET = [
         pix: "./images/boats/trehudal.png",
         type: "Nicholson 33",
         category: CLUB,
-        base: "La Trinit&eacute;"
+        base: "La&nbsp;Trinit&eacute;"
     },
     { 
         name: "Jules Verne",
@@ -793,7 +793,7 @@ const THE_FLEET = [
         pix: "./images/boats/stiren.er.mor.png",
         type: "Ghibli",
         category: CLUB,
-        base: "La Trinit&eacute;"
+        base: "La&nbsp;Trinit&eacute;"
     },
     { 
         name: "Coevic 2",
@@ -809,7 +809,7 @@ const THE_FLEET = [
         pix: "./images/boats/ma.enez.png",
         type: "Symphonie",
         category: TO_GRAB,
-        base: "La Trinit&eacute;"
+        base: "La&nbsp;Trinit&eacute;"
     },
     { 
         name: "Saudade",
