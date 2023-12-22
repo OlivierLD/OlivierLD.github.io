@@ -773,10 +773,10 @@ const THE_FLEET = [
     },
     { 
         name: "Trehudal",
-        id: "dummy-boat",
-        pix: "./images/boats/dummy.boat.jpg",
+        id: "trehudal",
+        pix: "./images/boats/trehudal.png",
         type: "Nicholson 33",
-        category: TO_GRAB,
+        category: CLUB,
         base: "La Trinit&eacute;"
     },
     { 
