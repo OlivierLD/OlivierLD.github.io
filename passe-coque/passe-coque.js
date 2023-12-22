@@ -665,7 +665,7 @@ const THE_FLEET = [
         pix: "./images/boats/coraxy.png",
         type: "Cognac",
         category: CLUB,
-        base: "Saint Philibert"
+        base: "Saint&nbsp;Philibert"
     },
     {
         name: "Manu Oviri",
@@ -713,7 +713,7 @@ const THE_FLEET = [
         pix: "./images/boats/tri.yann.png",
         type: "Trimaran Allegro",
         category: CLUB,
-        base: "Saint Philibert"
+        base: "Saint&nbsp;Philibert"
     },
     { 
         name: "Rozen an Avel",
@@ -721,7 +721,7 @@ const THE_FLEET = [
         pix: "./images/boats/dummy.boat.jpg",
         type: "Arp&egrave;ge",
         category: OLD_BOAT,
-        base: "Saint Philibert"
+        base: "Saint&nbsp;Philibert"
     },
     { 
         name: "La R&ecirc;veuse",
@@ -737,7 +737,7 @@ const THE_FLEET = [
         pix: "./images/boats/taapuna.png",
         type: "Edel 660",
         category: CLUB,
-        base: "Rivi&egrave;re de Saint Philibert"
+        base: "Rivi&egrave;re de Saint&nbsp;Philibert"
     },
     { 
         name: "L'heure bleue",
@@ -785,7 +785,7 @@ const THE_FLEET = [
         pix: "./images/boats/dummy.boat.jpg",
         type: "Sir 520",
         category: TO_GRAB,
-        base: "Saint Philibert"
+        base: "Saint&nbsp;Philibert"
     },
     { 
         name: "Stiren ar Mor",
