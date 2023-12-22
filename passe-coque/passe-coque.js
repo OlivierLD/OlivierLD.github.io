@@ -709,10 +709,10 @@ const THE_FLEET = [
     },
     { 
         name: "Tri Yann",
-        id: "dummy-boat",
-        pix: "./images/boats/dummy.boat.jpg",
+        id: "tri-yann",
+        pix: "./images/boats/tri.yann.png",
         type: "Trimaran Allegro",
-        category: TO_GRAB,
+        category: CLUB,
         base: "Saint Philibert"
     },
     { 
