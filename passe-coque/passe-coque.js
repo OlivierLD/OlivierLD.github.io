@@ -146,6 +146,10 @@ let clack = (origin) => {
                                 window.setTimeout(() => {
                                     fillOutActu(null); // Populate default (full) news list
                                 }, 500);
+                            } else if (originId === "33") { // Partager, PCC
+                                window.setTimeout(() => {
+                                    fillOutFleet(CLUB, "share-container", false); // Populate PCC boat list
+                                }, 500);
                             }
 						}
 					});
@@ -506,7 +510,7 @@ let clickOnTxPix = (origin) => {
             }
             console.debug("Failed to get code data..." + (error ? JSON.stringify(error, null, 2) : ' - ') + ', ' + (message ? message : ' - '));
             // Plus tard...
-            dynamicContentContainer.innerHTML = `<b>${contentName} ${currentLang === 'FR' ? ' introuvable...' : ' not found...'}</b>`;
+            dynamicContentContainer.innerHTML = `<b>${contentName} ${currentLang === 'FR' ? ' introuvable...<br/>Bient&ocirc;t dispo !' : ' not found...<br/>Avai;able soon!'}</b>`;
         });
 
     // dynamicContentContainer.innerHTML = content;
@@ -564,7 +568,7 @@ let clickOnBoatPix = (origin) => {
             }
             console.debug("Failed to get code data..." + (error ? JSON.stringify(error, null, 2) : ' - ') + ', ' + (message ? message : ' - '));
             // Plus tard...
-            dynamicContentContainer.innerHTML = `<b>${contentName} ${currentLang === 'FR' ? ' introuvable...' : ' not found...'}</b>`;
+            dynamicContentContainer.innerHTML = `<b>${contentName} ${currentLang === 'FR' ? ' introuvable...<br/>Bient&ocirc;t dispo !' : ' not found...<br/>Avai;able soon!'}</b>`;
         });
 
     // dynamicContentContainer.innerHTML = content;
@@ -626,7 +630,7 @@ let aboutSomeone = (who) => {
             }
             console.debug("Failed to get code data..." + (error ? JSON.stringify(error, null, 2) : ' - ') + ', ' + (message ? message : ' - '));
             // Plus tard...
-            dialogContent.innerHTML = `<b>${contentName} ${currentLang === 'FR' ? ' introuvable...' : ' not found...'}</b>`;
+            dialogContent.innerHTML = `<b>${contentName} ${currentLang === 'FR' ? ' introuvable...<br/>Bient&ocirc;t dispo !' : ' not found...<br/>Avai;able soon!'}</b>`;
         });
 
     if (aboutDialog.show !== undefined) {
@@ -637,6 +641,7 @@ let aboutSomeone = (who) => {
     }
 };
 
+const NONE = 1;
 const CLUB = 2;
 const OLD_BOAT = 3;
 const TO_GRAB = 4;
@@ -680,7 +685,7 @@ const THE_FLEET = [
         id: "pen-duick",
         pix: "./images/boats/pen.duick.jpg",
         type: "W. Fife",
-        category: TO_GRAB,
+        category: NONE,
         base: "Lorient"
     },
     { 
@@ -696,7 +701,7 @@ const THE_FLEET = [
         id: "dummy-boat",
         pix: "./images/boats/dummy.boat.jpg",
         type: "Gib'Sea&nbsp;33",
-        category: OLD_BOAT,
+        category: NONE,
         base: "--"
     },
     { 
@@ -704,7 +709,7 @@ const THE_FLEET = [
         id: "dummy-boat",
         pix: "./images/boats/dummy.boat.jpg",
         type: "Offshore&nbsp;35",
-        category: OLD_BOAT,
+        category: NONE,
         base: "--"
     },
     { 
@@ -728,7 +733,7 @@ const THE_FLEET = [
         id: "dummy-boat",
         pix: "./images/boats/dummy.boat.jpg",
         type: "Evasion 32",
-        category: TO_GRAB,
+        category: NONE,
         base: "&Eacute;tel"
     },
     {
@@ -736,7 +741,7 @@ const THE_FLEET = [
         id: "dummy-boat",
         pix: "./images/boats/dummy.boat.jpg",
         type: "Flying Phantom",
-        category: TO_GRAB,
+        category: NONE,
         base: "Saint&nbsp;Philibert"
     },
     {
@@ -744,7 +749,7 @@ const THE_FLEET = [
         id: "mirella",
         pix: "./images/boats/mirella.png",
         type: "Maica 12,50",
-        category: TO_GRAB,
+        category: NONE,
         base: "Saint&nbsp;Brieuc"
     },
     { 
@@ -760,7 +765,7 @@ const THE_FLEET = [
         id: "dummy-boat",
         pix: "./images/boats/dummy.boat.jpg",
         type: "Arp&egrave;ge",
-        category: OLD_BOAT,
+        category: NONE,
         base: "Saint&nbsp;Philibert"
     },
     { 
@@ -784,7 +789,7 @@ const THE_FLEET = [
         id: "dummy-boat",
         pix: "./images/boats/dummy.boat.jpg",
         type: "Damien 40",
-        category: TO_GRAB,
+        category: NONE,
         base: "Arzal"
     },
     { 
@@ -824,7 +829,7 @@ const THE_FLEET = [
         id: "dummy-boat",
         pix: "./images/boats/dummy.boat.jpg",
         type: "One off",
-        category: TO_GRAB,
+        category: NONE,
         base: "Lorient"
     },
     { 
@@ -832,7 +837,7 @@ const THE_FLEET = [
         id: "dummy-boat",
         pix: "./images/boats/dummy.boat.jpg",
         type: "Karat&eacute;",
-        category: TO_GRAB,
+        category: NONE,
         base: "--"
     },
     { 
@@ -904,7 +909,7 @@ const THE_FLEET = [
         id: "imagine",
         pix: "./images/boats/selection.png",
         type: "Selection&nbsp;37",
-        category: TO_GRAB,
+        category: NONE,
         base: "Ouistreham"
     }
 ];
@@ -1027,9 +1032,9 @@ let updateFilter = radio => {
     }
 };
 
-let fillOutFleet = filter => {
+let fillOutFleet = (filter, containerId = 'fleet-container', withBadge = true) => {
 
-    let container = document.getElementById('fleet-container');
+    let container = document.getElementById(containerId); // 'fleet-container');
     // drop all children
     while (container.hasChildNodes()) {
         container.removeChild(container.lastChild);
@@ -1077,19 +1082,21 @@ let fillOutFleet = filter => {
         span.innerHTML = `${boat.name}<br/>${boat.type}, ${boat.base}`;
         div.appendChild(span);
         // Badge
-        let badge = document.createElement('div');
-        badge.classList.add("badge");
-        if (boat.category === OLD_BOAT) {
-            badge.classList.add("badge-old");
-            badge.innerHTML = '<span style="font-size: 2.0em; background: transparent;">😢</span>'; // "Old<br/>boat";
-        } else if (boat.category === CLUB) {
-            badge.classList.add("badge-pc");
-            badge.innerHTML = '<span>😎</span>'; // "PC<br/>Club";
-        } else if (boat.category === TO_GRAB) {
-            badge.classList.add("badge-grab");
-            badge.innerHTML = '<span>🤩</span>'; // (currentLang === 'FR') ? "&Agrave;<br/>saisir" : "Grab<br/>it!";
+        if (withBadge) {
+            let badge = document.createElement('div');
+            badge.classList.add("badge");
+            if (boat.category === OLD_BOAT) {
+                badge.classList.add("badge-old");
+                badge.innerHTML = '<span style="font-size: 2.0em; background: transparent;">😢</span>'; // "Old<br/>boat";
+            } else if (boat.category === CLUB) {
+                badge.classList.add("badge-pc");
+                badge.innerHTML = '<span>😎</span>'; // "PC<br/>Club";
+            } else if (boat.category === TO_GRAB) {
+                badge.classList.add("badge-grab");
+                badge.innerHTML = '<span>🤩</span>'; // (currentLang === 'FR') ? "&Agrave;<br/>saisir" : "Grab<br/>it!";
+            }
+            div.appendChild(badge);
         }
-        div.appendChild(badge);
         container.appendChild(div);
     });
     console.log("Done with fillOutFleet");
@@ -1161,6 +1168,7 @@ let fillOutActu = filter => {
             // content: "./actu/2023/passe-coque.trophy.html"
             console.log(`Adding event ${event.title}`);
             let eventDiv = document.createElement('div');
+            eventDiv.style = "margin: 20px;";
             sectionDiv.appendChild(eventDiv);
             console.log(`Now fetching ${event.content}`); // TODO Language !!
             fetch(event.content)
@@ -1186,7 +1194,7 @@ let fillOutActu = filter => {
                     }
                     console.debug("Failed to get code data..." + (error ? JSON.stringify(error, null, 2) : ' - ') + ', ' + (message ? message : ' - '));
                     // Plus tard...
-                    eventDiv.innerHTML = `<b>${contentName} ${currentLang === 'FR' ? ' introuvable...' : ' not found...'}</b>`;
+                    eventDiv.innerHTML = `<b>${contentName} ${currentLang === 'FR' ? ' introuvable...<br/>Bient&ocirc;t dispo !' : ' not found...<br/>Avai;able soon!'}</b>`;
                 });
         });
         container.appendChild(sectionDiv);
