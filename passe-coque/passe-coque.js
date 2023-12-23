@@ -656,7 +656,7 @@ const THE_FLEET = [
         id: "pordin-nancq",
         pix: "./images/boats/pordin.jpg",
         type: "Carter 37",
-        category: OLD_BOAT,
+        category: CLUB,
         base: "Locmiqu&eacute;lic"
     },
     {
@@ -680,7 +680,7 @@ const THE_FLEET = [
         id: "pen-duick",
         pix: "./images/boats/pen.duick.jpg",
         type: "W. Fife",
-        category: OLD_BOAT,
+        category: TO_GRAB,
         base: "Lorient"
     },
     { 
@@ -688,24 +688,64 @@ const THE_FLEET = [
         id: "dummy-boat",
         pix: "./images/boats/dummy.boat.jpg",
         type: "First Class 12",
+        category: TO_GRAB,
+        base: "--"
+    },
+    { 
+        name: "Atlantide",
+        id: "dummy-boat",
+        pix: "./images/boats/dummy.boat.jpg",
+        type: "Gib'Sea&nbsp;33",
         category: OLD_BOAT,
-        base: "Somewhere"
+        base: "--"
+    },
+    { 
+        name: "Lapyx",
+        id: "dummy-boat",
+        pix: "./images/boats/dummy.boat.jpg",
+        type: "Offshore&nbsp;35",
+        category: OLD_BOAT,
+        base: "--"
+    },
+    { 
+        name: "Kelt 620",
+        id: "dummy-boat",
+        pix: "./images/boats/dummy.boat.jpg",
+        type: "Ketl 620",
+        category: CLUB,
+        base: "&Eacute;tel"
+    },
+    { 
+        name: "Ia Orana",
+        id: "dummy-boat",
+        pix: "./images/boats/dummy.boat.jpg",
+        type: "Milord",
+        category: TO_GRAB,
+        base: "--"
     },
     {
         name: "Melkart",
         id: "dummy-boat",
         pix: "./images/boats/dummy.boat.jpg",
         type: "Evasion 32",
-        category: OLD_BOAT,
+        category: TO_GRAB,
         base: "&Eacute;tel"
+    },
+    {
+        name: "Babou",
+        id: "dummy-boat",
+        pix: "./images/boats/dummy.boat.jpg",
+        type: "Flying Phantom",
+        category: TO_GRAB,
+        base: "Saint&nbsp;Philibert"
     },
     {
         name: "Mirella",
         id: "mirella",
         pix: "./images/boats/mirella.png",
         type: "Maica 12,50",
-        category: CLUB,
-        base: "Minihic"
+        category: TO_GRAB,
+        base: "Saint&nbsp;Brieuc"
     },
     { 
         name: "Tri Yann",
@@ -724,12 +764,36 @@ const THE_FLEET = [
         base: "Saint&nbsp;Philibert"
     },
     { 
+        name: "Avel Mad",
+        id: "dummy-boat",
+        pix: "./images/boats/dummy.boat.jpg",
+        type: "Mousquetaire",
+        category: CLUB,
+        base: "Le&nbsp;Bono"
+    },
+    { 
+        name: "F&eacute;licie",
+        id: "dummy-boat",
+        pix: "./afri.can/felicie.african.jpg",
+        type: "One off Presles",
+        category: OLD_BOAT,
+        base: "Dakar"
+    },
+    { 
         name: "La R&ecirc;veuse",
         id: "dummy-boat",
         pix: "./images/boats/dummy.boat.jpg",
         type: "Damien 40",
         category: TO_GRAB,
-        base: "Somewhere"
+        base: "Arzal"
+    },
+    { 
+        name: "Neptune 99",
+        id: "dummy-boat",
+        pix: "./images/boats/dummy.boat.jpg",
+        type: "Neptune 99",
+        category: CLUB,
+        base: "Le&nbsp;Crouesty"
     },
     { 
         name: "Taapuna",
@@ -744,16 +808,24 @@ const THE_FLEET = [
         id: "dummy-boat",
         pix: "./images/boats/dummy.boat.jpg",
         type: "Arp&egrave;ge",
-        category: TO_GRAB,
-        base: "Somewhere"
+        category: CLUB,
+        base: "Golfe&nbsp;du&nbsp;Morbihan"
     },
     { 
         name: "Jolly Jumper",
         id: "dummy-boat",
         pix: "./images/boats/dummy.boat.jpg",
         type: "First 325",
+        category: CLUB,
+        base: "Les&nbsp;Sables&nbsp;d'Olonne"
+    },
+    { 
+        name: "Passpartout",
+        id: "dummy-boat",
+        pix: "./images/boats/dummy.boat.jpg",
+        type: "One off",
         category: TO_GRAB,
-        base: "Les Sables d'Olonne"
+        base: "Lorient"
     },
     { 
         name: "Melvan",
@@ -761,15 +833,23 @@ const THE_FLEET = [
         pix: "./images/boats/dummy.boat.jpg",
         type: "Karat&eacute;",
         category: TO_GRAB,
-        base: "Somewhere"
+        base: "--"
     },
     { 
         name: "Saigane",
         id: "dummy-boat",
         pix: "./images/boats/dummy.boat.jpg",
         type: "Dufour 2800",
-        category: TO_GRAB,
-        base: "Somewhere"
+        category: CLUB,
+        base: "Port&nbsp;Blanc"
+    },
+    { 
+        name: "Anao",
+        id: "dummy-boat",
+        pix: "./images/boats/dummy.boat.jpg",
+        type: "Folie Douce",
+        category: OLD_BOAT,
+        base: "&Eacute;tel"
     },
     { 
         name: "Trehudal",
@@ -800,15 +880,15 @@ const THE_FLEET = [
         id: "coevic-2",
         pix: "./images/boats/coevic-2.png",
         type: "Mirage 28",
-        category: TO_GRAB,
-        base: "Lorient"
+        category: CLUB,
+        base: "Kernevel"
     },
     { 
         name: "Ma Enez",
         id: "ma-enez",
         pix: "./images/boats/ma.enez.png",
         type: "Symphonie",
-        category: TO_GRAB,
+        category: CLUB,
         base: "La&nbsp;Trinit&eacute;"
     },
     { 
@@ -816,8 +896,8 @@ const THE_FLEET = [
         id: "saudade",
         pix: "./images/boats/saudade.png",
         type: "Super Arlequin",
-        category: TO_GRAB,
-        base: "Somewhere"
+        category: CLUB,
+        base: "Le&nbsp;Bono"
     },
     { 
         name: "Imagine",
@@ -983,11 +1063,14 @@ let fillOutFleet = filter => {
         // div.title = boat.name;
         div.onclick = function() { clickOnBoatPix(this); }; 
         div.onmouseover = function() { mouseOnTxPix(this); };
+        let imgContainer = document.createElement('div');
+        imgContainer.classList.add("boat-image-container");
         let img = document.createElement('img');
         img.src = boat.pix;
         // img.width = "100%";
         img.style.width = "100%";
-        div.appendChild(img);
+        imgContainer.appendChild(img);
+        div.appendChild(imgContainer);
         // Name and type
         let span = document.createElement('span'); 
         span.style = "position: relative; display: block; bottom: 4px; line-height: 1.1em;";

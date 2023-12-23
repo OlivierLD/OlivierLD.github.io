@@ -149,6 +149,10 @@ div.tooltip:hover span {
     max-width: 300px;
 }
 
+.boat-image-container {
+    min-height: 300px;
+}
+
 .image-plus-text {
     position: relative;
     text-align: center;
