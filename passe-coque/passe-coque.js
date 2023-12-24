@@ -698,8 +698,8 @@ const THE_FLEET = [
     },
     { 
         name: "Atlantide",
-        id: "dummy-boat",
-        pix: "./images/boats/dummy.boat.jpg",
+        id: "atlantide",
+        pix: "./images/atlantide.jpg",
         type: "Gib'Sea&nbsp;33",
         category: NONE,
         base: "--"
@@ -730,8 +730,8 @@ const THE_FLEET = [
     },
     {
         name: "Melkart",
-        id: "dummy-boat",
-        pix: "./images/boats/dummy.boat.jpg",
+        id: "melkart",
+        pix: "./images/boats/melkart.jpg",
         type: "Evasion 32",
         category: NONE,
         base: "&Eacute;tel"
@@ -786,8 +786,8 @@ const THE_FLEET = [
     },
     { 
         name: "La R&ecirc;veuse",
-        id: "dummy-boat",
-        pix: "./images/boats/dummy.boat.jpg",
+        id: "la.reveuse",
+        pix: "./images/boats/la.reveuse/la.reveuse.1.jpg",
         type: "Damien 40",
         category: NONE,
         base: "Arzal"
@@ -826,8 +826,8 @@ const THE_FLEET = [
     },
     { 
         name: "Passpartout",
-        id: "dummy-boat",
-        pix: "./images/boats/dummy.boat.jpg",
+        id: "passpartout",
+        pix: "./images/boats/passpartout/passpartout.6.jpg",
         type: "One off",
         category: NONE,
         base: "Lorient"
