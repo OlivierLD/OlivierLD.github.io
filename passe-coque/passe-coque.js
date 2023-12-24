@@ -834,11 +834,11 @@ const THE_FLEET = [
     },
     { 
         name: "Melvan",
-        id: "dummy-boat",
-        pix: "./images/boats/dummy.boat.jpg",
-        type: "Karat&eacute;",
+        id: "melvan",
+        pix: "./cap.melvan/melvan.png",
+        type: "Karat&eacute;&nbsp;33",
         category: NONE,
-        base: "--"
+        base: "Toulon"
     },
     { 
         name: "Saigane",
@@ -911,6 +911,22 @@ const THE_FLEET = [
         type: "Selection&nbsp;37",
         category: NONE,
         base: "Ouistreham"
+    },
+    { 
+        name: "Gwenillig",
+        id: "gwenillig",
+        pix: "./images/boats/gwenillig.png",
+        type: "Eygthene 24",
+        category: CLUB,
+        base: "--"
+    },
+    { 
+        name: "Lohengrin",
+        id: "lohengrin",
+        pix: "./images/boats/lohengrin/lohengrin.png",
+        type: "Ketch en Acier",
+        category: TO_GRAB,
+        base: "Arzal"
     }
 ];
 
