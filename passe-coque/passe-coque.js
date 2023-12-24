@@ -690,11 +690,11 @@ const THE_FLEET = [
     },
     { 
         name: "Wanita Too",
-        id: "dummy-boat",
-        pix: "./images/boats/dummy.boat.jpg",
+        id: "wanita",
+        pix: "./images/boats/wanita.too.png",
         type: "First Class 12",
-        category: TO_GRAB,
-        base: "--"
+        category: NONE,
+        base: "Saint-Malo"
     },
     { 
         name: "Atlantide",
