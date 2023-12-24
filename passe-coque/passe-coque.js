@@ -709,7 +709,7 @@ const THE_FLEET = [
         id: "dummy-boat",
         pix: "./images/boats/dummy.boat.jpg",
         type: "Offshore&nbsp;35",
-        category: NONE,
+        category: OLD_BOAT,
         base: "--"
     },
     { 
@@ -725,7 +725,7 @@ const THE_FLEET = [
         id: "dummy-boat",
         pix: "./images/boats/dummy.boat.jpg",
         type: "Milord",
-        category: TO_GRAB,
+        category: OLD_BOAT,
         base: "--"
     },
     {
@@ -773,7 +773,7 @@ const THE_FLEET = [
         id: "dummy-boat",
         pix: "./images/boats/dummy.boat.jpg",
         type: "Mousquetaire",
-        category: CLUB,
+        category: OLD_BOAT,
         base: "Le&nbsp;Bono"
     },
     { 
