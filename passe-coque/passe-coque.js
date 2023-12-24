@@ -874,7 +874,7 @@ const THE_FLEET = [
     },
     { 
         name: "Stiren ar Mor",
-        id: "dummy-boat",
+        id: "stiren",
         pix: "./images/boats/stiren.er.mor.png",
         type: "Ghibli",
         category: NONE,
