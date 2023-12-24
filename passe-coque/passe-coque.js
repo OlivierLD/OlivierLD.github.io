@@ -661,7 +661,7 @@ const THE_FLEET = [
         id: "pordin-nancq",
         pix: "./images/boats/pordin.jpg",
         type: "Carter 37",
-        category: CLUB,
+        category: NONE,
         base: "Locmiqu&eacute;lic"
     },
     {
@@ -669,7 +669,7 @@ const THE_FLEET = [
         id: "coraxy",
         pix: "./images/boats/coraxy.png",
         type: "Cognac",
-        category: CLUB,
+        category: NONE,
         base: "Saint&nbsp;Philibert"
     },
     {
@@ -861,7 +861,7 @@ const THE_FLEET = [
         id: "trehudal",
         pix: "./images/boats/trehudal.png",
         type: "Nicholson 33",
-        category: CLUB,
+        category: NONE,
         base: "La&nbsp;Trinit&eacute;"
     },
     { 
@@ -877,7 +877,7 @@ const THE_FLEET = [
         id: "dummy-boat",
         pix: "./images/boats/stiren.er.mor.png",
         type: "Ghibli",
-        category: CLUB,
+        category: NONE,
         base: "La&nbsp;Trinit&eacute;"
     },
     { 
