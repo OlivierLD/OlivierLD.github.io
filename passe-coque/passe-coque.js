@@ -842,8 +842,8 @@ const THE_FLEET = [
     },
     { 
         name: "Saigane",
-        id: "dummy-boat",
-        pix: "./images/boats/dummy.boat.jpg",
+        id: "saigane",
+        pix: "./images/boats/saigane/saigane.jpg",
         type: "Dufour 2800",
         category: CLUB,
         base: "Port&nbsp;Blanc"
