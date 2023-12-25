@@ -1,0 +1,81 @@
+
+<div style="height: 600px; overflow-y: scroll;">
+    <div class="tab" style="margin-top: 30px; margin-bottom: 10px; display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto;"> <!-- TODO Improve the grid-template... -->
+        <button class="tablinks tab-active" onclick="openTab(event, 'la-reveuse-01');" title="Sommaire">Sommaire</button>
+        <button class="tablinks" onclick="openTab(event, 'la-reveuse-02');">Photos</button>
+        <button class="tablinks" onclick="openTab(event, 'la-reveuse-03');">Contact</button>
+    </div>
+
+    <div style="height: 500px; overflow-y: scroll;">
+        <div id="la-reveuse-01" class="tab-section" style="display: block;">
+            <div style="display: grid; grid-template-columns: auto auto;">
+                <img src="./images/boats/la.reveuse/la.reveuse.1.jpg" width="100%">
+                <div style="padding: 14px;">
+                    <h2>La R&ecirc;veuse</h2>
+                    Un solide Damien 40 en acier construit chez Meta et fini en amateur (&eacute;clair&eacute;) par le p&eacute;re 
+                    d'Alain Buisson qui l'a confi&eacute; &agrave; Passe-Coque et que Alain et Yann pr&eacute;parent &agrave; Saint Philibert 
+                    entre deux entrainements de l'&eacute;quipage sur Ma Enez ou Saudade.
+                    <ul>
+                        <li>Ann&eacute;e de construction : 1987</li>
+                        <li>Longueur : 12.5 m</li>
+                        <li>Tirant d'eau : 1.10 m / 3.00 m</li>
+                        <li>Mat&eacute;riau : acier</li>
+                        <li>Carburant : Diesel</li>
+                    </ul>
+                </div>
+            </div>
+            <div>
+                <h2>Le projet WATTer</h2>
+                <a href="https://linktr.ee/watter_project" target="Watt">https://linktr.ee/watter_project</a><br/>
+                Le projet « PHARE » de 2024
+                <!--
+                Sur la photo De gauche a droite : Sophie Noemie Benjamin et Louis qui vont emmener La Reveuse vers la Norv&egrave;ge l Ecosse et la mer d Irlande
+                En entrainement sur le Super Arlequin Saudade
+                -->
+                <p>
+                    Quatre &eacute;tudiants et jeunes dipl&ocirc;m&eacute;s qui veulent vivre une aventure en liant leur passion commune, 
+                    la voile, et un projet &agrave; impact.
+                </p>
+                <p>
+                    Les &eacute;nergies renouvelables se d&eacute;veloppent, celles en mer encore plus, mais elles sont tr&egrave;s controvers&eacute;es.
+                </p>
+                <p>
+                    De trois &eacute;coles d'ing&eacute;nieur diff&eacute;rentes, Sophie, Noemis Benjamin et Louis  vont essayer de r&eacute;pondre aux 
+                    questions qui se posent questions sous la forme d'un documentaire, en parcourant diff&eacute;rents parcs &eacute;oliens marins 
+                    europ&eacute;ens en voilier.
+                </p>
+                <p>
+                    Une navigation engag&eacute;e et un documentaire pour :
+                    <ul>
+                        <li>Partir &agrave; la rencontre d'acteurs multiples</li>
+                        <li>Identifier des points de tension</li>
+                        <li>Enquêter pour apprendre la r&eacute;alit&eacute; sur le terrain</li>
+                        <li>promouvoir une vision de d&eacute;veloppement &agrave; l'&eacute;chelle Europ&eacute;enne</li>
+                        <li>Susciter de l'int&eacute;rêt pour des sources d'&eacute;nergie bas carbone</li>
+                        <li>D&eacute;truire les fausses id&eacute;es pr&eacute;conçues</li>
+                        <li>Communiquer sur les solutions techniques, politiques et &eacute;conomiques</li>
+                    </ul>
+                </p>
+            </div>
+        </div>
+
+        <div id="la-reveuse-02" class="tab-section" style="display: none;">
+            <slide-show id="la-reveuse-slide-show"
+                        width="800"
+                        height="400">
+                <slide-show-image src="./images/boats/la.reveuse/la.reveuse.1.jpg" title="La R&ecirc;veuse - 1"></slide-show-image>
+                <slide-show-image src="./images/boats/la.reveuse/la.reveuse.2.jpg" title="La R&ecirc;veuse - 2"></slide-show-image>
+                <slide-show-image src="./images/boats/la.reveuse/la.reveuse.3.jpg" title="La R&ecirc;veuse - 3"></slide-show-image>
+            </slide-show>
+        </div>
+
+        <div id="la-reveuse-03" class="tab-section" style="display: none;">
+            <h2>Plus d'infos...</h2>
+            Les r&eacute;f&eacute;rents :<br/>
+            <ul>
+                <li>Yann Legrand. ann.legrand56@icloud.com  +33 6 75 00 80 15</li>
+                <li>Alain Hahusseau. alain.hahusseau@sfr.fr  +33 7 88 72 41 71 </li>
+            </ul>
+        </div>
+    </div>
+</div>
