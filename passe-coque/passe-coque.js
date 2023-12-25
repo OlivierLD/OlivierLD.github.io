@@ -850,8 +850,8 @@ const THE_FLEET = [
     },
     { 
         name: "Anao",
-        id: "dummy-boat",
-        pix: "./images/boats/dummy.boat.jpg",
+        id: "anao",
+        pix: "./images/boats/anao.jpeg",
         type: "Folie Douce",
         category: OLD_BOAT,
         base: "&Eacute;tel"
