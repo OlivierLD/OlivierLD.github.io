@@ -738,8 +738,8 @@ const THE_FLEET = [
     },
     {
         name: "Babou",
-        id: "dummy-boat",
-        pix: "./images/boats/dummy.boat.jpg",
+        id: "babou",
+        pix: "./images/boats/flying.phantom.jpeg",
         type: "Flying Phantom",
         category: NONE,
         base: "Saint&nbsp;Philibert"
@@ -770,8 +770,8 @@ const THE_FLEET = [
     },
     { 
         name: "Avel Mad",
-        id: "dummy-boat",
-        pix: "./images/boats/dummy.boat.jpg",
+        id: "avel-mad",
+        pix: "./images/boats/avel.mad.jpeg",
         type: "Mousquetaire",
         category: OLD_BOAT,
         base: "Le&nbsp;Bono"
