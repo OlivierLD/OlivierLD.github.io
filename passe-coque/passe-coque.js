@@ -722,8 +722,8 @@ const THE_FLEET = [
     },
     { 
         name: "Ia Orana",
-        id: "dummy-boat",
-        pix: "./images/boats/dummy.boat.jpg",
+        id: "ia-orana",
+        pix: "./images/boats/milord.jpeg",
         type: "Milord",
         category: OLD_BOAT,
         base: "--"
@@ -818,10 +818,10 @@ const THE_FLEET = [
     },
     { 
         name: "Jolly Jumper",
-        id: "dummy-boat",
-        pix: "./images/boats/dummy.boat.jpg",
+        id: "jolly-jumper",
+        pix: "./images/boats/jolly.jumper.01.jpg",
         type: "First 325",
-        category: CLUB,
+        category: NONE,
         base: "Les&nbsp;Sables&nbsp;d'Olonne"
     },
     { 
