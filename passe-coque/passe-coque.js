@@ -778,7 +778,7 @@ const THE_FLEET = [
     },
     { 
         name: "F&eacute;licie",
-        id: "dummy-boat",
+        id: "felicie",
         pix: "./afri.can/felicie.african.jpg",
         type: "One off Presles",
         category: OLD_BOAT,

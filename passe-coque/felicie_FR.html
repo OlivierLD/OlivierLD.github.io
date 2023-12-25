@@ -1,0 +1,40 @@
+
+<div style="height: 600px; overflow-y: scroll;">
+    <div class="tab" style="margin-top: 30px; margin-bottom: 10px; display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto;"> <!-- TODO Improve the grid-template... -->
+        <button class="tablinks tab-active" onclick="openTab(event, 'felicie-01');" title="Sommaire">Sommaire</button>
+        <button class="tablinks" onclick="openTab(event, 'felicie-02');">Photos</button>
+        <button class="tablinks" onclick="openTab(event, 'felicie-03');">Contact</button>
+    </div>
+
+    <div style="height: 500px; overflow-y: scroll;">
+        <div id="felicie-01" class="tab-section" style="display: block;">
+            <div style="display: grid; grid-template-columns: auto auto;">
+                <img src="./afri.can/felicie.african.jpg" width="100%">
+                <div style="padding: 14px;">
+                    <h2>F&eacute;licie</h2>
+                    One off, dessin&eacute; par Dominique Presles.<br/>
+                    C&eacute;d&eacute; &agrave; l'association "Nav'Solidaire".
+                </div>
+            </div>
+        </div>
+
+        <div id="felicie-02" class="tab-section" style="display: none;">
+            <slide-show id="felicie-slide-show"
+                        width="800"
+                        height="400">
+                <slide-show-image src="./afri.can/felicie.01.jpeg" title="Felicie - 1"></slide-show-image>
+                <slide-show-image src="./afri.can/felicie.02.jpeg" title="Felicie - 2"></slide-show-image>
+                <slide-show-image src="./afri.can/felicie.african.jpg" title="Felicie - 3"></slide-show-image>
+                <slide-show-image src="./afri.can/on.board.felicie.jpg" title="Felicie - 4"></slide-show-image>
+            </slide-show>
+        </div>
+
+        <div id="felicie-03" class="tab-section" style="display: none;">
+            <h2>Plus d'infos...</h2>
+            Site internet : <a href="https://www.navsolidaire.fr" target="NS">https://www.navsolidaire.fr</a><br/>
+            Contact : Antoine MICHEL<br/>
+            Email : nav.solidaire@gmail.com<br/>
+            Tél : +33 6 95 45 01 27        
+        </div>
+    </div>
+</div>
