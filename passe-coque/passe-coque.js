@@ -701,7 +701,7 @@ const THE_FLEET = [
         id: "atlantide",
         pix: "./images/atlantide.jpg",
         type: "Gib'Sea&nbsp;33",
-        category: NONE,
+        category: TO_GRAB,
         base: "--"
     },
     { 
