@@ -705,8 +705,8 @@ const THE_FLEET = [
         base: "--"
     },
     { 
-        name: "Lapyx",
-        id: "dummy-boat",
+        name: "Iapyx",
+        id: "iapyx",
         pix: "./images/boats/dummy.boat.jpg",
         type: "Offshore&nbsp;35",
         category: OLD_BOAT,
@@ -714,11 +714,19 @@ const THE_FLEET = [
     },
     { 
         name: "Kelt 620",
-        id: "dummy-boat",
-        pix: "./images/boats/dummy.boat.jpg",
+        id: "kelt-620",
+        pix: "./images/boats/kelt620.jpeg",
         type: "Ketl 620",
         category: CLUB,
         base: "&Eacute;tel"
+    },
+    { 
+        name: "Twist Again",
+        id: "twist-again",
+        pix: "./images/boats/jod35.jpeg",
+        type: "JOD 35",
+        category: OLD_BOAT,
+        base: "Saint&nbsp;Philibert"
     },
     { 
         name: "Ia Orana",
@@ -762,8 +770,8 @@ const THE_FLEET = [
     },
     { 
         name: "Rozen an Avel",
-        id: "dummy-boat",
-        pix: "./images/boats/dummy.boat.jpg",
+        id: "rozen-an-avel",
+        pix: "./images/boats/rozen.an.avel.jpeg",
         type: "Arp&egrave;ge",
         category: NONE,
         base: "Saint&nbsp;Philibert"
@@ -793,9 +801,9 @@ const THE_FLEET = [
         base: "Arzal"
     },
     { 
-        name: "Neptune 99",
-        id: "dummy-boat",
-        pix: "./images/boats/dummy.boat.jpg",
+        name: "Tokad 2",
+        id: "tokad-2",
+        pix: "./images/boats/neptune.99.jpeg",
         type: "Neptune 99",
         category: CLUB,
         base: "Le&nbsp;Crouesty"
@@ -810,8 +818,8 @@ const THE_FLEET = [
     },
     { 
         name: "L'heure bleue",
-        id: "dummy-boat",
-        pix: "./images/boats/dummy.boat.jpg",
+        id: "heure-bleue",
+        pix: "./images/boats/lheure.bleue.jpeg",
         type: "Arp&egrave;ge",
         category: CLUB,
         base: "Golfe&nbsp;du&nbsp;Morbihan"
@@ -866,9 +874,17 @@ const THE_FLEET = [
     },
     { 
         name: "Jules Verne",
-        id: "dummy-boat",
-        pix: "./images/boats/dummy.boat.jpg",
+        id: "jules-verne",
+        pix: "./images/boats/jules.vernes.jpeg",
         type: "Sir 520",
+        category: TO_GRAB,
+        base: "Saint&nbsp;Philibert"
+    },
+    { 
+        name: "Remora",
+        id: "remora",
+        pix: "./images/boats/remora.jpeg",
+        type: "Arcachonnais",
         category: TO_GRAB,
         base: "Saint&nbsp;Philibert"
     },
