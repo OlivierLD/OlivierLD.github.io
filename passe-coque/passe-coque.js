@@ -707,7 +707,7 @@ const THE_FLEET = [
     { 
         name: "Iapyx",
         id: "iapyx",
-        pix: "./images/boats/dummy.boat.jpg",
+        pix: "./images/boats/iapyx.jpeg",
         type: "Offshore&nbsp;35",
         category: OLD_BOAT,
         base: "--"
