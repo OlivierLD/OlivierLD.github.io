@@ -95,7 +95,7 @@ let clack = (origin) => {
             .then(response => {  // Warning... the NOT_FOUND error lands here, apparently.
                 console.log(`Data Response: ${response.status} - ${response.statusText}`);
 				if (response.status !== 200) { // There is a problem...
-					contentPlaceHolder.innerHTML = `Fetching ${contentName}...<br/> Data Response: ${response.status} - ${response.statusText}<br/><b>En d&eacute;veloppement...<br/>Disponible prochainement.</b>`;
+					contentPlaceHolder.innerHTML = generateFetchMessage(contentName, response); // `Fetching ${contentName}...<br/> Data Response: ${response.status} - ${response.statusText}<br/><b>En d&eacute;veloppement...<br/>Disponible prochainement.</b>`;
 				} else {
 					response.text().then(doc => {
 						console.log(`Code data loaded, length: ${doc.length}.`);
@@ -166,11 +166,7 @@ let clack = (origin) => {
                 }
                 console.debug("Failed to get code data..." + (error ? JSON.stringify(error, null, 2) : ' - ') + ', ' + (message ? message : ' - '));
 				// Plus tard...
-                if (currentLang === 'FR') {
-				    contentPlaceHolder.innerHTML = "<b>Cette page est en cours de d&eacute;veloppememnt. Revenez bient&ocirc;t&nbsp;!</b>";
-                } else {
-				    contentPlaceHolder.innerHTML = "<b>This page is being developped. Please come back soon!</b>";
-                }
+				contentPlaceHolder.innerHTML = generateFetchErrorMessage(contentName, error, errmess);
             });
 }
 
@@ -235,6 +231,27 @@ let switchLanguage = () => {
 	clack(el);
 
     clack(el);
+};
+
+let generateFetchMessage = (contentName, response) => {
+    let mess = (currentLang === 'FR') ? 'Cette page est en cours de d&eacute;veloppement...<br/>Disponible prochainement.' : 
+                                        'This page is being developped...<br/>Available soon.';
+    let message = `<div style='margin: 10px;'>Message :<br/> Fetching ${contentName}...<br/>Data Response: ${response.status} - ${response.statusText}<br/><div style='border: 3px solid orange; border-radius: 10px; text-align: center;'><b>${mess}</b></div></div>`;
+    return message;
+};
+
+let generateFetchErrorMessage = (contentName, error, errmess) => {
+    let message;
+    if (errmess) {
+        let mess = JSON.parse(errmess);
+        if (mess.message) {
+            message = mess.message;
+        }
+    }
+    let text = (currentLang === 'FR') ? 'En cours de  d&eacute;veloppement...<br/>Disponible prochainement.' : 
+                                       'Being developped...<br/>Available soon.';
+    let content = `<div style='margin: 10px;'><pre>Fetch Error for ${contentName}: ${(error ? JSON.stringify(error, null, 2) : ' - ') + ', ' + (message ? message : ' - ')} </pre><div style='border: 3px solid red; border-radius: 10px; text-align: center;'><b>${text}</b></div></div>`;
+    return content;
 };
 
 const BG_IMAGES = 
@@ -491,7 +508,7 @@ let clickOnTxPix = (origin) => {
         .then(response => {  // Warning... the NOT_FOUND error lands here, apparently.
             console.log(`Data Response: ${response.status} - ${response.statusText}`);
             if (response.status !== 200) { // There is a problem...
-                dynamicContentContainer.innerHTML = `Fetching ${contentName}...<br/> Data Response: ${response.status} - ${response.statusText}<br/><b>En d&eacute;veloppement...<br/>Disponible prochainement.</b>`;
+                dynamicContentContainer.innerHTML = generateFetchMessage(contentName, response); // `Fetching ${contentName}...<br/> Data Response: ${response.status} - ${response.statusText}<br/><b>En d&eacute;veloppement...<br/>Disponible prochainement.</b>`;
             } else {
                 response.text().then(doc => {
                     console.log(`${contentName} code data loaded, length: ${doc.length}.`);
@@ -510,7 +527,7 @@ let clickOnTxPix = (origin) => {
             }
             console.debug("Failed to get code data..." + (error ? JSON.stringify(error, null, 2) : ' - ') + ', ' + (message ? message : ' - '));
             // Plus tard...
-            dynamicContentContainer.innerHTML = `<b>${contentName} ${currentLang === 'FR' ? ' introuvable...<br/>Bient&ocirc;t dispo !' : ' not found...<br/>Avai;able soon!'}</b>`;
+            dynamicContentContainer.innerHTML = generateFetchErrorMessage(contentName, error, errmess);
         });
 
     // dynamicContentContainer.innerHTML = content;
@@ -549,7 +566,7 @@ let clickOnBoatPix = (origin) => {
         .then(response => {  // Warning... the NOT_FOUND error lands here, apparently.
             console.log(`Data Response: ${response.status} - ${response.statusText}`);
             if (response.status !== 200) { // There is a problem...
-                dynamicContentContainer.innerHTML = `Fetching ${contentName}...<br/> Data Response: ${response.status} - ${response.statusText}<br/><b>En d&eacute;veloppement...<br/>Disponible prochainement.</b>`;
+                dynamicContentContainer.innerHTML = generateFetchMessage(contentName, response); // `Fetching ${contentName}...<br/> Data Response: ${response.status} - ${response.statusText}<br/><b>En d&eacute;veloppement...<br/>Disponible prochainement.</b>`;
             } else {
                 response.text().then(doc => {
                     console.log(`${contentName} code data loaded, length: ${doc.length}.`);
@@ -568,7 +585,7 @@ let clickOnBoatPix = (origin) => {
             }
             console.debug("Failed to get code data..." + (error ? JSON.stringify(error, null, 2) : ' - ') + ', ' + (message ? message : ' - '));
             // Plus tard...
-            dynamicContentContainer.innerHTML = `<b>${contentName} ${currentLang === 'FR' ? ' introuvable...<br/>Bient&ocirc;t dispo !' : ' not found...<br/>Avai;able soon!'}</b>`;
+            dynamicContentContainer.innerHTML = generateFetchErrorMessage(contentName, error, errmess); // `<b>${contentName} ${currentLang === 'FR' ? ' introuvable...<br/>Bient&ocirc;t dispo !' : ' not found...<br/>Avai;able soon!'}</b>`;
         });
 
     // dynamicContentContainer.innerHTML = content;
@@ -611,7 +628,7 @@ let aboutSomeone = (who) => {
         .then(response => {  // Warning... the NOT_FOUND error lands here, apparently.
             console.log(`Data Response: ${response.status} - ${response.statusText}`);
             if (response.status !== 200) { // There is a problem...
-                dialogContent.innerHTML = `Fetching ${contentName}...<br/> Data Response: ${response.status} - ${response.statusText}<br/><b>En d&eacute;veloppement...<br/>Disponible prochainement.</b>`;
+                dialogContent.innerHTML = generateFetchMessage(contentName, response); // `Fetching ${contentName}...<br/> Data Response: ${response.status} - ${response.statusText}<br/><b>En d&eacute;veloppement...<br/>Disponible prochainement.</b>`;
             } else {
                 response.text().then(doc => {
                     console.log(`${contentName} code data loaded, length: ${doc.length}.`);
@@ -630,7 +647,7 @@ let aboutSomeone = (who) => {
             }
             console.debug("Failed to get code data..." + (error ? JSON.stringify(error, null, 2) : ' - ') + ', ' + (message ? message : ' - '));
             // Plus tard...
-            dialogContent.innerHTML = `<b>${contentName} ${currentLang === 'FR' ? ' introuvable...<br/>Bient&ocirc;t dispo !' : ' not found...<br/>Avai;able soon!'}</b>`;
+            dialogContent.innerHTML = generateFetchErrorMessage(contentName, error, errmess); // `<b>${contentName} ${currentLang === 'FR' ? ' introuvable...<br/>Bient&ocirc;t dispo !' : ' not found...<br/>Avai;able soon!'}</b>`;
         });
 
     if (aboutDialog.show !== undefined) {
@@ -1207,7 +1224,7 @@ let fillOutActu = filter => {
                 .then(response => {  // Warning... the NOT_FOUND error lands here, apparently.
                     console.log(`Data Response: ${response.status} - ${response.statusText}`);
                     if (response.status !== 200) { // There is a problem...
-                        eventDiv.innerHTML = `Fetching ${event.content}...<br/> Data Response: ${response.status} - ${response.statusText}<br/><b>En d&eacute;veloppement...<br/>Disponible prochainement.</b>`;
+                        eventDiv.innerHTML = generateFetchMessage(event.content, response); // `Fetching ${event.content}...<br/> Data Response: ${response.status} - ${response.statusText}<br/><b>En d&eacute;veloppement...<br/>Disponible prochainement.</b>`;
                     } else {
                         response.text().then(doc => {
                             console.log(`${event.content} code data loaded, length: ${doc.length}.`);
@@ -1226,7 +1243,7 @@ let fillOutActu = filter => {
                     }
                     console.debug("Failed to get code data..." + (error ? JSON.stringify(error, null, 2) : ' - ') + ', ' + (message ? message : ' - '));
                     // Plus tard...
-                    eventDiv.innerHTML = `<b>${contentName} ${currentLang === 'FR' ? ' introuvable...<br/>Bient&ocirc;t dispo !' : ' not found...<br/>Avai;able soon!'}</b>`;
+                    eventDiv.innerHTML = generateFetchErrorMessage(contentName, error, errmess); // `<b>${contentName} ${currentLang === 'FR' ? ' introuvable...<br/>Bient&ocirc;t dispo !' : ' not found...<br/>Avai;able soon!'}</b>`;
                 });
         });
         container.appendChild(sectionDiv);
