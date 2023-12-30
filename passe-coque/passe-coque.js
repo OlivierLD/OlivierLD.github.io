@@ -697,14 +697,14 @@ const THE_FLEET = [
         category: CLUB,
         base: "&Eacute;tel"
     },
-    {
-        name: "Pen Duick",
-        id: "pen-duick",
-        pix: "./images/boats/pen.duick.jpg",
-        type: "W. Fife",
-        category: NONE,
-        base: "Lorient"
-    },
+    // {
+    //     name: "Pen Duick",
+    //     id: "pen-duick",
+    //     pix: "./images/boats/pen.duick.jpg",
+    //     type: "W. Fife",
+    //     category: NONE,
+    //     base: "Lorient"
+    // },
     { 
         name: "Wanita Too",
         id: "wanita",
@@ -822,7 +822,7 @@ const THE_FLEET = [
         id: "tokad-2",
         pix: "./images/boats/neptune.99.jpeg",
         type: "Neptune 99",
-        category: CLUB,
+        category: NONE,
         base: "Le&nbsp;Crouesty"
     },
     { 
