@@ -4,27 +4,49 @@
     <link rel="stylesheet" href="passe-coque.css" type="text/css" id="styleLink">
   </head>
   <body>
-    <h2>Contact Passe-Coque</h2>
+    <!--h2>Contact Passe-Coque</h2-->
     <?php
-      if (isset($HTTP_POST_VARS['operation'])) {   // POST param
-        $operation = $HTTP_POST_VARS['operation'];
+
+      $sendTo = "contact@passeurdecoute.fr"; // "olivier.lediouris@gmail.com"; // "contact@passeurdecoute.fr"
+
+      // echo('HTTP_POST_VARS:'.$HTTP_POST_VARS.'<br/>');
+      // echo('Operation? :'.$_POST['operation'].'<br/>');
+      // echo('email? :'.$_POST['email'].'<br/>');
+      // echo('body? :'.$_POST['commentArea'].'<br/>');
+
+      // if (isset($HTTP_POST_VARS['operation'])) {   // POST param
+      if (isset($_POST['operation'])) {   // POST param
+        $operation = $_POST['operation']; // $HTTP_POST_VARS['operation'];
+        // echo('<p>Operation prm detected: '.$operation.'</p>');
         if ($operation == 'send') {                // to, subject, body.
-          if (mail("contact@passeurdecoute.fr",
+          $destination = $sendTo;
+          if (isset($_POST['email'])) {
+            $destination = $destination.','.$_POST['email'];
+          }
+          if (mail($destination,
                    "From Passe-Coque Web Site",
-                   "A message from ".$HTTP_POST_VARS['email'].".\n".$HTTP_POST_VARS['commentArea'])) {  // Ok
-            ?>
-              <h1>Message was sent</h1>
-              <p>
+                   // "A message from ".$HTTP_POST_VARS['email'].".\n".$HTTP_POST_VARS['commentArea'])) {  // Ok
+                   "A message from ".$_POST['email'].".\n".$_POST['commentArea'])) {  // Ok
+    ?>
+              <div id="message">Message was sent</div>
+              <div id="content">
+    <?php 
+echo($_POST['commentArea']);
+    ?>                
+              </div>
+              <!--p>
                 <em>Thank you!</em>
-              </p>
-            <?
+              </p-->
+    <?php
           } else {
             // Failed
-            ?><h1>Message has NOT been sent</h1><?php
+    ?><div id="error">Message has NOT been sent</div><?php
           }
-          ?>Send <a href="contact.php">another</a>?<?php
+    ?><!-- Send <a href="contact.php">another</a>? --><?php
         }
       } else {
+        // echo('<p>NO operation prm detected</p>');
+
     ?>
     <p name="content">
       Enter your message below, and hit the Send button. 

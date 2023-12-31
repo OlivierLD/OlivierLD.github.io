@@ -1319,3 +1319,22 @@ let openTab = (evt, tabName) => {
     }
     evt.currentTarget.className += " tab-active";
 };
+
+let onSubmitResponse = (iframe) => {
+    // console.log(iframe);
+    let message = '';
+    try {
+        message = iframe.contentDocument.querySelectorAll('div[id="message"]')[0].innerText;
+    } catch (err) {
+        console.log("Oops");
+        try {
+            message = iframe.contentDocument.querySelectorAll('div[id="error"]')[0].innerText;
+        } catch (err2) {
+            console.log("No text, no error");
+        }
+    }
+    // TODO display in dialog
+    if (message.length > 0) {
+        alert(message);
+    }
+}
