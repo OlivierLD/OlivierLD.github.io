@@ -1323,7 +1323,7 @@ let openTab = (evt, tabName) => {
 let customAlertOpened = false;
 let showCustomAlert = (content) => {
   let customAlert = document.getElementById("custom-alert");
-  document.getElementById('custom-alert-content').innerText = content;
+  document.getElementById('custom-alert-content').innerHTML = content;
       if (customAlert.show !== undefined) {
           customAlert.show();
       } else {
@@ -1346,6 +1346,13 @@ let closeCustomAlert = () => {
 // Optional
 // window.alert = showCustomAlert;  // Not in window.onload !
 
+let subscriptionOKMessage = () => {
+    let mess = "Votre requ&ecirc;te a &eacute;t&eacute; envoy&eacute;e,<br/>vous &ecirc;tes en copie (v&eacute;rifiez vos spams...).";
+    if (currentLang !== 'FR') {
+        mess = "Your request has been sent,<br/>you're cc'd (check your spams...)."
+    }
+    return mess;
+}
 
 let onSubmitResponse = (iframe, substituteOK, substituteError) => {
     // console.log(iframe);
