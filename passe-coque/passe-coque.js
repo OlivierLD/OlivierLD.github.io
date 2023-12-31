@@ -1320,21 +1320,55 @@ let openTab = (evt, tabName) => {
     evt.currentTarget.className += " tab-active";
 };
 
-let onSubmitResponse = (iframe) => {
+let customAlertOpened = false;
+let showCustomAlert = (content) => {
+  let customAlert = document.getElementById("custom-alert");
+  document.getElementById('custom-alert-content').innerText = content;
+      if (customAlert.show !== undefined) {
+          customAlert.show();
+      } else {
+          customAlert.style.display = 'inline';
+      }
+  customAlertOpened = true;
+  window.setTimeout(closeCustomAlert, 5000);
+};
+
+let closeCustomAlert = () => {
+  let customAlert = document.getElementById("custom-alert");
+      if (customAlert.close !== undefined) {
+          customAlert.close();
+      } else {
+          customAlert.style.display = 'none';
+      }
+  customAlertOpened = false;
+};
+
+// Optional
+// window.alert = showCustomAlert;  // Not in window.onload !
+
+
+let onSubmitResponse = (iframe, substituteOK, substituteError) => {
     // console.log(iframe);
     let message = '';
     try {
         message = iframe.contentDocument.querySelectorAll('div[id="message"]')[0].innerText;
+        if (substituteOK) {
+            message = substituteOK;
+        }
     } catch (err) {
         console.log("Oops");
         try {
             message = iframe.contentDocument.querySelectorAll('div[id="error"]')[0].innerText;
+            if (substituteError) {
+                message = substituteError;
+            }
         } catch (err2) {
-            console.log("No text, no error");
+            console.log("No text, no error...");
         }
     }
-    // TODO display in dialog
+    // TODO display in dialog, or custom alert ?
     if (message.length > 0) {
-        alert(message);
+        // alert(message);
+        showCustomAlert(message);
     }
 }
