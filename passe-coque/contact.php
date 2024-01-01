@@ -8,11 +8,12 @@
     <?php
 
       $sendTo = "contact@passeurdecoute.fr"; // "olivier.lediouris@gmail.com"; // "contact@passeurdecoute.fr"
-      $subject = "From Passe-Coque Web Site"; // Default
+      $messageSubject = "From Passe-Coque Web Site"; // Default
 
       // echo('HTTP_POST_VARS:'.$HTTP_POST_VARS.'<br/>');
       // echo('Operation? :'.$_POST['operation'].'<br/>');
       // echo('email? :'.$_POST['email'].'<br/>');
+      // echo('subject? :'.$_POST['subject'].'<br/>');
       // echo('body? :'.$_POST['commentArea'].'<br/>');
 
       // if (isset($HTTP_POST_VARS['operation'])) {   // POST param
@@ -24,11 +25,14 @@
           if (isset($_POST['email'])) {
             $destination = $destination.','.$_POST['email'];
           }
-          if (isset($_POST['subject]'])) {
-            $subject = $_POST['subject]'];
+          if (isset($_POST['subject'])) {
+            $messageSubject = $_POST['subject'];
+            // echo("Subject is now [".$messageSubject."]<br/>");
+          // } else {
+          //   echo("Defaulting subject");
           }
           if (mail($destination,
-                   $subject,
+                   $messageSubject,
                    // "A message from ".$HTTP_POST_VARS['email'].".\n".$HTTP_POST_VARS['commentArea'])) {  // Ok
                    "A message from ".$_POST['email'].".\n".$_POST['commentArea'])) {  // Ok
     ?>
