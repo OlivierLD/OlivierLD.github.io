@@ -1354,6 +1354,14 @@ let subscriptionOKMessage = () => {
     return mess;
 }
 
+let subscriptionErrorMessage = () => {
+    let mess = "Votre requ&ecirc;te a pos&eacute; un probl&egrave;me, elle n'est pas partie.";
+    if (currentLang !== 'FR') {
+        mess = "There was a problem posting your request...."
+    }
+    return mess;
+}
+
 let onSubmitResponse = (iframe, substituteOK, substituteError) => {
     // console.log(iframe);
     let message = '';

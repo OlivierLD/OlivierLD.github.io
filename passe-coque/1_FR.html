@@ -155,7 +155,7 @@
                         </div>
                     </div-->
                     <!-- Form submit -->
-                    <iframe name="sub-response" style="display: none;" onload="onSubmitResponse(this, subscriptionOKMessage(), 'Oops, not sent...');"></iframe>
+                    <iframe name="sub-response" style="display: none;" onload="onSubmitResponse(this, subscriptionOKMessage(), subscriptionErrorMessage());"></iframe>
                     <div style="display: grid; grid-template-columns: auto auto;">
                         <form action="contact.php" method="post" target="sub-response"> <!-- TODO Redirect output in  a dialog ?-->
                             <input type="hidden" name="operation" value="send">

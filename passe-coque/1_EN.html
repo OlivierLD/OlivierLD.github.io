@@ -142,7 +142,8 @@
                     <div style="font-style: italic; color: white; line-height: 1em; margin-bottom: 10px;">
                         Never miss anything about our news and projects each month: Boats - projects - events.
                     </div>
-                    <div style="display: grid; grid-template-columns: auto auto;">
+                    <!-- Mailto option -->
+                    <!--div style="display: grid; grid-template-columns: auto auto;">
                         <div style="display: grid; grid-template-columns: auto auto;">
                             <span style="color: white; text-align: right; margin: 0 10px 0 0;">Your name:&nbsp;</span>
                             <input type="text" placeholder="First and last name" id="first-last-name" size="20">
@@ -152,6 +153,24 @@
                         <div style="text-align: center; padding: 10px 0 0 0;">
                             <button onclick="subscribeNewsLetter();">Subscribe</button>
                         </div>
+                    </div-->
+                    <!-- form submit -->
+                    <iframe name="sub-response" style="display: none;" onload="onSubmitResponse(this, subscriptionOKMessage(), subscriptionErrorMessage());"></iframe>
+                    <div style="display: grid; grid-template-columns: auto auto;">
+                        <form action="contact.php" method="post" target="sub-response"> <!-- TODO Redirect output in  a dialog ?-->
+                            <input type="hidden" name="operation" value="send">
+                            <input type="hidden" name="commentArea" value="newsletter subscription">
+
+                            <div style="display: grid; grid-template-columns: auto auto;">
+                                <span style="color: white; text-align: right; margin: 0 10px 0 0;">Your name:</span>
+                                <input type="text" name="first-last-name" placeholder="First and last name" id="first-last-name" size="20">
+                                <span style="color: white; text-align: right; margin: 0 10px 0 0;">Email:&nbsp;</span>
+                                <input type="text" name="email" placeholder="Email" id="user-email" size="20">
+                            </div>
+                            <div style="text-align: center; padding: 10px 0 0 0; vertical-align: top;">
+                                <input type="submit" value="Subscribe">
+                            </div>
+                        </form>
                     </div>
                 </td>
                 <td width="25%" style="text-align: right; vertical-align: top; color: white; padding: 5px; margin: 5px;">
