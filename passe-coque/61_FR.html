@@ -9,7 +9,8 @@
     </div>
 
     <div style="margin: 10px; border: 3px solid blue; border-radius: 10px; padding: 20px; background: rgba(255, 255, 255, 0.6);">
-        <table style="margin: auto;">
+        <!-- Mailto option -->
+        <!--table style="margin: auto;">
             <tr>
                 <td>Vos nom et pr&eacute;nom&nbsp;:</td>
                 <td><input type="text" id="first-name" placeholder="Prénom"></td>
@@ -20,7 +21,29 @@
                     <button onclick="sendEmail(document.getElementById('first-name').value, document.getElementById('last-name').value);">Envoyer un message</button>
                 </td>
             </tr>
-        </table>
+        </table-->
+        <!-- send mail option -->
+        <iframe name="sub-response" style="display: none;" onload="onSubmitResponse(this, sendMessageOKMessage(), sendMessageErrorMessage());"></iframe>
+        <div style="display: grid; grid-template-columns: auto auto;">
+            <form action="contact.php" method="post" target="sub-response" id="send-message">
+                <input type="hidden" name="operation" value="send">
+                <input type="hidden" name="subject" value="send-message">
+
+                <div style="display: grid; grid-template-columns: auto auto;">
+                    <span style="text-align: right; margin: 0 10px 0 0;">Votre nom&nbsp;:&nbsp;</span>
+                    <input type="text" name="first-last-name" placeholder="Pr&eacute;nom & Nom" id="first-last-name" size="20">
+                    <span style="text-align: right; margin: 0 10px 0 0;">Email&nbsp;:&nbsp;</span>
+                    <input type="text" name="email" placeholder="Email" id="user-email" size="20">
+                    <!-- Message content -->
+                    <span style="text-align: right; margin: 0 10px 0 0;">Votre message&nbsp;:&nbsp;</span>
+                    <textarea name="commentArea" form="send-message" rows="5">Votre message ici...</textarea>
+                </div>
+                <div style="text-align: center; padding: 10px 0 0 0; vertical-align: top;">
+                    <input type="submit" value="Envoyer">
+                </div>
+            </form>
+        </div>
+
     </div>
     <hr/>
     <div style="margin: 50px;">

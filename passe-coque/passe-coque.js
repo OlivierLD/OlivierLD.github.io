@@ -1362,6 +1362,22 @@ let subscriptionErrorMessage = () => {
     return mess;
 }
 
+let sendMessageOKMessage = () => {
+    let mess = "Votre message a &eacute;t&eacute; envoy&eacute;,<br/>vous &ecirc;tes en copie (v&eacute;rifiez vos spams...).";
+    if (currentLang !== 'FR') {
+        mess = "Your message has been sent,<br/>you're cc'd (check your spams...)."
+    }
+    return mess;
+}
+
+let sendMessageErrorMessage = () => {
+    let mess = "Votre message a pos&eacute; un probl&egrave;me, il n'est pas parti.";
+    if (currentLang !== 'FR') {
+        mess = "There was a problem posting your message...."
+    }
+    return mess;
+}
+
 let onSubmitResponse = (iframe, substituteOK, substituteError) => {
     // console.log(iframe);
     let message = '';
