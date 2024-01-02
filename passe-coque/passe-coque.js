@@ -730,8 +730,8 @@ const THE_FLEET = [
         base: "--"
     },
     { 
-        name: "Kelt 620",
-        id: "kelt-620",
+        name: "Ar Mor Van",
+        id: "ar-mor-van",
         pix: "./images/boats/kelt620.jpeg",
         type: "Ketl 620",
         category: CLUB,
