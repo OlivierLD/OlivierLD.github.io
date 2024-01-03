@@ -154,7 +154,7 @@
     };
 
     // Add tabs here  at will,as needed, by div id.
-    const TABS = ['kayak', 'todo', 'sf-home', '2022', '2023']; 
+    const TABS = ['kayak', 'todo', 'sf-home', '2022', '2023', '2024']; 
 
     let openTab = (evt, tabNum) => {
         let tabLinks = document.getElementsByClassName("tablinks");
@@ -190,7 +190,8 @@
         <button class="tablinks" onclick="openTab(event, 1);">ToDo</button>
         <button class="tablinks" onclick="openTab(event, 2);" title="San Francisco&#13;California">...From the past</button>
         <button class="tablinks" onclick="openTab(event, 3);">2022</button>
-        <button class="tablinks active" onclick="openTab(event, 4);">2023</button>
+        <button class="tablinks" onclick="openTab(event, 4);">2023</button>
+        <button class="tablinks active" onclick="openTab(event, 5);">2024</button>
     </div>
 
     <div id="kayak" style="display: none;">
@@ -745,7 +746,7 @@
         </div>
     </div>
 
-    <div id="2023" style="display: block; margin: 15px; height: 650px; overflow-y: scroll;">
+    <div id="2023" style="display: none; margin: 15px; height: 650px; overflow-y: scroll;">
 
         <ul>
             <li><a class="list-link" href="#new-planters">Nouveau bacs &agrave; plantes</a></li>
@@ -890,6 +891,29 @@
             </slide-show>
         </div>    
 
+    </div>
+
+    <div id="2024" style="display: block; margin: 15px; height: 650px; overflow-y: scroll;">
+
+        <ul>
+            <li><a class="list-link" href="#rainy-ria">Du vent dans la ria !</a></li>
+        </ul>
+
+        <h2><a name="rainy-ria">Du vent dans la ria !</a></h2>
+        <small style="font-style: italic;">Click the images to enlarge</small>
+
+        <div style="height: 600px; margin: 2px;">
+            <slide-show id="slide-show-ria"
+                        width="800"
+                        height="600">
+                <slide-show-image src="./images/ria.01.jpeg" title="Rainbow" desc="3 janvier"></slide-show-image>
+                <slide-show-image src="./images/ria.02.jpeg" title="Nichtager" desc="3 janvier"></slide-show-image>
+                <slide-show-image src="./images/ria.03.jpeg" title="St Cado rainbow" desc="3 janvier"></slide-show-image>
+                <slide-show-image src="./images/ria.04.jpeg" title="Nichtager" desc="3 janvier"></slide-show-image>
+                <slide-show-image src="./images/ria.05.jpeg" title="St Cado rainbow" desc="3 janvier"></slide-show-image>
+                <slide-show-image src="./images/ria.06.jpeg" title="Full rainbow" desc="3 janvier"></slide-show-image>
+            </slide-show>
+        </div>    
     </div>
 
     <hr/>
