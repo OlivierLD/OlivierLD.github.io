@@ -964,6 +964,19 @@ const THE_FLEET = [
 ];
 
 const INFO_SECTION = [
+    {
+        section: "agenda",
+        content: [{
+            date: "Jan-2024",
+            title: "Agenda 2024",
+            content: "./actu/agenda2024.html"
+        }]
+    },
+    {
+        section: "2024",
+        content: [
+        ]
+    },
     { 
         section: "2023",
         content: [
@@ -1157,6 +1170,14 @@ let updateInfoFilter = radio => {
         case 'all':
             console.log("No filter");
             fillOutActu(null);
+            break;
+        case 'agenda':
+            console.log('Agenda');
+            fillOutActu('agenda');
+            break;
+        case 'a2024':
+            console.log("2024");
+            fillOutActu('2024');
             break;
         case 'a2023':
             console.log("2023");
