@@ -756,9 +756,9 @@ const THE_FLEET = [
     {
         name: "Melkart",
         id: "melkart",
-        pix: "./images/boats/melkart.jpg",
+        pix: "./images/boats/melkart/melkart.00.jpg",
         type: "Evasion 32",
-        category: NONE,
+        category: CLUB,
         base: "&Eacute;tel"
     },
     {

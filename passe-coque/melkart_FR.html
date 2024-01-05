@@ -1,0 +1,58 @@
+
+<div style="height: 600px; overflow-y: scroll;">
+    <div class="tab" style="margin-top: 30px; margin-bottom: 10px; display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto;"> <!-- TODO Improve the grid-template... -->
+        <button class="tablinks tab-active" onclick="openTab(event, 'melkart-01');" title="Sommaire">Sommaire</button>
+        <button class="tablinks" onclick="openTab(event, 'melkart-02');">Photos</button>
+        <button class="tablinks" onclick="openTab(event, 'melkart-03');">Contact</button>
+    </div>
+
+    <div style="height: 500px; overflow-y: scroll;">
+        <div id="melkart-01" class="tab-section" style="display: block;">
+            <div style="display: grid; grid-template-columns: auto auto;">
+                <img src="./images/boats/melkart/melkart.00.jpg" width="100%">
+                <div style="padding: 14px;">
+                    <h2>Melkart</h2>
+                    Evasion 32, bas&eacute; &agrave; &Eacute;tel<br/>
+                    <ul>
+                        <li>Chantier B&eacute;n&eacute;teau</li>
+                    </ul>
+                </div>
+            </div>
+            <div>
+                <h2>Le Bateau</h2>
+                <div>
+                    Le voilier Evasion 32 est un monocoque habitable de croisi&egrave;re, construit par le chantier B&eacute;n&eacute;teau en France. 
+                    Ce voilier &agrave; quille fixe, gr&eacute;&eacute; en ketch en tête, r&eacute;alis&eacute; par l'architecte naval Andr&eacute; B&Eacute;N&Eacute;TEAU, avec un tirant 
+                    d'eau maximum de 1.40 m. La production a d&eacute;marr&eacute; en 1973 et s'est termin&eacute;e en 1981. 
+                    286 exemplaires du bateau ont &eacute;t&eacute; produits.
+                    &Eacute;quip&eacute; d'un moteur di&eacute;sel. 
+                </div>
+                <div>
+                    MELKART est un don &agrave; Passe-Coque (apparemment l'ancien propri&eacute;taire ne voulait plus naviguer) ! 
+                </div>
+                <h2>Les projets associatifs</h2>
+                <div>
+                    Le projet de Melkart est de faire un partenariat avec une association pour faire naviguer les enfants sourds et malentendants 
+                    (partager la mer avec les enfants, adolescents et adultes touch&eacute;s par cette pathologie).<br/>
+                    Tout est parti de cette id&eacute;e l&agrave;...
+                </div>
+            </div>
+        </div>
+
+        <div id="melkart-02" class="tab-section" style="display: none;">
+            <slide-show id="melkart-slide-show"
+                        width="340"
+                        height="400">
+                <slide-show-image src="./images/boats/melkart/melkart.01.jpg" title="Melkart - 1"></slide-show-image>
+                <slide-show-image src="./images/boats/melkart/melkart.02.jpg" title="Melkart - 1"></slide-show-image>
+                <slide-show-image src="./images/boats/melkart/melkart.03.jpg" title="Melkart - 1"></slide-show-image>
+            </slide-show>
+        </div>
+
+        <div id="melkart-03" class="tab-section" style="display: none;">
+            <h2>Plus d'infos...</h2>
+            R&eacute;f&eacute;rent : Tiago Cachada Campos<br/>
+            Disponibilit&eacute; Boat Club&nbsp;: OUI 
+        </div>
+    </div>
+</div>
