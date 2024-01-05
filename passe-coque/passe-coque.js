@@ -1399,21 +1399,26 @@ let sendMessageErrorMessage = () => {
     return mess;
 }
 
-let onSubmitResponse = (iframe, substituteOK, substituteError) => {
+let onSubscriptionResponse = (iframe) => {
     // console.log(iframe);
     let message = '';
     try {
-        message = iframe.contentDocument.querySelectorAll('div[id="message"]')[0].innerText;
-        if (substituteOK) {
-            message = substituteOK;
+        message = iframe.contentDocument.querySelectorAll('body')[0].innerText.trim();
+        if (message.startsWith("OK")) {
+            message = "Votre Souscription a bien &eacute;t&eacute; enregistr&eacute;e.";
+            if (currentLang == 'EN') {
+                message = "Your subscription was successfull."
+            }
+        } else if (message.startsWith("ERROR")) {
+            message = "Cette adresse email est d&eacute;j&agrave; utilis&eacute;e.<br/>Essayez avec une autre...";
+            if (currentLang == 'EN') {
+                message = "Email address already in use.<br/>Try another one..."
+            }
         }
     } catch (err) {
         console.log("Oops");
         try {
-            message = iframe.contentDocument.querySelectorAll('div[id="error"]')[0].innerText;
-            if (substituteError) {
-                message = substituteError;
-            }
+            message = iframe.contentDocument.querySelectorAll('body')[0].innerText.trim();
         } catch (err2) {
             console.log("No text, no error...");
         }

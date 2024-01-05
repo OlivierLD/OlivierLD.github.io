@@ -155,15 +155,15 @@
                         </div>
                     </div-->
                     <!-- Form submit -->
-                    <iframe name="sub-response" style="display: none;" onload="onSubmitResponse(this, subscriptionOKMessage(), subscriptionErrorMessage());"></iframe>
+                    <iframe name="sub-response" style="display: none;" onload="onSubscriptionResponse(this);"></iframe>
                     <div style="display: grid; grid-template-columns: auto auto;">
-                        <form action="contact.php" method="post" target="sub-response">
-                            <input type="hidden" name="operation" value="send">
-                            <input type="hidden" name="commentArea" value="newsletter subscription">
+                        <form action="./admin/sql/dbQuery.01.php" method="post" target="sub-response">
+                            <input type="hidden" name="operation" value="insert">
+                            <!--input type="hidden" name="commentArea" value="newsletter subscription"-->
 
                             <div style="display: grid; grid-template-columns: auto auto;">
                                 <span style="color: white; text-align: right; margin: 0 10px 0 0;">Votre nom&nbsp;:&nbsp;</span>
-                                <input type="text" name="first-last-name" placeholder="Pr&eacute;nom & Nom" id="first-last-name" size="20">
+                                <input type="text" name="name" placeholder="Pr&eacute;nom & Nom" id="first-last-name" size="20">
                                 <span style="color: white; text-align: right; margin: 0 10px 0 0;">Email&nbsp;:&nbsp;</span>
                                 <input type="text" name="email" placeholder="Email" id="user-email" size="20">
                             </div>

@@ -1,6 +1,21 @@
-<html>
+<html lang="en">
+  <!--
+   | PHP & MySQL playgbround...
+   +-->
   <head>
+    <meta charset="UTF-8">
+    <meta charset="ISO-8859-1">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>DB Query Test</title>
+    <style type="text/css">
+      * {
+        font-family: 'Courier New'
+      }
+
+      tr > td {
+        border: 1px solid silver;
+      }
+    </style>
   </head>
   <body>
     <h1>PHP / MYSQL Test</h1>
@@ -82,11 +97,16 @@ try {
 
   echo ("Returned " . $result->num_rows . " row(s)<br/>");
 
-  echo("-----------<br/><pre>");
+  echo("-----------<br/>");
+
+  echo "<table>";
   while ($table = mysqli_fetch_array($result)) { // go through each row that was returned in $result
-    echo("id:" . $table[0] . ", name:" . $table[1] . ", email:" . $table[2] . "<br/>");    // print the table that was returned on that row.
+    // echo "table contains ". count($table) . " entry(ies).<br/>";
+    // echo("id:" . $table[0] . ", name:" . $table[1] . ", email:" . $table[2] . "<br/>");    // print the table that was returned on that row.
+    echo("<tr><td>" . $table[0] . "</td><td>" . $table[1] . "</td><td>" . $table[2] /*. "</td><td>" . $table[3] . "</td><td>" . $table[4] . "</td><td>" . $table[5]*/ . "</td></tr>"); 
   }
-  echo("</pre>-----------<br/>");
+  echo "</table>";
+  echo("-----------<br/>");
   
 
   // $num = mysql_numrows($result);
