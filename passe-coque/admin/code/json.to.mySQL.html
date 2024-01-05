@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<!--
+    Email sender.
+    bcc element will be composed dynamically.
+ +-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/jpg" href="./palm.04.jpg">
+    <title>Send emails</title>
+    <style type="text/css">
+
+* {
+    font-family: 'Courier New', Courier, monospace;
+}        
+
+body {
+    background-color: silver;
+    font-size: 2em;
+}
+
+.mail-box {
+    padding: 20px; 
+    margin: 10px;
+    border: 1px solid blue; 
+    border-radius: 5px;
+    box-shadow: 2px 2px 4px grey, 0 0 25px white, 0 0 7px cyan;
+}
+.list-link {
+    color: white;
+    /* font-size: 20px;*/
+    text-shadow: 2px 2px 4px black, 0 0 25px white, 0 0 10px orange;
+    text-decoration: none;
+}
+a.list-link:hover {
+    color: cyan;
+    font-weight: bold;
+    cursor: pointer;
+    text-shadow: 4px 4px 8px black, 0 0 25px white, 0 0 10px cyan;
+}
+    </style>
+</head>
+<body>
+  <h1 class="list-link">JSON list to mySQL insert stmt</h1>  
+
+  <div id="stmt-list" style="max-height: 300px; overflow-y: scroll;">
+  </div>
+
+  <hr/>
+  <small><i>OlivSoft never stops</i></small>  
+</body>
+<script type="text/javascript">
+
+    let fillOutStmt = (stmtArray) => {
+        let innerHTML = "<pre>";
+        stmtArray.forEach(line => { 
+            innerHTML += (line + "\n");
+        });
+        innerHTML += "</pre>";
+        document.getElementById("stmt-list").innerHTML = innerHTML;
+    };
+
+    window.onload = () => {
+
+        fetch("./members.json")   // Requires a server (like nodeJS, see server.js). A protocol like file:// would trigger a CORS error
+        //  fetch("../members.for.tests.json") 
+            .then(response => {
+                console.log(`Data Response: ${response.status} - ${response.statusText}`);
+                // response.arrayBuffer().then(doc => {
+                response.json().then(doc => {  // TODO see other methods than json() ?
+                    let members = doc;
+                    console.log(`Data loaded, ${doc.length} members`);
+                    let idx = 0;
+                    let stmtArray = [];
+                    members.forEach(element => {
+                        if (element.email.trim().length > 0) {
+                            // email with blank or '<' or '>'
+                            if (element.email.includes(" ") || element.email.includes(">") || element.email.includes("<") || element.email.includes("mailto")) {
+                                console.log(`Suspicious email for ${JSON.stringify(element, null, 2)}`);
+                            }
+                            // Create insert SQL stmt
+                            let sqlStmt = "INSERT INTO `nl-subscribers`(`name`, `email`) " +
+                                          `VALUES('${element.firstName.replace("'", "&amp;apos;").trim()} ${element.lastName.replace("'", "&amp;apos;").trim()}', '${element.email}');`;
+                            stmtArray.push(sqlStmt);
+                            idx++;
+                            if (false) {
+                                console.log(`${idx} : ${element.email}`);
+                            }
+                        } else {
+                            console.log(`No email for ${element.firstName} ${element.lastName}`);
+                        }
+                    });
+                    // Now fill the textarea
+                    fillOutStmt(stmtArray);
+                });
+            },
+            (error, errmess) => {
+                console.log("Ooch");
+                let message;
+                if (errmess) {
+                    let mess = JSON.parse(errmess);
+                    if (mess.message) {
+                        message = mess.message;
+                    }
+                }
+                console.debug("Failed to get data..." + (error ? JSON.stringify(error, null, 2) : ' - ') + ', ' + (message ? message : ' - '));
+            });
+
+    }
+    
+</script>
+</html>
