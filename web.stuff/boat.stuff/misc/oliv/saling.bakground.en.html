@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Oliv</title>
+        <meta charset="utf-8">
+        <link rel="icon" type="image/jpg" href="../../icons/hammerhead.02.ico">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+html {
+    display: table;
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    display: table-cell;
+    /*text-align: center;*/
+    color: silver;
+    font-family: Verdana, Arial, Helvetica, Geneva;
+    font-size: 20pt;
+    vertical-align: top;
+    background: radial-gradient(at top, DarkGrey -8%, black 55%);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+input, button {
+    font-size: 20pt;
+}
+
+button {
+    color: navy;
+    border-radius: 10px;
+    box-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px silver;
+}
+
+h1 {
+    color: silver;
+    font-style: italic;
+    font-size: 36pt;
+    font-family: Verdana, Arial, Helvetica, Geneva;
+    padding-left: 15pt;
+    padding-bottom: 1pt;
+    padding-top: 1pt;
+}
+
+a:link {
+	color: #0000a0;
+    text-shadow: 2px 2px 4px black, 0 0 25px white, 0 0 7px cyan;
+}
+
+a:active {
+	color: #8080ff;
+    text-shadow: 2px 2px 4px black, 0 0 25px white, 0 0 7px cyan;
+}
+
+a:visited {
+	color: #8080ff;
+    text-shadow: 2px 2px 4px black, 0 0 25px white, 0 0 7px cyan;
+}
+
+.dialog-header {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.dialog-header-close {
+    float: right;
+}
+.dialog-header-close:hover {
+    color: cyan;
+    cursor: pointer;
+}
+
+        </style>
+    </head>        
+    <body>
+        <dialog id="image-dialog" class="shadow-menu" style="position: absolute; z-index: 10;">
+            <div class="dialog-header">
+              <span id="image-title"></span>
+              <span class="dialog-header-close" onclick="closeImageDialog();">&times</span>
+            </div>
+            <div id="image-content" style="margin-top: 15px;">
+            </div>
+        </dialog>
+        
+        <div style="display: grid; grid-template-columns: auto auto;">
+            <h1>Olivier LE DIOURIS - Sailing Background</h1>
+            <a href="" title="Switch to French"><img src="./images/france.gif" style="float: right; margin-top: 60px; margin-right: 40px;"/></a>
+        </div>
+        <div style="margin: 10px 20px;">
+            <dl>
+                <dt><a name="2010-2011">2010-2011</a></dt>
+                <dd>
+                Eight months sailing double-handed <a href="../../trip-2010-2011/index.html" target="DP">around the
+                Pacific</a> on a 42' ketch.<br/>
+                San Francisco CA, Nuku-Hiva (Marquesas Islands), Ua Pou (Marquesas Islands), Rangiroa (Tuamotu), Tahiti (Society
+                Islands),
+                Moorea (Society Islands), Huahine (Society Islands), Taha'a (Society Islands), Raiatea (Society Islands),
+                Bora-Bora (Society Islands), Tongareva (Cook Islands), Kiritimati (Kiribati Republic), O'Ahu (Hawai'i Islands),
+                San Francisco CA.
+                </dd>
+                <dt><a name="2006">2006</a>
+                <dt>
+                <dd>Pacific Cup (San Francisco - Hawai'i), navigator on board Relentless (Sydney 32)</dd>
+                <dt><a name="since-2004">From fall 2004 to spring 2017</a>
+                <dt>
+                <dd>Living onboard <a href="http://donpedro.lediouris.net/" target="DP">Don Pedro</a></dd>
+                <dt><a name="2000-2004">2000 to 2004</a></dt>
+                <dd>Racing on board Kookaburra, <a href="http://www.sfj105.org" target="other">J105</a> in the San Francisco Bay.
+                </dd>
+                <dt><a name="1988-2000">Between 1988 and 2000</a></dt>
+                <dd>Family Cruising...</dd>
+                <dt><a name="83-88">From 1983 to 1988</a></dt>
+                <dd>
+                <b><i>Professional Offshore Racing Navigator</i></b>
+                <ul>
+                    <li type="disc">
+                    <b>Year 1983</b>
+                    <ul>
+                        <li type="disc">"Troph&eacute;e des Multicoques" on <b>Paul Ricard</b>, 60' foiler (Skipper &Eacute;ric
+                        Tabarly).
+                        </li>
+                    </ul>
+                    </li>
+                    <li type="disc">
+                    <b>Year 1984</b>
+                    <ul>
+                        <li type="disc">"Troph&eacute;e des Multicoques" on <b>Paul Ricard</b> (Skipper &Eacute;ric
+                        Tabarly).
+                        </li>
+                        <li type="disc">Observer Singlehanded Transatlantic Race (OSTAR) on board &quot;<a href="#" onclick="showImageDialog(this, 'Num&eacute;ro 5', './images/N5.jpg');"><b>Num&eacute;ro
+                        Cinq</b></a>&quot;</li>
+                        <li type="disc">
+                        Qu&eacute;bec - Saint-Malo on <b>Paul Ricard</b>. (<b><i>Winner in Class 2 !</i></b>)
+                        <br>
+                        During this race, we were the first sailing boat to ever break the 500-nautical-miles-a-day barrier,
+                        doing 508 nm in 24 hours.
+                        Formule Tag (a Class 1, skipper Mike Birch) broke <i><u>our</u></i> record 2 days later - doing 512 nm in 24
+                        hours.
+                        <br/>
+                        We enjoyed our record for two memorable days.
+                        </li>
+                        <li type="disc">Semaine de vitesse de La Baule</li>
+                        <li type="disc">Semaine de vitesse de Brest</li>
+                        <li type="disc">Ruta del Discubrimento (Malaga - Santo-Domingo) on <b>Paul Ricard</b>.</li>
+                    </ul>
+                    </li>
+                    <li type="disc">
+                    <b>Year 1985</b>
+                    <ul>
+                        <li type="disc">Semaine de La Rochelle</li>
+                        <li type="disc">"Troph&eacute;e des Multicoques" on <a href="#" onclick="showImageDialog(this, 'Roger &amp; Gallet', './images/RG.gif');"><b>Roger &amp;
+                        Gallet</b></a>, 80' catamaran (Skipper &Eacute;ric Loizeau). <i><b>Winner All Classes !</b></i>
+                        </li>
+                        <li type="disc">Semaine de vitesse de La Baule</li>
+                        <li type="disc"><a href="#" onclick="showImageDialog(this, 'Roget &amp; Gallet', './images/rgme.jpg');">Race around Europe</a>
+                        <ul>
+                            <li type="disc">Kiel (Germany)</li>
+                            <li type="disc">Scheveningen (Holland)</li>
+                            <li type="disc">Torquay (UK)</li>
+                            <li type="disc">Lorient (France)</li>
+                            <li type="disc">Lisbon (Portugal)</li>
+                            <li type="disc">Malaga (Spain)</li>
+                            <li type="disc">Toulon (France)</li>
+                            <li type="disc">Porto-Cervo (Italy)</li>
+                        </ul>
+                        </li>
+                        <li type="disc">Semaine de vitesse de Brest</li>
+                    </ul>
+                    </li>
+                    <li type="disc">
+                    <b>Year 1986</b>
+                    <ul>
+                        <li type="disc">"Troph&eacute;e des Multicoques" on <b>Royale</b>, 85' catamaran (Skipper Lo&iuml;c
+                        Caradec). <i><b>Winner All Classes !</b></i></li>
+                        <li type="disc">
+                        Navigator and Skipper on <a href="#" onclick="showImageDialog(this, 'IOR !', './images/IOR.jpg');"><b>Mil&egrave;ne V</b></a>, IOR Maxi,
+                        70'.
+                        <ul>
+                            <li type="disc">Giraglia</li>
+                            <li type="disc">Semana de Palma de Majorca</li>
+                            <li type="disc">Nioulargue (Saint Tropez)</li>
+                            <li type="disc">RORC Races (Fort Lauderdale - Florida)</li>
+                        </ul>
+                        </li>
+                    </ul>
+                    </li>
+                    <li type="disc">
+                    <b>Year 1987</b>
+                    <ul>
+                        <li type="disc">Semaine de La Rochelle</li>
+                        <li type="disc">"Troph&eacute;e des Multicoques" on <a href="#" onclick="showImageDialog(this, 'C&ocirc;te d\'Or II', './images/CO2.jpg');">C&ocirc;te d'Or
+                        2</a>, 80' foiler (Skipper &Eacute;ric Tabarly). <i><b>Winner All Classes !</b></i></li>
+                        <li type="disc">Semaine de vitesse de La Baule</li>
+                        <li type="disc">Race around Europe
+                        <ul>
+                            <li type="disc">Scheveningen (Holland)</li>
+                            <li type="disc">Bremerhaven (Germany)</li>
+                            <li type="disc">Edimburg (Scottland)</li>
+                            <li type="disc">Dublin (Ireland)</li>
+                            <li type="disc">Lorient (France)</li>
+                            <li type="disc">Villamora (Portugal)</li>
+                            <li type="disc">Barcelona (Spain)</li>
+                            <li type="disc"><a href="#" onclick="showImageDialog(this, 'C&ocirc;te d\'Or II', './images/CO2L.jpg');">Toulon</a> (France)</li>
+                            <li type="disc">San-Remo (Italy)</li>
+                        </ul>
+                        </li>
+                        <li type="disc">Semaine de vitesse de Brest</li>
+                    </ul>
+                    </li>
+                </ul>
+                </dd>
+                <dt><a name="80-84">Between 1980 and 1984</a></dt>
+                <dd>Designing and building "<a href="#" onclick="showImageDialog(this, 'Num&eacute;ro 5', './images/n5_2.gif');">Num&eacute;ro Cinq</a>", a 30' trimaran for the OSTAR
+                (Observer Singlehanded Transatlantic Race).
+                </dd>
+                <dt><a name="82-84">From may 1982 to march 1984</a></dt>
+                <dd>
+                In charge in the "Centre de Formation &agrave; la Croisi&egrave;re" of the charter fleet (30 sailing boats).
+                </dd>
+                <dt><a name="spring81">Spring 1981</a></dt>
+                <dd>Yachts Delivery from Brittany to the South of France, through the Gibraltar Strait.</dd>
+                <dt><a name="1979-80">From may 1979 to december 1980</a></dt>
+                <dd>
+                Profesionnal Sailing instructor in Cap d'Agde (Mediterranean Sea, France).<br>
+                Leading sailing classes in French, Italian and Spanish Mediterranean Sea.
+                </dt>
+                <dt><a name="winter1978-79">Summer 1978 and winter 1978/1979</a></dt>
+                <dd>
+                Sailing instructor in the "Groupe Finist&eacute;rien de Croisi&egrave;re".<br>
+                Leading sailing classes in Jersey, Guernsey, Sark, the South of Cornwall (England), and the
+                South of Ireland.
+                </dd>
+                <dt><a name="winter1977">Winter 1977/1978</a></dt>
+                <dd>
+                Sailing instructor in the "Groupe Finist&eacute;rien de Croisi&egrave;re".<br>
+                Leading sailing classes in Jersey, Guernsey, Sark, and the South of Cornwall (England)
+                </dd>
+                <dt><a name="summer1977">Summer 1977</a></dt>
+                <dd>Sailing instructor in Beg Meil (South Brittany, France).</dd>
+                <dt><a name="summer1976">Summer 1976</a></dt>
+                <dd>Sailing instructor in Beg Meil (South Brittany, France).</dd>
+            </dl>  
+        </div>  
+        <hr/>
+        <i style="padding-left: 20px; text-shadow: 1px 1px 2px orange, 0 0 25px white, 0 0 5px silver;">Wow!</i>
+    </body>
+    <script type="text/javascript">
+
+function showImageDialog(element, txt, img) {
+    let bodyRect = document.body.getBoundingClientRect(),
+        elemRect = element.getBoundingClientRect(),
+        offset   = elemRect.top - bodyRect.top;
+    // let origY = window.scrollY;
+
+    // left: `${evt.clientX + window.scrollX}px`,
+    // top: `${evt.clientY + window.scrollY}px`,
+    
+    document.getElementById('image-title').innerText = `${txt}`;
+    document.getElementById('image-content').innerHTML = `<img src="${img}">`;
+
+    let aboutDialog = document.getElementById("image-dialog");
+    console.log(`Offset: ${offset}`);
+    aboutDialog.style.top = `${offset}px`;
+
+    // window.scrollY = origY; // A trick...
+
+    if (aboutDialog.show !== undefined) {
+      aboutDialog.show();
+    } else {
+      alert(NO_DIALOG_MESSAGE);
+      aboutDialog.style.display = 'inline';
+    }
+  }
+
+  function closeImageDialog() {
+    let aboutDialog = document.getElementById("image-dialog");
+    if (aboutDialog.close !== undefined) {
+      aboutDialog.close();
+    } else {
+      // alert(NO_DIALOG_MESSAGE);
+      aboutDialog.style.display = 'none';
+    }
+  }
+    </script>
+</html>
