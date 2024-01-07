@@ -1,3 +1,8 @@
+<!DOCTYPE html>
+<!--
+! Send an email to contact@passeurdecoute.fr.
+! Sender is cc'd.
+ +-->
 <html>
   <head>
     <title>Passe-Coque Contact</title>
@@ -7,7 +12,7 @@
     <!--h2>Contact Passe-Coque</h2-->
     <?php
 
-      $sendTo = "contact@passeurdecoute.fr"; // "olivier.lediouris@gmail.com"; // "contact@passeurdecoute.fr"
+      $sendTo = "contact@passeurdecoute.fr"; // "olivier.lediouris@gmail.com";
       $messageSubject = "From Passe-Coque Web Site"; // Default
 
       // echo('HTTP_POST_VARS:'.$HTTP_POST_VARS.'<br/>');
