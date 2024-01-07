@@ -18,3 +18,5 @@ SELECT TIMEDIFF(CURRENT_TIMESTAMP(), '2024-01-01 00:00:00') as 'IN HOURS';
 -- See https://www.tutorialspoint.com/mysql/mysql_date_time_functions_timestampdiff.htm for the units
 SELECT TIMESTAMPDIFF(HOUR, CURRENT_TIMESTAMP(), '2024-01-01 00:00:00') as 'IN HOURS';
 SELECT TIMESTAMPDIFF(HOUR, CURRENT_TIMESTAMP(), '2024-01-01') as 'IN HOURS';
+
+-- For ER Diagrams: https://app.diagrams.net/
