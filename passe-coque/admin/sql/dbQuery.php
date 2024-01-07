@@ -1,6 +1,6 @@
 <html lang="en">
   <!--
-   | PHP & MySQL playgbround...
+   | PHP & MySQL playground...
    +-->
   <head>
     <meta charset="UTF-8">
