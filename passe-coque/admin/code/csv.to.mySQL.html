@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<!--
+    Email sender.
+    bcc element will be composed dynamically.
+
+    Starts from hard-coded file name ../../helloasso/export-adhesion-simple-passe-coque-l-association-des-passeurs-d-ecoute-25_03_2021-04_01_2024.csv
+ +-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/jpg" href="./palm.04.jpg">
+    <title>Create Members</title>
+    <style type="text/css">
+
+* {
+    font-family: 'Courier New', Courier, monospace;
+}        
+
+body {
+    background-color: silver;
+    font-size: 1em;
+}
+
+.mail-box {
+    padding: 20px; 
+    margin: 10px;
+    border: 1px solid blue; 
+    border-radius: 5px;
+    box-shadow: 2px 2px 4px grey, 0 0 25px white, 0 0 7px cyan;
+}
+.list-link {
+    color: white;
+    /* font-size: 20px;*/
+    text-shadow: 2px 2px 4px black, 0 0 25px white, 0 0 10px orange;
+    text-decoration: none;
+}
+a.list-link:hover {
+    color: cyan;
+    font-weight: bold;
+    cursor: pointer;
+    text-shadow: 4px 4px 8px black, 0 0 25px white, 0 0 10px cyan;
+}
+    </style>
+</head>
+<body>
+  <h1 class="list-link">CSV list to mySQL insert stmt</h1>  
+
+  <div id="stmt-list" style="max-height: 300px; overflow-y: scroll;">
+  </div>
+
+  <hr/>
+  <small><i>OlivSoft never stops</i></small>  
+</body>
+<script type="text/javascript">
+
+    const FILE_NAME = "../../helloasso/export-adhesion-simple-passe-coque-l-association-des-passeurs-d-ecoute-25_03_2021-04_01_2024.csv";
+
+    let fillOutStmt = (stmtArray) => {
+        let innerHTML = "<pre>";
+        stmtArray.forEach(line => { 
+            innerHTML += (decodeURI(line) + "\n");
+        });
+        innerHTML += "</pre>";
+        document.getElementById("stmt-list").innerHTML = innerHTML;
+    };
+
+    const REFERENCE = 0;
+    const COMMAND_DATE = 1;
+    const COMMAND_STATUS = 2;
+    const MEMBER_LAST_NAME = 3;
+    const MEMBER_FIRST_NAME = 4;
+    const CARD_URL = 5;
+    const PAYER_LAST_NAME = 6;
+    const PAYER_FIRST_NAME = 7;
+    const PAYER_EMAIL = 8;
+    const JOB = 9;
+    const BUYING_MEAN = 10;
+    const AMOUNT_CAT = 11;
+    const AMOUNT = 12;
+    const CODE_PROMO = 13;
+    const AMOUNT_PROMO = 14;
+    const PHONE = 15;
+    const EMAIL = 16;
+    const ADDRESS = 17;
+    const ZIP = 18;
+    const BIRTH_DATE = 19;
+    const TOWN = 20;
+    const EXPERIENCE = 21;
+    const BOAT_BUILDING_EXP = 22;
+    const COMMENTS = 23;
+
+    let lpad = (s, w, len) => {
+        let str = s;
+        while (str.length < len) {
+            str = w + str;
+        }
+        return str;
+    };
+
+    // from "DD/MM/YYYY HH:MI" to "YYYY-MM-DD HH:MI:SS"
+    let toTimeStamp = (orig) => {
+        let dateTime = orig.split(" ");
+        let date = dateTime[0].split("/");
+        let time = dateTime[1].split(":");
+        
+        let yyyy = parseInt(date[2]);
+        let mm = parseInt(date[1]);
+        let dd = parseInt(date[0]);
+
+        let hh = parseInt(time[0]);
+        let mi = parseInt(time[1]);
+        let ss = parseInt(time[2] ? time[2] : '0');
+
+        let timeStamp = `${lpad(yyyy.toFixed(0), '0', 4)}-${lpad(mm.toFixed(0), '0', 2)}-${lpad(dd.toFixed(0), '0', 2)} ${lpad(hh.toFixed(0), '0', 2)}:${lpad(mi.toFixed(0), '0', 2)}:${lpad(ss.toFixed(0), '0', 2)}`;
+        return timeStamp;
+    };
+
+    // from 08/12/2001 to YYYY-MM-DD
+    let toDate = (orig) => {
+        let date = orig.split("/");
+        let yyyy = parseInt(date[2]);
+        let mm = parseInt(date[1]);
+        let dd = parseInt(date[0]);
+        return `${lpad(yyyy.toFixed(0), '0', 4)}-${lpad(mm.toFixed(0), '0', 2)}-${lpad(dd.toFixed(0), '0', 2)}`;
+    }
+
+    // 75163629;28/11/2023 21:43;Validé;Gambier;Sophie;https://www.helloasso.com/associations/passe-coque-l-association-des-passeurs-d-ecoute/adhesions/adhesion-simple/carte-adherent?cardId=75163629&ag=75163629;Gambier;Sophie;sophie.gambier01@gmail.com;;Carte bancaire;Passeur d'Ecoute;50,00;;;0769455969;sophie.gambier01@gmail.com;sophie.gambier01@gmail.com;44300;08/12/2001;Nantes;Equipière confirmée;aucune;
+    let arrayToColumns = (array) => {
+        let columnsArray = [];
+        for (let i=0; i<23; i++) {
+            let data = "NULL";
+            if (i === COMMAND_DATE) {
+                // Rework
+                if (array[i]) {
+                    data = toTimeStamp(array[i]);
+                } else {
+                    data = "NULL";
+                }
+            } else if (i === BIRTH_DATE) {
+                if (array[i]) {
+                    data = toDate(array[i]);
+                } else {
+                    data = "NULL";
+                }
+            } else {
+                data = (array[i] ? array[i].replaceAll("'", "\\'") : "");
+            }
+            if (data && data.length === 0) {
+                data = "NULL";
+            }
+            columnsArray.push(data.trim());
+        }
+        return columnsArray;
+    }
+
+    let toNumericValue = (val) => {
+        return ((!val || val === "NULL") ? 'NULL' : val.replaceAll(",", "."));
+    };
+    let toNonNumericValue = (val) => {
+        return ((!val || val === "NULL") ? 'NULL' : ("'" + val + "'"));
+    };
+
+    window.onload = () => {
+
+        fetch(FILE_NAME)   // Requires a server (like nodeJS, see server.js). A protocol like file:// would trigger a CORS error
+        //  fetch("../members.for.tests.json") 
+            .then(response => {
+                console.log(`Data Response: ${response.status} - ${response.statusText}`);
+                // response.arrayBuffer().then(doc => {
+                response.text().then(doc => {
+                    let fullDoc = doc;
+                    let members = fullDoc.split('\n');
+                    console.log(`Data loaded, ${members.length} members`);
+                    let idx = 0;
+                    let stmtArray = [];
+                    members.forEach(element => {
+                        let columns = element.split(';');
+                        if (idx > 0) {
+                            // debugger;
+                            let dbValues = arrayToColumns(columns);
+
+                            let sqlInsert = "INSERT INTO `pc-members`(" +
+                                                "`reference`, " +
+                                                "`command-date`, " +
+                                                "`command-status`, " +
+                                                "`member-first-name`, " +
+                                                "`member-last-name`, " +
+                                                "`card-url`, " +
+                                                "`payer-first-name`, " +
+                                                "`payer-last-name`, " +
+                                                "`payer-email`, " +
+                                                "`company-name`, " +
+                                                "`paid-with`, " + 
+                                                "`fee-category`, " +
+                                                "`fee-amount`, " +
+                                                "`promo-code`, " + 
+                                                "`promo-amount`, " +
+                                                "`phone`, " + 
+                                                "`email`, " + 
+                                                "`address`, " +
+                                                "`zip`, " + 
+                                                "`birth-date`, " +
+                                                "`city`, " +
+                                                "`sailing-experience`, " + 
+                                                "`boat-building-exp`, " +
+                                                "`comments` ) VALUES (" +
+                                                   toNumericValue(dbValues[0]) + "," +
+                                                   toNonNumericValue(dbValues[1]) + "," +
+                                                   toNonNumericValue(dbValues[2]) + "," +
+                                                   toNonNumericValue(dbValues[3]) + "," +
+                                                   toNonNumericValue(dbValues[4]) + "," +
+                                                   toNonNumericValue(dbValues[5]) + "," +
+                                                   toNonNumericValue(dbValues[6]) + "," +
+                                                   toNonNumericValue(dbValues[7]) + "," +
+                                                   toNonNumericValue(dbValues[8]) + "," +
+                                                   toNonNumericValue(dbValues[9]) + "," +
+                                                   toNonNumericValue(dbValues[10]) + "," +
+                                                   toNonNumericValue(dbValues[11]) + "," +
+                                                   toNumericValue(dbValues[12]) + "," +
+                                                   toNonNumericValue(dbValues[13]) + "," +
+                                                   toNumericValue(dbValues[14]) + "," +
+                                                   toNonNumericValue(dbValues[15]) + "," +
+                                                   toNonNumericValue(dbValues[16]) + "," +
+                                                   toNonNumericValue(dbValues[17]) + "," +
+                                                   toNonNumericValue(dbValues[18]) + "," +
+                                                   toNonNumericValue(dbValues[19]) + "," +
+                                                   toNonNumericValue(dbValues[20]) + "," +
+                                                   toNonNumericValue(dbValues[21]) + "," +
+                                                   toNonNumericValue(dbValues[22]) + "," +
+                                                   toNonNumericValue(dbValues[23]) +
+                                                ");";
+
+
+
+                            // console.log(sqlInsert);
+                            // Create insert SQL stmt
+                            try {
+                                let sqlStmt = sqlInsert;
+                                stmtArray.push(sqlStmt);
+                            } catch (err) {
+                                console.log(`Oops: ${err}`);
+                            }
+                        }
+                        idx++;
+                    });
+                    // Now fill the textarea
+                    fillOutStmt(stmtArray);
+                    // console.log(stmtArray);
+                });
+            },
+            (error, errmess) => {
+                console.log("Ooch");
+                let message;
+                if (errmess) {
+                    let mess = JSON.parse(errmess);
+                    if (mess.message) {
+                        message = mess.message;
+                    }
+                }
+                console.debug("Failed to get data..." + (error ? JSON.stringify(error, null, 2) : ' - ') + ', ' + (message ? message : ' - '));
+            });
+
+    }
+    
+</script>
+</html>
