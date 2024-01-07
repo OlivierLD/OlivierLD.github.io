@@ -71,7 +71,7 @@ class SlideShow extends HTMLElement {
 
 		this.slideIndex = 1;
 
-		this.widgetColor = 'cyan'; // TODO Make it a CSS rule
+		this.widgetColor = 'black'; // 'cyan'; // TODO Make it a CSS rule
 
 		// <link href="./css/SlideShow.css" rel="stylesheet" type="text/css">
 		// let link = document.createElement("link");

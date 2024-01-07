@@ -116,6 +116,7 @@ div.tooltip:hover span {
 
 .pc-button:hover {
     box-shadow: 4px 4px 8px black, 0 0 25px white, 0 0 10px cyan;
+    cursor: pointer;
 }
 
 .container {
