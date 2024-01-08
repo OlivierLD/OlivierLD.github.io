@@ -974,8 +974,11 @@ const INFO_SECTION = [
     },
     {
         section: "2024",
-        content: [
-        ]
+        content: [{
+            date: "Jan-2024",
+            title: "Early 2024",
+            content: "./actu/2024/new.site.html"
+        }]
     },
     { 
         section: "2023",
@@ -1302,6 +1305,18 @@ let translate = (actuId) => {
                     contentField01.innerHTML = 'Passe-Coque wins the "Audelor et R&eacute;gion Bretagne" prize, and a 5000€ check, for the creation of the boat-club of the association.';
                 }
                 // etc...
+            }
+            break;
+        case 'early-2024':
+            if (currentLang === 'EN') {
+                let dateField = document.getElementById('early-2024').querySelector('h2');
+                if (dateField) {
+                    dateField.innerText = "Mid-january 2024";
+                }
+                let contentField01 = document.getElementById('early-2024').querySelector('div');
+                if (contentField01) {
+                    contentField01.innerHTML = 'Release of the new web site.';
+                }
             }
             break;
         default:
