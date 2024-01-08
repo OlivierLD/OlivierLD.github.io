@@ -7,6 +7,7 @@
     --expanded-nav-width: 350px;
     /* --slide-width: 500px;
     --slide-height: 400px;   */
+    --pc-bg-color: #e96d08;
 }
   
 /* @font-face {
@@ -104,7 +105,7 @@ div.tooltip:hover span {
 
 .pc-button {
     position: relative;
-    background-color: orange;
+    background-color: var(--pc-bg-color);
     color: white;
     border: 1px solid silver;
     border-radius: 3px;
@@ -399,7 +400,7 @@ div.tooltip:hover span {
 }
 
 #lang-flag:hover {
-    box-shadow: 4px 4px 8px black, 0 0 25px white, 0 0 10px cyan;
+    /*box-shadow: 4px 4px 8px black, 0 0 25px white, 0 0 10px cyan;*/
 }
   
 .background {

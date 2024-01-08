@@ -124,11 +124,11 @@
 
     <div id="bottom-filler" style="height: 50px;"></div>
 
-    <div style="min-height: 200px; margin: -10px 0 0 0; background-color: orange; color: white;">
+    <div style="min-height: 200px; margin: -10px 0 0 0; background-color: var(--pc-bg-color); color: white;">
         <table class="page-bottom" style="width: 98%; color: white; margin: 10px;">
             <tr>
                 <td width="25%" style="vertical-align: top; color: white; padding: 5px; margin: 5px; line-height: 1.1em;">
-                    <h2 style="color: white;">Association Passe-Coque</h2>
+                    <h2 style="color: white; margin-bottom: 0;">Association Passe-Coque</h2>
                     12<sup><small style="color: white; font-size: 0.75em;">bis</small></sup> Z.A. de Kerran
                     <br/>
                     56470 Saint&nbsp;Philibert
@@ -138,7 +138,7 @@
                     <!-- Tel: +33 02 XX XX XX XX -->
                 </td>
                 <td width="50%" style="text-align: center; vertical-align: top; color: white; padding: 5px; margin: 5px;">
-                    <h2 style="color: white;">Subscribe to our newsletter!</h2>
+                    <h2 style="color: white; margin-bottom: 0;">Subscribe to our newsletter!</h2>
                     <div style="font-style: italic; color: white; line-height: 1em; margin-bottom: 10px;">
                         Never miss anything about our news and projects each month: Boats - projects - events.
                     </div>
@@ -156,31 +156,35 @@
                     </div-->
                     <!-- form submit -->
                     <iframe name="sub-response" style="display: none;" onload="onSubscriptionResponse(this);"></iframe>
-                    <div style="display: grid; grid-template-columns: auto auto;">
-                        <form action="./admin/sql/dbQuery.01.php" method="post" target="sub-response">
-                            <input type="hidden" name="operation" value="insert">
-                            <!--input type="hidden" name="commentArea" value="newsletter subscription"-->
-
+                    <form action="./admin/sql/dbQuery.01.php" method="post" target="sub-response">
+                        <div style="display: grid; grid-template-columns: auto auto;">
                             <div style="display: grid; grid-template-columns: auto auto;">
-                                <span style="color: white; text-align: right; margin: 0 10px 0 0;">Your name:&nbsp;</span>
-                                <input type="text" name="name" placeholder="First and Last Name" id="first-last-name" size="20">
-                                <span style="color: white; text-align: right; margin: 0 10px 0 0;">Email:&nbsp;</span>
-                                <input type="text" name="email" placeholder="Email" id="user-email" size="20">
+                                <input type="hidden" name="operation" value="insert">
+                                <!--input type="hidden" name="commentArea" value="newsletter subscription"-->
+
+                                <div style="display: grid; grid-template-columns: auto auto;">
+                                    <span style="color: white; text-align: right; margin: 0 10px 0 0;">Your name:&nbsp;</span>
+                                    <input type="text" name="name" placeholder="First and Last Name" id="first-last-name" size="20">
+                                    <span style="color: white; text-align: right; margin: 0 10px 0 0;">Email:&nbsp;</span>
+                                    <input type="text" name="email" placeholder="Email" id="user-email" size="20">
+                                </div>
                             </div>
-                            <div style="text-align: center; padding: 10px 0 0 0; vertical-align: top;">
-                                <input type="submit" value="Subscribe">
+                            <div>
+                                <div style="text-align: left; padding: 10px 0 0 0; vertical-align: top;">
+                                    <input type="submit" value="Subscribe">
+                                </div>
                             </div>
-                        </form>
-                    </div>
+                        </div>
+                    </form>
                 </td>
                 <td width="25%" style="text-align: right; vertical-align: top; color: white; padding: 5px; margin: 5px;">
-                    <a href="#" onclick="clack('_33');" style="text-decoration: none;"><h2 style="color: white;">Passe-Coque Club</h2></a>
+                    <a href="#" onclick="clack('_33');" style="text-decoration: none;"><h2 style="color: white; margin-bottom: 0;">Passe-Coque Club</h2></a>
                     <!--ul style="color: white; list-style-type: none;">
                         <li class="social-network-link" style="color: white;" onclick="networkSubscribe('Facebook');"><img src="./logos/facebook.png" width="40" style="vertical-align: middle; padding: 0 10px 0 0;">&nbsp;On Facebook</li>
                         <li class="social-network-link" style="color: white;" onclick="networkSubscribe('Linkedin');"><img src="./logos/linkedin.png" width="40" style="vertical-align: middle; padding: 5px 10px 0 0;">&nbsp;On Linkedin</li>
                         <li class="social-network-link" style="color: white;" onclick="networkSubscribe('Instagram');"><img src="./logos/instagram.jpg" width="40" style="vertical-align: middle; padding: 5px 10px 0 0;">&nbsp;On Instagram</li>
                     </ul-->
-                    <div style="text-align: right;">
+                    <div style="text-align: right; margin-right: 15%;">
                         <a href="https://www.facebook.com/pj.jannin" target="FB" title="FaceBook"><img src="./logos/facebook.png" width="40" style="vertical-align: middle;"></a>
                         <a href="https://www.linkedin.com/company/passe-coque" target="LI" title="LinkedIn"><img src="./logos/linkedin.png" width="40" style="vertical-align: middle;"></a>
                     </div>
