@@ -734,7 +734,7 @@ const THE_FLEET = [
         id: "ar-mor-van",
         pix: "./images/boats/kelt620.jpeg",
         type: "Ketl 620",
-        category: CLUB,
+        category: NONE,
         base: "&Eacute;tel"
     },
     { 
@@ -758,7 +758,7 @@ const THE_FLEET = [
         id: "melkart",
         pix: "./images/boats/melkart/melkart.00.jpg",
         type: "Evasion 32",
-        category: CLUB,
+        category: NONE,
         base: "&Eacute;tel"
     },
     {
@@ -838,7 +838,7 @@ const THE_FLEET = [
         id: "heure-bleue",
         pix: "./images/boats/lheure.bleue.jpeg",
         type: "Arp&egrave;ge",
-        category: CLUB,
+        category: NONE,
         base: "Golfe&nbsp;du&nbsp;Morbihan"
     },
     { 
@@ -918,7 +918,7 @@ const THE_FLEET = [
         id: "coevic-2",
         pix: "./images/boats/coevic-2.png",
         type: "Mirage 28",
-        category: CLUB,
+        category: NONE,
         base: "Kernevel"
     },
     { 
@@ -926,7 +926,7 @@ const THE_FLEET = [
         id: "ma-enez",
         pix: "./images/boats/ma.enez.png",
         type: "Symphonie",
-        category: CLUB,
+        category: NONE,
         base: "La&nbsp;Trinit&eacute;"
     },
     { 
@@ -934,7 +934,7 @@ const THE_FLEET = [
         id: "saudade",
         pix: "./images/boats/saudade.png",
         type: "Super Arlequin",
-        category: CLUB,
+        category: NONE,
         base: "Le&nbsp;Bono"
     },
     { 
@@ -950,7 +950,7 @@ const THE_FLEET = [
         id: "gwenillig",
         pix: "./images/boats/gwenillig.png",
         type: "Eygthene 24",
-        category: CLUB,
+        category: NONE,
         base: "--"
     },
     { 
