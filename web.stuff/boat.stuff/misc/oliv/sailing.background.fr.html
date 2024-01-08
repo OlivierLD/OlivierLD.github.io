@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
     <head>
         <title>Oliv</title>
         <meta charset="utf-8">
@@ -44,18 +44,26 @@ h1 {
     padding-top: 1pt;
 }
 
+h3 {
+    margin: 0 10px;
+}
+
+ul {
+    margin: 0 10px;
+}
+
 a:link {
-	color: #0000a0;
+	color: lime;
     text-shadow: 2px 2px 4px black, 0 0 25px white, 0 0 7px cyan;
 }
 
 a:active {
-	color: #8080ff;
+	color: green;
     text-shadow: 2px 2px 4px black, 0 0 25px white, 0 0 7px cyan;
 }
 
 a:visited {
-	color: #8080ff;
+	color: greenyellow;
     text-shadow: 2px 2px 4px black, 0 0 25px white, 0 0 7px cyan;
 }
 
@@ -79,7 +87,36 @@ dialog {
     color: cyan;
     cursor: pointer;
 }
+/* If hidden in the forst place */
+/* .sub-section {
+  visibility: hidden;
+  opacity: 0;
+  height: 0;
+  transition: opacity 0.5s linear, height 0.5s ease-in-out;
+  margin-left: 24px;
+} */
+/* If shown in the first place */
+.sub-section {
+  visibility: visible;
+  opacity: 1;
+  height: auto;
+  transition: opacity 0.5s linear, height 1.5s ease-in-out;
+  margin-left: 24px;
+}
 
+
+.list-link {
+  color: white;
+  font-size: 20px;
+  text-shadow: 2px 2px 4px black, 0 0 25px white, 0 0 10px orange;
+  text-decoration: none;
+}
+a.list-link:hover {
+  color: cyan;
+  font-weight: bold;
+  cursor: pointer;
+  text-shadow: 4px 4px 8px black, 0 0 25px white, 0 0 10px cyan;
+}
         </style>
     </head>        
     <body>
@@ -98,9 +135,10 @@ dialog {
               <a href="sailing.background.en.html" title="En anglais"><img src="./images/us_uk_flag.png" style="width: 27px; float: right; margin-top: 60px; margin-right: 40px;"/></a>
           </div>
           <div style="margin: 10px 20px;">
-              <dl>
-                  <dt><a name="2010-2011">2010-2011</a></dt>
-                  <dd>
+            <h3><a href="javascript:void(0)" class="list-link" title="Documents" onclick="showHideSection(this, '2010-2011');"><span class="expand-collapse">&#9660;&nbsp;</span>2010-2011</a></h3>
+            <div id="2010-2011" class="sub-section">
+              <ul>
+                <li>
                     Huit mois, en double <a href="../../trip-2010-2011/index_fr.html" target="DP">autour du Pacifique</a> 
                     sur un ketch de 42'.<br>
                     San Francisco CA, Nuku-Hiva (&Icirc;les Marquises), Ua Pou (&Icirc;les Marquises), Rangiroa (Tuamotu), Tahiti (&Icirc;les 
@@ -114,118 +152,136 @@ dialog {
                       <li>OpenCPN</li>
                       <li>Logiciels developp&eacute;s pour l'occasion (at home!), pour la m&eacute;t&eacute;o, le routage, logging, etc.</li>
                     </ul>
-                  </dd>
-                  <dt><a name="2006">2006</a>
-                  <dt>
-                  <dd>Pacific Cup (San Francisco - Hawai'i), <i>navigateur</i> &agrave; bord de Relentless (Sydney 32)</dd>
-                  <dt><a name="since-2004">De l'automne 2004 au printemps 2017</a>
-                  <dt>
-                  <dd>Vie &agrave; bord de <a href="http://donpedro.lediouris.net/" target="DP">Don Pedro</a></dd>
-                  <dt><a name="2000-2004">2000 &agrave; 2004</a></dt>
-                  <dd>R&eacute;gate &agrave; bord de Kookaburra, <a href="http://www.sfj105.org" target="other">J105</a> dans la Baie de San Francisco.
-                  </dd>
-                  <dt><a name="1988-2000">Entre 1988 et 2000</a></dt>
-                  <dd>Croisi&egrave;re familiale...</dd>
-                  <dt><a name="83-88">De 1983 &agrave; 1988</a></dt>
-                  <dd>
-                    <b><i>Navigateur professionnel en course au large</i></b>
-                    <ul>
-                      <li type="disc">
-                        <b>Ann&eacute;e 1983</b>
-                        <ul>
-                          <li type="disc">"Troph&eacute;e des Multicoques" &agrave; bord de <b>Paul Ricard</b>, foiler de 60' (Skipper &Eacute;ric
-                            Tabarly).
-                          </li>
-                        </ul>
-                      </li>
-                      <li type="disc">
-                        <b>Ann&eacute;e 1984</b>
-                        <ul>
-                          <li type="disc">"Troph&eacute;e des Multicoques" &agrave; bord de <b>Paul Ricard</b> (Skipper &Eacute;ric
-                            Tabarly).
-                          </li>
-                          <li type="disc">Observer Singlehanded Transatlantic Race (OSTAR) &agrave; bord de &quot;<a href="#" onclick="showImageDialog(this, 'Num&eacute;ro 5', './images/N5.jpg');"><b>Num&eacute;ro
-                            Cinq</b></a>&quot;</li>
-                          <li type="disc">
-                            Qu&eacute;bec - Saint-Malo, <i>navigateur</i> &agrave; bord de <b>Paul Ricard</b>. (<b><i>Vainqueur en Classe 2 !</i></b>)
-                            <br>
-                            Pendant cette course, nous avons &eacute;t&eacute; le premier voilier &agrave; franchir le mur des 500 miles par jour,
-                            en parcourant 508 miles en 24 heures.
-                            Formule Tag (un Classe 1, skipper Mike Birch) a bris&eacute; <i><u>notre</u></i> record 2 jours plus tard - avec 512 miles en 24
-                            heures.
-                            <br/>
-                            On a donc profit&eacute; de ce record pendant deux jours m&eacute;morables.
-                          </li>
-                          <li type="disc">Semaine de vitesse de La Baule</li>
-                          <li type="disc">Semaine de vitesse de Brest</li>
-                          <li type="disc">Ruta del Discubrimento (Malaga - Santo-Domingo), <i>navigateur</i> &agrave; bord de <b>Paul Ricard</b>.</li>
-                        </ul>
-                      </li>
-                      <li type="disc">
-                        <b>Year 1985</b>
-                        <ul>
-                          <li type="disc">Semaine de La Rochelle</li>
-                          <li type="disc">"Troph&eacute;e des Multicoques" &agrave; bord de <a href="#" onclick="showImageDialog(this, 'Roger &amp; Gallet', './images/RG.gif');"><b>Roger &amp;
-                            Gallet</b></a>, 80' catamaran (Skipper &Eacute;ric Loizeau). <i><b>Vainqueur toutes classes !</b></i>
-                          </li>
-                          <li type="disc">Semaine de vitesse de La Baule</li>
-                          <li type="disc"><a href="#" onclick="showImageDialog(this, 'Roget &amp; Gallet', './images/rgme.jpg');">Race around Europe, <i>navigateur</i> &agrave; bord de Roger &amp; Gallet</a>
-                            <ul>
-                              <li type="disc">Kiel (Allemagne)</li>
-                              <li type="disc">Scheveningen (Hollande)</li>
-                              <li type="disc">Torquay (UK)</li>
-                              <li type="disc">Lorient (France)</li>
-                              <li type="disc">Lisbon (Portugal)</li>
-                              <li type="disc">Malaga (Espagne)</li>
-                              <li type="disc">Toulon (France)</li>
-                              <li type="disc">Porto-Cervo (Italie)</li>
-                            </ul>
-                          </li>
-                          <li type="disc">Semaine de vitesse de Brest</li>
-                        </ul>
-                      </li>
-                      <li type="disc">
-                        <b>Year 1986</b>
-                        <ul>
-                          <li type="disc">"Troph&eacute;e des Multicoques" &agrave; bord de <b>Royale</b>, 85' catamaran (Skipper Lo&iuml;c
-                            Caradec). <i><b>Vainqueur toutes classes !</b></i></li>
-                          <li type="disc">
-                            <i>Navigateur</i> et <i>Skipper</i> &agrave; bord de <a href="#" onclick="showImageDialog(this, 'IOR !', './images/IOR.jpg');"><b>Mil&egrave;ne V</b></a>, IOR Maxi,
-                            70'.
-                            <ul>
-                              <li type="disc">Giraglia</li>
-                              <li type="disc">Semana de Palma de Majorca</li>
-                              <li type="disc">Nioulargue (Saint Tropez)</li>
-                              <li type="disc">RORC Races (Fort Lauderdale - Florida)</li>
-                            </ul>
-                          </li>
-                        </ul>
-                      </li>
-                      <li type="disc">
-                        <b>Year 1987</b>
-                        <ul>
-                          <li type="disc">Semaine de La Rochelle</li>
-                          <li type="disc">"Troph&eacute;e des Multicoques" &agrave; bord de <a href="#" onclick="showImageDialog(this, 'C&ocirc;te d\'Or II', './images/CO2.jpg');">C&ocirc;te d'Or
-                            2</a>, 80' foiler (Skipper &Eacute;ric Tabarly). <i><b>Vainqueur toutes classes !</b></i></li>
-                          <li type="disc">Semaine de vitesse de La Baule</li>
-                          <li type="disc">Race around Europe, <i>navigateur</i> &agrave; bord de C&ocirc;te d'Or 2
-                            <ul>
-                              <li type="disc">Scheveningen (Hollande)</li>
-                              <li type="disc">Bremerhaven (Allemagne)</li>
-                              <li type="disc">Edimburg (&Eacute;cosse)</li>
-                              <li type="disc">Dublin (Irlande)</li>
-                              <li type="disc">Lorient (France)</li>
-                              <li type="disc">Villamora (Portugal)</li>
-                              <li type="disc">Barcelona (Espagne)</li>
-                              <li type="disc"><a href="#" onclick="showImageDialog(this, 'C&ocirc;te d\'Or II', './images/CO2L.jpg');">Toulon</a> (France)</li>
-                              <li type="disc">San-Remo (Italie)</li>
-                            </ul>
-                          </li>
-                          <li type="disc">Semaine de vitesse de Brest</li>
-                        </ul>
-                      </li>
-                    </ul>
-                  </dd>
+                  </li>
+              </ul>
+            </div>
+            <h3><a href="javascript:void(0)" class="list-link" title="Documents" onclick="showHideSection(this, '2006');"><span class="expand-collapse">&#9660;&nbsp;</span>2006</a></h3>
+            <div id="2006" class="sub-section">
+              <ul>
+                <li>Pacific Cup (San Francisco - Hawai'i), <i>navigateur</i> &agrave; bord de Relentless (Sydney 32)</li>
+              </ul>
+            </div>
+            <h3><a href="javascript:void(0)" class="list-link" title="Documents" onclick="showHideSection(this, 'since-2004');"><span class="expand-collapse">&#9660;&nbsp;</span>De l'automne 2004 au printemps 2017</a></h3>
+            <div id="since-2004" class="sub-section">
+              <ul>
+                  <li>Vie &agrave; bord de <a href="http://donpedro.lediouris.net/" target="DP">Don Pedro</a></li>
+              </ul>
+            </div>
+            <h3><a href="javascript:void(0)" class="list-link" title="Documents" onclick="showHideSection(this, '2000-2004');"><span class="expand-collapse">&#9660;&nbsp;</span>2000 &agrave; 2004</a></h3>
+            <div id="2000-2004" class="sub-section">
+                <ul>
+                  <li>R&eacute;gate &agrave; bord de Kookaburra, <a href="http://www.sfj105.org" target="other">J105</a> dans la Baie de San Francisco.</li>
+                </ul>
+            </div>    
+            <h3><a href="javascript:void(0)" class="list-link" title="Documents" onclick="showHideSection(this, '1988-2000');"><span class="expand-collapse">&#9660;&nbsp;</span>Entre 1988 et 2000</a></h3>
+            <div id="1988-2000" class="sub-section">
+                <ul>
+                  <li>Croisi&egrave;re familiale...</li>
+                </ul>
+            </div>
+            <h3><a href="javascript:void(0)" class="list-link" title="Documents" onclick="showHideSection(this, '83-88');"><span class="expand-collapse">&#9660;&nbsp;</span>De 1983 &agrave; 1988</a></h3>
+            <div id="83-88" class="sub-section">
+              <b><i>Navigateur professionnel en course au large</i></b>
+              <ul>
+                <li type="disc">
+                  <b>Ann&eacute;e 1983</b>
+                  <ul>
+                    <li type="disc">"Troph&eacute;e des Multicoques" &agrave; bord de <b>Paul Ricard</b>, foiler de 60' (Skipper &Eacute;ric
+                      Tabarly).
+                    </li>
+                  </ul>
+                </li>
+                <li type="disc">
+                  <b>Ann&eacute;e 1984</b>
+                  <ul>
+                    <li type="disc">"Troph&eacute;e des Multicoques" &agrave; bord de <b>Paul Ricard</b> (Skipper &Eacute;ric
+                      Tabarly).
+                    </li>
+                    <li type="disc">Observer Singlehanded Transatlantic Race (OSTAR) &agrave; bord de &quot;<a href="#" onclick="showImageDialog(this, 'Num&eacute;ro 5', './images/N5.jpg');"><b>Num&eacute;ro
+                      Cinq</b></a>&quot;</li>
+                    <li type="disc">
+                      Qu&eacute;bec - Saint-Malo, <i>navigateur</i> &agrave; bord de <b>Paul Ricard</b>. (<b><i>Vainqueur en Classe 2 !</i></b>)
+                      <br>
+                      Pendant cette course, nous avons &eacute;t&eacute; le premier voilier &agrave; franchir le mur des 500 miles par jour,
+                      en parcourant 508 miles en 24 heures.
+                      Formule Tag (un Classe 1, skipper Mike Birch) a bris&eacute; <i><u>notre</u></i> record 2 jours plus tard - avec 512 miles en 24
+                      heures.
+                      <br/>
+                      On a donc profit&eacute; de ce record pendant deux jours m&eacute;morables.
+                    </li>
+                    <li type="disc">Semaine de vitesse de La Baule</li>
+                    <li type="disc">Semaine de vitesse de Brest</li>
+                    <li type="disc">Ruta del Discubrimento (Malaga - Santo-Domingo), <i>navigateur</i> &agrave; bord de <b>Paul Ricard</b>.</li>
+                  </ul>
+                </li>
+                <li type="disc">
+                  <b>Year 1985</b>
+                  <ul>
+                    <li type="disc">Semaine de La Rochelle</li>
+                    <li type="disc">"Troph&eacute;e des Multicoques" &agrave; bord de <a href="#" onclick="showImageDialog(this, 'Roger &amp; Gallet', './images/RG.gif');"><b>Roger &amp;
+                      Gallet</b></a>, 80' catamaran (Skipper &Eacute;ric Loizeau). <i><b>Vainqueur toutes classes !</b></i>
+                    </li>
+                    <li type="disc">Semaine de vitesse de La Baule</li>
+                    <li type="disc"><a href="#" onclick="showImageDialog(this, 'Roget &amp; Gallet', './images/rgme.jpg');">Race around Europe, <i>navigateur</i> &agrave; bord de Roger &amp; Gallet</a>
+                      <ul>
+                        <li type="disc">Kiel (Allemagne)</li>
+                        <li type="disc">Scheveningen (Hollande)</li>
+                        <li type="disc">Torquay (UK)</li>
+                        <li type="disc">Lorient (France)</li>
+                        <li type="disc">Lisbon (Portugal)</li>
+                        <li type="disc">Malaga (Espagne)</li>
+                        <li type="disc">Toulon (France)</li>
+                        <li type="disc">Porto-Cervo (Italie)</li>
+                      </ul>
+                    </li>
+                    <li type="disc">Semaine de vitesse de Brest</li>
+                  </ul>
+                </li>
+                <li type="disc">
+                  <b>Year 1986</b>
+                  <ul>
+                    <li type="disc">"Troph&eacute;e des Multicoques" &agrave; bord de <b>Royale</b>, 85' catamaran (Skipper Lo&iuml;c
+                      Caradec). <i><b>Vainqueur toutes classes !</b></i></li>
+                    <li type="disc">
+                      <i>Navigateur</i> et <i>Skipper</i> &agrave; bord de <a href="#" onclick="showImageDialog(this, 'IOR !', './images/IOR.jpg');"><b>Mil&egrave;ne V</b></a>, IOR Maxi, 70'.
+                      <ul>
+                        <li type="disc">Giraglia</li>
+                        <li type="disc">Semana de Palma de Majorca</li>
+                        <li type="disc">Nioulargue (Saint Tropez)</li>
+                        <li type="disc">RORC Races (Fort Lauderdale - Florida)</li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li type="disc">
+                  <b>Year 1987</b>
+                  <ul>
+                    <li type="disc">Semaine de La Rochelle</li>
+                    <li type="disc">"Troph&eacute;e des Multicoques" &agrave; bord de <a href="#" onclick="showImageDialog(this, 'C&ocirc;te d\'Or II', './images/CO2.jpg');">C&ocirc;te d'Or
+                      2</a>, 80' foiler (Skipper &Eacute;ric Tabarly). <i><b>Vainqueur toutes classes !</b></i></li>
+                    <li type="disc">Semaine de vitesse de La Baule</li>
+                    <li type="disc">Race around Europe, <i>navigateur</i> &agrave; bord de C&ocirc;te d'Or 2
+                      <ul>
+                        <li type="disc">Scheveningen (Hollande)</li>
+                        <li type="disc">Bremerhaven (Allemagne)</li>
+                        <li type="disc">Edimburg (&Eacute;cosse)</li>
+                        <li type="disc">Dublin (Irlande)</li>
+                        <li type="disc">Lorient (France)</li>
+                        <li type="disc">Villamora (Portugal)</li>
+                        <li type="disc">Barcelona (Espagne)</li>
+                        <li type="disc"><a href="#" onclick="showImageDialog(this, 'C&ocirc;te d\'Or II', './images/CO2L.jpg');">Toulon</a> (France)</li>
+                        <li type="disc">San-Remo (Italie)</li>
+                      </ul>
+                    </li>
+                    <li type="disc">Semaine de vitesse de Brest</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+
+            <h3><a href="javascript:void(0)" class="list-link" title="Documents" onclick="showHideSection(this, '76-84');"><span class="expand-collapse">&#9660;&nbsp;</span>De 1976 &agrave; 1984</a></h3>
+            <div id="76-84" class="sub-section">
+              <dl>
                   <dt><a name="80-84">Entre 1980 et 1984</a></dt>
                   <dd>Dessin et construction de "<a href="#" onclick="showImageDialog(this, 'Num&eacute;ro 5', './images/n5_2.gif');">Num&eacute;ro Cinq</a>", trimaran de 30' pour l'OSTAR
                     (Observer Singlehanded Transatlantic Race).
@@ -256,6 +312,7 @@ dialog {
                   <dt><a name="summer1976">&Eacute;t&eacute; 1976</a></dt>
                   <dd>Moniteur de voile &agrave; Beg Meil (Bretagne sud, France). D&eacute;riveur, croisi&egrave;re, planche &agrave; voile.</dd>
                 </dl>
+              </div>
           </div>  
         </div>
         <hr/>
@@ -298,5 +355,33 @@ function showImageDialog(element, txt, img) {
       aboutDialog.style.display = 'none';
     }
   }
+
+  let showSection = (id) => {
+	//document.getElementById(id).style.display = 'inline-block';
+		document.getElementById(id).style.visibility = 'visible';
+		document.getElementById(id).style.opacity = 1;
+		document.getElementById(id).style.height = 'auto';
+	};
+
+	let hideSection = (id) => {
+	//document.getElementById(id).style.display = 'none';
+		document.getElementById(id).style.visibility = 'hidden';
+		document.getElementById(id).style.opacity = 0;
+		document.getElementById(id).style.height = 0;
+	};
+
+	const COLLAPSED_LINE = "&#9658;&nbsp;";
+	const EXPANDED_LINE = "&#9660;&nbsp;";
+
+	let showHideSection = (obj, id) => {
+		let innerSpan = obj.querySelector('.expand-collapse');
+		if (document.getElementById(id).style.visibility === 'visible' || document.getElementById(id).style.visibility === '') {  // Then hide it
+			innerSpan.innerHTML = COLLAPSED_LINE;
+			hideSection(id);
+		} else { // Show it
+			innerSpan.innerHTML = EXPANDED_LINE;
+			showSection(id);
+		}
+	};
     </script>
 </html>
