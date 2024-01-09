@@ -32,7 +32,7 @@ $VERBOSE = false;
 
 if (isset($_POST['operation'])) {
   $operation = $_POST['operation'];
-  if ($operation == 'insert') { // Then do the query
+  if ($operation == 'insert') { // Then do the insert
     try {
       $name =  $_POST['name'];
       $email =  $_POST['email'];

@@ -34,7 +34,7 @@ if (isset($_POST['operation'])) {
     try {
       $email =  $_POST['email'];
 
-      $link = mysqli_init();
+      $link = mysqli_init();  // Mandatory ?
     
       echo("Will connect on ".$database." ...<br/>");
       $link = new mysqli($dbhost, $username, $password, $database);

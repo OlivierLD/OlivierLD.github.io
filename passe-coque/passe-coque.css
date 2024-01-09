@@ -7,7 +7,7 @@
     --expanded-nav-width: 350px;
     /* --slide-width: 500px;
     --slide-height: 400px;   */
-    --pc-bg-color: #e96d08;
+    --pc-bg-color: rgba(246, 101, 101, 0.9); /* #ff5f5f; */ /* #e96d08 */ /* #da6d14; */
 }
   
 /* @font-face {
