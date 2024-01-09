@@ -20,3 +20,5 @@ SELECT TIMESTAMPDIFF(HOUR, CURRENT_TIMESTAMP(), '2024-01-01 00:00:00') as 'IN HO
 SELECT TIMESTAMPDIFF(HOUR, CURRENT_TIMESTAMP(), '2024-01-01') as 'IN HOURS';
 
 -- For ER Diagrams: https://app.diagrams.net/
+
+SELECT `email` FROM `nl-subscribers` WHERE `email` IN (SELECT `email` from `pc-members`);
