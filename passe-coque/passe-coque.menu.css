@@ -76,7 +76,7 @@ ul#navigation li a {
 	font-weight: bold;
 }
 
-ul#navigation li a:hover, #home-label:hover {
+ul#navigation li a:hover, ul#navigation li a:hover > *, #home-label:hover {
 	/* background: #f8f8f8; */
 	color: var(--pc-bg-color); /* orange; */
 	font-weight: bold;

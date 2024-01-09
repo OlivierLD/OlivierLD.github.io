@@ -317,7 +317,7 @@ div.tooltip:hover span {
     background: url("./images/roof.evasion.jpg");
 
     background-size: 100%; /* cover; */
-    background-repeat: no-repeat;
+    background-repeat: repeat-y; /* no-repeat; */
     background-attachment: fixed; /* <= This one */
 
     position: absolute;
@@ -343,7 +343,7 @@ div.tooltip:hover span {
     background: url("./images/the.shipyard.jpg");
 
     background-size: 100%;
-    background-repeat: no-repeat;
+    background-repeat: repeat-y; /* no-repeat; */
     background-attachment: fixed; /* <= This one */
     background-position: 0 300px;
 
