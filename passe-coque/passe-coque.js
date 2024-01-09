@@ -708,7 +708,7 @@ const THE_FLEET = [
     { 
         name: "Wanita Too",
         id: "wanita",
-        pix: "./images/boats/wanita.too.png",
+        pix: "./images/boats/wanita.too.sq.png",
         type: "First Class 12",
         category: NONE,
         base: "Saint-Malo"
@@ -716,7 +716,7 @@ const THE_FLEET = [
     { 
         name: "Atlantide",
         id: "atlantide",
-        pix: "./images/atlantide.jpg",
+        pix: "./images/boats/atlantide.sq.png",
         type: "Gib'Sea&nbsp;33",
         category: TO_GRAB,
         base: "--"
@@ -724,7 +724,7 @@ const THE_FLEET = [
     { 
         name: "Iapyx",
         id: "iapyx",
-        pix: "./images/boats/iapyx.jpeg",
+        pix: "./images/boats/iapyx.sq.png",
         type: "Offshore&nbsp;35",
         category: OLD_BOAT,
         base: "--"
@@ -740,7 +740,7 @@ const THE_FLEET = [
     { 
         name: "Twist Again",
         id: "twist-again",
-        pix: "./images/boats/jod35.jpeg",
+        pix: "./images/boats/twist.again.sq.png",
         type: "JOD 35",
         category: OLD_BOAT,
         base: "Saint&nbsp;Philibert"
@@ -748,7 +748,7 @@ const THE_FLEET = [
     { 
         name: "Ia Orana",
         id: "ia-orana",
-        pix: "./images/boats/milord.jpeg",
+        pix: "./images/boats/ia.orana.sq.png",
         type: "Milord",
         category: OLD_BOAT,
         base: "--"
@@ -764,7 +764,7 @@ const THE_FLEET = [
     {
         name: "Babou",
         id: "babou",
-        pix: "./images/boats/flying.phantom.jpeg",
+        pix: "./images/boats/babou.sq.png",
         type: "Flying Phantom",
         category: NONE,
         base: "Saint&nbsp;Philibert"
@@ -796,7 +796,7 @@ const THE_FLEET = [
     { 
         name: "Avel Mad",
         id: "avel-mad",
-        pix: "./images/boats/avel.mad.jpeg",
+        pix: "./images/boats/avel.mad.sq.png",
         type: "Mousquetaire",
         category: OLD_BOAT,
         base: "Le&nbsp;Bono"
@@ -804,7 +804,7 @@ const THE_FLEET = [
     { 
         name: "F&eacute;licie",
         id: "felicie",
-        pix: "./afri.can/felicie.african.jpg",
+        pix: "./images/boats/felicie.sq.png",
         type: "One off Presles",
         category: OLD_BOAT,
         base: "Dakar"
@@ -812,7 +812,7 @@ const THE_FLEET = [
     { 
         name: "La R&ecirc;veuse",
         id: "la.reveuse",
-        pix: "./images/boats/la.reveuse/la.reveuse.1.jpg",
+        pix: "./images/boats/la.reveuse.sq.png",
         type: "Damien 40",
         category: NONE,
         base: "Arzal"
@@ -820,7 +820,7 @@ const THE_FLEET = [
     { 
         name: "Tokad 2",
         id: "tokad-2",
-        pix: "./images/boats/neptune.99.jpeg",
+        pix: "./images/boats/tokad.2.sq.png",
         type: "Neptune 99",
         category: NONE,
         base: "Le&nbsp;Crouesty"
@@ -852,7 +852,7 @@ const THE_FLEET = [
     { 
         name: "Passpartout",
         id: "passpartout",
-        pix: "./images/boats/passpartout/passpartout.6.jpg",
+        pix: "./images/boats/passpartout.sq.png",
         type: "One off",
         category: NONE,
         base: "Lorient"
@@ -860,7 +860,7 @@ const THE_FLEET = [
     { 
         name: "Melvan",
         id: "melvan",
-        pix: "./cap.melvan/melvan.png",
+        pix: "./images/boats/melvan.sq.png",
         type: "Karat&eacute;&nbsp;33",
         category: NONE,
         base: "Toulon"
@@ -892,7 +892,7 @@ const THE_FLEET = [
     { 
         name: "Jules Verne",
         id: "jules-verne",
-        pix: "./images/boats/jules.vernes.jpeg",
+        pix: "./images/boats/jules.verne.sq.png",
         type: "Sir 520",
         category: TO_GRAB,
         base: "Saint&nbsp;Philibert"
@@ -900,7 +900,7 @@ const THE_FLEET = [
     { 
         name: "Remora",
         id: "remora",
-        pix: "./images/boats/remora.jpeg",
+        pix: "./images/boats/remora.sq.png",
         type: "Arcachonnais",
         category: TO_GRAB,
         base: "Saint&nbsp;Philibert"
