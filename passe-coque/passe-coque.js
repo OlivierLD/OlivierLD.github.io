@@ -248,8 +248,8 @@ let generateFetchErrorMessage = (contentName, error, errmess) => {
             message = mess.message;
         }
     }
-    let text = (currentLang === 'FR') ? 'En cours de  d&eacute;veloppement...<br/>Disponible prochainement.' : 
-                                       'Being developped...<br/>Available soon.';
+    let text = (currentLang === 'FR') ? 'Erreur de chargement...<br/>Est-ce que le serveur est en route ?' : 
+                                        'Load error...<br/>Is the server running?';
     let content = `<div style='margin: 10px;'><pre>Fetch Error for ${contentName}: ${(error ? JSON.stringify(error, null, 2) : ' - ') + ', ' + (message ? message : ' - ')} </pre><div style='border: 3px solid red; border-radius: 10px; text-align: center;'><b>${text}</b></div></div>`;
     return content;
 };
