@@ -13,7 +13,7 @@ select CURRENT_TIMESTAMP() from dual;
 
 SELECT DATEDIFF('2015-09-05', '1989-03-25');
 
-SELECT DATEDIFF(CURRENT_TIMESTAMP(), '2024-01-01 00:00:00') as 'IN DAYS';
+SELECT DATEDIFF(CURRENT_TIMESTAMP(), '2024-01-01 00:00:00') as 'IN DAYS'; 
 SELECT TIMEDIFF(CURRENT_TIMESTAMP(), '2024-01-01 00:00:00') as 'IN HOURS';
 -- See https://www.tutorialspoint.com/mysql/mysql_date_time_functions_timestampdiff.htm for the units
 SELECT TIMESTAMPDIFF(HOUR, CURRENT_TIMESTAMP(), '2024-01-01 00:00:00') as 'IN HOURS';
@@ -22,3 +22,4 @@ SELECT TIMESTAMPDIFF(HOUR, CURRENT_TIMESTAMP(), '2024-01-01') as 'IN HOURS';
 -- For ER Diagrams: https://app.diagrams.net/
 
 SELECT `email` FROM `nl-subscribers` WHERE `email` IN (SELECT `email` from `pc-members`);
+
