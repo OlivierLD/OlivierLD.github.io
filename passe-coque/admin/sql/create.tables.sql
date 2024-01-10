@@ -18,6 +18,7 @@ CREATE TABLE IF NOT EXISTS `nl-subscribers` (
     id INT AUTO_INCREMENT PRIMARY KEY,
     `name` varchar(64) COLLATE utf8_unicode_ci NOT NULL COMMENT 'First and Last Name of the Subscriber',
     `email` varchar(64) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Email of the Subscriber',
+    `active`  boolean default TRUE,
     CONSTRAINT UK_email UNIQUE (`email`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT = 'News Letter Subscribers';
 
