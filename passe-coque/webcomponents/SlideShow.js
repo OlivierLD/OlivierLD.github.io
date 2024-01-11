@@ -426,10 +426,11 @@ class SlideShow extends HTMLElement {
 										// Keep height, adjust (shrink) width
 										image.setAttribute('width', self._width * factor);
 										image.setAttribute('height', self._height);
-										// Margin left
-										let margin = (self._width / 2) - (self._width * factor / 2);
-										// console.log('Margin top:' + margin);
-										image.style.marginLeft = 'auto'; // margin.toFixed(0) + 'px';
+										// Margin left & right
+										let margin = self._width * ( 1 - factor) / 2; // (self._width / 2) - (self._width * factor / 2);
+										// console.log(`Slide width: ${self._width}, img width: ${self._width * factor} => Margin left: ${margin} `);
+										// image.style.marginLeft = margin.toFixed(0) + 'px';
+										image.style.margin = `0 ${margin.toFixed(0)}px`;
 									}
 								} else {
 									image.setAttribute('width', self._width);
