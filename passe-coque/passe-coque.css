@@ -108,7 +108,7 @@ div.tooltip:hover span {
     background-color: var(--pc-bg-color);
     color: white;
     border: 1px solid silver;
-    border-radius: 3px;
+    border-radius: 6px;
 }
 /* .pc-button:after {
     position: absolute;
