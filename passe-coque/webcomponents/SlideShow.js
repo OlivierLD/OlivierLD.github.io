@@ -429,7 +429,7 @@ class SlideShow extends HTMLElement {
 										// Margin left
 										let margin = (self._width / 2) - (self._width * factor / 2);
 										// console.log('Margin top:' + margin);
-										image.style.marginLeft = margin.toFixed(0) + 'px';
+										image.style.marginLeft = 'auto'; // margin.toFixed(0) + 'px';
 									}
 								} else {
 									image.setAttribute('width', self._width);
