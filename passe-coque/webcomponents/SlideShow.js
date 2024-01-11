@@ -420,7 +420,7 @@ class SlideShow extends HTMLElement {
 										// Margin top
 										let margin = (self._height / 2) - (self._height * factor / 2);
 										// console.log('Margin top:' + margin);
-										image.style.marginTop = margin.toFixed(0) + 'px';
+										image.style.marginTop = margin.toFixed(0) + 'px'; // TODO a 'Xpx 0' ? (like below)
 									} else { // image higher than slide
 										let factor = imageRatio / slideRatio;
 										// Keep height, adjust (shrink) width
@@ -437,7 +437,6 @@ class SlideShow extends HTMLElement {
 									image.setAttribute('height', self._height);
 								}
 							}
-
 							// image.setAttribute('width', self._width);
 							// image.setAttribute('height', self._height);
 							image.setAttribute('src', src);
