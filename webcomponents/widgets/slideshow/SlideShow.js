@@ -115,6 +115,11 @@ class SlideShow extends HTMLElement {
 				'   padding: 8px 12px 8px 16px;' +
 				'}' +
 				'\n' +
+				'.prev {' +
+				'   left: 0;' +
+				'   padding: 8px 16px 8px 12px;' +
+				'}' +
+				'\n' +
 				'/* On hover, add a black background color with a little bit see-through */' +
 				'.prev:hover, .next:hover {' +
 				'   background-color: rgba(0, 0, 0, 0.6);' +
@@ -475,7 +480,7 @@ class SlideShow extends HTMLElement {
 
 				let prev = document.createElement('a');
 				prev.setAttribute('class', 'prev');
-  			prev.onclick = this._backward;
+  				prev.onclick = this._backward;
 				prev.innerHTML = '&#10094;';
 
 				let next = document.createElement('a');

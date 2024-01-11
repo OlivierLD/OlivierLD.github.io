@@ -91,6 +91,7 @@ class SlideShow extends HTMLElement {
 				'.slideshow-container {' +
 				'   max-width: 1000px;' +
 				'   position: relative;' +
+				'   background-color: silver;' +
 				'   margin: auto;' +
 				'}' +
 				'\n' +
@@ -113,6 +114,11 @@ class SlideShow extends HTMLElement {
 				'.next {' +
 				'   right: 0;' +
 				'   padding: 8px 12px 8px 16px;' +
+				'}' +
+				'\n' +
+				'.prev {' +
+				'   left: 0;' +
+				'   padding: 8px 16px 8px 12px;' +
 				'}' +
 				'\n' +
 				'/* On hover, add a black background color with a little bit see-through */' +
@@ -157,7 +163,7 @@ class SlideShow extends HTMLElement {
 				'.dots {' +
 				'   position: relative;' +
 				'   text-align: center;' +
-				'   bottom: 20px;' +
+				'   bottom: 24px;' +
 				'   margin: auto;' +
 				'   grid-area: center;' +
 				'}' +
@@ -475,7 +481,7 @@ class SlideShow extends HTMLElement {
 
 				let prev = document.createElement('a');
 				prev.setAttribute('class', 'prev');
-  			prev.onclick = this._backward;
+  				prev.onclick = this._backward;
 				prev.innerHTML = '&#10094;';
 
 				let next = document.createElement('a');

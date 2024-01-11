@@ -707,10 +707,11 @@ span.expand-collapse:hover {
 /* Slideshow container */
 .slideshow-container {
 
-    --slide-width: 500px;
+    --slide-width: 500px;  /* For non-picture slides ? */
     --slide-height: 400px;  
 
     max-width: calc(var(--slide-width) + 100px);
+    background-color: silver;
     margin: auto;
     /*position: inherit;*/
     /* margin-top: -150px; */
@@ -743,6 +744,9 @@ span.expand-collapse:hover {
 /* Position the "next button" to the right */
 .next {
     grid-area: right;
+}
+.prev {
+    grid-area: left;
 }
   
 .prev:hover, .next:hover {
