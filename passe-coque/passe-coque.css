@@ -7,7 +7,7 @@
     --expanded-nav-width: 350px;
     /* --slide-width: 500px;
     --slide-height: 400px;   */
-    --pc-bg-color: rgba(233, 78, 27, 0.9); /* rgba(246, 101, 101, 0.9); */ /* #ff5f5f; */ /* #e96d08 */ /* #da6d14; */
+    --pc-bg-color: rgba(243, 72, 33, 1.0); /* rgba(246, 101, 101, 0.9); */ /* #ff5f5f; */ /* #e96d08 */ /* #da6d14; */
 }
   
 /* @font-face {
@@ -125,7 +125,7 @@ div.tooltip:hover span {
 }
 
 .top-container {
-    margin-top: -36px;
+    margin-top: -65px;
 }
   
   /* Bottom right text */
@@ -288,11 +288,12 @@ div.tooltip:hover span {
 .background-container:after {
     content: '';
     /* background: url("./photos.michel.02/02.jpg") no-repeat center center; */
-    background: url("./images/coraxy.jpg");
+    background:  url("./images/the.shipyard.jpg"); /*  url("./images/coraxy.jpg"); */
 
-    background-size: 100%; /* auto; */ /* cover; */
+    background-size: 130%; /* auto; */ /* cover; */
     background-repeat: no-repeat;
     background-attachment: fixed; /* <= This one */
+    background-position: 0 200px;  /* 300px; */
 
     position: absolute;
     top: 0px;
@@ -343,7 +344,7 @@ div.tooltip:hover span {
     background: url("./images/the.shipyard.jpg");
 
     background-size: 100%;
-    background-repeat: repeat-y; /* no-repeat; */
+    background-repeat: no-repeat; /* repeat-y; */
     background-attachment: fixed; /* <= This one */
     background-position: 0 300px;
 

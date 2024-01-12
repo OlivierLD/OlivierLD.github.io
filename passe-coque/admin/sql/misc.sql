@@ -24,8 +24,26 @@ SELECT TIMESTAMPDIFF(HOUR, CURRENT_TIMESTAMP(), '2024-01-01') as 'IN HOURS';
 SELECT `email` FROM `nl-subscribers` WHERE `email` IN (SELECT `email` from `pc-members`);
 
 -- Renouvellement de cotisation
-SELECT `command-date`, 
-       concat('In ', 360 - TIMESTAMPDIFF(DAY, `command-date`, CURRENT_TIMESTAMP()), ' Day(s)') as 'When', 
-       concat(`member-first-name`, ' ', `member-last-name`) as NAME 
-from `pc-members` 
-where TIMESTAMPDIFF(DAY, `command-date`, CURRENT_TIMESTAMP()) > 330;
+SELECT
+    `command-date`,
+    CONCAT(
+        'In ',
+        365 - TIMESTAMPDIFF(
+            DAY,
+            `command-date`,
+            CURRENT_TIMESTAMP()),
+            ' Day(s)'
+        ) AS 'When',
+        CONCAT(
+            `member-first-name`,
+            ' ',
+            `member-last-name`
+        ) AS NAME
+    FROM
+        `pc-members`
+    WHERE
+        TIMESTAMPDIFF(
+            DAY,
+            `command-date`,
+            CURRENT_TIMESTAMP()) > 335;
+            

@@ -111,7 +111,8 @@ let clack = (origin) => {
                             if (false && originId === "22") {  // Not used.
                                 showSlides(currentSlide);
                             } else if (originId === "21" || originId === "22" || originId === "23") { // Menu 2, One page only, with anchors.
-                                window.setTimeout(() => {
+                                // let nbTry = 0;
+                                let scrollToAnchor = () => {
                                     const overflow = document.getElementById('action-container-2');
                                     let hashtag = (originId === "21") ? '01' : ((originId === "22") ? '02' : '03');
                                     const anchor = document.querySelector(`a[name='${hashtag}']`);
@@ -119,10 +120,18 @@ let clack = (origin) => {
                                     const rectOverflow = overflow.getBoundingClientRect();
                                     const rectAnchor = anchor.getBoundingClientRect();
     
-                                        // Set the scroll position of the overflow container
-                                    overflow.scrollTop = rectAnchor.top - rectOverflow.top;
-                                    console.log(`Origin: ${originId}: scrolltop: ${overflow.scrollTop}`);
-                                }, 200);
+                                    let scroll_top = rectAnchor.top - rectOverflow.top;
+                                    console.log(`rectAnchor.top: ${rectAnchor.top}, rectOverflow.top: ${rectOverflow.top} => ${scroll_top}`);
+                                    // Set the scroll position of the overflow container
+                                    overflow.scrollTop = scroll_top.toFixed(0);  // TODO Remains to zero ???
+                                    console.log(`>>> Origin: ${originId}: scrolltop: ${overflow.scrollTop} vs ${scroll_top}`);
+                                    // nbTry++;
+                                    // if (overflow.scrollTop === 0 && nbTry < 10) {
+                                    //     console.log("Re-trying...");
+                                    //     window.setTimeout(scrollToAnchor, 1000);
+                                    // }
+                                };
+                                window.setTimeout(scrollToAnchor, 100);
                                 console.log("Now scrolling.")
                             // } else if (originId === "31" || originId === "32" || originId === "33") {
                             //     const overflow = document.getElementById('action-container');
@@ -200,7 +209,7 @@ let updateMenu = () => { // Multilang aspect.
 	document.querySelectorAll("#_61").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Contact" : "Contact"));
 	document.querySelectorAll("#_62").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Actualit&eacute;" : "News"));
 	document.querySelectorAll("#_63").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "On parle de nous / Presse" : "We're in the news"));
-	document.querySelectorAll("#_64").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Visiter le chantier" : "Visit the shipyard"));
+	document.querySelectorAll("#_64").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "La boutique" : "The store"));
 	document.querySelectorAll("#_65").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Partenaires" : "Partners"));
 	document.querySelectorAll("#_66").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Charte PCC" : "PCC Chart"));
 };
@@ -236,7 +245,9 @@ let switchLanguage = () => {
 let generateFetchMessage = (contentName, response) => {
     let mess = (currentLang === 'FR') ? 'Cette page est en cours de d&eacute;veloppement...<br/>Disponible prochainement.' : 
                                         'This page is being developped...<br/>Available soon.';
-    let message = `<div style='margin: 10px;'>Message :<br/> Fetching ${contentName}...<br/>Data Response: ${response.status} - ${response.statusText}<br/><div style='border: 3px solid orange; border-radius: 10px; text-align: center;'><b>${mess}</b></div></div>`;
+    let message = `<div style='margin: 10px;'><div style='display: none;'>Message :<br/> Fetching ${contentName}...<br/>Data Response: ${response.status} - ${response.statusText}</div>` + 
+    `<div style="width: 100%; text-align: center;"><img src="./images/the.shipyard.jpg" width="100%"></div>` + 
+    `<div style='border: 3px solid orange; border-radius: 10px; text-align: center;'><b>${mess}</b></div></div>`;
     return message;
 };
 
