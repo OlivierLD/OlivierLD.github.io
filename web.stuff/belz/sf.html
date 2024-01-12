@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>San Francisco, California</title>
+	<link rel="icon" type="image/png" href="../../misc.pix/hummingbird.png">
+
+	<link rel="stylesheet" href="../../css/stylesheet.css">
+	<script type="module" src="../../webcomponents/widgets/slideshow/SlideShow.js"></script>
+	<style type="text/css">
+		body {
+			background: black;
+			color: cyan;
+            font-weight: normal;
+		}
+        a:link {
+            color: cyan;
+        }
+        .list-link {
+            color: white;
+            font-size: 20px;
+            text-shadow: 2px 2px 4px black, 0 0 25px white, 0 0 10px orange;
+            text-decoration: none;
+        }
+        a.list-link:hover {
+            color: cyan;
+            font-weight: bold;
+            cursor: pointer;
+            text-shadow: 4px 4px 8px black, 0 0 25px white, 0 0 10px cyan;
+        }
+
+        /* Tooltips, used below */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            border-bottom: 1px dotted black;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 200px;
+            background-color: silver;
+            color: navy;
+            text-transform: none;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 0;
+            position: absolute;
+            z-index: 1;
+            top: 150%;
+            left: 50%;
+            margin-left: -100px;
+            font-weight: normal;
+            padding: 6px; /* This hides the 'arrow'... */
+
+            /* Fade in tooltip - takes 1 second to go from 0% to 100% opac: */
+            opacity: 0;
+            transition: opacity 1s;
+        }
+
+        .tooltip .tooltiptext-right {
+            top: -5px;
+            left: 140%;
+            /*width: 200px;*/
+            margin-left: -60px;
+        }
+
+        .tooltip .tooltiptext::after {
+            content: "";
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: transparent transparent silver transparent;
+        }
+
+        .tooltip .tooltiptext-right::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            margin-left: -110px;
+            margin-top: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: transparent silver transparent transparent;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .tab {
+			overflow: hidden;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			background-color: rgba(241, 241, 241, 0.5);
+		}
+
+		/* Style the buttons inside the tab */
+		.tab button {
+			background-color: inherit;
+			float: left;
+			border: none;
+			outline: none;
+			cursor: pointer;
+			padding: 14px 16px;
+			transition: 0.3s;
+			font-size: 17px;
+		}
+
+		/* Change background color of buttons on hover */
+		.tab button:hover {
+			background-color: #ddd;
+		}
+
+		/* Create an active/current tablink class */
+		.tab button.active {
+			background-color: #ccc;
+		}
+
+        .bg-sf:after {
+            /* content: ''; */
+            background-image :url("./images/sf/ocean.beach.2.jpg");
+
+            background-size: cover;
+            background-repeat: repeat;
+            /* background-attachment: fixed; */
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.5; /* Here is your opacity */
+        }
+
+        .sf-style {
+            text-shadow: 2px 2px 4px black, 0 0 25px white, 0 0 10px orange;
+        }
+	</style>
+
+    <script type="text/javascript">
+
+    let onSlideShowClick = (src) => {
+        console.log(">> Client side!! Slide " + src + " was clicked.");
+        window.open(src, '_blank'); // This is an example
+    };
+
+    </script>    
+</head>
+<body>
+    <h1 class="tooltip">San Francisco, California. 
+        <span class="tooltiptext" style="font-size: 14px;">N 47&deg; 40.66' / W 3&deg; 08.14'</span>
+    </h1>
+    <div id="loading-message" style="width: 100%; text-align: center; display: block;">
+        <!-- This will be hidden when page is loaded. See window.onload -->
+        <h1 style="color: orange;">Loading, please wait...</h1>
+    </div>
+
+    <!-- From the past... -->
+    <div id="sf-home" style="display: block; margin: 0 20px 0 20px; max-height: 1024px; overflow-y: scroll; color: cyan;"> <!-- class="bg-sf" -->
+        <div>
+            <img src="./images/sf/ocean.beach.2.jpg" width="100%" style="opacity: 0.4; position: fixed; z-index: -1;">
+        </div>
+        <h1 class="sf-style"><a name="sf-top">San Francisco, CA</a></h1>
+        <span style="margin: 10px;">This is a bunch of raw pictures, from the time we were living in San Francisco, CA.</span>
+        <ul>
+            <li><a class="list-link" href="#sf-moved-in">Just moved in</a></li>
+            <li><a class="list-link" href="#sf-yard">The yard</a></li>
+            <li><a class="list-link" href="#sf-deck">The deck</a></li>
+            <li><a class="list-link" href="#sf-wip">Home tune-up</a></li>
+            <li><a class="list-link" href="#sf-the-roof">A lantern on the roof</a></li>
+            <li><a class="list-link" href="#sf-wood-work">Wood work</a></li>
+            <li><a class="list-link" href="#sf-home-brewing">Home brewing</a></li>
+        </ul>
+        <!-- Now, the data -->
+        <div><h2><a name="sf-moved-in" style="float: left;">Oct 2011, Just moved in, 2010 48th Avenue.</a></h2> <a href="#sf-top" style="float: right;">Top</a></div>
+        <br/>
+        <div style="font-style: italic;"><small>Click the images to enlarge</small></div>
+        <div style="height: 600px; margin: 2px;">
+            <slide-show id="slide-show-moved-in"
+                        width="800"
+                        height="600">
+                <slide-show-image src="./images/sf/moved-in/00.jpg" title="Bricks &amp; Crosswords" desc="Bricks &amp; Crosswords"></slide-show-image>
+                <slide-show-image src="./images/sf/moved-in/01.jpg" title="Bricks &amp; Crosswords" desc="Bricks &amp; Crosswords"></slide-show-image>
+                <slide-show-image src="./images/sf/moved-in/02.jpg" title="Bricks &amp; Crosswords" desc="Bricks &amp; Crosswords"></slide-show-image>
+                <slide-show-image src="./images/sf/moved-in/03.jpg" title="Behind the gate" desc="Behind the gate"></slide-show-image>
+                <slide-show-image src="./images/sf/moved-in/04.jpg" title="The door" desc="The door"></slide-show-image>
+                <slide-show-image src="./images/sf/moved-in/05.jpg" title="Patio, left bank" desc="Patio, left bank"></slide-show-image>
+                <slide-show-image src="./images/sf/moved-in/06.jpg" title="Kitchen, west" desc="Kitchen, west"></slide-show-image>
+                <slide-show-image src="./images/sf/moved-in/07.jpg" title="Kitchen, east" desc="Kitchen, east"></slide-show-image>
+                <slide-show-image src="./images/sf/moved-in/08.jpg" title="Living room" desc="Living room"></slide-show-image>
+                <slide-show-image src="./images/sf/moved-in/09.jpg" title="Master bed room" desc="Master bed room"></slide-show-image>
+                <slide-show-image src="./images/sf/moved-in/10.jpg" title="Second room" desc="Second room"></slide-show-image>
+                <slide-show-image src="./images/sf/moved-in/11.jpg" title="Arthur desing" desc="Arthur design"></slide-show-image>
+                <slide-show-image src="./images/sf/moved-in/12.jpg" title="Bath room" desc="Bath room"></slide-show-image>
+                <slide-show-image src="./images/sf/moved-in/13.jpg" title="Bathtub" desc="Bathtub"></slide-show-image>
+                <slide-show-image src="./images/sf/moved-in/14.jpg" title="Entrance" desc="Entrance"></slide-show-image>
+                <slide-show-image src="./images/sf/moved-in/15.jpg" title="The yard, mostly sand..." desc="The yard"></slide-show-image>
+            </slide-show>
+        </div>    
+
+        <div><h2><a name="sf-yard" style="float: left;">The yard</a></h2> <a href="#sf-top" style="float: right;">Top</a></div>
+        <br/>
+        <div style="height: 600px; margin: 2px;">
+            <slide-show id="slide-show-the-yard"
+                        width="800"
+                        height="600">
+                <slide-show-image src="./images/sf/yard/001.jpg" title="New plants..." desc="The yard"></slide-show-image>
+                <slide-show-image src="./images/sf/yard/050.jpg" title="Doroth&eacute;e, master gardener" desc="The yard"></slide-show-image>
+                <slide-show-image src="./images/sf/yard/051.jpg" title="More plants!" desc="The yard"></slide-show-image>
+                <slide-show-image src="./images/sf/yard/002.jpg" title="...and new paint." desc="The yard"></slide-show-image>
+                <slide-show-image src="./images/sf/yard/049.jpg" title="Progressing" desc="The yard"></slide-show-image>
+                <slide-show-image src="./images/sf/yard/052.jpg" title="Global view of the back" desc="The yard"></slide-show-image>
+                <slide-show-image src="./images/sf/yard/053.jpg" title="Still in the back" desc="The yard"></slide-show-image>
+                <slide-show-image src="./images/sf/yard/054.jpg" title="Starting on the new deck" desc="The yard"></slide-show-image>
+                <slide-show-image src="./images/sf/yard/055.jpg" title="A red one" desc="The yard"></slide-show-image>
+                <slide-show-image src="./images/sf/yard/003.jpg" title="With the deck, bird bath" desc="The yard"></slide-show-image>
+                <slide-show-image src="./images/sf/yard/004.jpg" title="Trimming" desc="The yard"></slide-show-image>
+                <slide-show-image src="./images/sf/yard/005.jpg" title="Camp fire break" desc="The yard"></slide-show-image>
+                <slide-show-image src="./images/sf/yard/006.jpg" title="Camp fire" desc="The yard"></slide-show-image>
+                <slide-show-image src="./images/sf/yard/007.jpg" title="With beer!" desc="The yard"></slide-show-image>
+                <slide-show-image src="./images/sf/yard/008.jpg" title="And chips" desc="The yard"></slide-show-image>
+                <slide-show-image src="./images/sf/yard/009.jpg" title="Cheese!" desc="The yard"></slide-show-image>
+                <slide-show-image src="./images/sf/yard/010.jpg" title="Wood chips instead of tile" desc="The yard"></slide-show-image>
+                <slide-show-image src="./images/sf/yard/011.jpg" title="Now what?" desc="The yard"></slide-show-image>
+                <slide-show-image src="./images/sf/yard/012.jpg" title="Mmh?" desc="The yard"></slide-show-image>
+                <slide-show-image src="./images/sf/yard/013.jpg" title="Looks like spring..." desc="The yard"></slide-show-image>
+                <slide-show-image src="./images/sf/yard/014.jpg" title="Mirror" desc="The yard"></slide-show-image>
+                <slide-show-image src="./images/sf/yard/015.jpg" title="The pelican" desc="The yard"></slide-show-image>
+                <slide-show-image src="./images/sf/yard/016.jpg" title="With succulents" desc="The yard"></slide-show-image>
+                <slide-show-image src="./images/sf/yard/017.jpg" title="Planting succulents" desc="The yard"></slide-show-image>
+                <slide-show-image src="./images/sf/yard/018.jpg" title="Poteries" desc="The yard"></slide-show-image>
+                <slide-show-image src="./images/sf/yard/019.jpg" title="Poteries and succulents" desc="The yard"></slide-show-image>
+                <slide-show-image src="./images/sf/yard/020.jpg" title="Filling up the planters" desc="The yard"></slide-show-image>
+
+                <slide-show-image src="./images/sf/yard/021.jpg" title="Succulents, in the rocks" desc="The yard"></slide-show-image>
+                <slide-show-image src="./images/sf/yard/022.jpg" title="Succulents" desc="The yard"></slide-show-image>
+                <slide-show-image src="./images/sf/yard/023.jpg" title="Succulents" desc="The yard"></slide-show-image>
+                <slide-show-image src="./images/sf/yard/024.jpg" title="Succulents, growing" desc="The yard"></slide-show-image>
+                <slide-show-image src="./images/sf/yard/025.jpg" title="How cute!" desc="The yard"></slide-show-image>
+                <slide-show-image src="./images/sf/yard/026.jpg" title="Again" desc="The yard"></slide-show-image>
+                <slide-show-image src="./images/sf/yard/027.jpg" title="Growing in the rocks" desc="The yard"></slide-show-image>
+                <slide-show-image src="./images/sf/yard/028.jpg" title="Growing in the rocks" desc="The yard"></slide-show-image>
+                <slide-show-image src="./images/sf/yard/029.jpg" title="Coming good" desc="The yard"></slide-show-image>
+                <slide-show-image src="./images/sf/yard/030.jpg" title="Coming good" desc="The yard"></slide-show-image>
+
+                <slide-show-image src="./images/sf/yard/031.jpg" title="Happy succulents" desc="The yard"></slide-show-image>
+                <slide-show-image src="./images/sf/yard/032.jpg" title="Pots and planters" desc="The yard"></slide-show-image>
+                <slide-show-image src="./images/sf/yard/033.jpg" title="Planters, blooming" desc="The yard"></slide-show-image>
+                <slide-show-image src="./images/sf/yard/034.jpg" title="Blooming again" desc="The yard"></slide-show-image>
+                <slide-show-image src="./images/sf/yard/035.jpg" title="North side" desc="The yard"></slide-show-image>
+                <slide-show-image src="./images/sf/yard/036.jpg" title="Spring" desc="The yard"></slide-show-image>
+                <slide-show-image src="./images/sf/yard/037.jpg" title="Succulent seem to like the spot" desc="The yard"></slide-show-image>
+                <slide-show-image src="./images/sf/yard/038.jpg" title="Indeed!" desc="The yard"></slide-show-image>
+                <slide-show-image src="./images/sf/yard/039.jpg" title="South side" desc="The yard"></slide-show-image>
+                <slide-show-image src="./images/sf/yard/040.jpg" title="South again" desc="The yard"></slide-show-image>
+
+                <slide-show-image src="./images/sf/yard/041.jpg" title="East, with the adirondac chair" desc="The yard"></slide-show-image>
+                <slide-show-image src="./images/sf/yard/042.jpg" title="Orange blooms" desc="The yard"></slide-show-image>
+                <slide-show-image src="./images/sf/yard/043.jpg" title="Mexican pots" desc="The yard"></slide-show-image>
+                <slide-show-image src="./images/sf/yard/044.jpg" title="Foggy?" desc="The yard"></slide-show-image>
+                <slide-show-image src="./images/sf/yard/045.jpg" title="The hose" desc="The yard"></slide-show-image>
+                <slide-show-image src="./images/sf/yard/046.jpg" title="The yard, from above" desc="The yard"></slide-show-image>
+                <slide-show-image src="./images/sf/yard/047.jpg" title="From above, closer look" desc="The yard"></slide-show-image>
+                <slide-show-image src="./images/sf/yard/048.jpg" title="Sunny!" desc="The yard"></slide-show-image>
+                <slide-show-image src="./images/sf/yard/056.jpg" title="The cactus, gone mad!" desc="The yard"></slide-show-image>
+                <slide-show-image src="./images/sf/yard/057.jpg" title="Took 2 weeks to grow that big" desc="The yard"></slide-show-image>
+                <slide-show-image src="./images/sf/yard/058.jpg" title="Cactus flowers" desc="The yard"></slide-show-image>
+            </slide-show>
+        </div>    
+
+        <div><h2><a name="sf-deck" style="float: left;">The deck</a></h2> <a href="#sf-top" style="float: right;">Top</a></div>
+        <br/>
+        <div style="height: 600px; margin: 2px;">
+            <slide-show id="slide-show-the-deck"
+                        width="800"
+                        height="600">
+                <slide-show-image src="./images/sf/deck/001.jpg" title="Aligning the blocks" desc="The deck"></slide-show-image>
+                <slide-show-image src="./images/sf/deck/002.jpg" title="First beam" desc="The deck"></slide-show-image>
+                <slide-show-image src="./images/sf/deck/003.jpg" title="Moving on" desc="The deck"></slide-show-image>
+                <slide-show-image src="./images/sf/deck/004.jpg" title="More beams" desc="The deck"></slide-show-image>
+                <slide-show-image src="./images/sf/deck/005.jpg" title="With some help" desc="The deck"></slide-show-image>
+                <slide-show-image src="./images/sf/deck/006.jpg" title="First sides..." desc="The deck"></slide-show-image>
+                <slide-show-image src="./images/sf/deck/007.jpg" title="An idea of the size!" desc="The deck"></slide-show-image>
+                <slide-show-image src="./images/sf/deck/008.jpg" title="South-west corner" desc="The deck"></slide-show-image>
+                <slide-show-image src="./images/sf/deck/009.jpg" title="So?" desc="The deck"></slide-show-image>
+                <slide-show-image src="./images/sf/deck/010.jpg" title="Coming" desc="The deck"></slide-show-image>
+                <slide-show-image src="./images/sf/deck/011.jpg" title="Screwing" desc="The deck"></slide-show-image>
+                <slide-show-image src="./images/sf/deck/012.jpg" title="Coming good" desc="The deck"></slide-show-image>
+                <slide-show-image src="./images/sf/deck/013.jpg" title="Close look" desc="The deck"></slide-show-image>
+                <slide-show-image src="./images/sf/deck/014.jpg" title="Sit on it" desc="The deck"></slide-show-image>
+                <slide-show-image src="./images/sf/deck/015.jpg" title="Look at me!" desc="The deck"></slide-show-image>
+                <slide-show-image src="./images/sf/deck/016.jpg" title="A table" desc="The deck"></slide-show-image>
+                <slide-show-image src="./images/sf/deck/017.jpg" title="Mmmh?" desc="The deck"></slide-show-image>
+                <slide-show-image src="./images/sf/deck/018.jpg" title="Union break" desc="The deck"></slide-show-image>
+                <slide-show-image src="./images/sf/deck/019.jpg" title="Pizza" desc="The deck"></slide-show-image>
+                <slide-show-image src="./images/sf/deck/020.jpg" title="View from east" desc="The deck"></slide-show-image>
+                <slide-show-image src="./images/sf/deck/021.jpg" title="The bench" desc="The deck"></slide-show-image>
+                <slide-show-image src="./images/sf/deck/022.jpg" title="Quick clean-up" desc="The deck"></slide-show-image>
+                <slide-show-image src="./images/sf/deck/023.jpg" title="Table and bench" desc="The deck"></slide-show-image>
+                <slide-show-image src="./images/sf/deck/024.jpg" title="Seems to fit" desc="The deck"></slide-show-image>
+                <slide-show-image src="./images/sf/deck/025.jpg" title="Starting on planters" desc="The deck"></slide-show-image>
+                <slide-show-image src="./images/sf/deck/026.jpg" title="Planters" desc="The deck"></slide-show-image>
+                <slide-show-image src="./images/sf/deck/027.jpg" title="First planter" desc="The deck"></slide-show-image>
+                <slide-show-image src="./images/sf/deck/028.jpg" title="First planter" desc="The deck"></slide-show-image>
+                <slide-show-image src="./images/sf/deck/029.jpg" title="Two planters" desc="The deck"></slide-show-image>
+                <slide-show-image src="./images/sf/deck/030.jpg" title="Two planters" desc="The deck"></slide-show-image>
+                <slide-show-image src="./images/sf/deck/031.jpg" title="With a bench" desc="The deck"></slide-show-image>
+                <slide-show-image src="./images/sf/deck/032.jpg" title="Planters and bench" desc="The deck"></slide-show-image>
+                <slide-show-image src="./images/sf/deck/033.jpg" title="Real world test" desc="The deck"></slide-show-image>
+                <slide-show-image src="./images/sf/deck/034.jpg" title="First coat of lasure" desc="The deck"></slide-show-image>
+                <slide-show-image src="./images/sf/deck/035.jpg" title="Drawings..." desc="The deck"></slide-show-image>
+                <slide-show-image src="./images/sf/deck/036.jpg" title="Deck full view" desc="The deck"></slide-show-image>
+                <slide-show-image src="./images/sf/deck/037.jpg" title="Everything!" desc="The deck"></slide-show-image>
+                <slide-show-image src="./images/sf/deck/038.jpg" title="Rocks for the succulents" desc="The deck"></slide-show-image>
+                <slide-show-image src="./images/sf/deck/039.jpg" title="Starting planting succulents" desc="The deck"></slide-show-image>
+                <slide-show-image src="./images/sf/deck/040.jpg" title="Succulents" desc="The deck"></slide-show-image>
+                <slide-show-image src="./images/sf/deck/041.jpg" title="Adirondack chair" desc="The deck"></slide-show-image>
+                <slide-show-image src="./images/sf/deck/042.jpg" title="... and more planters!" desc="The deck"></slide-show-image>
+                <slide-show-image src="./images/sf/deck/043.jpg" title="Some shade over the table" desc="The deck"></slide-show-image>
+                <slide-show-image src="./images/sf/deck/044.jpg" title="Shade, coming" desc="The deck"></slide-show-image>
+                <slide-show-image src="./images/sf/deck/045.jpg" title="Shade..." desc="The deck"></slide-show-image>
+            </slide-show>
+        </div>    
+
+        <div><h2><a name="sf-wip" style="float: left;">Home tune-up</a></h2> <a href="#sf-top" style="float: right;">Top</a></div>
+        <br/>
+        <div style="min-height: 600px; margin: 2px;">
+            <h3>The kitchen</h3>
+            <div>
+                <slide-show id="slide-show-sf-kitchen"
+                            width="800"
+                            height="600">
+                    <slide-show-image src="./images/sf/kitchen/001.jpg" title="The ceiling" desc="The ceiling"></slide-show-image>
+                    <slide-show-image src="./images/sf/kitchen/002.jpg" title="West side" desc="West side"></slide-show-image>
+                    <slide-show-image src="./images/sf/kitchen/003.jpg" title="Getting there" desc="Getting there"></slide-show-image>
+                    <slide-show-image src="./images/sf/kitchen/004.jpg" title="Night shift" desc="Night shift"></slide-show-image>
+                    <slide-show-image src="./images/sf/kitchen/005.jpg" title="Ceiling" desc="Ceiling"></slide-show-image>
+                    <slide-show-image src="./images/sf/kitchen/006.jpg" title="Ceiling" desc="Ceiling"></slide-show-image>
+                    <slide-show-image src="./images/sf/kitchen/007.jpg" title="Ceiling" desc="Ceiling"></slide-show-image>
+                    <slide-show-image src="./images/sf/kitchen/008.jpg" title="Walls" desc="Walls"></slide-show-image>
+                    <slide-show-image src="./images/sf/kitchen/009.jpg" title="Walls" desc="Walls"></slide-show-image>
+                    <slide-show-image src="./images/sf/kitchen/010.jpg" title="Checking" desc="Checking"></slide-show-image>
+                    <slide-show-image src="./images/sf/kitchen/011.jpg" title="Walls, completed" desc="Walls, completed"></slide-show-image>
+                    <slide-show-image src="./images/sf/kitchen/012.jpg" title="The whole stuff" desc="The whole stuff"></slide-show-image>
+                    <slide-show-image src="./images/sf/kitchen/013.jpg" title="Starting on the floor" desc="Starting on the floor"></slide-show-image>
+                    <slide-show-image src="./images/sf/kitchen/014.jpg" title="First plank" desc="First plank"></slide-show-image>
+                    <slide-show-image src="./images/sf/kitchen/015.jpg" title="Progressing" desc="Progressing"></slide-show-image>
+                    <slide-show-image src="./images/sf/kitchen/016.jpg" title="The full floor" desc="The full floor"></slide-show-image>
+                    <slide-show-image src="./images/sf/kitchen/017.jpg" title="Overview" desc="Overview"></slide-show-image>
+                    <slide-show-image src="./images/sf/kitchen/018.jpg" title="Starting on the worktop" desc="Starting on the worktop"></slide-show-image>
+                    <slide-show-image src="./images/sf/kitchen/019.jpg" title="Assembling the worktop" desc="Assembling the worktop"></slide-show-image>
+                    <slide-show-image src="./images/sf/kitchen/020.jpg" title="Assembled!" desc="Assembled!"></slide-show-image>
+                    <slide-show-image src="./images/sf/kitchen/021.jpg" title="With the tile" desc="With the tile"></slide-show-image>
+                    <slide-show-image src="./images/sf/kitchen/022.jpg" title="Nice tile, hey?" desc="Nice tile, hey?"></slide-show-image>
+                    <slide-show-image src="./images/sf/kitchen/023.jpg" title="Touch up" desc="Touch up"></slide-show-image>
+                    <slide-show-image src="./images/sf/kitchen/024.jpg" title="With the paint" desc="With the paint"></slide-show-image>
+                    <slide-show-image src="./images/sf/kitchen/025.jpg" title="Good to go!" desc="Good to go!"></slide-show-image>
+                </slide-show>
+            </div>
+            <h3>The bathroom</h3>
+            <div>
+                <slide-show id="slide-show-bathroom"
+                            width="800"
+                            height="600">
+                    <slide-show-image src="./images/sf/bathroom/001.jpg" title="Removing the old one" desc="Removing the old one"></slide-show-image>
+                    <slide-show-image src="./images/sf/bathroom/002.jpg" title="Old one removed" desc="Old one removed"></slide-show-image>
+                    <slide-show-image src="./images/sf/bathroom/003.jpg" title="Old bathtub" desc="Old bathtub"></slide-show-image>
+                    <slide-show-image src="./images/sf/bathroom/004.jpg" title="Shower bulkhead" desc="Shower bulkhead"></slide-show-image>
+                    <slide-show-image src="./images/sf/bathroom/005.jpg" title="Inside..." desc="Inside..."></slide-show-image>
+                    <slide-show-image src="./images/sf/bathroom/006.jpg" title="New door, new floor" desc="New door, new floor"></slide-show-image>
+                    <slide-show-image src="./images/sf/bathroom/007.jpg" title="Shower bottom" desc="Shower bottom"></slide-show-image>
+                </slide-show>
+                <!-- Video -->
+                <div style="text-align: center;">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/pY4ta-DtsMs?si=QrIHOKzDRKLDdL_o" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <h3>The living-room</h3>
+            <div>
+                <slide-show id="slide-show-livingroom"
+                            width="800"
+                            height="600">
+                    <slide-show-image src="./images/sf/salon/000.jpg" title="Before..." desc="Before..."></slide-show-image>
+                    <slide-show-image src="./images/sf/salon/001.jpg" title="North-East" desc="North-East"></slide-show-image>
+                    <slide-show-image src="./images/sf/salon/002.jpg" title="South-West" desc="South-West"></slide-show-image>
+                    <slide-show-image src="./images/sf/salon/003.jpg" title="South-East" desc="South-East"></slide-show-image>
+                    <slide-show-image src="./images/sf/salon/004.jpg" title="Book shelf" desc="Book shelf"></slide-show-image>
+                </slide-show>
+            </div>
+
+            <h3>First floor room</h3>
+            <div>
+                <slide-show id="slide-show-first-floor"
+                            width="800"
+                            height="600">
+                    <slide-show-image src="./images/sf/room-first-floor/001.jpg" title="Before, with a carpet" desc="Before, with a carpet"></slide-show-image>
+                    <slide-show-image src="./images/sf/room-first-floor/002.jpg" title="Before" desc="Before"></slide-show-image>
+                    <slide-show-image src="./images/sf/room-first-floor/003.jpg" title="New wall-paper" desc="New wall-paper"></slide-show-image>
+                    <slide-show-image src="./images/sf/room-first-floor/004.jpg" title="Getting started" desc="Getting started"></slide-show-image>
+                    <slide-show-image src="./images/sf/room-first-floor/005.jpg" title="Progressing" desc="Progressing"></slide-show-image>
+                    <slide-show-image src="./images/sf/room-first-floor/006.jpg" title="Almost there" desc="Almost there"></slide-show-image>
+                    <slide-show-image src="./images/sf/room-first-floor/007.jpg" title="Starting on the cork floor" desc="Starting on the cork floor"></slide-show-image>
+                    <slide-show-image src="./images/sf/room-first-floor/008.jpg" title="Floor, completed" desc="Floor, completed"></slide-show-image>
+                    <slide-show-image src="./images/sf/room-first-floor/009.jpg" title="Floor, completed" desc="Floor, completed"></slide-show-image>
+                </slide-show>
+            </div>
+
+            <h3>A deck on the roof</h3>
+            <div>
+                <slide-show id="slide-show-roof-deck"
+                            width="800"
+                            height="600">
+                    <slide-show-image src="./images/sf/roof/001.jpg" title="Step one" desc="Step one"></slide-show-image>
+                    <slide-show-image src="./images/sf/roof/002.jpg" title="From above" desc="From above"></slide-show-image>
+                    <slide-show-image src="./images/sf/roof/003.jpg" title="Weather station" desc="Weather station"></slide-show-image>
+                    <slide-show-image src="./images/sf/roof/004.jpg" title="First test" desc="Fist test"></slide-show-image>
+                    <slide-show-image src="./images/sf/roof/005.jpg" title="Watching Japan" desc="Watching Japan"></slide-show-image>
+                    <slide-show-image src="./images/sf/roof/006.jpg" title="SF Sunset" desc="SF Sunset"></slide-show-image>
+                    <slide-show-image src="./images/sf/roof/007.jpg" title="Drink is coming..." desc="Drink is coming..."></slide-show-image>
+                    <slide-show-image src="./images/sf/roof/008.jpg" title="Almost there" desc="Almost there"></slide-show-image>
+                    <slide-show-image src="./images/sf/roof/009.jpg" title="Getting ready" desc="Getting ready"></slide-show-image>
+                    <slide-show-image src="./images/sf/roof/010.jpg" title="Cheers!" desc="Cheers!"></slide-show-image>
+                </slide-show>
+            </div>
+        </div>    
+
+        <div><h2><a name="sf-the-roof" style="float: left;">A lantern on the roof</a></h2> <a href="#sf-top" style="float: right;">Top</a></div>
+        <br/>
+        <div style="height: 600px; margin: 2px;">
+            <slide-show id="slide-show-lantern"
+                        width="800"
+                        height="600">
+                <slide-show-image src="./images/sf/lanterne/001.jpg" title="The base" desc="The base"></slide-show-image>
+                <slide-show-image src="./images/sf/lanterne/002.jpg" title="Growing up" desc="Growing up"></slide-show-image>
+                <slide-show-image src="./images/sf/lanterne/003.jpg" title="Roof, growing" desc="Roof, growing"></slide-show-image>
+                <slide-show-image src="./images/sf/lanterne/004.jpg" title="From inside" desc="From inside"></slide-show-image>
+                <slide-show-image src="./images/sf/lanterne/005.jpg" title="Progressing" desc="Progressing"></slide-show-image>
+                <slide-show-image src="./images/sf/lanterne/006.jpg" title="Foggy day..." desc="Foggy day..."></slide-show-image>
+                <slide-show-image src="./images/sf/lanterne/007.jpg" title="Sunny" desc="Sunny"></slide-show-image>
+                <slide-show-image src="./images/sf/lanterne/008.jpg" title="Sunny" desc="Sunny"></slide-show-image>
+                <slide-show-image src="./images/sf/lanterne/009.jpg" title="From inside" desc="From inside"></slide-show-image>
+                <slide-show-image src="./images/sf/lanterne/010.jpg" title="Watching west" desc="Watching west"></slide-show-image>
+                <slide-show-image src="./images/sf/lanterne/011.jpg" title="Shingle (will be replaced...)" desc="Shingle (will be replaced...)"></slide-show-image>
+                <slide-show-image src="./images/sf/lanterne/013.jpg" title="Fefe, Baba" desc="Fefe, Baba"></slide-show-image>
+                <slide-show-image src="./images/sf/lanterne/017.jpg" title="New cover" desc="New cover"></slide-show-image>
+                <slide-show-image src="./images/sf/lanterne/018.jpg" title="Still progressing" desc="Still progressing"></slide-show-image>
+                <slide-show-image src="./images/sf/lanterne/019.jpg" title="Still on it" desc="Still on it"></slide-show-image>
+                <slide-show-image src="./images/sf/lanterne/020.jpg" title="Getting there" desc="Getting there"></slide-show-image>
+                <slide-show-image src="./images/sf/lanterne/021.jpg" title="Getting there" desc="Getting there"></slide-show-image>
+                <slide-show-image src="./images/sf/lanterne/022.jpg" title="Coming good" desc="Coming good"></slide-show-image>
+                <slide-show-image src="./images/sf/lanterne/012.jpg" title="At night" desc="At night"></slide-show-image>
+                <slide-show-image src="./images/sf/lanterne/014.jpg" title="With doors" desc="With doors"></slide-show-image>
+                <slide-show-image src="./images/sf/lanterne/015.jpg" title="Pop it up!" desc="Pop it up!"></slide-show-image>
+                <slide-show-image src="./images/sf/lanterne/016.jpg" title="Windows, opened" desc="Windows, opened"></slide-show-image>
+                <slide-show-image src="./images/sf/lanterne/023.jpg" title="Night and fog" desc="Night and fog"></slide-show-image>
+                <slide-show-image src="./images/sf/lanterne/025.jpg" title="Operational" desc="Operational"></slide-show-image>
+                <slide-show-image src="./images/sf/lanterne/026.jpg" title="Operational" desc="Operational"></slide-show-image>
+                <slide-show-image src="./images/sf/lanterne/024.jpg" title="With a weather station" desc="With a weather station"></slide-show-image>
+            </slide-show>
+        </div>    
+
+        <div><h2><a name="sf-wood-work" style="float: left;">Wood work, etc</a></h2> <a href="#sf-top" style="float: right;">Top</a></div>
+        <br/>
+        <h3>Sand Dollars</h3>
+        <div>
+            <slide-show id="slide-show-sand-dollars"
+                        width="800"
+                        height="600">
+                <slide-show-image src="./images/sf/sand-dollar/01.jpg" title="The basic shape" desc="The basic shape"></slide-show-image>
+                <slide-show-image src="./images/sf/sand-dollar/02.jpg" title="With the quills" desc="With the quills"></slide-show-image>
+                <slide-show-image src="./images/sf/sand-dollar/03.jpg" title="Molding the rubber" desc="Molding the rubber"></slide-show-image>
+                <slide-show-image src="./images/sf/sand-dollar/04.jpg" title="Out of the mold" desc="Out of the mold"></slide-show-image>
+                <slide-show-image src="./images/sf/sand-dollar/05.jpg" title="In the frame" desc="xxx"></slide-show-image>
+                <slide-show-image src="./images/sf/sand-dollar/08.jpg" title="Casting" desc="In the frame"></slide-show-image>
+                <slide-show-image src="./images/sf/sand-dollar/09.jpg" title="Out of the mold!" desc="Out of the mold!"></slide-show-image>
+                <slide-show-image src="./images/sf/sand-dollar/all-sand-dollars.jpg" title="In place, in the garden" desc="In place, in the gardenb"></slide-show-image>
+            </slide-show>
+        </div>
+
+        <h3>Hand blades</h3>
+        <div>
+            <slide-show id="slide-show-hand-blades"
+                        width="800"
+                        height="600">
+                <slide-show-image src="./images/sf/wood/2016.hand.planes/01.presses.jpg" title="Plywood version, step 1" desc="Plywood version, step 1"></slide-show-image>
+                <slide-show-image src="./images/sf/wood/2016.hand.planes/02.Rocker.Concave.jpg" title="Plywood version" desc="Plywood version"></slide-show-image>
+                <slide-show-image src="./images/sf/wood/2016.hand.planes/03.custom.jpg" title="Done!" desc="Done!"></slide-show-image>
+                <slide-show-image src="./images/sf/wood/2016.hand.planes/04.2nd.board.jpg" title="2nd board" desc="2nd board"></slide-show-image>
+                <slide-show-image src="./images/sf/wood/2016.hand.planes/4th.01.jpg" title="Laminated wood, step 1" desc="Laminated wood, step 1"></slide-show-image>
+                <slide-show-image src="./images/sf/wood/2016.hand.planes/4th.02.jpg" title="Laminated wood, step 2" desc="Laminated wood, step 2"></slide-show-image>
+                <slide-show-image src="./images/sf/wood/2016.hand.planes/4th.03.jpg" title="Laminated wood, step 3" desc="Laminated wood, step 3"></slide-show-image>
+                <slide-show-image src="./images/sf/wood/2016.hand.planes/4th.04.jpg" title="Laminated wood, step 4" desc="Laminated wood, step 4"></slide-show-image>
+                <slide-show-image src="./images/sf/wood/2016.hand.planes/4th.05.jpg" title="Laminated wood, step 5" desc="Laminated wood, step 5"></slide-show-image>
+                <slide-show-image src="./images/sf/wood/2016.hand.planes/4th.06.jpg" title="Laminated wood, step 6" desc="Laminated wood, step 6"></slide-show-image>
+                <slide-show-image src="./images/sf/wood/2016.hand.planes/4th.07.jpg" title="Laminated wood, step 7" desc="Laminated wood, step 7"></slide-show-image>
+                <slide-show-image src="./images/sf/wood/2016.hand.planes/4th.08.jpg" title="Laminated wood, step 8" desc="Laminated wood, step 8"></slide-show-image>
+                <slide-show-image src="./images/sf/wood/2016.hand.planes/05.solid.jpg" title="Solid one" desc="Solid one"></slide-show-image>
+                <slide-show-image src="./images/sf/wood/2016.hand.planes/5th.blade.jpg" title="With fins" desc="With fins"></slide-show-image>
+                <slide-show-image src="./images/sf/wood/2016.hand.planes/06.booster.jpg" title="With boosters" desc="With boosters"></slide-show-image>
+                <slide-show-image src="./images/sf/wood/2016.hand.planes/07.stamp.jpg" title="Nice stamp!" desc="Nice stamp!"></slide-show-image>
+                <slide-show-image src="./images/sf/wood/2016.hand.planes/08.3.top.jpg" title="3 blades, top" desc="3 blades, top"></slide-show-image>
+                <slide-show-image src="./images/sf/wood/2016.hand.planes/09.3.bottom.jpg" title="3 blades, bottom" desc="3 blades, bottom"></slide-show-image>
+            </slide-show>
+        </div>
+        
+        <h3>Shogi</h3>
+        <div style="text-align: center;">
+            <iframe src="./images/sf/shogi/index.html" style="width: 90%; min-height: 600px; padding: 10px; border: 2px solid whitesmoke; border-radius: 15px;"></iframe>
+        </div>
+
+        <h3>Other wood stuff</h3>
+        <div>
+            <h4>Knives</h4>
+            <div style="text-align: center;">
+                <iframe src="./images/sf/wood/knives/slideshow.html" style="width: 90%; min-height: 600px; padding: 10px; border: 2px solid whitesmoke; border-radius: 15px;"></iframe>
+            </div>
+            <h4>Misc</h4>
+            <div>
+                <slide-show id="slide-show-wood-work"
+                            width="800"
+                            height="600">
+                    <slide-show-image src="./images/sf/wood/misc/air-plants.jpg" title="Air plants" desc="Air plants"></slide-show-image>
+                    <slide-show-image src="./images/sf/wood/misc/baleine.jpg" title="Whale" desc="Whale"></slide-show-image>
+                    <slide-show-image src="./images/sf/wood/2016.wood.work/uke.jpg" title="Ukulele" desc="Ukulele"></slide-show-image>
+                    <slide-show-image src="./images/sf/wood/2016.wood.work/shogi.jpg" title="Shogi" desc="Shogi"></slide-show-image>
+                    <slide-show-image src="./images/sf/wood/wood.rings/01.jpg" title="Wooden rings" desc="Wooden rings"></slide-show-image>
+                    <slide-show-image src="./images/sf/wood/wood.rings/02.jpg" title="Wooden rings" desc="Wooden rings"></slide-show-image>
+                    <slide-show-image src="./images/sf/wood/wood.rings/03.jpg" title="Wooden rings" desc="Wooden rings"></slide-show-image>
+                </slide-show>
+            </div>
+
+        </div>
+
+        <div><h2><a name="sf-home-brewing" style="float: left;">Home brewing</a></h2> <a href="#sf-top" style="float: right;">Top</a></div>
+        <br/>
+        <div>
+            <slide-show id="slide-show-beer"
+                        width="800"
+                        height="600">
+                <slide-show-image src="./images/sf/beer/01.Beer.jpg" title="The kit, just delivered" desc="The kit, just delivered"></slide-show-image>
+                <slide-show-image src="./images/sf/beer/02.Beer.jpg" title="Unpacked!" desc="Unpacked!"></slide-show-image>
+                <slide-show-image src="./images/sf/beer/04.Boiling.jpg" title="First batch, started" desc="First batch, started"></slide-show-image>
+                <slide-show-image src="./images/sf/beer/05.Boiling.jpg" title="Boiling" desc="Boiling"></slide-show-image>
+                <slide-show-image src="./images/sf/beer/06.first.fermenter.jpg" title="First fermenter" desc="First fermenter"></slide-show-image>
+                <slide-show-image src="./images/sf/beer/07.first.fermenter.jpg" title="It's in!" desc="It's in!"></slide-show-image>
+                <slide-show-image src="./images/sf/beer/08.first.fermenter.jpg" title="Fermenting" desc="Fermenting"></slide-show-image>
+                <slide-show-image src="./images/sf/beer/09.fermentation.jpg" title="Fermenting, on its way" desc="Fermenting, on its way"></slide-show-image>
+                <slide-show-image src="./images/sf/beer/10.transfer.jpg" title="Ready for racking" desc="Ready for racking"></slide-show-image>
+                <slide-show-image src="./images/sf/beer/11.ready.for.racking.jpg" title="2nd fermenter" desc="2nd fermenter"></slide-show-image>
+                <slide-show-image src="./images/sf/beer/12.racking.finished.jpg" title="Ready for bottling" desc="Ready for bottling"></slide-show-image>
+                <slide-show-image src="./images/sf/beer/13.bottling.ready.jpg" title="Bottles" desc="Bottles"></slide-show-image>
+                <slide-show-image src="./images/sf/beer/14.carbonating.jpg" title="Carbonating" desc="Carbonating"></slide-show-image>
+                <slide-show-image src="./images/sf/beer/15.label.project.jpg" title="Custom label" desc="Custom label"></slide-show-image>
+                <slide-show-image src="./images/sf/beer/16.beer.jpg" title="Cheers!" desc="heers!"></slide-show-image>
+                <slide-show-image src="./images/sf/beer/17.coaster.jpg" title="Custom coaster" desc="Custom coaster"></slide-show-image>
+            </slide-show>
+        </div>
+    </div>
+
+    <hr/>
+
+    <div style="height: 150px;"><!-- Bottom padding --></div>
+</body>
+
+<script>
+
+window.onload = () => { // Important: window.onload
+
+    document.getElementById("loading-message").style.display = "none"; // Hide loading message
+
+    document.getElementById("slide-show-moved-in").slideclick = onSlideShowClick;
+    document.getElementById("slide-show-the-yard").slideclick = onSlideShowClick;
+    document.getElementById("slide-show-the-deck").slideclick = onSlideShowClick;
+    document.getElementById("slide-show-sf-kitchen").slideclick = onSlideShowClick;
+    document.getElementById("slide-show-bathroom").slideclick = onSlideShowClick;
+    document.getElementById("slide-show-livingroom").slideclick = onSlideShowClick;
+    document.getElementById("slide-show-first-floor").slideclick = onSlideShowClick;
+    document.getElementById("slide-show-roof-deck").slideclick = onSlideShowClick;
+    document.getElementById("slide-show-lantern").slideclick = onSlideShowClick;
+    document.getElementById("slide-show-sand-dollars").slideclick = onSlideShowClick;
+    document.getElementById("slide-show-hand-blades").slideclick = onSlideShowClick;
+    document.getElementById("slide-show-wood-work").slideclick = onSlideShowClick;
+    document.getElementById("slide-show-beer").slideclick = onSlideShowClick;
+};
+
+</script>
+</html>
