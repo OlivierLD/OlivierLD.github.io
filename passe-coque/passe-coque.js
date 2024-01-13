@@ -127,6 +127,10 @@ let clack = (origin) => {
                                     console.log(`>>> Origin: ${originId}: scrolltop: ${overflow.scrollTop} vs ${scroll_top}`);
                                 };
                                 window.setTimeout(scrollToAnchor, 100);
+                                // 2e couche
+                                if (originId === "21") {
+                                    window.scrollTo(0, 0); // Scroll on top, if invoked from a button at the bottom of the page
+                                }
                                 // console.log("Now scrolling.")
                             // } else if (originId === "31" || originId === "32" || originId === "33") {
                             //     const overflow = document.getElementById('action-container');
@@ -245,7 +249,8 @@ let generateFetchMessage = (contentName, response) => {
                                         'This page is being developped...<br/>Available soon.';
     let message = `<div style='margin: 10px;'><div style='display: none;'>Message :<br/> Fetching ${contentName}...<br/>Data Response: ${response.status} - ${response.statusText}</div>` + 
     `<div style="width: 100%; text-align: center;"><img src="./images/the.shipyard.jpg" width="100%"></div>` + 
-    `<div style='border: 3px solid orange; border-radius: 10px; text-align: center;'><b>${mess}</b></div></div>`;
+    `<div style='border: 3px solid orange; border-radius: 10px; text-align: center; display: grid; grid-template-columns: auto auto auto;'>` + 
+    `<div style="display: flex; align-items: center; margin: auto;"><img src="./images/construction.cone.png" height="52"></div> <div><b>${mess}</b></div> <div style="display: flex; align-items: center; margin: auto;"><img src="./images/construction.cone.png" height="52"></div></div></div>`;
     return message;
 };
 
