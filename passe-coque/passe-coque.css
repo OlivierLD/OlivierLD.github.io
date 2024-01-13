@@ -154,7 +154,9 @@ div.tooltip:hover span {
 }
 
 .boat-image-container {
-    min-height: 300px;
+    min-height: 280px;
+    background-color: black;
+    aspect-ratio : 1 / 1;
 }
 
 .image-plus-text {
