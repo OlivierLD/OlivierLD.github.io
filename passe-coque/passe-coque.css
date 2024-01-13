@@ -199,6 +199,14 @@ div.tooltip:hover span {
     width: 100%;
 }
 
+.partner-logo {
+    margin: auto;
+}
+
+.partner-logo:hover {
+    cursor: pointer;
+}
+
 .boat-image-plus-text {
     position: relative;
     text-align: center;

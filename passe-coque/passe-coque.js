@@ -123,16 +123,11 @@ let clack = (origin) => {
                                     let scroll_top = rectAnchor.top - rectOverflow.top;
                                     console.log(`rectAnchor.top: ${rectAnchor.top}, rectOverflow.top: ${rectOverflow.top} => ${scroll_top}`);
                                     // Set the scroll position of the overflow container
-                                    overflow.scrollTop = scroll_top.toFixed(0);  // TODO Remains to zero ???
+                                    overflow.scrollTop = scroll_top; // .toFixed(0);  // If remains to zero, check div's height
                                     console.log(`>>> Origin: ${originId}: scrolltop: ${overflow.scrollTop} vs ${scroll_top}`);
-                                    // nbTry++;
-                                    // if (overflow.scrollTop === 0 && nbTry < 10) {
-                                    //     console.log("Re-trying...");
-                                    //     window.setTimeout(scrollToAnchor, 1000);
-                                    // }
                                 };
                                 window.setTimeout(scrollToAnchor, 100);
-                                console.log("Now scrolling.")
+                                // console.log("Now scrolling.")
                             // } else if (originId === "31" || originId === "32" || originId === "33") {
                             //     const overflow = document.getElementById('action-container');
                             //     let hashtag = (originId === "31") ? '01' : ((originId === "32") ? '02' : '03');
@@ -147,18 +142,21 @@ let clack = (origin) => {
                             //         console.log("Now Scrolling !");
                             //     //}, 1000);
                             //     // console.log("Scrolling !");
-                            } else if (originId === "4") {
-                                window.setTimeout(() => {
-                                    fillOutFleet(null); // Populate default (full) boat list
-                                }, 500);
-                            } else if (originId === "62") {
-                                window.setTimeout(() => {
-                                    fillOutActu(null); // Populate default (full) news list
-                                }, 500);
-                            } else if (originId === "33") { // Partager, PCC
-                                window.setTimeout(() => {
-                                    fillOutFleet(CLUB, "share-container", false); // Populate PCC boat list
-                                }, 500);
+                            } else {
+                                if (originId === "4") {
+                                    window.setTimeout(() => {
+                                        fillOutFleet(null); // Populate default (full) boat list
+                                    }, 500);
+                                } else if (originId === "62") {
+                                    window.setTimeout(() => {
+                                        fillOutActu(null); // Populate default (full) news list
+                                    }, 500);
+                                } else if (originId === "33") { // Partager, PCC
+                                    window.setTimeout(() => {
+                                        fillOutFleet(CLUB, "share-container", false); // Populate PCC boat list
+                                    }, 500);
+                                } 
+                                window.scrollTo(0, 0); // Scroll on top, if invoked from a button at the bottom of the page
                             }
 						}
 					});
@@ -666,6 +664,14 @@ let aboutSomeone = (who) => {
     } else {
       // alert(NO_DIALOG_MESSAGE);
       aboutDialog.style.display = 'inline';
+    }
+};
+
+let aboutPartner = (from) => {
+    // console.log(`About Partner`);
+    let partnerURL = from.getAttribute('url');  // Non standard !
+    if (partnerURL) {
+        window.open(partnerURL);
     }
 };
 
@@ -1349,6 +1355,14 @@ let scrollTheTeam = (dir) => {
     console.log(`Scrolling, ${dir}`);
     let container = document.getElementById("team-container");
     let nbPeople = container.querySelectorAll('div.image-plus-text').length;
+    let step = container.clientWidth / nbPeople;
+    container.scrollLeft += (step * dir);
+};
+
+let scrollPartners = (dir) => {
+    console.log(`Scrolling, ${dir}`);
+    let container = document.getElementById("partners-container");
+    let nbPeople = container.querySelectorAll('div.partner-logo').length;
     let step = container.clientWidth / nbPeople;
     container.scrollLeft += (step * dir);
 };
