@@ -23,7 +23,7 @@ SELECT TIMESTAMPDIFF(HOUR, CURRENT_TIMESTAMP(), '2024-01-01') as 'IN HOURS';
 
 SELECT `email` FROM `nl-subscribers` WHERE `email` IN (SELECT `email` from `pc-members`);
 
--- Renouvellement de cotisation
+-- Renouvellement de cotisation, dans moins d'un mois.
 SELECT
     `command-date`,
     CONCAT(
