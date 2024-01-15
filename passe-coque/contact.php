@@ -12,7 +12,7 @@
     <!--h2>Contact Passe-Coque</h2-->
     <?php
 
-      $sendTo = "contact@passeurdecoute.fr"; // "olivier.lediouris@gmail.com";
+      $sendTo = "catherine.laguerre@hotmail.com"; // "contact@passeurdecoute.fr"; // "olivier.lediouris@gmail.com"; // 
       $messageSubject = "From Passe-Coque Web Site"; // Default
 
       // echo('HTTP_POST_VARS:'.$HTTP_POST_VARS.'<br/>');

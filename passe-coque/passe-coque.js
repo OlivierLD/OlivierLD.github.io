@@ -1474,3 +1474,28 @@ let onSubscriptionResponse = (iframe) => {
         showCustomAlert(message);
     }
 }
+
+let onSubmitResponse = (iframe, okMess, errorMess) => {
+    // console.log(iframe);
+    let message = '';
+    try {
+        message = iframe.contentDocument.querySelectorAll('body')[0].innerText.trim();
+        if (message.startsWith("OK")) {
+            message = okMess;
+        } else if (message.startsWith("ERROR")) {
+            message = errorMess;
+        }
+    } catch (err) {
+        console.log("Oops");
+        try {
+            message = iframe.contentDocument.querySelectorAll('body')[0].innerText.trim();
+        } catch (err2) {
+            console.log("No text, no error...");
+        }
+    }
+    // TODO display in dialog, or custom alert ?
+    if (message.length > 0) {
+        // alert(message);
+        showCustomAlert(message);
+    }
+}
