@@ -709,7 +709,7 @@ const THE_FLEET = [
         pix: "./images/boats/coraxy.png",
         type: "Cognac",
         category: NONE,
-        base: "Saint&nbsp;Philibert"
+        base: "Saint-Philibert"
     },
     {
         name: "Manu Oviri",
@@ -765,7 +765,7 @@ const THE_FLEET = [
         pix: "./images/boats/twist.again.sq.png",
         type: "JOD 35",
         category: OLD_BOAT,
-        base: "Saint&nbsp;Philibert"
+        base: "Saint-Philibert"
     },
     { 
         name: "Ia Orana",
@@ -789,7 +789,7 @@ const THE_FLEET = [
         pix: "./images/boats/babou.sq.png",
         type: "Flying Phantom",
         category: NONE,
-        base: "Saint&nbsp;Philibert"
+        base: "Saint-Philibert"
     },
     {
         name: "Mirella",
@@ -805,7 +805,7 @@ const THE_FLEET = [
         pix: "./images/boats/tri.yann.png",
         type: "Trimaran Allegro",
         category: CLUB,
-        base: "Saint&nbsp;Philibert"
+        base: "Saint-Philibert"
     },
     { 
         name: "Rozen an Avel",
@@ -813,7 +813,7 @@ const THE_FLEET = [
         pix: "./images/boats/rozen.an.avel.jpeg",
         type: "Arp&egrave;ge",
         category: NONE,
-        base: "Saint&nbsp;Philibert"
+        base: "Saint-Philibert"
     },
     { 
         name: "Avel Mad",
@@ -853,7 +853,7 @@ const THE_FLEET = [
         pix: "./images/boats/taapuna.png",
         type: "Edel 660",
         category: CLUB,
-        base: "Rivi&egrave;re de Saint&nbsp;Philibert"
+        base: "Rivi&egrave;re de Saint-Philibert"
     },
     { 
         name: "L'heure bleue",
@@ -917,7 +917,7 @@ const THE_FLEET = [
         pix: "./images/boats/jules.verne.sq.png",
         type: "Sir 520",
         category: TO_GRAB,
-        base: "Saint&nbsp;Philibert"
+        base: "Saint-Philibert"
     },
     { 
         name: "Remora",
@@ -925,7 +925,7 @@ const THE_FLEET = [
         pix: "./images/boats/remora.sq.png",
         type: "Arcachonnais",
         category: TO_GRAB,
-        base: "Saint&nbsp;Philibert"
+        base: "Saint-Philibert"
     },
     { 
         name: "Stiren ar Mor",

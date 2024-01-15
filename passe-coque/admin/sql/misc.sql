@@ -47,3 +47,9 @@ SELECT
             `command-date`,
             CURRENT_TIMESTAMP()) > 335;
             
+-- 
+-- Work without back-quotes
+-- 
+create table akeu (coucou int);
+--
+            
