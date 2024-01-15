@@ -52,6 +52,7 @@ if (isset($_POST['operation'])) {
     
       // $sql = 'SELECT COUNT(*) FROM `nl-subscribers`;'; 
       $sql = 'SELECT
+      `reference`,
       `command-date`,
       CONCAT(
           \'In \',
@@ -72,7 +73,8 @@ if (isset($_POST['operation'])) {
           TIMESTAMPDIFF(
               DAY,
               `command-date`,
-              CURRENT_TIMESTAMP()) > 335;'; 
+              CURRENT_TIMESTAMP()) > 335
+      ORDER BY 1 DESC, 2;'; 
       
       echo('Performing query <code>'.$sql.'</code><br/>');
     
@@ -85,7 +87,7 @@ if (isset($_POST['operation'])) {
       while ($table = mysqli_fetch_array($result)) { // go through each row that was returned in $result
         // echo "table contains ". count($table) . " entry(ies).<br/>";
         // echo("id:" . $table[0] . ", name:" . $table[1] . ", email:" . $table[2] . "<br/>");    // print the table that was returned on that row.
-        echo("<tr><td>" . $table[0] . "</td><td>" . $table[1] . "</td><td>" . $table[2] . "</td></tr>"); 
+        echo("<tr><td>" . $table[0] . "</td><td>" . $table[1] . "</td><td>" . $table[2] . "</td><td>" . $table[3] . "</td></tr>\n"); 
       }
       echo "</table>";
       
@@ -95,11 +97,23 @@ if (isset($_POST['operation'])) {
     } catch (Throwable $e) {
       echo "Captured Throwable for connection : " . $e->getMessage() . "<br/>" . PHP_EOL;
     }
-    
+    echo("<hr/>" . PHP_EOL);
+    // echo("Again ? Click <a href='#'>Here</a>.");
+    ?>
+    <form action="#" method="get">
+      <!--input type="hidden" name="operation" value="blank"-->
+      <table>
+        <tr>
+          <td colspan="2" style="text-align: center;"><input type="submit" value="Again ?"></td>
+        </tr>
+      </table>
+    </form>
+    <?php
   }
 } else { // Then display the form
     ?>
-    <form action="dbQuery.03.php" method="post">
+    <!--form action="dbQuery.03.php" method="post"-->
+    <form action="#" method="post">
       <input type="hidden" name="operation" value="query">
       <table>
         <!--tr>
