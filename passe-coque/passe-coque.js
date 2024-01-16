@@ -315,7 +315,7 @@ let startBGAnimation = (cb) => {
 		}
 	} else { // Previous behavior
 		if (bgAnimation !== undefined) {
-		clearInterval(bgAnimation);
+		    clearInterval(bgAnimation);
 		}
 		// setTimeout(darkenBackground, 1);
 		bgAnimation = setInterval(() => {
@@ -377,41 +377,7 @@ function handleTouchMove(evt) {
 // const BG_INTERVAL = 2 * 60 * 1000; // in ms. 
 let secondLeft = BG_INTERVAL / 1000;
 
-const ABOUT_DATA = [ // Use with innerHTML
-    "Raspberry Pi", 
-    "Web&nbsp;Components", 
-    "Java&nbsp;&amp;&nbsp;Processing", 
-    "HTML5,&nbsp;CSS3,&nbsp;ES6,&nbsp;NodeJS", 
-    "Python", 
-    "Arduino&nbsp;&amp;&nbsp;Co"
-];
 let aboutDiv = undefined;
-
-let currentAboutIndex = 0;
-let currentLeftMargin = 0;
-
-function leftNewContent() {
-    if (currentLeftMargin > 0) {
-        currentLeftMargin -= 1;
-        aboutDiv.style.marginLeft = `${currentLeftMargin}%`;
-        setTimeout(leftNewContent, 10);
-    }
-}
-function leftOldContent() {
-    if (currentLeftMargin > -100) {
-        currentLeftMargin -= 1;
-        aboutDiv.style.marginLeft = `${currentLeftMargin}%`;
-        setTimeout(leftOldContent, 10);
-    } else {
-        currentAboutIndex += 1;
-        if (currentAboutIndex > (ABOUT_DATA.length - 1)) {
-            currentAboutIndex = 0;
-        }
-        aboutDiv.innerHTML = ABOUT_DATA[currentAboutIndex];
-        currentLeftMargin = 100;
-        setTimeout(leftNewContent, 10);
-    }
-}
 
 let auto = false;
 
@@ -709,7 +675,7 @@ const THE_FLEET = [
         pix: "./images/boats/coraxy.png",
         type: "Cognac",
         category: NONE,
-        base: "Saint-Philibert"
+        base: "Saint&#8209;Philibert"
     },
     {
         name: "Manu Oviri",
@@ -765,7 +731,7 @@ const THE_FLEET = [
         pix: "./images/boats/twist.again.sq.png",
         type: "JOD 35",
         category: OLD_BOAT,
-        base: "Saint-Philibert"
+        base: "Saint&#8209;Philibert"
     },
     { 
         name: "Ia Orana",
@@ -789,7 +755,7 @@ const THE_FLEET = [
         pix: "./images/boats/babou.sq.png",
         type: "Flying Phantom",
         category: NONE,
-        base: "Saint-Philibert"
+        base: "Saint&#8209;Philibert"
     },
     {
         name: "Mirella",
@@ -805,7 +771,7 @@ const THE_FLEET = [
         pix: "./images/boats/tri.yann.png",
         type: "Trimaran Allegro",
         category: CLUB,
-        base: "Saint-Philibert"
+        base: "Saint&#8209;Philibert"
     },
     { 
         name: "Rozen an Avel",
@@ -813,7 +779,7 @@ const THE_FLEET = [
         pix: "./images/boats/rozen.an.avel.jpeg",
         type: "Arp&egrave;ge",
         category: NONE,
-        base: "Saint-Philibert"
+        base: "Saint&#8209;Philibert"
     },
     { 
         name: "Avel Mad",
@@ -853,7 +819,7 @@ const THE_FLEET = [
         pix: "./images/boats/taapuna.png",
         type: "Edel 660",
         category: CLUB,
-        base: "Rivi&egrave;re de Saint-Philibert"
+        base: "Rivi&egrave;re de Saint&#8209;Philibert"
     },
     { 
         name: "L'heure bleue",
@@ -917,7 +883,7 @@ const THE_FLEET = [
         pix: "./images/boats/jules.verne.sq.png",
         type: "Sir 520",
         category: TO_GRAB,
-        base: "Saint-Philibert"
+        base: "Saint&#8209;Philibert"
     },
     { 
         name: "Remora",
@@ -925,7 +891,7 @@ const THE_FLEET = [
         pix: "./images/boats/remora.sq.png",
         type: "Arcachonnais",
         category: TO_GRAB,
-        base: "Saint-Philibert"
+        base: "Saint&#8209;Philibert"
     },
     { 
         name: "Stiren ar Mor",
