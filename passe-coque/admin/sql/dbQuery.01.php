@@ -35,8 +35,8 @@ if (isset($_POST['operation'])) {
   $operation = $_POST['operation'];
   if ($operation == 'insert') { // Then do the insert
     try {
-      $name =  $_POST['name'];
-      $email =  $_POST['email'];
+      $name = $_POST['name'];
+      $email = $_POST['email'];
 
       $link = mysqli_init();
     
