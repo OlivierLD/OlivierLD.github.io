@@ -59,6 +59,34 @@ CREATE TABLE IF NOT EXISTS `pc-members` (
     `comments` VARCHAR(512)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT = 'Passe-Coque members';
 
+CREATE TABLE IF NOT EXISTS PC_MEMBERS (
+    ID INT AUTO_INCREMENT PRIMARY KEY, -- reference is NOT unique enough...
+    REFERENCE INT,
+    COMMAND_DATE TIMESTAMP,      -- Format: YYYY-MM-DD hh:mm:ss
+    COMMAND_STATUS VARCHAR(32),
+    MEMBER_FIRST_NAME VARCHAR(64),
+    MEMBER_LAST_NAME VARCHAR(64),
+    CARD_URL VARCHAR(512),
+    PAYER_FIRST_NAME VARCHAR(64),
+    PAYER_LAST_NAME VARCHAR(64),
+    PAYER_EMAIL VARCHAR(64),
+    COMPANY_NAME VARCHAR(64),
+    PAID_WITH VARCHAR(32),
+    FEE_CATEGORY VARCHAR(32),
+    FEE_AMOUNT FLOAT,
+    PROMO_CODE VARCHAR(16),
+    PROMO_AMOUNT FLOAT,
+    PHONE VARCHAR(16),
+    EMAIL VARCHAR(64),
+    ADDRESS VARCHAR(128),
+    ZIP VARCHAR(8),
+    BIRTH_DATE DATE,  -- format 'YYYY-MM-DD'
+    CITY VARCHAR(32),
+    SAILING_EXPERIENCE VARCHAR(256),
+    BOAT_BUILDING_EXP VARCHAR(256),
+    COMMENTS VARCHAR(512)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT = 'Passe-Coque members';
+
 -- Exemple, from
 -- 75163629;28/11/2023 21:43;Validé;Gambier;Sophie;https://www.helloasso.com/associations/passe-coque-l-association-des-passeurs-d-ecoute/adhesions/adhesion-simple/carte-adherent?cardId=75163629&ag=75163629;Gambier;Sophie;sophie.gambier01@gmail.com;;Carte bancaire;Passeur d'Ecoute;50,00;;;0769455969;sophie.gambier01@gmail.com;sophie.gambier01@gmail.com;44300;08/12/2001;Nantes;Equipière confirmée;aucune;
 

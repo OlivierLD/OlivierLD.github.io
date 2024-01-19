@@ -9,7 +9,7 @@
     --slide-height: 400px;   */
     --pc-bg-color: rgba(243, 72, 33, 1.0); /* rgba(246, 101, 101, 0.9); */ /* #ff5f5f; */ /* #e96d08 */ /* #da6d14; */
 }
-  
+
 /* @font-face {
     font-family: TrueNorth;
     src: url(fonts/TrueNorthBlack-Regular.otf) format("opentype");
@@ -148,7 +148,7 @@ div.tooltip:hover span {
 
 .boat-frame {
     padding: 10px; 
-    z-index: 1; 
+    /* z-index: 1;  */
     max-height: 420px; 
     max-width: 300px;
 }
@@ -156,7 +156,8 @@ div.tooltip:hover span {
 .boat-image-container {
     min-height: 280px;
     background-color: black;
-    aspect-ratio : 1 / 1;
+    /* background-image: radial-gradient(white, silver, black); */
+    aspect-ratio : 1 / 1;  /* THAT is a cool one... */
 }
 
 .image-plus-text {

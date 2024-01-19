@@ -5,6 +5,7 @@
   <head>
     <!--meta charset="UTF-8">
     <meta charset="ISO-8859-1"-->
+    <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>DB Query Test 2</title>
     <style type="text/css">

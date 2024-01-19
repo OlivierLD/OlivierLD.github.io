@@ -52,4 +52,25 @@ SELECT
 -- 
 create table akeu (coucou int);
 --
-            
+-- UPDATE NL-SUNSCRIBERS
+UPDATE `nl-subscribers` SET `active` = FALSE WHERE 
+-- SELECT * FROM `nl-subscribers` WHERE
+    `email` LIKE '%axelle%' OR 
+    `email` LIKE '%.isaac%' OR 
+    `email` LIKE '%marefly%' OR 
+    `email` LIKE '%foucher-p%' OR 
+    `email` LIKE '%jeromedormois%' OR 
+    `email` LIKE '%pellen.avocat%' OR 
+    `email` LIKE '%karine.audoin%';
+--
+UPDATE `nl-subscribers` SET `email` = 'fred.epmg@gmail.com'
+WHERE `email` = 'fredgougeon@wanadoo.fr';
+--
+UPDATE `nl-subscribers` SET `email` = 'unjourdaout@gmail.com'
+WHERE `email` = 'didier-de.puyraimond@tactiques.fr';
+--    
+-- Table name is case-sensitive, column names seem not to be.
+DROP TABLE AKEU_COUCOU;
+CREATE TABLE AKEU_COUCOU (id int, command_date TIMESTAMP, STUFF varchar(32));
+insert into AKEU_COUCOU (id, command_date, stuff) values (1, '2024-01-10 08:00:00', 'Pouet');
+select * from AKEU_COUCOU;

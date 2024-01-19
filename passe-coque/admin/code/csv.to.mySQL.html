@@ -58,7 +58,8 @@ a.list-link:hover {
     let fillOutStmt = (stmtArray) => {
         let innerHTML = "<pre>";
         stmtArray.forEach(line => { 
-            innerHTML += (decodeURI(line) + "\n");
+            // innerHTML += (decodeURI(line) + "\n");
+            innerHTML += (line + "\n");
         });
         innerHTML += "</pre>";
         document.getElementById("stmt-list").innerHTML = innerHTML;
@@ -143,12 +144,32 @@ a.list-link:hover {
                     data = "NULL";
                 }
             } else {
-                data = (array[i] ? array[i].replaceAll("'", "\\'") : "");
+                // data = (array[i] ? array[i].replaceAll("'", "\\'") : "");
+                if (i === MEMBER_FIRST_NAME || i === MEMBER_LAST_NAME || i === PAYER_FIRST_NAME || i === PAYER_LAST_NAME || 
+                    i === EXPERIENCE || i === BOAT_BUILDING_EXP || i === ADDRESS || i === TOWN) {
+                    data = array[i];
+                    if (data) {
+                        if (data.startsWith('"')) {
+                            data = data.substring(1);
+                        } 
+                        if (data.endsWith('"')) {
+                            data = data.substring(0, data.length - 1);
+                        }
+                        data = data.trim();
+                        // Now escape special characters. Good doc at https://www.the-art-of-web.com/javascript/escape/
+                        data = encodeURIComponent(data);
+                        // data = data.replaceAll("'", "&apos;"); 
+                        data = data.replaceAll("'", "\\'");
+                        // console.log("urlencoded: " + data);
+                    }
+                } else {
+                    data = (array[i] ? array[i].replaceAll("'", "\\'") : "");
+                }
             }
             if (data && data.length === 0) {
                 data = "NULL";
             }
-            columnsArray.push(data.trim());
+            columnsArray.push(data); // .trim());
         }
         return columnsArray;
     }
@@ -179,31 +200,31 @@ a.list-link:hover {
                             // debugger;
                             let dbValues = arrayToColumns(columns);
 
-                            let sqlInsert = "INSERT INTO `pc-members`(" +
-                                                "`reference`, " +
-                                                "`command-date`, " +
-                                                "`command-status`, " +
-                                                "`member-first-name`, " +
-                                                "`member-last-name`, " +
-                                                "`card-url`, " +
-                                                "`payer-first-name`, " +
-                                                "`payer-last-name`, " +
-                                                "`payer-email`, " +
-                                                "`company-name`, " +
-                                                "`paid-with`, " + 
-                                                "`fee-category`, " +
-                                                "`fee-amount`, " +
-                                                "`promo-code`, " + 
-                                                "`promo-amount`, " +
-                                                "`phone`, " + 
-                                                "`email`, " + 
-                                                "`address`, " +
-                                                "`zip`, " + 
-                                                "`birth-date`, " +
-                                                "`city`, " +
-                                                "`sailing-experience`, " + 
-                                                "`boat-building-exp`, " +
-                                                "`comments` ) VALUES (" +
+                            let sqlInsert = "INSERT INTO PC_MEMBERS (" +
+                                                "REFERENCE, " +
+                                                "COMMAND_DATE, " +
+                                                "COMMAND_STATUS, " +
+                                                "MEMBER_FIRST_NAME, " +
+                                                "MEMBER_LAST_NAME, " +
+                                                "CARD_URL, " +
+                                                "PAYER_FIRST_NAME, " +
+                                                "PAYER_LAST_NAME, " +
+                                                "PAYER_EMAIL, " +
+                                                "COMPANY_NAME, " +
+                                                "PAID_WITH, " + 
+                                                "FEE_CATEGORY, " +
+                                                "FEE_AMOUNT, " +
+                                                "PROMO_CODE, " + 
+                                                "PROMO_AMOUNT, " +
+                                                "PHONE, " + 
+                                                "EMAIL, " + 
+                                                "ADDRESS, " +
+                                                "ZIP, " + 
+                                                "BIRTH_DATE, " +
+                                                "CITY, " +
+                                                "SAILING_EXPERIENCE, " + 
+                                                "BOAT_BUILDING_EXP, " +
+                                                "COMMENTS ) VALUES (" +
                                                    toNumericValue(dbValues[0]) + "," +
                                                    toNonNumericValue(dbValues[1]) + "," +
                                                    toNonNumericValue(dbValues[2]) + "," +
@@ -243,6 +264,8 @@ a.list-link:hover {
                         }
                         idx++;
                     });
+                    // Copy that one for phpAdmin...
+                    // stmtArray.forEach(stmt => console.log(stmt));
                     // Now fill the textarea
                     fillOutStmt(stmtArray);
                     // console.log(stmtArray);

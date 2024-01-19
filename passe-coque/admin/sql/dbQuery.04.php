@@ -53,27 +53,27 @@ if (isset($_POST['operation'])) {
     
       // $sql = 'SELECT COUNT(*) FROM `nl-subscribers`;'; 
       $sql = 'SELECT
-      `reference`,
-      `command-date`,
+      REFERENCE,
+      COMMAND_DATE,
       CONCAT(
           \'In \',
           365 - TIMESTAMPDIFF(
               DAY,
-              `command-date`,
+              COMMAND_DATE,
               CURRENT_TIMESTAMP()),
               \' Day(s)\'
           ) AS \'When\',
           CONCAT(
-              `member-first-name`,
+              MEMBER_FIRST_NAME,
               \' \',
-              `member-last-name`
+              MEMBER_LAST_NAME
           ) AS NAME
       FROM
-          `pc-members`
+          PC_MEMBERS
       WHERE
           TIMESTAMPDIFF(
               DAY,
-              `command-date`,
+              COMMAND_DATE,
               CURRENT_TIMESTAMP()) > 335
       ORDER BY 1 DESC, 2;'; 
       
@@ -88,7 +88,7 @@ if (isset($_POST['operation'])) {
       while ($table = mysqli_fetch_array($result)) { // go through each row that was returned in $result
         // echo "table contains ". count($table) . " entry(ies).<br/>";
         // echo("id:" . $table[0] . ", name:" . $table[1] . ", email:" . $table[2] . "<br/>");    // print the table that was returned on that row.
-        echo("<tr><td>" . $table[0] . "</td><td>" . $table[1] . "</td><td>" . $table[2] . "</td><td>" . $table[3] . "</td></tr>\n"); 
+        echo("<tr><td>" . $table[0] . "</td><td>" . $table[1] . "</td><td>" . $table[2] . "</td><td>" . urldecode($table[3]) . "</td></tr>\n"); 
       }
       echo "</table>";
       
