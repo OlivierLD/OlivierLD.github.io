@@ -20,7 +20,7 @@
     </style>
   </head>
   <body>
-
+    <h1>Create News Letter subscriber</h1>
     <?php
 // phpinfo();
 

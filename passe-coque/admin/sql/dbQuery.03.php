@@ -19,7 +19,7 @@
     </style>
   </head>
   <body>
-    <h1>PHP / MySQL. Fee renewal</h1>
+    <h1>PHP / MySQL. Fee renewal (V1)</h1>
 
     <?php
 // phpinfo();

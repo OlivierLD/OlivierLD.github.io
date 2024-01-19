@@ -19,7 +19,7 @@
     </style>
   </head>
   <body>
-    <h1>PHP / MYSQL Test 2</h1>
+    <h1>PHP / MYSQL. Query News Letter subscribers</h1>
 
     <?php
 // phpinfo();
