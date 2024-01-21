@@ -49,16 +49,16 @@ if (isset($_POST['operation'])) {
     
       $sql = 'SELECT
           CONCAT(
-              MEMBER_FIRST_NAME,
+              UPPER(PCM.MEMBER_FIRST_NAME),
               \' \',
-              MEMBER_LAST_NAME
+              PCM.MEMBER_LAST_NAME
           ) AS NAME,
-          CARD_URL 
+          PCM.CARD_URL 
       FROM 
-          PC_MEMBERS 
+          PC_MEMBERS PCM
       WHERE 
-           UPPER(MEMBER_FIRST_NAME) LIKE UPPER(\'%' . $name . '%\') OR 
-           UPPER(MEMBER_LAST_NAME) LIKE UPPER(\'%' . $name . '%\')
+           UPPER(PCM.MEMBER_FIRST_NAME) LIKE UPPER(\'%' . $name . '%\') OR 
+           UPPER(PCM.MEMBER_LAST_NAME) LIKE UPPER(\'%' . $name . '%\')
       ORDER BY 1;';
       
       echo('Performing query <code>' . $sql . '</code><br/>');

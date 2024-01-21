@@ -74,3 +74,20 @@ DROP TABLE AKEU_COUCOU;
 CREATE TABLE AKEU_COUCOU (id int, command_date TIMESTAMP, STUFF varchar(32));
 insert into AKEU_COUCOU (id, command_date, stuff) values (1, '2024-01-10 08:00:00', 'Pouet');
 select * from AKEU_COUCOU;
+
+--
+-- Doublons
+--
+SELECT
+    MEMBER_FIRST_NAME,
+    CONCAT('(', COUNT(MEMBER_LAST_NAME),
+    ')'),
+    MEMBER_LAST_NAME
+FROM
+    `PC_MEMBERS`
+GROUP BY
+    MEMBER_LAST_NAME,
+    MEMBER_FIRST_NAME
+HAVING
+    COUNT(MEMBER_LAST_NAME) > 1;
+    

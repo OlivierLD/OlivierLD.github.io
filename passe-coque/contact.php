@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <!--
-! Send an email to contact@passeurdecoute.fr.
-! Sender is cc'd.
+ ! Send an email to contact@passeurdecoute.fr.
+ ! Sender is cc'd.
+ ! See doc at https://www.farnell.com/datasheets/1599363.pdf
+ !       also https://www.w3docs.com/snippets/php/php-mail-cc-field.html
  +-->
 <html>
   <head>
@@ -12,7 +14,7 @@
     <!--h2>Contact Passe-Coque</h2-->
     <?php
 
-      $sendTo = "catherine.laguerre@hotmail.com"; // "contact@passeurdecoute.fr"; // "olivier.lediouris@gmail.com"; // 
+      $sendTo = "contact@passeurdecoute.fr"; //  . "," . "catherine.laguerre@hotmail.com"; // "contact@passeurdecoute.fr"; // "olivier.lediouris@gmail.com"; // 
       $messageSubject = "From Passe-Coque Web Site"; // Default
 
       // echo('HTTP_POST_VARS:'.$HTTP_POST_VARS.'<br/>');
@@ -36,10 +38,20 @@
           // } else {
           //   echo("Defaulting subject");
           }
+          $headers = "From: Passe-Coque WebSite\r\n";
+          $headers .= "CC: catherine.laguerre@hotmail.com, olivier.lediouris@gmail.com\r\n";
+
+          $messFrom = "";
+          if (isset($_POST['first-last-name'])) {
+            $messFrom = $_POST['first-last-name'] . ' (' . $_POST['email'] . ')';
+          } else {
+            $messFrom = $_POST['email'];
+          }
           if (mail($destination,
                    $messageSubject,
                    // "A message from ".$HTTP_POST_VARS['email'].".\n".$HTTP_POST_VARS['commentArea'])) {  // Ok
-                   "A message from ".$_POST['email'].".\n".$_POST['commentArea'])) {  // Ok
+                   "A message from ".$messFrom.".\n".$_POST['commentArea'],
+                   $headers)) {  // Ok
     ?>
               <div id="message">Message was sent</div>
               <div id="content">
