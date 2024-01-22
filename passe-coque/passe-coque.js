@@ -882,8 +882,8 @@ const THE_FLEET = [
         id: "jules-verne",
         pix: "./images/boats/jules.verne.sq.png",
         type: "Sir 520",
-        category: TO_GRAB,
-        base: "Saint&#8209;Philibert"
+        category: CLUB,
+        base: "Locmariaquer"
     },
     { 
         name: "Remora",
@@ -938,7 +938,7 @@ const THE_FLEET = [
         id: "gwenillig",
         pix: "./images/boats/gwenillig.png",
         type: "Eygthene 24",
-        category: NONE,
+        category: CLUB,
         base: "--"
     },
     { 

@@ -17,13 +17,6 @@
       $sendTo = "contact@passeurdecoute.fr"; //  . "," . "catherine.laguerre@hotmail.com"; // "contact@passeurdecoute.fr"; // "olivier.lediouris@gmail.com"; // 
       $messageSubject = "From Passe-Coque Web Site"; // Default
 
-      // echo('HTTP_POST_VARS:'.$HTTP_POST_VARS.'<br/>');
-      // echo('Operation? :'.$_POST['operation'].'<br/>');
-      // echo('email? :'.$_POST['email'].'<br/>');
-      // echo('subject? :'.$_POST['subject'].'<br/>');
-      // echo('body? :'.$_POST['commentArea'].'<br/>');
-
-      // if (isset($HTTP_POST_VARS['operation'])) {   // POST param
       if (isset($_POST['operation'])) {   // POST param
         $operation = $_POST['operation']; // $HTTP_POST_VARS['operation'];
         // echo('<p>Operation prm detected: '.$operation.'</p>');
@@ -38,13 +31,13 @@
           // } else {
           //   echo("Defaulting subject");
           }
-          $headers = "From: Passe-Coque WebSite\r\n";
+          $headers = "";  // "From: Passe-Coque WebSite\r\n";
           $headers .= "CC: catherine.laguerre@hotmail.com, olivier.lediouris@gmail.com\r\n";
 
-          $messFrom = "";
-          if (isset($_POST['first-last-name'])) {
+          $messFrom = "??";
+          if (isset($_POST['first-last-name']) && isset($_POST['email'])) {
             $messFrom = $_POST['first-last-name'] . ' (' . $_POST['email'] . ')';
-          } else {
+          } else if (isset($_POST['email'])) {
             $messFrom = $_POST['email'];
           }
           if (mail($destination,
