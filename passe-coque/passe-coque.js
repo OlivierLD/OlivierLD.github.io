@@ -1354,25 +1354,25 @@ let openTab = (evt, tabName) => {
 
 let customAlertOpened = false;
 let showCustomAlert = (content) => {
-  let customAlert = document.getElementById("custom-alert");
-  document.getElementById('custom-alert-content').innerHTML = `<pre>${content}</pre>`;
-      if (customAlert.show !== undefined) {
-          customAlert.show();
-      } else {
-          customAlert.style.display = 'inline';
-      }
-  customAlertOpened = true;
-  window.setTimeout(closeCustomAlert, 5000);
+    let customAlert = document.getElementById("custom-alert");
+    document.getElementById('custom-alert-content').innerHTML = `<pre>${content}</pre>`;
+    if (customAlert.show !== undefined) {
+        customAlert.show();
+    } else {
+        customAlert.style.display = 'inline';
+    }
+    customAlertOpened = true;
+    window.setTimeout(closeCustomAlert, 5000);
 };
 
 let closeCustomAlert = () => {
-  let customAlert = document.getElementById("custom-alert");
-      if (customAlert.close !== undefined) {
-          customAlert.close();
-      } else {
-          customAlert.style.display = 'none';
-      }
-  customAlertOpened = false;
+    let customAlert = document.getElementById("custom-alert");
+    if (customAlert.close !== undefined) {
+        customAlert.close();
+    } else {
+        customAlert.style.display = 'none';
+    }
+    customAlertOpened = false;
 };
 
 // Optional
@@ -1434,7 +1434,7 @@ let onSubscriptionResponse = (iframe) => {
             console.log("No text, no error...");
         }
     }
-    // TODO display in dialog, or custom alert ?
+    // Display in dialog, or custom alert.
     if (message.length > 0) {
         // alert(message);
         showCustomAlert(message);
@@ -1446,7 +1446,7 @@ let onSubmitResponse = (iframe, okMess, errorMess) => {
     let message = '';
     try {
         message = iframe.contentDocument.querySelectorAll('body')[0].innerText.trim();
-        if (message.length > 0) {
+        if (message.length > 0) {  // because of the onload on the iframe...
             if (message.startsWith("ERROR")) {
                 message = errorMess;
             } else {
@@ -1466,7 +1466,7 @@ let onSubmitResponse = (iframe, okMess, errorMess) => {
             console.log("No text, no error...");
         }
     }
-    // TODO display in dialog, or custom alert ?
+    // Display in dialog, or custom alert.
     if (message.length > 0) {
         // alert(message);
         showCustomAlert(message);

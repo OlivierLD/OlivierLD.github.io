@@ -75,6 +75,7 @@ canvas {
 
 div.click-for-more img {
     /* opacity: 0.5; */
+    opacity: 1;
 }
 div.click-for-more img:hover {
     /* opacity: 1.0; */
@@ -413,6 +414,7 @@ div.tooltip:hover span {
 
 #lang-flag:hover {
     /*box-shadow: 4px 4px 8px black, 0 0 25px white, 0 0 10px cyan;*/
+    border: none;
 }
   
 .background {
@@ -528,9 +530,9 @@ html {
     height: 100%;
 }
   
-a:link {
-    /* color: #0000a0 */
-}
+/* a:link {
+    color: #0000a0
+} */
   
 a:active {
     color: #8080ff
