@@ -1355,7 +1355,7 @@ let openTab = (evt, tabName) => {
 let customAlertOpened = false;
 let showCustomAlert = (content) => {
   let customAlert = document.getElementById("custom-alert");
-  document.getElementById('custom-alert-content').innerHTML = content;
+  document.getElementById('custom-alert-content').innerHTML = `<pre>${content}</pre>`;
       if (customAlert.show !== undefined) {
           customAlert.show();
       } else {
@@ -1446,10 +1446,17 @@ let onSubmitResponse = (iframe, okMess, errorMess) => {
     let message = '';
     try {
         message = iframe.contentDocument.querySelectorAll('body')[0].innerText.trim();
-        if (message.startsWith("OK")) {
-            message = okMess;
-        } else if (message.startsWith("ERROR")) {
-            message = errorMess;
+        if (message.length > 0) {
+            if (message.startsWith("ERROR")) {
+                message = errorMess;
+            } else {
+                message = okMess;
+            }
+            // if (message.startsWith("OK")) {
+            //     message = okMess;
+            // } else if (message.startsWith("ERROR")) {
+            //     message = errorMess;
+            // }
         }
     } catch (err) {
         console.log("Oops");

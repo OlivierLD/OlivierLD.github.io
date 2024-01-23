@@ -31,7 +31,7 @@
           // } else {
           //   echo("Defaulting subject");
           }
-          $headers = "";  // "From: Passe-Coque WebSite\r\n";
+          $headers = "From: contact@passeurdecoute.fr\r\n";
           $headers .= "CC: catherine.laguerre@hotmail.com, olivier.lediouris@gmail.com\r\n";
 
           $messFrom = "??";
@@ -46,7 +46,7 @@
                    "A message from ".$messFrom.".\n".$_POST['commentArea'],
                    $headers)) {  // Ok
     ?>
-              <div id="message">Message was sent</div>
+              <div id="message">Message was sent.</div>
               <div id="content">
     <?php 
 echo($_POST['commentArea']);
