@@ -1471,4 +1471,26 @@ let onSubmitResponse = (iframe, okMess, errorMess) => {
         // alert(message);
         showCustomAlert(message);
     }
-}
+};
+
+
+let checkFields = (evt) => {
+    let ok = true;
+    let errMess = [];
+    let name = document.getElementById('first-last-name').value;
+    let email = document.getElementById('user-email').value;
+    if (!name || name.trim().length === 0) {
+        errMess.push(currentLang === 'FR' ? 'On a besoin d\'un nom.' : 'Name is required.');
+    }
+    if (!email || email.trim().length === 0) {
+        errMess.push(currentLang === 'FR' ? 'On a besoin d\'un email.' : 'Email is required.');
+    }
+    if (errMess.length > 0) {
+        ok = false;
+        let mess = '';
+        errMess.forEach(el => mess += (el + '<br/>'));
+        let prefix = (currentLang === 'FR' ? 'Votre message n\'a pas &eacute;t&eacute; envoy&eacute;.<br/>' : 'You message was not sent.<br/>');
+        showCustomAlert(`<pre>${prefix}${mess}</pre>`);
+    }
+    return ok;
+};

@@ -155,7 +155,7 @@
                     </div-->
                     <!-- Form submit -->
                     <iframe name="sub-response" style="display: none;" onload="onSubscriptionResponse(this);"></iframe>
-                    <form action="./admin/sql/dbQuery.01.php" method="post" target="sub-response">
+                    <form action="./admin/sql/dbQuery.01.php" method="post" target="sub-response" onsubmit="return checkFields(event);">
                         <div style="display: grid; grid-template-columns: auto auto;">
                             <div style="display: grid; grid-template-columns: auto auto;">
                                 <input type="hidden" name="operation" value="insert">
