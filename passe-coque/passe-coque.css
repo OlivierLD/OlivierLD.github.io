@@ -849,6 +849,14 @@ span.expand-collapse:hover {
     }
     * {
         font-size: 12px;
+        line-height: 1.2em;
+    }
+    .data-header-div {
+        margin: 0 10px 0 10px;
+        text-align: center;
+    }
+    .data-div {
+        margin: 40px 10px 40px 10px;
     }
     .prev, .next, .text {
         font-size: 11px
