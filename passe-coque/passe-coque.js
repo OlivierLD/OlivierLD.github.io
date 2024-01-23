@@ -1473,7 +1473,13 @@ let onSubmitResponse = (iframe, okMess, errorMess) => {
     }
 };
 
-
+/**
+ * For both 1_xx.html and 61_xx.html
+ * Same field ids.
+ * 
+ * @param {*} evt 
+ * @returns true if OK, false otherwise (to prevent submit)
+ */
 let checkFields = (evt) => {
     let ok = true;
     let errMess = [];

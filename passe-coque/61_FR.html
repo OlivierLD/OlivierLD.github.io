@@ -25,7 +25,7 @@
         <!-- send mail option -->
         <iframe name="sub-response" style="display: none;" onload="onSubmitResponse(this, sendMessageOKMessage(), sendMessageErrorMessage());"></iframe>
         <div style="display: grid; grid-template-columns: auto auto;">
-            <form action="contact.php" method="post" target="sub-response" id="send-message">
+            <form action="contact.php" method="post" target="sub-response" id="send-message" onsubmit="return checkFields(event);">
                 <input type="hidden" name="operation" value="send">
                 <input type="hidden" name="subject" value="Un message du site web.">
 
