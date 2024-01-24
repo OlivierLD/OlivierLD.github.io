@@ -1474,7 +1474,7 @@ let onSubmitResponse = (iframe, okMess, errorMess) => {
 };
 
 /**
- * For both 1_xx.html and 61_xx.html
+ * For the messages in both 1_xx.html and 61_xx.html
  * Same field ids.
  * 
  * @param {*} evt 

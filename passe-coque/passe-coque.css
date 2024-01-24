@@ -542,27 +542,14 @@ a:visited {
     color: #8080ff
 }
   
-  /* @media screen and (max-width: calc(var(--small-screen-width))) { */
-@media screen and (max-width: 800px) {  /* No var... */
-    h1 {
-        color: orange;
-        font-size: 2em;
-    }
-    * {
-        font-size: 12px;
-    }
-}
-
-@media screen and (max-width: 1024px) {  /* No var... */
-    h1 {
-        color: blue;
-        font-size: 1.5em;
-    }
-}
-
 .active-link {
     color: white;
     font-size: 20px;
+    /* text-shadow: 2px 2px 4px black, 0 0 25px white, 0 0 10px orange; */
+}
+.active-link i {
+    color: white;
+    /* font-size: 20px; */
     /* text-shadow: 2px 2px 4px black, 0 0 25px white, 0 0 10px orange; */
 }
   
@@ -842,33 +829,7 @@ span.expand-collapse:hover {
       opacity: 1
     }
 }
-  
-/* On smaller screens, decrease text size */
-/* @media only screen and (max-width: var(--small-screen-width)) { */
-@media only screen and (max-width: 1000px) { /* No var... */
-    body {
-        color: orange;
-    }
-    * {
-        font-size: 12px;
-        line-height: 1.2em;
-    }
-    .data-header-div {
-        margin: 0 10px 0 10px;
-        text-align: center;
-    }
-    .data-div {
-        margin: 40px 10px 40px 10px;
-    }
-    .prev, .next, .text {
-        font-size: 11px
-    }
-    .slideshow-container {
-        --slide-width: 350px;
-        --slide-height: 250px;  
-    }
-}
-  
+    
 .display {
     width: calc(var(--slide-width) - 8px);
     height: calc(var(--slide-height) - 8px);
@@ -955,6 +916,19 @@ span.expand-collapse:hover {
     /* transform: translate(-5%, -30%); */
 }
 
+.pix-strip {
+    display: grid; 
+    grid-template-columns: 300px 300px 300px 300px 300px 300px 300px 300px 300px 300px; 
+    margin-right: 20px;
+}
+.pcc-dialog {
+    width: 800px; 
+    margin-top: 40px; 
+    z-index: 3; 
+    position: absolute; 
+    max-height: 600px; 
+    overflow: scroll;
+}
 .page-bottom {
     color: white !important;
 }
@@ -1001,3 +975,82 @@ span.expand-collapse:hover {
 .tab button.tab-active {
     background-color: #ccc;
 }
+
+  /* @media screen and (max-width: calc(var(--small-screen-width))) { */
+@media screen and (max-width: 800px) {  /* No var... */
+    h1 {
+        color: orange;
+        font-size: 2em;
+    }
+    * {
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 1024px) {  /* No var... */
+    h1 {
+        color: blue;
+        font-size: 1.5em;
+    }
+}
+
+/* On smaller screens, decrease text size */
+/* @media only screen and (max-width: var(--small-screen-width)) { */
+@media only screen and (max-width: 1000px) { /* No var... */
+    body {
+        color: orange;
+    }
+    * {
+        font-size: 12px;
+        line-height: 1.2em;
+    }
+    .data-header-div {
+        margin: 0 10px 0 10px;
+        text-align: center;
+    }
+    .data-div {
+        margin: 40px 10px 40px 10px;
+    }
+    .txt-div {
+        margin: 0;
+        padding: 0;
+    }    
+    .citation-overlay {
+        /* font-style: italic;
+        font-size: 2em;
+        text-align: left;
+        position: relative; */
+        top: -100px;
+        left: 5px;
+    }
+    .title-overlay {
+        text-align: right;
+        top: 80px;
+        left: auto;
+        right: 20px;
+    }    
+    .pix-strip {
+        display: grid; 
+        grid-template-columns: 200px 200px 200px 200px 200px 200px 200px 200px 200px 200px; 
+        margin-right: 20px;
+    }    
+    .pcc-dialog {
+        width: 600px; 
+        margin-top: 40px; 
+        z-index: 3; 
+        position: absolute; 
+        max-height: 360px; 
+        overflow: scroll;
+    }
+    .boat-image-container {
+        min-height: 20px;
+    }
+    .prev, .next, .text {
+        font-size: 11px
+    }
+    .slideshow-container {
+        --slide-width: 350px;
+        --slide-height: 250px;  
+    }
+}
+        

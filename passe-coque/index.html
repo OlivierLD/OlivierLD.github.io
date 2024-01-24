@@ -32,7 +32,7 @@
 	
 <body>
 
-<dialog id="about-dialog" class="shadow-menu" style="width: 800px; margin-top: 40px; position: absolute; z-index: 10;">
+<dialog id="about-dialog" class="shadow-menu pcc-dialog"> <!-- z-index: 10; -->
 	<div class="dialog-header">
 		<span><!-- Empty title --></span>
 		<span class="dialog-header-close" onclick="closeAboutDialog();">&times</span>
@@ -42,7 +42,7 @@
 	</div>
 </dialog>
 
-<dialog id="custom-alert" class="shadow-menu" style="width: 800px; border: 2px solid cyan; margin-top: 50px;">
+<dialog id="custom-alert" class="shadow-menu pcc-dialog" style="border: 2px solid cyan; margin-top: 50px;">
     <div class="dialog-header">
       <span>Message</span>
       <span class="dialog-header-close" onclick="closeCustomAlert();">&times</span>
@@ -204,8 +204,8 @@
 				<a href="javascript:void(0)" onclick="showHideSection(this, 'section-2');"><span class="expand-collapse">&#9658;&nbsp;</span><span id="3">Nos actions</span></a>
 				<div id="section-2" class="sub-section">
 					<a class="active-link" href="javascript:void(0)" onclick="clack(this);" id="_31">Transmettre - <i>Les projets</i></a>
-					<a class="active-link" href="javascript:void(0)" onclick="clack(this);" id="_32">R&eacute;nover</a>
-					<a class="active-link" href="javascript:void(0)" onclick="clack(this);" id="_33">Partager</a>
+					<a class="active-link" href="javascript:void(0)" onclick="clack(this);" id="_32">R&eacute;nover - <i>Le chantier</i></a>
+					<a class="active-link" href="javascript:void(0)" onclick="clack(this);" id="_33">Partager - <i>Le Club</i></a>
 					<!--a class="active-link" href="javascript:void(0)" onclick="clack(this);" id="_34">Formations</a>
 					<a class="active-link" href="javascript:void(0)" onclick="clack(this);" id="_35">Partenaires</a-->
 				</div>
