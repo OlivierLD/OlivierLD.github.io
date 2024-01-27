@@ -918,7 +918,7 @@ span.expand-collapse:hover {
 
 .pix-strip {
     display: grid; 
-    grid-template-columns: 300px 300px 300px 300px 300px 300px 300px 300px 300px 300px; 
+    grid-template-columns: 300px 300px 300px 300px 300px 300px 300px 300px 300px 300px 300px; 
     margin-right: 20px;
 }
 .pcc-dialog {
@@ -1031,7 +1031,7 @@ span.expand-collapse:hover {
     }    
     .pix-strip {
         display: grid; 
-        grid-template-columns: 200px 200px 200px 200px 200px 200px 200px 200px 200px 200px; 
+        grid-template-columns: 200px 200px 200px 200px 200px 200px 200px 200px 200px 200px 200px; 
         margin-right: 20px;
     }    
     .pcc-dialog {
