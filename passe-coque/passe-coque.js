@@ -63,6 +63,24 @@ let showHideSection = (obj, id) => {
 
 var currentContext = "1"; // Default, Home page.
 
+let getQSPrm = (prm) => {
+	let value;
+	let loc = document.location.toString();
+	if (loc.indexOf("?") > -1) {
+		let qs = loc.substring(loc.indexOf("?") + 1);
+		let prms = qs.split('&');
+		for (let i=0; i<prms.length; i++) {
+			let nv = prms[i].split('=');
+			if (nv.length === 2) {
+				if (nv[0] === prm) {
+					return nv[1];
+				}
+			}
+		}
+	}
+	return value;
+};
+
 let clack = (origin) => {
     let originId = '';
     if (typeof(origin) === 'string') {

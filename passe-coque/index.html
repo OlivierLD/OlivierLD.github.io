@@ -334,6 +334,10 @@ window.onload = () => {
 		switchLanguage();
 	}
 	// TODO Maybe some day other QS prms...
+	let qsLang = getQSPrm('lang');
+	if (qsLang) {
+		currentLang = qsLang;
+	}
 
 	// Load Home Page
 	let el = document.createElement("div");
