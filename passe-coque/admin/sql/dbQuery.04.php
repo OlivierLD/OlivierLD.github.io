@@ -40,7 +40,7 @@ if (isset($_POST['operation'])) {
     }
 
     try {
-      $link = mysqli_init();  // Mandatory ?
+      // $link = mysqli_init();  // No mandatory
     
       echo("Will connect on ".$database." ...<br/>" . PHP_EOL);
       $link = new mysqli($dbhost, $username, $password, $database);
@@ -76,8 +76,8 @@ if (isset($_POST['operation'])) {
       FROM
           PC_MEMBERS PCM
       WHERE
-           (UPPER(PCM.MEMBER_FIRST_NAME) LIKE UPPER(\'%' . $namePattern . '%\') OR 
-            UPPER(PCM.MEMBER_LAST_NAME) LIKE UPPER(\'%' . $namePattern . '%\')) AND
+          (UPPER(PCM.MEMBER_FIRST_NAME) LIKE UPPER(\'%' . $namePattern . '%\') OR 
+           UPPER(PCM.MEMBER_LAST_NAME) LIKE UPPER(\'%' . $namePattern . '%\')) AND
           TIMESTAMPDIFF(
               DAY,
               PCM.COMMAND_DATE,
@@ -90,7 +90,6 @@ if (isset($_POST['operation'])) {
       $result = mysqli_query($link, $sql);
       echo ("Returned " . $result->num_rows . " row" . ($result->num_rows > 1 ? "" : "s") . "<br/>" . PHP_EOL);
     
-
       if ($result->num_rows > 0) {
         echo("<h2>Cotisations to be renewed in less than 1 month</h2>" . PHP_EOL);
         echo "<table>" . PHP_EOL;
