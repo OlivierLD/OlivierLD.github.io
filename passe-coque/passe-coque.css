@@ -219,6 +219,7 @@ div.tooltip:hover span {
     border-radius: 5px;
     /* background-color: rgba(161, 156, 156, 0.65); */
     background: white;
+    height: 388px;
 }
 .boat-image-plus-text:hover {
     /* box-shadow: 4px 4px 8px black, 0 0 25px white, 0 0 10px cyan; */
@@ -665,21 +666,6 @@ span.expand-collapse:hover {
     /* text-shadow: 4px 4px 8px navy, 0 0 25px blue, 0 0 7px cyan; */
 }
   
-@media screen and (max-height: 450px) {
-
-    * {
-        font-size: 12px;
-    }
-
-    .sidenav {
-      padding-top: 15px;
-    }
-  
-    .sidenav a {
-      font-size: 12px;
-    }
-}
-
 .image-container {
     border: 2px solid cyan;
     border-radius: 5px;
@@ -976,10 +962,23 @@ span.expand-collapse:hover {
     background-color: #ccc;
 }
 
+@media screen and (max-height: 450px) {
+    * {
+        font-size: 12px;
+    }
+    .sidenav {
+      padding-top: 15px;
+    }  
+    .sidenav a {
+      font-size: 12px;
+    }
+}
+
+
   /* @media screen and (max-width: calc(var(--small-screen-width))) { */
 @media screen and (max-width: 800px) {  /* No var... */
     h1 {
-        color: orange;
+        /* color: orange; */
         font-size: 2em;
     }
     * {
@@ -997,9 +996,9 @@ span.expand-collapse:hover {
 /* On smaller screens, decrease text size */
 /* @media only screen and (max-width: var(--small-screen-width)) { */
 @media only screen and (max-width: 1000px) { /* No var... */
-    body {
+    /* body {
         color: orange;
-    }
+    } */
     * {
         font-size: 12px;
         line-height: 1.2em;
@@ -1052,5 +1051,12 @@ span.expand-collapse:hover {
         --slide-width: 350px;
         --slide-height: 250px;  
     }
+    .boat-image-plus-text {
+        height: 210px;
+    }
+    .badge {
+        bottom: 220px;
+        left: 86px;
+    }    
 }
         
