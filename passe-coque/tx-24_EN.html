@@ -1,0 +1,42 @@
+<div style="height: 600px; overflow-y: scroll;">
+    <div class="tab" style="margin-top: 30px; margin-bottom: 10px; display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto;"> <!-- TODO Improve the grid-template... -->
+        <button class="tablinks tab-active" onclick="openTab(event, 'voile-mag-01');" title="Sommaire">Summary</button>
+        <button class="tablinks" onclick="openTab(event, 'voile-mag-02');">Pictures</button>
+        <button class="tablinks" onclick="openTab(event, 'voile-mag-03');">Contact</button>
+    </div>
+
+    <div style="height: 500px; overflow-y: scroll;">
+        <div id="voile-mag-01" class="tab-section" style="display: block;">
+
+            <div style="display: grid; grid-template-columns: auto auto;">
+                <img src="./images/boats/voile.mag/voile.mag.01.jpeg" title="Saudade sous Spi" width="100%"></img>
+                <div style="padding: 14px;">
+                    <h2>Refit of the Super-Arlequin "Saudade"</h2>
+                    <h3>Voile Magazine</h3>
+                </div>
+            </div>
+            <div>
+                The "Super Arlequin" series had its hour of glory in regattas, notably in "La course du Figaro" - or should we say "La course de l'Aurore" - in the hands of famous skippers.<br/>
+                And Passe-Coque and Voile Magazine wanted to put Saudade back afloat, to show that refit is a sustainable and accessible way to sail.<br/>
+                To discover in each issue of Voile Magazine.
+            </div>
+        </div>
+
+        <div id="voile-mag-02" class="tab-section" style="display: none; background: black; padding-top: 10px;">
+            <slide-show id="voile-mag-slide-show"
+                        width="500"
+                        height="400"
+                        style="line-height: 1em;">
+                <slide-show-image src="./images/boats/voile.mag/voile.mag.02.jpeg" title="Saudade"></slide-show-image>
+                <slide-show-image src="./images/boats/voile.mag/voile.mag.03.jpeg" title="Saudade"></slide-show-image>
+                <slide-show-image src="./images/boats/voile.mag/voile.mag.04.jpeg" title="Saudade"></slide-show-image>
+                <slide-show-image src="./images/boats/voile.mag/voile.mag.05.jpeg" title="Saudade"></slide-show-image>
+            </slide-show>
+        </div>
+
+        <div id="voile-mag-03" class="tab-section" style="display: none;">
+            <h2>More info...</h2>
+            Referent: Fran&ccedil;ois Xavier de Cr&eacute;cy<br/>
+        </div>
+    </div>
+</div>
