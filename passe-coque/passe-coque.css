@@ -962,6 +962,21 @@ span.expand-collapse:hover {
     background-color: #ccc;
 }
 
+.home-page-slides-01 {
+    margin: 0 10%; 
+    display: grid; 
+    grid-template-columns: 33% 33% 33%;
+}
+.home-page-slides-02 {
+    display: grid; 
+    grid-template-columns: 48% 48%;
+}
+
+.home-width {
+    margin-top: -10px; 
+    width: 100%;
+}
+
 @media screen and (max-height: 450px) {
     * {
         font-size: 12px;
@@ -1040,6 +1055,7 @@ span.expand-collapse:hover {
         position: absolute; 
         max-height: 360px; 
         overflow: scroll;
+        display: none;
     }
     .boat-image-container {
         min-height: 20px;
@@ -1058,5 +1074,17 @@ span.expand-collapse:hover {
         bottom: 220px;
         left: 86px;
     }    
+    .background-container {
+        width: 86%;
+    }
+    .home-page-slides-01 {
+        margin: 0 10%; 
+        display: grid; 
+        grid-template-columns: 98%;
+    }    
+    .home-page-slides-02 {
+        display: grid; 
+        grid-template-columns: 98%;
+    }
 }
         

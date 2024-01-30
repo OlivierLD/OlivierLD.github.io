@@ -598,6 +598,7 @@ let showInfoTxDialog = () => {
     let infoTxDialog = document.getElementById("info-tx-dialog");
     window.scrollTo(0, 0); // Scroll on top, for Safari...
     if (infoTxDialog.show !== undefined) {
+        infoTxDialog.style.display = 'inline'; // Safari...
         infoTxDialog.show();
     } else {
       alert(NO_DIALOG_MESSAGE);
@@ -608,6 +609,7 @@ let showInfoTxDialog = () => {
 let closeInfoTxDialog = () => {
     let infoTxDialog = document.getElementById("info-tx-dialog");
     if (infoTxDialog.close !== undefined) {
+        infoTxDialog.style.display = 'none'; // Safari
         infoTxDialog.close();
     } else {
       // alert(NO_DIALOG_MESSAGE);
@@ -1375,6 +1377,7 @@ let showCustomAlert = (content) => {
     let customAlert = document.getElementById("custom-alert");
     document.getElementById('custom-alert-content').innerHTML = `<pre>${content}</pre>`;
     if (customAlert.show !== undefined) {
+        customAlert.style.display = 'inline'; // For Safari...
         customAlert.show();
     } else {
         customAlert.style.display = 'inline';
@@ -1386,6 +1389,7 @@ let showCustomAlert = (content) => {
 let closeCustomAlert = () => {
     let customAlert = document.getElementById("custom-alert");
     if (customAlert.close !== undefined) {
+        customAlert.style.display = 'none'; // Safari
         customAlert.close();
     } else {
         customAlert.style.display = 'none';

@@ -32,17 +32,18 @@
 	
 <body>
 
-<dialog id="about-dialog" class="shadow-menu pcc-dialog"> <!-- z-index: 10; -->
+<dialog id="about-dialog" class="shadow-menu pcc-dialog" style="display: none;"> <!-- z-index: 10; display: none; <= Safari cell phone TODO Make sure it shows up.... -->
 	<div class="dialog-header">
 		<span><!-- Empty title --></span>
 		<span class="dialog-header-close" onclick="closeAboutDialog();">&times</span>
 	</div>
 	<div id="dialog-content">
 		<!-- Content goes here -->
+		Dummy Content
 	</div>
 </dialog>
 
-<dialog id="custom-alert" class="shadow-menu pcc-dialog" style="border: 2px solid cyan; margin-top: 50px;">
+<dialog id="custom-alert" class="shadow-menu pcc-dialog" style="border: 2px solid cyan; margin-top: 50px; display: none;"> <!-- display: none <- Safari...-->
     <div class="dialog-header">
       <span>Message</span>
       <span class="dialog-header-close" onclick="closeCustomAlert();">&times</span>
