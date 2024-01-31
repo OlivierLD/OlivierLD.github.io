@@ -408,7 +408,7 @@ div.tooltip:hover span {
 
 .text-content {
     /* text-shadow: 2px 2px 4px black, 0 0 25px white, 0 0 7px cyan; */
-    margin-top: 55px; /* Depends on the menu's thickness */
+    margin-top: 59px; /* Depends on the menu's thickness */
     color: black; /*blue;*/
     /* font-weight: bold; */
 }
@@ -996,6 +996,13 @@ span.expand-collapse:hover {
     display: block;
 }
 .hamburger-menu {
+    width: 100%;
+	top: 0; 
+    margin-left: -8px;
+    height: 66px;
+    position: fixed; 
+	z-index: 2;
+    background: rgba(255, 255, 255, 0.85);
     display: none;
 }
 
@@ -1119,7 +1126,7 @@ span.expand-collapse:hover {
         /* margin: 0 10%;  */
         /* display: grid;  */
         grid-template-columns: 98%;
-    }    
+    } 
     .project-slides {
         grid-template-columns: 33% 33% 33%; 
     }    

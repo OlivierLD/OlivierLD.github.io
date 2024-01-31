@@ -18,6 +18,7 @@ let closeAboutDialog = () => {
     let aboutDialog = document.getElementById("about-dialog");
     if (aboutDialog.close !== undefined) {
       aboutDialog.close();
+      aboutDialog.style.display = 'none';
     } else {
       // alert(NO_DIALOG_MESSAGE);
       aboutDialog.style.display = 'none';
@@ -651,10 +652,11 @@ let aboutSomeone = (who) => {
         });
 
     if (aboutDialog.show !== undefined) {
+        aboutDialog.style.display = 'block'; // Safari...
         aboutDialog.show();
     } else {
       // alert(NO_DIALOG_MESSAGE);
-      aboutDialog.style.display = 'inline';
+      aboutDialog.style.display = 'block'; // 'inline';
     }
 };
 
@@ -668,7 +670,7 @@ let aboutPartner = (from) => {
 
 const NONE = 1;
 const CLUB = 2;
-const OLD_BOAT = 3;
+const EX_BOAT = 3;
 const TO_GRAB = 4;
 
 // TODO See if there is a better place for this hard-coded list, like a json to fetch...
@@ -726,7 +728,7 @@ const THE_FLEET = [
         id: "atlantide",
         pix: "./images/boats/atlantide.sq.png",
         type: "Gib'Sea&nbsp;33",
-        category: TO_GRAB,
+        category: EX_BOAT,
         base: "--"
     },
     { 
@@ -734,7 +736,7 @@ const THE_FLEET = [
         id: "iapyx",
         pix: "./images/boats/iapyx.sq.png",
         type: "Offshore&nbsp;35",
-        category: OLD_BOAT,
+        category: EX_BOAT,
         base: "--"
     },
     { 
@@ -750,7 +752,7 @@ const THE_FLEET = [
         id: "twist-again",
         pix: "./images/boats/twist.again.sq.png",
         type: "JOD 35",
-        category: OLD_BOAT,
+        category: EX_BOAT,
         base: "Saint&#8209;Philibert"
     },
     { 
@@ -758,7 +760,7 @@ const THE_FLEET = [
         id: "ia-orana",
         pix: "./images/boats/ia.orana.sq.png",
         type: "Milord",
-        category: OLD_BOAT,
+        category: EX_BOAT,
         base: "--"
     },
     {
@@ -806,7 +808,7 @@ const THE_FLEET = [
         id: "avel-mad",
         pix: "./images/boats/avel.mad.sq.png",
         type: "Mousquetaire",
-        category: OLD_BOAT,
+        category: EX_BOAT,
         base: "Le&nbsp;Bono"
     },
     { 
@@ -814,7 +816,7 @@ const THE_FLEET = [
         id: "felicie",
         pix: "./images/boats/felicie.sq.png",
         type: "One off Presles",
-        category: OLD_BOAT,
+        category: EX_BOAT,
         base: "Dakar"
     },
     { 
@@ -886,7 +888,7 @@ const THE_FLEET = [
         id: "anao",
         pix: "./images/boats/anao.jpeg",
         type: "Folie Douce",
-        category: OLD_BOAT,
+        category: EX_BOAT,
         base: "&Eacute;tel"
     },
     { 
@@ -1090,7 +1092,7 @@ let updateFilter = radio => {
             break;
         case '2':
             console.log("Old boats");
-            fillOutFleet(OLD_BOAT);
+            fillOutFleet(EX_BOAT);
             break;
         case '3':
             console.log("Passe-Coque Club");
@@ -1158,7 +1160,7 @@ let fillOutFleet = (filter, containerId = 'fleet-container', withBadge = true) =
         if (withBadge) {
             let badge = document.createElement('div');
             badge.classList.add("badge");
-            if (boat.category === OLD_BOAT) {
+            if (boat.category === EX_BOAT) {
                 badge.classList.add("badge-old");
                 badge.innerHTML = '<span style="font-size: 2.0em; background: transparent;">😢</span>'; // "Old<br/>boat";
             } else if (boat.category === CLUB) {
