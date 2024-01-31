@@ -78,7 +78,7 @@
 			- Partenaires                      65
 			- Chart PCC                        66
 	-->
-	<div id="nav-menu" style="display: none; margin-left: -8px;">
+	<div id="nav-menu" class="scrolling-menu" style="margin-left: -8px;">
 		<div style="float: left; display: grid; grid-template-columns: auto auto;">
 			<div>
 				<!--a href="javascript:void(0)" onclick="clack(this);" id="_1"><image src="./logo.passe-coque.png" style="width: 48px; padding: 14px 10px;" title="Passe-Coque"/></a-->
@@ -162,25 +162,24 @@
 	<br/>
 
 	  <!--
-    The Big Main Sliding Menu on the left
+    The Big Main Sliding Menu on the left, for small devices.
 
     ◄ = &#9668;
     ► = &#9658;
     ▼ = &#9660;
     ▲ = &#9650;
         -->
-	<div id="side-menu" style="display: none;">
+	<div id="side-menu" class="hamburger-menu">
 		<!--h1 style="width: 100%;"><span id="hamburger" style="cursor: pointer;" onclick="openNav()" onmouseover="openNav()" title="Hamburger">&nbsp; &#8801;</span> <span id="my-name">Passe-Coque </span></h1-->
-		<div style="display: grid; grid-template-columns: 60px auto; height: 10px;">
-			<div id="hamburger" style="cursor: pointer;" onclick="openNav()" onmouseover="openNav()" title="Hamburger">
-				<h1 style="color: #16696d; font-size: 4em; margin-top: -20px;">&#8801;</h1>
-			</div>
+		<div style="display: grid; grid-template-columns: auto 60px; height: 10px;">
 			<div>
 				<!--h1 id="my-name" style="margin-top: 50px; font-size: 3em;">Passe-Coque </h1-->
 				<!--img src="./logos/LOGO_PC_no_txt.png" style="width: 50px; margin-top: -40px; margin-left: -30px;" title="Passe-Coque"/-->
-				<img src="./logos/logo.02.png" style="width: 50px; margin-top: -26px; margin-left: -30px;" title="Passe-Coque"/>
+				<img src="./logos/logo.02.png" style="width: 50px; margin-top: -26px; /*margin-left: -30px;*/" title="Passe-Coque"/>
 				<img src="./logos/LOGO_PC_txt_only.png" style="width: 100px;" title="Passe-Coque"/>
-				
+			</div>
+			<div id="hamburger" style="cursor: pointer;" onclick="openNav()" onmouseover="openNav()" title="Hamburger">
+				<span style="color: #16696d; font-size: 2em; float: right; margin-right: 20px;">&#8801;&nbsp;Menu</span>
 			</div>
 		</div>
 		<!--h1 style="width: 100%;"><span id="hamburger" style="cursor: pointer;" onclick="openNav()" onmouseover="openNav()" title="Hamburger">&nbsp; <img src="./logo.transp.png" style="width: 48px; padding: 14px 10px;" title="Passe-Coque"/></span> <span id="my-name">Passe-Coque </span></h1-->
@@ -319,16 +318,16 @@ window.onload = () => {
 		// }
 		// window.location.href = redirected;
 	}
-	let navMenu = document.getElementById('nav-menu');
-	let sideBar = document.getElementById('side-menu');
+	// let navMenu = document.getElementById('nav-menu');
+	// let sideBar = document.getElementById('side-menu');
 
-	if (cellPhoneUI) {
-		navMenu.style.display = 'none';
-		sideBar.style.display = 'block';
-	} else {
-		navMenu.style.display = 'block';
-		sideBar.style.display = 'none';
-	}
+	// if (cellPhoneUI) {
+	// 	navMenu.style.display = 'none';
+	// 	sideBar.style.display = 'block';
+	// } else {
+	// 	navMenu.style.display = 'block';
+	// 	sideBar.style.display = 'none';
+	// }
 
 	let userLang = getQueryParameterByName('lang');
 	if (userLang && userLang === 'EN') {
