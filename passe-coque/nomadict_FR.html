@@ -1,0 +1,88 @@
+
+<div style="height: 600px; overflow-y: scroll;">
+    <div class="tab" style="margin-top: 30px; margin-bottom: 10px; display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto;"> <!-- TODO Improve the grid-template... -->
+        <button class="tablinks tab-active" onclick="openTab(event, 'nomadict-01');" title="Sommaire">Sommaire</button>
+        <button class="tablinks" onclick="openTab(event, 'nomadict-02');">Photos</button>
+        <button class="tablinks" onclick="openTab(event, 'nomadict-03');">Contact</button>
+    </div>
+
+    <div style="height: 500px; overflow-y: scroll;">
+        <div id="nomadict-01" class="tab-section" style="display: block;">
+            <div style="display: grid; grid-template-columns: auto auto;">
+                <img src="./images/boats/nomadict/nomadict.00.jpg" width="100%">
+                <div style="padding: 14px;">
+                    <h2>Nomadict</h2>
+                    Gin Fizz, bas&eacute; &agrave; Concarneau<br/>
+                    <ul>
+                        <li>Refit en discussion &agrave; Concarneau au chantier IDB Marine</li>
+                    </ul>
+                </div>
+            </div>
+            <div>
+                <h2>Le Bateau</h2>
+                <ul>
+                    <li>Longueur 11.30m</li>
+                    <li>Largeur 3.76m</li>
+                    <li>Tirant d'eau 1.90m</li>
+                    <li>D&eacute;placement 7t</li>
+                    <li>M&acirc;t aluminium</li>
+                    <li>Barres de fl&egrave;ches avec renforts (fait par des pro en 2021)</li>
+                    <li>Gr&eacute;ement dormant et courant de 2021</li>
+                    <li>GV full batten 3 ris avec lazy jack, bon &eacute;tat</li>
+                    <li>G&eacute;nois sur enrouleur (profurl), bon &eacute;tat</li>
+                    <li>Trinquette avec d&eacute;coupe tempête arisable sur &eacute;tais largable, tr&egrave;s bon &eacute;tat </li>
+                    <li>Tourmentin, fatigu&eacute; </li>
+                    <li>Spi, bon &eacute;tat </li>
+                    <li>GPS traceur Garmin avec sondeur et an&eacute;mom&egrave;tre </li>
+                    <li>VHF fixe et radar</li>
+                    <li>Pilote ST7000</li>
+                    <li>Moteur Nanni 43CV, 3800h, tourne parfaitement, d&eacute;marre au quart de tour</li>
+                    <li>150L de gasoil</li>
+                    <li>Bib neuf de mai 2023</li>
+                    <li>2 brassi&egrave;res automatiques neuves, une &agrave; r&eacute;viser</li>
+                    <li>Feu &agrave; retournement et bou&eacute;e fer &agrave; cheval</li>
+                    <li>Ancre delta avec 40m de cha&icirc;ne et cablot</li>
+                    <li>Ancre plate secondaire avec 20m de cha&icirc;ne</li>
+                    <li>Guindeau &eacute;lectrique</li>
+                    <li>Annexe zodiac &agrave; plancher gonflable</li>
+                    <li>1 cabine avant</li>
+                    <li>1 cabine arri&egrave;re</li>
+                    <li>3 couchage dans le carr&eacute;</li>
+                    <li>1 couchette navigateur</li>
+                    <li>Cuisine avec r&eacute;chaud double et four, frigo, &eacute;vier et pompe &agrave; eau de mer</li>
+                    <li>300L d'eau douce en r&eacute;servoirs souples</li>
+                    <li>Grande table &agrave; cartes</li>
+                    <li>Capote et bimini</li>
+                    <li>Grande plage arri&egrave;re </li>
+                    <li>2 panneaux solaires 210W sur portique arri&egrave;re </li>
+                    <li>Éolienne (&agrave; &eacute;quilibrer)</li>
+                    <li>2 batteries de service</li>
+                    <li>1 batterie moteur</li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="nomadict-02" class="tab-section" style="display: none; background: black; padding-top: 10px;">
+            <slide-show id="nomadict-slide-show"
+                        width="780"
+                        height="400"
+                        style="line-height: 1em;">
+                <slide-show-image src="./images/boats/nomadict/nomadict.01.jpg" title="Nomadict - 1"></slide-show-image>
+                <slide-show-image src="./images/boats/nomadict/nomadict.02.jpg" title="Nomadict - 2"></slide-show-image>
+                <slide-show-image src="./images/boats/nomadict/nomadict.03.jpg" title="Nomadict - 3"></slide-show-image>
+                <slide-show-image src="./images/boats/nomadict/nomadict.04.jpg" title="Nomadict - 4"></slide-show-image>
+                <slide-show-image src="./images/boats/nomadict/nomadict.05.jpg" title="Nomadict - 5"></slide-show-image>
+                <slide-show-image src="./images/boats/nomadict/nomadict.06.jpg" title="Nomadict - 6"></slide-show-image>
+                <slide-show-image src="./images/boats/nomadict/nomadict.07.jpg" title="Nomadict - 7"></slide-show-image>
+                <slide-show-image src="./images/boats/nomadict/nomadict.08.jpg" title="Nomadict - 8"></slide-show-image>
+                <slide-show-image src="./images/boats/nomadict/nomadict.09.jpg" title="Nomadict - 9"></slide-show-image>
+            </slide-show>
+        </div>
+
+        <div id="nomadict-03" class="tab-section" style="display: none;">
+            <h2>Plus d'infos...</h2>
+            R&eacute;f&eacute;rent : Pierre-Jean Jannin.<br/>
+            Email : contact@passeurdecoute.fr
+        </div>
+    </div>
+</div>

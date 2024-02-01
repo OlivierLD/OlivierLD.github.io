@@ -970,6 +970,22 @@ const THE_FLEET = [
         type: "Ketch en Acier",
         category: TO_GRAB,
         base: "Arzal"
+    },
+    { 
+        name: "Nomadict",
+        id: "nomadict",
+        pix: "./images/boats/nomadict/nomadict.00.jpg",
+        type: "Gin Fizz",
+        category: TO_GRAB,
+        base: "Concarneau"
+    },
+    { 
+        name: "Velona",
+        id: "velona",
+        pix: "./images/boats/velona/velona.00.jpg",
+        type: "Classic Old Gaffer",
+        category: TO_GRAB,
+        base: "Hennebont"
     }
 ];
 

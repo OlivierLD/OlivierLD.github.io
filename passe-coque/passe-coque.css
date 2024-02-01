@@ -618,7 +618,7 @@ span.expand-collapse:hover {
     position: absolute;
     top: 0;
     right: 25px;
-    font-size: 24px;
+    font-size: 48px;
     margin-left: 50px;
     margin-bottom: 20px;
 }
@@ -1012,14 +1012,15 @@ span.expand-collapse:hover {
     }
     .sidenav {
       padding-top: 15px;
+      font-size: 18px;
     }  
     .sidenav a {
-      font-size: 12px;
+      font-size: 18px;
     }
 }
 
 
-  /* @media screen and (max-width: calc(var(--small-screen-width))) { */
+/* @media screen and (max-width: calc(var(--small-screen-width))) { */
 @media screen and (max-width: 800px) {  /* No var... */
     h1 {
         /* color: orange; */
@@ -1027,13 +1028,6 @@ span.expand-collapse:hover {
     }
     * {
         font-size: 12px;
-    }
-}
-
-@media screen and (max-width: 1024px) {  /* No var... */
-    h1 {
-        color: blue;
-        font-size: 1.5em;
     }
 }
 
@@ -1134,4 +1128,10 @@ span.expand-collapse:hover {
         grid-template-columns: 33% 33% 33%; 
     }
 }
-        
+
+/* Cell-phone, vertically */
+/* @media only screen and (max-width: 400px) {  
+    .sidenav {
+        font-size: 24px;
+    }    
+} */
