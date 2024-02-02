@@ -574,7 +574,8 @@ a:visited {
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: rgba(255, 255, 255, 0.9);
+    color: rgba(44, 81, 85, 255);
+    background-color: white; /* rgba(255, 255, 255, 0.9); */
     /* background-image: linear-gradient(rgba(0, 0, 255, 0.6), rgba(0, 0, 0, 0.6)); */
     overflow-x: hidden;
     /* transition: 1.0s; */
@@ -588,13 +589,13 @@ a:visited {
     text-decoration: none;
     /* font-size: 12px; */
     /* color: white; */ /* #818181; */
-    color: rgba(44,81,85,255);
+    color: rgba(44, 81, 85, 255);
     display: block;
     transition: 0.3s;
 }
   
 .sidenav a:hover, .offcanvas a:focus {
-    color: rgba(44,81,85,255);
+    color: rgba(44, 81, 85, 255);
     /* color: white; */ /* #f1f1f1; */
     /*cursor: not-allowed;*/
 }
@@ -1014,8 +1015,10 @@ span.expand-collapse:hover {
 }
 
 /* On smaller screens, decrease text size */
+/* Doc at https://www.w3schools.com/cssref/css3_pr_mediaquery.php */
 /* @media only screen and (max-width: var(--small-screen-width)) { */
-@media only screen and (max-width: 1000px) { /* No var... */
+/* @media only screen and (max-width: 1000px) { */  /* No var... */
+@media screen and (max-width: 1000px) { /* No var... */
     .scrolling-menu {
         display: none;
     }
