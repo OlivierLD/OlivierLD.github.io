@@ -1,13 +1,15 @@
 /**
  * Oho !
  */
+const NO_DIALOG_MESSAGE = "Dialog tag not supported.";
 const DEFAULT_LANG = "FR";
 let currentLang = DEFAULT_LANG; // Init value
 
 let showAboutDialog = () => {
     let aboutDialog = document.getElementById("about-dialog");
     if (aboutDialog.show !== undefined) {
-      aboutDialog.show();
+        aboutDialog.style.display = 'inline';
+        aboutDialog.show();
     } else {
       alert(NO_DIALOG_MESSAGE);
       aboutDialog.style.display = 'inline';
@@ -602,7 +604,7 @@ let showInfoTxDialog = () => {
         infoTxDialog.style.display = 'inline'; // Safari...
         infoTxDialog.show();
     } else {
-      alert(NO_DIALOG_MESSAGE);
+      // alert(NO_DIALOG_MESSAGE);
       infoTxDialog.style.display = 'inline';
     }
 };

@@ -4,7 +4,7 @@
 :root {
     --small-screen-width: 1000px;
     --slider-scale: 0.5;
-    --expanded-nav-width: 250px;
+    --expanded-nav-width: 100%; /* 250px; */
     /* --slide-width: 500px;
     --slide-height: 400px;   */
     --pc-bg-color: rgba(243, 72, 33, 1.0); /* rgba(246, 101, 101, 0.9); */ /* #ff5f5f; */ /* #e96d08 */ /* #da6d14; */
@@ -518,6 +518,7 @@ input:checked + .slider:before {
   
 .dialog-header-close {
     float: right;
+    margin-right: 10px;
 }
 
 .dialog-header-close:hover {
@@ -544,12 +545,12 @@ a:visited {
 }
   
 .active-link {
-    color: white;
-    font-size: 20px;
+    /* color: white; */
+    /* font-size: 20px; */
     /* text-shadow: 2px 2px 4px black, 0 0 25px white, 0 0 10px orange; */
 }
 .active-link i {
-    color: white;
+    /* color: white; */
     /* font-size: 20px; */
     /* text-shadow: 2px 2px 4px black, 0 0 25px white, 0 0 10px orange; */
 }
@@ -567,35 +568,39 @@ a:visited {
 }
   
 .sidenav {
-    height: 100%;
+    height: auto; /* 100%; */
     width: 0;
     position: fixed;
     z-index: 1;
     top: 0;
     left: 0;
-    /*  background-color: rgba(0, 0, 0, 0.6); */
-    background-image: linear-gradient(rgba(0, 0, 255, 0.6), rgba(0, 0, 0, 0.6));
+    background-color: rgba(255, 255, 255, 0.9);
+    /* background-image: linear-gradient(rgba(0, 0, 255, 0.6), rgba(0, 0, 0, 0.6)); */
     overflow-x: hidden;
-    transition: 1.0s;
+    /* transition: 1.0s; */
     padding-top: 60px;
+    font-weight: bold;
+    font-size: 24px;
 }
   
 .sidenav a {
     padding: 8px 8px 8px 32px;
     text-decoration: none;
-    font-size: 12px;
-    color: white; /* #818181; */
+    /* font-size: 12px; */
+    /* color: white; */ /* #818181; */
+    color: rgba(44,81,85,255);
     display: block;
     transition: 0.3s;
 }
   
 .sidenav a:hover, .offcanvas a:focus {
-    color: white; /* #f1f1f1; */
+    color: rgba(44,81,85,255);
+    /* color: white; */ /* #f1f1f1; */
     /*cursor: not-allowed;*/
 }
   
 a.no-click {
-    color: white; /* #f1f1f1; */
+    /* color: white; */ /* #f1f1f1; */
     cursor: not-allowed;
 }
   
@@ -605,12 +610,12 @@ a.no-click {
 }
   
 a.active-link:hover {
-    color: cyan;
+    /* color: cyan; */
     cursor: pointer;
 }
   
 span.expand-collapse:hover {
-    color: cyan;
+    /* color: cyan; */
     cursor: pointer;
 }
   
@@ -624,11 +629,13 @@ span.expand-collapse:hover {
 }
   
 .sidenav > div > a > * {
-    color: white;
+    /* color: white; */
+    color: rgba(44,81,85,255);
 }
 
 .sidenav > a > * {
-    color: white;
+    /* color: white; */
+    color: rgba(44,81,85,255);
 }
 
 .switch-lang {
@@ -1006,31 +1013,6 @@ span.expand-collapse:hover {
     display: none;
 }
 
-@media screen and (max-height: 450px) {
-    * {
-        font-size: 12px;
-    }
-    .sidenav {
-      padding-top: 15px;
-      font-size: 18px;
-    }  
-    .sidenav a {
-      font-size: 18px;
-    }
-}
-
-
-/* @media screen and (max-width: calc(var(--small-screen-width))) { */
-@media screen and (max-width: 800px) {  /* No var... */
-    h1 {
-        /* color: orange; */
-        font-size: 2em;
-    }
-    * {
-        font-size: 12px;
-    }
-}
-
 /* On smaller screens, decrease text size */
 /* @media only screen and (max-width: var(--small-screen-width)) { */
 @media only screen and (max-width: 1000px) { /* No var... */
@@ -1045,6 +1027,9 @@ span.expand-collapse:hover {
         font-size: 12px;
         line-height: 1.2em;
     }
+    .dialog-header-close {
+        font-size: 48px;
+    }    
     .data-header-div {
         margin: 0 10px 0 10px;
         text-align: center;
@@ -1076,11 +1061,11 @@ span.expand-collapse:hover {
         margin-right: 20px;
     }    
     .pcc-dialog {
-        width: 600px; 
+        width: 400px; 
         margin-top: 40px; 
         z-index: 3; 
         position: absolute; 
-        max-height: 360px; 
+        max-height: 500px; 
         overflow: scroll;
         display: none;
     }
@@ -1126,6 +1111,34 @@ span.expand-collapse:hover {
     }    
     .fleet-slides {
         grid-template-columns: 33% 33% 33%; 
+    }
+}
+
+@media screen and (max-height: 450px) and (max-width: 450px) {
+    * {
+        font-size: 12px;
+    }
+    .sidenav {
+      padding-top: 15px;
+      font-size: 16px;
+    }  
+    .sidenav * {
+      font-size: 16px;
+    }
+    .pcc-dialog {
+        width: 400px; 
+    }
+}
+
+
+/* @media screen and (max-width: calc(var(--small-screen-width))) { */
+@media screen and (max-width: 800px) {  /* No var... */
+    h1 {
+        /* color: orange; */
+        font-size: 2em;
+    }
+    * {
+        font-size: 12px;
     }
 }
 
