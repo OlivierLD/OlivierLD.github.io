@@ -28,11 +28,18 @@ let closeAboutDialog = () => {
 };
 
 let openNav = () => {
-	document.getElementById("side-nav").style.width =  getComputedStyle(document.documentElement).getPropertyValue('--expanded-nav-width'); // "450px";
+    // console.log("Opening Hamburger Menu");
+    // alert("Opening Hamburger Menu");
+    // let newWidth = getComputedStyle(document.documentElement).width;
+    // console.log(`Setting new Width to ${newWidth}`);
+	// document.getElementById("side-nav").style.width = newWidth; // getComputedStyle(document.documentElement).getPropertyValue('--expanded-nav-width'); // "450px";
+    document.getElementById("side-nav").style.display = 'inline-block';
+    // debugger;
 };
 
 let closeNav = () => {
-	document.getElementById("side-nav").style.width = "0";
+	// document.getElementById("side-nav").style.width = "0";
+    document.getElementById("side-nav").style.display = 'none';
 };
 
 let showSection = (id) => {

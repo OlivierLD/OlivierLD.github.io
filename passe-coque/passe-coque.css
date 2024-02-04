@@ -559,9 +559,9 @@ a:visited {
      font-weight: bold;
 }
   
-.sidenav:hover {
+/* .sidenav:hover {
     font-size: 24px;
-}
+} */
   
 .no-shadow {
     text-shadow: none;
@@ -569,7 +569,7 @@ a:visited {
   
 .sidenav {
     height: auto; /* 100%; */
-    width: 0;
+    width: 100%;
     position: fixed;
     z-index: 1;
     top: 0;
@@ -577,6 +577,7 @@ a:visited {
     color: rgba(44, 81, 85, 255);
     background-color: white; /* rgba(255, 255, 255, 0.9); */
     /* background-image: linear-gradient(rgba(0, 0, 255, 0.6), rgba(0, 0, 0, 0.6)); */
+    display: none;
     overflow-x: hidden;
     /* transition: 1.0s; */
     padding-top: 60px;
@@ -591,7 +592,7 @@ a:visited {
     /* color: white; */ /* #818181; */
     color: rgba(44, 81, 85, 255);
     display: block;
-    transition: 0.3s;
+    /* transition: 0.3s; */
 }
   
 .sidenav a:hover, .offcanvas a:focus {
@@ -1015,10 +1016,16 @@ span.expand-collapse:hover {
 }
 
 /* On smaller screens, decrease text size */
-/* Doc at https://www.w3schools.com/cssref/css3_pr_mediaquery.php */
+/* 
+    Doc at https://www.w3schools.com/cssref/css3_pr_mediaquery.php 
+           https://www.w3schools.com/css/css3_mediaqueries_ex.asp
+           https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_media_queries/Using_media_queries
+ */
 /* @media only screen and (max-width: var(--small-screen-width)) { */
 /* @media only screen and (max-width: 1000px) { */  /* No var... */
-@media screen and (max-width: 1000px) { /* No var... */
+/* @media screen and (max-width: 1000px) { */
+@media screen and (width <= 1300px) { 
+
     .scrolling-menu {
         display: none;
     }
@@ -1029,6 +1036,7 @@ span.expand-collapse:hover {
     * {
         font-size: 12px;
         line-height: 1.2em;
+        /* color: red; */
     }
     .dialog-header-close {
         font-size: 48px;
@@ -1096,9 +1104,9 @@ span.expand-collapse:hover {
         width: 86%;
     }
     .home-page-slides-01 {
-        margin: 0 10%; 
+        margin: 0 2%; 
         display: grid; 
-        grid-template-columns: 98%;
+        grid-template-columns: 96%;
     }    
     .home-page-slides-02 {
         display: grid; 
@@ -1117,37 +1125,40 @@ span.expand-collapse:hover {
     }
 }
 
-@media screen and (max-height: 450px) and (max-width: 450px) {
+/* @media screen and (max-width: calc(var(--small-screen-width))) { */
+@media screen and (width <= 800px) {
+    h1 {
+        font-size: 2em;
+    }
+    * {
+        font-size: 12px;
+        /* color: blue; */
+    }
+    .sidenav {
+        padding-top: 15px;
+        font-size: 20px;
+      }  
+      .sidenav * {
+        font-size: 20px;
+      }
+      .pcc-dialog {
+          width: 400px; 
+      }
+}
+
+/* @media screen and (height <= 450px) or (width <= 450px) {
     * {
         font-size: 12px;
     }
     .sidenav {
       padding-top: 15px;
-      font-size: 16px;
+      font-size: 20px;
     }  
     .sidenav * {
-      font-size: 16px;
+      font-size: 20px;
     }
     .pcc-dialog {
         width: 400px; 
     }
-}
-
-
-/* @media screen and (max-width: calc(var(--small-screen-width))) { */
-@media screen and (max-width: 800px) {  /* No var... */
-    h1 {
-        /* color: orange; */
-        font-size: 2em;
-    }
-    * {
-        font-size: 12px;
-    }
-}
-
-/* Cell-phone, vertically */
-/* @media only screen and (max-width: 400px) {  
-    .sidenav {
-        font-size: 24px;
-    }    
 } */
+
