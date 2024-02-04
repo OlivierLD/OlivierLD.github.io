@@ -288,6 +288,36 @@ window.onload = () => {
 	console.log("Loaded!");
 	console.log(`${window.location.href} loaded !`);
 
+	// Increment view counter
+	fetch("./php/nbViews.php", {
+		method: "POST",
+		body: JSON.stringify({
+			dummy: 1,
+			content: "Fix my bugs",
+			completed: false
+		}),
+		headers: {
+			"Content-type": "application/json; charset=UTF-8"
+		}
+	}).then(response => {
+		console.log(`Received from PHP: \nResponse Status:${response.status}`);
+		// Assumimg this is text (not json, or what not)
+		response.text().then(data => {
+			console.log(`Content: ${data}`);
+		});
+	},
+	(error, errmess) => {
+		console.log("Ooch");
+		let message;
+		if (errmess) {
+			let mess = JSON.parse(errmess);
+			if (mess.message) {
+				message = mess.message;
+			}
+		}
+		console.debug("Failed to get to the nbViews.php..." + (error ? JSON.stringify(error, null, 2) : ' - ') + ', ' + (message ? message : ' - '));
+    });
+
 	window.translate = translate;
 
 	qrcode = new QRCode(document.getElementById("qrcode"), {

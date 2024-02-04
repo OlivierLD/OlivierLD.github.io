@@ -107,3 +107,8 @@ VALUES (75163629,
        'Equipière confirmée');
 
 select `member-first-name`, `member-last-name`, `birth-date` from `pc-members`;
+
+CREATE TABLE IF NOT EXISTS PC_NB_VIEWS (
+    NB_VIEWS INT
+);
+INSERT INTO PC_NB_VIEWS (NB_VIEWS) VALUES (0);
