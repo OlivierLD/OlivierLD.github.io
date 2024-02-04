@@ -44,7 +44,7 @@ a.list-link:hover {
     <div>
         Sans surprise, la racine du site est <code>index.html</code>.
         <p>
-            Pour le moment (Dec 2023), il n'y a dans le code <u>AUCUNE</u> d&eacute;pendance vis-&agrave;-vis d'un framework (pas de JQuery, ReactJS, Underscore, Knockout) externe.
+            Pour le moment (Dec 2023), il n'y a dans le code <u>AUCUNE</u> d&eacute;pendance vis-&agrave;-vis d'un framework (pas de WordPress, JQuery, ReactJS, Underscore, Knockout) externe.
         </p>
         Le site est une SPA (Single Page Application). &Ccedil;a permet de r&eacute;duire la taille des ressources de mani&egrave;re substancielle.
         <br/>
@@ -61,8 +61,9 @@ a.list-link:hover {
             <li>Une barre lat&eacute;rale de navigation, activ&eacute;e avec un hamburger (&#8801;)</li>
         </ul>
         L'un est destin&eacute; aux cell-phones (la barre lat&eacute;rale), l'autre aux autres p&eacute;riph&eacute;riques.<br/>
-        La distinction est faite dans un code en JavaScript, dans le <code>window.onload</code>, dans le fichier <code>index.html</code>,
-        en fonction des valeurs de <code>window.innerWidth</code> et <code>window.innerHeight</code>.
+        <del>La distinction est faite dans un code en JavaScript, dans le <code>window.onload</code>, dans le fichier <code>index.html</code>,
+        en fonction des valeurs de <code>window.innerWidth</code> et <code>window.innerHeight</code>.</del><br/>
+        La distinction est faite dans <code>passe-coque.css</code>, en fonction de la largeur de l'&eacute;cran.
     </div>
     <br/>
     <div>
