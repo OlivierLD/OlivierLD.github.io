@@ -30,7 +30,7 @@ $VERBOSE = false;
           }
         }
       
-        $sql = 'UPDATE PC_NB_VIEWS A SET A.NB_VIEWS = A.NB_VIEWS + 1;';
+        $sql = 'UPDATE PC_NUMBERS A SET A.AMOUNT = A.AMOUNT + 1 WHERE A.ID = \'NB_VIEWS\';';
         
         if ($verbose) {
           echo('Performing instruction <code>'.$sql.'</code><br/>');

@@ -45,12 +45,7 @@ if (isset($_POST['operation'])) {
         echo("Connected.<br/>");
       }
     
-      // $sql = 'SELECT COUNT(`nl-subscribers`.*) '
-      //         . ' FROM `nl-subscribers`'
-      //         . ' ORDER BY `nl-subscribers`.`name` ASC LIMIT 0, 30 '; 
-    
-      // $sql = 'SELECT COUNT(*) FROM `nl-subscribers`;'; 
-      $sql = 'SELECT A.NB_VIEWS FROM PC_NB_VIEWS A;'; 
+      $sql = 'SELECT A.AMOUNT FROM PC_NUMBERS A WHERE A.ID = \'NB_VIEWS\' ;'; 
       
       echo('Performing query <code>'.$sql.'</code><br/>');
     
@@ -83,7 +78,7 @@ if (isset($_POST['operation'])) {
       <input type="hidden" name="operation" value="query">
       <table>
         <tr>
-          <td colspan="2" style="text-align: center;"><input type="submit" value="Query"></td>
+          <td colspan="2" style="text-align: center;"><input type="submit" value="Query..."></td>
         </tr>
       </table>
     </form>
