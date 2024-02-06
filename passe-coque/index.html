@@ -282,39 +282,84 @@
 </body>    
 <script type="text/javascript">
 
+
 window.onload = () => {
 	console.log("Loaded!");
 	console.log(`${window.location.href} loaded !`);
 
-	// Increment view counter
-	fetch("./php/nbViews.php", {
-		method: "POST",
-		body: JSON.stringify({
-			dummy: 1,
-			content: "Fix my bugs",
-			completed: false
-		}),
-		headers: {
-			"Content-type": "application/json; charset=UTF-8"
-		}
-	}).then(response => {
-		console.log(`Received from PHP: \nResponse Status:${response.status}`);
-		// Assumimg this is text (not json, or what not)
-		response.text().then(data => {
-			console.log(`Content: ${data}`);
-		});
-	},
-	(error, errmess) => {
-		console.log("NBViews: Ooch");
-		let message;
-		if (errmess) {
-			let mess = JSON.parse(errmess);
-			if (mess.message) {
-				message = mess.message;
+	// Increment view counter, keep trach, etc
+	function requestLogger(appCodeName, appName, product, appVersion, language,
+					       platform, userAgent, latitude, longitude) {
+		fetch("./php/nbViews.php", {
+			method: "POST",
+			body: JSON.stringify({
+				appCodeName: appCodeName, 
+				appName: appName, 
+				product: product, 
+				appVersion: appVersion, 
+				language: language,
+				platform: platform, 
+				userAgent: userAgent, 
+				latitude: latitude, 
+				longitude: longitude
+			}),
+			headers: {
+				"Content-type": "application/json; charset=UTF-8"
 			}
-		}
-		console.debug("Failed to get to the nbViews.php..." + (error ? JSON.stringify(error, null, 2) : ' - ') + ', ' + (message ? message : ' - '));
-    });
+		}).then(response => {
+			console.log(`Received from PHP: \nResponse Status:${response.status}`);
+			// Assumimg this is text (not json, or what not)
+			response.text().then(data => {
+				console.log(`Content: ${data}`);
+			});
+		},
+		(error, errmess) => {
+			console.log("RequestLogger: Ooch");
+			let message;
+			if (errmess) {
+				let mess = JSON.parse(errmess);
+				if (mess.message) {
+					message = mess.message;
+				}
+			}
+			console.debug("Failed to get to the nbViews.php..." + (error ? JSON.stringify(error, null, 2) : ' - ') + ', ' + (message ? message : ' - '));
+		});
+	}
+	// For tests, or further use...
+	console.log(`AppCodeName: ${navigator.appCodeName}\n
+	Browser Name: ${navigator.appName}\n
+	Product: ${navigator.product}\n
+	Browser Name: ${navigator.appName}\n
+	Browser Version: ${navigator.appVersion}\n
+	Cookies Enabled: ${navigator.cookieEnabled}\n
+	Browser Language: ${navigator.language}\n
+	Browser Online: ${navigator.onLine}\n
+	Platform: ${navigator.platform}\n
+	User-agent header: ${navigator.userAgent}`);
+	navigator.geolocation.getCurrentPosition(pos => {
+		console.log(`Invoked from Lat: ${pos.coords.latitude}, Lng: ${pos.coords.longitude}`);
+		requestLogger(navigator.appCodeName,
+					  navigator.appName,
+					  navigator.product,
+					  navigator.appVersion,
+					  navigator.language,
+					  navigator.platform,
+					  navigator.userAgent,
+					  pos.coords.latitude,
+					  pos.coords.longitude);
+	}, err => {
+		console.log(`Error: ${JSON.stringify(err)}`);
+		requestLogger(navigator.appCodeName,
+					  navigator.appName,
+					  navigator.product,
+					  navigator.appVersion,
+					  navigator.language,
+					  navigator.platform,
+					  navigator.userAgent,
+					  null,
+					  null);
+
+	});
 
 	window.translate = translate;
 
