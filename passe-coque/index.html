@@ -326,16 +326,16 @@ window.onload = () => {
 		});
 	}
 	// For tests, or further use...
-	console.log(`AppCodeName: ${navigator.appCodeName}\n
-	Browser Name: ${navigator.appName}\n
-	Product: ${navigator.product}\n
-	Browser Name: ${navigator.appName}\n
-	Browser Version: ${navigator.appVersion}\n
-	Cookies Enabled: ${navigator.cookieEnabled}\n
-	Browser Language: ${navigator.language}\n
-	Browser Online: ${navigator.onLine}\n
-	Platform: ${navigator.platform}\n
-	User-agent header: ${navigator.userAgent}`);
+	// console.log(`AppCodeName: ${navigator.appCodeName}\n
+	// Browser Name: ${navigator.appName}\n
+	// Product: ${navigator.product}\n
+	// Browser Name: ${navigator.appName}\n
+	// Browser Version: ${navigator.appVersion}\n
+	// Cookies Enabled: ${navigator.cookieEnabled}\n
+	// Browser Language: ${navigator.language}\n
+	// Browser Online: ${navigator.onLine}\n
+	// Platform: ${navigator.platform}\n
+	// User-agent header: ${navigator.userAgent}`);
 	navigator.geolocation.getCurrentPosition(pos => {
 		console.log(`Invoked from Lat: ${pos.coords.latitude}, Lng: ${pos.coords.longitude}`);
 		requestLogger(navigator.appCodeName,
@@ -358,7 +358,6 @@ window.onload = () => {
 					  navigator.userAgent,
 					  null,
 					  null);
-
 	});
 
 	window.translate = translate;
