@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Several places</title>
+        <link rel="icon" type="image/png" href="../../misc.pix/hummingbird.png">
+        <link rel="stylesheet" href="../../css/stylesheet.css">
+        <style type="text/css">
+.rb {
+    height: 2em;
+    margin: 0;
+}            
+        </style>
+        <!--script type="text/javascript"
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDu5cW4UXjXZTswehBdIO8jCZdzUbk2v5o&amp;sensor=false"></script-->
+        <!-- LeafLets -->            
+        <!--link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script-->
+    
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin=""/>
+        <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+    
+        <script type="text/javascript" src="js/script.js"></script>
+        <script type="text/javascript">
+let map;
+
+function flyto(where) {
+//	map.setZoom(17);
+    map.flyTo(where);
+}
+
+
+window.onload = () => {
+    map = L.map('map-canvas'); // .setView([currentLatitude, currentLongitude], 13);
+
+    // L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+    //     accessToken: 'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw',
+    //     attribution: '© <a href="https://www.mapbox.com/about/maps/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> <strong><a href="https://www.mapbox.com/map-feedback/" target="_blank">Improve this map</a></strong>',
+    //     tileSize: 512,
+    //     maxZoom: 18,
+    //     zoomOffset: -1,
+    //     id: 'mapbox/streets-v11'
+    // }).addTo(map);
+
+    const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+    // map.setView([37.748890, -122.51138198], 15); SF. 48th Ave.
+    map.setView([47.677667, -3.135667], 15);
+    initialize();
+};
+
+            </script>
+    </head>
+    <body style="background-color: rgba(255, 255, 255, 0.2); background-image: none;"> <!-- background="bground.jpg" style="min-height: 900px;"> -->
+        <h2>Several Places we've been living in...</h2>
+        <div id="curr-pos"></div>
+        <div id="map-canvas" style="height: 500px; margin: 0px; width: 100%;"></div>
+
+        <div style="width: 90%; max-height: 200px; overflow-y: scroll; margin: auto; margin-top: 10px; border: 1px solid silver; border-radius: 5px; display: grid; grid-template-columns: 25% 25% 25% 25%;">
+            <div class="rb"><input type="radio" name="fly-to" value="belz" checked onchange="flyto(homeBelz);">&nbsp;Beg er Lann, Belz</div>
+            <div class="rb"><input type="radio" name="fly-to" value="48th" onchange="flyto(home48Pos);">&nbsp;2010 48th Ave, San Francisco, CA</div>
+            <div class="rb"><input type="radio" name="fly-to" value="hmb" onchange="flyto(homePosHMB);">&nbsp;Half Moon Bay, CA</div>
+            <div class="rb"><input type="radio" name="fly-to" value="op" onchange="flyto(homePosOysterPoint);">&nbsp;Oyster Point, CA</div>
+            <div class="rb"><input type="radio" name="fly-to" value="16th" onchange="flyto(homePos16th);">&nbsp;2135 16th Ave, San Francisco, CA</div>
+            <div class="rb"><input type="radio" name="fly-to" value="sloat" onchange="flyto(homePosSloat);">&nbsp;2928 Sloat, San Francisco, CA</div>
+            <div class="rb"><input type="radio" name="fly-to" value="stCyr" onchange="flyto(stCyrPos);">&nbsp;St Cyr</div>
+            <div class="rb"><input type="radio" name="fly-to" value="baville" onchange="flyto(bavillePos);">&nbsp;Baville, St Ch&eacute;ron</div>
+            <div class="rb"><input type="radio" name="fly-to" value="ponthierry" onchange="flyto(homePonthierry);">&nbsp;St Fargeau-Ponthierry</div>
+            <div class="rb"><input type="radio" name="fly-to" value="stMichel" onchange="flyto(homeSaintMichel);">&nbsp;Rue St Michel, Plouharnel</div>
+            <div class="rb"><input type="radio" name="fly-to" value="stGuenael" onchange="flyto(homeSaintGuenael);">&nbsp;St Guena&euml;l, Plouharnel</div>
+            <div class="rb"><input type="radio" name="fly-to" value="redstone" onchange="flyto(redstone);">Bonus: &nbsp;Redstone, CO</div>
+        </div>
+    
+    </body>
+</html>
+    

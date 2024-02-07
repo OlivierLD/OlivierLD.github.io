@@ -185,7 +185,7 @@
     </small>
     <br/>
     <small>
-        <a class="list-link" href="./sf.html" target="SF">From the past, SF Home...</a>
+        <a class="list-link" href="./sf.html" target="SF">From the past, SF Home...</a>, <a class="list-link" href="./maps.html" target="SF">Previous places...</a>
     </small>
 
     <!-- The tabs. Add them here on demand -->
@@ -558,24 +558,29 @@
 
         let mbAttr = 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community';
         let mbUrl = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
+                    // 'https://tile.openstreetmap.org/{z}/{x}/{y}.png'
+
+        let base_layer = L.tileLayer(mbUrl, {
+            id: 'mapbox.streets', 
+            attribution: mbAttr, 
+            opacity: 1.0
+        });
 
 
-        let base_layer = L.tileLayer(mbUrl, {id: 'mapbox.streets', attribution: mbAttr, opacity: 1.0});
-
-        const SAT_VIEW = false;
+        const SAT_VIEW = true;
 
         // Plot Port Tinduff 
         let map = L.map('mapid');
         // A test here: adding 2 layers, streetview on top of satview. Hence the opacity.
-        // if (SAT_VIEW) {
+        if (SAT_VIEW) {
             base_layer.addTo(map);
-        // } else {
+        } else {
             const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 maxZoom: 19,
                 attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
                 opacity: 0.5
             }).addTo(map);
-        // }
+        }
 
         const portTinduffLat = 48.335402;
         const portTinduffLng = -4.368657;
@@ -584,6 +589,7 @@
                       [portTinduffLat + 0.25, portTinduffLng + 0.25]];
         map.fitBounds(bounds);
         // also see: map = L.map("map").setView([37.75, -122.23], 10);
+        map.setView([portTinduffLat, portTinduffLng], 15);
 
         L.marker([portTinduffLat, portTinduffLng])
                 .addTo(map)
@@ -600,13 +606,17 @@
                 attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
             }).addTo(map2);
         } else {
-            let base_layer_2 = L.tileLayer(mbUrl, {id: 'mapbox.streets', attribution: mbAttr});
+            let base_layer_2 = L.tileLayer(mbUrl, {
+                id: 'mapbox.streets', 
+                attribution: mbAttr
+            });
             base_layer_2.addTo(map2);
         }
 
         let boundsGroix = [[groixLat - 0.025, groixLng - 0.025], 
                            [groixLat + 0.025, groixLng + 0.025]];
         map2.fitBounds(boundsGroix);
+        map2.setView([groixLat, groixLng], 15);
 
         let imgSrc = "./images/Groix.Oct.2023.01.jpg";
         let lat = 47.643763, lng = -3.437558;

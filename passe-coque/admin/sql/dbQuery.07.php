@@ -71,7 +71,7 @@ if (isset($_POST['operation'])) {
         echo("Connected.<br/>");
       }
     
-      $sql = 'SELECT COUNT(CLIENT_IP) AS NB_HIT, MAX(EVENT_DATE) AS SINCE, PLATFORM, BROWSER_LANGUAGE, LATITUDE, LONGITUDE from PC_TRACKER GROUP BY CLIENT_IP ORDER BY 1 DESC;'; 
+      $sql = 'SELECT COUNT(CLIENT_IP) AS NB_HIT, MIN(EVENT_DATE) AS SINCE, PLATFORM, BROWSER_LANGUAGE, LATITUDE, LONGITUDE FROM PC_TRACKER GROUP BY CLIENT_IP ORDER BY 1 DESC;'; 
       //             |                           |                         |         |                 |         |
       //             |                           |                         |         |                 |         5
       //             |                           |                         |         |                 4
@@ -97,11 +97,10 @@ if (isset($_POST['operation'])) {
         echo("<td>" . $table[2] . "</td>" . PHP_EOL);
         echo("<td>" . $table[3] . "</td>" . PHP_EOL);
         if ($table[4] !== null && $table[5] !== null) {
-          echo("<td>" . decToSex($table[4], $NS) . " " . decToSex($table[5], $EW) . "</td>" . PHP_EOL);
-          echo("<td>" . $table[4] . " " . $table[5] . "</td>" . PHP_EOL);
+          echo("<td>" . decToSex($table[4], $NS) . " / " . decToSex($table[5], $EW) . "</td>" . PHP_EOL);
+          echo("<td>" . $table[4] . " / " . $table[5] . "</td>" . PHP_EOL);
         } else {
-          echo("<td>unknown</td>" . PHP_EOL);
-          echo("<td></td>" . PHP_EOL);
+          echo("<td colspan=\"2\">unknown</td>" . PHP_EOL);
         }
         echo("</tr>" . PHP_EOL);
       }
