@@ -614,9 +614,8 @@
 
         boundsTinduff = [[portTinduffLat - 0.25, portTinduffLng - 0.25], 
                          [portTinduffLat + 0.25, portTinduffLng + 0.25]];
-        // mapPT.fitBounds(boundsTinduff);
-        // also see: map = L.map("map").setView([37.75, -122.23], 10);
-        // map.setView([portTinduffLat, portTinduffLng], 15);
+        // mapPT.fitBounds(boundsTinduff); // Do NOT do this if chart is not visible !!
+        // mapPT.setView([portTinduffLat, portTinduffLng], 15);
 
         L.marker([portTinduffLat, portTinduffLng])
                 .addTo(mapPT)
@@ -632,7 +631,7 @@
 
         boundsGroix = [[groixLat - 0.025, groixLng - 0.025], 
                        [groixLat + 0.025, groixLng + 0.025]];
-        // mapGX.fitBounds(boundsGroix);
+        // mapGX.fitBounds(boundsGroix); // Not if chart is not visible !!
         // mapGX.setView([groixLat, groixLng], 15);
 
         let imgSrc = "./images/Groix.Oct.2023.01.jpg";
