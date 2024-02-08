@@ -7,13 +7,13 @@
     <meta charset="ISO-8859-1"-->
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>DB Query Test 2</title>
+    <title>Site Hits</title>
     <style type="text/css">
       * {
         font-family: 'Courier New'
       }
 
-      tr > td {
+      tr > td, th {
         border: 1px solid silver;
       }
     </style>
@@ -35,7 +35,7 @@ function decToSex($value, $type) {
   $dec = $absValue - $intValue;
   $dec *= 60;
 
-  $formatted = $intValue . "&deg; " . number_format($dec, 2) . "'";
+  $formatted = $intValue . "&deg;" . number_format($dec, 2) . "'";
   $sign = "N";
   if ($type == $EW) {
     $sign = "E";
@@ -71,7 +71,7 @@ if (isset($_POST['operation'])) {
         echo("Connected.<br/>");
       }
     
-      $sql = 'SELECT COUNT(CLIENT_IP) AS NB_HIT, MIN(EVENT_DATE) AS SINCE, PLATFORM, BROWSER_LANGUAGE, LATITUDE, LONGITUDE FROM PC_TRACKER GROUP BY CLIENT_IP ORDER BY 1 DESC;'; 
+      $sql = 'SELECT COUNT(CLIENT_IP) AS NB_HIT, MIN(EVENT_DATE) AS SINCE, PLATFORM, BROWSER_LANGUAGE, LATITUDE, LONGITUDE FROM PC_TRACKER GROUP BY CLIENT_IP ORDER BY 1 DESC, 2;'; 
       //             |                           |                         |         |                 |         |
       //             |                           |                         |         |                 |         5
       //             |                           |                         |         |                 4

@@ -12,7 +12,7 @@ function decToSex(v, ns_ew) {
     let dec = absVal - intValue;
     let i = intValue;
     dec *= 60;
-    let s = String(i) + "\272" + dec.toFixed(2) + "'";
+    let s = String(i) + "\xb0" + dec.toFixed(2) + "'"; // \xb0 = \272
     if (v < 0) {
         switch(ns_ew) {
             case ns:

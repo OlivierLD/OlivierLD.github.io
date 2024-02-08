@@ -7,7 +7,7 @@
     <meta charset="ISO-8859-1"-->
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>DB Query. Members</title>
+    <title>Query Members</title>
     <style type="text/css">
       * {
         font-family: 'Courier New'

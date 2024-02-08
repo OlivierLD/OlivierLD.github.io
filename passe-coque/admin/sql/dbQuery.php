@@ -18,7 +18,7 @@
     </style>
   </head>
   <body>
-    <h1>PHP / MYSQL Test. NL Subscribers list</h1>
+    <h1>PHP / MYSQL Tests. NL Subscribers list...</h1>
     <?php
 
 // phpinfo();

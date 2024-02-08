@@ -193,7 +193,7 @@
         <button class="tablinks" onclick="openTab(event, 0);" title="Kayaking in the ria">Kayak</button>
         <button class="tablinks" onclick="openTab(event, 1);">ToDo</button>
         <button class="tablinks" onclick="openTab(event, 2);">2022</button>
-        <button class="tablinks" onclick="openTab(event, 3);">2023</button>
+        <button class="tablinks" onclick="openTab(event, 3); reCenterPT(); reCenterGx();">2023</button>
         <button class="tablinks active" onclick="openTab(event, 4);">2024</button>
     </div>
 
@@ -445,7 +445,8 @@
         <h2><a name="port-tinduff">Week-end &agrave; Port Tinduff</a>, 22-24 septembre</h2>
 
         <div id="mapid" style="width: 1200px; height: 600px;"></div>
-
+        <button onclick="reCenterPT()">Map Refresh</button>
+        <br/>
         <small style="font-style: italic;">Click the images to enlarge</small>
         <br/>
         <div style="height: 600px; margin: 2px;">
@@ -469,7 +470,8 @@
         <h2><a name="groix-08-oct">2 jours &agrave;</a> Groix, 8-9 octobre</h2>
 
         <div id="mapid-2" style="width: 1200px; height: 600px;"></div>
-
+        <button onclick="reCenterGx()">Map Refresh</button>
+        <br/>
         <h2><a name="windy-2023-11">Windy!</a></h2>
         Le baro d&eacute;gringole...
         <ul>
@@ -539,6 +541,25 @@
 </body>
 
 <script>
+    let mapPT, mapGX;
+    let boundsGroix, boundsTinduff;
+
+    const portTinduffLat = 48.335402;
+    const portTinduffLng = -4.368657;
+
+    const groixLat = 47.636526;
+    const groixLng = -3.463199;
+
+    reCenterPT = () => {
+        mapPT.fitBounds(boundsTinduff);
+        mapPT.setView([portTinduffLat, portTinduffLng], 12);
+    }
+
+    reCenterGx = () => {
+        mapGX.fitBounds(boundsGroix);
+        mapGX.setView([groixLat, groixLng], 12);
+    }
+
     window.onload = () => { // Important: window.onload
 
         document.getElementById("loading-message").style.display = "none"; // Hide loading message
@@ -560,69 +581,65 @@
         let mbUrl = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
                     // 'https://tile.openstreetmap.org/{z}/{x}/{y}.png'
 
-        let base_layer = L.tileLayer(mbUrl, {
+        const base_layer = L.tileLayer(mbUrl, {
             id: 'mapbox.streets', 
             attribution: mbAttr, 
             opacity: 1.0
+        });
+        const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+            opacity: 0.5
+        });
+        const base_layer_2 = L.tileLayer(mbUrl, {
+            id: 'mapbox.streets', 
+            attribution: mbAttr
+        });
+        const tiles2 = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+            opacity: 0.5
         });
 
 
         const SAT_VIEW = true;
 
         // Plot Port Tinduff 
-        let map = L.map('mapid');
+        mapPT = L.map('mapid');
         // A test here: adding 2 layers, streetview on top of satview. Hence the opacity.
         if (SAT_VIEW) {
-            base_layer.addTo(map);
-        } else {
-            const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                maxZoom: 19,
-                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-                opacity: 0.5
-            }).addTo(map);
+            base_layer.addTo(mapPT);
         }
+        tiles.addTo(mapPT);
 
-        const portTinduffLat = 48.335402;
-        const portTinduffLng = -4.368657;
-
-        let bounds = [[portTinduffLat - 0.25, portTinduffLng - 0.25], 
-                      [portTinduffLat + 0.25, portTinduffLng + 0.25]];
-        map.fitBounds(bounds);
+        boundsTinduff = [[portTinduffLat - 0.25, portTinduffLng - 0.25], 
+                         [portTinduffLat + 0.25, portTinduffLng + 0.25]];
+        // mapPT.fitBounds(boundsTinduff);
         // also see: map = L.map("map").setView([37.75, -122.23], 10);
-        map.setView([portTinduffLat, portTinduffLng], 15);
+        // map.setView([portTinduffLat, portTinduffLng], 15);
 
         L.marker([portTinduffLat, portTinduffLng])
-                .addTo(map)
+                .addTo(mapPT)
                 .bindPopup(`Port Tinduff`)
                 .bindTooltip("Port Tinduff, Rade de Brest, Finist&egrave;re");
         
         // Groix Leaflet
-        const groixLat = 47.636526;
-        const groixLng = -3.463199;
-        let map2 = L.map('mapid-2');
-        if (!SAT_VIEW) {
-            const tiles2 = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                maxZoom: 19,
-                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-            }).addTo(map2);
-        } else {
-            let base_layer_2 = L.tileLayer(mbUrl, {
-                id: 'mapbox.streets', 
-                attribution: mbAttr
-            });
-            base_layer_2.addTo(map2);
+        mapGX = L.map('mapid-2');
+        if (SAT_VIEW) {
+            base_layer_2.addTo(mapGX);
         }
+        tiles2.addTo(mapGX);
 
-        let boundsGroix = [[groixLat - 0.025, groixLng - 0.025], 
-                           [groixLat + 0.025, groixLng + 0.025]];
-        map2.fitBounds(boundsGroix);
-        map2.setView([groixLat, groixLng], 15);
+        boundsGroix = [[groixLat - 0.025, groixLng - 0.025], 
+                       [groixLat + 0.025, groixLng + 0.025]];
+        // mapGX.fitBounds(boundsGroix);
+        // mapGX.setView([groixLat, groixLng], 15);
 
         let imgSrc = "./images/Groix.Oct.2023.01.jpg";
         let lat = 47.643763, lng = -3.437558;
         let legend = "Port Tudy";
         L.marker([lat, lng])
-                .addTo(map2)
+                .addTo(mapGX)
                 .bindPopup(`<b>${legend}</b><br/><small>Click to enlarge</small><br/><a href="${imgSrc}" target="new"><img src='${imgSrc}' width='200' title='Click to enlarge'></a>`)
                 .bindTooltip(`${legend}`);
 
@@ -631,7 +648,7 @@
         lng = -3.437558 + 0.001;
         legend = "Thonier &quot;Biche&quot;";
         L.marker([lat, lng])
-                .addTo(map2)
+                .addTo(mapGX)
                 .bindPopup(`<b>${legend}</b><br/><small>Click to enlarge</small><br/><a href="${imgSrc}" target="new"><img src='${imgSrc}' width='200' title='Click to enlarge'></a>`)
                 .bindTooltip(`${legend}`);
 
@@ -640,7 +657,7 @@
         lng = -3.496857;
         legend = "Pen Men";
         L.marker([lat, lng])
-                .addTo(map2)
+                .addTo(mapGX)
                 .bindPopup(`<b>${legend}</b><br/><small>Click to enlarge</small><br/><a href="${imgSrc}" target="new"><img src='${imgSrc}' width='200' title='Click to enlarge'></a>`)
                 .bindTooltip(`${legend}`);
 
@@ -649,7 +666,7 @@
         lng = -3.502435;
         legend = "Pen Men";
         L.marker([lat, lng])
-                .addTo(map2)
+                .addTo(mapGX)
                 .bindPopup(`<b>${legend}</b><br/><small>Click to enlarge</small><br/><a href="${imgSrc}" target="new"><img src='${imgSrc}' width='200' title='Click to enlarge'></a>`)
                 .bindTooltip(`${legend}`);
 
@@ -658,7 +675,7 @@
         lng = -3.510847;
         legend = "Pen Men";
         L.marker([lat, lng])
-                .addTo(map2)
+                .addTo(mapGX)
                 .bindPopup(`<b>${legend}</b><br/><small>Click to enlarge</small><br/><a href="${imgSrc}" target="new"><img src='${imgSrc}' width='200' title='Click to enlarge'></a>`)
                 .bindTooltip(`${legend}`);
 
@@ -667,7 +684,7 @@
         lng = -3.514495;
         legend = "Au sud de Pen Men";
         L.marker([lat, lng])
-                .addTo(map2)
+                .addTo(mapGX)
                 .bindPopup(`<b>${legend}</b><br/><small>Click to enlarge</small><br/><a href="${imgSrc}" target="new"><img src='${imgSrc}' width='200' title='Click to enlarge'></a>`)
                 .bindTooltip(`${legend}`);
         
@@ -676,7 +693,7 @@
         lng = -3.514495 + 0.0001;
         legend = "Au sud de Pen Men";
         L.marker([lat, lng])
-                .addTo(map2)
+                .addTo(mapGX)
                 .bindPopup(`<b>${legend}</b><br/><small>Click to enlarge</small><br/><a href="${imgSrc}" target="new"><img src='${imgSrc}' width='200' title='Click to enlarge'></a>`)
                 .bindTooltip(`${legend}`);
 
@@ -686,7 +703,7 @@
         lng = -3.484613;
         legend = "Couac&nbsp;!";
         L.marker([lat, lng])
-                .addTo(map2)
+                .addTo(mapGX)
                 .bindPopup(`<b>${legend}</b><br/><small>Click to enlarge</small><br/><a href="${imgSrc}" target="new"><img src='${imgSrc}' width='200' title='Click to enlarge'></a>`)
                 .bindTooltip(`${legend}`);
 
@@ -697,7 +714,7 @@
         lng = -3.482307;
         legend = "Port St Nic.";
         L.marker([lat, lng])
-                .addTo(map2)
+                .addTo(mapGX)
                 .bindPopup(`<b>${legend}</b><br/><small>Click to enlarge</small><br/><a href="${imgSrc}" target="new"><img src='${imgSrc}' width='200' title='Click to enlarge'></a>`)
                 .bindTooltip(`${legend}`);
 
@@ -707,7 +724,7 @@
         lng = -3.464020;
         legend = "Trou de l'enfer";
         L.marker([lat, lng])
-                .addTo(map2)
+                .addTo(mapGX)
                 .bindPopup(`<b>${legend}</b><br/><small>Click to enlarge</small><br/><a href="${imgSrc}" target="new"><img src='${imgSrc}' width='200' title='Click to enlarge'></a>`)
                 .bindTooltip(`${legend}`);
 
@@ -717,7 +734,7 @@
         lng = -3.435568;
         legend = "Locmaria";
         L.marker([lat, lng])
-                .addTo(map2)
+                .addTo(mapGX)
                 .bindPopup(`<b>${legend}</b><br/><small>Click to enlarge</small><br/><a href="${imgSrc}" target="new"><img src='${imgSrc}' width='200' title='Click to enlarge'></a>`)
                 .bindTooltip(`${legend}`);
 
@@ -727,7 +744,7 @@
         lng = -3.448380;
         legend = "Ti Beudeff";
         L.marker([lat, lng])
-                .addTo(map2)
+                .addTo(mapGX)
                 .bindPopup(`<b>${legend}</b><br/><small>Click to enlarge</small><br/><a href="${imgSrc}" target="new"><img src='${imgSrc}' width='200' title='Click to enlarge'></a>`)
                 .bindTooltip(`${legend}`);
 
@@ -737,7 +754,7 @@
         lng = -3.454363;
         legend = "Beast of the southern west";
         L.marker([lat, lng])
-                .addTo(map2)
+                .addTo(mapGX)
                 .bindPopup(`<b>${legend}</b><br/><small>Click to enlarge</small><br/><a href="${imgSrc}" target="new"><img src='${imgSrc}' width='200' title='Click to enlarge'></a>`)
                 .bindTooltip(`${legend}`);
 
@@ -746,7 +763,7 @@
         lng = -3.472760;
         legend = "Qu&eacute;h&eacute;llo";
         L.marker([lat, lng])
-                .addTo(map2)
+                .addTo(mapGX)
                 .bindPopup(`<b>${legend}</b>`)
                 .bindTooltip(`${legend}`);
 
@@ -755,7 +772,7 @@
         lng = -3.459168;
         legend = "AirBnB";
         L.marker([lat, lng])
-                .addTo(map2)
+                .addTo(mapGX)
                 .bindPopup(`<b>${legend}</b>`)
                 .bindTooltip(`${legend}`);
 };
