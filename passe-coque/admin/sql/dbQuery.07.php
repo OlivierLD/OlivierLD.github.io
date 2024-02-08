@@ -16,6 +16,13 @@
       tr > td, th {
         border: 1px solid silver;
       }
+      h1 {
+        /* text-stroke: 2px orange; */ /* Might not be supported */
+        font-size: 3em;
+        color: black;
+        -webkit-text-fill-color: white; /* Will override color (regardless of order) */
+        -webkit-text-stroke: 3px black;
+      }
     </style>
   </head>
   <body>
