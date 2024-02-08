@@ -41,9 +41,20 @@ window.onload = () => {
     //     id: 'mapbox/streets-v11'
     // }).addTo(map);
 
+    let mbAttr = 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community';
+    let mbUrl = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
+                // 'https://tile.openstreetmap.org/{z}/{x}/{y}.png'
+
+    const base_layer = L.tileLayer(mbUrl, {
+        id: 'mapbox.streets', 
+        attribution: mbAttr, 
+        opacity: 1.0
+    }).addTo(map);
+
     const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
-        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        opacity: 0.5
     }).addTo(map);
     // map.setView([37.748890, -122.51138198], 15); SF. 48th Ave.
     map.setView([47.677667, -3.135667], 15);
