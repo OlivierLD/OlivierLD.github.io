@@ -61,6 +61,8 @@ function getPositions($dbhost, $username, $password, $database, $verbose) {
 
 try {
     $data = getPositions($dbhost, $username, $password, $database, $VERBOSE);
+    header('Content-Type: application/json; charset=utf-8');
+    // echo json_encode($data); // This is for text (not json)
     echo $data;
     http_response_code(200);
 } catch (Throwable $e) {

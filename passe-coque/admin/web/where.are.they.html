@@ -47,7 +47,7 @@ window.onload = () => {
 			console.log(`Received from PHP: \nResponse Status:${response.status}`);
 			// Assumimg this is text (not json, or what not)
 			response.json().then(data => {
-				console.log(`Content: ${JSON.stringify(data)}`);
+				// console.log(`Content: ${JSON.stringify(data)}`);
 				// Plot positions on the map
 				initialize(data, map);
 			});
