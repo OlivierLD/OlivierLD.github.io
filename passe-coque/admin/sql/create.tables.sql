@@ -138,4 +138,5 @@ CREATE TABLE IF NOT EXISTS PC_USERS (
     SOME_CONTENT VARCHAR(512) COMMENT 'Whatever you want goes here'
 );
 
-INSERT INTO PC_USERS (USERNAME, PASSWORD, SOME_CONTENT) VALUES ('olivier@lediouris.net', 'c2h5oh', 'Akeu Coucou!');
+INSERT INTO PC_USERS (USERNAME, PASSWORD, SOME_CONTENT) VALUES ('olivier@lediouris.net', sha1('c2h5oh'), 'Akeu Coucou!');
+INSERT INTO PC_USERS (USERNAME, PASSWORD, SOME_CONTENT) VALUES ('admin@passe-coque.com ', sha1('manager'), 'For tests');

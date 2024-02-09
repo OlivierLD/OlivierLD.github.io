@@ -82,7 +82,7 @@ if (isset($_POST['operation'])) {
           // echo "table contains ". count($table) . " entry(ies).<br/>";
           $db_password = $table[0];
         }
-        if ($db_password == $form_password) { // Valid.
+        if ($db_password == sha1($form_password)) { // Valid.
 
           $_SESSION['USER_NAME'] = $form_username;
           // $_SERVER['PHP_AUTH_PW'] = $form_password;
