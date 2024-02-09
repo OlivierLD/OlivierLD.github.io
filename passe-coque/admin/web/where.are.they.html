@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8">
+	<title>Passe&#8209;Coque Users</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" type="image/png" href="../../logos/LOGO_PC_no_txt.png">
+
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin=""/>
+	<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+
+	<script type="text/javascript" src="script.js"></script>
+
+	<style type="text/css">
+		* {
+			font-family: 'Courier New', Courier, monospace;
+		}
+    </style>
+</head>
+	
+<body style="background-color: rgba(255, 255, 255, 0.2); background-image: none;"> <!-- background="bground.jpg" style="min-height: 900px;"> -->
+	<h2>Passe-Coque users...</h2>
+	<div id="curr-pos"></div>
+	<div id="map-canvas" style="height: 500px; margin: 0px; width: 100%;"></div>
+</body>  
+
+<script type="text/javascript">
+
+window.onload = () => {
+	console.log("Loaded!");
+	console.log(`${window.location.href} loaded !`);
+
+	const map = L.map('map-canvas'); // .setView([currentLatitude, currentLongitude], 13);
+	let mbAttr = 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community';
+	let mbUrl = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
+				// 'https://tile.openstreetmap.org/{z}/{x}/{y}.png'
+
+
+	// Increment view counter, keep trach, etc
+	function requestPositions() {
+		fetch("../../php/geo_members.php", {
+			method: "GET",
+			headers: {
+				"Content-type": "application/json; charset=UTF-8"
+			}
+		}).then(response => {
+			console.log(`Received from PHP: \nResponse Status:${response.status}`);
+			// Assumimg this is text (not json, or what not)
+			response.json().then(data => {
+				console.log(`Content: ${JSON.stringify(data)}`);
+				// Plot positions on the map
+				initialize(data, map);
+			});
+		},
+		(error, errmess) => {
+			console.log("requestPositions: Ooch");
+			let message;
+			if (errmess) {
+				let mess = JSON.parse(errmess);
+				if (mess.message) {
+					message = mess.message;
+				}
+			}
+			console.debug("Failed to get to the geo_members.php..." + (error ? JSON.stringify(error, null, 2) : ' - ') + ', ' + (message ? message : ' - '));
+		});
+	};
+
+	const base_layer = L.tileLayer(mbUrl, {
+		id: 'mapbox.streets', 
+		attribution: mbAttr, 
+		opacity: 1.0
+	}).addTo(map);
+
+	const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		maxZoom: 19,
+		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+		opacity: 0.5
+	}).addTo(map);
+
+	map.setView([47.677667, -3.135667], 10); // Belz...
+
+	requestPositions(); // Will plot the data
+
+};
+
+</script>
+
+</html>
