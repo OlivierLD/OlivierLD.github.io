@@ -36,7 +36,6 @@ function getPositions($dbhost, $username, $password, $database, $verbose) {
         $json_result = "[";
         $first = true;
         while ($table = mysqli_fetch_array($result)) { // go through each row that was returned in $result
-            // echo "{ \"latitude\": " . $table[0] . ", \"longitude\": " . $table[1] . ", \"platform\": \"" . $table[2] . "\", \"lang\": \"" . $table[3] . "\" }, ";
             $next_element = "{ \"latitude\": " . $table[0] . ", \"longitude\": " . $table[1] . ", \"platform\": \"" . $table[2] . "\", \"lang\": \"" . $table[3] . "\" } ";
             // echo $next_element . "<br/>" . PHP_EOL;
             $json_result = $json_result . ($first ? "" : ", ") . $next_element;
