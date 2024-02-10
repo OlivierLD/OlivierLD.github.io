@@ -20,8 +20,9 @@
 	
 <body style="background-color: rgba(255, 255, 255, 0.2); background-image: none;"> <!-- background="bground.jpg" style="min-height: 900px;"> -->
 	<h2>Passe-Coque users...</h2>
+	<div id="nb-users"></div>
 	<div id="curr-pos"></div>
-	<div id="map-canvas" style="height: 500px; margin: 0px; width: 100%;"></div>
+	<div id="map-canvas" style="height: 800px; margin: 0px; width: 100%;"></div>
 </body>  
 
 <script type="text/javascript">
@@ -48,6 +49,8 @@ window.onload = () => {
 			// Assumimg this is text (not json, or what not)
 			response.json().then(data => {
 				// console.log(`Content: ${JSON.stringify(data)}`);
+				let len = data.length;
+				document.getElementById('nb-users').innerHTML = `${len} different positions.`;
 				// Plot positions on the map
 				initialize(data, map);
 			});
