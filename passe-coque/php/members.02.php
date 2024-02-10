@@ -3,6 +3,9 @@
    ! After Custom Authentication.
    ! Crendentials stored in DB.
    ! Member space, once identified.
+   !
+   ! TODO:
+   ! - Admin privileges
    +-->
   <head>
     <!--meta charset="UTF-8">
@@ -50,9 +53,25 @@ if ($current_lang == "FR") {
     <hr/>
     <?php
 if ($current_lang == "FR") {
-  echo "<div style='font-size: 3em; line-height: 3em;'>Cette page est en cours de d&eacute;veloppememnt. Bient&ocirc;t disponible...</div>" . PHP_EOL;
+  echo "<div style='font-size: 3em; line-height: 1em;'>Cette page est en cours de d&eacute;veloppement. Bient&ocirc;t disponible...</div>" . PHP_EOL;
+    ?>
+    Vous voulez :
+    <ul>
+      <li><a href="#" onclick="alert('Plus tard');">G&eacute;rer vos cotisations</a></li>
+      <li><a href="#" onclick="alert('Plus tard');">R&eacute;server un bateau</a></li>
+      <li><a href="#" onclick="alert('Plus tard');">. . . </a></li>
+    </ul>
+    <?php
 } else {
-  echo "<div style='font-size: 3em; line-height: 3em;'>This page is being developped. Available soon...</div>" . PHP_EOL;
+  echo "<div style='font-size: 3em; line-height: 1em;'>This page is being developped. Available soon...</div>" . PHP_EOL;
+    ?>
+    Youy want to:
+    <ul>
+      <li><a href="#" onclick="alert('Later');">Manage your subscriptions</a></li>
+      <li><a href="#" onclick="alert('Later');">Book a boat</a></li>
+      <li><a href="#" onclick="alert('Later');">. . . </a></li>
+    </ul>
+    <?php
 }
     ?>
     <hr/>

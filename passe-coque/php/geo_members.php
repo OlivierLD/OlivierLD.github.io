@@ -9,6 +9,7 @@ $VERBOSE = false;
 
 /*
  * Get users' positions and other stuff from table PC_TRACKER, in JSON format.
+ * No HTML involved, absolutely none.
  */
 
 function getPositions($dbhost, $username, $password, $database, $verbose) {
