@@ -20,9 +20,12 @@
   </head>
   <body>
     <!--h1>Espace Membres</h1-->
-
     <?php
-// phpinfo();
+// echo "Default GC_MaxLifeTime: " . ini_get("session.gc_maxlifetime") . " s<br/>" . PHP_EOL;
+$timeout = 60;
+ini_set("session.gc_maxlifetime", $timeout);
+ini_set("session.cookie_lifetime", $timeout);
+// echo "GC_MaxLifeTime now: " . ini_get("session.gc_maxlifetime") . " s<br/>" . PHP_EOL;
 
 session_start();
 

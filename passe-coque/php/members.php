@@ -32,11 +32,19 @@
   </head>
   <body>
     <!--h1>Espace Membres</h1-->
-
     <?php
-// phpinfo();
+$timeout = 60;  // In seconds
+ini_set("session.gc_maxlifetime", $timeout);
+ini_set("session.cookie_lifetime", $timeout);
 
 session_start();
+
+if (false) {
+  echo "Session vars, before everything:<br/>" . PHP_EOL;
+  echo "USER_NAME: " . $_SESSION['USER_NAME'] . "<br/>" . PHP_EOL;
+  echo "CURRENT_LANG: " . $_SESSION['CURRENT_LANG'] . "<br/>" . PHP_EOL;
+  echo "--------------------------------<br/>" . PHP_EOL;
+}
 
 $username = "passecc128";
 $password = "zcDmf7e53eTs";
@@ -146,9 +154,9 @@ if (isset($_POST['operation'])) {
           // header('HTTP/1.0 401 Unauthorized');
           // die ("Not authorized");
           if ($current_lang == "FR") {
-            echo "Acc&egrave;s refus&eacute;...<br/>";
+            echo "Acc&egrave;s refus&eacute;, mot de passe invalide...<br/>";
           } else {
-            echo "Not authorized...<br/>";
+            echo "Not authorized, invalid password...<br/>";
           }
           unset($_SESSION['USER_NAME']);
           // unset($_SERVER['PHP_AUTH_PW']);
