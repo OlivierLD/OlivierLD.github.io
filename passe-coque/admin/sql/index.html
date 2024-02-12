@@ -12,19 +12,32 @@
 * {
     font-family: 'Courier New', Courier, monospace;
 }        
+h1 {
+    /* text-stroke: 2px orange; */ /* Might not be supported */
+    font-size: 3em;
+    color: black;
+    -webkit-text-fill-color: white; /* Will override color (regardless of order) */
+    -webkit-text-stroke: 3px black;
+}
     </style>
 </head>
 <body>
     <h1>MySQL DB Access with PHP</h1>
+    <p>
+        <i>Warning:</i> These are development samples, friendly/sexy UI is <b>NOT</b> in the scope.
+    </p>
     <ul>
-        <li><a href="dbQuery.php">Technical sample</a> (be prepared...)</li>
-        <li><a href="dbQuery.01.php">Create News Letter Subscriber</a></li>
-        <li><a href="dbQuery.02.php">Query News Letter Subscribers</a></li>
-        <li><a href="dbQuery.03.php">Fee renewal (V1)</a></li>
-        <li><a href="dbQuery.04.php">Fee renewal (V2)</a></li>
-        <li><a href="dbQuery.05.php">Members and their cards</a></li>
-        <li><a href="dbQuery.06.php">Number of views of the site</a></li>
-        <li><a href="dbQuery.07.php">Site hits</a></li>
+        <li><a href="dbQuery.php" target="MySQL">Technical sample</a> (be prepared...)</li>
+        <li><a href="dbQuery.01.php" target="MySQL">Create News Letter Subscriber</a></li>
+        <li><a href="dbQuery.02.php" target="MySQL">Query News Letter Subscribers</a></li>
+        <li><a href="dbQuery.03.php" target="MySQL">Fee renewal (V1)</a></li>
+        <li><a href="dbQuery.04.php" target="MySQL">Fee renewal (V2)</a></li>
+        <li><a href="dbQuery.05.php" target="MySQL">Members and their cards</a></li>
+        <li><a href="dbQuery.06.php" target="MySQL">Number of views of the site</a></li>
+        <li><a href="dbQuery.07.php" target="MySQL">Site hits</a></li>
+        <li><a href="../web/where.are.they.html" target="LL">Leaflet / hits</a></li>
     </ul>
+    <hr/>
+    <i>&copy; 2024, Passe-Coque. Passe-Coque never stops.</i>
 </body>
 </html>
