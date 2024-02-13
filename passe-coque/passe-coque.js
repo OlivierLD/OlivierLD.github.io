@@ -1013,6 +1013,10 @@ const INFO_SECTION = [
         content: [{
             date: "Jan-2024",
             title: "Early 2024",
+            content: "./actu/2024/bpgo.html"
+        }, {
+            date: "Jan-2024",
+            title: "Early 2024",
             content: "./actu/2024/new.site.html"
         }]
     },
