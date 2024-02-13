@@ -344,29 +344,42 @@ window.onload = () => {
 	// Browser Online: ${navigator.onLine}\n
 	// Platform: ${navigator.platform}\n
 	// User-agent header: ${navigator.userAgent}`);
-	navigator.geolocation.getCurrentPosition(pos => {
-		console.log(`Invoked from Lat: ${pos.coords.latitude}, Lng: ${pos.coords.longitude}`);
+	if (false) {
+		// This will prompt the user for an authorization
+		navigator.geolocation.getCurrentPosition(pos => {
+			console.log(`Invoked from Lat: ${pos.coords.latitude}, Lng: ${pos.coords.longitude}`);
+			requestLogger(navigator.appCodeName,
+						navigator.appName,
+						navigator.product,
+						navigator.appVersion,
+						navigator.language,
+						navigator.platform,
+						navigator.userAgent,
+						pos.coords.latitude,
+						pos.coords.longitude);
+		}, err => {
+			console.log(`Error: ${JSON.stringify(err)}`);
+			requestLogger(navigator.appCodeName,
+						navigator.appName,
+						navigator.product,
+						navigator.appVersion,
+						navigator.language,
+						navigator.platform,
+						navigator.userAgent,
+						null,
+						null);
+		});
+	} else { // No prompt required...
 		requestLogger(navigator.appCodeName,
-					  navigator.appName,
-					  navigator.product,
-					  navigator.appVersion,
-					  navigator.language,
-					  navigator.platform,
-					  navigator.userAgent,
-					  pos.coords.latitude,
-					  pos.coords.longitude);
-	}, err => {
-		console.log(`Error: ${JSON.stringify(err)}`);
-		requestLogger(navigator.appCodeName,
-					  navigator.appName,
-					  navigator.product,
-					  navigator.appVersion,
-					  navigator.language,
-					  navigator.platform,
-					  navigator.userAgent,
-					  null,
-					  null);
-	});
+						navigator.appName,
+						navigator.product,
+						navigator.appVersion,
+						navigator.language,
+						navigator.platform,
+						navigator.userAgent,
+						null,
+						null);
+	}
 
 	window.translate = translate;
 

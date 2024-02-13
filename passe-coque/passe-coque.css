@@ -1,5 +1,6 @@
 /*
  * Var and media : https://www.w3schools.com/css/css3_variables_mediaqueries.asp
+ * Stylsheet import see https://www.w3schools.com/cssref/pr_import_rule.php
  */
 :root {
     --small-screen-width: 1000px;
