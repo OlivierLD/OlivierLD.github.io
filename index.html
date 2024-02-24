@@ -684,6 +684,16 @@ button:hover, button:focus {
   box-shadow: 5px 5px 5px rgba(0, 255, 255, 0.5);
 }
 
+.blink_me {
+  animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+
 </style>
 
 <script type="text/javascript">
@@ -894,7 +904,7 @@ Date.prototype.format = function (dateFormat) {
 
   <div id="loading-message" style="width: 100%; text-align: center; display: block; z-index: 10; position: fixed; top: 5px; left: 0;">
     <!-- This will be hidden when page is loaded. See window.onload -->
-    <h1 style="color: lime;">Loading, please wait...</h1>
+    <h1 class="display-data blink_me" style="color: lime;">Loading, please wait...</h1>
   </div>
 
   <div id="browser-warning" class="smooth" 
