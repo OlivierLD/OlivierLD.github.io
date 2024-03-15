@@ -283,6 +283,13 @@
                         <div id="03" class="display-result" title="Degrees&#13;Minutes&#13;Decimal Seconds"></div>
                         <span class="tooltiptext">Degrees,&#13;Minutes,&#13;Decimal Seconds</span>
                     </div>                        
+
+                    <div class="small-label"><!-- Hours, minutes, seconds --></div>
+                    <div class="tooltip">
+                        <div id="04" class="display-result" title="Hours, minutes, seconds"></div>
+                        <span class="tooltiptext">Hours, Minutes, Seconds</span>
+                    </div>                        
+
                 </div>
                 <div style="margin-top: 10px; margin-left: 16px">
                     <div class="tooltip">
@@ -308,15 +315,25 @@
                                             justified="RIGHT"
                                             font-size="40"
                                             value="000°00'00.0000 "></split-flap-display>
-                            <span class="tooltiptext">Degrees,&#13;Minutes,&#13;Decimal Seconds</span>
-                        </div>
+                        <span class="tooltiptext">Degrees,&#13;Minutes,&#13;Decimal Seconds</span>
                     </div>
+                    <div class="tooltip">
+                        <split-flap-display id="hour-min-sec-display"
+                                            nb-char="15"
+                                            justified="RIGHT"
+                                            font-size="40"
+                                            value="00h 00m 00.00s "></split-flap-display>
+                        <span class="tooltiptext">Hours, Minutes, Decimal Seconds</span>
+                    </div>
+                </div>
                 <div>
                     <button onclick="copyToClipboard('01')"><img src="icons8-copy-to-clipboard-50.png" style="width: 40px; height: auto;" title="Copy to Clipboard"></button>
                     <br/>
                     <button onclick="copyToClipboard('02')"><img src="icons8-copy-to-clipboard-50.png" style="width: 40px; height: auto;" title="Copy to Clipboard"></button>
                     <br/>
                     <button onclick="copyToClipboard('03')"><img src="icons8-copy-to-clipboard-50.png" style="width: 40px; height: auto;" title="Copy to Clipboard"></button>
+                    <br/>
+                    <button onclick="copyToClipboard('04')"><img src="icons8-copy-to-clipboard-50.png" style="width: 40px; height: auto;" title="Copy to Clipboard"></button>
                 </div>
             </div>
         </div>
@@ -324,11 +341,32 @@
         <i style="padding-left: 20px; text-shadow: 1px 1px 2px orange, 0 0 25px white, 0 0 5px silver;">Wow!</i>
     </body>
     <script type="text/javascript">
-displayResult = (one, two, three) => {
+displayResult = (one, two, three, four) => {
     document.getElementById("results").style.display = "grid";
     document.getElementById("01").innerHTML = one;
     document.getElementById("02").innerHTML = two;
     document.getElementById("03").innerHTML = three;
+    document.getElementById("04").innerHTML = four;
+};
+
+let lpad = (str, pad, len) => {
+    while (str.length < len) {
+        str = pad + str;
+    }
+    return str;
+};
+
+// Decimal degrees to H:M:S.s
+toHMS = (decimalValue) => {
+    let h = 0;
+    let m = 0;
+    let s = 0;
+
+    h = Math.floor(decimalValue / 15.0);
+    m = Math.floor(((decimalValue / 15) - h) * 60.0);
+    s = ((((decimalValue / 15) - h) * 60.0) - m) * 60.0;
+
+    return `${lpad(h.toFixed(0), '0', 2)}h ${lpad(m.toFixed(0), '0', 2)}m ${lpad(s.toFixed(2), '0', 5)}s`
 };
 
 fromDecimal = () => {
@@ -360,15 +398,18 @@ fromDecimal = () => {
     document.getElementById("min-two").value = intMin;
     document.getElementById("seconds").value = decimalSeconds.toFixed(4);
 
+    // Non split-flap display
     displayResult(
         `${originalValue.toFixed(6)}&deg;`,
         `${degrees}&deg;${decimalMin.toFixed(4)}'`,
-        `${degrees}&deg;${intMin}'${decimalSeconds.toFixed(4)}"`
+        `${degrees}&deg;${intMin}'${decimalSeconds.toFixed(4)}"`,
+        `${toHMS(originalValue)}`
     );
 
     setSplitFlapValue("decimal-deg-display", `${originalValue.toFixed(6)}°`);
     setSplitFlapValue("deg-decimal-min-display", `${degrees}°${decimalMin.toFixed(4)}'`);
     setSplitFlapValue("deg-min-decimal-sec-display", `${degrees}°${intMin}'${decimalSeconds.toFixed(4)}"`);
+    setSplitFlapValue("hour-min-sec-display", `${toHMS(originalValue)}`);
 };
 
 fromDegMin = () => {
@@ -401,11 +442,13 @@ fromDegMin = () => {
     displayResult(
         `${decimalDeg.toFixed(6)}&deg;`,
         `${degOriginal}&deg;${minOriginal.toFixed(4)}'`,
-        `${degOriginal}&deg;${intMinutes}'${decimalSec.toFixed(4)}"`
+        `${degOriginal}&deg;${intMinutes}'${decimalSec.toFixed(4)}"`,
+        `${toHMS(decimalDeg)}`
     );
     setSplitFlapValue("decimal-deg-display", `${decimalDeg.toFixed(6)}°`);
     setSplitFlapValue("deg-decimal-min-display", `${degOriginal}°${minOriginal.toFixed(4)}'`);
     setSplitFlapValue("deg-min-decimal-sec-display", `${degOriginal}°${intMinutes}'${decimalSec.toFixed(4)}"`);
+    setSplitFlapValue("hour-min-sec-display", `${toHMS(decimalDeg)}`);
 };
 
 fromDegMinSec = () => {
@@ -444,11 +487,13 @@ fromDegMinSec = () => {
     displayResult(
         `${decimalDeg.toFixed(6)}&deg;`,
         `${degOriginal}&deg;${decimalMin.toFixed(4)}'`,
-        `${degOriginal}&deg;${minOriginal}'${secOriginal.toFixed(4)}"`
+        `${degOriginal}&deg;${minOriginal}'${secOriginal.toFixed(4)}"`,
+        `${toHMS(decimalDeg)}`
     );
     setSplitFlapValue("decimal-deg-display", `${decimalDeg.toFixed(6)}°`);
     setSplitFlapValue("deg-decimal-min-display", `${degOriginal}°${decimalMin.toFixed(4)}'`);
     setSplitFlapValue("deg-min-decimal-sec-display", `${degOriginal}°${minOriginal}'${secOriginal.toFixed(4)}"`);
+    setSplitFlapValue("hour-min-sec-display", `${toHMS(decimalDeg)}`);
 };
 
 setSplitFlapValue = (id, value) => {
