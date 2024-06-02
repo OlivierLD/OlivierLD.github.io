@@ -49,6 +49,9 @@ h5 {
 .print-only {
     display: none;
 }
+.print-only-2 { 
+    display: none;
+}
 
 /* "Small" screens */
 @media screen and (max-width: 1000px) { /* TODO investigate that one... */
@@ -64,4 +67,65 @@ h5 {
 */
 pouet-pouet {
     color: rgb(190, 9, 94);
+}
+
+/*
+ For the table of contents
+ */
+ .visually-hidden {
+    clip: rect(0 0 0 0);
+    clip-path: inset(100%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    width: 1px;
+    white-space: nowrap;
+}
+
+.toc-list, .toc-list ol {
+  list-style-type: none;
+}
+
+.toc-list {
+  padding: 0;
+}
+
+.toc-list ol {
+  padding-inline-start: 2ch;
+}
+
+.toc-list > li > a {
+  font-weight: bold;
+  margin-block-start: 1em;
+}
+
+.toc-list li > a {
+    text-decoration: none;
+    display: grid;
+    grid-template-columns: auto max-content;
+    align-items: end;
+}
+
+.toc-list li > a > .title {
+    position: relative;
+    overflow: hidden;
+}
+
+.toc-list li > a .leaders::after {
+    position: absolute;
+    padding-inline-start: .25ch;
+    content: " . . . . . . . . . . . . . . . . . . . "
+        ". . . . . . . . . . . . . . . . . . . . . . . "
+        ". . . . . . . . . . . . . . . . . . . . . . . "
+        ". . . . . . . . . . . . . . . . . . . . . . . "
+        ". . . . . . . . . . . . . . . . . . . . . . . "
+        ". . . . . . . . . . . . . . . . . . . . . . . "
+        ". . . . . . . . . . . . . . . . . . . . . . . ";
+    text-align: right;
+}
+
+.toc-list li > a > .page {
+    min-width: 2ch;
+    font-variant-numeric: tabular-nums;
+    text-align: right;
 }
