@@ -17,8 +17,6 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 
-  <script type="module" src="../../../webcomponents/widgets/slideshow/SlideShow.js"></script>
-
   <style type="text/css">
     
 .list-link {
@@ -78,10 +76,11 @@ dialog[open] {
 	color: silver;
 	border: 2px solid silver;
 	border-radius: 10px;
-	width: 800px;
-	margin-left: 200px; 
+	/*width: 800px;*/
+	margin-left: 30px;
 	margin-top: 10px; 
-	z-index: 1000;
+    position: absolute;
+	z-index: 1001;
 	box-shadow: 2px 2px 4px grey, 0 0 25px white, 0 0 7px cyan;
 }
 
@@ -202,7 +201,7 @@ compass-rose .day {
     /*position: absolute;
     top: 50%;
     left: 50%;*/
-    margin-top: 25px;
+    margin-top: 40px;
     transform: translate(-50%, -50%);
     transform: rotate(90deg);
     cursor: pointer;
@@ -317,8 +316,24 @@ compass-rose .day {
     overflow-y: scroll;
 }
 
+.page-content {
+    display: grid; 
+    grid-template-columns: 50% 50%;
+}
+
+/* "Small" screens */
+@media screen and (width <= 800px) {
+    .page-content {
+        display: grid; 
+        grid-template-columns: 100%;
+    }
+    .arrow {
+        margin-top: 5px;
+    }
+}
   </style>
 
+  <script type="module" src="../../../webcomponents/widgets/slideshow/SlideShow.js"></script>
   <script type="module" src="../../../webcomponents/widgets/analogdisplay/AnalogDisplay.js"></script>
   <script type="module" src="../../../webcomponents/widgets/compass/CompassRose.js"></script>
   <script type="module" src="../../../webcomponents/widgets/direction/DirectionDisplay.js"></script>
@@ -343,7 +358,6 @@ compass-rose .day {
               </td>
             </tr>
         </table>
-        
     </div>
     <hr/>
     <div>
@@ -379,26 +393,26 @@ compass-rose .day {
     </div>
 </dialog>
     
-<table style="width: 100%;">
-    <tr>
-        <td>
+<div id="page-header">
+    <div style="display: grid; grid-template-columns: auto auto auto;">
+        <div>
             <h1 style="padding-left: 10px;"><a href="http://www.cngx.fr" target="_new">Rubi's Cup 2024</a> - Replay Logged Data (La Trinit&eacute; - Port-Tudy)</h1>
-        </td>
-        <td style="text-align: right; padding-right: 20px;">
+        </div>
+        <div style="text-align: right; padding-right: 20px;">
             <img src="../dives/drowning.gif"
                  id="whatzat" 
                  title="Heeeeeeelp !!" 
                  onclick="showAboutDialog();"/>
-        </td>
-        <td>
+        </div>
+        <div>
             <div class="arrow" title="Try this!">
                 <span></span>
                 <span></span>
                 <span></span>
             </div>
-        </td>
-    </tr>
-</table>
+        </div>
+    </div>
+</div>
 
 <!--div id="mapid" style="width: 600px; height: 400px;"></div-->
 <div id="top-div" style="margin: 5px; display: grid; grid-template-columns: auto 120px 120px 120px 120px;">
@@ -427,13 +441,13 @@ compass-rose .day {
 </div>
 
 <!-- Map, displays, and controls -->
-<table width="100%">
-  <tr>
-    <td valign="top">
+<div style="width: 100%;">
+  <div class="page-content"> <!-- style="display: grid; grid-template-columns: 50% 50%;" -->
+    <div style="vertical-align: top;">
       <!-- Column 1 -->
       <div id="mapid" style="width: 800px; height: 600px; box-shadow: 4px 4px 8px grey, 0 0 25px white, 0 0 7px cyan;"></div>
-    </td>
-    <td valign="top" rowspan="2">
+    </div>
+    <div style="vertical-align: top;" rowspan="2">
       <!-- Column 2 -->
       <div style="border: 2px solid black; border-radius: 5px;">
         <div style="padding-left: 10px; color: black; text-align: left; font-style: italic;">Position</div>
@@ -493,7 +507,7 @@ compass-rose .day {
                     </tr>
                 </table>
             </div>
-          </div>
+        </div>
       </div>
 
       <div>
@@ -505,16 +519,16 @@ compass-rose .day {
             <li><a class="list-link" href="#" onclick="flyToZoom(3);">Les Grands Sables</a></li>
         </ul>
       </div>
-    </td>
-  </tr>
-</table>
+    </div>
+</div>
+</div>
 <hr/>
 <span>Slide show</span>
 <div id="slide-show-container" 
      class="body-pix">
     <slide-show id="slide-show-02"
-                width="800"
-                height="600"
+                width="600"
+                height="800"
                 slideclick="onSlideShowClick"
                 style="padding: 10px;">
         <slide-show-image src="./images/01.jpeg" title="Rigged!"></slide-show-image>
