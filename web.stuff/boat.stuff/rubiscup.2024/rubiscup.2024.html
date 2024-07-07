@@ -391,14 +391,16 @@ compass-rose .day {
                 Map is draggable.
                 <br/>
                 Zoom in and out using the +/- on the chart (or double-click, and shift + double-click)
-                <br/>
+                <!--br/>
                 Click on the markers on the chart to display pictures.
                 <br/>
-                Click on the pictures to enlarge them.
+                Click on the pictures to enlarge them. -->
                 <br/>
                 Use the links on the right to move from place to place (experimental).
                 <br/>
                 Try the "REPLAY" button to replay what was logged (zoom when replaying..., it's worth it).
+                <br/>
+                Use the slider to scroll accross the logged data.
             </div>
         </div>
         <hr style="margin-top: 15px; margin-bottom: 5px;"/>
@@ -410,6 +412,7 @@ compass-rose .day {
     <div style="display: grid; grid-template-columns: auto auto auto;">
         <div>
             <h1 style="padding-left: 10px;"><a href="http://www.cngx.fr" target="_new">Rubi's Cup 2024</a> - Replay Logged Data (La Trinit&eacute; - Port-Tudy)</h1>
+            On board Z&eacute;phir, <a href="https://www.fr-lucas.com/birvidic-700-1701" target="FL">Birvidic 700</a> designed by Fran&ccedil;ois Lucas.
         </div>
         <div style="text-align: right; padding-right: 20px;">
             <img src="../dives/drowning.gif"
@@ -440,7 +443,7 @@ compass-rose .day {
     <br/>
     <span id="point-origin" style="margin: 10px; font-size: 10px;"></span>    
     <br/>
-    <span style="margin: 10px; font-size: 10px;">Scroll down the page for pictures</span>    
+    <span style="margin: 10px; font-size: 12px; font-style: italic;">Scroll down the page for pictures</span>    
   </div> 
   <button id="start-path" onclick="/*pathIdx = INIT_PATH_IDX;*/ /* 0; */ drive();">Replay</button>
   <button id="cancel-path" onclick="cancelDrive();" disabled>Cancel</button>
@@ -448,9 +451,9 @@ compass-rose .day {
   <button id="resume-path" onclick="resumeDriving();" disabled>Resume</button>
 </div>
 <div id="div-slider">
-    <input type="range" id="data-slider" value="0" min="0" max="200" style="width: 90%;"
+    <input type="range" id="data-slider" value="0" min="0" max="200" style="width: 95%;"
            oninput="onSlider.call(this, event); sliderValue01.value = this.value;"/>
-    <output name="padding" id="sliderValue01" style="color: black;"></output>
+    <output name="padding" id="sliderValue01" style="color: black;">0</output>
 </div>
 
 <!-- Map, displays, and controls -->
@@ -462,7 +465,7 @@ compass-rose .day {
       <!--div id="mapid" style="width: 40vw; height: 40vw; box-shadow: 4px 4px 8px grey, 0 0 25px white, 0 0 7px cyan;"></div-->
       <!--div id="mapid" style="width: 90%; height: 90%; box-shadow: 4px 4px 8px grey, 0 0 25px white, 0 0 7px cyan;"></div-->
     </div>
-    <div style="vertical-align: top;">
+    <div style="vertical-align: top; margin-left: 4px;">
       <!-- Column 2 -->
       <div style="border: 2px solid black; border-radius: 5px;">
         <div style="padding-left: 10px; color: black; text-align: left; font-style: italic;">Position</div>
@@ -538,7 +541,7 @@ compass-rose .day {
 </div>
 
 <hr/>
-<span>Slide show</span>
+<span>Slide show - Images are clickable</span>
 <div id="slide-show-container" 
      class="body-pix">
     <slide-show id="slide-show-02"
