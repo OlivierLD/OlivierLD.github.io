@@ -164,6 +164,14 @@
 
             zonedNow = new Date(zonedNow.getTime() + ONE_MINUTE);
           }
+
+          // Coeffs (experimental) ?
+          if (false) { // TODO Implement the getCurveData
+            let tideStationBrest = tideEngine.default.findTideStation("Brest%2C%20France", THE_YEAR);
+            let brestData = getCurveData(tideStationBrest);
+            let coeffInBrest = tideEngine.default.getCoeffInBrest(tideStationBrest, brestData.tideTable); // <= Send the tide table for Brest !!
+          }
+
           console.log("Calculation completed.");
           let table = document.getElementById('tide-table');
           let tableContent = `<pre><b>${decodeURIComponent(station.fullName)}</b>\n`;
