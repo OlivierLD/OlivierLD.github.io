@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Morse Memo</title>
+        <meta charset="utf-8">
+        <link rel="icon" type="image/jpg" href="hammerhead.02.ico">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+      html {
+        display: table;
+        width: 100%;
+        height: 100%;
+      }
+
+      body {
+        display: table-cell;
+        /*text-align: center;*/
+        color: silver;
+        font-family: Verdana, Arial, Helvetica, Geneva;
+        font-size: 20pt;
+        vertical-align: top;
+        background: radial-gradient(at top, DarkGrey -8%, black 55%);
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+      }
+
+      input, button {
+        font-size: 20pt;
+      }
+
+      button {
+          color: navy;
+          border-radius: 10px;
+          box-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px silver;
+      }
+
+      h1 {
+        color: silver;
+        font-style: italic;
+        font-size: 36pt;
+        font-family: Verdana, Arial, Helvetica, Geneva;
+        padding-left: 15pt;
+        padding-bottom: 1pt;
+        padding-top: 1pt;
+      }
+
+      .display-result {
+        font-size: 36pt;
+        text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px silver;
+        font-family:'Courier New', Courier, monospace; 
+        font-weight: bold; 
+        text-align: right;
+      }
+
+      .small-label {
+          font-size: 20px;
+          text-align: left;
+          vertical-align: bottom;
+          padding-top: 20px;
+      }
+
+      /* 
+          See https://codepen.io/shimdim/pen/NjyNNb 
+              https://blog.logrocket.com/creating-beautiful-tooltips-with-only-css/
+      */
+      /*You can use [title] selector as well*/
+      [data-title] {
+        /*outline: red dotted 1px;*/ /*optional styling*/
+        /*font-size: 30px;*/ /*optional styling*/
+        position: relative;
+        cursor: help;
+      }
+
+      [data-title]:hover::before {
+        content: attr(data-title); /* Content of attribute data-title */
+        position: absolute;
+        bottom: -26px;
+        display: inline-block;
+        padding: 3px 6px;
+        border-radius: 2px;
+        background: #000;
+        color: #fff;
+        font-size: 12px;
+        font-family: sans-serif;
+        white-space: nowrap;
+        z-index: 10;
+      }
+
+      [data-title]:hover::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 8px;
+        display: inline-block;
+        color: #fff;
+        border: 2px solid red;	
+        border: 8px solid transparent;	
+        border-bottom: 8px solid #000;
+      }
+
+      .smooth {
+            /*height: 0;*/
+            /*visibility: hidden;*/
+            /*opacity: 0;*/
+            /*transition: visibility 0.5s, height 0.5s, opacity 0.5s linear;*/        
+            height: 0;
+            max-height: 0;            
+            margin: auto;
+            /* transition: transform 0.5s, max-height 1s, height 1s; */
+            transition: all 0.5s ease-in-out;
+            /* -webkit-transition: all .5s ease-in-out; */
+            opacity: 0;
+            transform: scaleY(0);
+            /* transform-origin: top; */
+            /* transition-timing-function: ease; */
+            overflow: hidden;
+        }
+
+        .visible-div {
+            opacity: 1;
+            width: auto;
+            height: auto;
+            transition: all 0.5s ease-in-out;
+            max-height: 1600px;
+            transform: scaleY(1);
+            margin-top: 5px;
+        }
+
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            border-bottom: 1px dotted black;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 300px;
+            background-color: silver;
+            color: navy;
+            font-size: 20px;
+            text-transform: none;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 0;
+            position: absolute;
+            z-index: 1;
+            top: 100%;
+            left: 50%;
+            margin-left: -150px; /* half the width */
+
+            /* Fade in tooltip - takes 1 second to go from 0% to 100% opac: */
+            opacity: 0;
+            transition: opacity 1s;
+        }
+
+        .tooltip .tooltiptext::after {
+            content: "";
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: transparent transparent silver transparent;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .letter {
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+            padding: 2px;
+            margin: 2px;
+            border: 1px solid silver;
+            border-radius: 2px;
+        }
+        .morse {
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+            padding: 2px;
+            margin: 2px;
+            border: 1px solid silver;
+            border-radius: 2px;
+        }
+        </style>
+        <script type="module" src="./SplitFlapDisplay.js"></script>
+    </head>        
+    <body>
+        <h1>Morse Memo</h1>
+        <div style="padding: 10px;">
+            Ceci est en fran&ccedil;ais (just in case you missed it).<br/>
+            Il s'agit de fournir un moyen mn&eacute;motechnique pour se souvenir du code morse, par quelle s&eacute;quence de traits et de points une lettre est repr&eacute;sent&eacute;e.<br/>
+            Voici comment &ccedil;a marche&nbsp;:
+            <ul>
+                <li>Une lettre est repr&eacute;sent&eacute;e par un mot</li>
+                <li>Ce mot commence par la lettre qu'il repr&eacute;sente</li>
+                <li>Ce mot contient autant de syllabes que de signes</li>
+                <li>Les syllabes avec des 'O' sont des traits</li>
+                <li>Les autres syllabes sont des points</li>
+            </ul>
+            Exemples&nbsp;:<br/>
+            <span class="letter">Allo</span>&nbsp;: Deux syllables, la deuxi&egrave;me avec un 'O', 'A' s'&eacute;crit en morse <span class="morse">&middot;-</span> <br/>
+            <span class="letter">Linotype</span>&nbsp;: Quatre syllabes, la deuxi&egrave;me avec un 'O', 'L' s'&eacute;crit en morse <span class="morse">&middot;-&middot;&middot;</span> <br/>
+        </div>
+        <div style="padding: 10px; margin-top: 10px; display: grid; grid-template-columns: auto auto;">
+            <div class="letter">Allo</div> <div class="morse">&middot;-</div> 
+            <div class="letter">Bombardement</div> <div class="morse">-&middot;&middot;&middot;</div>
+            <div class="letter">Compte-Goutte</div> <div class="morse">-&middot;-&middot;</div>
+            <div class="letter">Domaine</div> <div class="morse">-&middot;&middot;</div>
+            <div class="letter">Eh !</div> <div class="morse">&middot;</div>
+            <div class="letter">Fanfaronne</div> <div class="morse">&middot;&middot;-&middot;</div>
+            <div class="letter">Gloutonne</div> <div class="morse">--&middot;</div>
+            <div class="letter">Heureusement</div> <div class="morse">&middot;&middot;&middot;&middot;</div>
+            <div class="letter">Ile</div> <div class="morse">&middot;&middot;</div>
+            <div class="letter">J'ai mon loto</div> <div class="morse">&middot;---</div>
+            <div class="letter">Kohinor</div> <div class="morse">-&middot;-</div>
+            <div class="letter">Linotype</div> <div class="morse">&middot;-&middot;&middot;</div>
+            <div class="letter">Moto</div> <div class="morse">--</div>
+            <div class="letter">Note</div> <div class="morse">-&middot;</div>
+            <div class="letter">Oloron</div> <div class="morse">---</div>
+            <div class="letter">Pyrophore</div> <div class="morse">&middot;--&middot;</div>
+            <div class="letter">Quocorico</div> <div class="morse">--&middot;-</div>
+            <div class="letter">Raisonne</div> <div class="morse">&middot;-&middot;</div>
+            <div class="letter">Salade</div> <div class="morse">&middot;&middot;&middot;</div>
+            <div class="letter">Top</div> <div class="morse">-</div>
+            <div class="letter">Unisson</div> <div class="morse">&middot;&middot;-</div>
+            <div class="letter">V&eacute;g&eacute;tation</div> <div class="morse">&middot;&middot;&middot;-</div>
+            <div class="letter">Wagon long</div> <div class="morse">&middot;--</div>
+            <div class="letter">Xochimilco</div> <div class="morse">-&middot;&middot;-</div>
+            <div class="letter">Yotcheoufou</div> <div class="morse">-&middot;--</div>
+            <div class="letter">Zoroastre</div> <div class="morse">--&middot;&middot;</div>
+        </div>
+        <hr/>
+    </body>
+</html>
