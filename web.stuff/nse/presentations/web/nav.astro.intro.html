@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<!--
+    Intends to generate a possibly printer-ready document, with appropriate page breaks and so.
+    This doc should be both visualizable and printable.
+ +-->
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Navigation Astronomique</title>
+    <!--author>Olivier Le Diouris</author-->
+    <meta name="author" content="Olivier Le Diouris">
+    <link rel="icon" type="image/png" href="../../sextant.png">
+    <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    <link rel="stylesheet" href="../../main.css" />
+    <!-- link rel="stylesheet" media="screen" href="main.css" /-->
+    <link rel="stylesheet" media="print" href="../../print.css" />
+</head>
+<body>
+
+<div id="screen-warning" class="screen-only screen-warning">
+    <!-- Language switch goes here -->
+     <div style="float: right;">
+        <a href="#">In English</a>
+     </div>
+    <b><i>Note&nbsp;:</i></b>
+    <div style="display: grid; grid-template-columns: auto auto;">
+        <p style="margin: 5px; padding: 5px; border: 1px solid silver; border-radius: 5px;">
+            The following document is designed to be visualized from a web browser, or printed from it (a pdf can also be generated from the page).
+            The printed version will have page breaks and other formattings that will not be displayed from the web browser.<br/>
+            Likewise, the web version has links that would be meaningless in a printed document.<br/>
+            When printing, you will have the possibility - from the dialog showing up in the browser - to hide or show different 
+            data like headers, footers, page numbers, etc, and even scale.<br/>
+            <b>But</b>, I'm still looking for a (free) way to generate the page numbers in the table of contents...
+        </p>
+        <p style="margin: 5px; padding: 5px; border: 1px solid silver; border-radius: 5px;">
+            Le document qui suit est con&ccedil;u pour &ecirc;tre visualis&eacute; dans un navigateur web, ou imprim&eacute; &agrave; partir ce celui-ci (on peut aussi g&eacute;n&eacute;rer un pdf).
+            La version imprim&eacute;e comporte des sauts de page et autres formattages qui ne seront pas visibles &agrave; partir du navigateur.<br/>
+            De m&ecirc;me, la version web comporte des liens qui n'auraient gu&egrave;re de sens dans un document imprim&eacute;.<br/>
+            Lors de l'impression, vous aurez la possibilit&eacute; - &agrave; partir des boites de dialogue du navigateur - de faire appara&icirc;tre ou pas
+            des donn&eacute;es comme les en-t&ecirc;tes et bas de page, num&eacute;ros de page, etc, et m&ecirc;me l'&eacute;chelle.<br/>
+            <b>Mais</b>, je suis toujours en train de chercher comment g&eacute;n&eacute;rer (gratuitement) les num&eacute;ros de page dans la table des mati&egrave;res...
+        </p>
+    </div>
+    <hr/>
+</div>
+
+<div class="front-page">
+    <h3 style="text-align: center;">Olivier Le Diouris</h3>
+    <div class="in-the-middle">
+        <h1 style="text-align: center; font-size: 4.5em;">Introduction &agrave; la navigation astronomique</h1>
+        <h2 style="text-align: center; font-size: 2em;">Principes de base</h1>
+    </div>
+</div>
+
+<div class="blank-for-print"></div>
+
+<hr class="screen-only"/>
+<div class="print-only content in-the-middle">
+    <div style="text-align: right; margin-right: 30px;">
+        <i>Pour Sky, Tao, Ellie, Zach, Otto, Eva</i>
+    </div>
+    <div style="text-align: left; margin-left: 30px; margin-top: 130px;">
+        <i>The more you know, the less you need... (Yvon Chouinard)</i>
+    </div>
+</div>    
+
+<div class="blank-for-print"></div>
+
+<div class="table-content screen-only">
+    <!-- 
+        role=list necessary because WebKit removes list semantic when list-style-type: none 
+        taken from https://codepen.io/nzakas/pen/rNJaeMo
+        WARNING !!! Page numbers are NOT automatically generated !!
+    -->
+    <h2>Table</h2>
+    <ol class="toc-list" role="list">
+        <li><a class="toc" href="#01"><span class="title">Pr&eacute;ambule<span class="leaders print-only-2" aria-hidden="true"></span></span><span data-href="#01" class="page print-only"><span class="visually-hidden">Page&nbsp;</span>6</span></a></li>
+        <li>
+            <a class="toc" href="#02"><span class="title">Le principe<span class="leaders print-only-2" aria-hidden="true"></span></span><span data-href="#02" class="page print-only"><span class="visually-hidden">Page&nbsp;</span>7</span></a>
+            <ol role="list">
+                <li><a class="toc" href="#02-1"><span class="title">Le sextant<span class="leaders print-only-2" aria-hidden="true"></span></span><span data-href="#02-1" class="page print-only"><span class="visually-hidden">Page&nbsp;</span>10</span></a></li>
+                <li><a class="toc" href="#02-2"><span class="title">Les donn&eacute;es<span class="leaders print-only-2" aria-hidden="true"></span></span><span data-href="#02-2" class="page print-only"><span class="visually-hidden">Page&nbsp;</span>10</span></a></li>
+                <li><a class="toc" href="#02-3"><span class="title">Premi&egrave;re d&eacute;finition<span class="leaders print-only-2" aria-hidden="true"></span></span><span data-href="#02-3" class="page print-only"><span class="visually-hidden">Page&nbsp;</span>10</span></a></li>
+            </ol>
+        </li>
+        <li>
+            <a class="toc" href="#03"><span class="title">Un cas particulier<span class="leaders print-only-2" aria-hidden="true"></span></span><span data-href="#03" class="page print-only"><span class="visually-hidden">Page&nbsp;</span>7</span></a>
+            <a class="toc" href="#04"><span class="title">Deuxi&egrave;me d&eacute;finition<span class="leaders print-only-2" aria-hidden="true"></span></span><span data-href="#04" class="page print-only"><span class="visually-hidden">Page&nbsp;</span>7</span></a>
+            <a class="toc" href="#05"><span class="title">G&eacute;n&eacute;ralisation<span class="leaders print-only-2" aria-hidden="true"></span></span><span data-href="#05" class="page print-only"><span class="visually-hidden">Page&nbsp;</span>7</span></a>
+            <a class="toc" href="#06"><span class="title">Troisi&egrave;me d&eacute;finition<span class="leaders print-only-2" aria-hidden="true"></span></span><span data-href="#06" class="page print-only"><span class="visually-hidden">Page&nbsp;</span>7</span></a>
+            <a class="toc" href="#07"><span class="title">Ce qu'on cherche<span class="leaders print-only-2" aria-hidden="true"></span></span><span data-href="#07" class="page print-only"><span class="visually-hidden">Page&nbsp;</span>7</span></a>
+            <a class="toc" href="#08"><span class="title">Exploitation des r&eacute;sultats<span class="leaders print-only-2" aria-hidden="true"></span></span><span data-href="#08" class="page print-only"><span class="visually-hidden">Page&nbsp;</span>7</span></a>
+            <a class="toc" href="#09"><span class="title">Quatri&egrave;me d&eacute;finition<span class="leaders print-only-2" aria-hidden="true"></span></span><span data-href="#09" class="page print-only"><span class="visually-hidden">Page&nbsp;</span>7</span></a>
+            <a class="toc" href="#10"><span class="title">Conclusion<span class="leaders print-only-2" aria-hidden="true"></span></span><span data-href="#10" class="page print-only"><span class="visually-hidden">Page&nbsp;</span>7</span></a>
+        </li>
+    </ol>
+</div>
+<hr class="screen-only"/>
+
+<div class="content">
+    <h1><a name="01">Pr&eacute;ambule</a></h1>
+    <div>
+        <p>
+            On va exposer dans ce document les principes de base utilis&eacute;s en navigation astronomique pour trouver sa position en mer.
+        </p>
+        <p>
+            Ces principes reposent sur les donn&eacute;es suivantes :
+            <ul>
+                <li>La connaissance du temps</li>
+                <li>La position de l'astre observ&eacute;</li>
+                <li>La position estim&eacute;e de l'observateur</li>
+                <li>La hauteur (l'angle qu'il fait avec l'horizon) de l'astre observ&eacute;</li>
+            </ul>
+            Le principe de base consiste &agrave; comparer ce qu'on devrait observer avec le sextant si on &eacute;tait la o&ugrave; on pense &ecirc;tre avec
+            ce qu'on observe en re&eacute;alite, et &agrave; corriger son estime - sa position - en cons&eacute;quence.
+        </p>
+        <p>
+            <b>Le but de la navigation astronomique est de corriger son estime</b> ; comme toutes les autres sortes de point, d'ailleurs.
+        </p>
+        <p>
+            Et - ainsi qu'on va le voir - 95% des calculs &agrave; faire sont uniquement destin&eacute;s &agrave; calculer ce qu'on devrait observer si on &eacute;tait effectivement l&agrave; o&ugrave; on pense &ecirc;tre.
+        </p>
+        <p>
+            Afin de rester concis, on n'entrera pas toujours dans les d&eacute;tails ; le but de ce document est d'abord d'&eacute;noncer les concepts
+            &agrave; connaitre pour mettre la navigation astronomique en &oelig;uvre.
+        </p>
+    </div>
+</div>
+
+<hr class="screen-only"/>
+<div class="content doc-section in-the-middle">
+    <h1 style="text-align: center; font-size: 3em;"><a name="02">Le principe</a></h1>
+    <h2 style="text-align: center; font-size: 2em;">Les donn&eacute;es et les &eacute;l&eacute;ments du calcul</h2>
+</div>
+<hr class="screen-only"/>
+
+<div class="content doc-section">
+    <h1><a name="02-1">Le sextant</a></h1>
+    <p>
+        <ul>
+            <li>
+                L'observation d'un astre se fait - dans notre contexte -  &agrave; l'aide d'un sextant.
+                Cet appareil sert &agrave; mesurer des anles. On s'en sert pour mesurer l'angle que fait un astre au dessus de l'horizon.
+                On appelle cet angle le <i>hauteur</i> d'un astre.
+            </li>
+            <li>
+                La pr&eacute;cision requise est de l'ordre de la minute d'arc.
+                <ul>
+                    <li>Une minute d'arc au centre de la Terre, projet&eacute;e &agrave; sa surface, c'est la d&eacute;finition du mille marin.</li>
+                </ul>
+
+            </li>
+            <li>Pour donner une id&eacute;e de ce que &ccedil;a repr&eacute;sente, une minute d'arc, c'est &eacute;pais comme un cheveux &agrave; bout de bras...</li>
+        </ul>
+    </p>
+</div>
+
+<div class="content doc-section">
+    <h1><a name="02-2">Les donn&eacute;es</a></h1>
+    <p>
+        <ul>
+            <li>
+                Connaissance du temps
+                <ul>
+                    <li>
+                        Il s'agit de la connaissance de l'heure exacte, &agrave; la seconde pr&egrave;s. Il faut une bonne montre, ou un bon chronom&egrave;tre.
+                        <ul>
+                            <li>
+                                En effet, la Terre tourne de 360&deg; en une journ&eacute;e, ce qui fait 15&deg; en une heure, soit 1&deg; en 4 minutes,
+                                et donc une minute d'arc en 4 secondes de temps. Une minute d'arc, c'est un mille marin, par d&eacute;finition. Une erreur de 4 secondes sur la montre
+                                peut donc se traduire par une erreur d'un mille sur la carte...
+                            </li>
+                        </ul>
+                    </li>
+                    <li>Ce temps exact est celui qu'on utilise pour calculer la position de l'astre observ&eacute;.</li>
+                </ul>
+            </li>
+            <li>
+               La position de l'astre observ&eacute;.
+                <ul>
+                    <li>
+                        On la calcule &agrave; l'aide des almanachs nautiques ou astronomiques (qu'on appelle aussi <i>&eacute;ph&eacute;m&eacute;rides</i>). 
+                        Ces documents donnent pour tout instant les coordonn&eacute;es de diff&eacute;rents astres (Soleil, Lune, plan&egrave;tes, &eacute;toiles).
+                    </li>
+                </ul>
+            </li>
+            <li>
+                La position estim&eacute;e de l'observateur.
+                 <ul>
+                     <li>
+                         Elle est obtenue gr&acirc;ce &agrave; la tenue de l'estime.<br/>
+                         Comme on l'a dit, on est en train de corriger son estime. Elle doit &ecirc;tre tenue de mani&egrave;re rigoureuse, c'est crucial.
+                     </li>
+                     <li>L'estime est tenue gr&acirc;ce au livre de bord.</li>
+                 </ul>
+             </li>
+             <li>
+                La hauteur observ&eacute;e
+                <ul>
+                    <li>
+                        Elle est lue sur le sextant, et on y applique plusieurs corrections :
+                        <ul>
+                            <li>
+                                Demi-diam&egrave;tre
+                                <ul>
+                                    <li>Dans le cas du Soleil et de la Lune</li>
+                                </ul>
+                            </li>
+                            <li>R&eacute;fraction</li>
+                            <li>Parallaxe</li>
+                            <li>D&eacute;pression de l'horizon</li>
+                        </ul>
+                    </li>
+                    <li>
+                        Compte tenu de la pr&eacute;cision requise, cette donn&eacute;e est probablement la plus d&eacute;licate &agrave; obtenir,
+                        une bonne observation requiert de l'entrainement. Mesurer un angle &agrave; un cheveu pres (cheveu &agrave; bout de bras, voir plus haut...),
+                        sur un pont qui bouge, avec les deux mains prises..., &ccedil;a ne s'improvise pas du jour au lendemain.
+                    </li>
+                </ul>
+             </li>
+         </ul>
+    </p>
+</div>
+
+<div class="content doc-section">
+    <h2><a name="02-2-1">Pour r&eacute;sumer les donn&eacute;es</a></h2>
+    <ul>
+        <li>Pour avoir la hauteur observ&eacute;e, il faut un sextant (et savoir s'en servir).</li>
+        <li>Pour avoir l'heure, il faut une (bonne) montre.</li>
+        <li>Pour avoir sa position estim&eacute;e, il faut un livre de bord bien tenu, et &agrave; jour.</li>
+        <li>Pour avoir la position de l'astre observ&eacute;, il faut des &eacute;ph&eacute;merides &agrave; jour (&agrave; savoir pour l'heure de l'observation).</li>
+    </ul>
+</div>    
+
+<div class="content doc-section">
+    <h1><a name="02-3">Premi&egrave;re d&eacute;finition</a></h1>
+    <p>
+        <ul>
+            <li>
+                Lorsqu'on parle de la position d'un astre, on parle en fait de la position du point de la Terre
+                o&ugrave; l'astre est &agrave; la verticale (au z&eacute;nith).
+            </li>
+            <li>
+                On appelle ce point la <i>Position G&eacute;ographique Instantan&eacute;e</i> d'un astre, not&eacute;e <b>P<i>g</i></b>.
+            </li>
+            <li>Les coordonn&eacute;es de ce point varient d'une seconde &agrave; l'autre, et oui, la Terre tourne !</li>
+        </ul>
+        <img src="01.png" style="width: 90vw;">
+    </p>
+</div>
+
+<div class="content doc-section">
+    <p>
+        <ul>
+            <li>
+                Ce point <b>P<i>g</i></b>, comme tous les points de la Terre,
+                a une latitude et une longitude.
+            </li>
+            <li>Sa latitude s'apelle le <b>D&eacute;clinaison</b>, not&eacute;e <b>D</b></li>
+            <li>
+                Sa longitude s'appelle <b>Angle Horaire &agrave; Greenwich</b>, not&eacute; <b>AHG</b> (ou aussi <b>AHvo</b>, pour Angle Horaire au vrai z&eacute;ro)
+                <ul>
+                    <li>
+                        On retrouvera souvent cet "Angle Horaire". Cette expression est utilis&eacute;e pour les angles qu'on compte
+                        dans le sens des aiguilles d'une montre, &agrave; l'inverse de l'usage r&eacute;pandu en trigonom&eacute;trie, o&ugrave; c'est le contraire,
+                        sens <i>inverse</i> des aiguilles d'une montre.
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <img src="02.png" style="width: 90vw;">
+        <br/>
+        <img src="03.png" style="width: 90vw;">
+    </p>
+</div>
+
+<div class="content doc-section">
+    <h1><a name="03">Un cas particulier</a></h1>
+    <h2>Hauteur m&eacute;ridienne</h2>
+    <div>
+        <p>
+            <ul>
+                <li>
+                    Pour exposer le principe de la fa&ccedil;on la plus claire possible, on va d'abord consid&eacute;rer le cas 
+                    o&ugrave; l'observateur (not&eacute; <b>Obs</b> sur les figures suivantes) se trouve sur le m&ecirc;me m&eacute;ridien que le point P<i>g</i>.
+                </li>
+                <li>
+                    Pour l'observateur, ceci se produit lorsque l'astre arrive &agrave; son point le plus haut dans le ciel
+                    <ul>
+                        <li>On appelle ceci la <i>culmination</i> de l'astre</li>
+                        <li>
+                            Pour certains astres (&eacute;toiles, plan&egrave;tes, ...), on peut aussi utiliser le fait qu'ils passent &agrave; leur point le plus bas dans le ciel,
+                            qu'on appelle alors l'<i>anti-culmination.</i>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    Pour un observateur immobile, ceci arrive une fois par jour et par astre.
+                    <ul>
+                        <li>
+                            <i>Note :</i> Quand il s'agit du Soleil, on dit qu'il est <i>midi</i>.<br/>
+                            Les m&eacute;ridionaux habitent dans le midi...
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <img src="04.png" style="width: 90vw;">
+            <ul>
+                <li>
+                    Pour simplifier les diagrammes, on va faire figurer le m&eacute;ridien sur lequel se trouvent l'astre et l'observateur dans le plan de la feuille.
+                </li>
+            </ul>
+            <img src="05.png" style="width: 90vw;">
+            <ul>
+                <li>
+                    On a besoin d'introduitre ici la notion de Distance Z&eacute;nithale.
+                    <ul>
+                        <li>La Distance Z&eacute;nithale, not&eacute;e <b>Dz</b> ou <b>&zeta;</b>, est le compl&eacute;ment de la hauteur, soit <b>(90&deg - hauteur)</b></li>
+                        <li>On voit les rapports respectifs entre hauteur et distance z&eacute;nithale sur les diagrammes suivants</li>
+                        <li>Dans le diagramme qui suit, on a repr&eacute;sent&eacute; 2 fois le Soleil, uniquement afin que ses rayons soient parall&egrave;les</li>
+                        <li>On constate que dans ce cas, la Distance Z&eacute;nithale est &eacute;gale &agrave; la <i>somme</i> de la Latitude et de la D&eacute;clinaison</li>
+                        <li>Connaissant la Distance Z&eacute;nithale, la d&eacute;termination de la hauteur est imm&eacute;diate.</li>
+                    </ul>
+                </li>
+            </ul>
+            <img src="06.png" style="width: 90vw;">
+            <ul>
+                <li>Sur la figure suivante, on constate que dans c ecas, la Distance Z&eacute;nithale est &eacute;gale &agrave; la <i>diff&eacute;rence</i> entre la Latitude et la D&eacute;clinaison.</li>
+                <li>Il est donc important de consid&eacute;rer les signes respectifs de la Latitude de l'observateur et de la D&eacute;clinaison de l'astre.</li>
+            </ul>
+            <img src="07.png" style="width: 90vw;">
+            <ul>
+                <li>
+                    Ainsi, dans ce cas particulier ou l'observateur et l'astre se trouvent sur le m&ecirc;me m&eacute;ridien, il
+                    est facile de calculer la hauteur de l'astre pour un instant donn&acute;e, &agrave; la position estim&eacute;le de l'observateur.
+                </li>
+                <li>
+                    Pour r&eacute;sumer :
+                    <ul>
+                        <li>
+                            Si <b>L</b> &amp; <b>D</b> sont de m&ecirc;me signe
+                            <ul>
+                                <li><b>He = 90&deg; - (L-D) = 90&deg; - L + D</b></li>
+                            </ul>
+                        </li>
+                        <li>
+                            Si <b>L</b> &amp; <b>D</b> sont signes diff&eacute;rents
+                            <ul>
+                                <li><b>He = 90&deg; - (L+D) = 90&deg; - L - D</b></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    De la m&ecirc;me facon, lorsqu'on a fait une observation (obtenu la hauteur observ&eacute;e) &agrave; une heure donn&eacute;e, &agrave; laquelle
+                    on connait - gr&acirc;ce aux &eacute;ph&eacute;m&eacute;rides - la valeur de la D&eacute;clinaison de l'astre, on est capable d'en d&eacute;duire sa latitude.
+                </li>
+                <li>
+                    <i>Note</i> : Pour obtenir sa longitude, il faut &eacute;valuer l'heure de la culmination (&agrave; la seconde pr&egrave;s) et la comparer
+                    &agrave; l'heure de la culmination &agrave; Greenwich. C'est un peu plus complexe, et n'entre pas dans le cadre de ce document.
+                </li>
+            </ul>
+        </p>
+    </div>
+</div>
+
+<div class="content doc-section">
+    <h1><a name="04">Deuxi&egrave;me d&eacute;finition</a></h1>
+    <h2>Grand Cercle</h2>
+    <p>
+        <ul>
+            <li>
+                Un <b>Grand Cercle</b> est un cercle qui coupe la Terre en deux moiti&eacute;s &eacute;gales.
+                <ul>
+                    <li>Tous les m&eacute;ridiens sont des Grands Cercles</li>
+                    <li>L'&Eacute;quateur est le seul parall&egrave;le qui soit un Grand Cercle</li>
+                    <li>
+                        Par deux points donn&eacute;s de la Terre, il ne passe qu'<i>un</i> Grand Cercle.
+                        <ul>
+                            <li>Sauf evidemment si ils sont chacun a l'extr&eacute;mit&eacute; d'un diam&egrave;tre...</li>
+                        </ul>
+                    </li>
+                    <li>Le trajet le plus court d'un point &agrave; un autre est un arc de Grand Cercle (qu'on appelle <i>orthodromie</i>)</li>
+                </ul>
+            </li>
+        </ul>
+        <img src="08.png" style="width: 90vw;">
+    </p>
+</div>
+
+<div class="content doc-section">
+    <h1><a name="05">G&eacute;n&eacute;ralisation</a></h1>
+    <p>
+        <ul>
+            <li>
+                Dans le cas - fr&eacute;quent - o&ugrave; l'observateur et le point <b>P<i>g</i></b> ne sont <i>pas</i> sur le m&ecirc;me m&eacute;ridien, on consid&egrave;re
+                le grand cercle - unique donc - qui passe par la position estim&eacute;e de l'observateur et le point <b>P<i>g</i></b>.
+            </li>
+        </ul>
+        <img src="09.png" style="width: 90vw;">
+        <ul>
+            <li>
+                Toute l'astuce de calcul, destin&eacute;e &agrave; trouver la hauteur estim&eacute;e de l'astre, consiste &agrave; faire "<i>pivoter</i>"
+                ce grand cercle de mani&egrave;re &agrave; l'amener dans le plan de la feuille.
+            </li>
+            <li>Ainsi, on se trouve dans le cas de figure d&eacute;j&agrave; d&eacute;crit pour la hauteur m&eacute;ridienne.</li>
+            <li>De trigonom&eacute;trie dans le plan, on passe donc en trigonom&eacute;trie sph&eacute;rique. Les calculs sont plus complexes, mais le principe reste simple.</li>
+            <li>
+                Ce calcul de "<i>pivotement</i>" fait intervenir deux grandeurs essentielles :
+                <ul>
+                    <li>La somme <b>L&PlusMinus;D</b></li>
+                    <li>La diff&eacute;rence de longitude entre l'observateur et <b>P<i>g</i></b>, appel&eacute;e "Angle Horaire Local", not&eacute; <b>AHL</b></li>
+                </ul>
+            </li>
+            <li>
+                Ces deux grandeurs sont en fait
+                <uL>
+                    <li>La diff&eacute;rence de <i>latitude</i> entre <b>P<i>g</i></b> et <b>Obs</b></li>
+                    <li>La diff&eacute;rence de <i>longitude</i> entre <b>P<i>g</i></b> et <b>Obs</b></li>
+                </uL>
+            </li>
+        </ul>
+        <img src="10.png" style="width: 90vw;">
+        <ul>
+            <li>Une fois ce pivotement effectu&eacute;, on a tous les &eacute;l&eacute;ments pour d&eacute;terminer la hauteur estim&eacute;e de l'astre observ&eacute;.</li>
+            <li>Ces calculs sont d&eacute;taill&eacute;s dans un autre document, pas ici.</li>
+        </ul>
+    </p>
+</div>
+
+<div class="content doc-section">
+    <h1><a name="06">Troisi&egrave;me d&eacute;finition</a></h1>
+    <h2>Azimuth</h2>
+    <ul>
+        <li>L'azimuth - not&eacute; <b>Z</b> - n'est rien d'autre que la <i>direction</i> dans laquelle on voit l'astre observ&eacute;.</li>
+        <li>C'est &eacute;galement le rel&egrave;vement du point <b>P<i>g</i></b>, autrement dit la direction &agrave; prendre pour l'atteindre.</li>
+        <li>L'azimuth est compt&eacute; de 0&deg; &agrave; 360&deg; (tout comme un rel&egrave;vement).</li>
+        <li><i>Remarque</i> : dans le cas de la hauteur m&eacute;ridienne, l'azimuth est 0&deg; ou 180&deg;</li>
+    </ul>
+    <img src="11.png" style="width: 90vw;">
+</div>
+
+<div class="content doc-section">
+    <h1><a name="07">Ce qu'on cherche</a></h1>
+    <ul>
+        <li>
+            Toutes les figures et tous les calculs d&eacute;crits pr&eacute;c&eacute;demment n'ont que deux buts :
+            <ul>
+                <li>
+                    Calculer, pour la position estim&eacute;e de l'observateur, &agrave; l'heure exacte de l'observation
+                    <ul>
+                        <li>La hauteur estim&eacute;e de l'astre observ&eacute;</li>
+                        <li>Son azimuth</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li>
+            Ces donn&eacute;es s'obtiennent en r&eacute;solvant les formules suivantes :
+            $$
+            He = \arcsin \left( \sin(L) \times \sin(D) + \cos(L) \times \cos(D) \times \cos(AHL)) \right)
+            $$
+
+            $$
+            Z = \arctan \left( \dfrac{ \sin(AHL)} { (\cos(L) \times \tan(D)) - (\sin(L) \times \cos(AHL)) } \right)
+            $$
+        </li>
+        <li>On ne rit pas</li>
+    </ul>
+</div>
+
+<div class="content doc-section">
+    <h1><a name="08">Exploitation des r&eacute;sultats</a></h1>
+    <h2>Correction de l'estime, et d&eacute;termination de la position</h2>
+    <ul>
+        <li>
+            On a donc determin&eacute; par le calcul la hauteur estim&eacute;e d'un astre, &agrave; savoir la hauteur
+            qu'on observerait si on &eacute;tait effectivement &agrave; la position estim&eacute;e de l'observateur.
+        </li>
+        <li>
+            Tous les points d'un cercle, centr&eacute; sur le point <b>P<i>g</i></b>, voient l'astre &agrave; la m&ecirc;me hauteur.
+        </li>
+    </ul>
+    <img src="12.png" style="width: 90vw;">
+    <br/>
+    <img src="13.png" style="width: 90vw;">
+    <ul>
+        <li>On passe le diagramme pr&eacute;c&eacute;dent sur la carte, et on obtient le suivant :</li>
+    </ul>
+    <img src="14.png" style="width: 90vw;">
+    <ul>
+        <li>En pratique, on est rarement assez pr&egrave;s du point <b>P<i>g</i></b> pour qu'un tel <i>cercle d'&eacute;gales hauteurs</i> tienne sur la carte.</li>
+        <li>
+            De fait, ce cercle est souvent tellement grand que sur une longueur de 20 ou 30 milles sur sa circonf&eacute;rence,
+            il est assimilable &agrave; une droite, qu'on appelle <i>droite d'&eacute;gales hauteurs</i> (que tout le monde 
+            abr&egrave;ge en <i>droite de hauteurs</i>).
+        </li>
+        <li>
+            On a donc jusqu'&agrave; pr&eacute;sent :
+            <ul>
+                <li>La hauteur estim&eacute;e de l'astre</li>
+                <li>L'azimuth de l'astre</li>
+                <li>La position estim&eacute;e de l'observateur</li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+<div class="content doc-section">
+    <h1><a name="09">Quatri&egrave;me d&eacute;finition</a></h1>
+    <h2>Intercept</h2>
+    <ul>
+        <li>L'intercept est la diff&eacute;rence entre la hauteur estim&eacute;e (calcul&eacute;e) et la hauteur observ&eacute;e (avec le sextant).</li>
+        <li>Il peut &ecirc;tre positif ou n&eacute;gatif</li>
+        <li>
+            Il est exprim&eacute; en minutes d'arc
+            <ul>
+                <li>
+                    On rappelle la d&eacute;finition du mille marin :
+                    <ul>
+                        <li>Une minute d'arc au centre de la Terre projet&eacute;e &agrave; sa surface.</li>
+                    </ul>
+                </li>
+                <li>
+                    Il y a donc une corellation directe entre la valeur de l'intercept en minutes d'arc et la valeur de la correction
+                    &agrave; apporter &agrave; l'estime en milles.
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+<div class="content doc-section">
+    <ul>
+        <li>On porte sur la carte la position estim&eacute;e de l'observateur</li>
+        <li>On trace l'azimuth, passant par cette position</li>
+        <li>
+            Si la hauteur observ&eacute;e est plus grande que la hauteur estim&eacute;e, &ccedil;a signifie qu'on est en realit&eacute; <i><b>plus pr&egrave;s</b></i>
+            de l'astre que ne le pr&eacute;tend l'estime, et ce d'autant de milles qu'il y a de minutes dans l'intercept.
+        </li>
+        <li>
+            Si la hauteur observ&eacute;e est plus petite que la hauteur estim&eacute;e, &ccedil;a signifie qu'on est en realit&eacute; <i><b>plus loin</b></i>
+            de l'astre que ne le pr&eacute;tend l'estime, et ce d'autant de milles qu'il y a de minutes dans l'intercept.
+        </li>
+        <li>On porte donc sur la carte l'intercept, le long de l'azimuth, dans le sens appropri&eacute;.</li>
+        <li>Perpendiculairement &agrave; l'azimuth, &agrave; partir du point ainsi trouv&eacute;, on trace la <i>droite de hauteurs</i>.</li>
+    </ul>
+    <img src="15.png" style="width: 90vw;">
+    <ul>
+        <li>Tout ce qu'on sait &agrave; pr&eacute;sent, c'est qu'on est quelque part sur cette droite.</li>
+        <li>
+            Afin d'affiner cette information, on fait une deuxi&egrave;me droite queques heures plus tard (ou avec un autre astre, 
+            s'il y en a de disponibles), afin que la nouvelle droite n'ait pas le m&ecirc;me azimuth que la premi&egrave;re.
+        </li>
+    </ul>
+    <img src="16.png" style="width: 90vw;">
+    <ul>
+        <li>
+            On translate ensuite la premi&egrave;re droite de la distance parcourue dans l'intervalle de temps qui s&eacute;pare les deux observations, 
+            dans la direction qu'on a suivie.
+        </li>
+        <li>
+            On obtient ainsi une intersection entre les deux droites, qui se trouve &ecirc;tre la <b><i>position corrig&eacute;e</i></b>,
+            pusiqu'elle synth&eacute;tise &agrave; la fois les informations donn&eacute;es par la premi&egrave;re et la deuxi&egrave;me droite.
+        </li>
+    </ul>
+    <img src="17.png" style="width: 90vw;">
+</div>
+
+<div class="content doc-section">
+    <h1><a name="10">Conclusion</a></h1>
+    <ul>
+        <li>La d&eacute;marche d&eacute;crite dans ce document est simple, mais les calculs pour la mettre en &oelig;uvre n'ont rien de trivial.</li>
+        <li>N&eacute;anmoins, une bonne compr&eacute;hension du principe est n&eacute;cessaire, ne serait-ce qu'afin de d&eacute;tecter les erreurs de calcul, qui ne manqueront pas d'arriver.</li>
+    </ul>
+</div>
+
+<!-- End of Doc -->
+<hr class="screen-only"/>
+
+<div id="last-page" class="content doc-section in-the-middle" style="margin-right: 30px; font-style: italic;">
+    R&eacute;dig&eacute; en 2004 pour la premi&egrave;re &eacute;dition.
+</div>
+
+</body>
+</html>
