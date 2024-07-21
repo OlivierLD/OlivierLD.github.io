@@ -84,10 +84,10 @@
             <ol role="list">
                 <li><a class="toc" href="#02-1"><span class="title">Le sextant<span class="leaders print-only-2" aria-hidden="true"></span></span><span data-href="#02-1" class="page print-only"><span class="visually-hidden">Page&nbsp;</span>10</span></a></li>
                 <li><a class="toc" href="#02-2"><span class="title">Les donn&eacute;es<span class="leaders print-only-2" aria-hidden="true"></span></span><span data-href="#02-2" class="page print-only"><span class="visually-hidden">Page&nbsp;</span>10</span></a></li>
-                <li><a class="toc" href="#02-3"><span class="title">Premi&egrave;re d&eacute;finition<span class="leaders print-only-2" aria-hidden="true"></span></span><span data-href="#02-3" class="page print-only"><span class="visually-hidden">Page&nbsp;</span>10</span></a></li>
             </ol>
         </li>
         <li>
+            <a class="toc" href="#02-3"><span class="title">Premi&egrave;re d&eacute;finition<span class="leaders print-only-2" aria-hidden="true"></span></span><span data-href="#02-3" class="page print-only"><span class="visually-hidden">Page&nbsp;</span>10</span></a>
             <a class="toc" href="#03"><span class="title">Un cas particulier<span class="leaders print-only-2" aria-hidden="true"></span></span><span data-href="#03" class="page print-only"><span class="visually-hidden">Page&nbsp;</span>7</span></a>
             <a class="toc" href="#04"><span class="title">Deuxi&egrave;me d&eacute;finition<span class="leaders print-only-2" aria-hidden="true"></span></span><span data-href="#04" class="page print-only"><span class="visually-hidden">Page&nbsp;</span>7</span></a>
             <a class="toc" href="#05"><span class="title">G&eacute;n&eacute;ralisation<span class="leaders print-only-2" aria-hidden="true"></span></span><span data-href="#05" class="page print-only"><span class="visually-hidden">Page&nbsp;</span>7</span></a>
@@ -250,17 +250,12 @@
             <li>Les coordonn&eacute;es de ce point varient d'une seconde &agrave; l'autre, et oui, la Terre tourne !</li>
         </ul>
         <img src="01.png" style="width: 90vw;">
-    </p>
-</div>
-
-<div class="content doc-section">
-    <p>
         <ul>
             <li>
                 Ce point <b>P<i>g</i></b>, comme tous les points de la Terre,
                 a une latitude et une longitude.
             </li>
-            <li>Sa latitude s'apelle le <b>D&eacute;clinaison</b>, not&eacute;e <b>D</b></li>
+            <li>Sa latitude s'appelle la <b>D&eacute;clinaison</b>, not&eacute;e <b>D</b></li>
             <li>
                 Sa longitude s'appelle <b>Angle Horaire &agrave; Greenwich</b>, not&eacute; <b>AHG</b> (ou aussi <b>AHvo</b>, pour Angle Horaire au vrai z&eacute;ro)
                 <ul>
@@ -302,7 +297,7 @@
                     Pour un observateur immobile, ceci arrive une fois par jour et par astre.
                     <ul>
                         <li>
-                            <i>Note :</i> Quand il s'agit du Soleil, on dit qu'il est <i>midi</i>.<br/>
+                            <i>Note :</i> Quand le Soleil passe au m&eacute;ridien, on dit qu'il est <i>midi</i>.<br/>
                             Les m&eacute;ridionaux habitent dans le midi...
                         </li>
                     </ul>
@@ -392,8 +387,13 @@
     </p>
 </div>
 
+<hr class="screen-only"/>
+<div class="content doc-section in-the-middle">
+    <h1 style="text-align: center; font-size: 3em;"><a name="05">G&eacute;n&eacute;ralisation</a></h1>
+</div>
+<hr class="screen-only"/>
+
 <div class="content doc-section">
-    <h1><a name="05">G&eacute;n&eacute;ralisation</a></h1>
     <p>
         <ul>
             <li>
@@ -461,6 +461,7 @@
         </li>
         <li>
             Ces donn&eacute;es s'obtiennent en r&eacute;solvant les formules suivantes :
+            <div class="postit">
             $$
             He = \arcsin \left( \sin(L) \times \sin(D) + \cos(L) \times \cos(D) \times \cos(AHL)) \right)
             $$
@@ -468,13 +469,21 @@
             $$
             Z = \arctan \left( \dfrac{ \sin(AHL)} { (\cos(L) \times \tan(D)) - (\sin(L) \times \cos(AHL)) } \right)
             $$
+            </div>
         </li>
         <li>On ne rit pas</li>
     </ul>
 </div>
 
+<hr class="screen-only"/>
+<div class="content doc-section in-the-middle">
+    <h1 style="text-align: center; font-size: 3em;"><a name="08">Exploitation des r&eacute;sultats</a></h1>
+</div>
+<hr class="screen-only"/>
+
+
 <div class="content doc-section">
-    <h1><a name="08">Exploitation des r&eacute;sultats</a></h1>
+    <!--h1><a name="08">Exploitation des r&eacute;sultats</a></h1-->
     <h2>Correction de l'estime, et d&eacute;termination de la position</h2>
     <ul>
         <li>
