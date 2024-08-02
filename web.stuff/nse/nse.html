@@ -3307,23 +3307,28 @@
          pour les tables de Dieumegard, avec une hauteur instrumentale de 33&deg;01', on trouve ainsi un intercept de 6', dans la direction oppos&eacute;e &agrave; l'astre.
         <div style="text-align: center;"><img src="images/form.dieumegard.02.png" width="60%" alt="Dieumegard" title="Dieumegard"></div>
         <div style="padding: 20px;">
-            <i>Note&nbsp;:</i>Pour l'obtention de <code>msh * &delta;AH</code>, <i>comme la variation horaire n'est <b>pas</b> &eacute;gale &agrave; 15&deg;</i>, on utilisera la table de correction 5&nbsp;:<br/>
+            <i>Note&nbsp;:</i>Pour l'obtention de <code>msh * &delta;AH</code>, <i>comme la variation horaire n'est <b>pas</b> &eacute;gale &agrave; 15&deg;</i>, on utilisera la table de correction <b>5</b> (ceux qui savent se passer de calculette vont &ecirc;tre contents)&nbsp;:<br/>
             On a <code>&delta;AH = 14.5333&deg;</code>, et <code>msh = 0.311667</code>.<br/>
-            <div style="display: grid; grid-template-columns: auto auto;">
+            <div>
                 <div>
-                    Ainsi <code>msh * &delta;AH = 4.529550&deg;</code>&nbsp;:<br/>
-                    <img src="images/msh.x.delta.ha.png" style="width: 40%;">
+                    Ainsi <code>msh * &delta;AH = 14.5333 &times; 0.311667 = 4.5295500111&deg;</code>&nbsp;:<br/>
+                    <img src="images/msh.x.delta.ha.png" style="width: 20%;">
                     <br/>
                     qu'on "arrondit" &agrave; <code>4.529550&deg;</code>.
                 </div>
+                On multiplie la partie enti&egrave;re <code>0.529550</code> par <code>60</code>, <i>ou bien</i> on la cherche dans la table <b>5</b>&nbsp;:<br/>
+            </div>
+            <div style="display: grid; grid-template-columns: auto auto; padding: 10px;">
                 <div>
-                    On multiplie la partie enti&egrave;re <code>0.529550</code> par <code>60</code>&nbsp;:<br/>
-                    <img src="images/before.table.5.png" style="width: 30%;">
+                    On multiplie&nbsp;:<br/>
+                    <img src="images/before.table.5.png" style="width: 30%; padding-top: 20px;">
+                </div>
+                <div>
+                    On cherche la partie d&eacute;cimale <code>0.529550</code> <b><i>dans</i></b> la table <b>5</b>&nbsp;:<br/>
+                    <img src="images/table.5.png" style="width: 40%;"><br/>
+                    On en sort la colonne <code>31</code>, ligne <code>77</code>, ce qui donne <code>31.77</code>&nbsp;!        
                 </div>
             </div>
-            Et on cherche ensuite la partie decimale <code>0.529550</code> <b><i>dans</i></b> la table 5&nbsp;:<br/>
-            <img src="images/table.5.png" style="width: 40%;"><br/>
-            On en sort la colonne <code>31</code>, ligne <code>77</code>, ce qui donne <code>31.77</code>&nbsp;!
         </div>
     </div>
     <div class="doc-section">
