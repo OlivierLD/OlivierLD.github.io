@@ -212,14 +212,14 @@
                 <li><a class="toc" href="#equation-du-temps"><span class="title">&Eacute;quation du temps<span class="leaders print-only-2" aria-hidden="true"></span></span><span data-href="#equation-du-temps" class="page print-only"><span class="visually-hidden">Page&nbsp;</span>81</span></a></li>
                 <li><a class="toc" href="#logarithms"><span class="title">Utilisation simplifi&eacute;e des tables de logarithmes<span class="leaders print-only-2" aria-hidden="true"></span></span><span data-href="#logarithms" class="page print-only"><span class="visually-hidden">Page&nbsp;</span>82</span></a></li>
                 <li><a class="toc" href="#05-2-9-2-7"><span class="title">Droite de hauteur avec des tables de logarithmes<span class="leaders print-only-2" aria-hidden="true"></span></span><span data-href="#05-2-9-2-7" class="page print-only"><span class="visually-hidden">Page&nbsp;</span>87</span></a></li>
-                <li><a class="toc" href="#lop-sample"><span class="title">Exemple de calcul de droites de hauteur<span class="leaders print-only-2" aria-hidden="true"></span></span><span data-href="#lop-sample" class="page print-only"><span class="visually-hidden">Page&nbsp;</span>121</span></a></li>
+                <li><a class="toc" href="#lop-sample"><span class="title">Exemple de calcul de droites de hauteur (Dieumegard &amp; Bataille)<span class="leaders print-only-2" aria-hidden="true"></span></span><span data-href="#lop-sample" class="page print-only"><span class="visually-hidden">Page&nbsp;</span>121</span></a></li>
                 <li>
-                    <a class="toc" href="#least-squares"><span class="title">R&eacute;solution d'un polyn&ocirc;me par la m&eacute;thode des moindres carr&eacute;s<span class="leaders print-only-2" aria-hidden="true"></span></span><span data-href="#least-squares" class="page print-only"><span class="visually-hidden">Page&nbsp;</span>128</span></a>
+                    <a class="toc" href="#least-squares"><span class="title">R&eacute;solution d'un polyn&ocirc;me par la m&eacute;thode des moindres carr&eacute;s<span class="leaders print-only-2" aria-hidden="true"></span></span><span data-href="#least-squares" class="page print-only"><span class="visually-hidden">Page&nbsp;</span>127</span></a>
                     <ul role="list">
-                        <li><a class="toc" href="#least-square-dev"><span class="title">Cas d'une courbe de d&eacute;viation<span class="leaders print-only-2" aria-hidden="true"></span></span><span data-href="#least-square-dev" class="page print-only"><span class="visually-hidden">Page&nbsp;</span>130</span></a></li>
+                        <li><a class="toc" href="#least-square-dev"><span class="title">Cas d'une courbe de d&eacute;viation<span class="leaders print-only-2" aria-hidden="true"></span></span><span data-href="#least-square-dev" class="page print-only"><span class="visually-hidden">Page&nbsp;</span>129</span></a></li>
                     </ul>
                 </li>
-                <li><a class="toc" href="#read-next"><span class="title">&Agrave; lire aussi<span class="leaders print-only-2" aria-hidden="true"></span></span><span data-href="#read-next" class="page print-only"><span class="visually-hidden">Page&nbsp;</span>132</span></a></li>
+                <li><a class="toc" href="#read-next"><span class="title">&Agrave; lire aussi<span class="leaders print-only-2" aria-hidden="true"></span></span><span data-href="#read-next" class="page print-only"><span class="visually-hidden">Page&nbsp;</span>131</span></a></li>
             </ul>
         </li>
     </ol>
@@ -3261,7 +3261,7 @@
 </div>
 
 <div class="content">
-    <h2><a name="lop-sample">Exemple de calcul de droites de hauteur</a></h2>
+    <h2><a name="lop-sample">Exemple de calcul de droites de hauteur (Dieumegard &amp; Bataille)</a></h2>
     <p>
         Voici un exemple de point par droites de hauteurs. <br/>
         On utilisera ici une plotting sheet, afin d'illustrer son usage. L'emploi de canevas Mercator 
@@ -3285,16 +3285,20 @@
         On observe <b>Jupiter</b> (&#9795;) et la <b>Lune</b> (son bord inf&eacute;rieur).
     </p>
     <p>
+        <b>Premi&egrave;re droite.</b><br/>
         &Agrave; 05:21:05 UTC, on observe Jupiter, sa hauteur instrumentale est 67&deg;32'.
     </p>
     <div class="doc-section">
         Voici le formulaire utilis&eacute; avec les tables de Dieumegard, pour d&eacute;terminer l'intercept, qui est ainsi de 0.85', vers l'astre.
         <div style="text-align: center;"><img src="images/form.dieumegard.01.png" width="60%" alt="Dieumegard" title="Dieumegard"></div>
         <div style="padding: 20px;">
-            <i>Note&nbsp;:</i>Pour l'obtention de <code>msh * &delta;AH</code>, <i>comme la variation horaire est de 15&deg;</i>, on utilise la table de correction 4&nbsp;:<br/>
+            <i>Note&nbsp;:</i>Pour l'obtention de <code>msh * &delta;AH</code>, <i>comme la variation horaire (&delta;AH) est de 15&deg;</i> (cette donn&eacute;e vient des &eacute;ph&eacute;merides), on utilise la table de correction 4&nbsp;:<br/>
+            L'heure TU de l'observation est 05:21:05 - soit 5 heures, 21 minutes et 05 secondes, les "Minutes &amp; Secondes" &agrave; convertir en Heures sont donc respectivement <b>21</b> et <b>05</b>, 
+            on cherche donc colonne <b>21</b> (minutes) ligne <b>5</b> (secondes)&nbsp;:
+            <br/>            
             <img src="images/table.4.01.png" style="width: 40%;">
             <br/>
-            L'heure TU est 05:21:05 - soit 5 heures, 21 minutes et 05 secondes, on cherche donc colonne 21 (minutes) ligne 5 (secondes), c'est ainsi qu'on trouve 5&deg;16.25'.
+            C'est ainsi qu'on trouve 5&deg;16.25'.
             <br/>
         </div>
     </div>
@@ -3303,8 +3307,9 @@
         <div style="text-align: center;"><img src="images/form.bataille.02.png" width="60%" alt="Bataille" title="Bataille"></div>
     </div>
     <div class="doc-section">
+        <b>Deuxi&egrave;re droite.</b><br/>
         Pour la Lune - avec son bord inf&eacute;rieur - on r&eacute;utilise le m&ecirc;me formulaire, l'observation date de 05:18:42 UTC,
-         pour les tables de Dieumegard, avec une hauteur instrumentale de 33&deg;01', on trouve ainsi un intercept de 6', dans la direction oppos&eacute;e &agrave; l'astre.
+        pour les tables de Dieumegard, avec une hauteur instrumentale de 33&deg;01', on trouve ainsi un intercept de 6', dans la direction oppos&eacute;e &agrave; l'astre.
         <div style="text-align: center;"><img src="images/form.dieumegard.02.png" width="60%" alt="Dieumegard" title="Dieumegard"></div>
         <div style="padding: 20px;">
             <i>Note&nbsp;:</i>Pour l'obtention de <code>msh * &delta;AH</code>, <i>comme la variation horaire n'est <b>pas</b> &eacute;gale &agrave; 15&deg;</i>, on utilisera la table de correction <b>5</b> (ceux qui savent se passer de calculette vont &ecirc;tre contents)&nbsp;:<br/>
@@ -3316,19 +3321,22 @@
                     <br/>
                     qu'on "arrondit" &agrave; <code>4.529550&deg;</code>.
                 </div>
-                On multiplie la partie enti&egrave;re <code>0.529550</code> par <code>60</code>, <i>ou bien</i> on la cherche dans la table <b>5</b>&nbsp;:<br/>
+                On multiplie la partie enti&egrave;re <code>0.529550</code> par <code>60</code>, <i><b>ou bien</b></i> on la cherche dans la table <b>5</b>&nbsp;:<br/>
             </div>
             <div style="display: grid; grid-template-columns: auto auto; padding: 10px;">
                 <div>
-                    On multiplie&nbsp;:<br/>
+                    Si on multiplie&nbsp;:<br/>
                     <img src="images/before.table.5.png" style="width: 30%; padding-top: 20px;">
+                    <br/>
+                    Le r&eacute;sultat est 31.77300'
                 </div>
                 <div>
-                    On cherche la partie d&eacute;cimale <code>0.529550</code> <b><i>dans</i></b> la table <b>5</b>&nbsp;:<br/>
+                    Si on cherche la partie d&eacute;cimale <code>0.529550</code> <b><i>dans</i></b> la table <b>5</b>&nbsp;:<br/>
                     <img src="images/table.5.png" style="width: 40%;"><br/>
                     On en sort la colonne <code>31</code>, ligne <code>77</code>, ce qui donne <code>31.77</code>&nbsp;!        
                 </div>
             </div>
+            Dans les deux cas, la valeur recherch&eacute;e est 31.77'.
         </div>
     </div>
     <div class="doc-section">
