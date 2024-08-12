@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html>
+<!--
+ | Available from http://leafletjs.com/
+ | Tutorials and examples at https://leafletjs.com/examples.html
+ | Note: No native way to change orientation
+ +-->
+<head>
+
+    <title>Leaflet - Sailing 2024 !</title>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" /-->
+    <!-- link rel="icon" type="image/ico" href="icons/hammerhead.02.ico" -->
+    <link rel="icon" type="image/ico" href="../../boat.stuff/icons/hammerhead.02.ico">
+
+    <!--    
+    <link rel="stylesheet" href="leaflet/leaflet.css" />
+    <script src="leaflet/leaflet.js"></script>
+    -->
+
+    <!--link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+          integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+          crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+            integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+            crossorigin=""></script-->
+    <!--link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+            integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+            crossorigin=""/>            
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+            integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+            crossorigin=""></script-->     
+            
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+
+    <!--link rel="stylesheet" href="http://i3.cdn-image.com/lcldsc/leaflet.css">            
+    <script src="http://i3.cdn-image.com/lcldsc/leaflet.js"></script>
+    <script src="http://i3.cdn-image.com/lcldsc/leaflet-providers.min.js"></script-->
+
+    <script type="module" src="../../../webcomponents/widgets/slideshow/SlideShow.js"></script>
+
+    <style>
+        :root {
+        --slide-width: 500px;
+        --slide-height: 400px;
+        --expanded-nav-width: 450px;
+        --slider-scale: 0.5;
+        }
+
+        /* For the switch (slider) */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: calc(var(--slider-scale) * 60px);
+            height: calc(var(--slider-scale) * 34px);
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: calc(var(--slider-scale) * 26px);
+            width: calc(var(--slider-scale) * 26px);
+            left: calc(var(--slider-scale) * 4px);
+            bottom: calc(var(--slider-scale) * 4px);
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        input:checked + .slider {
+            background-color: #2196f3;
+        }
+
+        input:focus + .slider {
+            box-shadow: 0 0 1px #2196f3;
+        }
+
+        input:checked + .slider:before {
+            -webkit-transform: translateX(calc(var(--slider-scale) * 26px));
+            -ms-transform: translateX(calc(var(--slider-scale) * 26px));
+            transform: translateX(calc(var(--slider-scale) * 26px));
+        }
+
+        /* Rounded sliders */
+        .slider.round {
+            border-radius: calc(var(--slider-scale) * 34px);
+        }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
+
+        /* Switch grid */
+        .switch-container {
+            display: grid;
+            grid-template-columns: calc(var(--slider-scale) * 80px) 200px;
+        }
+        .switch-element {
+            place-self: flex-start;
+        }
+
+		button {
+			padding: 4px 20px;
+			/* give the background a gradient */
+			background:#ffae00; /* fallback for browsers that don't support gradients */
+			/* background: -webkit-linear-gradient(top, #ffae00, #d67600); */
+			background: -webkit-linear-gradient(top, rgba(255, 174, 0, 0.6), rgba(214, 118, 0, 0.6));
+			background: -moz-linear-gradient(top, #ffae00, #d67600);
+			background: -o-linear-gradient(top, #ffae00, #d67600);
+			/* background: linear-gradient(top, #ffae00, #d67600); */
+			background: linear-gradient(top, rgba(255, 174, 0, 0.6), rgba(214, 118, 0, 0.6));
+			border: 2px outset #dad9d8;
+			/* style the text */
+			font-family: Lato, Verdana, Andika, Arial, sans-serif; /* Andkia is available at http://www.google.com/webfonts/specimen/Andika */
+			font-size: 1.1em;
+			letter-spacing: 0.05em;
+			text-transform: uppercase;
+			color: #fff;
+			text-shadow: 0px 1px 10px #000;
+			/* add to small curve to the corners of the button */
+			-webkit-border-radius: 15px;
+			-moz-border-radius: 15px;
+			border-radius: 15px;
+			/* give the button a drop shadow */
+			-webkit-box-shadow: rgba(0, 0, 0, .55) 0 1px 6px;
+			-moz-box-shadow: rgba(0, 0, 0, .55) 0 1px 6px;
+			box-shadow: rgba(0, 0, 0, .55) 0 1px 6px;
+		}
+		/* NOW STYLE THE BUTTON'S HOVER STATE */
+		/*	button#rCoffee:hover, button#rCoffee:focus { */
+		button:hover, button:focus {
+			border:2px solid #dad9d8;
+		}
+
+        button:disabled {
+            background: silver;
+            color: gray;
+        }
+
+        .local-icon-class {
+            background: red;
+        }
+    </style>
+</head>
+<body style='font-family: "Source Code Pro", "Courier New", Helvetica, Geneva; font-weight: bold;'>
+
+
+
+<h1>Ao&ucirc;t 2024, Croisi&egrave;re Viollette</h1>
+<!--small>Two leaflet layers. Street Map and Sat View.</small-->
+
+<!--
+ | Try
+ | - map.panTo(new L.LatLng(40.737, -73.923));
+ | - map.setView(new L.LatLng(40.737, -73.923), 8);
+ | - map.flyTo(new L.LatLng(40.737, -73.923));
+ +-->
+
+<table>
+    <tr>
+        <td valign="top">
+            <div id="mapid" style="width: 1200px; height: 800px;"></div>
+        </td>
+        <td valign="top" style="text-align: right; min-width: 200px;">
+            <div id="curr-pos"></div>
+            <div id="curr-pos-raw"></div>
+            <div id="fly-to" style="text-align: left; border: 1px solid cyan; border-radius: 5px; padding: 5px;">
+                 Fly to ?
+                 <ul>
+                    <li><a class="list-link" href="#" onclick="flyToZoom(0);">Kern&eacute;vel</a></li>
+                    <li><a class="list-link" href="#" onclick="flyToZoom(1);">Sauzon</a></li>
+                    <li><a class="list-link" href="#" onclick="flyToZoom(2);">Les Sables Rouges, Groix</a></li>
+                    <li><a class="list-link" href="#" onclick="flyToZoom(3);">Brigneau</a></li>
+                    <li>
+                        Gl&eacute;nan
+                        <ul>
+                            <li><a class="list-link" href="#" onclick="flyToZoom(4);">Vieux Gl&eacute;nan</a></li>
+                            <li><a class="list-link" href="#" onclick="flyToZoom(5);">Fort Cigogne</a></li>
+                            <li><a class="list-link" href="#" onclick="flyToZoom(6);">Ile du Loc'h</a></li>
+                            <li><a class="list-link" href="#" onclick="flyToZoom(7);">Saint Nicolas</a></li>
+                        </ul>
+                    </li>
+                    <li><a class="list-link" href="#" onclick="flyToZoom(8);">Sein</a></li>
+                    <li><a class="list-link" href="#" onclick="flyToZoom(9);">Les Tas de Pois</a></li>
+                    <li><a class="list-link" href="#" onclick="flyToZoom(10);">Bertheaume</a></li>
+                 </ul>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <div>
+                <h3>5 Ao&ucirc;t</h3>
+                <i>Kern&eacute;vel - Sauzon</i><br/>
+                On se retrouve &agrave; Kern&eacute;vel, au ponton visiteurs, et on d&eacute;colle pour Belle-&Icirc;le.<br/>
+                On y est &agrave; Sauzon en fin d'apr&egrave;s midi, mouill&eacute; sur deux ancres dans le fond du port.
+            </div>
+            <div>
+                <h3>6 Ao&ucirc;t</h3>
+                <i>Sauzon</i><br/>
+                <slide-show id="slide-show-01"
+                            width="800"
+                            height="600"
+                            slideclick="onSlideShowClick">
+                    <slide-show-image src="./pix/20240806_143025.jpg" title="Vers Les Poulains"></slide-show-image>
+                    <slide-show-image src="./pix/20240806_143029.jpg" title="Les Poulains"></slide-show-image>
+                </slide-show>
+            </div>
+            <div>
+                <h3>7 Ao&ucirc;t</h3>
+                <i>Sauzon - Groix - Brigneau</i><br/>
+                Depart de Sauzon dans la matin&eacute;e (il nous faut assez d'eau pour sortir), arr&ecirc;t &agrave; Groix (aux Sables Rouges) pour d&eacute;jeuner,
+                puis arriv&eacute;e &agrave; Brigneau.
+                <slide-show id="slide-show-02"
+                            width="800"
+                            height="600"
+                            slideclick="onSlideShowClick">
+                    <slide-show-image src="./pix/20240807_173453.jpg" title="Des Illurs vont &agrave; la p&ecirc;che"></slide-show-image>
+                    <slide-show-image src="./pix/20240807_173457.jpg" title="Retour de p&ecirc;che !"></slide-show-image>
+                    <slide-show-image src="./pix/20240807_185334.jpg" title="Id&eacute;fix"></slide-show-image>
+                </slide-show>
+            </div>
+            <div>
+                <h3>8 Ao&ucirc;t</h3>
+                <i>Brigneau - Gl&eacute;nan</i><br/>
+                <ul>
+                    <li>Premier mouillage &agrave; Vieux Gl&eacute;nan</li>
+                    <li>Mouillage &agrave; Fort Cigogne</li>
+                    <li>Mouillage &agrave; l'&Icirc;le du Loc'h</li>
+                    <li>Mouillage &agrave; Saint Nicolas</li>
+                    <li>Retour &agrave; Fort Cigogne pour la nuit</li>
+                </ul>
+                
+                    <slide-show-image src="./pix/20240808_155716.jpg" title="Penfret"></slide-show-image>
+                    <slide-show-image src="./pix/20240808_155719.jpg" title="Encore Penfret"></slide-show-image>
+                    <slide-show-image src="./pix/20240808_155735.jpg" title="L'&eacute;cole des Gl&eacute;nans"></slide-show-image>
+                    <slide-show-image src="./pix/20240808_155741.jpg" title="Fort Cigogne"></slide-show-image>
+                    <slide-show-image src="./pix/20240808_155744.jpg" title="Vue sur St Nic"></slide-show-image>
+                    <slide-show-image src="./pix/20240808_163644.jpg" title="Fort Cigogne"></slide-show-image>
+                    <slide-show-image src="./pix/20240808_163843.jpg" title="De l'&Icirc;le Cigogne"></slide-show-image>
+                    <slide-show-image src="./pix/20240808_163846.jpg" title="Mouill&eacute; &agrave; Cigogne"></slide-show-image>
+                    <slide-show-image src="./pix/20240808_163849.jpg" title="&Agrave; Cigogne"></slide-show-image>
+                    <slide-show-image src="./pix/20240808_164038.jpg" title="Les remparts de Cigogne"></slide-show-image>
+                    <slide-show-image src="./pix/20240808_164548.jpg" title="Caillasse"></slide-show-image>
+                    <slide-show-image src="./pix/20240808_165110.jpg" title="Cigogne"></slide-show-image>
+                    <slide-show-image src="./pix/20240808_165119.jpg" title="Le fort"></slide-show-image>
+                    <slide-show-image src="./pix/20240808_165129.jpg" title="Le fort"></slide-show-image>
+                    <slide-show-image src="./pix/20240808_172958.jpg" title="L'&icirc;le du Loc'h"></slide-show-image>
+                    <slide-show-image src="./pix/20240808_174400.jpg" title="Gouelles"></slide-show-image>
+                    <slide-show-image src="./pix/20240808_175621.jpg" title="Un caillou en travers"></slide-show-image>
+                    <slide-show-image src="./pix/20240808_182641.jpg" title="La chambre, vue de St Nic"></slide-show-image>
+                    <slide-show-image src="./pix/20240808_182647.jpg" title="Bananec"></slide-show-image>
+                    <slide-show-image src="./pix/20240808_182651.jpg" title="Miko"></slide-show-image>
+                    <slide-show-image src="./pix/20240808_184409.jpg" title="La cale de St Nic"></slide-show-image>
+                    <slide-show-image src="./pix/20240808_185003.jpg" title="La o&ugrave; les oiseaux nichent"></slide-show-image>
+                    <slide-show-image src="./pix/20240808_185007.jpg" title="Les copines"></slide-show-image>
+                    <slide-show-image src="./pix/20240808_193004.jpg" title="Fort Cigogne"></slide-show-image>
+                    <slide-show-image src="./pix/20240808_212902.jpg" title="Gl&eacute;nan sunset"></slide-show-image>
+                </slide-show>
+            </div>
+            <div>
+                <h3>9 Ao&ucirc;t</h3>
+                <i>Glenan - Sein</i><br/>
+                De la pluie dans la Baie d'Audierne !
+                <slide-show id="slide-show-04"
+                            width="800"
+                            height="600"
+                            slideclick="onSlideShowClick">
+                    <slide-show-image src="./pix/20240809_170552.jpg" title="Le Raz de Sein"></slide-show-image>
+                    <slide-show-image src="./pix/20240809_170559.jpg" title="Le Chat"></slide-show-image>
+                    <slide-show-image src="./pix/20240809_170602.jpg" title="Sein, par la passe orientale"></slide-show-image>
+                    <slide-show-image src="./pix/20240809_185234.jpg" title="Le raz, vu de Sein"></slide-show-image>
+                    <slide-show-image src="./pix/20240809_185617.jpg" title="Sein"></slide-show-image>
+                    <slide-show-image src="./pix/20240809_185622.jpg" title="Sein"></slide-show-image>
+                    <slide-show-image src="./pix/20240809_190927.jpg" title="Men Brial"></slide-show-image>
+                </slide-show>
+            </div>
+            <div>
+                <h3>10 Ao&ucirc;t</h3>
+                <i>Sein - Bertheaume</i><br/>
+                Par les Tas de Pois.
+                <slide-show id="slide-show-05"
+                            width="800"
+                            height="600"
+                            slideclick="onSlideShowClick">
+                    <slide-show-image src="./pix/20240810_120231.jpg" title="Bye-bye Sein !"></slide-show-image>
+                    <slide-show-image src="./pix/20240810_122321.jpg" title="T&eacute;vennec, La Vieille, La Plate"></slide-show-image>
+                </slide-show>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" valign="bottom" height="60">
+            <hr/>
+            <!--address>&copy; 2017, Le Diouris &amp; Co.</address-->
+            OpenSource JavaScript map API at <a href="https://leafletjs.com/" target="leaflet">leafletjs.com</a>
+        </td>
+    </tr>
+</table>    
+
+<script>
+
+    let decToSex = (val, ns_ew) => {
+        let absVal = Math.abs(val);
+        let intValue = Math.floor(absVal);
+        let dec = absVal - intValue;
+        let i = intValue;
+        dec *= 60;
+        let min = dec.toFixed(4);
+        while (min.length < 7) {
+            min = '0' + min;
+        }
+        let s = i + "°" + min + "'";
+
+        if (val < 0) {
+            s += (ns_ew === 'NS' ? 'S' : 'W');
+        } else {
+            s += (ns_ew === 'NS' ? 'N' : 'E');
+        }
+        return s;
+    };
+
+    let getQSPrm = (prm) => {
+        let loc = document.location.toString();
+        if (loc.indexOf("?") > -1) {
+            let qs = loc.substring(loc.indexOf("?") + 1);
+            let prms = qs.split('&');
+            for (let i=0; i<prms.length; i++) {
+                let nv = prms[i].split('=');
+                if (nv.length === 2) {
+                    if (nv[0] === prm) {
+                        return nv[1];
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    let map = L.map('mapid'); // .setView([51.505, -0.09], 13);
+
+    let mbAttr = 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community';
+    let mbUrl = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
+
+    const satLayer = L.tileLayer(mbUrl, {id: 'mapbox.streets', attribution: mbAttr, opacity: 1.0});
+    satLayer.addTo(map);
+
+
+    const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		maxZoom: 25,
+		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        opacity: 0.5
+	}).addTo(map);
+
+    // let polyline = L.polyline(latlngs, {color: 'red'}).addTo(map);
+    // // zoom the map to the polyline
+    // map.fitBounds(polyline.getBounds());
+
+    map.setView([47.75, -3.5], 8.5); // Centered on this trip
+
+    const ZOOM_POSITIONS = [
+        new L.LatLng(47.72122045254237, -3.3716332912445073),   // Ponton visiteurs, Kernevel
+        new L.LatLng(47.370715188639444, -3.2202923297882085),  // Sauzon
+        new L.LatLng(47.62977460204848, -3.4153425693511967),   // Les sables rouges
+        new L.LatLng(47.78120467806854, -3.669122457504273),    // Brigneau
+        new L.LatLng(47.71596209170099, -3.9744490385055546),   // Vieux Glenan
+        new L.LatLng(47.71672566064587, -3.9930555224418645),   // Cigogne
+        new L.LatLng(47.70536842025546, -3.9964056015014653),   // Ile du Loc'h
+        new L.LatLng(47.7238219178445, -4.0000319480896005),    // Saint Nicolas
+        new L.LatLng(48.03288875232381, -4.8459041118621835),   // Sein
+        new L.LatLng(48.25033707917933, -4.626145362854005),    // Tas de Pois
+        new L.LatLng(48.34053189098419, -4.697577953338624)     // Bertheaume
+    ];
+
+    const MARKERS = [{
+        "latitude": 47.72122045254237,
+        "longitude": -3.3716332912445073,
+        "name": "Kernevel, ponton Visiteurs",
+        "description": ""
+    }, {
+        "latitude": 47.370715188639444,
+        "longitude": -3.2202923297882085,
+        "name": "Sauzon", 
+        "description": "L'hotel du phare (click to enlarge)\n<br/>\n<a href=\"pix/20240805_190729.jpg\" target=\"_blank\"><img src=\"pix/20240805_190729.jpg\" width=\"256\" height=\"auto\" alt=\"Click to enlarge\"/></a>"
+    }, {
+        "latitude": 47.78120467806854,
+        "longitude": -3.669122457504273,
+        "name": "Brigneau",
+        "description": "(click to enlarge)\n<br/>\n<a href=\"pix/20240807_184317.jpg\" target=\"_blank\"><img src=\"pix/20240807_184317.jpg\" width=\"256\" height=\"auto\" alt=\"Click to enlarge\"/></a>"
+    }, {
+        "latitude": 47.62977460204848, 
+        "longitude": -3.4153425693511967,
+        "name": "Les Sables Rouges",
+        "description": "Pour d&eacute;jeuner"
+    }, {
+        "latitude": 47.71668032052766,
+        "longitude": -3.9744490385055546,
+        "name": "Vieux Gl&eacute;nan",
+        "description": "Premier mouillage dans l'archipel"
+    }, {
+        "latitude": 47.71740936679942,
+        "longitude": -3.99328887462616,
+        "name": "Fort Cigogne",
+        "description": "(click to enlarge)\n<br/>\n<a href=\"pix/20240808_163849.jpg\" target=\"_blank\"><img src=\"pix/20240808_163849.jpg\" width=\"256\" height=\"auto\" alt=\"Click to enlarge\"/></a>"
+    }, {
+        "latitude": 47.71006294710473,
+        "longitude": -3.997092247009278,
+        "name": "Ile du Loc'h",
+        "description": "Priv&eacute;, et gard&eacute;..."
+    }, {
+        "latitude": 47.72355532662917,
+        "longitude": -3.9978700876235966,
+        "name": "Saint Nicolas",
+        "description": "Des oiseaux !" 
+    }, {
+        "latitude": 48.03288875232381,
+        "longitude": -4.8459041118621835,
+        "name": "Sein",
+        "description": "(click to enlarge)\n<br/>\n<a href=\"pix/20240809_185617.jpg\" target=\"_blank\"><img src=\"pix/20240809_185617.jpg\" width=\"256\" height=\"auto\" alt=\"Click to enlarge\"/></a>"
+    }, {
+        "latitude": 48.25033707917933,
+        "longitude":  -4.626145362854005,
+        "name": "Les Tas de Pois",
+        "description": "" 
+    }, {
+        "latitude": 48.34053189098419,
+        "longitude":  -4.697577953338624,
+        "name": "Anse de Bertheaume",
+        "description": "Id&eacute;fix &agrave; son mouillage"
+    }];
+
+
+    // markers on the chart
+    if (true) {
+        MARKERS.forEach(mark => {
+            L.marker([(mark.latitude), (mark.longitude)], { title: mark.name })
+                .addTo(map)
+                .bindPopup('<b>' + mark.name + '</b><br/>' + mark.description); // .openPopup();
+        });
+    }
+
+    function flyToZoom(idx) {
+        // map.panTo(ZOOM_POSITIONS[idx]);
+        // map.setView(ZOOM_POSITIONS[idx], 18);
+        map.flyTo(ZOOM_POSITIONS[idx]);
+    }
+
+    map.addEventListener('mousemove', (event) => {
+        // let lat = Math.round(event.latlng.lat * 100000) / 100000;
+        // let lng = Math.round(event.latlng.lng * 100000) / 100000;
+        let lat = event.latlng.lat;
+        let lng = event.latlng.lng;
+        while (lng > 180) {
+            lng -= 360;
+        }
+        while (lng < -180) {
+            lng += 360;
+        }
+        document.getElementById('curr-pos').innerHTML = `${decToSex(lat, "NS")}<br/>${decToSex(lng, "EW")}`;
+        if (getQSPrm('decimal') === 'Y') {
+            document.getElementById('curr-pos-raw').innerHTML = `${lat}<br/>${lng}`; // In decimal
+        }
+    });
+
+    let from = null, to = null;
+    let center = null;
+    let polylineGroup = null;
+    // let greatCircle = null;
+    // let rhumbline = null;
+
+    map.addEventListener('click', (event) => {
+        // console.log("Paf!");
+        let clickPos = event.latlng;
+        let message = from === null ? "Start from here" : "Go to here";
+        let marker = new L.marker([clickPos.lat, clickPos.lng])
+                        //   .addTo(map)
+                          .bindPopup(`<b>${decToSex(clickPos.lat, 'NS')}<br/>${decToSex(clickPos.lng, 'EW')}</b>`)
+                          .bindTooltip(message);
+        if (from === null) {
+            from = marker;
+            from.addTo(map);
+        } else if (to === null) {
+            to = marker;
+            to.addTo(map);
+        } else {
+            alert("From and to already exist.\nReset to enter new ones");
+        }     
+        if (from !== null && to !== null) {
+            document.getElementById("calculate-button").disabled = false;
+        }                    
+    });
+
+    if (Math.toRadians === undefined) {
+        Math.toRadians = (deg) => {
+            return deg * (Math.PI / 180);
+        };
+    }
+
+    if (Math.toDegrees === undefined) {
+        Math.toDegrees = (rad) => {
+            return rad * (180 / Math.PI);
+        };
+    }
+
+    function onSlideShowClick(src) {
+        console.log(">> Client side!! Slide " + src + " was clicked.");
+        window.open(src, '_blank'); // This is an example
+    }
+
+    window.onload = () => {
+        console.log("Loaded!");
+    };
+
+</script>
+
+</body>
+</html>
