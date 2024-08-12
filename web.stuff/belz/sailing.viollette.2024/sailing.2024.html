@@ -484,34 +484,6 @@
         }
     });
 
-    let from = null, to = null;
-    let center = null;
-    let polylineGroup = null;
-    // let greatCircle = null;
-    // let rhumbline = null;
-
-    map.addEventListener('click', (event) => {
-        // console.log("Paf!");
-        let clickPos = event.latlng;
-        let message = from === null ? "Start from here" : "Go to here";
-        let marker = new L.marker([clickPos.lat, clickPos.lng])
-                        //   .addTo(map)
-                          .bindPopup(`<b>${decToSex(clickPos.lat, 'NS')}<br/>${decToSex(clickPos.lng, 'EW')}</b>`)
-                          .bindTooltip(message);
-        if (from === null) {
-            from = marker;
-            from.addTo(map);
-        } else if (to === null) {
-            to = marker;
-            to.addTo(map);
-        } else {
-            alert("From and to already exist.\nReset to enter new ones");
-        }     
-        if (from !== null && to !== null) {
-            document.getElementById("calculate-button").disabled = false;
-        }                    
-    });
-
     if (Math.toRadians === undefined) {
         Math.toRadians = (deg) => {
             return deg * (Math.PI / 180);
