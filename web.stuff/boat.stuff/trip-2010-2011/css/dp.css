@@ -471,7 +471,8 @@ span.expand-collapse:hover {
 }
 
 /* On smaller screens, decrease text size */
-@media only screen and (max-width: var(--slide-width)) {
+/*@media only screen and (max-width: var(--slide-width)) { */
+@media screen and (width <= var(--slide-width)) {
   .prev, .next, .text {
     /*font-size: 11px;*/
   }
