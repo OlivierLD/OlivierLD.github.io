@@ -168,7 +168,7 @@ span.expand-collapse:hover {
   bottom: 0;
   margin-bottom: 5px;
   margin-left: 7px;
-  font-size: 16px;
+  /*font-size: 16px;*/
   color: orange;
   font-style: italic;
   font-weight: bold;
@@ -181,8 +181,18 @@ span.expand-collapse:hover {
   }
 
   .sidenav a {
-    font-size: 18px;
+    /*font-size: 18px;*/
   }
+  
+  .resp-iframe {
+    position: absolute;
+    top: 100px;
+    left: 0;
+    width: 100%;
+    height: 90%;
+    border: 0;
+}
+
 }
 
 #wrap {
@@ -463,7 +473,7 @@ span.expand-collapse:hover {
 /* On smaller screens, decrease text size */
 @media only screen and (max-width: var(--slide-width)) {
   .prev, .next, .text {
-    font-size: 11px
+    /*font-size: 11px;*/
   }
 }
 
@@ -521,7 +531,7 @@ span.expand-collapse:hover {
   padding-left: 0px;
   align-self: end;
   color: inherit;
-  font-size: 14px;
+  /* font-size: 14px; */
 }
 
 /* For the switch (slider) */

@@ -216,6 +216,7 @@ function sails(nodeName, jib, ss, main, mizzen, mss, spi) {
     let txt = document.createTextNode(elmt); 
     elmt.innerHTML = "<img src='sails/" + imgName + "' width='171' height='169' align='left' valign='top' alt='" + imgName + "' title='" + imgName + "'>"; 
   } catch (ex) { 
+    console.log(`For ${nodeName}, ${ex.toString()}`);
     alert("Exception! " + ex.toString()); 
   } 
 }
