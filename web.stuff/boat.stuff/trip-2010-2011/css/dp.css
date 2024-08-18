@@ -175,26 +175,6 @@ span.expand-collapse:hover {
   text-shadow: 4px 4px 8px navy, 0 0 25px blue, 0 0 7px cyan;
 }
 
-@media screen and (width <= 800px) {
-  .sidenav {
-    padding-top: 15px;
-  }
-
-  .sidenav a {
-    /*font-size: 18px;*/
-  }
-
-  .resp-iframe {
-    position: absolute;
-    top: 100px;
-    left: 0;
-    width: 100%;
-    height: 90%;
-    border: 0;
-  }
-
-}
-
 #wrap {
   position: fixed;
   left: 0;
@@ -470,14 +450,6 @@ span.expand-collapse:hover {
   }
 }
 
-/* On smaller screens, decrease text size */
-/*@media only screen and (max-width: var(--slide-width)) { */
-@media screen and (width <= var(--slide-width)) {
-  .prev, .next, .text {
-    /*font-size: 11px;*/
-  }
-}
-
 .display {
   width: var(--slide-width);
   height: var(--slide-height);
@@ -648,3 +620,37 @@ button:hover, button:focus {
   color: cyan;
   cursor: pointer;
 }
+
+/* On smaller screens, decrease text size */
+/*@media only screen and (max-width: var(--slide-width)) { */
+@media screen and (width <= var(--slide-width)) {
+  .prev, .next, .text {
+    /*font-size: 11px;*/
+  }
+}
+
+/* @media screen and (max-width: 800px) { */
+@media screen and (width <= 800px) {
+    .sidenav {
+    padding-top: 15px;
+  }
+
+  .sidenav a {
+    /*font-size: 18px;*/
+  }
+
+  body {
+    background-color: red;
+  }
+
+  .resp-iframe {
+    position: absolute;
+    top: 100px;
+    left: 0;
+    width: 100%;
+    height: 90%;
+    border: 0;
+  }
+
+}
+
