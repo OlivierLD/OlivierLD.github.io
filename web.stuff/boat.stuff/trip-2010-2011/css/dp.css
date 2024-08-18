@@ -631,25 +631,21 @@ button:hover, button:focus {
 
 /* @media screen and (max-width: 800px) { */
 @media screen and (width <= 800px) {
-    .sidenav {
+  
+  .sidenav {
     padding-top: 15px;
   }
 
   .sidenav a {
-    /*font-size: 18px;*/
+    font-size: 36px;
   }
 
-  body {
+  /* body {
     background-color: red;
-  }
+  } */
 
   .resp-iframe {
-    position: absolute;
-    top: 100px;
-    left: 0;
-    width: 100%;
     height: 90%;
-    border: 0;
   }
 
 }
