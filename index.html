@@ -915,7 +915,7 @@ Date.prototype.format = function (dateFormat) {
     </div>
     <div style="padding: 10px;">
       This site is using cutting-edge ES6/HTML5/CSS3 features.
-      Your current browser may not be able to support all of them...
+      Your current browser (<span id="browser-name"></span>) may not be able to support all of them...
     </div>
   </div>
 
@@ -1995,11 +1995,12 @@ Date.prototype.format = function (dateFormat) {
     } else if (userAgent.match(/edg/i)) {
       browserName = "edge";
     } else {
-      browserName = "No browser detection";
+      browserName = `No browser detection for [${userAgent}]`;
     }
 
     console.log(`Detected ${browserName}`);
     if (browserName !== "chrome") {
+      document.getElementById('browser-name').innerText = browserName;
       window.setTimeout(() => {
         document.getElementById("browser-warning").classList.toggle('visible-div'); // style.display = 'block';
       }, 1000);
