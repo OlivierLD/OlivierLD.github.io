@@ -469,7 +469,7 @@ compass-rose .day {
       <!-- Column 2 -->
       <div style="border: 2px solid black; border-radius: 5px;">
         <div style="padding-left: 10px; color: black; text-align: left; font-style: italic;">Position</div>
-        <div id="curr-pos" style="width: 98%; height: 40px; padding: 2px; margin-top: -0px;" title="Cursor's position">&nbsp;<br/>&nbsp;</div>
+        <div id="curr-pos" style="width: 98%; height: 80px; padding: 2px; margin-top: -0px;" title="Cursor's position">&nbsp;<br/>&nbsp;</div>
       </div>  
       <div id="displays" style="text-align: center; border: 2px solid rgba(0, 0, 255, 0.5); border-radius: 5px;" title="All data below&#13;available when REPLAYing">
           <div style="padding-left: 10px; color: blue; text-align: left; font-style: italic;">Replay Status</div>
@@ -795,7 +795,8 @@ compass-rose .day {
                     console.log(`Read from data file: ${JSON.stringify(pos, null, 2)}`);
                 }
                 // 1 - Data
-                let displayPos = `${decToSex(pos.lat, "NS")}<br/>${decToSex(pos.lng, "EW")}`;
+                // let displayPos = `${decToSex(pos.lat, "NS")}<br/>${decToSex(pos.lng, "EW")}`;
+                let displayPos = `${decToSex(pos.lat, "NS")}<br/>${decToSex(pos.lng, "EW")}<br/><span title="GRID Square">${pos.gridSquare}</span><br/><span title="Google Plus.&#13;Use to search GoogleMap">${pos.googlePlusCode}</span>`;
                 if (pos.rmcDate) {
                     displayDate = `${pos.rmcDate}`;
                     document.getElementById('UTC-date').innerHTML = displayDate;
