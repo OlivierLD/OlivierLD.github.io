@@ -17,6 +17,8 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 
+  <script type="module" src="../../../webcomponents/widgets/slideshow/SlideShow.js"></script>
+
   <style type="text/css">
     
 .list-link {
@@ -538,6 +540,24 @@ compass-rose .day {
       </div>
     </div>
 </div>
+
+<hr/>
+<span>Slide show - Images are clickable</span>
+<div id="slide-show-container" 
+     class="body-pix">
+    <slide-show id="slide-show-02"
+                width="600"
+                height="800"
+                slideclick="onSlideShowClick"
+                style="padding: 10px;">
+        <slide-show-image src="./images/04.jpeg" title="Alpine start"></slide-show-image>
+        <slide-show-image src="./images/03.jpeg" title="The kite"></slide-show-image>
+        <slide-show-image src="./images/02.jpeg" title="Les coureaux de Groix"></slide-show-image>
+        <slide-show-image src="./images/01.jpeg" title="Heading"></slide-show-image>
+        <slide-show-image src="./images/05.jpeg" title="Arriving, downwind"></slide-show-image>
+    </slide-show>
+</div>
+<hr/>
 
 <hr/>
 
