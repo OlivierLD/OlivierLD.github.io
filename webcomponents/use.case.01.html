@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+ ! Case Study, Bezier.
+ ! See also: https://javascript.info/bezier-curve
+ +-->
+<head>
+	<meta charset="UTF-8">
+	<title>B&eacute;zier!</title>
+	<link rel="icon" type="image/png" href="../logo-192x192.png">
+
+	<link rel="stylesheet" href="css/stylesheet.css">
+	<link rel="stylesheet" href="css/web-components.css">
+
+	<style>
+        :root {
+            --padding: 50px;
+            --perspective: 100em;
+            --rotateX: -15deg;
+            --scaleY: 1;
+            --slider-scale: 0.5;
+        }
+
+        html {
+            height: 100%;
+            background-color: black;
+        }
+
+        body {
+            background-color: black;
+            /* color: gray; */
+            color: cyan;
+            font-family: "Helvetica Neue", Verdana, Arial, Helvetica, sans-serif;
+            /* background-image: linear-gradient(to bottom right, #4d4d4d, black); */
+            background: radial-gradient(at top, DarkGrey -8%, black 55%);
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+        }
+
+        hr {
+            width: 100%;
+        }
+
+        a, a:visited, a:active, a:any-link {
+            color: orange;
+        }
+
+        .black-frame {
+            padding: 3px;
+            margin: 1px;
+            border-radius: 5px;
+            border: 1px solid silver;
+        }
+
+        .centered {
+            text-align: center;
+        }
+
+        .smooth {
+            /*height: 0;*/
+            /*visibility: hidden;*/
+            /*opacity: 0;*/
+            /*transition: visibility 0.5s, height 0.5s, opacity 0.5s linear;*/
+            height: 0;
+            max-height: 0;
+            margin: auto;
+            margin-left: 0;
+            /*transition: transform 0.5s, max-height 1s, height 1s;*/
+            transition: all 0.5s ease;
+            opacity: 0;
+            transform: scaleY(0);
+            transform-origin: top;
+            overflow: hidden;
+        }
+
+        .visible-div {
+            opacity: 1;
+            width: auto;
+            height: auto;
+            max-height: 1800px;
+            transform: scaleY(1);
+            margin-top: 5px;
+        }
+
+        .mirror {
+            display: block;
+            -webkit-transform: matrix(-1, 0, 0, 1, 0, 0);
+            -moz-transform: matrix(-1, 0, 0, 1, 0, 0);
+            -o-transform: matrix(-1, 0, 0, 1, 0, 0);
+            transform: matrix(-1, 0, 0, 1, 0, 0);
+        }
+
+        .mirror-upside-down {
+            display: block;
+            -webkit-transform: matrix(-1, 0, 0, 1, 0, 0) rotate(180deg) perspective(var(--perspective)) rotateX(var(--rotateX));
+            -moz-transform: matrix(-1, 0, 0, 1, 0, 0) rotate(180deg) perspective(var(--perspective)) rotateX(var(--rotateX));
+            -o-transform: matrix(-1, 0, 0, 1, 0, 0) rotate(180deg) perspective(var(--perspective)) rotateX(var(--rotateX));
+            transform: matrix(-1, 0, 0, 1, 0, 0) rotate(180deg) perspective(var(--perspective)) rotateX(var(--rotateX)) scaleY(var(--scaleY));
+            transform-origin: center;
+        }
+
+        /* For the switch (slider) */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: calc(var(--slider-scale) * 60px);
+            height: calc(var(--slider-scale) * 34px);
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: calc(var(--slider-scale) * 26px);
+            width: calc(var(--slider-scale) * 26px);
+            left: calc(var(--slider-scale) * 4px);
+            bottom: calc(var(--slider-scale) * 4px);
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        input:checked + .slider {
+            background-color: #2196f3;
+        }
+
+        input:focus + .slider {
+            box-shadow: 0 0 1px #2196f3;
+        }
+
+        input:checked + .slider:before {
+            -webkit-transform: translateX(calc(var(--slider-scale) * 26px));
+            -ms-transform: translateX(calc(var(--slider-scale) * 26px));
+            transform: translateX(calc(var(--slider-scale) * 26px));
+        }
+
+        /* Rounded sliders */
+        .slider.round {
+            border-radius: calc(var(--slider-scale) * 34px);
+        }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
+
+        /* Switch grid */
+        .switch-container {
+            display: grid;
+            grid-template-columns: 26px calc(var(--slider-scale) * 64px) 26px;
+        }
+
+        .switch-element {
+            place-self: center;
+        }
+    </style>
+
+	<script type="text/javascript">
+
+        function changeBG(value) {
+            let bodyStyle = document.getElementsByTagName("body")[0].style;
+            let htmlStyle = document.getElementsByTagName("html")[0].style;
+            if (value === 'LIGHT') {
+                bodyStyle.background = 'radial-gradient(at top, white -8%, lightgrey 55%)';
+                htmlStyle.backgroundColor = 'lightgrey';
+                bodyStyle.color = 'black';
+                let anchors = document.querySelectorAll("a");
+                anchors.forEach(anchor => {
+                    anchor.style.color = 'navy';
+                });
+                let pres = document.querySelectorAll("pre");
+                pres.forEach(pre => {
+                    pre.style.color = 'gray';
+                });
+            } else {
+                bodyStyle.background = 'radial-gradient(at top, DarkGrey -8%, black 55%)';
+                htmlStyle.backgroundColor = 'black';
+                bodyStyle.color = 'cyan';
+                let anchors = document.querySelectorAll("a");
+                anchors.forEach(anchor => {
+                    anchor.style.color = 'orange';
+                });
+                let pres = document.querySelectorAll("pre");
+                pres.forEach(pre => {
+                    pre.style.color = 'white';
+                });
+            }
+        }
+
+        function onThemeChange(flip) {
+            // console.log(flip.checked);
+
+            if (flip.checked === false) { // Day to Night
+                changeBG('DARK');
+            } else {                      // Night to Day
+                changeBG('LIGHT');
+            }
+        }
+
+        function changeScale(value) {
+            console.log('Scale value is now', value);
+            document.documentElement.style.setProperty('--slider-scale', value);
+        }
+
+        let headUpExpanded = false;
+
+        function collapseExpandHeadsup() {
+            let cmdElem = document.getElementById("head-up-command");
+            let slidersElem = document.getElementById("heads-up-sliders");
+            let buttonZone = document.getElementById("button-span-zone");
+            if (headUpExpanded) {
+                slidersElem.style.display = 'none';
+                buttonZone.style.display = 'none';
+                cmdElem.innerText = "+ Head up";
+            } else {
+                slidersElem.style.display = 'block';
+                buttonZone.style.display = 'block';
+                cmdElem.innerText = "- Head up";
+            }
+            headUpExpanded = !headUpExpanded;
+        }
+
+        /**
+         * Set data to the WebComponents
+         * Assume that they all have a 'value' member.
+         *
+         * @param from The field containing the value to set
+         * @param to The WebComponent to set the value to
+         */
+        function setData(from, to) {
+            let elem = document.getElementById(to);
+            let value = document.getElementById(from).value; // Field to read to get the value
+            if (value.length !== 0) {
+                elem.value = value;                            // value corresponds to the 'set value(val) { ...', invokes the setter in the HTMLElement class
+            }
+        }
+
+        function applyClass(id, classList) {
+            let widget = document.getElementById(id);
+            let cssClass = classList.value;
+            widget.className = cssClass;
+            widget.repaint();
+        }
+
+        function applyBackground(id, color) {
+            let cell = document.getElementById(id);
+            cell.style.backgroundColor = color;
+        }
+
+        function toggleHeadsUp() {
+            document.body.classList.toggle('mirror-upside-down');
+        }
+
+        function setPadding(e) {
+            let v = this.value;
+            document.body.style.setProperty("--padding", v + "px");
+        }
+
+        function setPerspective(e) {
+            let v = this.value;
+            document.body.style.setProperty("--perspective", v + "em");
+        }
+
+        function setRotateX(e) {
+            let v = this.value;
+            document.body.style.setProperty("--rotateX", v + "deg");
+        }
+
+        function setScaleY(e) {
+            let v = this.value;
+            document.body.style.setProperty("--scaleY", v);
+        }
+    </script>
+</head>
+<body>
+
+<!-- Perspective sliders -->
+<span id="head-up-command" onclick="collapseExpandHeadsup();" style="cursor: pointer;" tabindex="0"
+	  title="Show/Hide HeadUp Controls">+ Head up</span> 
+<div id="button-span-zone" style="display: none; text-align: center;">
+    <button onclick="toggleHeadsUp();" style="border-radius: 5px; margin: 5px;"
+		    title="Click this for HeadUp display, is a wind shield for example...">Head Up</button>
+</div>
+<div id="heads-up-sliders" style="display: none;">
+	<table width="100%">
+		<tr>
+			<td width="25%">    
+				<h5 style="color: cyan;">Padding</h5>
+				<input type="range" value="50" min="0" max="200" style="width: 90%;"
+					   oninput="setPadding.call(this, event); padding01.value = this.value;"/>
+				<output name="padding" id="padding01" style="color: cyan;"></output>
+			</td>
+			<td width="25%">
+				<h5 style="color: cyan;">Perspective</h5>
+				<input type="range" value="100" min="0" max="100" style="width: 90%;"
+					   oninput="setPerspective.call(this, event); perspective01.value = this.value;"/>
+				<output name="perspective" id="perspective01" style="color: cyan;"></output>
+			</td>
+			<td width="25%">
+				<h5 style="color: cyan;">Rotate X</h5>
+				<input type="range" value="-15" min="-100" max="100" style="width: 90%;"
+					   oninput="setRotateX.call(this, event); perspective02.value = this.value;"/>
+				<output name="perspective" id="perspective02" style="color: cyan;"></output>
+			</td>
+			<td width="25%">
+				<h5 style="color: cyan;">Scale Y</h5>
+				<input type="range" value="1" min="0" max="5" step="0.1" style="width: 90%;"
+					   oninput="setScaleY.call(this, event); scaleY02.value = this.value;"/>
+				<output name="scaleY" id="scaleY02" style="color: cyan;"></output>
+			</td>
+		</tr>
+	</table>
+</div>
+<hr/>
+
+<style>
+    graph-display:focus {
+        outline: none;
+    }
+</style>
+
+<table width="98%" style="margin: auto;">
+	<tr>
+		<td>
+			<h3>
+				Case study. B&eacute;zier curves.
+			</h3>
+		</td>
+		<td style="text-align: right;">
+			<!-- Page BG -->
+			<!--
+            Page Background
+            <input type="radio" name="page-bg" value="DARK" checked onchange="changeBG(this.value);">Dark
+            <input type="radio" name="page-bg" value="LIGHT" onchange="changeBG(this.value);">Light
+            -->
+			<div class="switch-container">
+                <span class="switch-element"
+					  style="font-size: 24px; font-weight: bold; padding-bottom: 0px;">&#9790</span>
+				<label class="switch switch-element">
+					<input id="bg-slider" type="checkbox" onchange="onThemeChange(this);">
+					<span class="slider round"></span>
+				</label>
+				<span class="switch-element" style="font-size: 24px; font-weight: bold;">&#9788</span>
+			</div>
+		</td>
+	</tr>
+</table>
+
+<script type="text/javascript">
+
+let bezierCtlrPts = [];
+           
+function clearGraph(graphId) {
+    let bezGraph = document.getElementById(graphId);  
+    let ctx = bezGraph.getContext('2d');
+    ctx.fillStyle = "white";
+    ctx.fillRect(0, 0, bezGraph.width, bezGraph.height);
+}
+
+function resetPoints(graphId) {
+    clearGraph(graphId);
+    while (bezierCtlrPts.length > 0) {
+        bezierCtlrPts.pop();
+    }
+    document.getElementById('animate').disabled = true;
+}
+
+let finalBezierPts = [];
+
+function drawCtrlLines(context, ctrlPts, t) {
+
+    if (ctrlPts.length > 2) {
+        for (let j=0; j<ctrlPts.length - 1; j++) {
+            let from = ctrlPts[j];
+            let to = ctrlPts[j + 1];
+            context.strokeStyle = 'orange';
+            context.lineWidth = 2;
+            context.beginPath();
+            context.moveTo(from.x, from.y);
+            context.lineTo(to.x, to.y);
+            context.stroke();
+            context.closePath();
+        }
+    }
+
+    let nextCtrlPts = [];
+    for (let i=0; i<ctrlPts.length - 1; i++) {
+        let from = ctrlPts[i];
+        let to = ctrlPts[i + 1];
+        let deltaX = (to.x - from.x);
+        let deltaY = (to.y - from.y);
+        let pt = {
+            x: from.x + (deltaX * t),
+            y: from.y + (deltaY * t)
+        }
+        nextCtrlPts.push(pt);
+
+        context.beginPath();
+        context.arc(pt.x, pt.y, 2, 0, 2 * Math.PI);
+        if (ctrlPts.length === 2) {
+            context.fillStyle = "red";
+            finalBezierPts.push(pt);   // Keep in memory !!
+        } else {
+            context.fillStyle = "black";
+        }
+        context.fill();
+        context.closePath();
+
+        for (let j=0; j<ctrlPts.length - 1; j++) {
+            let from = ctrlPts[j];
+            let to = ctrlPts[j + 1];
+            if (ctrlPts.length === 2) {
+                context.strokeStyle = 'blue';
+            } else {
+                context.strokeStyle = 'lime';
+            }
+            context.lineWidth = 2;
+            context.beginPath();
+            context.moveTo(from.x, from.y);
+            context.lineTo(to.x, to.y);
+            context.stroke();
+            context.closePath();
+        }
+
+        if (ctrlPts.length === 2) { // Draw ALL bezier points
+            for (let k=0; k<finalBezierPts.length - 1; k++) {
+                context.strokeStyle = 'red';
+                context.lineWidth = 2;
+                context.beginPath();
+                context.moveTo(finalBezierPts[k].x, finalBezierPts[k].y);
+                context.lineTo(finalBezierPts[k + 1].x, finalBezierPts[k + 1].y);
+                context.stroke();
+                context.closePath();
+            }
+        }
+    }
+    return nextCtrlPts;
+}
+
+/**
+ * ctrlPts must contain at least 3 points.
+ */
+function setBezierForT(graphId, ctrlPts, t, incr, limit) {
+
+    let elmt = document.getElementById(graphId);
+    let context = elmt.getContext('2d');
+
+    clearGraph(graphId);
+    plotPoints(graphId);
+
+    let nextCtrlPts = drawCtrlLines(context, ctrlPts, t);
+    while (nextCtrlPts.length >= 3) {
+        nextCtrlPts = drawCtrlLines(context, nextCtrlPts, t);
+    }
+    if (nextCtrlPts.length === 2) { // Last one, the actual Bezier point
+        nextCtrlPts = drawCtrlLines(context, nextCtrlPts, t);
+    }
+
+    if (t <= limit) { // Then keep looping
+        t += incr;
+        window.setTimeout(() => setBezierForT(graphId, ctrlPts, t, incr, limit), 100);
+    }
+}
+
+function animateBezier(graphId) {
+    console.log("Animatimng Bezier...");
+    plotPoints(graphId);
+
+    while (finalBezierPts.length > 0) {
+        finalBezierPts.pop();
+    }
+
+    let elmt = document.getElementById(graphId);
+    let context = elmt.getContext('2d');
+
+    // Plot lines between Ctrl-Pts
+    for (let i=0; i<bezierCtlrPts.length - 1; i++) {
+        let from = bezierCtlrPts[i];
+        let to = bezierCtlrPts[i + 1];
+        context.strokeStyle = 'lime';
+        context.beginPath();
+        context.lineWidth = 2;
+        context.moveTo(from.x, from.y);
+        context.lineTo(to.x, to.y);
+        context.stroke();
+        context.closePath();
+    }
+
+    let t = 0;
+    setBezierForT(graphId, bezierCtlrPts, t, 0.01, 1.0);
+}
+
+function plotPoints(graphId) {
+
+    clearGraph(graphId); // 'bezier-graph'
+    let elmt = document.getElementById(graphId);
+
+    let context = elmt.getContext('2d');
+    // Plot the points
+    const RADIUS = 6;
+
+    bezierCtlrPts.forEach(pt => {
+        context.beginPath();
+        // console.log(`Plotting ${pt.x}/${pt.y}`);
+        context.arc(pt.x, pt.y /* - RADIUS*/, RADIUS, 0, 2 * Math.PI);
+        context.fillStyle = "red";
+        context.fill();
+        context.lineWidth = 2;
+        context.strokeStyle = "blue";
+        context.stroke();
+        context.closePath();
+    });
+}
+    </script>
+    <table>
+		<tr>
+            <!-- Beziers -->
+			<td valign="top">
+				<div class="black-frame centered">
+					<canvas id="bezier-graph"
+                            class="display-bezier-graph"
+                            width="800"
+                            height="600"
+                            title="B&eacute;ziers White Board">
+                    </canvas>
+				</div>
+				<div style="padding: 5px;">
+					<button id="reset-points" onclick="resetPoints('bezier-graph');">Reset Points</button>
+					<button id="animate" onclick="animateBezier('bezier-graph');">Animate Bezier</button>
+				</div>
+                <script type="text/javascript">
+
+let bezGraph = document.getElementById('bezier-graph'); 
+// Display in tooltip : absc / ord...
+bezGraph.addEventListener('mousemove', evt => {
+    // wow !
+    let theGraph = evt.target;
+    let rect = theGraph.getBoundingClientRect();
+    let x = evt.clientX - rect.left; // x position within the element.
+    let y = evt.offsetY - rect.height; // evt.clientY - rect.top;  // y position within the element. // TODO The value is to big by ~6... rect.height ?
+    // console.log(`MouseMove on graph: ${x}, ${y}`);
+    theGraph.title = `Mouse at [${x}, ${y}]`;
+});
+
+bezGraph.addEventListener('click', evt => {
+    // wow !
+    let theGraph = evt.target;
+    let rect = theGraph.getBoundingClientRect();
+    let x = evt.clientX - rect.left; // x position within the element.
+    let y = evt.clientY - rect.top;  // y position within the element. // TODO The value is to big by ~6... rect.height ?
+    // theGraph.value = `Click at ${x.toFixed(1)}, ${y.toFixed(1)}`;
+    // Plot the point, put it is its array
+    bezierCtlrPts.push({x: x, y: y});
+    document.getElementById('animate').disabled = (bezierCtlrPts.length < 3);
+    plotPoints('bezier-graph');
+});
+                </script>
+            </td>
+            <td style="vertical-align: top;">
+                <div style="padding: 10px;">
+                    Good article <a href="https://javascript.info/bezier-curve" target="_blank">here</a>.<br/>
+                    <ul>
+                        <li>Click on the white board on the left to create control points.</li>
+                        <li>At least 3 control points are required to create a B&eacute;zier curve</li>
+                        <li>Points can be reset by clicking the right button</li>
+                        <li>
+                            When least 3 points are defined, the curve can be displayed (Animate button)
+                            <ul>
+                                <li>The final curve is displayed in <span style="color: red;">red</span>.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </td>
+        </tr>    
+	</table>
+</div>
+<hr/>
+</div>  
+<script type="text/javascript">
+    window.onload = () => {
+        console.log("window.onload - X");
+        clearGraph('bezier-graph');
+        document.getElementById('animate').disabled = true;
+    };
+</script>      
+ 
+<!-- The end -->
+<table width="100%">
+	<tr>
+		<td><span style="font-style: italic;" title="C'est MOI qui l'ai fait.">Oliv did it</span></td>
+		<td><span class="mirror" style="font-style: italic;" title="C'est MOI qui l'ai fait.">Oliv did it</span></td>
+	</tr>
+</table>
+
+</body>
+</html>
