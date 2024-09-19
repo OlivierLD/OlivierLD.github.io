@@ -330,8 +330,42 @@
 <hr/>
 
 <style>
-    graph-display:focus {
-        outline: none;
+    button {
+        padding: 4px 20px;
+        /* give the background a gradient */
+        background:#ffae00; /* fallback for browsers that don't support gradients */
+        /* background: -webkit-linear-gradient(top, #ffae00, #d67600); */
+        background: -webkit-linear-gradient(top, rgba(255, 174, 0, 0.6), rgba(214, 118, 0, 0.6));
+        background: -moz-linear-gradient(top, #ffae00, #d67600);
+        background: -o-linear-gradient(top, #ffae00, #d67600);
+        /* background: linear-gradient(top, #ffae00, #d67600); */
+        background: linear-gradient(top, rgba(255, 174, 0, 0.6), rgba(214, 118, 0, 0.6));
+        border: 2px outset #dad9d8;
+        /* style the text */
+        font-family: Lato, Verdana, Andika, Arial, sans-serif; /* Andkia is available at http://www.google.com/webfonts/specimen/Andika */
+        font-size: 1.1em;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        color: #fff;
+        text-shadow: 0px 1px 10px #000;
+        /* add to small curve to the corners of the button */
+        -webkit-border-radius: 15px;
+        -moz-border-radius: 15px;
+        border-radius: 15px;
+        /* give the button a drop shadow */
+        -webkit-box-shadow: rgba(0, 0, 0, .55) 0 1px 6px;
+        -moz-box-shadow: rgba(0, 0, 0, .55) 0 1px 6px;
+        box-shadow: rgba(0, 0, 0, .55) 0 1px 6px;
+    }
+    /* NOW STYLE THE BUTTON'S HOVER STATE */
+    /*	button#rCoffee:hover, button#rCoffee:focus { */
+    button:hover, button:focus {
+        border:2px solid #dad9d8;
+    }
+
+    button:disabled {
+        background: silver;
+        color: gray;
     }
 </style>
 
@@ -339,7 +373,7 @@
 	<tr>
 		<td>
 			<h3>
-				Case study. B&eacute;zier curves.
+				Case study. B&eacute;zier curves, 2D.
 			</h3>
 		</td>
 		<td style="text-align: right;">
@@ -383,7 +417,11 @@ function resetPoints(graphId) {
 
 let finalBezierPts = [];
 
-function drawCtrlLines(context, ctrlPts, t) {
+function drawCtrlLines(context, ctrlPts, t, top) {
+
+    // Display t
+    context.font = "20px Arial";
+    context.fillText(`t = ${t.toFixed(4)}`, 10, 30);
 
     if (ctrlPts.length > 2) {
         for (let j=0; j<ctrlPts.length - 1; j++) {
@@ -428,7 +466,7 @@ function drawCtrlLines(context, ctrlPts, t) {
             if (ctrlPts.length === 2) {
                 context.strokeStyle = 'blue';
             } else {
-                context.strokeStyle = 'lime';
+                context.strokeStyle = (top !== undefined && top === true) ? 'orange' : 'lime';
             }
             context.lineWidth = 2;
             context.beginPath();
@@ -464,7 +502,7 @@ function setBezierForT(graphId, ctrlPts, t, incr, limit) {
     clearGraph(graphId);
     plotPoints(graphId);
 
-    let nextCtrlPts = drawCtrlLines(context, ctrlPts, t);
+    let nextCtrlPts = drawCtrlLines(context, ctrlPts, t, true);
     while (nextCtrlPts.length >= 3) {
         nextCtrlPts = drawCtrlLines(context, nextCtrlPts, t);
     }
