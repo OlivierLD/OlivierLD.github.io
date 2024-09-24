@@ -515,7 +515,7 @@ function setBezierForT(graphId, ctrlPts, t, incr, limit) {
 
     if (t <= limit) { // Then keep looping
         t += incr;
-        window.setTimeout(() => setBezierForT(graphId, ctrlPts, t, incr, limit), 100);
+        window.setTimeout(() => setBezierForT(graphId, ctrlPts, t, incr, limit), 50);
     }
 }
 
@@ -544,7 +544,7 @@ function animateBezier(graphId) {
     }
 
     let t = 0;
-    setBezierForT(graphId, bezierCtlrPts, t, 0.01, 1.0);
+    setBezierForT(graphId, bezierCtlrPts, t, 0.025, 1.0);
 }
 
 function plotPoints(graphId) {
