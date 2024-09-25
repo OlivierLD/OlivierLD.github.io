@@ -2046,9 +2046,9 @@ Date.prototype.format = function (dateFormat) {
 
       let docElem = document.documentElement;
       let body = document.getElementsByTagName('body')[0]; // could use document.body
-      let w = window.innerWidth || docElem.clientWidth || body.clientWidth;
-      let h = window.innerHeight || docElem.clientHeight || body.clientHeight;
-      dom.style.backgroundSize = `${w}px ${h}px`;
+      // let w = window.innerWidth || docElem.clientWidth || body.clientWidth;
+      // let h = window.innerHeight || docElem.clientHeight || body.clientHeight;
+      dom.style.backgroundSize = 'cover'; // `${w}px ${h}px`;
     }, 100);
 
     window.addEventListener("resize", () => {
