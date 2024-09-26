@@ -172,16 +172,6 @@ span.expand-collapse:hover {
   text-shadow: 4px 4px 8px navy, 0 0 25px blue, 0 0 7px cyan;
 }
 
-@media screen and (max-height: 450px) {
-  .sidenav {
-    padding-top: 15px;
-  }
-
-  .sidenav a {
-    font-size: 18px;
-  }
-}
-
 #wrap {
   position: fixed;
   left: 0;
@@ -691,6 +681,21 @@ button:hover, button:focus {
 @keyframes blinker {
   50% {
     opacity: 0;
+  }
+}
+
+/* @media screen and (max-height: 450px) { */
+@media screen and (width <= 1000px) {  
+  h1 {
+    font-size: 60px;
+  }
+
+  .sidenav {
+    padding-top: 15px;
+  }
+
+  .sidenav a {
+    font-size: 36px;
   }
 }
 
