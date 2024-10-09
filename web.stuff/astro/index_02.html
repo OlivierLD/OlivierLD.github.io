@@ -1681,10 +1681,31 @@ let toggleForeground = () => {
                             <input class="day" type="number" id="UTC-second" placeholder="seconds" min="0" max="59" title="seconds"> UTC
                         </div>
                         <div>
-                            <!-- TODO Nice sliders -->
-                            <input type="checkbox" id="no-planet"><small>Skip planets calculations</small>
-                            <input type="checkbox" id="no-star"><small>Skip stars calculations</small>
-                            <input type="checkbox" id="verbose" onchange="verbose(this);"><small>Console Verbose</small>
+                            <!-- Nice sliders -->
+                            <!--input type="checkbox" id="no-planet"><small>Skip planets calculations</small-->
+                            <div class="switch-container" style="margin-left: 30px; margin-top: 10px;" title="Planet Calculation">
+                                <label class="switch switch-element">
+                                  <input id="no-planet" type="checkbox">
+                                  <span class="slider round"></span>
+                                </label>
+                                <span class="switch-element"><small>Skip planets calculations</small></span>
+                            </div>
+                            <!--input type="checkbox" id="no-star"><small>Skip stars calculations</small-->
+                            <div class="switch-container" style="margin-left: 30px;" title="Star Calculation">
+                                <label class="switch switch-element">
+                                  <input id="no-star" type="checkbox">
+                                  <span class="slider round"></span>
+                                </label>
+                                <span class="switch-element"><small>Skip stars calculations</small></span>
+                            </div>
+                            <!--input type="checkbox" id="verbose" onchange="verbose(this);"><small>Console Verbose</small-->
+                            <div class="switch-container" style="margin-left: 30px;" title="Console verbose">
+                                <label class="switch switch-element">
+                                  <input id="verbose" type="checkbox" onchange="verbose(this);">
+                                  <span class="slider round"></span>
+                                </label>
+                                <span class="switch-element"><small>Console verbose</small></span>
+                            </div>
                         </div>
                     </div>    
                 </div>    
