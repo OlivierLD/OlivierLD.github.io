@@ -1635,7 +1635,6 @@ let toggleForeground = () => {
                                 <div id="alert-mess" style="color: green; background-color: orange; border-radius: 5px; padding: 5px;"></div>
                             </div>    
                     
-
                             <div style="display: grid; grid-template-columns: auto auto auto; align-items: center; border: 1px solid rgba(128, 128, 128, 0.75); border-radius: 5px; margin: 5px; padding: 3px;">
                                 <small style="text-align: right;">Bookmark this URL:</small>
                                 <div id="url-to-bookmark" class="bookmark" style="white-space: nowrap; overflow-x: scroll; height: fit-content;"></div>
@@ -1658,7 +1657,7 @@ let toggleForeground = () => {
                         style="margin: 3px; padding-left: 5px; padding-right: 5px; cursor: pointer;"><span id="date-char">&#9658;</span> UTC Date, and options</div>
 
                     <div id="user-date-widgets" class="smooth" style="padding: 2px; border: 1px solid rgba(0, 255, 255, 0.25); border-radius: 5px;">
-                        <small>Enter UTC date and time, then click the Compute button.</small>
+                        <small>Enter UTC date and time, then click the Compute button (in the background parameters).</small>
                         <div>
                             <input class="day" type="number" id="UTC-day" placeholder="day" min="1" max="31" title="Day of the Month">
                             <select class="month" id="UTC-month" title="Month of the year">
@@ -1682,6 +1681,7 @@ let toggleForeground = () => {
                             <input class="day" type="number" id="UTC-second" placeholder="seconds" min="0" max="59" title="seconds"> UTC
                         </div>
                         <div>
+                            <!-- TODO Nice sliders -->
                             <input type="checkbox" id="no-planet"><small>Skip planets calculations</small>
                             <input type="checkbox" id="no-star"><small>Skip stars calculations</small>
                             <input type="checkbox" id="verbose" onchange="verbose(this);"><small>Console Verbose</small>
