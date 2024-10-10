@@ -96,6 +96,9 @@ class SunPath extends HTMLElement {
 
 		this._previousClassName = "";
 		this.sunPathColorConfig = sunPathDefaultColorConfig;
+
+		this.doAFter = function(sunPath, context) { // Do-nothing by default; Callback, after drawing. Takes 'this' and the context as parameter.
+		};  
 	}
 
 	// Called whenever the custom element is inserted into the DOM.
@@ -376,6 +379,9 @@ class SunPath extends HTMLElement {
 			}
 		}
 		return colorConfig;
+	}
+	setDoAfter(func) {
+		this.doAfter = func;
 	}
 
 	repaint() {
@@ -745,7 +751,7 @@ class SunPath extends HTMLElement {
 					z += 360;
 				}
 				// console.log(`Z Offset: ${this._zOffset}`);
-				let displayData = `${z}°`;  
+				let displayData = `${z}°`;  // The "heading"...
 				let metrics = context.measureText(displayData);
 				context.fillText(displayData, (this._width / 2) - (metrics.width / 2), /*(this._height / 2) + 60*/ 18);
 				displayData = `\u21e7`;  // Vertical arrow
@@ -893,18 +899,21 @@ class SunPath extends HTMLElement {
 		}
 		// Planets here
 		if (this.venusHe !== undefined && this.venusZ !== undefined) {
-			this.plotPlanet(context, center, radius, 'orange', 'orange', this.venusHe, this.venusZ, "Venus");
+			this.plotCelestialBody(context, center, radius, 'orange', 'orange', this.venusHe, this.venusZ, "Venus");
 		}
 		if (this.marsHe !== undefined && this.marsZ !== undefined) {
-			this.plotPlanet(context, center, radius, 'red', 'red', this.marsHe, this.marsZ, "Mars");
+			this.plotCelestialBody(context, center, radius, 'red', 'red', this.marsHe, this.marsZ, "Mars");
 		}
 		if (this.jupiterHe !== undefined && this.jupiterZ !== undefined) {
-			this.plotPlanet(context, center, radius, 'pink', 'pink', this.jupiterHe, this.jupiterZ, "Jupiter");
+			this.plotCelestialBody(context, center, radius, 'pink', 'pink', this.jupiterHe, this.jupiterZ, "Jupiter");
 		}
 		if (this.saturnHe !== undefined && this.saturnZ !== undefined) {
-			this.plotPlanet(context, center, radius, 'lightyellow', 'lightyellow', this.saturnHe, this.saturnZ, "Saturn");
+			this.plotCelestialBody(context, center, radius, 'lightyellow', 'lightyellow', this.saturnHe, this.saturnZ, "Saturn");
 		}
-
+		// After (callback), like Plot Stars & Constellations ?
+		if (this.doAfter !== undefined) {
+			this.doAfter(this, context);
+		}
 	}
 
 	/**
@@ -1023,33 +1032,37 @@ class SunPath extends HTMLElement {
 		context.restore();
 	}
 
-	plotPlanet(context, center, radius, stroke, fill, he, z, name) {
+	plotCelestialBody(context, center, radius, stroke, fill, he, z, name, withLines=true) {
 		context.strokeStyle = stroke;
 		let panelPoint = this.rotateBothWays(this.rotation, z, this.side, this._tilt * this.invertX, (this.addToZ + this._zOffset)); // Horizon under the Body
-		// From center to horizon
-		context.beginPath();
-		context.moveTo(center.x, center.y);
-		context.lineTo(center.x + (panelPoint.x * radius * this.invertX), center.y - (panelPoint.y * radius));
-		context.stroke();
-		context.closePath();
-		// Up/Down to the body
-		context.beginPath();
-		context.moveTo(center.x + (panelPoint.x * radius * this.invertX), center.y - (panelPoint.y * radius));
-		if (he > 0) {
-			for (let alt = 0; alt <= he; alt++) {
-				panelPoint = this.rotateBothWays(alt + this.rotation, z, this.side, this._tilt * this.invertX, (this.addToZ + this._zOffset));
-				context.lineTo(center.x + (panelPoint.x * radius * this.invertX), center.y - (panelPoint.y * radius));
-			}
-		} else {
-			for (let alt = 0; alt >= he; alt--) {
-				panelPoint = this.rotateBothWays(alt + this.rotation, z, this.side, this._tilt * this.invertX, (this.addToZ + this._zOffset));
-				context.lineTo(center.x + (panelPoint.x * radius * this.invertX), center.y - (panelPoint.y * radius));
+		if (withLines) {
+			// From center to horizon
+			context.beginPath();
+			context.moveTo(center.x, center.y);
+			context.lineTo(center.x + (panelPoint.x * radius * this.invertX), center.y - (panelPoint.y * radius));
+			context.stroke();
+			context.closePath();
+			// Up/Down to the body
+			context.beginPath();
+			context.moveTo(center.x + (panelPoint.x * radius * this.invertX), center.y - (panelPoint.y * radius));
+			if (he > 0) {
+				for (let alt = 0; alt <= he; alt++) {
+					panelPoint = this.rotateBothWays(alt + this.rotation, z, this.side, this._tilt * this.invertX, (this.addToZ + this._zOffset));
+					context.lineTo(center.x + (panelPoint.x * radius * this.invertX), center.y - (panelPoint.y * radius));
+				}
+			} else {
+				for (let alt = 0; alt >= he; alt--) {
+					panelPoint = this.rotateBothWays(alt + this.rotation, z, this.side, this._tilt * this.invertX, (this.addToZ + this._zOffset));
+					context.lineTo(center.x + (panelPoint.x * radius * this.invertX), center.y - (panelPoint.y * radius));
+				}
 			}
 		}
 		panelPoint = this.rotateBothWays(he + this.rotation, z, this.side, this._tilt * this.invertX, (this.addToZ + this._zOffset));
-		context.lineTo(center.x + (panelPoint.x * radius * this.invertX), center.y - (panelPoint.y * radius));
-		context.stroke();
-		context.closePath();
+		if (withLines) {
+			context.lineTo(center.x + (panelPoint.x * radius * this.invertX), center.y - (panelPoint.y * radius));
+			context.stroke();
+			context.closePath();
+		}
 		// Draw the Body
 		context.fillStyle = fill;
 		context.beginPath();
@@ -1069,16 +1082,18 @@ class SunPath extends HTMLElement {
 
 			context.restore();
 		}
-		// Dotted line to center
-		context.fillStyle = fill;
-		context.save();
-		context.setLineDash([5, 3]);
-		context.beginPath();
-		context.moveTo(center.x + (panelPoint.x * radius * this.invertX), center.y - (panelPoint.y * radius));
-		context.lineTo(center.x, center.y);
-		context.stroke();
-		context.closePath();
-		context.restore();
+		if (withLines) {
+			// Dotted line to center
+			context.fillStyle = fill;
+			context.save();
+			context.setLineDash([5, 3]);
+			context.beginPath();
+			context.moveTo(center.x + (panelPoint.x * radius * this.invertX), center.y - (panelPoint.y * radius));
+			context.lineTo(center.x, center.y);
+			context.stroke();
+			context.closePath();
+			context.restore();
+		}
 		// Display values
 		if (false) {
 			context.save();

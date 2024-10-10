@@ -35,6 +35,8 @@ let globalAstroData;
 let globalSRUSun;
 let globalSRUMoon;
 
+let globalSRUStars;
+
 let marqueeScrollUpAnimationInterval;
 // let defaultMarqueeTextArray = [ 'Raspberry Pi', 'Web Components', 'Java & Processing', 'HTML5, CSS3, ES6', 'NodeJS', 'Python', '3D Printing', 'Arduino & Co', 'AI, ML, DL', 'Artificial Intelligence', 'Artificial Insanity', 'and other toys...' ];
 
@@ -1813,7 +1815,19 @@ let toggleForeground = () => {
                 " Polaris : GHA: " + testResult.polaris.GHA.fmt + ", RA: " + testResult.polaris.RA.fmt + ", Dec: " + testResult.polaris.DEC.fmt + "\n";
         }
         if (!document.getElementById('no-star').checked) {
-            // TODO
+            // TODO Display star data ?
+            // Calculate SRU for stars
+            if (testResult.stars !== undefined) {
+                globalSRUStars = [];
+                testResult.stars.forEach(star => {
+                    // console.log(`Computing SRU for ${star.name}`);
+                    let sruStar = sightReduction(userPos.latitude, userPos.longitude, star.gha, star.decl);
+                    globalSRUStars.push({name: star.name, h: sruStar.alt, z: sruStar.Z });
+                    // console.log('Done');
+                });
+            } else {
+                globalSRUStars = undefined;
+            }
         }
         detailsContent +=
             " Equation of time: " + testResult.EOT.fmt + "\n" +
@@ -2095,6 +2109,43 @@ let toggleForeground = () => {
 
     };
 
+    let extraDrawingSunPath = (sp, context) => {
+        console.log("Extra Sun Path drawings");
+        // globalAstroData
+        try {
+            let withStars = document.getElementById("stars-slider").checked;
+            if (withStars && globalAstroData.stars !== undefined) {
+                console.log(`Will plot ${globalAstroData.stars.length} stars`);
+                // Stars like {name: 'Altair', decl: 8.93591555402763, gha: 304.71130394967025}
+                // Need to have He and Z for each star, in globalSRUStars
+                console.log(`${globalSRUStars.length} items in globalSRUStars`);
+                let center = {
+                    x: sp.canvas.width / 2,
+                    y: sp.canvas.height / 2
+                };
+                let radius = (sp.canvas.width / 2) * .8;
+
+                globalSRUStars.forEach(star => {
+                    if (star.h !== undefined && star.z !== undefined && star.h >= 0) {
+                        let z = 180 - sp._zOffset; // The "heading" of the user.
+                        if (sp.invertX == -1) { // Pointing north
+                            z = - sp._zOffset;
+                        }
+                        while (z < 0) {
+                            z += 360;
+                        }
+                        // Do not display stars behind...
+                        if (star.z > (z - 90) && star.z < (z + 90)) { // TODO Tweak this (negative values...)
+                            sp.plotCelestialBody(context, center, radius, 'white', 'white', star.h, star.z, star.name, false);
+                        }
+                    }
+                });
+            }
+        } catch (err) {
+            console.log(`Oops: ${JSON.stringify(err)}`);
+        }
+    };
+
     // Set default date values, start process(es)
     window.onload = () => {
 
@@ -2112,6 +2163,7 @@ let toggleForeground = () => {
         }
 
         document.getElementById("world-map-01").setDoAfter(extraDrawingWorldMap);
+        document.getElementById("sun-path-01").setDoAfter(extraDrawingSunPath);
 
         let hdgUpdater = window.setInterval(sensorUpdater, 1000); // Simulation
         let prmslData = window.setInterval(prmslUpdater, 2000);   // Simulation
