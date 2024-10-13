@@ -9,9 +9,31 @@
 			background: black;
 			color: cyan;
 		}
+		.blink_me {
+			animation: blinker 0.5s linear infinite;
+		}
+		@keyframes blinker {
+			50% {
+				opacity: 0;
+			}
+		}
+		.display-data {
+			grid-area: middle;
+			text-align: center;
+			vertical-align: baseline;
+			margin: auto;
+			color: inherit;
+			font-size: 48px;
+			font-weight: bold;
+		}
 	</style>
   </head>
   <body>
+	<div id="loading-message" style="width: 100%; text-align: center; display: block; z-index: 10; position: fixed; top: 5px; left: 0;">
+		<!-- This will be hidden when page is loaded. See window.onload -->
+		<h1 class="display-data blink_me" style="color: orange;">Loading pictures, please wait...</h1>
+	</div>
+	
   	<h1>Hawai'i, Big Island, Feb 2020</h1>
   	
   	<small>Scroll on the image below, it's a wide one.</small>
@@ -277,7 +299,9 @@
 			document.getElementById("slide-show-11").slideclick = onSlideShowClick;
 			document.getElementById("slide-show-12").slideclick = onSlideShowClick;
 			document.getElementById("slide-show-13").slideclick = onSlideShowClick;
-		}
+
+			document.getElementById("loading-message").style.display = "none"; // Hide loading message
+		};
 	</script>
 
   <hr/>
