@@ -2137,12 +2137,26 @@ let toggleForeground = () => {
                 // Stars like {name: 'Altair', decl: 8.93591555402763, gha: 304.71130394967025}
                 // Need to have He and Z for each star, in globalSRUStars
                 console.log(`${globalSRUStars.length} items in globalSRUStars`);
+                // TODO Get those two (center & radius) from the sp context...
                 let center = {
                     x: sp.canvas.width / 2,
                     y: sp.canvas.height / 2
                 };
                 let radius = (sp.canvas.width / 2) * .8;
 
+                if (globalSRUStars.length > 0) { // Then draw forward & backwards circle...
+                    context.strokeStyle = sp.sunPathColorConfig.gridColor;
+                    context.beginPath();
+                    context.moveTo(center.x +(-1 * radius), center.y);
+                    for (let beta = 0; beta <= 180; beta += 1) { // 0-180, top only
+                        let x = radius * (Math.sin(Math.toRadians(beta - 90)));
+                        let y = radius * (Math.cos(Math.toRadians(beta - 90)));
+                        context.lineTo(center.x + x, center.y - y);
+                    }
+                    context.lineTo(center.x +(-1 * radius), center.y); // Close the semi-circle
+                    context.stroke();
+                    context.closePath();
+                }
                 globalSRUStars.forEach(star => {
                     if (star.h !== undefined && star.z !== undefined && star.h >= 0) {
                         let z = 180 - sp._zOffset; // The "heading" of the user.

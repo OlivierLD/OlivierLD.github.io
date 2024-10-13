@@ -571,7 +571,7 @@ class SunPath extends HTMLElement {
 		let len = 0;
 
 		panelPoint = this.rotateBothWays(this.rotation, 180, this.side, this._tilt, (this.addToZ + this._zOffset));
-//	context.moveTo(center.x + (panelPoint.x * radius * this.invertX), center.y - (panelPoint.y * radius));
+     // context.moveTo(center.x + (panelPoint.x * radius * this.invertX), center.y - (panelPoint.y * radius));
 		let text = (this.invertX === 1 ? "S" : "N");
 		let metrics = context.measureText(text);
 		len = metrics.width;
