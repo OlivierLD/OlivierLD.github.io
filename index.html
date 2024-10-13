@@ -699,9 +699,9 @@ button:hover, button:focus {
   }
 }
 
-</style>
+  </style>
 
-<script type="text/javascript">
+  <script type="text/javascript">
 // Date formatting
 
 // Provide month names
@@ -900,9 +900,9 @@ Date.prototype.format = function (dateFormat) {
     return date_string;
 };
 
-</script>
-<script type="module" src="./webcomponents/widgets/marquee/MarqueePanel.js"></script>
-<script type="text/javascript" src="./web.stuff/astro/js/qrcode.js"></script>
+  </script>
+  <script type="module" src="./webcomponents/widgets/marquee/MarqueePanel.js"></script>
+  <script type="text/javascript" src="./web.stuff/astro/js/qrcode.js"></script>
 
 </head>
 <body class="bg-gradient">
@@ -977,7 +977,8 @@ Date.prototype.format = function (dateFormat) {
         <span onclick="hidePage001();"
               class="close-icon bigger-close-icon" style="margin-right: 20px;">&times;</span>
         <div style="overflow-y: auto;">
-           <iframe src="./misc.pix/2020.02.Hawaii/index.html" width="100%" style="min-height: 1000px;"></iframe>
+          <!-- Deferred load for ./misc.pix/2020.02.Hawaii/index.html, big pictures... -->
+          <iframe id="hawaii-2020" src="" width="100%" style="min-height: 1000px;"></iframe>
         </div>
       </div>
     </div>
@@ -1340,7 +1341,7 @@ Date.prototype.format = function (dateFormat) {
     <a href="javascript:void(0)" onclick="showHideSection(this, 'section-00');" title="Modal pages examples"><span class="expand-collapse">&#9658;&nbsp;</span>Single Page App stuff</a>
     <div id="section-00" class="sub-section">
       <a href="javascript:void(0)" class="active-link" onclick="showPage00()">A Full Modal Page, with a &lt;div&gt;</a>
-      <a href="javascript:void(0)" class="active-link" onclick="showPage001()">A Full Modal Page, with an &lt;iframe&gt;</a>
+      <a href="javascript:void(0)" class="active-link" onclick="showPage001()">A Full Modal Page, with an &lt;iframe&gt; (deferred load)</a>
       <a href="javascript:void(0)" class="active-link" onclick="showPage002()">A Full Modal Page, with an &lt;iframe&gt;, (external not allowed... CORS)</a>
       <a href="javascript:void(0)" class="active-link" onclick="showPage003()">A Full Modal Page, with an &lt;iframe&gt;, linear regression</a>
     </div>
@@ -1605,6 +1606,8 @@ Date.prototype.format = function (dateFormat) {
   }
 
   function showPage001() {
+    let frameUrl = "./misc.pix/2020.02.Hawaii/index.html";
+    document.getElementById('hawaii-2020').src = frameUrl;
     // document.getElementById('id01').style.display = 'block';
     document.getElementById('id00-1').style.transform = 'scaleY(1)';
   }
