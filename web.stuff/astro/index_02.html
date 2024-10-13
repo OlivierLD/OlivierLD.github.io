@@ -2145,7 +2145,8 @@ let toggleForeground = () => {
                 let radius = (sp.canvas.width / 2) * .8;
 
                 if (globalSRUStars.length > 0) { // Then draw forward & backwards circle...
-                    context.strokeStyle = sp.sunPathColorConfig.gridColor;
+                    context.save()
+                    context.strokeStyle = 'orange'; // sp.sunPathColorConfig.gridColor;
                     context.beginPath();
                     context.moveTo(center.x +(-1 * radius), center.y);
                     for (let beta = 0; beta <= 180; beta += 1) { // 0-180, top only
@@ -2156,6 +2157,7 @@ let toggleForeground = () => {
                     context.lineTo(center.x +(-1 * radius), center.y); // Close the semi-circle
                     context.stroke();
                     context.closePath();
+                    context.restore();
                 }
                 globalSRUStars.forEach(star => {
                     if (star.h !== undefined && star.z !== undefined && star.h >= 0) {
