@@ -2144,11 +2144,12 @@ let toggleForeground = () => {
                 };
                 let radius = (sp.canvas.width / 2) * .8;
 
-                if (globalSRUStars.length > 0) { // Then draw forward & backwards circle...
+                // Draw forward / backwards half circle...
+                if (globalSRUStars.length > 0) { 
                     context.save()
                     context.strokeStyle = 'orange'; // sp.sunPathColorConfig.gridColor;
                     context.beginPath();
-                    context.moveTo(center.x +(-1 * radius), center.y);
+                    context.moveTo(center.x + (-1 * radius), center.y);
                     for (let beta = 0; beta <= 180; beta += 1) { // 0-180, top only
                         let x = radius * (Math.sin(Math.toRadians(beta - 90)));
                         let y = radius * (Math.cos(Math.toRadians(beta - 90)));
@@ -2159,6 +2160,7 @@ let toggleForeground = () => {
                     context.closePath();
                     context.restore();
                 }
+                // Plot the stars
                 globalSRUStars.forEach(star => {
                     if (star.h !== undefined && star.z !== undefined && star.h >= 0) {
                         let z = 180 - sp._zOffset; // The "heading" of the user.
@@ -2183,7 +2185,7 @@ let toggleForeground = () => {
     // Set default date values, start process(es)
     window.onload = () => {
 
-        console.log('On Load, ready.');
+        console.log('On Load, ready...');
         updateUTCDate();
         // Check QS for location
         let qsLat = getQueryParameterByName('lat');
@@ -2220,7 +2222,7 @@ let toggleForeground = () => {
 
         document.getElementById('sun-path-header-title').innerText = (navigator.userAgent.indexOf("Chrome") > -1 ? "(draggable header)" : "");
 
-        console.log('On Load, done.');
+        console.log('On Load, done!');
     };
 </script>
 </html>
