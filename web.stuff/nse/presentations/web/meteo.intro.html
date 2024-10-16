@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<!--
+    Intends to generate a possibly printer-ready document, with appropriate page breaks and so.
+    This doc should be both visualizable and printable.
+
+    Good resource at https://content.meteoblue.com/en/research-education/educational-resources/meteoscool
+ +-->
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>M&eacute;t&eacute;o Marine - 101</title>
+    <!--author>Olivier Le Diouris</author-->
+    <meta name="author" content="Olivier Le Diouris">
+    <link rel="icon" type="image/png" href="../../cloud.png">
+    <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <!--script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script-->
+    <script type="text/javascript" 
+        async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+
+
+    <link rel="stylesheet" href="../../main.css" />
+    <!-- link rel="stylesheet" media="screen" href="main.css" /-->
+    <link rel="stylesheet" media="print" href="../../print.css" />
+</head>
+<body>
+
+<div id="screen-warning" class="screen-only screen-warning">
+     <!-- Language switch goes here -->
+     <div style="float: right;">
+        <a href="#" onclick="alert('Oops... not yet!');">In English</a>
+     </div>
+    <b><i>Note&nbsp;:</i></b>
+    <div style="display: grid; grid-template-columns: auto auto;">
+        <p style="margin: 5px; padding: 5px; border: 1px solid silver; border-radius: 5px;">
+            The following document is designed to be visualized from a web browser, or printed from it (a pdf can also be generated from the page).
+            The printed version will have page breaks and other formattings that will not be displayed from the web browser.<br/>
+            Likewise, the web version has links that would be meaningless in a printed document.<br/>
+            When printing, you will have the possibility - from the dialog showing up in the browser - to hide or show different 
+            data like headers, footers, page numbers, etc, and even scale.<br/>
+            <b>But</b>, I'm still looking for a (free) way to generate the page numbers in the table of contents...
+        </p>
+        <p style="margin: 5px; padding: 5px; border: 1px solid silver; border-radius: 5px;">
+            Le document qui suit est con&ccedil;u pour &ecirc;tre visualis&eacute; dans un navigateur web, ou imprim&eacute; &agrave; partir de celui-ci (on peut aussi g&eacute;n&eacute;rer un pdf).
+            La version imprim&eacute;e comporte des sauts de page et autres formattages qui ne seront pas visibles &agrave; partir du navigateur.<br/>
+            De m&ecirc;me, la version web comporte des liens qui n'auraient gu&egrave;re de sens dans un document imprim&eacute;.<br/>
+            Lors de l'impression, vous aurez la possibilit&eacute; - &agrave; partir des boites de dialogue du navigateur - de faire appara&icirc;tre ou pas
+            des donn&eacute;es comme les en-t&ecirc;tes et bas de page, num&eacute;ros de page, etc, et m&ecirc;me l'&eacute;chelle.<br/>
+            <b>Mais</b>, je suis toujours en train de chercher comment g&eacute;n&eacute;rer (gratuitement) les num&eacute;ros de page dans la table des mati&egrave;res...
+        </p>
+    </div>
+    <hr/>
+</div>
+
+<div class="front-page">
+    <h3 style="text-align: center;">Olivier Le Diouris</h3>
+    <div class="in-the-middle">
+        <h1 style="text-align: center; font-size: 4.5em;">Introduction &agrave; la m&eacute;t&eacute;orologie marine</h1>
+        <h2 style="text-align: center; font-size: 2em;">Principes de base</h1>
+    </div>
+</div>
+
+<div class="blank-for-print"></div>
+
+<hr class="screen-only"/>
+
+<div class="print-only content in-the-middle">
+    <div style="text-align: right; margin-right: 30px;">
+        <i>Pour Sky, Tao, Ellie, Zach, Otto, Eva</i>
+    </div>
+    <div style="text-align: left; margin-left: 30px; margin-top: 130px;">
+        <i>The more you know, the less you need... (Yvon Chouinard)</i>
+    </div>
+</div>    
+
+<div class="blank-for-print"></div>
+
+<div class="table-content screen-only">
+    <!-- 
+        role=list necessary because WebKit removes list semantic when list-style-type: none 
+        taken from https://codepen.io/nzakas/pen/rNJaeMo
+        WARNING !!! Page numbers are NOT automatically generated !!
+    -->
+    <h2>Table</h2>
+    <ol class="toc-list" role="list">
+        <li><a class="toc" href="#01"><span class="title">Pr&eacute;ambule<span class="leaders print-only-2" aria-hidden="true"></span></span><span data-href="#01" class="page print-only"><span class="visually-hidden">Page&nbsp;</span>X</span></a></li>
+        <li>
+            <a class="toc" href="#02"><span class="title">Les ph&eacute;nom&egrave;nes de brise<span class="leaders print-only-2" aria-hidden="true"></span></span><span data-href="#02" class="page print-only"><span class="visually-hidden">Page&nbsp;</span>X</span></a>
+            <ol role="list">
+                <li><a class="toc" href="#02-1"><span class="title">. . .<span class="leaders print-only-2" aria-hidden="true"></span></span><span data-href="#02-2" class="page print-only"><span class="visually-hidden">Page&nbsp;</span>X</span></a></li>
+            </ol>
+        </li>
+        <li>
+            <a class="toc" href="#03"><span class="title">Les r&eacute;gions<span class="leaders print-only-2" aria-hidden="true"></span></span><span data-href="#03" class="page print-only"><span class="visually-hidden">Page&nbsp;</span>X</span></a>
+            <a class="toc" href="#04"><span class="title">Les fronts<span class="leaders print-only-2" aria-hidden="true"></span></span><span data-href="#04" class="page print-only"><span class="visually-hidden">Page&nbsp;</span>X</span></a>
+            <a class="toc" href="#05"><span class="title">Les perturbations<span class="leaders print-only-2" aria-hidden="true"></span></span><span data-href="#05" class="page print-only"><span class="visually-hidden">Page&nbsp;</span>X</span></a>
+            <a class="toc" href="#06"><span class="title">Les cartes m&eacute;t&eacute;o<span class="leaders print-only-2" aria-hidden="true"></span></span><span data-href="#06" class="page print-only"><span class="visually-hidden">Page&nbsp;</span>X</span></a>
+            <a class="toc" href="#07"><span class="title">Au niveau de la mer<span class="leaders print-only-2" aria-hidden="true"></span></span><span data-href="#07" class="page print-only"><span class="visually-hidden">Page&nbsp;</span>X</span></a>
+            <a class="toc" href="#08"><span class="title">Le 500mb...<span class="leaders print-only-2" aria-hidden="true"></span></span><span data-href="#08" class="page print-only"><span class="visually-hidden">Page&nbsp;</span>X</span></a>
+            <a class="toc" href="#09"><span class="title">Conclusion<span class="leaders print-only-2" aria-hidden="true"></span></span><span data-href="#10" class="page print-only"><span class="visually-hidden">Page&nbsp;</span>X</span></a>
+            <a class="screen-only toc" href="#10"><span class="title">&Agrave; lire ensuite<span class="leaders print-only-2" aria-hidden="true"></span></span><span data-href="#11" class="page print-only"><span class="visually-hidden">Page&nbsp;</span>X</span></a>
+        </li>
+    </ol>
+</div>
+<hr class="screen-only"/>
+
+<div class="content">
+    <h1><a name="01">Pr&eacute;ambule</a></h1>
+    <div>
+        <p>
+            On va exposer dans ce document les principes de base utilis&eacute;s en m&eacute;t&eacute;o marine - sans &eacute;lectricit&eacute; (sans forcement pouvoir recevoir de fax, ou de fichier GRIB) - 
+            afin de pouvoir anticiper les changements de temps, essentiellement la force et la direction du vent, lesquels ont un impact direct sur l'&eacute;tat de la mer, et
+            ipso-facto, sur le moral de l'&eacute;quipage.
+        </p>
+        <p>
+            Ces principes reposent sur les donn&eacute;es suivantes :
+            <ul>
+                <li>La force et la direction du vent</li>
+                <li>Leur &eacute;volution (on note leurs valeurs dans le livre de bord, &agrave; intervalles r&eacute;guliers)</li>
+                <li>L'&eacute;volution de la pression atmosph&eacute;rique.
+                    <ul>
+                        <li>Cette &eacute;volution peut elle aussi etre consign&eacute;e dans la livre de bord</li>
+                        <li>Un barographe peut aussi ici s'av&eacute;rer un outil pr&eacute;cieux</li>
+                    </ul>
+                </li>
+            </ul>
+        </p>
+        <p style="font-weight: bold; font-style: italic;">
+            Note : Afin de rester concis, on n'entrera pas toujours dans les d&eacute;tails ; le but de ce document est d'abord d'&eacute;noncer les concepts
+            &agrave; connaitre (sans forc&eacute;ment les d&eacute;crire int&eacute;gralement) pour mettre les pr&eacute;visions m&eacute;t&eacute;orologiques en &oelig;uvre.<br/>
+            Les ph&eacute;nom&egrave;nes qu'on va d&eacute;crire plus avant rel&egrave;vent de la thermodynamique, et peuvent parfois (voire souvent) &ecirc;tre exprim&eacute;s d'une fa&ccedil;on complexe,
+            qui peut potentiellement en d&eacute;courager plus d'un...<br/> 
+            On va t&acirc;cher ici de les pr&eacute;senter de fa&ccedil;on plus "intuitive".
+        </p>
+    </div>
+</div>
+
+<div class="blank-for-print"></div>
+
+<hr class="screen-only"/>
+<div class="content doc-section in-the-middle">
+    <h1 style="text-align: center; font-size: 3em;"><a name="02">Les ph&eacute;nom&egrave;nes de brise</a></h1>
+    <div class="content doc-section">
+        On les appelle "brises c&ocirc;ti&egrave;res", pour cette raison &eacute;vidente que ce ph&eacute;nom&egrave;ne apparait pr&egrave;s des c&ocirc;tes.
+        <div class="content doc-section">
+            <h2><a name="02-1">Air chaud, air froid</a></h2>
+        </div>
+
+        <div class="content doc-section">
+            <h2><a name="02-2">Deux types de brise</a></h2>
+        </div>
+        
+        Pr&egrave;s des c&ocirc;tes, ce ph&eacute;nom&egrave;nes <i>existe toujours</i>. D'autres ph&eacute;nom&egrave;nes peuvent s'y ajouter (on verra lesquels ensuite), mais il est <i>toujours</i> pr&eacute;sent.
+    </div>
+</div>
+<hr class="screen-only"/>
+<div class="blank-for-print"></div>
+
+<div class="content doc-section in-the-middle">
+    <h1 style="text-align: center; font-size: 3em;"><a name="03">Les r&eacute;gions</a></h1>
+    Polaires, tropicales, sub-tropicales, temp&eacute;r&eacute;es.
+</div>
+<hr class="screen-only"/>
+<div class="blank-for-print"></div>
+
+<div class="content doc-section in-the-middle">
+    <h1 style="text-align: center; font-size: 3em;"><a name="04">Les fronts</a></h1>
+
+    <div class="content doc-section">
+        <h2><a name="04-1">Nuages</a></h2>
+    </div>
+
+</div>
+<hr class="screen-only"/>
+<div class="blank-for-print"></div>
+
+<div class="content doc-section in-the-middle">
+    <h1 style="text-align: center; font-size: 3em;"><a name="05">Les perturbations</a></h1>
+</div>
+<hr class="screen-only"/>
+<div class="blank-for-print"></div>
+
+<div class="content doc-section in-the-middle">
+    <h1 style="text-align: center; font-size: 3em;"><a name="06">Les cartes m&eacute;t&eacute;o</a></h1>
+</div>
+<hr class="screen-only"/>
+<div class="blank-for-print"></div>
+
+<div class="content doc-section in-the-middle">
+    <h1 style="text-align: center; font-size: 3em;"><a name="07">Au niveau de la mer</a></h1>
+</div>
+<hr class="screen-only"/>
+<div class="blank-for-print"></div>
+
+<div class="content doc-section in-the-middle">
+    <h1 style="text-align: center; font-size: 3em;"><a name="08">Le 500mb...</a></h1>
+</div>
+<hr class="screen-only"/>
+<div class="blank-for-print"></div>
+
+<div class="content doc-section in-the-middle">
+    <h1 style="text-align: center; font-size: 3em;"><a name="09">Conclusion</a></h1>
+</div>
+<hr class="screen-only"/>
+<div class="blank-for-print"></div>
+
+<div class="screen-only content doc-section">
+    <h1><a name="10">&Agrave; lire ensuite</a></h1>
+    . . .
+</div>
+
+<!-- End of Doc -->
+<hr class="screen-only"/>
+
+<div id="last-page" class="content doc-section in-the-middle" style="margin-right: 30px; font-style: italic;">
+    R&eacute;dig&eacute; en 20... pour la premi&egrave;re &eacute;dition.
+</div>
+
+</body>
+</html>
+
+<!--
+  <iframe style="border-radius:12px" src="https://open.spotify.com/embed/artist/0b2B3PwcYzQAhuJacmcYgc?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+  -->
+  
