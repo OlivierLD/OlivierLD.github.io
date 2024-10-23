@@ -219,6 +219,13 @@ let displayWorldData = (astroData) => {
     }
 };        
 
+let userSunPos = false; // user by default
+
+let switchPos = (cb) => {
+    userSunPos = cb.checked;
+    console.log(`User-Sun: ${userSunPos ? "Using Sun position" : "Using User porsition"}`);
+};
+
 let setTransparency = (wcId, cb) => {
 	document.getElementById(wcId).transparentGlobe = (cb.checked ? 'true' : 'false');
 	document.getElementById(wcId).repaint();
@@ -389,24 +396,32 @@ let expandCollapseHelpData = () => {
 };
 
 let updatePosition = () => {
-    let sgnLat = document.getElementById("pos-lat-sign-01").value;
-    let degLat = parseInt(document.getElementById("pos-lat-deg-01").value);
-    let minLat = parseFloat(document.getElementById("pos-lat-min-01").value);
-    let lat = (degLat + (minLat / 60.0)) * (sgnLat === 'N' ? 1 : -1);
 
-    let sgnLng = document.getElementById("pos-lng-sign-01").value;
-    let degLng = parseInt(document.getElementById("pos-lng-deg-01").value);
-    let minLng = parseFloat(document.getElementById("pos-lng-min-01").value);
-    let lng = (degLng + (minLng / 60.0)) * (sgnLng === 'E' ? 1 : -1);
+    if (!userSunPos) { // Use user position
 
-//		console.log("Setting pos to " + lat + "/" + lng);
-    setUserPos(lat, lng);
-    // URL to bookmark
-    let toBookmark = `${window.location.protocol}//${window.location.hostname}:${window.location.pathname}?lat=${lat}&long=${lng}`;
+        let sgnLat = document.getElementById("pos-lat-sign-01").value;
+        let degLat = parseInt(document.getElementById("pos-lat-deg-01").value);
+        let minLat = parseFloat(document.getElementById("pos-lat-min-01").value);
+        let lat = (degLat + (minLat / 60.0)) * (sgnLat === 'N' ? 1 : -1);
 
-    console.log("Bookmark this URL: " + toBookmark);
-    document.getElementById("url-to-bookmark").innerText = toBookmark;
-    document.getElementById("url-placeHolder").style.display = "block";
+        let sgnLng = document.getElementById("pos-lng-sign-01").value;
+        let degLng = parseInt(document.getElementById("pos-lng-deg-01").value);
+        let minLng = parseFloat(document.getElementById("pos-lng-min-01").value);
+        let lng = (degLng + (minLng / 60.0)) * (sgnLng === 'E' ? 1 : -1);
+
+    //		console.log("Setting pos to " + lat + "/" + lng);
+        setUserPos(lat, lng);
+        // URL to bookmark
+        let toBookmark = `${window.location.protocol}//${window.location.hostname}:${window.location.pathname}?lat=${lat}&long=${lng}`;
+
+        console.log("Bookmark this URL: " + toBookmark);
+        document.getElementById("url-to-bookmark").innerText = toBookmark;
+        document.getElementById("url-placeHolder").style.display = "block";
+    } else {
+        // Use Sun pos
+        console.log("Use SUN position");
+        // globalAstroData
+    }
 };
 
 let updateFromUserPos = () => {
@@ -540,8 +555,12 @@ let drawArrow = (divId, dir, body) => {
         points += `${pt.x.toFixed(0)},${pt.y.toFixed(0)} `;
     });
     // console.log('Points:' + points.trim());
-    polygon.setAttributeNS(null, 'points', points.trim());
-    svg.appendChild(polygon);
+    try {
+        polygon.setAttributeNS(null, 'points', points.trim());
+        svg.appendChild(polygon);
+    } catch (err) {
+        console.log(`Oops: ${JSON.stringify(err)}`);
+    }
 
     let text = document.createElementNS(XMLNS, 'text');
     text.setAttributeNS(null, 'x', '10');
@@ -1150,6 +1169,17 @@ let toggleForeground = () => {
         <div class="dialog-header">
           <span>Background Parameters...</span>
           <span class="dialog-header-close" onclick="closePrmsDialog();">&times</span>
+        </div>
+
+        <div style="display: grid; grid-template-columns: auto auto; text-align: left;">
+            <div>Center on: <span class="switch-element">User Position</span></div>
+            <div class="switch-container" style="margin-left: -150px;" title="Sun or User">
+                <label class="switch switch-element">
+                  <input id="transp-slider" type="checkbox" onchange="switchPos(this);">
+                  <span class="slider round"></span>
+                </label>
+                <span class="switch-element">Sun Position</span>
+            </div>
         </div>
 
         <div style="margin-bottom: 10px;">
@@ -1771,6 +1801,12 @@ let toggleForeground = () => {
             console.log("Calculation done %d-%d-%d %d:%d:%d UTC :", calculationData.utcyear, calculationData.utcmonth, calculationData.utcday, calculationData.utchour, calculationData.utcminute, calculationData.utcsecond);
             console.log("Result:\n", JSON.stringify(testResult, null, 2));
         }
+
+        if (userSunPos) { // Use SUN position
+            // console.log("Setting user pos from the sun...");
+            setUserPos(globalAstroData.sun.DEC.raw, ghaToLongitude(globalAstroData.sun.GHA.raw)); // from globalAstroData
+        }
+
         // SRU - Sight Reduction Utility
         try {
             let sruSun = sightReduction(userPos.latitude, userPos.longitude, testResult.sun.GHA.raw, testResult.sun.DEC.raw);
@@ -1779,15 +1815,22 @@ let toggleForeground = () => {
             //     `SUN<br/>Elev: ${sru.alt.toFixed(2)}&deg;<br/>Z: ${sru.Z.toFixed(1)}&deg;`;
 
             // Background data display
-            drawArrow('sun-azimuth', sruSun.Z, 'Sun');
+            if (!isNaN(sruSun.Z)) {
+                drawArrow('sun-azimuth', sruSun.Z, 'Sun');
+            }
             // Sun Altitude: json.CELESTIAL_DATA.elevation
-            drawElevation('sun-elevation', sruSun.alt);
-    
+            if (!isNaN(sruSun.alt)) {
+                drawElevation('sun-elevation', sruSun.alt);
+            }
             let sruMoon = sightReduction(userPos.latitude, userPos.longitude, testResult.moon.GHA.raw, testResult.moon.DEC.raw);
             globalSRUMoon = sruMoon;
-            drawArrow('moon-azimuth', sruMoon.Z, 'Moon');
-            // Sun Altitude: json.CELESTIAL_DATA.elevation
-            drawElevation('moon-elevation', sruMoon.alt, '#ffffff', '#808080');
+            if (!isNaN(sruMoon.Z)) {
+                drawArrow('moon-azimuth', sruMoon.Z, 'Moon');
+            }
+            // Moon Altitude: json.CELESTIAL_DATA.elevation
+            if (!isNaN(sruMoon.alt)) {
+                drawElevation('moon-elevation', sruMoon.alt, '#ffffff', '#808080');
+            }
         } catch (error) {
             console.debug(error);
         }
