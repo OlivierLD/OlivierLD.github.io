@@ -223,6 +223,14 @@ let userSunPos = false; // user by default
 
 let switchPos = (cb) => {
     userSunPos = cb.checked;
+    if (userSunPos) { 
+        userPosBackup.latitude = userPos.latitude;
+        userPosBackup.longitude = userPos.longitude;
+    } else {
+        userPos.latitude = userPosBackup.latitude;
+        userPos.longitude = userPosBackup.longitude;
+        setUserPos(userPos.latitude, userPos.longitude);
+    }
     console.log(`User-Sun: ${userSunPos ? "Using Sun position" : "Using User porsition"}`);
 };
 
@@ -439,6 +447,11 @@ let userPos = {
     latitude: 37.7489,
     longitude: -122.507
 };
+
+let userPosBackup = {
+    latitude: userPos.latitude,
+    longitude: userPos.longitude
+}
 
 let setUserPos = (lat, lng) => {
     userPos.latitude = lat;
