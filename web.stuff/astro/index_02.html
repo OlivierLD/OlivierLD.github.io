@@ -223,10 +223,10 @@ let userSunPos = false; // user by default
 
 let switchPos = (cb) => {
     userSunPos = cb.checked;
-    if (userSunPos) { 
+    if (userSunPos) { // Store the backup
         userPosBackup.latitude = userPos.latitude;
         userPosBackup.longitude = userPos.longitude;
-    } else {
+    } else {          // Restore the backup
         userPos.latitude = userPosBackup.latitude;
         userPos.longitude = userPosBackup.longitude;
         setUserPos(userPos.latitude, userPos.longitude);
@@ -1428,7 +1428,7 @@ let toggleForeground = () => {
 
 <div style="display: grid; grid-template-columns: auto auto;" title="Single Page Application with Background SVG &amp; Web Components">
     <div><h1 style="vertical-align: top; margin-top: 0; font-style: normal; text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px silver;"><span style="cursor: pointer;" onclick="openNav()" onmouseover="openNav()" title="Hamburger">&nbsp; &#8801;</span> ES6 Celestial Computer, SPA with BG Components</h1></div>
-    <div style="text-align: right;"><small>Last code update Oct 10, 2024, 15:00 MDT</small></div>    
+    <div style="text-align: right;"><small>Last code update Oct 26, 2024, 12:00 CET</small></div>    
 </div>
 <div class="background bg-container" 
      style="margin: 10px; margin-top: 50px; border: 2px solid rgba(0, 255, 255, 0.5); border-radius: 10px;">
