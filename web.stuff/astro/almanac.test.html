@@ -57,6 +57,10 @@ td {
     padding: 0 5px 0 5px;
     text-align: right;
 }
+th {
+    border: 1px solid silver;
+    padding: 0 5px 0 5px;
+}
 .sub-title {
     font-style: italic;
     font-weight: bold;
@@ -94,7 +98,6 @@ td {
                 <input class="day" type="number" id="UTC-second" placeholder="seconds" min="0" max="59" title="seconds"> UTC
             </div>
             <div>
-                <input type="checkbox" id="no-planet"><small>Skip planets calculations</small>
                 <input type="checkbox" id="verbose" onchange="verbose(this);"><small>Console Verbose</small>
             </div>
             <button id="now" onclick="updateUTCDate();" title="Update time to current time">Now</button>&nbsp;
@@ -155,8 +158,14 @@ td {
         let month = MONTHS[date.getMonth()];
         let day = DAYS[date.getDay()];
         return `${day}, ${month} ${date.getDate()}, ${date.getFullYear()}`;
-
     };
+
+    let decimalHoursToHMS = (decHours) => {
+		let hours = Math.floor(decHours);
+		let min = (decHours - hours) * 60;
+		let sec = (min - Math.floor(min)) * 60;
+		return `${lpad(hours, '0', 2)}:${lpad(Math.floor(min), '0', 2)}:${lpad(sec.toFixed(3), '0', 6)}`;
+    }
 
 
     let compute = () => {
@@ -166,15 +175,26 @@ td {
             month: parseInt(document.getElementById('UTC-month').value),
             day: parseInt(document.getElementById('UTC-day').value)
         };
-        let noPlanets =  document.getElementById('no-planet').checked;
 
-        let htmlContent = "";
+        let htmlContentSunMoonAries = "";
+        let htmlContentPlanets = "";
+        let htmlContentSemiDiamAndCo = "";
+
+
         const now = new Date(`${today.year}-${today.month}-${today.day}`);
-        htmlContent += `<h2>Sun Almanac for ${ formatDate(now) }</h2>`;
-        htmlContent += "<table>";
-        htmlContent += "<tr><th>UT</th><th>Sun GHA</th><th>&delta;GHA</th><th>Sun RA</th><th>Sun Decl</th><th>Aries GHA</th></tr>";
+        htmlContentSunMoonAries += `<h2> ${ formatDate(now) }</h2>`;
+        htmlContentSunMoonAries += "<table style='margin: auto;'>";
+        htmlContentSunMoonAries += "<tr><th rowspan='2'>UT</th><th colspan='5'>Sun</th><th colspan='6'>Moon</th><th>Aries</th><th rowspan='2'>UT</th></tr>";
+        htmlContentSunMoonAries += "<tr><th>GHA</th><th>&delta;GHA</th><th>SHA</th><th>Decl</th><th>d</th><th>GHA</th><th>&delta;GHA</th><th>SHA</th><th>Decl</th><th>d</th><th>hp (&Pi;)</th><th>GHA</th></tr>";
 
-        let prevSunGHA;
+        htmlContentPlanets += "<table style='margin: auto;'>";
+        htmlContentPlanets += "<tr><th rowspan='2'>UT</th><th colspan='3'>Venus</th><th colspan='3'>Mars</th><th colspan='3'>Jupiter</th><th colspan='3'>Saturn</th><th rowspan='2'>UT</th></tr>";
+        htmlContentPlanets += "<tr><th>GHA</th><th>SHA</th><th>Decl</th><th>GHA</th><th>SHA</th><th>Decl</th><th>GHA</th><th>SHA</th><th>Decl</th><th>GHA</th><th>SHA</th><th>Decl</th></tr>";
+
+        // htmlContentSemiDiamAndCo += "<table>";
+
+        let prevSunGHA, prevSunDecl, prevMoonGHA, prevMoonDecl;
+
         for (let hours=0; hours<24; hours++) {
             let calculationData = {
                 utcyear: today.year,
@@ -183,8 +203,8 @@ td {
                 utchour: hours,
                 utcminute: 0,
                 utcsecond: 0,
-                deltaT: DELTA_T,
-                noPlanets: noPlanets
+                deltaT: DELTA_T, /// Recalculated
+                noPlanets: false
             };
 
             // The heart of the system
@@ -196,25 +216,125 @@ td {
 
             let ut = lpad(hours.toFixed(0), '0', 2);
             let sunGHA = decToSex(calcResult.sun.GHA.raw); // calcResult.sun.GHA.fmt;
-            let deltaGHA = "";
+            let moonGHA = decToSex(calcResult.moon.GHA.raw); // calcResult.sun.GHA.fmt;
+
+            let deltaSunGHA = "";
+            let deltaSunDecl = "";
+            let deltaMoonGHA = "";
+            let deltaMoonDecl = "";
+
+            let moonHp = `${(calcResult.moon.HP.raw / 60).toFixed(4)}'`;
+
             if (prevSunGHA) {
-                delta = calcResult.sun.GHA.raw - prevSunGHA;
+                let delta = calcResult.sun.GHA.raw - prevSunGHA;
                 while (delta < 0) {
                     delta += 360;
                 }
-                deltaGHA = `${delta.toFixed(4)}&deg;`;
+                deltaSunGHA = `${delta.toFixed(4)}&deg;`;
             }
+            if (prevSunDecl) {
+                let delta = Math.abs(calcResult.sun.DEC.raw - prevSunDecl);
+                // while (delta < 0) {
+                //     delta += 360;
+                // }
+                delta *= 60.0; // in minutes
+                deltaSunDecl = `${delta.toFixed(4)}'`;
+            }
+            if (prevMoonGHA) {
+                let delta = calcResult.moon.GHA.raw - prevMoonGHA;
+                while (delta < 0) {
+                    delta += 360;
+                }
+                deltaMoonGHA = `${delta.toFixed(4)}&deg;`;
+            }
+            if (prevMoonDecl) {
+                let delta = Math.abs(calcResult.moon.DEC.raw - prevMoonDecl);
+                // while (delta < 0) {
+                //     delta += 360;
+                // }
+                delta *= 60.0; // in minutes
+                deltaMoonDecl = `${delta.toFixed(4)}'`;
+            }
+
             prevSunGHA = calcResult.sun.GHA.raw;
+            prevMoonGHA = calcResult.moon.GHA.raw;
+            prevSunDecl = calcResult.sun.DEC.raw;
+            prevMoonDecl = calcResult.moon.DEC.raw;
+
             let sunRA = decToSex(calcResult.sun.RA.raw);
             let sunDecl = decToSex(calcResult.sun.DEC.raw, "NS"); // calcResult.sun.DEC.fmt;
+
+            let moonRA = decToSex(calcResult.moon.RA.raw);
+            let moonDecl = decToSex(calcResult.moon.DEC.raw, "NS"); // calcResult.sun.DEC.fmt;
+
             let ariesGHA = decToSex(calcResult.aries.GHA.raw); // calcResult.aries.GHA.fmt;
 
-            htmlContent += `<tr><td>${ut}</td><td>${sunGHA}</td><td>${deltaGHA}</td><td>${sunRA}</td><td>${sunDecl}</td><td>${ariesGHA}</td></tr>`;
+            htmlContentSunMoonAries += (`<tr><td style='font-weight: bold;'>${ut}</td><td>${sunGHA}</td><td>${deltaSunGHA}</td><td>${sunRA}</td><td>${sunDecl}</td><td>${deltaSunDecl}</td>` + 
+                                              `<td>${moonGHA}</td><td>${deltaMoonGHA}</td><td>${moonRA}</td><td>${moonDecl}</td><td>${deltaMoonDecl}</td><td>${moonHp}</td><td>${ariesGHA}</td>` + 
+                                              `<td style='font-weight: bold;'>${ut}</td></tr>`);
 
+            let venusGHA = decToSex(calcResult.venus.GHA.raw);
+            let venusRA = decToSex(calcResult.venus.RA.raw);
+            let venusDecl = decToSex(calcResult.venus.DEC.raw, "NS");
+
+            let marsGHA = decToSex(calcResult.mars.GHA.raw);
+            let marsRA = decToSex(calcResult.mars.RA.raw);
+            let marsDecl = decToSex(calcResult.mars.DEC.raw, "NS");
+
+            let jupiterGHA = decToSex(calcResult.jupiter.GHA.raw);
+            let jupiterRA = decToSex(calcResult.jupiter.RA.raw);
+            let jupiterDecl = decToSex(calcResult.jupiter.DEC.raw, "NS");
+
+            let saturnGHA = decToSex(calcResult.saturn.GHA.raw);
+            let saturnRA = decToSex(calcResult.saturn.RA.raw);
+            let saturnDecl = decToSex(calcResult.saturn.DEC.raw, "NS");
+
+            htmlContentPlanets += (`<tr><td style='font-weight: bold;'>${ut}</td><td>${venusGHA}</td><td>${venusRA}</td><td>${venusDecl}</td>` + 
+                                                                               `<td>${marsGHA}</td><td>${marsRA}</td><td>${marsDecl}</td>` + 
+                                                                               `<td>${jupiterGHA}</td><td>${jupiterRA}</td><td>${jupiterDecl}</td>` + 
+                                                                               `<td>${saturnGHA}</td><td>${saturnRA}</td><td>${saturnDecl}</td>` + 
+                                              `<td style='font-weight: bold;'>${ut}</td></tr>`);
+
+            if (hours === 12) {
+                let semiDiamSun = (calcResult.sun.SD.raw / 60).toFixed(4);
+                let sunHP = (calcResult.sun.HP.raw / 60).toFixed(4);
+                let semiDiamMoon = (calcResult.moon.SD.raw / 60).toFixed(4);
+                let moonPhase = `${calcResult.moon.illum.toFixed(2)}% ${calcResult.moon.phase.phase}`;
+                let phaseIndex = Math.floor(calcResult.moon.phase.phaseAngle / (360 / 28.5)) + 1;
+                let phaseImageName = `./moon/phase${(phaseIndex < 10 ? '0' : '') + phaseIndex}.gif`;
+
+                let tPassSun = decimalHoursToHMS(12 - (calcResult.EOT.raw / 60));
+                let moonAge = (calcResult.moon.phase.phaseAngle * 28 / 360);
+
+                htmlContentSemiDiamAndCo += (
+                    `<tr><td colspan='14'>&nbsp;</td></tr>` +
+                    `<tr>` + 
+                        `<td rowspan='3'></td>` + 
+                        `<td colspan='2'>&frac12;&nbsp;\u2300 ${semiDiamSun}'</td>` + 
+                        `<td colspan='3'>hp (&pi;) ${sunHP}'</td>` + 
+                        `<td colspan='3'>&frac12;&nbsp;\u2300 ${semiDiamMoon}'</td>` + 
+                        `<td colspan='2'>${moonPhase}</td>` + 
+                        `<td rowspan='3' colspan='2'><img src='${phaseImageName}' alt='${calcResult.moon.phase.phaseAngle}' title='${calcResult.moon.phase.phaseAngle + '&deg'}'>` +
+                        `<td rowspan='3'></td>` + 
+                    `</tr>` +
+                    `<tr><td colspan='5'>EoT at 12:00 UTC : ${calcResult.EOT.fmt}</td><td colspan='5'>Phase at 12:00 UTC : ${calcResult.moon.phase.phaseAngle.toFixed(2)}&deg;</td></tr>` +
+                    `<tr><td colspan='5'>Meridian Pass. Time : ${tPassSun}</td><td colspan='5'>Age : ${moonAge.toFixed(1)} day(s)</td></tr>` 
+                );
+            }
 
         }
-        htmlContent += "</table>";
-        document.getElementById("final-result").innerHTML = htmlContent;
+
+        htmlContentSunMoonAries += htmlContentSemiDiamAndCo ; // Add it to the same table
+
+        htmlContentSunMoonAries += "</table>";
+        htmlContentPlanets += "</table>";
+        // htmlContentSemiDiamAndCo += "</table>";
+
+        document.getElementById("final-result").innerHTML = (
+            htmlContentSunMoonAries + "<br/>" + 
+            /* htmlContentSemiDiamAndCo + "<br/>" + */
+            htmlContentPlanets 
+        );
     };
 
     let updateUTCDate = () => {
