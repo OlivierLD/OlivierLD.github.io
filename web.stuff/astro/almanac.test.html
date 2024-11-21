@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<!--
+ | All the skill in the "compute" function below,
+ | Invoked on click.
+ |
+ | Do look into the <script type="module" src="app.js"></script>
+ +-->
+<html lang="en_US">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/jpg" href="./palm.04.jpg">
+    <title>Celestial Computer - Almanac test</title>
+    <script type="module" src="app.js"></script>
+    <style>
+h1 {
+    color: silver;
+    font-family: Verdana,sans-serif;
+    font-style: italic;
+}
+
+body {
+    font-family: Verdana,sans-serif;
+}
+
+.day {
+    width: 40px;
+    text-align: center;
+}
+
+.year {
+    width: 80px;
+    text-align: center;
+}
+
+.result {
+    margin-top: 10px;
+    border: solid silver 2px;
+    border-radius: 5px;
+    /*width: 80%;*/
+    height: 200px;
+    max-height: 200px;
+    font-family: "Courier New",sans-serif;
+    overflow-y: auto;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  padding: 10px;
+  margin: auto;
+}
+* {
+    font-family: 'Courier New', Courier, monospace;
+}
+td {
+    border: 1px solid silver;
+    padding: 0 5px 0 5px;
+    text-align: right;
+}
+.sub-title {
+    font-style: italic;
+    font-weight: bold;
+    color: blue;
+}
+    </style>
+</head>
+<body>
+<h1>Almanac Test, ES6 Celestial Computer</h1>
+<h2>Compute Sun Almanac for one day</h2>
+<table>
+    <tr>
+        <td style="vertical-align: top;">
+            <small>Enter UTC date and time, then click the Compute button.</small>
+            <div>
+                <input class="day" type="number" id="UTC-day" placeholder="day" min="1" max="31" title="Day of the Month">
+                <select class="month" id="UTC-month" title="Month of the year">
+                    <option value="1">Jan</option>
+                    <option value="2">Feb</option>
+                    <option value="3">Mar</option>
+                    <option value="4">Apr</option>
+                    <option value="5">May</option>
+                    <option value="6">Jun</option>
+                    <option value="7">Jul</option>
+                    <option value="8">Aug</option>
+                    <option value="9">Sep</option>
+                    <option value="10">Oct</option>
+                    <option value="11">Nov</option>
+                    <option value="12">Dec</option>
+                </select>
+                <input class="year" type="number" id="UTC-year" placeholder="year" min="0" title="year">
+                at
+                <input class="day" type="number" id="UTC-hour" placeholder="hours" min="0" max="23" title="Hour of the day [0..23]">:
+                <input class="day" type="number" id="UTC-minute" placeholder="minutes" min="0" max="59" title="minutes">:
+                <input class="day" type="number" id="UTC-second" placeholder="seconds" min="0" max="59" title="seconds"> UTC
+            </div>
+            <div>
+                <input type="checkbox" id="no-planet"><small>Skip planets calculations</small>
+                <input type="checkbox" id="verbose" onchange="verbose(this);"><small>Console Verbose</small>
+            </div>
+            <button id="now" onclick="updateUTCDate();" title="Update time to current time">Now</button>&nbsp;
+            <button id="compute" onclick="compute();">Compute</button>&nbsp;
+        </td>
+    </tr>
+</table>
+<div id="final-result">
+</div>
+
+</body>
+</html>
+<script type="text/javascript">
+
+    const DELTA_T = 69.2201; // Will be re-calculated
+
+    let consoleVerbose = false;
+
+    let lpad = (str, pad, len) => {
+        while (str.length < len) {
+            str = pad + str;
+        }
+        return str;
+    };
+
+    let decToSex = (val, ns_ew) => {
+        let absVal = Math.abs(val);
+        let intValue = Math.floor(absVal);
+        let dec = absVal - intValue;
+        let i = intValue;
+        dec *= 60; //    let s = i + "°" + dec.toFixed(2) + "'";
+        //    let s = i + String.fromCharCode(176) + dec.toFixed(2) + "'";
+    
+        let s = ""; // sign
+    
+        if (ns_ew !== undefined) {
+            if (val < 0) {
+                s += ns_ew === 'NS' ? 'S' : 'W';
+            } else {
+                s += ns_ew === 'NS' ? 'N' : 'E';
+            }
+            s += " ";
+        } else {
+            if (val < 0) {
+                s += '-';
+            }
+        }
+    
+        s += i + "°" + dec.toFixed(2) + "'";
+        return s;
+    };
+
+
+    const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    const DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+    let formatDate = (date) => {
+        let month = MONTHS[date.getMonth()];
+        let day = DAYS[date.getDay()];
+        return `${day}, ${month} ${date.getDate()}, ${date.getFullYear()}`;
+
+    };
+
+
+    let compute = () => {
+
+        let today = {
+            year: parseInt(document.getElementById('UTC-year').value),
+            month: parseInt(document.getElementById('UTC-month').value),
+            day: parseInt(document.getElementById('UTC-day').value)
+        };
+        let noPlanets =  document.getElementById('no-planet').checked;
+
+        let htmlContent = "";
+        const now = new Date(`${today.year}-${today.month}-${today.day}`);
+        htmlContent += `<h2>Sun Almanac for ${ formatDate(now) }</h2>`;
+        htmlContent += "<table>";
+        htmlContent += "<tr><th>UT</th><th>Sun GHA</th><th>&delta;GHA</th><th>Sun RA</th><th>Sun Decl</th><th>Aries GHA</th></tr>";
+
+        let prevSunGHA;
+        for (let hours=0; hours<24; hours++) {
+            let calculationData = {
+                utcyear: today.year,
+                utcmonth: today.month,
+                utcday: today.day,
+                utchour: hours,
+                utcminute: 0,
+                utcsecond: 0,
+                deltaT: DELTA_T,
+                noPlanets: noPlanets
+            };
+
+            // The heart of the system
+            let calcResult = sampleMain(calculationData); // in app.js
+            if (consoleVerbose) {
+                console.log("Calculation done %d-%d-%d %d:%d:%d UTC :", calculationData.utcyear, calculationData.utcmonth, calculationData.utcday, calculationData.utchour, calculationData.utcminute, calculationData.utcsecond);
+                console.log("Result:\n", JSON.stringify(calcResult, null, 2));
+            }
+
+            let ut = lpad(hours.toFixed(0), '0', 2);
+            let sunGHA = decToSex(calcResult.sun.GHA.raw); // calcResult.sun.GHA.fmt;
+            let deltaGHA = "";
+            if (prevSunGHA) {
+                delta = calcResult.sun.GHA.raw - prevSunGHA;
+                while (delta < 0) {
+                    delta += 360;
+                }
+                deltaGHA = `${delta.toFixed(4)}&deg;`;
+            }
+            prevSunGHA = calcResult.sun.GHA.raw;
+            let sunRA = decToSex(calcResult.sun.RA.raw);
+            let sunDecl = decToSex(calcResult.sun.DEC.raw, "NS"); // calcResult.sun.DEC.fmt;
+            let ariesGHA = decToSex(calcResult.aries.GHA.raw); // calcResult.aries.GHA.fmt;
+
+            htmlContent += `<tr><td>${ut}</td><td>${sunGHA}</td><td>${deltaGHA}</td><td>${sunRA}</td><td>${sunDecl}</td><td>${ariesGHA}</td></tr>`;
+
+
+        }
+        htmlContent += "</table>";
+        document.getElementById("final-result").innerHTML = htmlContent;
+    };
+
+    let updateUTCDate = () => {
+        let now = new Date();
+        document.getElementById('UTC-day').value = now.getUTCDate();
+        document.getElementById('UTC-month').value = now.getUTCMonth() + 1;
+        document.getElementById('UTC-year').value = now.getUTCFullYear();
+        document.getElementById('UTC-hour').value = (now.getUTCHours().toString().length < 2 ? "0" : "") + now.getUTCHours();
+        document.getElementById('UTC-minute').value = (now.getUTCMinutes().toString().length < 2 ? "0" : "") + now.getUTCMinutes();
+        document.getElementById('UTC-second').value = (now.getUTCSeconds().toString().length < 2 ? "0" : "") + now.getUTCSeconds();
+    };
+
+    let verbose = (cb) => {
+        consoleVerbose = cb.checked;
+    };
+
+    if (Math.toRadians === undefined) {
+        Math.toRadians = deg => {
+            return (deg / 180) * Math.PI;
+        };
+    }
+
+    // XMLNS Required.
+    const XMLNS = "http://www.w3.org/2000/svg";
+
+    // Set default date values
+    window.onload = () => {
+
+        console.log('On Load, ready.');
+        updateUTCDate();
+        console.log('On Load, done.');
+
+    };
+</script>
