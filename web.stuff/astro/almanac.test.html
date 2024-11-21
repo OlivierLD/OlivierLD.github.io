@@ -77,7 +77,7 @@ table.no-border td {
 </head>
 <body>
 <h1>Almanac Test, ES6 Celestial Computer</h1>
-<h2>Compute Sun Almanac for one day</h2>
+<h2>Compute Sun Almanac for a given duration</h2>
 <table class="no-border">
     <tr>
         <td style="vertical-align: top;">
@@ -181,7 +181,6 @@ table.no-border td {
 		return `${lpad(hours, '0', 2)}:${lpad(Math.floor(min), '0', 2)}:${lpad(sec.toFixed(3), '0', 6)}`;
     }
 
-
     let compute = () => {
 
         let durationElements = document.getElementsByName("duration");
@@ -232,7 +231,7 @@ table.no-border td {
         endDate.setMilliseconds(0);
         console.log(`End Date : ${endDate}`);
 
-        let fullHTMLContent = "";
+        let fullHTMLContent = ""; // TODO Front page, for print media.
 
         let keepWorking = true;
 
@@ -445,7 +444,7 @@ table.no-border td {
         };
     }
 
-    // XMLNS Required.
+    // XMLNS Required for SVG.
     const XMLNS = "http://www.w3.org/2000/svg";
 
     // Set default date values
