@@ -220,7 +220,7 @@ table.no-border td {
     let formatDate = (date) => {
         let month = MONTHS[date.getMonth()];
         let day = DAYS[date.getDay()];
-        return `${day}, ${month} ${date.getDate()}, ${date.getFullYear()}`;
+        return `${day} ${date.getDate()} ${month} ${date.getFullYear()}`;
     };
 
     let decimalHoursToHMS = (decHours) => {
