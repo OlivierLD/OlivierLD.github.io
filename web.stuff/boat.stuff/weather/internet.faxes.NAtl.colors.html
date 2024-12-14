@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<!--
+ | This is a test, WiP.
+ | North Atlantic faxes from the Internet, rotated and re-scaled, new origins.
+ | BUT: The faxes are NOT transparent, like when processed in Java, where the white
+ | is trurned transparent, and the black into another color.
+ |
+ | We have to:
+ | - Make the white transparent
+ | - Change the black into another color
+ | - Rescale, rotate, translate the fax.
+ +-->
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=ISO-8859-1">
+    <title>Internet Faxes</title>
+    <link rel="icon" type="image/ico" href="../icons/hammerhead.02.ico">
+    <link rel="stylesheet" href="../css/white.css" type="text/css"/>
+    <style>
+    html {
+      /* height: 100%; */
+      margin: 0;
+      padding: 0;
+    }
+  
+    .fax-container {
+      display: grid;
+      grid-template-columns: 450px 450px;
+      padding: 0px;
+      /* margin: auto; */
+    }
+
+    .tooltip {
+      position: relative;
+      display: inline-block;
+      border-bottom: 1px dotted silver;
+    }
+
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      width: 240px;
+      background-color: black;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 5px 0;
+
+      /* Position the tooltip */
+      position: absolute;
+      z-index: 1;
+    }
+
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+    }
+    img {
+      mix-blend-mode: multiply;
+    }
+    </style>
+    <script type="text/javascript">
+      let surfaceFaxesVisible = () => {
+          let left = document.getElementById("left");
+          return !(left.style.display === 'none');
+      };  
+      let set500mbOpacity = val => {
+        let fax500mb = document.getElementById("500mb");
+        fax500mb.style.opacity = val;
+      };
+
+      // Show/Hide surface faxes
+      let showSurface = (cb) => {
+          let left = document.getElementById("left");
+          let right = document.getElementById("right");
+          right.style.display = cb.checked ? 'inline' : 'none';
+          left.style.display = cb.checked ? 'inline' : 'none';
+          let fax500mb = document.getElementById("500mb");
+          fax500mb.style.marginTop = cb.checked ? '-575px' : '-30px';
+          // if (!cb.checked) {
+          //   set500mbOpacity('1.0');
+          // } else {
+          //   set500mbOpacity('0.5');
+          // }
+
+          // Reworked ones
+          let left2 = document.getElementById("reworked-faxes-canvas-left");
+          let right2 = document.getElementById("reworked-faxes-canvas-right");
+          let f500mb2 = document.getElementById("reworked-faxes-canvas-500mb");
+
+          left2.style.display = cb.checked ? 'inline' : 'none';
+          right2.style.display = cb.checked ? 'inline' : 'none';
+          f500mb2.style.marginTop = cb.checked ? '-520px' : '-30px';
+
+      };
+      // Show/Hide 500mb fax
+      let show500mb = (cb) => {
+          let fax500mb = document.getElementById("500mb");
+          fax500mb.style.display = cb.checked ? 'inline' : 'none';
+          // if (cb.checked && !surfaceFaxesVisible()) {
+          //   set500mbOpacity('1.0');
+          // } else {
+          //   set500mbOpacity('0.5');
+          // }
+
+          // Reworked ones
+          // let left2 = document.getElementById("reworked-faxes-canvas-left");
+          // let right2 = document.getElementById("reworked-faxes-canvas-right");
+          let f500mb2 = document.getElementById("reworked-faxes-canvas-500mb");
+          f500mb2.style.display = cb.checked ? 'inline' : 'none';
+
+      };
+    </script>
+</head>
+<body style="background-color: #fff;">
+  <h2 class="tooltip">
+    Faxes from the Internet, North Atlantic
+    <span class="tooltiptext">3 faxes, reworked<br/><i>on the <b>client</b> side</i>.</span>
+  </h2>
+  <div id="update-date">
+
+  </div>
+
+<!-- North-West Atlantic: https://tgftp.nws.noaa.gov/fax/PYAA12.gif -->
+<!-- North-East Atlantic: https://tgftp.nws.noaa.gov/fax/PYAA11.gif -->
+<!-- North Atlantic 500mb: https://tgftp.nws.noaa.gov/fax/PPAA10.gif -->
+
+  <div id="raw-placeholder" style="display: none;">
+    <!-- TODO Try downloading them in php -->
+    <!--img id="left" src="https://tgftp.nws.noaa.gov/fax/PYAA12.gif"></img>
+    <img id="right" src="https://tgftp.nws.noaa.gov/fax/PYAA11.gif"></img>
+    <img id="500mb" src="https://tgftp.nws.noaa.gov/fax/PPAA10.gif"></img-->
+    <img id="raw-left" src="faxes/_left.gif" style="width: 50%; height: auto; margin: 5px;"></img>
+    <img id="raw-right" src="faxes/_right.gif" style="width: 50%; height: auto; margin: 5px;"></img>
+    <img id="raw-500mb" src="faxes/_500mb.gif" style="width: 50%; height: auto; margin: 5px;"></img>
+  </div>
+  <hr/>
+  <!-- Original faxes -->
+  <div style="padding-top: 0px; margin-bottom: 20px;">
+    <input type="checkbox" id="show-surface" onchange="showSurface(this);" checked> Surface Faxes
+    <input type="checkbox" id="show-500mb" onchange="show500mb(this);" checked> 500mb Fax
+  </div>
+
+  <div style="height: 80vh; overflow: scroll;">
+    <div id="placeholder" class="fax-container" style="min-height: 600px; min-width: 1024px; padding-top: 40px;">
+        <!--img id="left" src="https://tgftp.nws.noaa.gov/fax/PYAA12.gif"></img>
+        <img id="right" src="https://tgftp.nws.noaa.gov/fax/PYAA11.gif"></img>
+        <img id="500mb" src="https://tgftp.nws.noaa.gov/fax/PPAA10.gif"></img-->
+        <img id="left" src="faxes/_left.gif"></img>
+        <img id="right" src="faxes/_right.gif"></img>
+        <img id="500mb" src="faxes/_500mb.gif"></img>
+    </div>
+    <hr/>
+    <!-- Reworked faxes -->
+    <div id="reworked-faxes" class="fax-container" style="min-height: 600px; min-width: 1024px; padding-top: 80px;">
+      <!-- Canvas dimensions are touchy !! -->
+      <canvas id="reworked-faxes-canvas-left" width="2048" height="1600"></canvas> <!--  style="width: 2048px; height: 1600px;" -->
+      <canvas id="reworked-faxes-canvas-right" width="2048" height="1600"></canvas> <!--  style="width: 2048px; height: 1600px;" -->
+      <canvas id="reworked-faxes-canvas-500mb" width="2048" height="1600"></canvas> <!--  style="width: 2048px; height: 1600px;" -->
+    </div>
+  </div>
+  <hr/>
+</body>
+<script type="text/javascript">
+
+let dummyTest = (ctx) => {
+  const imgData = ctx.createImageData(100, 100);
+  console.log(`New image, ${100} x ${100} : ${imgData.data.length} elements.`);
+  for (let i = 0; i < imgData.data.length; i += 4) {
+    imgData.data[i+0] = 255; // red
+    imgData.data[i+1] = 0;
+    imgData.data[i+2] = 0;
+    imgData.data[i+3] = 255;
+  }
+  ctx.putImageData(imgData, 0, 0);
+}
+
+let changeColor = /*async*/ (ctx, image, colorFrom, colorTo) => {
+
+  // See https://www.w3schools.com/tags/tryit.asp?filename=tryhtml5_canvas_createimagedata
+
+  // var response = await fetch(image.src /*imageUrl*/);
+  // var fileBlob = await response.blob();
+  // var bitmap = await createImageBitmap(fileBlob);
+  // var canvas = new OffscreenCanvas(bitmap.width, bitmap.height);
+  // var context = canvas.getContext('2d');
+  // context.drawImage(bitmap, 0, 0);
+  // var imageData = context.getImageData(0, 0, bitmap.width, bitmap.height);
+
+  let width = image.width;
+  let height = image.height;
+  // var picLength = width * height; // number of chunks of 4
+
+  let imageData = ctx.getImageData(0, 0, width, height);
+  let newImage = imageData; //  ctx.createImageData(width, height);
+  console.log(`New image, ${width} x ${height} : ${newImage.data.length} pixels (of 4 ints).`);
+
+  for (let i=0; i<imageData.data.length; /*picLength * 4;*/ i+=4) {
+    newImage.data[i] = imageData.data[i];
+    newImage.data[i+1] = imageData.data[i+1];
+    newImage.data[i+2] = imageData.data[i+2];
+    newImage.data[i+3] = imageData.data[i+3];
+    if (true) {
+      // Turn white into transparent: (255, 255, 255, 255) becomes (255, 255, 255, 0)
+      if (imageData.data[i] === 255 && imageData.data[i+1] === 255 && imageData.data[i+2] === 255) {
+        newImage.data[i + 3] = 0;
+      }
+      // Turn colorFrom into colorTo (from.r, fromg, fromb, 255) becomes (to.r, to.g, to.b, 255)
+      if (imageData.data[i] === colorFrom.r && imageData.data[i+1] === colorFrom.g && imageData.data[i+2] === colorFrom.b) {
+        newImage.data[i] = colorTo.r;
+        newImage.data[i+1] = colorTo.g;
+        newImage.data[i+2] = colorTo.b;
+      }
+    }
+  }
+  return newImage;
+  // ctx.putImageData(newImage, 0, 0);
+};
+
+let downloadToFileSystem = async (from, to) => {
+
+  let promise = new Promise(function(resolve, reject) {
+    const baseUrl = "./faxes/fax.download.php";
+    let url = baseUrl + `?origin=${from}&destination=${to}`;
+
+    // XHR version
+    let req = new XMLHttpRequest();
+    req.open('GET', url);
+    req.onload = function() {
+      if (req.status == 200) {
+        resolve(req.response);
+      } else {
+        resolve("File not Found");
+      }
+    };
+    req.send();
+
+    if (false) {    
+      // Fetch version
+      fetch(url, {
+        method: "GET",
+        headers: {
+          // "Content-type": "application/json; charset=UTF-8"
+          "Content-type": "text/html; charset=UTF-8"
+        }
+      }).then(response => {
+        console.log(`Received from PHP: \nResponse Status:${response.status}`);
+        // Assumimg this is text (not json, or what not)
+        response.text().then(data => {
+          console.log("Received [" + data + "]");
+          resolve(response);
+        });
+      },
+      (error, errmess) => {
+        console.log("fax download: Ooch");
+        let message;
+        if (errmess) {
+          let mess = JSON.parse(errmess);
+          if (mess.message) {
+            message = mess.message;
+          }
+        }
+        reject(error);
+        console.debug("Failed to get to the " + baseUrl + "..." + (error ? JSON.stringify(error, null, 2) : ' - ') + ', ' + (message ? message : ' - '));
+      });
+    }
+  });
+
+  await promise;
+};
+
+let doYourJob = () => {
+  /*
+   * First tentative...
+   */
+  const leftFax = document.getElementById('left');
+  const rightFax = document.getElementById('right');
+  const fax500mb = document.getElementById('500mb');
+
+  if (true) {
+    // Surface, left fax
+    leftFax.style.width = '600px';
+    leftFax.style.height = 'auto';
+    leftFax.style.transform = 'rotate(90deg)';
+    /* leftFax.style.filter = 'opacity(1.0)';  */    // In the background.
+    leftFax.style.opacity = '1.0';      // Another option, same as above.
+
+    // Surface, right fax
+    rightFax.style.width = '600px';
+    rightFax.style.height = 'auto';
+    rightFax.style.transform = 'rotate(90deg)';
+    /* rightFax.style.filter = 'opacity(1.0)';  */   // In the background (see z-index)
+    rightFax.style.opacity = '1.0';      // Another option, same as above.
+    rightFax.style.marginLeft = '-33px';
+    rightFax.style.zIndex = '-1';
+
+    // 500mb fax
+    fax500mb.style.width = '919px';
+    fax500mb.style.height = 'auto';
+    // fax500mb.style.transform = 'rotate(0deg)';
+    /* fax500mb.style.filter = 'opacity(0.5)'; */    // Foreground, not opaque (see z-index)
+    fax500mb.style.opacity = '1.0'; // '0.5';     // Foreground, not opaque (see z-index)
+    fax500mb.style.marginLeft = '62px';
+    fax500mb.style.marginTop = '-575px';
+    fax500mb.style.zIndex = '1';
+  }
+  /*
+   * Now with Images and canvases
+   */
+
+  let srcLeft = document.getElementById("raw-left").src;
+  let srcRight = document.getElementById("raw-right").src;
+  let src500mb = document.getElementById("raw-500mb").src;
+
+  // Let's go. One by one
+
+  // 1 - Left
+  let canvas = document.getElementById("reworked-faxes-canvas-left");
+  let ctx = canvas.getContext("2d");
+
+  let imageLeft = new Image();
+  // imageLeft.crossOrigin = "anonymous";
+  console.log(`Now loading (left: ${srcLeft})...`);
+  imageLeft.src = srcLeft;
+  console.log(`Image width: ${imageLeft.width}, height: ${imageLeft.height}`);
+  // Try OffscreenCanvas...
+  let osCanvas = new OffscreenCanvas(imageLeft.width, imageLeft.height);
+  let osContext = osCanvas.getContext('2d');
+
+  osContext.drawImage(imageLeft, 0, 0);
+
+  // Change colors, white to transparent, and black to red
+  try {
+    let transformed = changeColor(osContext /*ctx*/, imageLeft, {r: 0, g: 0, b: 0}, {r: 255, g: 0, b: 0});
+    console.log(`transformed: ${transformed.data.length} pixels`);
+    // let newImage = ctx.getImageData(0, 0, width, height);
+    ctx.putImageData(transformed, 0, 0); // , 0, 0, transformed.width, transformed.height);
+  } catch (err) {
+    console.log(`Oops: ${err}`);
+  }
+  canvas.style.width = '600px';
+  canvas.style.height = 'auto';
+  canvas.style.transform = 'rotate(90deg)';
+  /* leftFax.style.filter = 'opacity(1.0)';  */    // In the background.
+  canvas.style.opacity = '1.0';      // Another option, same as above.
+
+  // 2 - Right
+  canvas = document.getElementById("reworked-faxes-canvas-right");
+  ctx = canvas.getContext("2d");
+
+  let imageRight = new Image();
+  // imageLeft.crossOrigin = "anonymous";
+  console.log(`Now loading (right: ${srcRight})...`);
+  imageRight.src = srcRight;
+  console.log(`Image width: ${imageRight.width}, height: ${imageRight.height}`);
+
+  // Try OffscreenCanvas...
+  osCanvas = new OffscreenCanvas(imageRight.width, imageRight.height);
+  osContext = osCanvas.getContext('2d');
+  osContext.drawImage(imageRight, 0, 0);
+
+  // Change colors, white to transparent, and black to red
+  try {
+    transformed = changeColor(osContext /*ctx*/, imageRight, {r: 0, g: 0, b: 0}, {r: 255, g: 0, b: 0});
+    console.log(`transformed: ${transformed.data.length} pixels`);
+    // let newImage = ctx.getImageData(0, 0, width, height);
+    ctx.putImageData(transformed, 0, 0); // , 0, 0, transformed.width, transformed.height);
+  } catch (err) {
+    console.log(`Oops: ${err}`);
+  }
+
+  canvas.style.width = '600px';
+  canvas.style.height = 'auto';
+  canvas.style.transform = 'rotate(90deg)';
+  /* canvas.style.filter = 'opacity(1.0)';  */   // In the background (see z-index)
+  canvas.style.opacity = '1.0';      // Another option, same as above.
+  canvas.style.marginLeft = '-99px';
+  canvas.style.zIndex = '-1';
+
+  // 3 - 500mb
+  canvas = document.getElementById("reworked-faxes-canvas-500mb");
+  ctx = canvas.getContext("2d");
+
+  let image500mb = new Image();
+  // imageLeft.crossOrigin = "anonymous";
+  console.log(`Now loading (500mb: ${src500mb})...`);
+  image500mb.src = src500mb;
+  console.log(`Image width: ${image500mb.width}, height: ${image500mb.height}`);
+
+  // Try OffscreenCanvas...
+  osCanvas = new OffscreenCanvas(image500mb.width, image500mb.height);
+  osContext = osCanvas.getContext('2d');
+  osContext.drawImage(image500mb, 0, 0);
+
+  // Change colors, white to transparent, and black to blue
+  try {
+    transformed = changeColor(osContext /*ctx*/, image500mb, {r: 0, g: 0, b: 0}, {r: 0, g: 0, b: 255});
+    console.log(`transformed: ${transformed.data.length} pixels`);
+    // let newImage = ctx.getImageData(0, 0, width, height);
+    ctx.putImageData(transformed, 0, 0); // , 0, 0, transformed.width, transformed.height);
+  } catch (err) {
+    console.log(`Oops: ${err}`);
+  }
+
+  canvas.style.width = '919px';
+  canvas.style.height = 'auto';
+  // canvas.style.transform = 'rotate(0deg)';
+  /* canvas.style.filter = 'opacity(0.5)'; */    // Foreground, not opaque (see z-index)
+  canvas.style.opacity = '1.0'; // '0.5';     // Foreground, not opaque (see z-index)
+  canvas.style.marginLeft = '121px';
+  canvas.style.marginTop = '-520px';
+  canvas.style.zIndex = '1';
+};
+
+// On Load: Rework the faxes loaded above, in the placeholder div.
+// Margins can be tuned with the debugger (inspector).
+window.onload = () => {
+
+  // First, download the faxes on the file system, to be able to rework them.
+  // This cannot be done from ES6, that's why we use php.
+  const NW_ATL_URL = "https://tgftp.nws.noaa.gov/fax/PYAA12.gif";
+  const NE_ATL_URL = "https://tgftp.nws.noaa.gov/fax/PYAA11.gif";
+  const N_ATL_500mb_URL =  "https://tgftp.nws.noaa.gov/fax/PPAA10.gif";
+
+  // document.getElementById("update-date").innerHTML = `Updated on ${new Date()}`;
+
+  if (false) {
+    setTimeout(() => { // Non blocking alert ?
+      alert("Loading and transforming faxes.\nPlease wait...");
+    }, 10);
+  }
+
+  downloadToFileSystem(NW_ATL_URL, "_left.gif").then(
+    (value) => {
+      document.getElementById("left").src = "faxes/_left.gif";
+      document.getElementById("raw-left").src = "faxes/_left.gif";
+
+      console.log("First fax downloaded, moving on.");
+      downloadToFileSystem(NE_ATL_URL, "_right.gif").then(
+        (value) => {
+          document.getElementById("right").src = "faxes/_right.gif";
+          document.getElementById("raw-right").src = "faxes/_right.gif";
+
+          console.log("Second fax downloaded, moving on.");
+          downloadToFileSystem(N_ATL_500mb_URL, "_500mb.gif").then(
+            (value) => {
+              document.getElementById("500mb").src = "faxes/_500mb.gif";
+              document.getElementById("raw-500mb").src = "faxes/_500mb.gif";
+              console.log("Third fax downloaded, moving on.");
+
+              document.getElementById("update-date").innerHTML = `Just updated, on ${new Date()}`;
+              setTimeout(() => {  // Ugly !
+                doYourJob();
+              }, 1000);
+            },
+            (error) => {
+              console.log(`Third step failed: ${error}`);
+            }
+          );
+        },
+        (error) => {
+          console.log(`Second step failed: ${error}`);
+        }  
+      );
+    },
+    (error) => {
+      console.log(`First step failed: ${error}`);
+    }
+  );
+  
+}
+
+</script>
+</html>
