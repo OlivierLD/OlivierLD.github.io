@@ -52,10 +52,11 @@ embed {
 
 const TABS = [   // Add tabs here as needed
   { id: 'one', name: 'Earth', url: 'https://earth.nullschool.net/#current/wind/surface/level/orthographic=-22.32,45.08,1243' },
-  { id: 'three', name: 'WindGuru', url: 'https://www.windguru.cz/map/' },
+  { id: 'three', name: 'Windy', url: 'https://www.windy.com/?47.647,-3.330,11,i:pressure' }, // 'https://www.windguru.cz/map/' },
   { id: 'five', name: 'NOAA Faxes', url: 'https://olivierld.github.io/web.stuff/boat.stuff/weather/internet.faxes.NAtl.html' },
   { id: 'six', name: 'Ventusky', url: 'https://www.ventusky.com/?p=49.0;-9.7;5&l=wind-10m&t=20231101/2100&m=icon' },
-  { id: 'seven', name: 'WindMorbihan', url: 'https://www.windmorbihan.com/' }
+  { id: 'seven', name: 'WindMorbihan', url: 'https://www.windmorbihan.com/' },
+  { id: 'two', name: 'WindGuru', url: 'https://www.windguru.cz/map/' },
   
 ];
 
@@ -79,16 +80,18 @@ let openTab = (evt, tabNum) => {
   <!-- The tabs. Add them here on demand -->
   <div class="tab" style="margin-top: 10px; display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto;"> <!-- TODO Improve the grid-template... -->
       <button id="one" class="tablinks active" onclick="openTab(event, 0);">Earth</button>
-      <button id="three" class="tablinks" onclick="openTab(event, 1);">WindGuru</button>
+      <button id="three" class="tablinks" onclick="openTab(event, 1);">Windy</button>
       <button id="five" class="tablinks" onclick="openTab(event, 2);">NOAA Faxes</button>
       <button id="six" class="tablinks" onclick="openTab(event, 3);">Ventusky</button>
       <button id="seven" class="tablinks" onclick="openTab(event, 4);">WindMorbihan</button>
+      <button id="two" class="tablinks" onclick="openTab(event, 5);">WindGuru</button>
   </div>
   <div class="resizable" style="height: 600px; width: 100%;">
-    <embed id="content" src="https://earth.nullschool.net/#current/wind/surface/level/orthographic=-22.32,45.08,1243"></embed>
+    <!--embed id="content" src="https://earth.nullschool.net/#current/wind/surface/level/orthographic=-22.32,45.08,1243"></embed-->
+    <iframe id="content" src="https://earth.nullschool.net/#current/wind/surface/level/orthographic=-22.32,45.08,1243" style="width: 100%; height: 100%;"></iframe>
   </div>
   <div style="margin-top: 10px;">
-    The same, and more... Some of the links below would not fit in the frame above, because of some Cross Origin Resource Sharing (CORS) issues.
+    Below, the same, and more... Some of the links below would not fit in the frame above, because of some Cross Origin Resource Sharing (CORS) issues.
     <ul>
       <li><a href="https://earth.nullschool.net/#current/wind/surface/level/orthographic=-22.32,45.08,1243" target="next">Earth</a></li>
       <li><a href="https://www.windy.com/?47.647,-3.330,11,i:pressure" target="next">Windy</a></li>
