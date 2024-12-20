@@ -690,6 +690,10 @@ window.onload = () => {
         for (let i=blurFrom; i<docSections.length; i++) {
             docSections[i].classList.add("blurry");
         }
+        let firstWarning = document.querySelectorAll(".screen-warning");
+        firstWarning.forEach(div => {
+            div.style.display = 'none';
+        })
     }
     console.log('Done loading.');
 };
