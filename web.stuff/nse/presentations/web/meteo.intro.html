@@ -535,6 +535,15 @@
         Dans le cas d'une d&eacute;pression, plus les isobars sont serr&eacute;s, plus le vent est fort (voir les cartes ci-dessous).
     </div>
 
+    <!-- Thalwegs, Dorsales -->
+    <div>
+        <h2><a name="05-2">Thalwegs, Dorsales</a></h2>
+        <i>En bref :</i><br/>
+        Quand une d&eacute;pression pr&eacute;sente une excroissance, longiforme, on appelle &ccedil;a un <i>thalweg</i> (qui signifie "vall&eacute;e", en allemand).<br/>
+        Comme cette configuration a pour effet connexe de resserer les isobars, on y constatera fr&eacute;quemment une acc&eacute;l&eacute;ration du vent.<br/>
+        Le m&ecirc;me genre de configuration dans le cas d'un anticyclone s'appelle une <i>dorsale</i>, et peut donner lieu &agrave; des ph&eacute;nom&egrave;nes analogues.
+    </div> 
+
 </div>
 <hr class="screen-only"/>
 <!--div class="blank-for-print"></div-->
@@ -864,7 +873,11 @@
                 let nv = prms[i].split('=');
                 if (nv.length === 2) {
                     if (nv[0] === prm) {
-                        return nv[1];
+                        let prmVal = nv[1];
+                        if (prmVal.indexOf("#") !== -1) {
+                            prmVal = prmVal.substring(0, prmVal.indexOf("#"));
+                        }
+                        return prmVal;
                     }
                 }
             }

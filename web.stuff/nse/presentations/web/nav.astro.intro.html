@@ -672,7 +672,11 @@ let getQSPrm = (prm) => {
             let nv = prms[i].split('=');
             if (nv.length === 2) {
                 if (nv[0] === prm) {
-                    return nv[1];
+                    let prmVal = nv[1];
+                    if (prmVal.indexOf("#") !== -1) {
+                        prmVal = prmVal.substring(0, prmVal.indexOf("#"));
+                    }
+                    return prmVal;
                 }
             }
         }
