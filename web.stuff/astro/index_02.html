@@ -220,6 +220,7 @@ let displayWorldData = (astroData) => {
 };        
 
 let userSunPos = false; // user by default
+let simulatePressureAndHeading = false;
 
 let switchPos = (cb) => {
     userSunPos = cb.checked;
@@ -232,6 +233,10 @@ let switchPos = (cb) => {
         setUserPos(userPos.latitude, userPos.longitude);
     }
     console.log(`User-Sun: ${userSunPos ? "Using Sun position" : "Using User porsition"}`);
+};
+
+let setSimulation = (cb) => {
+    simulatePressureAndHeading = cb.checked;
 };
 
 let setTransparency = (wcId, cb) => {
@@ -1217,10 +1222,17 @@ let toggleForeground = () => {
 
         <div>
             <!--
-             |  WORLD MAP CTRL
+             |  WORLD MAP CTRL & Co
              +-->
             <div id="world-map-ctrl" title="Map Controls">
                 <div class="black-frame centered">
+                    <div class="switch-container" style="margin-left: 30px;" title="Simulate data">
+                        <label class="switch switch-element">
+                          <input id="transp-slider" type="checkbox" onchange="setSimulation(this);">
+                          <span class="slider round"></span>
+                        </label>
+                        <span class="switch-element" style="width: 150%; text-align: left;">Simulate Pressure and Heading</span>
+                    </div>
                     <!--input type="checkbox" onchange="setTransparency('world-map-01', this);"/>Transparent -->
                     <div class="switch-container" style="margin-left: 30px;" title="Make globe transparent">
                         <label class="switch switch-element">
@@ -1761,7 +1773,7 @@ let toggleForeground = () => {
             </td>
         </tr>
     </table>
-    <h2 style="margin-left: 10px; color: rgba(255, 255, 255, 0.5);">Heading and PRMSL are <i>simulated</i></h2>
+    <h2 style="margin-left: 10px; color: rgba(255, 255, 255, 0.5);">Heading and PRMSL can be <i>simulated</i></h2>
 
     <button class="tooltip" onclick="showHideData();" style="margin: 10px;">Show/Hide Computed Data
         <span class="tooltiptext">Computed data will show below</span>
@@ -2062,34 +2074,40 @@ let toggleForeground = () => {
     
     // Random Simulation
     let sensorUpdater = () => {
-        let diff = (Math.random() - 0.5) * 2.0; // [-1..1]
-        hdg += diff;
-        let _hdg = Math.trunc(hdg);
-        // _hdg %= 360;
-        while (_hdg < 0) {
-            _hdg += 360;
-        } 
-        while (_hdg >= 360) {
-            _hdg -= 360;
+        if (simulatePressureAndHeading) {
+            let diff = (Math.random() - 0.5) * 2.0; // [-1..1]
+            hdg += diff;
+            let _hdg = Math.trunc(hdg);
+            // _hdg %= 360;
+            while (_hdg < 0) {
+                _hdg += 360;
+            } 
+            while (_hdg >= 360) {
+                _hdg -= 360;
+            }
+            document.getElementById("jumbo-01").value = _hdg; // .toFixed(0);
+        } else {
+            document.getElementById("jumbo-01").value = 0.0;
         }
-        document.getElementById("jumbo-01").value = _hdg; // .toFixed(0);
         document.getElementById("jumbo-02").value = 0.0;
         document.getElementById("jumbo-03").value = 0.0;
         document.getElementById("jumbo-04").value = 0.0;
     };
 
-    let prmslUpdater = () => {
-        let prmslDiff = (Math.random() - 0.5) * 0.2; // [-0.1..0.1]
-        prmsl += prmslDiff;
-        if (prmsl > 1040) {
-            prmsl -= (2 * prmslDiff);
-        }
-        if (prmsl < 950) {
-            prmsl += (2 * prmslDiff);
-        }
+    let prmslUpdater = () => { // Simulator
+        if (simulatePressureAndHeading) {
+            let prmslDiff = (Math.random() - 0.5) * 0.2; // [-0.1..0.1]
+            prmsl += prmslDiff;
+            if (prmsl > 1040) {
+                prmsl -= (2 * prmslDiff);
+            }
+            if (prmsl < 950) {
+                prmsl += (2 * prmslDiff);
+            }
 
-        // document.getElementById("scroll-digit-display-01").value = prmsl.toFixed(1);
-        setScrollDigitValue("scroll-digit-display-01", prmsl.toFixed(1));
+            // document.getElementById("scroll-digit-display-01").value = prmsl.toFixed(1);
+            setScrollDigitValue("scroll-digit-display-01", prmsl.toFixed(1));
+        }
     };
 
     let extraDrawingWorldMap = (wm, context) => {
