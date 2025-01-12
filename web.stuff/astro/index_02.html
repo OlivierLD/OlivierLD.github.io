@@ -237,6 +237,12 @@ let switchPos = (cb) => {
 
 let setSimulation = (cb) => {
     simulatePressureAndHeading = cb.checked;
+    // simulation-div
+    if (simulatePressureAndHeading) {
+        document.getElementById("simulation-div").innerHTML = "Heading and PRMSL are <i>simulated</i>";
+    } else {
+        document.getElementById("simulation-div").innerHTML = "Heading and PRMSL can be <i>simulated</i>";
+    }
 };
 
 let setTransparency = (wcId, cb) => {
@@ -1773,7 +1779,7 @@ let toggleForeground = () => {
             </td>
         </tr>
     </table>
-    <h2 style="margin-left: 10px; color: rgba(255, 255, 255, 0.5);">Heading and PRMSL can be <i>simulated</i></h2>
+    <h2 style="margin-left: 10px; color: rgba(255, 255, 255, 0.5);" id="simulation-div"></h2>
 
     <button class="tooltip" onclick="showHideData();" style="margin: 10px;">Show/Hide Computed Data
         <span class="tooltiptext">Computed data will show below</span>
