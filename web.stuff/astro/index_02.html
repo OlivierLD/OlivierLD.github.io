@@ -675,16 +675,21 @@ let drawElevation = (divId, elev, color, circleColor) => { // colors in hex, lik
     // Text
     /*
     <text x="20" y="40">Example SVG text 1</text>
-        */
-    let label = `Elev:${elev.toFixed(1)}°`;
+     */
+    let absVal = Math.abs(elev);
+    let intValue = Math.floor(absVal);
+    let dec = absVal - intValue;
+    dec *= 60;
+    let min = dec.toFixed(1);
+    let label = `Elev:${elev < 0 ? "-" : ""}${intValue}°${min}'`;
     let text = document.createElementNS(XMLNS, 'text');
-    let fontSize = 11;
+    let fontSize = 10;
     text.setAttribute('x', 5);
     text.setAttribute('y', `${(FRAME_HEIGHT / 2) + (fontSize / 2) - 2}`);
     text.setAttributeNS(null, 'font-size', fontSize);
     text.setAttributeNS(null, 'font-weight', 'bold');
     text.setAttributeNS(null, 'font-family', "'Helvetica Neue', 'Lato', Verdana, Helvetica, Geneva, sans-serif;");
-    text.setAttributeNS(null, 'fill', 'rgba(0, 0, 0, 0.75)');
+    text.setAttributeNS(null, 'fill', 'lime'); // 'rgba(0, 0, 0, 0.75)');
 
     text.appendChild(document.createTextNode(`${label}`));
     svg.appendChild(text);
