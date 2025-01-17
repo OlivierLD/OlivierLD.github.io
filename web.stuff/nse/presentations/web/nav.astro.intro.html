@@ -166,7 +166,7 @@
         <ul>
             <li>
                 L'observation d'un astre se fait - dans notre contexte -  &agrave; l'aide d'un sextant.
-                Cet appareil sert &agrave; mesurer des anles. On s'en sert pour mesurer l'angle que fait un astre au dessus de l'horizon.
+                Cet appareil sert &agrave; mesurer des angles. On s'en sert pour mesurer l'angle que fait un astre au dessus de l'horizon.
                 On appelle cet angle le <i>hauteur</i> d'un astre.
             </li>
             <li>
@@ -686,6 +686,9 @@ let getQSPrm = (prm) => {
 
 window.onload = () => {
     console.log('Loaded !');
+    /*
+     * Check SQ parameter: all-clear=yes, or all-clear=no-warning
+    */
     let allClear = getQSPrm('all-clear');
     if (allClear !== 'yes') {
         // Blurry or not
@@ -694,10 +697,12 @@ window.onload = () => {
         for (let i=blurFrom; i<docSections.length; i++) {
             docSections[i].classList.add("blurry");
         }
-        let firstWarning = document.querySelectorAll(".screen-warning");
-        firstWarning.forEach(div => {
-            div.style.display = 'none';
-        })
+        if (allClear !== 'no-warning') {
+            let firstWarning = document.querySelectorAll(".screen-warning");
+            firstWarning.forEach(div => {
+                div.style.display = 'none';
+            });
+        }
     }
     console.log('Done loading.');
 };
