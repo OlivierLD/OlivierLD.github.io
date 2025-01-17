@@ -2,6 +2,7 @@
 <!--
     Intends to generate a possibly printer-ready document, with appropriate page breaks and so.
     This doc should be both visualizable and printable.
+    QS parameter: all-clear=yes, or all-clear=no-warning
  +-->
 <html lang="fr">
 <head>
@@ -687,22 +688,22 @@ let getQSPrm = (prm) => {
 window.onload = () => {
     console.log('Loaded !');
     /*
-     * Check SQ parameter: all-clear=yes, or all-clear=no-warning
+     * Check QS parameter: all-clear=yes, or all-clear=no-warning
     */
     let allClear = getQSPrm('all-clear');
     if (allClear !== 'yes') {
         // Blurry or not
-        let docSections = document.querySelectorAll(".doc-section");
-        let blurFrom = Math.floor(docSections.length / 3);
-        for (let i=blurFrom; i<docSections.length; i++) {
-            docSections[i].classList.add("blurry");
+        if (allClear !== 'no-warning') { // no-warning, display clear text, but no warning
+            let docSections = document.querySelectorAll(".doc-section");
+            let blurFrom = Math.floor(docSections.length / 3);
+            for (let i=blurFrom; i<docSections.length; i++) {
+                docSections[i].classList.add("blurry");
+            }
         }
-        if (allClear !== 'no-warning') {
-            let firstWarning = document.querySelectorAll(".screen-warning");
-            firstWarning.forEach(div => {
-                div.style.display = 'none';
-            });
-        }
+        let firstWarning = document.querySelectorAll(".screen-warning");
+        firstWarning.forEach(div => {
+            div.style.display = 'none';
+        });
     }
     console.log('Done loading.');
 };
