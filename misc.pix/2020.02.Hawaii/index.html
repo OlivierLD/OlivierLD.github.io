@@ -5,6 +5,10 @@
   	<link rel="stylesheet" href="../../css/stylesheet.css" type="text/css"/>
 	<script type="module" src="../../webcomponents/widgets/slideshow/SlideShow.js"></script>
 	<style type="text/css">
+		:root {
+			--slider-scale: 0.5;
+		}
+
 		body {
 			background: black;
 			color: cyan;
@@ -26,6 +30,79 @@
 			font-size: 48px;
 			font-weight: bold;
 		}
+
+		/* Switch sliders */
+		.switch {
+			position: relative;
+			display: inline-block;
+			width: calc(var(--slider-scale) * 60px);
+			height: calc(var(--slider-scale) * 34px);
+		}
+
+		.switch input {
+			opacity: 0;
+			width: 0;
+			height: 0;
+		}
+
+		.slider {
+			position: absolute;
+			cursor: pointer;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background-color: #ccc;
+			-webkit-transition: .4s;
+			transition: .4s;
+		}
+
+		.slider:before {
+			position: absolute;
+			content: "";
+			height: calc(var(--slider-scale) * 26px);
+			width: calc(var(--slider-scale) * 26px);
+			left: calc(var(--slider-scale) * 4px);
+			bottom: calc(var(--slider-scale) * 4px);
+			background-color: white;
+			-webkit-transition: .4s;
+			transition: .4s;
+		}
+
+		input:checked + .slider {
+			background-color: #2196f3;
+		}
+
+		input:focus + .slider {
+			box-shadow: 0 0 1px #2196f3;
+		}
+
+		input:checked + .slider:before {
+			-webkit-transform: translateX(calc(var(--slider-scale) * 26px));
+			-ms-transform: translateX(calc(var(--slider-scale) * 26px));
+			transform: translateX(calc(var(--slider-scale) * 26px));
+		}
+
+		/* Rounded sliders */
+		.slider.round {
+			border-radius: calc(var(--slider-scale) * 34px);
+		}
+
+		.slider.round:before {
+			border-radius: 50%;
+		}
+
+		/* Switch grid */
+		.switch-container {
+			display: grid;
+			grid-template-columns: calc(var(--slider-scale) * 80px) 200px;
+			width: 500px;
+		}
+		.switch-element {
+			font-weight: normal;
+			place-self: flex-start;
+		}
+
 	</style>
   </head>
   <body>
@@ -64,7 +141,14 @@
 	<br/>
 	<div style="margin: 3px;">
 		Caldera<br/>
-		<input type="checkbox" onchange="setAuto('slide-show-01', this);"><span style="font-weight: normal; font-style: italic;">Auto-Scroll</span></input>
+		<!--input type="checkbox" onchange="setAuto('slide-show-01', this);"><span style="font-weight: normal; font-style: italic;">Auto-Scroll</span></input-->
+		<div class="switch-container" style="margin-left: 30px; margin-top: 10px;" title="Scroll through slides">
+			<label class="switch switch-element">
+			  <input id="cloud-slider" type="checkbox" onchange="setAuto('slide-show-01', this);">
+			  <span class="slider round"></span>
+			</label>
+			<span class="switch-element">Slides Auto-Scroll</span>
+		</div>		
 	</div>
 	<div style="height: 360px; margin: 2px;">
 		<slide-show id="slide-show-01"
@@ -81,7 +165,14 @@
 	</div>
 	<div style="margin: 3px;">
 		Lava<br/>
-		<input type="checkbox" onchange="setAuto('slide-show-02', this);"><span style="font-weight: normal; font-style: italic;">Auto-Scroll</span></input>
+		<!--input type="checkbox" onchange="setAuto('slide-show-02', this);"><span style="font-weight: normal; font-style: italic;">Auto-Scroll</span></input-->
+		<div class="switch-container" style="margin-left: 30px; margin-top: 10px;" title="Scroll through slides">
+			<label class="switch switch-element">
+			  <input id="cloud-slider" type="checkbox" onchange="setAuto('slide-show-02', this);">
+			  <span class="slider round"></span>
+			</label>
+			<span class="switch-element">Slides Auto-Scroll</span>
+		</div>		
 	</div>
 	<div style="height: 640px; margin: 2px;">
 		<slide-show id="slide-show-02"
@@ -97,8 +188,22 @@
 
 	<div style="margin: 3px;">
 		Petroglyphs<br/>
-		<input type="checkbox" onchange="setAuto('slide-show-03', this);"><span style="font-weight: normal; font-style: italic;">Auto-Scroll - 1</span></input><br/>
-		<input type="checkbox" onchange="setAuto('slide-show-04', this);"><span style="font-weight: normal; font-style: italic;">Auto-Scroll - 2</span></input>
+		<!--input type="checkbox" onchange="setAuto('slide-show-03', this);"><span style="font-weight: normal; font-style: italic;">Auto-Scroll - 1</span></input><br/-->
+		<!--input type="checkbox" onchange="setAuto('slide-show-04', this);"><span style="font-weight: normal; font-style: italic;">Auto-Scroll - 2</span></input-->
+		<div class="switch-container" style="margin-left: 30px; margin-top: 10px;" title="Scroll through slides">
+			<label class="switch switch-element">
+			  <input id="cloud-slider" type="checkbox" onchange="setAuto('slide-show-03', this);">
+			  <span class="slider round"></span>
+			</label>
+			<span class="switch-element">Slides Auto-Scroll - 1</span>
+		</div>		
+		<div class="switch-container" style="margin-left: 30px; margin-top: 10px;" title="Scroll through slides">
+			<label class="switch switch-element">
+			  <input id="cloud-slider" type="checkbox" onchange="setAuto('slide-show-04', this);">
+			  <span class="slider round"></span>
+			</label>
+			<span class="switch-element">Slides Auto-Scroll - 2</span>
+		</div>		
 	</div>
 	<table style="margin: auto;">
 		<tr>
@@ -135,7 +240,14 @@
 
 	<div style="margin: 3px;">
 		Lapakahi<br/>
-		<input type="checkbox" onchange="setAuto('slide-show-05', this);"><span style="font-weight: normal; font-style: italic;">Auto-Scroll</span></input>
+		<!--input type="checkbox" onchange="setAuto('slide-show-05', this);"><span style="font-weight: normal; font-style: italic;">Auto-Scroll</span></input-->
+		<div class="switch-container" style="margin-left: 30px; margin-top: 10px;" title="Scroll through slides">
+			<label class="switch switch-element">
+			  <input id="cloud-slider" type="checkbox" onchange="setAuto('slide-show-05', this);">
+			  <span class="slider round"></span>
+			</label>
+			<span class="switch-element">Slides Auto-Scroll</span>
+		</div>		
 	</div>
 	<div style="height: 360px; margin: 2px;">
 		<slide-show id="slide-show-05"
@@ -151,7 +263,14 @@
 
 	<div style="margin: 3px;">
 		Kalopa<br/>
-		<input type="checkbox" onchange="setAuto('slide-show-06', this);"><span style="font-weight: normal; font-style: italic;">Auto-Scroll</span></input>
+		<!--input type="checkbox" onchange="setAuto('slide-show-06', this);"><span style="font-weight: normal; font-style: italic;">Auto-Scroll</span></input-->
+		<div class="switch-container" style="margin-left: 30px; margin-top: 10px;" title="Scroll through slides">
+			<label class="switch switch-element">
+			  <input id="cloud-slider" type="checkbox" onchange="setAuto('slide-show-06', this);">
+			  <span class="slider round"></span>
+			</label>
+			<span class="switch-element">Slides Auto-Scroll</span>
+		</div>		
 	</div>
 	<div style="height: 360px; margin: 2px;">
 		<slide-show id="slide-show-06"
@@ -170,7 +289,14 @@
 
 	<div style="margin: 3px;">
 		Hilo<br/>
-		<input type="checkbox" onchange="setAuto('slide-show-07', this);"><span style="font-weight: normal; font-style: italic;">Auto-Scroll</span></input>
+		<!--input type="checkbox" onchange="setAuto('slide-show-07', this);"><span style="font-weight: normal; font-style: italic;">Auto-Scroll</span></input-->
+		<div class="switch-container" style="margin-left: 30px; margin-top: 10px;" title="Scroll through slides">
+			<label class="switch switch-element">
+			  <input id="cloud-slider" type="checkbox" onchange="setAuto('slide-show-07', this);">
+			  <span class="slider round"></span>
+			</label>
+			<span class="switch-element">Slides Auto-Scroll</span>
+		</div>		
 	</div>
 	<div style="height: 360px; margin: 2px;">
 		<slide-show id="slide-show-07"
@@ -197,7 +323,14 @@
 
 	<div style="margin: 3px;">
 		Bird feeder<br/>
-		<input type="checkbox" onchange="setAuto('slide-show-09', this);"><span style="font-weight: normal; font-style: italic;">Auto-Scroll</span></input>
+		<!--input type="checkbox" onchange="setAuto('slide-show-09', this);"><span style="font-weight: normal; font-style: italic;">Auto-Scroll</span></input-->
+		<div class="switch-container" style="margin-left: 30px; margin-top: 10px;" title="Scroll through slides">
+			<label class="switch switch-element">
+			  <input id="cloud-slider" type="checkbox" onchange="setAuto('slide-show-09', this);">
+			  <span class="slider round"></span>
+			</label>
+			<span class="switch-element">Slides Auto-Scroll</span>
+		</div>		
 	</div>
 	<div style="height: 360px; margin: 2px;">
 		<slide-show id="slide-show-09"
@@ -222,7 +355,14 @@
 
 	<div style="margin: 3px;">
 		Pu'u-wa'awa'a<br/>
-		<input type="checkbox" onchange="setAuto('slide-show-11', this);"><span style="font-weight: normal; font-style: italic;">Auto-Scroll</span></input>
+		<!--input type="checkbox" onchange="setAuto('slide-show-11', this);"><span style="font-weight: normal; font-style: italic;">Auto-Scroll</span></input-->
+		<div class="switch-container" style="margin-left: 30px; margin-top: 10px;" title="Scroll through slides">
+			<label class="switch switch-element">
+			  <input id="cloud-slider" type="checkbox" onchange="setAuto('slide-show-11', this);">
+			  <span class="slider round"></span>
+			</label>
+			<span class="switch-element">Slides Auto-Scroll</span>
+		</div>		
 	</div>
 	<div style="height: 360px; margin: 2px;">
 		<slide-show id="slide-show-11"
@@ -239,7 +379,14 @@
 
 	<div style="margin: 3px;">
 		Sunset in Waikoloa<br/>
-		<input type="checkbox" onchange="setAuto('slide-show-12', this);"><span style="font-weight: normal; font-style: italic;">Auto-Scroll</span></input>
+		<!--input type="checkbox" onchange="setAuto('slide-show-12', this);"><span style="font-weight: normal; font-style: italic;">Auto-Scroll</span></input-->
+		<div class="switch-container" style="margin-left: 30px; margin-top: 10px;" title="Scroll through slides">
+			<label class="switch switch-element">
+			  <input id="cloud-slider" type="checkbox" onchange="setAuto('slide-show-12', this);">
+			  <span class="slider round"></span>
+			</label>
+			<span class="switch-element">Slides Auto-Scroll</span>
+		</div>		
 	</div>
 	<div style="height: 360px; margin: 2px;">
 		<slide-show id="slide-show-12"
@@ -263,7 +410,14 @@
 
 	<div style="margin: 3px;">
 		Haehoomalu<br/>
-		<input type="checkbox" onchange="setAuto('slide-show-13', this);"><span style="font-weight: normal; font-style: italic;">Auto-Scroll</span></input>
+		<!--input type="checkbox" onchange="setAuto('slide-show-13', this);"><span style="font-weight: normal; font-style: italic;">Auto-Scroll</span></input-->
+		<div class="switch-container" style="margin-left: 30px; margin-top: 10px;" title="Scroll through slides">
+			<label class="switch switch-element">
+			  <input id="cloud-slider" type="checkbox" onchange="setAuto('slide-show-13', this);">
+			  <span class="slider round"></span>
+			</label>
+			<span class="switch-element">Slides Auto-Scroll</span>
+		</div>		
 	</div>
 	<div style="height: 360px; margin: 2px;">
 		<slide-show id="slide-show-13"
