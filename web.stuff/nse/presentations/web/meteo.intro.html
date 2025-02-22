@@ -884,7 +884,7 @@
                 if (nv.length === 2) {
                     if (nv[0] === prm) {
                         let prmVal = nv[1];
-                        if (prmVal.indexOf("#")&nbsp;!== -1) {
+                        if (prmVal.indexOf("#") !== -1) {
                             prmVal = prmVal.substring(0, prmVal.indexOf("#"));
                         }
                         return prmVal;
@@ -901,9 +901,9 @@
         * Check QS parameter: all-clear=yes, or all-clear=no-warning
         */
         let allClear = getQSPrm('all-clear');
-        if (allClear&nbsp;!== 'yes') {
+        if (allClear !== 'yes') {
             // Blurry or not
-            if (allClear&nbsp;!== 'no-warning') { // no-warning, display clear text, but no warning
+            if (allClear !== 'no-warning') { // no-warning, display clear text, but no warning
                 let docSections = document.querySelectorAll(".doc-section");
                 let blurFrom = Math.floor(docSections.length / 3);
                 for (let i=blurFrom; i<docSections.length; i++) {
