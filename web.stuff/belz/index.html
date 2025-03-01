@@ -154,7 +154,7 @@
     };
 
     // Add tabs here  at will,as needed, by div id.
-    const TABS = ['kayak', 'todo', '2022', '2023', '2024']; 
+    const TABS = ['kayak', 'todo', '2022', '2023', '2024', '2025']; 
 
     let openTab = (evt, tabNum) => {
         let tabLinks = document.getElementsByClassName("tablinks");
@@ -194,7 +194,8 @@
         <button class="tablinks" onclick="openTab(event, 1);">ToDo</button>
         <button class="tablinks" onclick="openTab(event, 2);">2022</button>
         <button class="tablinks" onclick="openTab(event, 3); reCenterPT(); reCenterGx();">2023</button>
-        <button class="tablinks active" onclick="openTab(event, 4);">2024</button>
+        <button class="tablinks" onclick="openTab(event, 4);">2024</button>
+        <button class="tablinks active" onclick="openTab(event, 5);">2025</button>
     </div>
 
     <div id="kayak" style="display: none;">
@@ -512,7 +513,7 @@
 
     </div>
 
-    <div id="2024" style="display: block; margin: 15px; height: 100vh; overflow-y: scroll;">
+    <div id="2024" style="display: none; margin: 15px; height: 100vh; overflow-y: scroll;">
 
         <ul>
             <li><a class="list-link" href="#rainy-ria">Du vent dans la ria !</a></li>
@@ -590,6 +591,31 @@
         <h2><a name="sailing-02">21-23 Septembre</a></h2>
         <div>
             <a href="../boat.stuff/groix.gavres.2024/groix.gavres.2024.html" target="_blank">3 jours &agrave; Groix</a>
+        </div>
+
+    </div>
+
+    <div id="2025" style="display: block; margin: 15px; height: 650px; overflow-y: scroll;">
+        <h2><a name="feb-mar">Fevrier-Mars 2025</a></h2>
+        <div>
+            Toutes les fleurs sont jaunes !
+            <div style="height: 600px; margin: 2px;">
+            <slide-show id="slide-show-yellow"
+                        width="800"
+                        height="600">
+                <slide-show-image src="./images/jaune.2025.01.jpeg" title="Jonquilles" desc=""></slide-show-image>
+                <slide-show-image src="./images/jaune.2025.02.jpeg" title="Mimosa" desc=""></slide-show-image>
+                <slide-show-image src="./images/jaune.2025.03.jpeg" title="Des petites fleurs" desc=""></slide-show-image>
+                <slide-show-image src="./images/jaune.2025.04.jpeg" title="Ajoncs" desc=""></slide-show-image>
+                <slide-show-image src="./images/jaune.2025.05.jpeg" title="Ajoncs" desc=""></slide-show-image>
+                <slide-show-image src="./images/jaune.2025.06.jpeg" title="Genets" desc=""></slide-show-image>
+                <slide-show-image src="./images/jaune.2025.07.jpeg" title="Ajoncs" desc=""></slide-show-image>
+                <slide-show-image src="./images/jaune.2025.08.jpeg" title="Ajoncs" desc=""></slide-show-image>
+                <slide-show-image src="./images/jaune.2025.09.jpeg" title="Ajoncs" desc=""></slide-show-image>
+                <slide-show-image src="./images/jaune.2025.10.jpeg" title="Exception ?" desc="Exception !"></slide-show-image>
+            </slide-show>
+            </div>
+            
         </div>
 
     </div>
