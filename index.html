@@ -1087,8 +1087,11 @@ Date.prototype.format = function (dateFormat) {
   <div style="margin-left: 30px; margin-top: 10px;">
     <button id="change-bg" onclick="changeBGNow();" title="Change background image immediatly&#13;with transition effects">Change BG now</button>
   </div>
+  <div style="margin-left: 30px; margin-top: 10px;">
+    <button id="start-stop-change-bg" onclick="changeBG_YN();" title="Automatic BG change, Y/N">Stop changing BG</button>
+  </div>
   <div id="date-time-container" style="margin-left: 30px; margin-top: 10px;">
-
+    <!-- Date tine will show up here -->
   </div>
   <div id="bg-countdown-container" style="margin-left: 30px; margin-top: 10px; font-weight: normal; font-size: 12px;">
     Change BG in <span id="count-down">00 s</span>
@@ -1767,7 +1770,7 @@ Date.prototype.format = function (dateFormat) {
     opacity += 1;
     currentBackground = `radial-gradient(at top, rgba(255, 255, 255, ${(opacity / 100).toFixed(2)}) 20%, rgba(10, 10, 0, ${(opacity / 100).toFixed(2)}) 55%)`;
     if (opacity < 100) {
-      setTimeout(darkenBackground, 50);
+      setTimeout(darkenBackground, 10);
     } else {
       // Change image in the dark
       if (!randomOrder) {
@@ -1939,9 +1942,27 @@ Date.prototype.format = function (dateFormat) {
       clearInterval(bgAnimation);
     }
     setTimeout(darkenBackground, 1);
-    bgAnimation = setInterval(() => {
-      setTimeout(darkenBackground, 1);
-    }, BG_INTERVAL); // in ms.
+    if (bgAnimation) { // If auto BG scroll, restart
+      bgAnimation = setInterval(() => {
+        setTimeout(darkenBackground, 1);
+      }, BG_INTERVAL); // in ms.
+    }
+  }
+
+  function changeBG_YN() {
+    if (bgAnimation !== undefined) { // Will stop
+      console.log("Stopping BG change...");
+      clearInterval(bgAnimation); 
+      bgAnimation = undefined;
+      document.getElementById("start-stop-change-bg").innerText = 'Resume BG Change';
+    } else { // Resume
+      console.log("Resuming BG change...");
+      bgAnimation = setInterval(() => {
+        setTimeout(darkenBackground, 1);
+      }, BG_INTERVAL); // in ms.
+      document.getElementById("start-stop-change-bg").innerText = 'Stop BG Change';
+    }
+
   }
 
   const NO_DIALOG_MESSAGE = "Your browser seems not to support dialogs...\nMaybe Chrome or Chromium would?";
@@ -2022,7 +2043,7 @@ Date.prototype.format = function (dateFormat) {
 
     detectBrowser();
 
-    setInterval(() => {
+    bgAnimation = setInterval(() => {
       v1 += dir1;
       if (v1 > 20 || v1 < -20) {
         dir1 *= -1;
