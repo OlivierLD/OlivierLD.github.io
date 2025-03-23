@@ -2564,6 +2564,27 @@
 <div class="content">
     <h2><a name="logarithms">Utilisation simplifi&eacute;e des tables de logarithmes</a></h2>
     <p>
+        D'abord, pour ceux qui ne seraient pas familiers avec cet outil math&eacute;matique, une des raisons pour lesquelles les logarithmes nous int&eacute;ressent ici,
+        est qu'on peut r&eacute;soudre divisions et multiplications en faisant des additions et soustractions.<br/>
+        Si on veut connaitre le r&eacute;sultat de l'op&eacute;ration <code>355 / 113</code>, on peut certes faire &ccedil;a &agrave; la main, mais avec les logs,
+        on sait que <code>log(355/113) = log(355) - log(113)</code>.<br/>
+        Les tables de log nous disent que&nbsp;:
+        <ul>
+            <li><code>log(355) = 2.5502283531</code></li>
+            <li><code>log(113) = 2.05307844348</code></li>
+        </ul>
+        Le logarithme du r&eacute;sultat qu'on cherche est <code>log(355) - log(113)</code> soit <code>2.5502283531 - 2.05307844348 = 0.4971499096</code>.<br/>
+        Comme les logarithmes qu'on utilise ici sont des logarithmes d&eacute;cimaux (et non pas N&eacute;p&eacute;riens, comme en math), le r&eacute;sultat convoit&eacute; est <code>10<sup><small>0.4971499096</small></sup></code> (qu'on trouve dans les tables). 
+        Le r&eacute;sultat est ainsi <code>3.1415929206</code>. &Ccedil;a doit vous dire quelque chose...
+    </p>
+    <p>
+        C'est cet aspect qui est utilis&eacute; dans cet outil qu'on appelle "r&egrave;gle &agrave; calculs". On multiplie en faisant glisser la r&egrave;gle d'une longueur donn&eacute;e.<br/>
+        <div style="width: 80%; text-align: center;">
+            <img src="./images/rac.jpeg" width="100%"><br/>
+        </div>
+        <code style="font-weight: bold; background: silver; padding: 15px; margin: 10px;"><span style="color: red;">2</span> &times; <span style="color: lime;">3</span> = <span style="color: blue;">6</span></code>
+    </p>
+    <p style="padding-top: 20px;">
         Les tables de logarithmes (aka "tables de log") sont des documents <i>imprim&eacute;s</i> qui permettent de r&eacute;sumer des op&eacute;rations complexes 
         (multiplication de sinus d'arc-tangentes, et autres salades de la m&ecirc;me farine), &agrave; des additions et des soustractions,
         minimisant par l&agrave; m&ecirc;me les occasions de faire des erreurs de calcul.
@@ -2581,7 +2602,8 @@
         Le nombre des &eacute;tapes du calcul (dont chacune peut donner lieu &agrave; des erreurs), et la complexit&eacute; du processus sont 
         pr&eacute;cisement ce qui a donn&eacute; lieu &agrave; l'&eacute;laboration des tables de calcul comme celles de Dieumegard &amp; Bataille.
         <br/>
-        Rien de nouveau ici, et c'est toujours valable - en informatique par exemple. Moins on &eacute;crit de code (plus il est concis), moins il y a de bugs.
+        Rien de nouveau ici, et c'est toujours valable - en informatique par exemple. Moins on &eacute;crit de code (plus il est concis), moins il y a de bugs.<br/>
+        Ceci est vrai aussi dans beaucoup d'autres domaines. Moins Donald T. s'exprime, moins il dit de conneries.
     </p>
     <p>
         <i><b>Les tables donnent les logarithmes <span style="color: red;">d&eacute;cimaux</span></b></i> (et non pas n&eacute;p&eacute;riens, 
