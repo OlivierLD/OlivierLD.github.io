@@ -6,7 +6,9 @@ import {
 	calculateGreatCircle, 
 	getMoonTilt,
 	calcLHA,
-	ghaToLongitude
+	ghaToLongitude,
+	getHorizonDip,
+	getRefraction
 } from './utils.js';
 // import * as CelestialComputer from './lib/celestial-computer.min.js';
 // let CelestialComputer = require('./longterm.almanac.js');
@@ -65,11 +67,14 @@ export function sampleMain(userDataObject) {
 	return calcResult;
 }
 
+// To facilitate the syntax
 window.sampleMain = sampleMain;
 window.CelestialComputer = CelestialComputer;
 
 window.gridSquare = CelestialComputer.gridSquare;
 window.sightReduction = CelestialComputer.sightReduction; // The one in utils.js
+window.getHorizonDip = getHorizonDip;
+window.getRefraction = getRefraction;
 
 window.getGCDistance = getGCDistance;
 window.getGCDistanceDegreesNM = getGCDistanceDegreesNM;

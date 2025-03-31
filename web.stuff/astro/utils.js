@@ -134,6 +134,26 @@ export function sightReduction(lat, lng, ahg, dec) {
 	};
 };
 
+/**
+ * Returns the horizon dip, in degrees
+ * @param {float} eyeHeight  Eye Height above water, in meters
+ * @returns Horizon dip, in minutes (miles)
+ */
+export function getHorizonDip(eyeHeight) { // In meters
+	return 1.76 * Math.sqrt(eyeHeight);
+};
+
+/**
+ * 
+ * @param {float} alt Observed altitude, in degrees
+ * @returns refraction, in degrees
+ */
+export function getRefraction(alt) { // Works, according to the Correction Tables...
+	return 0.97127 * Math.tan(Math.toRadians(90.0 - alt)) -
+				 0.00137 * Math.pow(Math.tan(Math.toRadians(90.0 - alt)), 3.0); // in degrees
+};
+
+
 if (Math.toRadians === undefined) {
 	Math.toRadians = (deg) => {
 		return deg * (Math.PI / 180);

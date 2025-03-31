@@ -14,8 +14,10 @@
     <link rel="icon" type="image/jpg" href="./palm.04.jpg">
     <title>ES6 Celestial Computer test page</title>
 
+    <!-- Main Module -->
     <script type="module" src="app.js"></script> <!-- THAT is the key -->
 
+    <!-- Web Components -->
     <script type="module" src="./webcomponents/WorldMap.js"></script>
     <script type="module" src="./webcomponents/MarqueePanel.js"></script>
     <!--script type="module" src="./webcomponents/CalendarDisplay.js"></script-->
@@ -27,6 +29,7 @@
     <script type="module" src="./webcomponents/moonphase.2/MoonPhase.js"></script>
     <script type="module" src="./webcomponents/SunPath.js"></script>
 
+    <!-- Specific Scripts -->
     <script type="text/javascript" src="date.proto.js"></script>
 
     <script type="text/javascript">
@@ -129,7 +132,9 @@ let setNewZOffset = (range, id) => {
 
     </script>
 
+    <!-- Nav Bar management -->
     <script type="text/javascript" src="js/nav-bar.js"></script>
+    <!-- For the ISS -->
     <script type="text/javascript" src="js/ajax.manager.js"></script>
 
     <script type="text/javascript">
@@ -454,7 +459,7 @@ let updateFromUserPos = () => {
     document.getElementById("pos-lng-min-01").value = ((absLong - Math.trunc(absLong)) * 60).toFixed(2);
 };
 
-let userPos = {
+let userPos = { // Default SF
     latitude: 37.7489,
     longitude: -122.507
 };
@@ -500,7 +505,7 @@ if (Math.toRadians === undefined) {
 const XMLNS = "http://www.w3.org/2000/svg";
 
 /**
- * Draw a wind direction arrow, using SVG
+ * Draw an arrow, using SVG
  *
  * @param divId ID of the div to draw the arrow in
  * @param dir Direction to represent in degrees, number [0..360], or object { value: number, label: 'string' }.
@@ -1849,6 +1854,34 @@ let toggleForeground = () => {
             globalSRUSun = sruSun;
             // document.getElementById('sru-elev-z').innerHTML =
             //     `SUN<br/>Elev: ${sru.alt.toFixed(2)}&deg;<br/>Z: ${sru.Z.toFixed(1)}&deg;`;
+
+            // hp, semi-diam (upper-lower limb), refraction, horizon depression
+            if (false) {
+                const LOWER_LIMB = 1;
+                const UPPER_LIMB = 2;
+
+                let horizonDip = getHorizonDip(1.80); // 1.80 meters above the surface
+                let refraction = '-';
+                if (sruSun.alt > 0) {
+                    refraction = getRefraction(sruSun.alt);
+                }
+                let hp = testResult.sun.HP.raw; // in seconds of arc
+                let limb = LOWER_LIMB;
+                let sd = 0;
+                if (limb === LOWER_LIMB) {
+                    sd = testResult.sun.SD.raw; // in seconds of arc.
+                }
+                if (limb === UPPER_LIMB) {
+                    sd = -testResult.sun.SD.raw; // in seconds of arc.
+                }
+
+                console.log(`Sun SD: ${sd / 60.0}', dip:${horizonDip}', refraction:${refraction}', HP: ${hp / 60.0}'`);
+                let apparentCorrection = (sd / 60.0) - horizonDip;
+                let totalCorrection = apparentCorrection - (isNaN(refraction) ? 0 : refraction) + (hp / 60.0);
+                console.log(`Apparent Correction (SD - Horizon Dip): ${apparentCorrection.toFixed(2)}'`);
+                console.log(`Total Correction (App Correction - refraction + hp): ${totalCorrection.toFixed(2)}'`);
+                console.log("Total Correction: to be ADDED to the instrumental (measured) elevation.");
+            }
 
             // Background data display
             if (!isNaN(sruSun.Z)) {
