@@ -8,7 +8,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Sight Reduction</title>
-	<link rel="icon" type="image/gif" href="./sextant.gif">
+	<link rel="icon" type="image/gif" href="./pix/sextant.gif">
 	<link rel="stylesheet" href="./css/stylesheet.css">
 	<!--style type="text/css">
 		body {
@@ -16,7 +16,9 @@
 		}
 	</style-->
 	<!-- Scripts -->
-	<script type="text/javascript" src="./ajax.manager.js"></script>
+    <!-- Main Module -->
+    <script type="module" src="app.js"></script> <!-- THAT is the key -->
+
 	<script type="text/javascript">
 
 		function decToSex(val, ns_ew) {
@@ -60,18 +62,138 @@
 		  Sample payload:
 		{
 		  "estimatedPosition": {
-		    "latitude": 37.409,
-		    "longitude": -122.7654
+				"latitude": 37.409,
+				"longitude": -122.7654
 			},
 			"utcDate": "2018-11-05T20:50:52",
-		  "cbd": {
-		    "name": "Sun",
-		    "instrumentalAltitude": 35.074,
-		    "limb": "LOWER",
+			"cbd": {
+				"name": "Sun",
+				"instrumentalAltitude": 35.074,
+				"limb": "LOWER",
 				"eyeHeight": 1.8
 			}
 		}
 		 */
+
+		 function calculateSightReduction(payload, callback) {
+			let getData = getSRPromise(payload);
+			getData.then((value) => { // resolve
+				let json = JSON.parse(value);
+				if (callback !== undefined) {
+					callback(json);
+				} else {
+					console.log(JSON.stringify(json, null, 2));
+				}
+			}, (error) => { // reject
+				console.log("Failed to get the Sight Reduction result..." + (error !== undefined && error.code !== undefined ? error.code : ' - ') + ', ' + (error !== undefined && error.message !== undefined ? error.message : ' - '));
+			});
+		}
+
+		const DELTA_T = 69.2201; // Will be re-calculated
+
+		function calculateReverseSight(payload, callback) {
+			console.log(payload);
+
+			let calculationData = {                                               // utcDate like 2025-03-31T14:16:31, duration format.
+				utcyear: parseInt(payload.utcDate.substring(0, 4)),               //              |    |  |  |  |  |
+				utcmonth: parseInt(payload.utcDate.substring(5, 7)),              //              0    |  |  |  |  |
+				utcday: parseInt(payload.utcDate.substring(8, 10)),               //                   5  |  |  |  |
+				utchour: parseInt(payload.utcDate.substring(11, 13)),             //                      8  |  |  |
+				utcminute: parseInt(payload.utcDate.substring(14, 16)),           //                         11 |  |
+				utcsecond: parseInt(payload.utcDate.substring(17, 19)),           //                            14 | 
+				deltaT: DELTA_T,                                                  //                               17
+				noPlanets: false,
+				noStars: false
+			};
+
+			let globalAstroData = sampleMain(calculationData); // in app.js
+			if (false) {
+				console.log("Calculation done %d-%d-%d %d:%d:%d UTC :", calculationData.utcyear, calculationData.utcmonth, calculationData.utcday, calculationData.utchour, calculationData.utcminute, calculationData.utcsecond);
+				console.log("Result:\n", JSON.stringify(globalAstroData, null, 2));
+			}
+
+			// SRU - Sight Reduction Utility
+			try { // TODO If Sun (or other body)
+				let sruSun = sightReduction(payload.estimatedPosition.latitude, payload.estimatedPosition.longitude, globalAstroData.sun.GHA.raw, globalAstroData.sun.DEC.raw);
+				// document.getElementById('sru-elev-z').innerHTML =
+				//     `SUN<br/>Elev: ${sru.alt.toFixed(2)}&deg;<br/>Z: ${sru.Z.toFixed(1)}&deg;`;
+
+				// hp, semi-diam (upper-lower limb), refraction, horizon depression
+				const LOWER_LIMB = 1;
+				const UPPER_LIMB = 2;
+
+				let horizonDip = getHorizonDip(payload.cbd.eyeHeight); // 1.80 meters above the surface
+				let refraction = 0;
+				if (sruSun.alt > 0) {
+					refraction = getRefraction(sruSun.alt);
+				}
+				let hp = globalAstroData.sun.HP.raw; // in seconds of arc
+				let limb =  (payload.cbd.limb === 'UPPER') ? UPPER_LIMB : LOWER_LIMB; // Get it from the form
+				let sd = 0;
+				if (limb === LOWER_LIMB) {
+					sd = globalAstroData.sun.SD.raw; // in seconds of arc.
+				}
+				if (limb === UPPER_LIMB) {
+					sd = -globalAstroData.sun.SD.raw; // in seconds of arc.
+				}
+
+				console.log(`Sun SD: ${sd / 60.0}', dip:${horizonDip}', refraction:${refraction}', HP: ${hp / 60.0}'`);
+				let apparentCorrection = (sd / 60.0) - horizonDip;
+				let totalCorrection = apparentCorrection - (isNaN(refraction) ? 0 : refraction) + (hp / 60.0);
+				console.log(`Apparent Correction (SD - Horizon Dip): ${apparentCorrection.toFixed(2)}'`);
+				console.log(`Total Correction (App Correction - refraction + hp): ${totalCorrection.toFixed(2)}'`);
+				console.log("Total Correction: to be ADDED to the instrumental (measured) elevation.");
+
+					
+				console.log(`Sun Z: ${sruSun.Z}`);
+				console.log(`Sun alt: ${sruSun.alt}`); 
+
+				/*
+				For the callback: {
+					decl: -16.40498367695131
+					delta-t: 68.9677
+					gha: 84.8538302416593
+					horizon-depression-minutes: 2.361287784239778
+					horizontal-parallax-minutes: 0.1479020927681669
+					hp: 0.0024650348794694483
+					instrumental-altitude: 25.119431796329224
+					lunar-distance: 4.873968467166731
+					observed-altitude-degrees: 25.317291337175323
+					parallax-minutes: 0.13369661970764085
+					refraction-minutes: 2.040395775549588
+					sd: 0.2689926565141308
+					semi-diameter-minutes: 16.139559390847847
+					total-correction-minutes: 11.871572450766122
+				}
+				*/
+
+				// TODO All bodies...
+				callbackContent = {
+					"decl": globalAstroData.sun.DEC.raw,
+					"delta-t": globalAstroData.deltaT,
+					"gha": globalAstroData.sun.GHA.raw,
+					"horizon-depression-minutes": horizonDip,
+					"horizontal-parallax-minutes": hp,
+					"hp": hp / 3600.0,
+					"instrumental-altitude": sruSun.alt + (totalCorrection / 60.0),
+					"lunar-distance": globalAstroData.lunarDist.raw,
+					"observed-altitude-degrees": sruSun.alt,
+					"parallax-minutes": hp / 60.0,
+					"refraction-minutes": refraction,
+					"sd": sd / 3600.0,
+					"semi-diameter-minutes": sd / 60.0,
+					"total-correction-minutes": totalCorrection
+				}
+
+				callback(callbackContent);
+
+			} catch (err) {
+				console.log('Oops:', err)
+			}
+
+
+		}
+
 		function calculateSR(reverse) {
 			// Gather data
 			let day = document.getElementById('calendar-day-01').value;
