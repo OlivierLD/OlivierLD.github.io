@@ -58,8 +58,73 @@
 					(seconds < 10 ? '0' + seconds : seconds);
 		}
 
+    // Used by setGeolocation
+    let geoInterval;
+    const options = {
+        enableHighAccuracy: true,
+        maximumAge: 0,
+        timeout: 5000
+    };
+
+    // Called from navigator.geolocation.getCurrentPosition
+    // Used by setGeolocation
+    const onPosSuccess = (pos) => {
+
+        // Doc at https://w3c.github.io/geolocation-api/
+        // Position object at https://w3c.github.io/geolocation-api/#position_interface
+        //
+        console.log('lat= ' + pos.coords.latitude + ' lon= ' + pos.coords.longitude); // + ' hdg= ' + pos.coords.heading + ' spd= ' + pos.coords.speed + ' m/s');
+        console.log(`GeoLocation position: ${decToSex(pos.coords.latitude, 'NS')} / ${decToSex(pos.coords.longitude, 'EW')}`);
+        // console.log("Pos data:" + pos.coords);
+        // document.getElementById('center-point').innerHTML = `Centered on ${decToSex(pos.coords.latitude, 'NS')} / ${decToSex(pos.coords.longitude, 'EW')}`;
+
+
+        // set the pos.coords.latitude, pos.coords.longitude
+		let latSign = Math.sign(pos.coords.latitude);
+		let latDeg = Math.floor(Math.abs(pos.coords.latitude));
+		let latMin = (Math.abs(pos.coords.latitude) - latDeg) * 60.0;
+		document.getElementById('pos-lat-sign-01').value = latSign < 0 ? 'S' : 'N';
+		document.getElementById('pos-lat-deg-01').value = latDeg;
+		document.getElementById('pos-lat-min-01').value = latMin.toFixed(2);
+
+		let lngSign = Math.sign(pos.coords.longitude);
+		let lngDeg = Math.floor(Math.abs(pos.coords.longitude));
+		let lngMin = (Math.abs(pos.coords.longitude) - lngDeg) * 60.0;
+		document.getElementById('pos-lng-sign-01').value = lngSign < 0 ? 'W' : 'E';
+		document.getElementById('pos-lng-deg-01').value = lngDeg;
+		document.getElementById('pos-lng-min-01').value = lngMin.toFixed(2);
+
+	};
+
+    // Called from navigator.geolocation.getCurrentPosition
+    // Used by setGeolocation
+    const onPosError = (err) => {
+        let errMess;
+        if (err.code === err.PERMISSION_DENIED) {
+            errMess = 'Location access was denied by the user.';
+        } else {
+            errMess = 'location error (' + err.code + '): ' + err.message;
+        }
+        console.error(errMess);
+    };
+
+    let setGeolocation = (slider) => {
+        console.log(`GeoLocation turned ${slider.checked ? 'ON' : 'OFF'}`);
+        if (slider.checked) { // ON
+            geoInterval = setInterval(() => {
+            /* let watchId = */ navigator.geolocation.getCurrentPosition(onPosSuccess, onPosError, options);
+            }, 1000);
+        } else {              // OFF
+            if (geoInterval) {
+                clearInterval(geoInterval);
+            }
+        }
+    };
+
+
 		/*
 		  Sample payload:
+
 		{
 		  "estimatedPosition": {
 				"latitude": 37.409,
@@ -76,17 +141,109 @@
 		 */
 
 		 function calculateSightReduction(payload, callback) {
-			let getData = getSRPromise(payload);
-			getData.then((value) => { // resolve
-				let json = JSON.parse(value);
-				if (callback !== undefined) {
-					callback(json);
-				} else {
-					console.log(JSON.stringify(json, null, 2));
+			console.log(payload);
+
+			let calculationData = {                                               // utcDate like 2025-03-31T14:16:31, duration format.
+				utcyear: parseInt(payload.utcDate.substring(0, 4)),               //              |    |  |  |  |  |
+				utcmonth: parseInt(payload.utcDate.substring(5, 7)),              //              0    |  |  |  |  |
+				utcday: parseInt(payload.utcDate.substring(8, 10)),               //                   5  |  |  |  |
+				utchour: parseInt(payload.utcDate.substring(11, 13)),             //                      8  |  |  |
+				utcminute: parseInt(payload.utcDate.substring(14, 16)),           //                         11 |  |
+				utcsecond: parseInt(payload.utcDate.substring(17, 19)),           //                            14 | 
+				deltaT: DELTA_T,                                                  //                               17
+				noPlanets: false,
+				noStars: false
+			};
+
+			let globalAstroData = sampleMain(calculationData); // in app.js
+			if (false) {
+				console.log("Calculation done %d-%d-%d %d:%d:%d UTC :", calculationData.utcyear, calculationData.utcmonth, calculationData.utcday, calculationData.utchour, calculationData.utcminute, calculationData.utcsecond);
+				console.log("Result:\n", JSON.stringify(globalAstroData, null, 2));
+			}
+
+			// SRU - Sight Reduction Utility
+			try { // TODO If Sun (or other body)
+				let sruSun = sightReduction(payload.estimatedPosition.latitude, payload.estimatedPosition.longitude, globalAstroData.sun.GHA.raw, globalAstroData.sun.DEC.raw);
+				// document.getElementById('sru-elev-z').innerHTML =
+				//     `SUN<br/>Elev: ${sru.alt.toFixed(2)}&deg;<br/>Z: ${sru.Z.toFixed(1)}&deg;`;
+
+				// hp, semi-diam (upper-lower limb), refraction, horizon depression
+				const LOWER_LIMB = 1;
+				const UPPER_LIMB = 2;
+
+				let horizonDip = getHorizonDip(payload.cbd.eyeHeight); // 1.80 meters above the surface
+				let refraction = 0;
+				if (payload.cbd.instrumentalAltitude > 0) {
+					refraction = getRefraction(payload.cbd.instrumentalAltitude);
 				}
-			}, (error) => { // reject
-				console.log("Failed to get the Sight Reduction result..." + (error !== undefined && error.code !== undefined ? error.code : ' - ') + ', ' + (error !== undefined && error.message !== undefined ? error.message : ' - '));
-			});
+				let hp = globalAstroData.sun.HP.raw; // in seconds of arc
+				let limb =  (payload.cbd.limb === 'UPPER') ? UPPER_LIMB : LOWER_LIMB; // Get it from the form
+				let sd = 0;
+				if (limb === LOWER_LIMB) {
+					sd = globalAstroData.sun.SD.raw; // in seconds of arc.
+				}
+				if (limb === UPPER_LIMB) {
+					sd = -globalAstroData.sun.SD.raw; // in seconds of arc.
+				}
+
+				console.log(`Sun SD: ${sd / 60.0}', dip:${horizonDip}', refraction:${refraction}', HP: ${hp / 60.0}'`);
+				let apparentCorrection = (sd / 60.0) - horizonDip;
+				let totalCorrection = apparentCorrection - (isNaN(refraction) ? 0 : refraction) + (hp / 60.0);
+				console.log(`Apparent Correction (SD - Horizon Dip): ${apparentCorrection.toFixed(2)}'`);
+				console.log(`Total Correction (App Correction - refraction + hp): ${totalCorrection.toFixed(2)}'`);
+				console.log("Total Correction: to be ADDED to the instrumental (measured) elevation.");
+
+				console.log(`Sun Z: ${sruSun.Z}`);
+				console.log(`Sun alt: ${sruSun.alt}`); 
+
+				/*
+				For the callback: {
+					decl: -16.40498367695131
+					delta-t: 68.9677
+					gha: 84.8538302416593
+					horizon-depression-minutes: 2.361287784239778
+					horizontal-parallax-minutes: 0.1479020927681669
+					hp: 0.0024650348794694483
+					instrumental-altitude: 25.119431796329224
+					lunar-distance: 4.873968467166731
+					observed-altitude-degrees: 25.317291337175323
+					parallax-minutes: 0.13369661970764085
+					refraction-minutes: 2.040395775549588
+					sd: 0.2689926565141308
+					semi-diameter-minutes: 16.139559390847847
+					total-correction-minutes: 11.871572450766122
+
+					estimated-altitude-degrees
+					intercept-degrees
+				}
+				*/
+
+				// TODO All bodies...
+				callbackContent = {
+					"decl": globalAstroData.sun.DEC.raw,
+					"delta-t": globalAstroData.deltaT,
+					"gha": globalAstroData.sun.GHA.raw,
+					"horizon-depression-minutes": horizonDip,
+					"horizontal-parallax-minutes": hp,
+					"hp": hp / 3600.0,
+					"instrumental-altitude": payload.cbd.instrumentalAltitude,
+					"lunar-distance": globalAstroData.lunarDist.raw,
+					"observed-altitude-degrees": payload.cbd.instrumentalAltitude + (totalCorrection / 60.0),
+					"estimated-altitude-degrees": sruSun.alt,
+					"intercept-degrees": sruSun.alt - (payload.cbd.instrumentalAltitude + (totalCorrection / 60.0)),
+					"parallax-minutes": hp / 60.0,
+					"refraction-minutes": refraction,
+					"sd": sd / 3600.0,
+					"semi-diameter-minutes": sd / 60.0,
+					"total-correction-minutes": totalCorrection,
+					"z": sruSun.Z
+				}
+
+				callback(callbackContent);
+
+			} catch (err) {
+				console.log('Oops:', err)
+			}		
 		}
 
 		const DELTA_T = 69.2201; // Will be re-calculated
@@ -144,7 +301,6 @@
 				console.log(`Total Correction (App Correction - refraction + hp): ${totalCorrection.toFixed(2)}'`);
 				console.log("Total Correction: to be ADDED to the instrumental (measured) elevation.");
 
-					
 				console.log(`Sun Z: ${sruSun.Z}`);
 				console.log(`Sun alt: ${sruSun.alt}`); 
 
@@ -175,14 +331,15 @@
 					"horizon-depression-minutes": horizonDip,
 					"horizontal-parallax-minutes": hp,
 					"hp": hp / 3600.0,
-					"instrumental-altitude": sruSun.alt + (totalCorrection / 60.0),
+					"instrumental-altitude": sruSun.alt - (totalCorrection / 60.0),
 					"lunar-distance": globalAstroData.lunarDist.raw,
 					"observed-altitude-degrees": sruSun.alt,
 					"parallax-minutes": hp / 60.0,
 					"refraction-minutes": refraction,
 					"sd": sd / 3600.0,
 					"semi-diameter-minutes": sd / 60.0,
-					"total-correction-minutes": totalCorrection
+					"total-correction-minutes": totalCorrection,
+					"z": sruSun.Z
 				}
 
 				callback(callbackContent);
@@ -190,8 +347,6 @@
 			} catch (err) {
 				console.log('Oops:', err)
 			}
-
-
 		}
 
 		function calculateSR(reverse) {
@@ -463,7 +618,7 @@
 						<span>'</span>
 					</td>
 				</tr>
-			  <tr>
+			    <tr>
 					<td>Estimated Longitude:</td>
 					<td>
 						<select id="pos-lng-sign-01">
@@ -494,6 +649,17 @@
 								step="0.01"
 								value="00.00"/>
 						<span>'</span>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4">
+						<div class="switch-container" style="margin-left: 30px;" title="Enable GeoLocation APIs">
+							<label class="switch switch-element">
+							<input id="geoloc-slider" type="checkbox" onchange="setGeolocation(this);">
+							<span class="slider round"></span>
+							</label>
+							<span class="switch-element">Enable GeoLocation</span>
+						</div>
 					</td>
 				</tr>
 			</table>
@@ -627,6 +793,8 @@
 		</div>
 		<div id="result" style="margin: 10px;"></div>
 	</div>
+	<hr/>
+	<i>&copy; 2025, Oliv Cool Stuff Soft.</i>
 
 </body>
 </html>
