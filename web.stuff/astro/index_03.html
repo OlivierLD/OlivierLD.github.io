@@ -635,7 +635,10 @@
 
 	<table width="100%">
 		<tr>
-			<td><h1>Sight Reduction</h1><small>Minimal UI</small></td>
+			<td>
+				<h1 id="title-01">Sight Reduction</h1>
+				<small>Minimal UI</small>
+			</td>
 			<td><img src="./pix/sextant.gif" alt="Sextant" style="background-color: white; padding: 10px; border-radius: 50%; border: 1px solid cyan;"></td>
 		</tr>
 	</table>
@@ -644,7 +647,7 @@
 	<!-- A div for the user to set the UTC time -->
 	<div id="user-time-set">
 		<div id="user-time-widgets" style="display: block; padding: 10px;">
-			<span style="margin: 5px;">UTC Date of observation:</span>
+			<span id="label-02" style="margin: 5px;">UTC Date of observation:</span>
 			<br/>
 			<input type="number"
 						 id="calendar-day-01"
@@ -687,7 +690,7 @@
 		<div id="user-pos-widgets" style="display: block; padding: 10px;">
 			<table>
 				<tr>
-					<td>Estimated Latitude:</td>
+					<td id="label-03">Estimated Latitude:</td>
 					<td>
 						<select id="pos-lat-sign-01">
 							<option value="N" selected>N</option>
@@ -720,7 +723,7 @@
 					</td>
 				</tr>
 			    <tr>
-					<td>Estimated Longitude:</td>
+					<td id="label-04">Estimated Longitude:</td>
 					<td>
 						<select id="pos-lng-sign-01">
 							<option value="E" selected>E</option>
@@ -759,7 +762,7 @@
 								<input id="geoloc-slider" type="checkbox" onchange="setGeolocation(this);">
 								<span class="slider round"></span>
 							</label>
-							<span class="switch-element">Enable GeoLocation</span>
+							<span id="label-05" class="switch-element">Enable GeoLocation</span>
 						</div>
 					</td>
 				</tr>
@@ -768,7 +771,7 @@
 		<div id="user-obs-widgets" style="display: block; padding: 10px;">
 			<table>
 				<tr>
-					<td>Body:</td>
+					<td id="label-06">Body:</td>
 					<td>
 						<!-- Body list -->
 						<select id="celestial-body">
@@ -848,7 +851,7 @@
 				</tr>
 				<tr>
 					<!-- Instrumental elevation -->
-					<td>Sextant Elevation:</td>
+					<td id="label-07">Sextant Elevation:</td>
 					<td>
 						<input type="number"
 								id="sextant-degrees"
@@ -873,7 +876,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td>Eye Height (meters)</td>
+					<td id="label-08">Eye Height (meters)</td>
 					<td>
 						<input type="number"
 								id="eye-height"
@@ -916,6 +919,17 @@ let getQueryParameterByName = (name, url) => {
     return decodeURIComponent(results[2].replace(/\+/g, " "));
 };
 
+let translate = (lang) => {
+	document.getElementById('title-01').innerText = (lang === 'FR') ? 'Correction de hauteur' : 'Sight Reduction';
+	document.getElementById('label-02').innerText = (lang === 'FR') ? 'Date UTC de l\'observation :' : 'UTC Date of observation:';
+	document.getElementById('label-03').innerHTML = (lang === 'FR') ? 'Latitude Estim&eacute;e :' : 'Estimated Latitude:';
+	document.getElementById('label-04').innerHTML = (lang === 'FR') ? 'Longitude Estim&eacute;e :' : 'Estimated Longitude:';
+	document.getElementById('label-05').innerHTML = (lang === 'FR') ? 'GeoLocation' : 'Enable GeoLocation';
+	document.getElementById('label-06').innerHTML = (lang === 'FR') ? 'Corps C&eacute;leste :' : 'Body:';
+	document.getElementById('label-07').innerHTML = (lang === 'FR') ? 'Hauteur lue au sextant :' : 'Sextant Elevation:';
+	document.getElementById('label-08').innerHTML = (lang === 'FR') ? 'Hauteur de l\'&oelig;il (en m&egrave;tres)' : 'Eye Height (meters)';
+};
+
 // Find language to use	
 window.onload = () => {
 
@@ -926,6 +940,7 @@ window.onload = () => {
 		if (browserUserLang) {
 			if (browserUserLang.substring(0, 2).toUpperCase() === 'FR') {
 				userLang = 'FR';
+				console.log("On va parler français")
 			} else {
 				userLang = 'EN';
 				console.log("We'll speak english");
@@ -937,7 +952,7 @@ window.onload = () => {
 		console.log(`Lang to use will be ${langToUse}`);
 	}
 	if (langToUse !== 'EN') { // Then switch to French, default is EN.
-		// TODO Do it !
+		translate(langToUse);
 	}
 };	
 </script>
