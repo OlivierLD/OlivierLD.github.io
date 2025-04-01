@@ -3,6 +3,7 @@
 <!--
  ! Standalone.
  ! All ES6 Astrocomputer
+ ! Sight reduction, back and forth.
  +-->
 <head>
 	<meta charset="UTF-8">
@@ -140,7 +141,96 @@
 		}
 		 */
 
-		 function calculateSightReduction(payload, callback) {
+		const LOWER_LIMB = 1;
+		const UPPER_LIMB = 2;
+
+		function findStarGHA(bodyName, globalData) {
+			globalData.stars.forEach(star => {
+				if (star.name === bodyName) {
+					return star.gha;
+				}
+			});
+			return null;
+		};
+		function findStarDEC(bodyName, globalData) {
+			globalData.stars.forEach(star => {
+				if (star.name === bodyName) {
+					return star.decl;
+				}
+			});
+			return null;
+		};
+
+		function getGHAFor(bodyName, globalData) {
+			switch (bodyName) {
+				case 'Moon':
+					return globalData.moon.GHA.raw;
+				case 'Venus':
+					return globalData.venus.GHA.raw;
+				case 'Mars':
+					return globalData.mars.GHA.raw;
+				case 'Jupiter':
+					return globalData.jupiter.GHA.raw;
+				case 'Saturn':
+					return globalData.saturn.GHA.raw;
+				default: // Star ?
+					return findStarGHA(bodyName, globalData);
+			}
+			return null;
+		};
+		function getDECFor(bodyName, globalData) {
+			switch (bodyName) {
+				case 'Moon':
+					return globalData.moon.DEC.raw;
+				case 'Venus':
+					return globalData.venus.DEC.raw;
+				case 'Mars':
+					return globalData.mars.DEC.raw;
+				case 'Jupiter':
+					return globalData.jupiter.DEC.raw;
+				case 'Saturn':
+					return globalData.saturn.DEC.raw;
+				default: // Star ?
+					return findStarDEC(bodyName, globalData);
+			}
+			return null;
+		}
+		function getHPFor(bodyName, globalData) {
+			switch (bodyName) {
+				case 'Moon':
+					return globalData.moon.HP.raw;
+				case 'Venus':
+					return globalData.venus.HP.raw;
+				case 'Mars':
+					return globalData.mars.HP.raw;
+				case 'Jupiter':
+					return globalData.jupiter.HP.raw;
+				case 'Saturn':
+					return globalData.saturn.HP.raw;
+				default: // Star ?
+					return 0;
+			}
+			return null;
+		}
+		function getSDFor(bodyName, globalData) {
+			switch (bodyName) {
+				case 'Moon':
+					return globalData.moon.SD.raw;
+				case 'Venus':
+					return globalData.venus.SD.raw;
+				case 'Mars':
+					return globalData.mars.SD.raw;
+				case 'Jupiter':
+					return globalData.jupiter.HP.raw;
+				case 'Saturn':
+					return globalData.saturn.SD.raw;
+				default: // Star ?
+					return 0;
+			}
+			return null;
+		}
+
+		function calculateSightReduction(payload, callback) {
 			console.log(payload);
 
 			let calculationData = {                                               // utcDate like 2025-03-31T14:16:31, duration format.
@@ -162,39 +252,43 @@
 			}
 
 			// SRU - Sight Reduction Utility
-			try { // TODO If Sun (or other body)
-				let sruSun = sightReduction(payload.estimatedPosition.latitude, payload.estimatedPosition.longitude, globalAstroData.sun.GHA.raw, globalAstroData.sun.DEC.raw);
+			try { 
+				// Default Sun
+				let ghaBody = globalAstroData.sun.GHA.raw;
+				let decBody = globalAstroData.sun.DEC.raw;
+				let hp = globalAstroData.sun.HP.raw; // in seconds of arc
+				let sd = globalAstroData.sun.SD.raw; 
+				if (payload.cbd.name !== 'Sun') {
+					// Update the data !
+					ghaBody = getGHAFor(payload.cbd.name, globalAstroData);
+					decBody = getDECFor(payload.cbd.name, globalAstroData);
+					hp = getHPFor(payload.cbd.name, globalAstroData);
+					sd = getSDFor(payload.cbd.name, globalAstroData);
+				}
+				let sruBody = sightReduction(payload.estimatedPosition.latitude, payload.estimatedPosition.longitude, ghaBody, decBody);
 				// document.getElementById('sru-elev-z').innerHTML =
 				//     `SUN<br/>Elev: ${sru.alt.toFixed(2)}&deg;<br/>Z: ${sru.Z.toFixed(1)}&deg;`;
 
 				// hp, semi-diam (upper-lower limb), refraction, horizon depression
-				const LOWER_LIMB = 1;
-				const UPPER_LIMB = 2;
-
 				let horizonDip = getHorizonDip(payload.cbd.eyeHeight); // 1.80 meters above the surface
 				let refraction = 0;
 				if (payload.cbd.instrumentalAltitude > 0) {
 					refraction = getRefraction(payload.cbd.instrumentalAltitude);
 				}
-				let hp = globalAstroData.sun.HP.raw; // in seconds of arc
 				let limb =  (payload.cbd.limb === 'UPPER') ? UPPER_LIMB : LOWER_LIMB; // Get it from the form
-				let sd = 0;
-				if (limb === LOWER_LIMB) {
-					sd = globalAstroData.sun.SD.raw; // in seconds of arc.
-				}
 				if (limb === UPPER_LIMB) {
-					sd = -globalAstroData.sun.SD.raw; // in seconds of arc.
+					sd = -sd; // in seconds of arc.
 				}
 
-				console.log(`Sun SD: ${sd / 60.0}', dip:${horizonDip}', refraction:${refraction}', HP: ${hp / 60.0}'`);
+				console.log(`${payload.cbd.name} SD: ${sd / 60.0}', dip:${horizonDip}', refraction:${refraction}', HP: ${hp / 60.0}'`);
 				let apparentCorrection = (sd / 60.0) - horizonDip;
 				let totalCorrection = apparentCorrection - (isNaN(refraction) ? 0 : refraction) + (hp / 60.0);
 				console.log(`Apparent Correction (SD - Horizon Dip): ${apparentCorrection.toFixed(2)}'`);
 				console.log(`Total Correction (App Correction - refraction + hp): ${totalCorrection.toFixed(2)}'`);
 				console.log("Total Correction: to be ADDED to the instrumental (measured) elevation.");
 
-				console.log(`Sun Z: ${sruSun.Z}`);
-				console.log(`Sun alt: ${sruSun.alt}`); 
+				console.log(`${payload.cbd.name} Z: ${sruBody.Z}`);
+				console.log(`${payload.cbd.name} alt: ${sruBody.alt}`); 
 
 				/*
 				For the callback: {
@@ -229,14 +323,14 @@
 					"instrumental-altitude": payload.cbd.instrumentalAltitude,
 					"lunar-distance": globalAstroData.lunarDist.raw,
 					"observed-altitude-degrees": payload.cbd.instrumentalAltitude + (totalCorrection / 60.0),
-					"estimated-altitude-degrees": sruSun.alt,
-					"intercept-degrees": sruSun.alt - (payload.cbd.instrumentalAltitude + (totalCorrection / 60.0)),
+					"estimated-altitude-degrees": sruBody.alt,
+					"intercept-degrees": sruBody.alt - (payload.cbd.instrumentalAltitude + (totalCorrection / 60.0)),
 					"parallax-minutes": hp / 60.0,
 					"refraction-minutes": refraction,
 					"sd": sd / 3600.0,
 					"semi-diameter-minutes": sd / 60.0,
 					"total-correction-minutes": totalCorrection,
-					"z": sruSun.Z
+					"z": sruBody.Z
 				}
 
 				callback(callbackContent);
@@ -270,39 +364,43 @@
 			}
 
 			// SRU - Sight Reduction Utility
-			try { // TODO If Sun (or other body)
-				let sruSun = sightReduction(payload.estimatedPosition.latitude, payload.estimatedPosition.longitude, globalAstroData.sun.GHA.raw, globalAstroData.sun.DEC.raw);
+			try { 
+				// Default Sun
+				let ghaBody = globalAstroData.sun.GHA.raw;
+				let decBody = globalAstroData.sun.DEC.raw;
+				let hp = globalAstroData.sun.HP.raw; // in seconds of arc
+				let sd = globalAstroData.sun.SD.raw; 
+				if (payload.cbd.name !== 'Sun') {
+					// Update the data !
+					ghaBody = getGHAFor(payload.cbd.name, globalAstroData);
+					decBody = getDECFor(payload.cbd.name, globalAstroData);
+					hp = getHPFor(payload.cbd.name, globalAstroData);
+					sd = getSDFor(payload.cbd.name, globalAstroData);
+				}
+				let sruBody = sightReduction(payload.estimatedPosition.latitude, payload.estimatedPosition.longitude, ghaBody, decBody);
 				// document.getElementById('sru-elev-z').innerHTML =
 				//     `SUN<br/>Elev: ${sru.alt.toFixed(2)}&deg;<br/>Z: ${sru.Z.toFixed(1)}&deg;`;
 
 				// hp, semi-diam (upper-lower limb), refraction, horizon depression
-				const LOWER_LIMB = 1;
-				const UPPER_LIMB = 2;
-
 				let horizonDip = getHorizonDip(payload.cbd.eyeHeight); // 1.80 meters above the surface
 				let refraction = 0;
-				if (sruSun.alt > 0) {
-					refraction = getRefraction(sruSun.alt);
+				if (sruBody.alt > 0) {
+					refraction = getRefraction(sruBody.alt);
 				}
-				let hp = globalAstroData.sun.HP.raw; // in seconds of arc
 				let limb =  (payload.cbd.limb === 'UPPER') ? UPPER_LIMB : LOWER_LIMB; // Get it from the form
-				let sd = 0;
-				if (limb === LOWER_LIMB) {
-					sd = globalAstroData.sun.SD.raw; // in seconds of arc.
-				}
 				if (limb === UPPER_LIMB) {
-					sd = -globalAstroData.sun.SD.raw; // in seconds of arc.
+					sd = -sd; // in seconds of arc.
 				}
 
-				console.log(`Sun SD: ${sd / 60.0}', dip:${horizonDip}', refraction:${refraction}', HP: ${hp / 60.0}'`);
+				console.log(`${payload.cbd.name} SD: ${sd / 60.0}', dip:${horizonDip}', refraction:${refraction}', HP: ${hp / 60.0}'`);
 				let apparentCorrection = (sd / 60.0) - horizonDip;
 				let totalCorrection = apparentCorrection - (isNaN(refraction) ? 0 : refraction) + (hp / 60.0);
 				console.log(`Apparent Correction (SD - Horizon Dip): ${apparentCorrection.toFixed(2)}'`);
 				console.log(`Total Correction (App Correction - refraction + hp): ${totalCorrection.toFixed(2)}'`);
 				console.log("Total Correction: to be ADDED to the instrumental (measured) elevation.");
 
-				console.log(`Sun Z: ${sruSun.Z}`);
-				console.log(`Sun alt: ${sruSun.alt}`); 
+				console.log(`${payload.cbd.name} Z: ${sruBody.Z}`);
+				console.log(`${payload.cbd.name} alt: ${sruBody.alt}`); 
 
 				/*
 				For the callback: {
@@ -331,15 +429,15 @@
 					"horizon-depression-minutes": horizonDip,
 					"horizontal-parallax-minutes": hp,
 					"hp": hp / 3600.0,
-					"instrumental-altitude": sruSun.alt - (totalCorrection / 60.0),
+					"instrumental-altitude": sruBody.alt - (totalCorrection / 60.0),
 					"lunar-distance": globalAstroData.lunarDist.raw,
-					"observed-altitude-degrees": sruSun.alt,
+					"observed-altitude-degrees": sruBody.alt,
 					"parallax-minutes": hp / 60.0,
 					"refraction-minutes": refraction,
 					"sd": sd / 3600.0,
 					"semi-diameter-minutes": sd / 60.0,
 					"total-correction-minutes": totalCorrection,
-					"z": sruSun.Z
+					"z": sruBody.Z
 				}
 
 				callback(callbackContent);
@@ -350,7 +448,7 @@
 		}
 
 		function calculateSR(reverse) {
-			// Gather data
+			// Gather user data
 			let day = document.getElementById('calendar-day-01').value;
 			let utcDate =
 					document.getElementById('calendar-year-01').value + '-' +
@@ -381,7 +479,7 @@
 					"longitude": longitude
 				},
 				"utcDate": utcDate,
-				"cbd": {
+				"cbd": { // cbd: callback data
 					"name": body,
 					"instrumentalAltitude": sextantAltitude,
 					"limb": limb,
@@ -410,7 +508,7 @@
 					z: 139.58829918131767
 				}
 				*/
-		//	console.log("Result:", result);
+				//	console.log("Result:", result);
 
 				let fmtDisplay = "<hr/>";
 
