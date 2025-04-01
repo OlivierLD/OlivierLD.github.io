@@ -22,6 +22,8 @@
 
 	<script type="text/javascript">
 
+	let langToUse = 'EN';
+
 	function decToSex(val, ns_ew) {
 		var absVal = Math.abs(val);
 		var intValue = Math.floor(absVal);
@@ -896,4 +898,47 @@
 	<i>&copy; 2025, Oliv Cool Stuff Soft.</i>
 
 </body>
+<script type="text/javascript">
+
+let getQueryParameterByName = (name, url) => {
+    if (!url) {
+        url = window.location.href;
+    }
+    name = name.replace(/[\[\]]/g, "\\$&");
+    let regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) {
+        return null;
+    }
+    if (!results[2]) {
+        return '';
+    }
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+};
+
+// Find language to use	
+window.onload = () => {
+
+	let userLang = getQueryParameterByName('lang');
+	if (!userLang) { 
+		let browserUserLang = navigator.language || navigator.userLanguage; 
+		console.log("The browser's language is: " + browserUserLang);
+		if (browserUserLang) {
+			if (browserUserLang.substring(0, 2).toUpperCase() === 'FR') {
+				userLang = 'FR';
+			} else {
+				userLang = 'EN';
+				console.log("We'll speak english");
+			}
+		}
+	}
+	if (userLang) {
+		langToUse = userLang;
+		console.log(`Lang to use will be ${langToUse}`);
+	}
+	if (langToUse !== 'EN') { // Then switch to French, default is EN.
+		// TODO Do it !
+	}
+};	
+</script>
 </html>
