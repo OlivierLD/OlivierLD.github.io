@@ -548,7 +548,7 @@
 			// Line 8
 			fmtDisplay += ("<tr><td style='text-align: right;' colspan='3'>" + translator(EST_ALT) + "</td><td style='text-align: left;' colspan='3'>" + decToSex(result['estimated-altitude-degrees']) + "</td></tr>");
 			// Line 9
-			fmtDisplay += ("<tr><td style='text-align: right;' colspan='3'>" + translator(INTERCEPT) + "</td><td style='text-align: left;' colspan='3'>" + Math.abs(result['intercept-degrees'] * 60).toFixed(2) + "' " + (result['intercept-degrees'] < 0 ? translator(AWAY) : translator(TOWARDS)) + " [" + translateBodyName(body) + "]</td></tr>");
+			fmtDisplay += ("<tr><td style='text-align: right;' colspan='3'>" + translator(INTERCEPT) + "</td><td style='text-align: left;' colspan='3'>" + Math.abs(result['intercept-degrees'] * 60).toFixed(2) + "' " + (result['intercept-degrees'] < 0 ? translator(AWAY) : translator(TOWARDS)) + " " + translateBodyName(body) + "</td></tr>");
 
 			fmtDisplay += ("</table>");
 			fmtDisplay += ("<hr/>");
@@ -1001,9 +1001,9 @@ let translator = (id) => {
 		case INTERCEPT:
 			return (langToUse === 'FR') ? 'Intercept' : 'Intercept' ;
 		case AWAY:
-			return (langToUse === 'FR') ? 'Plus loin de l\'astre' : 'Away from' ;
+			return (langToUse === 'FR') ? 'Plus loin de l\'astre,' : 'Away from' ;
 		case TOWARDS:
-			return (langToUse === 'FR') ? 'Vers l\'astre' : 'towards' ;
+			return (langToUse === 'FR') ? 'Vers' : 'towards' ;
 		case WITH_DELTA_T:
 			return (langToUse === 'FR') ? 'Calcul&eacute avec DetlaT' : 'Calculated with DeltaT' ;
 		default:
@@ -1015,9 +1015,9 @@ let translator = (id) => {
 let translateBodyName = (name) => {
 	switch (name) {
 		case 'Sun':
-			return (langToUse === 'FR') ? 'Soleil' : 'Sun' ;
+			return (langToUse === 'FR') ? 'le Soleil' : 'Sun' ;
 		case 'Moon':
-			return (langToUse === 'FR') ? 'Lune' : 'Moon' ;
+			return (langToUse === 'FR') ? 'la Lune' : 'Moon' ;
 		default:
 			return name;
 	}
