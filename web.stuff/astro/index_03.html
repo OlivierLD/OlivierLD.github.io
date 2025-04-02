@@ -924,8 +924,8 @@ let getQueryParameterByName = (name, url) => {
 };
 
 let translate = (lang) => {
-	document.getElementById('title-01').innerText = (lang === 'FR') ? 'Correction des hauteurs' : 'Sight Reduction';
-	document.getElementById('label-02').innerText = (lang === 'FR') ? 'Date UTC de l\'observation&nbsp;:' : 'UTC Date of observation:';
+	document.getElementById('title-01').innerHTML = (lang === 'FR') ? 'Correction des hauteurs' : 'Sight Reduction';
+	document.getElementById('label-02').innerHTML = (lang === 'FR') ? 'Date UTC de l\'observation&nbsp;:' : 'UTC Date of observation:';
 	document.getElementById('label-03').innerHTML = (lang === 'FR') ? 'Latitude Estim&eacute;e&nbsp;:' : 'Estimated Latitude:';
 	document.getElementById('label-04').innerHTML = (lang === 'FR') ? 'Longitude Estim&eacute;e&nbsp;:' : 'Estimated Longitude:';
 	document.getElementById('label-05').innerHTML = (lang === 'FR') ? 'G&eacute;oLocalisation' : 'Enable GeoLocation';
