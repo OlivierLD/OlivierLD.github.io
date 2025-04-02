@@ -45,6 +45,17 @@
 		return s;
 	}
 
+	function switchLanguage() {
+		let newURL = location.origin + location.pathname;
+		if (langToUse === 'FR') {
+			// Switch to English
+			location.replace(newURL + "?lang=EN");
+		} else {
+			// Switch to French
+			location.replace(newURL + "?lang=FR");
+		}
+	}
+
 	function updateFieldToNow() {
 		let now = new Date();
 		let year = now.getUTCFullYear();
@@ -641,6 +652,7 @@
 	<table width="100%">
 		<tr>
 			<td><h1 id="title-01">Sight Reduction</h1></td>
+			<td><a href="javascript:void(0)" onclick="switchLanguage();"><image id="lang-flag" src="./pix/france.gif" alt="US/UK Flag" title="Switch to English" style="width: 27px; margin-left: 30px;"></image></a></td>
 			<td><img src="./pix/sextant.gif" alt="Sextant" style="background-color: white; padding: 10px; border-radius: 50%; border: 1px solid cyan;"></td>
 		</tr>
 	</table>
@@ -942,6 +954,11 @@ let translate = (lang) => {
 	document.getElementById('button-now').innerHTML = (lang === 'FR') ? 'Heure actuelle' : 'Now';
 	document.getElementById('button-calc').innerHTML = (lang === 'FR') ? 'Calcul' : 'Calculate';
 	document.getElementById('button-reverse').innerHTML = (lang === 'FR') ? 'Inverse' : 'Reverse';
+
+	// Lang swicth
+	document.getElementById('lang-flag').src = (lang === 'FR') ? "./pix/us_uk_flag.png" : "./pix/france.gif";	
+	document.getElementById('lang-flag').alt = (lang === 'FR') ? "France" : "US-UK, etc";	
+	document.getElementById('lang-flag').title = (lang === 'FR') ? "Switch to English" : "En Fran&ccedil;ais";	
 };
 
 const ALMANAC = 1;
@@ -977,11 +994,11 @@ let translator = (id) => {
 		case DEC:
 			return (langToUse === 'FR') ? 'D&eacute;clinaison' : 'Dec' ;
 		case SEMI_DIAM:
-			return (langToUse === 'FR') ? 'Demi-diam&egrave;tre' : 'Sei-diameter' ;
+			return (langToUse === 'FR') ? 'Demi-diam&egrave;tre' : 'Semi-diameter' ;
 		case REFRACTION:
 			return (langToUse === 'FR') ? 'R&eacute;fraction' : 'Refraction' ;
 		case APP_ALT:
-			return (langToUse === 'FR') ? 'Hauteur apparente' : 'Apparent elevation' ;
+			return (langToUse === 'FR') ? 'Hauteur apparente' : 'Apparent Elevation' ;
 		case OBS_ALT:
 			return (langToUse === 'FR') ? 'Hauteur Observ&eacute;e' : 'Observed Elevation' ;
 		case HOR_PARALLAX:
