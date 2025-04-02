@@ -11,11 +11,13 @@
 	<title>Sight Reduction</title>
 	<link rel="icon" type="image/gif" href="./pix/sextant.gif">
 	<link rel="stylesheet" href="./css/stylesheet.css">
-	<!--style type="text/css">
-		body {
-			color: cyan;
+	<style type="text/css">
+		.result-style {
+			margin: 10px;
+			max-height: 200px;
+			overflow-y: scroll;
 		}
-	</style-->
+	</style>
 	<!-- Scripts -->
     <!-- Main Module -->
     <script type="module" src="app.js"></script> <!-- THAT is the key -->
@@ -251,7 +253,7 @@
 
 		let globalAstroData = sampleMain(calculationData); // in app.js
 		if (false) {
-			console.log("Calculation done %d-%d-%d %d:%d:%d UTC :", calculationData.utcyear, calculationData.utcmonth, calculationData.utcday, calculationData.utchour, calculationData.utcminute, calculationData.utcsecond);
+			console.log("Calculation done %d-%d-%d %d:%d:%d UTC:", calculationData.utcyear, calculationData.utcmonth, calculationData.utcday, calculationData.utchour, calculationData.utcminute, calculationData.utcsecond);
 			console.log("Result:\n", JSON.stringify(globalAstroData, null, 2));
 		}
 
@@ -361,7 +363,7 @@
 
 		let globalAstroData = sampleMain(calculationData); // in app.js
 		if (false) {
-			console.log("Calculation done %d-%d-%d %d:%d:%d UTC :", calculationData.utcyear, calculationData.utcmonth, calculationData.utcday, calculationData.utchour, calculationData.utcminute, calculationData.utcsecond);
+			console.log("Calculation done %d-%d-%d %d:%d:%d UTC:", calculationData.utcyear, calculationData.utcmonth, calculationData.utcday, calculationData.utchour, calculationData.utcminute, calculationData.utcsecond);
 			console.log("Result:\n", JSON.stringify(globalAstroData, null, 2));
 		}
 
@@ -488,28 +490,29 @@
 				"eyeHeight": eyeHeight
 			}
 		};
-		// Create and invoke promise
-		let srCallback = function(result) {
-			/*
-			Result looks like: {
-				decl: -16.40498367695131,
-				delta-t: 68.9677,
-				estimated-altitude-degrees: 25.317291337175323,
-				gha: 84.8538302416593,
-				horizon-depression-minutes: 2.361287784239778,
-				horizontal-parallax-minutes: 0.1479020927681669,
-				hp: 0.0024650348794694483,
-				intercept-degrees: -0.0002860101440127494,
-				lunar-distance: 4.873968467166731,
-				observed-altitude-degrees: 25.31700532703131,
-				parallax-minutes: 0.13399483310705615,
-				refraction-minutes: 2.061946817836327,
-				sd: 0.2689926565141308,
-				semi-diameter-minutes: 16.139559390847847,
-				total-correction-minutes: 11.850319621878798,
-				z: 139.58829918131767
-			}
-			*/
+		/**
+		 * Callback function for the sight reduction
+		 * @param {JSON} result like: {
+		 *		decl: -16.40498367695131,
+		 *		delta-t: 68.9677,
+		 *		estimated-altitude-degrees: 25.317291337175323,
+		 *		gha: 84.8538302416593,
+		 *		horizon-depression-minutes: 2.361287784239778,
+		 *		horizontal-parallax-minutes: 0.1479020927681669,
+		 *		hp: 0.0024650348794694483,
+		 *		intercept-degrees: -0.0002860101440127494,
+		 *		lunar-distance: 4.873968467166731,
+		 *		observed-altitude-degrees: 25.31700532703131,
+		 *		parallax-minutes: 0.13399483310705615,
+		 *		refraction-minutes: 2.061946817836327,
+		 *		sd: 0.2689926565141308,
+		 *		semi-diameter-minutes: 16.139559390847847,
+		 *		total-correction-minutes: 11.850319621878798,
+		 *		z: 139.58829918131767
+		 *  }
+		 * @returns none
+		 */
+		 let srCallback = function(result) {
 			//	console.log("Result:", result);
 
 			let fmtDisplay = "<hr/>";
@@ -558,25 +561,27 @@
 			document.getElementById("result").innerHTML = fmtDisplay;
 		};
 
+		/**
+		 * Callback function for the reverse - sight reduction
+		 * @param {JSON} result like: {
+		 *  	decl: -16.40498367695131,
+		 *  	delta-t: 68.9677,
+		 *  	gha: 84.8538302416593,
+		 *  	horizon-depression-minutes: 2.361287784239778,
+		 *  	horizontal-parallax-minutes: 0.1479020927681669,
+		 *  	hp: 0.0024650348794694483,
+		 *  	instrumental-altitude: 25.119431796329224,
+		 *  	lunar-distance: 4.873968467166731,
+		 *  	observed-altitude-degrees: 25.317291337175323,
+		 *  	parallax-minutes: 0.13369661970764085,
+		 *  	refraction-minutes: 2.040395775549588,
+		 *  	sd: 0.2689926565141308,
+		 *  	semi-diameter-minutes: 16.139559390847847,
+		 *  	total-correction-minutes: 11.871572450766122
+		 *  }
+		 * @returns none
+		 */
 		let reverseCallback = function(result) {
-			/*
-			Result looks like: {
-				decl: -16.40498367695131
-				delta-t: 68.9677
-				gha: 84.8538302416593
-				horizon-depression-minutes: 2.361287784239778
-				horizontal-parallax-minutes: 0.1479020927681669
-				hp: 0.0024650348794694483
-				instrumental-altitude: 25.119431796329224
-				lunar-distance: 4.873968467166731
-				observed-altitude-degrees: 25.317291337175323
-				parallax-minutes: 0.13369661970764085
-				refraction-minutes: 2.040395775549588
-				sd: 0.2689926565141308
-				semi-diameter-minutes: 16.139559390847847
-				total-correction-minutes: 11.871572450766122
-			}
-			*/
 			//	console.log("Result:", result);
 
 			let hi = result['instrumental-altitude'];
@@ -635,10 +640,7 @@
 
 	<table width="100%">
 		<tr>
-			<td>
-				<h1 id="title-01">Sight Reduction</h1>
-				<small>Minimal UI</small>
-			</td>
+			<td><h1 id="title-01">Sight Reduction</h1></td>
 			<td><img src="./pix/sextant.gif" alt="Sextant" style="background-color: white; padding: 10px; border-radius: 50%; border: 1px solid cyan;"></td>
 		</tr>
 	</table>
@@ -876,7 +878,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td id="label-08">Eye Height (meters)</td>
+					<td id="label-08">Eye Height (meters):</td>
 					<td>
 						<input type="number"
 								id="eye-height"
@@ -895,7 +897,9 @@
 			<button id="button-calc" onclick="calculateSR();" style="border-radius: 3px; box-shadow: 2px 2px silver;" title="Sight Reduction">Calculate</button>
 			<button id="button-reverse" onclick="calculateSR(true);" style="border-radius: 3px; box-shadow: 2px 2px silver;" title="Calculate the Sextant elevation for your time and position">Reverse</button>
 		</div>
-		<div id="result" style="margin: 10px;"></div>
+		<div id="result" class="result-style">
+
+		</div>
 	</div>
 	<hr/>
 	<i>&copy; 2025, Oliv Cool Stuff Soft.</i>
@@ -921,13 +925,13 @@ let getQueryParameterByName = (name, url) => {
 
 let translate = (lang) => {
 	document.getElementById('title-01').innerText = (lang === 'FR') ? 'Correction des hauteurs' : 'Sight Reduction';
-	document.getElementById('label-02').innerText = (lang === 'FR') ? 'Date UTC de l\'observation :' : 'UTC Date of observation:';
-	document.getElementById('label-03').innerHTML = (lang === 'FR') ? 'Latitude Estim&eacute;e :' : 'Estimated Latitude:';
-	document.getElementById('label-04').innerHTML = (lang === 'FR') ? 'Longitude Estim&eacute;e :' : 'Estimated Longitude:';
+	document.getElementById('label-02').innerText = (lang === 'FR') ? 'Date UTC de l\'observation&nbsp;:' : 'UTC Date of observation:';
+	document.getElementById('label-03').innerHTML = (lang === 'FR') ? 'Latitude Estim&eacute;e&nbsp;:' : 'Estimated Latitude:';
+	document.getElementById('label-04').innerHTML = (lang === 'FR') ? 'Longitude Estim&eacute;e&nbsp;:' : 'Estimated Longitude:';
 	document.getElementById('label-05').innerHTML = (lang === 'FR') ? 'G&eacute;oLocalisation' : 'Enable GeoLocation';
-	document.getElementById('label-06').innerHTML = (lang === 'FR') ? 'Corps C&eacute;leste :' : 'Body:';
-	document.getElementById('label-07').innerHTML = (lang === 'FR') ? 'Hauteur lue au sextant :' : 'Sextant Elevation:';
-	document.getElementById('label-08').innerHTML = (lang === 'FR') ? 'Hauteur de l\'&oelig;il (en m&egrave;tres)' : 'Eye Height (meters)';
+	document.getElementById('label-06').innerHTML = (lang === 'FR') ? 'Corps C&eacute;leste&nbsp;:' : 'Body:';
+	document.getElementById('label-07').innerHTML = (lang === 'FR') ? 'Hauteur lue au sextant&nbsp;:' : 'Sextant Elevation:';
+	document.getElementById('label-08').innerHTML = (lang === 'FR') ? 'Hauteur de l\'&oelig;il (en m&egrave;tres)&nbsp;:' : 'Eye Height (meters):';
 
 	document.getElementById('label-limb-01').innerHTML = (lang === 'FR') ? 'Bord inf&eacute;rieur' : 'Lower Limb';
 	document.getElementById('label-limb-02').innerHTML = (lang === 'FR') ? 'Bord sup&eacute;rieur' : 'Upper Limb';
