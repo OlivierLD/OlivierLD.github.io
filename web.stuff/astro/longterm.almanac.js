@@ -1420,7 +1420,7 @@ function calcStarPos(ra, dec, deltaRA, deltaD, starPar) {
 	let RAstar2 = Math.atan2((Math.sin(lambdastar2) * Utils.cosd(eps) - Math.tan(betastar2) * Utils.sind(eps)), Math.cos(lambdastar2));
 	let DECstar2 = Math.asin(Math.sin(betastar2) * Utils.cosd(eps) + Math.cos(betastar2) * Utils.sind(eps) * Math.sin(lambdastar2));
 
-	// Lunar distance of star TODO Manage it.
+	// Lunar distance of star. TODO Manage it.
 	let starMoonDist = Math.toDegrees(Math.acos(Utils.sind(DECMoon) * Math.sin(DECstar2) + Utils.cosd(DECMoon) * Math.cos(DECstar2) * Utils.cosd(RAMoon - Math.toDegrees(RAstar2))));
 
 	// Finals

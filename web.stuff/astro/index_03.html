@@ -188,20 +188,24 @@
 	const DELTA_T = 69.2201; // Will be re-calculated anyway.
 
 	function findStarGHA(bodyName, globalData) {
-		globalData.stars.forEach(star => {
+		for (const star of globalData.stars) {
+			// console.log(`Looking for GHA for [${bodyName}], now on [${star.name}]`);
 			if (star.name === bodyName) {
+				// console.log("--> Found it!");
 				return star.gha;
 			}
-		});
-		return null;
+		}
+		return null; // ie not found
 	};
 	function findStarDEC(bodyName, globalData) {
-		globalData.stars.forEach(star => {
+		for (const star of globalData.stars) {
+			// console.log(`Looking for D for [${bodyName}], now on [${star.name}]`);
 			if (star.name === bodyName) {
+				// console.log("--> Found it!");
 				return star.decl;
 			}
-		});
-		return null;
+		}
+		return null; // ie not found
 	};
 
 	function getGHAFor(bodyName, globalData) {
@@ -355,16 +359,16 @@
 			}
 			*/
 
-			// TODO All bodies...
+			// All bodies...
 			callbackContent = {
-				"decl": globalAstroData.sun.DEC.raw,
+				"decl": decBody,
 				"delta-t": globalAstroData.deltaT,
-				"gha": globalAstroData.sun.GHA.raw,
+				"gha": ghaBody,
 				"horizon-depression-minutes": horizonDip,
 				"horizontal-parallax-minutes": hp,
 				"hp": hp / 3600.0,
 				"instrumental-altitude": payload.cbd.instrumentalAltitude,
-				"lunar-distance": globalAstroData.lunarDist.raw,
+				// "lunar-distance": globalAstroData.lunarDist.raw,
 				"observed-altitude-degrees": payload.cbd.instrumentalAltitude + (totalCorrection / 60.0),
 				"estimated-altitude-degrees": sruBody.alt,
 				"intercept-degrees": sruBody.alt - (payload.cbd.instrumentalAltitude + (totalCorrection / 60.0)),
@@ -374,6 +378,9 @@
 				"semi-diameter-minutes": sd / 60.0,
 				"total-correction-minutes": totalCorrection,
 				"z": sruBody.Z
+			}
+			if (payload.cbd.name === 'Sun') {
+				callbackContent["lunar-distance"] =  globalAstroData.lunarDist.raw;
 			}
 
 			callback(callbackContent);
@@ -462,16 +469,16 @@
 			}
 			*/
 
-			// TODO All bodies...
+			// All bodies...
 			callbackContent = {
-				"decl": globalAstroData.sun.DEC.raw,
+				"decl": decBody,
 				"delta-t": globalAstroData.deltaT,
-				"gha": globalAstroData.sun.GHA.raw,
+				"gha": ghaBody,
 				"horizon-depression-minutes": horizonDip,
 				"horizontal-parallax-minutes": hp,
 				"hp": hp / 3600.0,
 				"instrumental-altitude": sruBody.alt - (totalCorrection / 60.0),
-				"lunar-distance": globalAstroData.lunarDist.raw,
+				// "lunar-distance": globalAstroData.lunarDist.raw,
 				"observed-altitude-degrees": sruBody.alt,
 				"parallax-minutes": hp / 60.0,
 				"refraction-minutes": refraction,
@@ -479,6 +486,9 @@
 				"semi-diameter-minutes": sd / 60.0,
 				"total-correction-minutes": totalCorrection,
 				"z": sruBody.Z
+			}
+			if (payload.cbd.name === 'Sun') {
+				callbackContent["lunar-distance"] =  globalAstroData.lunarDist.raw;
 			}
 
 			callback(callbackContent);
