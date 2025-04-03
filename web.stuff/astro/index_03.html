@@ -12,6 +12,12 @@
 	<link rel="icon" type="image/gif" href="./pix/sextant.gif">
 	<link rel="stylesheet" href="./css/stylesheet.css">
 	<style type="text/css">
+		.bg-img {
+			position: relative;
+			width: 100%;
+			height: 100%;
+			background: radial-gradient(at top, rgba(255, 255, 255, 0.25) 20%, rgba(1, 67, 114, 0.20) 55%), url("./pix/dacron.gif");
+		}
 		.result-style {
 			margin: 10px;
 			max-height: 200px;
@@ -683,7 +689,7 @@
 
 	</script>
 </head>
-<body>
+<body class="bg-img">
 	<dialog id="about-dialog" class="help-dialog" style="color: cyan;">
 		<div class="dialog-header">
 			<table width="100%">
