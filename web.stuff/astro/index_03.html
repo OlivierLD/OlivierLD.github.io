@@ -39,7 +39,6 @@
 			font-size: 48px;
 			font-weight: 700;
 		}
-
 		.dialog-header-close {
 			float: right;
 			font-size: 3rem;
@@ -48,6 +47,10 @@
 			color: cyan;
 			cursor: pointer;
 			text-shadow: 5px 5px 10px rgb(78, 39, 39), 0 0 25px white, 0 0 7px cyan;
+		}
+		.help-icon:hover {
+			cursor: pointer;
+			box-shadow: 5px 5px 10px rgb(78, 39, 39), 0 0 25px white, 0 0 7px cyan;
 		}
 	</style>
 	<!-- Scripts -->
@@ -735,9 +738,9 @@
 	<table width="100%">
 		<tr>
 			<td><h1 id="title-01">Sight Reduction</h1></td>
-			<td><a href="javascript:void(0)" onclick="switchLanguage();"><image id="lang-flag" src="./pix/france.gif" alt="French Flag" title="En Fran&ccedil;ais" style="width: 27px; margin-left: 30px;"></image></a></td>
+			<td><a href="javascript:void(0)" onclick="switchLanguage();"><image id="lang-flag" class="help-icon" src="./pix/france.gif" alt="French Flag" title="En Fran&ccedil;ais" style="width: 27px; margin-left: 30px;"></image></a></td>
 			<td style="text-align: right; padding-right: 20px;">
-				<img src="./pix/drowning.svg" style="width: 38px;" id="whatzat" title="Heeeeeeelp !!" onclick="showAboutDialog();"/>
+				<img src="./pix/drowning.svg" class="help-icon" style="width: 38px;" id="whatzat" title="Heeeeeeelp !!" onclick="showAboutDialog();"/>
 			</td>
 			<td><img src="./pix/sextant.gif" alt="Sextant" style="background-color: white; padding: 10px; border-radius: 50%; border: 1px solid cyan;"></td>
 		</tr>
