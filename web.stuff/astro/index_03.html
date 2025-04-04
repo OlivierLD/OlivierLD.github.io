@@ -1107,8 +1107,11 @@ let translate = (lang) => {
 	document.getElementById('month-12').innerHTML = (lang === 'FR') ? 'D&eacute;c' : 'Dec';
 
 	document.getElementById('button-now').innerHTML = (lang === 'FR') ? 'Heure actuelle' : 'Now';
+	document.getElementById('button-now').title = (lang === 'FR') ? 'Met la valeur de la date à celle de la date actuelle' : 'Set date value to current time';
 	document.getElementById('button-calc').innerHTML = (lang === 'FR') ? 'Calcul' : 'Calculate';
+	document.getElementById('button-calc').title = (lang === 'FR') ? 'Correction de la hauteur' : 'Sight Reduction';
 	document.getElementById('button-reverse').innerHTML = (lang === 'FR') ? 'Inverse' : 'Reverse';
+	document.getElementById('button-reverse').title = (lang === 'FR') ? 'Calcule la hauteur du sextant à votre position  pour la date donnée' : 'Calculate the Sextant elevation for your time and position';
 
 	// Lang swicth
 	document.getElementById('lang-flag').src = (lang === 'FR') ? "./pix/us_uk_flag.png" : "./pix/france.gif";	
