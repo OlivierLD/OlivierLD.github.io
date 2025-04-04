@@ -776,18 +776,18 @@
 						 style="width: 40px; text-align: center;"
 						 value="01"/>
 			<select id="calendar-month-01">
-				<option value="01" selected>Jan</option>
-				<option value="02">Feb</option>
-				<option value="03">Mar</option>
-				<option value="04">Apr</option>
-				<option value="05">May</option>
-				<option value="06">Jun</option>
-				<option value="07">Jul</option>
-				<option value="08">Aug</option>
-				<option value="09">Sep</option>
-				<option value="10">Oct</option>
-				<option value="11">Nov</option>
-				<option value="12">Dec</option>
+				<option value="01" id="month-01" selected>Jan</option>
+				<option value="02" id="month-02">Feb</option>
+				<option value="03" id="month-03">Mar</option>
+				<option value="04" id="month-04">Apr</option>
+				<option value="05" id="month-05">May</option>
+				<option value="06" id="month-06">Jun</option>
+				<option value="07" id="month-07">Jul</option>
+				<option value="08" id="month-08">Aug</option>
+				<option value="09" id="month-09">Sep</option>
+				<option value="10" id="month-10">Oct</option>
+				<option value="11" id="month-11">Nov</option>
+				<option value="12" id="month-12">Dec</option>
 			</select>
 			<input type="number"
 				   id="calendar-year-01"
@@ -1085,6 +1085,20 @@ let translate = (lang) => {
 
 	document.getElementById('label-body-sun').innerHTML = (lang === 'FR') ? 'Soleil' : 'Sun';
 	document.getElementById('label-body-moon').innerHTML = (lang === 'FR') ? 'Lune' : 'Moon';
+
+	// months
+	document.getElementById('month-01').innerHTML = (lang === 'FR') ? 'Jan' : 'Jan';
+	document.getElementById('month-02').innerHTML = (lang === 'FR') ? 'F&eacute;v' : 'Feb';
+	document.getElementById('month-03').innerHTML = (lang === 'FR') ? 'Mar' : 'Mar';
+	document.getElementById('month-04').innerHTML = (lang === 'FR') ? 'Avr' : 'Apr';
+	document.getElementById('month-05').innerHTML = (lang === 'FR') ? 'Mai' : 'May';
+	document.getElementById('month-06').innerHTML = (lang === 'FR') ? 'Juin' : 'Jun';
+	document.getElementById('month-07').innerHTML = (lang === 'FR') ? 'Juil' : 'Jul';
+	document.getElementById('month-08').innerHTML = (lang === 'FR') ? 'Ao&ucirc;t' : 'Aug';
+	document.getElementById('month-09').innerHTML = (lang === 'FR') ? 'Sep' : 'Sep';
+	document.getElementById('month-10').innerHTML = (lang === 'FR') ? 'Oct' : 'Oct';
+	document.getElementById('month-11').innerHTML = (lang === 'FR') ? 'Nov' : 'Nov';
+	document.getElementById('month-12').innerHTML = (lang === 'FR') ? 'D&eacute;c' : 'Dec';
 
 	document.getElementById('button-now').innerHTML = (lang === 'FR') ? 'Heure actuelle' : 'Now';
 	document.getElementById('button-calc').innerHTML = (lang === 'FR') ? 'Calcul' : 'Calculate';
