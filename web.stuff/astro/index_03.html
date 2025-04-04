@@ -773,7 +773,7 @@
 						 id="calendar-day-01"
 						 placeholder="DD"
 						 title="Day to set"
-						 style="width: 40px; text-align: center;"
+						 style="width: 45px; text-align: center;"
 						 value="01"/>
 			<select id="calendar-month-01">
 				<option value="01" id="month-01" selected>Jan</option>
@@ -793,7 +793,7 @@
 				   id="calendar-year-01"
 				   placeholder="YYYY"
 				   title="Year to set"
-				   style="width: 60px; text-align: center;"
+				   style="width: 70px; text-align: center;"
 				   value="1970"/>
 			<input type="text"
 				   id="watch-value-01"
@@ -897,10 +897,10 @@
 						<select id="celestial-body">
 							<option id="label-body-sun" value="Sun" selected>Sun</option>
 							<option id="label-body-moon" value="Moon">Moon</option>
-							<option value="Venus">Venus</option>
+							<option id="label-body-venus" value="Venus">Venus</option>
 							<option value="Mars">Mars</option>
 							<option value="Jupiter">Jupiter</option>
-							<option value="Saturn">Saturn</option>
+							<option id="label-body-saturn" value="Saturn">Saturn</option>
 							<option value="Acamar">Acamar</option>
 							<option value="Achenar">Achenar</option>
 							<option value="Acrux">Acrux</option>
@@ -977,7 +977,7 @@
 								id="sextant-degrees"
 								placeholder="Deg"
 								title="Elevation degrees"
-								style="width: 40px; text-align: center;"
+								style="width: 50px; text-align: center;"
 								min="0"
 								max="90"
 								step="1"
@@ -1085,6 +1085,8 @@ let translate = (lang) => {
 
 	document.getElementById('label-body-sun').innerHTML = (lang === 'FR') ? 'Soleil' : 'Sun';
 	document.getElementById('label-body-moon').innerHTML = (lang === 'FR') ? 'Lune' : 'Moon';
+	document.getElementById('label-body-venus').innerHTML = (lang === 'FR') ? 'V&eacute;nus' : 'Venus';
+	document.getElementById('label-body-saturn').innerHTML = (lang === 'FR') ? 'Saturne' : 'Saturn';
 
 	// months
 	document.getElementById('month-01').innerHTML = (lang === 'FR') ? 'Jan' : 'Jan';
