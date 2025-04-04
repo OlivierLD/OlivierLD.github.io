@@ -624,7 +624,7 @@
 			// Line 8
 			fmtDisplay += ("<tr><td style='text-align: right;' colspan='3'>" + translator(EST_ALT) + "</td><td style='text-align: left;' colspan='3'>" + decToSex(result['estimated-altitude-degrees']) + "</td></tr>");
 			// Line 9
-			fmtDisplay += ("<tr><td style='text-align: right;' colspan='3'>" + translator(INTERCEPT) + "</td><td style='text-align: left;' colspan='3'>" + Math.abs(result['intercept-degrees'] * 60).toFixed(2) + "' " + (result['intercept-degrees'] < 0 ? translator(AWAY) : translator(TOWARDS)) + " " + translateBodyName(body) + "</td></tr>");
+			fmtDisplay += ("<tr><td style='text-align: right;' colspan='3'>" + translator(INTERCEPT) + "</td><td style='text-align: left;' colspan='3'>" + Math.abs(result['intercept-degrees'] * 60).toFixed(2) + "' " + (result['intercept-degrees'] < 0 ? translator(TOWARDS) : translator(AWAY)) + " " + translateBodyName(body) + "</td></tr>");
 
 			fmtDisplay += ("</table>");
 			fmtDisplay += ("<hr/>");
