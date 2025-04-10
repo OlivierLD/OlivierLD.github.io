@@ -172,6 +172,18 @@ let refresh = () => {
 
       let tanZ = Math.sin(Math.toRadians(decimalAHL)) / ((Math.cos(Math.toRadians(decimalLat)) * Math.tan(Math.toRadians(decimalDec))) - (Math.sin(Math.toRadians(decimalLat)) * Math.cos(Math.toRadians(decimalAHL))));
       let zDirect = Math.abs(Math.atan(tanZ));
+
+      if (false) { // Display details on the console...
+        console.log(`sin(AHL): ${Math.sin(Math.toRadians(decimalAHL))}`);
+        console.log(`cos(L): ${Math.cos(Math.toRadians(decimalLat))}`);
+        console.log(`tan(D): ${Math.tan(Math.toRadians(decimalDec))}`);
+        console.log(`sin(L): ${Math.sin(Math.toRadians(decimalLat))}`);
+        console.log(`cos(AHL): ${Math.cos(Math.toRadians(decimalAHL))}`);
+        console.log(`cos(L) * tan(D): ${Math.cos(Math.toRadians(decimalLat)) * Math.tan(Math.toRadians(decimalDec))}`);
+        console.log(`sin(L) * cos(AHL): ${Math.sin(Math.toRadians(decimalLat)) * Math.cos(Math.toRadians(decimalAHL))}`);
+        console.log(`tanZ: ${tanZ}`);
+      }
+
       document.getElementById("direct-z").innerText = decToSex(Math.toDegrees(zDirect));
 
       // Now thw manual ones.
@@ -192,7 +204,8 @@ let refresh = () => {
       document.getElementById("log-cos-dec").innerText = Math.log10(Math.cos(Math.toRadians(Math.abs(decimalDec)))).toFixed(5);
 
       document.getElementById("ahl-value").innerText = `${document.getElementById('ahl-deg').value}\u00b0${document.getElementById('ahl-min').value}`;
-      document.getElementById("log-cos-ahl").innerText = Math.log10(Math.cos(Math.toRadians(Math.abs(decimalAHL)))).toFixed(5);
+      let cosAHL = Math.cos(Math.toRadians(Math.abs(decimalAHL)));
+      document.getElementById("log-cos-ahl").innerText = Math.log10(cosAHL).toFixed(5);
 
       document.getElementById("log-sin-l-value").innerText = document.getElementById("log-sin-l").innerText;
       document.getElementById("log-sin-d-value").innerText = document.getElementById("log-sin-dec").innerText;
@@ -211,7 +224,7 @@ let refresh = () => {
 
       document.getElementById("log-cos-l-cos-d-cos-ahl").innerText = (parseFloat(document.getElementById("log-cos-l").innerText) + 
                                                                       parseFloat(document.getElementById("log-cos-dec").innerText) + 
-                                                                      parseFloat(document.getElementById("log-cos-ahl").innerText)).toFixed(6);
+                                                                      (cosAHLSign * parseFloat(document.getElementById("log-cos-ahl").innerText))).toFixed(6);
                                                                      
       document.getElementById("log-cos-l-cos-d-cos-ahl-value").innerText = document.getElementById("log-cos-l-cos-d-cos-ahl").innerText;
       document.getElementById("cos-l-cos-d-cos-ahl").innerText = Math.pow(10, parseFloat(document.getElementById("log-cos-l-cos-d-cos-ahl").innerText)).toFixed(6);

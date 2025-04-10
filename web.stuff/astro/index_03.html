@@ -382,6 +382,9 @@
 
 				estimated-altitude-degrees
 				intercept-degrees
+				
+				// added LHA
+				lha
 			}
 			*/
 
@@ -403,7 +406,8 @@
 				"sd": sd / 3600.0,
 				"semi-diameter-minutes": sd / 60.0,
 				"total-correction-minutes": totalCorrection,
-				"z": sruBody.Z
+				"z": sruBody.Z,
+				"lha": ghaBody + payload.estimatedPosition.longitude
 			}
 			if (payload.cbd.name === 'Sun') {
 				callbackContent["lunar-distance"] =  globalAstroData.lunarDist.raw;
@@ -492,6 +496,8 @@
 				sd: 0.2689926565141308
 				semi-diameter-minutes: 16.139559390847847
 				total-correction-minutes: 11.871572450766122
+				// added lha
+				lha: 84.8538302416593
 			}
 			*/
 
@@ -511,7 +517,8 @@
 				"sd": sd / 3600.0,
 				"semi-diameter-minutes": sd / 60.0,
 				"total-correction-minutes": totalCorrection,
-				"z": sruBody.Z
+				"z": sruBody.Z,
+				"lha": ghaBody + payload.estimatedPosition.longitude
 			}
 			if (payload.cbd.name === 'Sun') {
 				callbackContent["lunar-distance"] =  globalAstroData.lunarDist.raw;
@@ -599,6 +606,10 @@
 			fmtDisplay += ("<tr><td style='text-align: right;'>" + translator(GHA) + "</td><td style='text-align: right;'>" + decToSex(result['gha']) + "</td>");
 			fmtDisplay += (     "<td style='text-align: right;'>" + translator(HORIZON_DIP) + "</td><td style='text-align: right;'>" + (- result['horizon-depression-minutes']).toFixed(2) + "'</td>");
 			fmtDisplay += (     "<td style='text-align: right;'>" + translator(PARALLAX) + "</td><td style='text-align: right;'>" + result['parallax-minutes'].toFixed(2) + "'</td></tr>");
+			// Line 1bis
+			fmtDisplay += ("<tr><td style='text-align: right;'>" + translator(LHA) + "</td><td style='text-align: right;'>" + decToSex(result['lha']) + "</td>");
+			fmtDisplay += (     "<td style='text-align: right;'></td><td style='text-align: right;'></td>");
+			fmtDisplay += (     "<td style='text-align: right;'></td><td style='text-align: right;'></td></tr>");
 			// Line 2
 			fmtDisplay += ("<tr><td style='text-align: right;'>" + translator(DEC) + "</td><td style='text-align: right;'>" + decToSex(result['decl'], 'NS') + "</td>");
 			fmtDisplay += (     "<td style='text-align: right;'>" + translator(SEMI_DIAM) + "</td><td style='text-align: right;'>" + sdCorrected.toFixed(2) + "'</td>");
@@ -675,6 +686,10 @@
 			fmtDisplay += ("<tr><td style='text-align: right;'>" + translator(GHA) + "</td><td style='text-align: right;'>" + decToSex(result['gha']) + "</td>");
 			fmtDisplay += (     "<td style='text-align: right;'>" + translator(HORIZON_DIP) + "</td><td style='text-align: right;'>" + (- result['horizon-depression-minutes']).toFixed(2) + "'</td>");
 			fmtDisplay += (     "<td style='text-align: right;'>" + translator(PARALLAX) + "</td><td style='text-align: right;'>" + result['parallax-minutes'].toFixed(2) + "'</td></tr>");
+			// Line 1bis
+			fmtDisplay += ("<tr><td style='text-align: right;'>" + translator(LHA) + "</td><td style='text-align: right;'>" + decToSex(result['lha']) + "</td>");
+			fmtDisplay += (     "<td style='text-align: right;'></td><td style='text-align: right;'></td>");
+			fmtDisplay += (     "<td style='text-align: right;'></td><td style='text-align: right;'></td></tr>");
 			// Line 2
 			fmtDisplay += ("<tr><td style='text-align: right;'>" + translator(DEC) + "</td><td style='text-align: right;'>" + decToSex(result['decl'], 'NS') + "</td>");
 			fmtDisplay += (     "<td style='text-align: right;'>" + translator(SEMI_DIAM) + "</td><td style='text-align: right;'>" + sdCorrected.toFixed(2) + "'</td>");
@@ -1144,6 +1159,7 @@ const INTERCEPT = 18;
 const AWAY = 19;
 const TOWARDS = 20;
 const WITH_DELTA_T = 21;
+const LHA = 22;
 
 let translator = (id) => {
 	switch (id) {
@@ -1153,6 +1169,8 @@ let translator = (id) => {
 			return (langToUse === 'FR') ? 'Corrections :' : 'Correction:' ;
 		case GHA:
 			return (langToUse === 'FR') ? 'AHvo' : 'GHA' ;
+		case LHA:
+			return (langToUse === 'FR') ? 'AHL' : 'LHA' ;
 		case DEC:
 			return (langToUse === 'FR') ? 'D&eacute;clinaison' : 'Dec' ;
 		case SEMI_DIAM:
