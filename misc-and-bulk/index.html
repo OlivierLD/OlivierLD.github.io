@@ -16,6 +16,8 @@
     * {
         font-family: "Source Code Pro", "Courier New", "Helvetica Neue", "Lato", Verdana, Helvetica, Geneva, sans-serif;
         color: navy;
+        font-size: 20px;
+        font-weight: bold;
         /* background-color: silver; */
     }
     .list-link {
@@ -29,6 +31,27 @@
         font-weight: bold;
         cursor: pointer;
         text-shadow: 4px 4px 8px black, 0 0 25px white, 0 0 10px cyan;
+    }
+    /* If shown in the first place */
+    .sub-section {
+      visibility: visible;
+      opacity: 1;
+      height: auto;
+      transition: opacity 0.5s linear, height 1.5s ease-in-out;
+      margin-left: 24px;
+    }
+
+    .list-link {
+      color: white;
+      font-size: 20px;
+      text-shadow: 2px 2px 4px black, 0 0 25px white, 0 0 10px orange;
+      text-decoration: none;
+    }
+    a.list-link:hover {
+      color: cyan;
+      font-weight: bold;
+      cursor: pointer;
+      text-shadow: 4px 4px 8px black, 0 0 25px white, 0 0 10px cyan;
     }
     </style>
 </head>
@@ -216,7 +239,35 @@
          + today.getDate() + ", " + today.getFullYear();
    }
 
- </script>
+   let showSection = (id) => {
+    //document.getElementById(id).style.display = 'inline-block';
+      document.getElementById(id).style.visibility = 'visible';
+      document.getElementById(id).style.opacity = 1;
+      document.getElementById(id).style.height = 'auto';
+    };
+  
+    let hideSection = (id) => {
+    //document.getElementById(id).style.display = 'none';
+      document.getElementById(id).style.visibility = 'hidden';
+      document.getElementById(id).style.opacity = 0;
+      document.getElementById(id).style.height = 0;
+    };
+  
+    const COLLAPSED_LINE = "&#9658;&nbsp;";
+    const EXPANDED_LINE = "&#9660;&nbsp;";
+  
+    let showHideSection = (obj, id) => {
+      let innerSpan = obj.querySelector('.expand-collapse');
+      if (document.getElementById(id).style.visibility === 'visible' || document.getElementById(id).style.visibility === '') {  // Then hide it
+        innerSpan.innerHTML = COLLAPSED_LINE;
+        hideSection(id);
+      } else { // Show it
+        innerSpan.innerHTML = EXPANDED_LINE;
+        showSection(id);
+      }
+    };
+  
+  </script>
  
  <rect id="backGround" x="50" y="50" width="300" height="200" fill="black" stroke="#444" stroke-width="5"/>
  <rect id="backGround" x="53" y="53" width="294" height="194" fill="none" stroke="#fff" stroke-width="1"/>
@@ -256,6 +307,21 @@
       <li><a class="list-link" href="https://olivierld.w3spaces.com/" target="W3S">(My) W3 Space</a></li>
       <li><a class="list-link" href="https://www.mathieurivrin.com/" target="Mathieu">Mathieu Rivrin - Photographe de Bretagne</a></li>
     </ul>
+
+    <h3><a href="javascript:void(0)" class="list-link" title="Sailing, Navigation, several links" onclick="showHideSection(this, 'sailing-navigating');"><span class="expand-collapse">&#9660;&nbsp;</span>Sailing, Navigating, ...</a></h3>
+    <div id="sailing-navigating" class="sub-section">
+        <ul>
+            <li><a class="list-link" href="https://nakedhungrytraveller.com.au/considering-the-cook-islands/" target="cook" class="shadow-menu">Naked Hungry Traveler, Cook Islands</a></li>
+            <li><a class="list-link" href="https://www.youtube.com/watch?v=pez7fzf6ZCQ" target="ylc" class="shadow-menu">Hommage &agrave; Yvon Le Corre</a></li>
+            <li><a class="list-link" href="https://interstices.info/naviguer-comme-les-polynesiens/" target="navigation" class="shadow-menu">Naviguer comme les Polyn&eacute;siens</a></li>
+            <li><a class="list-link" href="https://www.persee.fr/doc/jso_0300-953x_1972_num_28_36_2384" target="navigation" class="shadow-menu">Les Polyn&eacute;siens et la Navigation Astronomique</a></li>
+            <li><a class="list-link" href="https://www.tahiti-infos.com/Navigation-ancestrale-les-polynesiens-avaient-deja-la-science_a88549.html" target="navigation" class="shadow-menu">Les Polyn&eacute;siens avaient d&eacute;j&agrave; la science</a></li>
+            <li><a class="list-link" href="https://www.celnav.de/" target="navigation" class="shadow-menu">Henning Umland</a>'s home page</li>
+            <li><a class="list-link" href="https://voilepartageedelarade.bzh/" target="navigation" class="shadow-menu">Voile partag&eacute;e de la Rade</a></li>                
+            <li><a class="list-link" href="https://www.yrvind.com/" target="navigation" class="shadow-menu">Sven Yrvind</a>'s web site</li>
+            <li><a class="list-link" href="https://www.classicboat.co.uk/articles/history/shackleton-epic-the-complete-story-of-the-greatest-small-boat-voyage-of-all-time/" target="navigation" class="shadow-menu">Shackleton Epic</a></li>
+        </ul>
+    </div>
 
 </body>  
 </html>
