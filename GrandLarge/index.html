@@ -1,0 +1,2204 @@
+<!DOCTYPE html>
+<!--
+  HTML5, CSS3, ES6
+  Oliv's home page.
+ +-->
+<html lang="en-US">
+<head>
+  <title>Grand Large</title>
+  <link rel="icon" type="image/jpg" href="palm.04.jpg">
+  <link rel="stylesheet" href="css/stylesheet.css" type="text/css"/>
+  <style>
+
+:root {
+  --slide-width: 500px;
+  --slide-height: 400px;
+  --expanded-nav-width: 450px;
+  --slider-scale: 0.5;
+}
+
+@font-face {
+    font-family: "AlegrayaSans";
+    /*  src: url(fonts/ds-digi.ttf) format("truetype"); */
+    src: url(alegreya-sans/AlegreyaSans-Medium.ttf) format("truetype");
+}
+
+.background {
+  /*color: #999999;*/
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  top: 0;
+  left: 0;
+  z-index: -100;
+}
+.bg-data {
+  font-family: "Courier New", sans-serif;
+  font-size: 256px;
+  font-weight: bold;
+  color: lightskyblue;
+  text-align: center;
+  margin-top: 125px;
+  margin-left: 20px;
+}
+
+html {
+  display: table;
+  width: 100%;
+  height: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  /*font-family: "Lato", sans-serif;*/
+  /*font-family: "AlegrayaSans";*/
+  font-family: "Open Sans", "DejaVu Sans", sans-serif;
+  font-weight: 300;
+  color: orange;
+  text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px silver;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Open Sans", "DejaVu Sans", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.active-link {
+  color: white;
+  font-size: 20px;
+  text-shadow: 2px 2px 4px black, 0 0 25px white, 0 0 10px orange;
+}
+
+.bold-link {
+   font-weight: bold;
+}
+
+.sidenav:hover {
+  font-size: 24px;
+}
+
+.no-shadow {
+  text-shadow: none;
+}
+
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  /*  background-color: rgba(0, 0, 0, 0.6); */
+  background-image: linear-gradient(rgba(0, 0, 255, 0.6), rgba(0, 0, 0, 0.6));
+  overflow-x: hidden;
+  transition: 1.0s;
+  padding-top: 60px;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 18px;
+  color: silver; /* #818181; */
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover, .offcanvas a:focus {
+  color: white; /* #f1f1f1; */
+  /*cursor: not-allowed;*/
+}
+
+a.no-click {
+  color: white; /* #f1f1f1; */
+  cursor: not-allowed;
+}
+
+#close-nav-button:hover {
+  color: cyan;
+  cursor: pointer;
+}
+
+a.active-link:hover {
+  color: cyan;
+  cursor: pointer;
+}
+
+span.expand-collapse:hover {
+  color: cyan;
+  cursor: pointer;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 24px;
+  margin-left: 50px;
+  margin-bottom: 20px;
+}
+
+.sub-section {
+  /* display: none; */
+  visibility: hidden;
+  opacity: 0;
+  height: 0;
+  transition: opacity 0.5s linear, height 0.5s ease-in-out;
+  margin-left: 24px;
+}
+
+.sub-section-desc {
+  margin-left: 30px;
+  font-size: 14px;
+  color: orange;
+  font-style: italic;
+  text-shadow: 2px 2px 4px black, 0 0 25px white, 0 0 7px cyan;
+}
+
+.enhanced {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  margin-bottom: 5px;
+  margin-left: 7px;
+  font-size: 16px;
+  color: orange;
+  font-style: italic;
+  font-weight: bold;
+  text-shadow: 4px 4px 8px navy, 0 0 25px blue, 0 0 7px cyan;
+}
+
+#wrap {
+  position: fixed;
+  left: 0;
+  width: 100%;
+  top: 40px;
+  height: 100%;
+}
+
+.w3-modal {
+  z-index: 3;
+  display: block;
+  transform: scaleX(0);
+  padding-top: 100px;
+  padding-left: 200px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  /*width: 100%;*/
+  /*height: 100%;*/
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.0);
+  transition: transform 0.5s ease-out;
+}
+
+.w3-full-page-modal {
+  z-index: 10;
+  display: block;
+  transform: scaleY(0);
+  padding-top: 0;
+  padding-left: 0;
+  position: fixed;
+  left: 0;
+  top: 0;
+  max-height: 100%; /* This is to allow the content to scroll in a modal dialog */
+  /*width: 100%;*/
+  /*height: 100%;*/
+  overflow: auto;
+  overflow-y: auto;
+  /* background-color: rgb(0, 0, 0); */
+  /* background-color: rgba(0, 0, 0, 0.0); */
+  transition: transform 0.5s ease-out;
+  transform-origin: top;
+}
+
+.w3-modal-content {
+  margin: auto;
+  background-color: #000;
+  position: relative;
+  padding: 0;
+  outline: 0;
+  width: auto;
+}
+
+.floating-menu {
+  z-index: 3;
+  display: block;
+  transform: scaleY(0);
+  margin-top: 80px;
+  margin-right: 50px;
+  padding-right: 30px;
+  position: fixed;
+  right: 0;
+  top: 0;
+  border: 2px solid cyan;
+  border-radius: 5px;
+  /*width: 100%;*/
+  /*height: 100%;*/
+  overflow: auto;
+  background-color: rgba(255, 255, 255, 0.5);
+  color: darkblue;
+  transition: transform 0.5s ease-out;
+  transform-origin: top;
+}
+
+.floating-menu a:link, .floating-menu a:visited {
+  color: darkblue;
+  text-decoration: none;
+}
+.floating-menu a:hover {
+  color: navy;
+  text-shadow: 2px 2px 4px grey, 0 0 25px white, 0 0 7px cyan;
+}
+.floating-menu a:active {
+  color: DarkOrange;
+  text-shadow: 2px 2px 4px grey, 0 0 25px white, 0 0 7px cyan;
+}
+
+.shadow-menu a:link, .shadow-menu a:visited {
+  color: darkblue;
+  text-decoration: none;
+}
+.shadow-menu a:hover {
+  color: navy;
+  text-shadow: 2px 2px 4px grey, 0 0 25px white, 0 0 7px cyan;
+}
+.shadow-menu a:active {
+  color: DarkOrange;
+  text-shadow: 2px 2px 4px grey, 0 0 25px white, 0 0 7px cyan;
+}
+
+.close-icon {
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin-top: 2px;
+  margin-right: 7px;
+  cursor: pointer;
+}
+
+.close-icon:hover {
+  text-shadow: 2px 2px 4px grey, 0 0 25px white, 0 0 7px cyan;
+}
+
+.bigger-close-icon {
+  font-size: 40px;
+}
+
+.bottom-text {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  margin-bottom: 5px;
+  margin-left: 7px;
+  color: white;
+  text-shadow: 2px 2px 4px black, 0 0 25px white, 0 0 10px orange;
+}
+
+.image-container {
+  border: 2px solid cyan;
+  border-radius: 5px;
+}
+
+.marquee-01 {
+  --bg-color-from: rgba(0, 0, 0, 0);
+  --bg-color-to: rgba(0, 0, 0, 0);
+  --fg-color-from: lime;
+  --fg-color-to: cyan;
+}
+
+.the-slides {
+  /*display: none;*/
+  height: var(--slide-height);
+  grid-area: center;
+  margin: auto;
+  transition: max-height 1s ease-out, opacity 0.5s ease-out, transform 0.5s ease-out;
+  opacity: 0;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.25);
+  max-width: 0;
+  transform: scaleX(0);
+  overflow: hidden;
+}
+
+.visible-slide {
+  opacity: 1;
+  max-width: var(--slide-width);
+  transform: scaleX(1);
+}
+
+/* Slideshow container */
+.slideshow-container {
+  max-width: calc(var(--slide-width) + 100px);
+  margin: auto;
+  /*position: inherit;*/
+  margin-top: -150px;
+  text-align: center;
+  display: grid;
+  grid-template-areas:
+      'left center right';
+  grid-gap: 0;
+  padding: 0;
+}
+
+/* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  margin: auto;
+  padding: 8px;
+  height: 40px;
+  width: 40px;
+  color: inherit; /* white; */
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 20px;
+  grid-area: left;
+}
+
+/* Position the "next button" to the right */
+.next {
+  grid-area: right;
+}
+
+.prev:hover, .next:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+  border: 1px solid orange;
+  /*background-color: #717171;*/
+}
+
+/* Caption text */
+.text {
+  color: inherit; /*#f2f2f2; */
+  font-size: 15px;
+  padding: 8px 12px;
+  position: relative;
+  bottom: 35px;
+  width: 100%;
+  text-align: left;
+  grid-area: center;
+}
+
+/* Number text (1/3 etc) */
+.number-text {
+  color: inherit; /*  #f2f2f2; */
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  grid-area: center;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+  cursor: pointer;
+  height: 13px;
+  width: 13px;
+  margin: 0 0;
+  background-color: rgba(0, 0, 0, 0.5); /*#bbb;*/
+  border-radius: 50%;
+  display: inline-block;
+  border: 1px solid cyan;
+  transition: background-color 0.6s ease;
+}
+
+.active, .dot:hover {
+  /*background-color: cyan; #717171;*/
+  border: 1px solid cyan;
+  background-image: radial-gradient(blue, cyan);
+}
+
+.dots {
+  position: relative;
+  text-align: center;
+  /* bottom: -135px; */
+  bottom: -230px;
+  margin: auto;
+  grid-area: center;
+}
+
+/* Fading animation */
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+  from {
+    opacity: .4
+  }
+  to {
+    opacity: 1
+  }
+}
+
+@keyframes fade {
+  from {
+    opacity: .4
+  }
+  to {
+    opacity: 1
+  }
+}
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: var(--slide-width)) {
+  .prev, .next, .text {
+    font-size: 11px
+  }
+}
+
+.display {
+  width: var(--slide-width);
+  height: var(--slide-height);
+  border: 4px solid; /* Comment 2 lines to remove the frame */
+  border-radius: 10px;
+  display: grid;
+  grid-template-areas:
+      'top' 'middle' 'bottom';
+  grid-gap: 0;
+  padding: 0;
+  /* Use those for swipe effect */
+  position: relative;
+  left: 0;
+}
+
+.display-data {
+  grid-area: middle;
+  text-align: center;
+  vertical-align: baseline;
+  margin: auto;
+  color: inherit;
+  font-size: 48px;
+  font-weight: bold;
+}
+
+.display-data-2 {
+  grid-area: middle;
+  text-align: right;
+  /*vertical-align: baseline;*/
+  margin: auto;
+  color: inherit;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.display-data-centered {
+  text-align: center;
+}
+
+.display-unit {
+  grid-area: bottom;
+  text-align: center;
+  vertical-align: baseline;
+  color: inherit;
+  font-size: 20px;
+}
+
+.display-title {
+  grid-area: top;
+  text-align: center;
+  vertical-align: bottom;
+  padding-left: 0;
+  align-self: end;
+  color: inherit;
+  font-size: 14px;
+}
+
+/* For the switch (slider) */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: calc(var(--slider-scale) * 60px);
+  height: calc(var(--slider-scale) * 34px);
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: calc(var(--slider-scale) * 26px);
+  width: calc(var(--slider-scale) * 26px);
+  left: calc(var(--slider-scale) * 4px);
+  bottom: calc(var(--slider-scale) * 4px);
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196f3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196f3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(calc(var(--slider-scale) * 26px));
+  -ms-transform: translateX(calc(var(--slider-scale) * 26px));
+  transform: translateX(calc(var(--slider-scale) * 26px));
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: calc(var(--slider-scale) * 34px);
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+/* Switch grid */
+.switch-container {
+  display: grid;
+  grid-template-columns: calc(var(--slider-scale) * 80px) 200px;
+  width: 500px;
+}
+.switch-element {
+  place-self: flex-start;
+}
+
+button {
+  padding: 4px 20px;
+  /* give the background a gradient */
+  background: #ffae00; /* fallback for browsers that don't support gradients */
+  background: -webkit-linear-gradient(top, #ffae00, #d67600);
+  background: -moz-linear-gradient(top, #ffae00, #d67600);
+  background: -o-linear-gradient(top, #ffae00, #d67600);
+  background: linear-gradient(top, #ffae00, #d67600);
+  border: 2px outset #dad9d8;
+  /* style the text */
+  font-family: Lato, Verdana, Andika, Arial, sans-serif; /* Andkia is available at http://www.google.com/webfonts/specimen/Andika */
+  font-size: 0.8em;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #fff;
+  text-shadow: 0 1px 10px #000;
+  /* add to small curve to the corners of the button */
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  border-radius: 15px;
+  /* give the button a drop shadow */
+  -webkit-box-shadow: rgba(0, 0, 0, .55) 0 1px 6px;
+  -moz-box-shadow: rgba(0, 0, 0, .55) 0 1px 6px;
+  box-shadow: rgba(0, 0, 0, .55) 0 1px 6px;
+}
+
+/* NOW STYLE THE BUTTON'S HOVER STATE */
+button:hover, button:focus {
+  border: 2px solid #dad9d8;
+}
+
+.dialog-header {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.dialog-header-close {
+  float: right;
+}
+.dialog-header-close:hover {
+  color: cyan;
+  cursor: pointer;
+}
+
+.help-header:hover {
+  color: orangered;
+  font-size: 1.5em;
+}
+
+.smooth {
+    /*height: 0;*/
+    /*visibility: hidden;*/
+    /*opacity: 0;*/
+    /*transition: visibility 0.5s, height 0.5s, opacity 0.5s linear;*/
+    height: 0;
+    max-height: 0;
+    margin: auto;
+    /*transition: transform 0.5s, max-height 1s, height 1s;*/
+    transition: all 0.5s ease;
+    opacity: 0;
+    transform: scaleY(0);
+    transform-origin: top;
+    overflow: hidden;
+}
+
+.visible-div {
+    opacity: 1;
+    width: auto;
+    height: auto;
+    max-height: 1600px;
+    transform: scaleY(1);
+    margin-top: 5px;
+}
+
+#bg-title {
+  color: rgba(192, 192, 192, 0.5); 
+  margin-right: 120px; 
+  padding: 10px; 
+  font-style: italic; 
+  text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px silver; 
+  border: 1px solid silver; 
+  border-radius: 5px;
+  
+}
+#h2-title:hover, #kebab:hover, #hamburger:hover, #my-name:hover, #bg-title:hover {
+    color: cyan;
+}
+
+#bg-title:hover {  /* Extra for that one */
+  box-shadow: 5px 5px 5px rgba(0, 255, 255, 0.5);
+}
+
+.blink_me {
+  animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* @media screen and (max-height: 450px) { */
+@media screen and (width <= 1000px) {  
+  h1 {
+    font-size: 60px;
+  }
+
+  .sidenav {
+    padding-top: 15px;
+  }
+
+  .sidenav a {
+    font-size: 36px;
+  }
+}
+
+  </style>
+
+  <script type="text/javascript">
+// Date formatting
+
+// Provide month names
+Date.prototype.getMonthName = function () {
+    const month_names = [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December'
+    ];
+
+    return month_names[this.getMonth()];
+};
+
+// Provide month abbreviation
+Date.prototype.getMonthAbbr = function () {
+    const month_abbrs = [
+        'Jan',
+        'Feb',
+        'Mar',
+        'Apr',
+        'May',
+        'Jun',
+        'Jul',
+        'Aug',
+        'Sep',
+        'Oct',
+        'Nov',
+        'Dec'
+    ];
+
+    return month_abbrs[this.getMonth()];
+};
+
+// Provide full day of week name
+Date.prototype.getDayFull = function () {
+    const days_full = [
+        'Sunday',
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday'
+    ];
+    return days_full[this.getDay()];
+};
+
+// Provide full day of week name
+Date.prototype.getDayAbbr = function () {
+    const days_abbr = [
+        'Sun',
+        'Mon',
+        'Tue',
+        'Wed',
+        'Thur',
+        'Fri',
+        'Sat'
+    ];
+    return days_abbr[this.getDay()];
+};
+
+// Provide the day of year 1-365
+Date.prototype.getDayOfYear = function () {
+    let janFirst = new Date(this.getFullYear(), 0, 1);
+    return Math.ceil((this - janFirst) / 86400000);
+};
+
+// Provide the day suffix (st,nd,rd,th)
+Date.prototype.getDaySuffix = function () {
+    let d = this.getDate();
+    let sfx = ["th", "st", "nd", "rd"];
+    let val = d % 100;
+
+    return (sfx[(val - 20) % 10] || sfx[val] || sfx[0]);
+};
+
+// Provide Week of Year
+Date.prototype.getWeekOfYear = function () {
+    let janFirst = new Date(this.getFullYear(), 0, 1);
+    return Math.ceil((((this - janFirst) / 86400000) + janFirst.getDay() + 1) / 7);
+};
+
+// Provide if it is a leap year or not
+Date.prototype.isLeapYear = function () {
+    let yr = this.getFullYear();
+    if ((parseInt(yr, 10) % 4) === 0) {
+        if (parseInt(yr, 10) % 100 === 0) {
+            if (parseInt(yr, 10) % 400 !== 0) {
+                return false;
+            }
+            if (parseInt(yr, 10) % 400 === 0) {
+                return true;
+            }
+        }
+        if (parseInt(yr, 10) % 100 !== 0) {
+            return true;
+        }
+    }
+    if ((parseInt(yr, 10) % 4) !== 0) {
+        return false;
+    }
+};
+
+// Provide Number of Days in a given month
+Date.prototype.getMonthDayCount = function () {
+    const month_day_counts = [
+        31,
+        this.isLeapYear() ? 29 : 28,
+        31,
+        30,
+        31,
+        30,
+        31,
+        31,
+        30,
+        31,
+        30,
+        31
+    ];
+
+    return month_day_counts[this.getMonth()];
+};
+
+// format provided date into this.format format
+Date.prototype.format = function (dateFormat) {
+    // break apart format string into array of characters
+    dateFormat = dateFormat.split("");
+
+    let date = this.getDate(),
+        month = this.getMonth(),
+        hours = this.getHours(),
+        minutes = this.getMinutes(),
+        seconds = this.getSeconds(),
+        milli = this.getTime() % 1000,
+        tzName = this.toString().substring(this.toString().indexOf('(') + 1, this.toString().indexOf(')')),
+        tzOffset = -(this.getTimezoneOffset() / 60);
+
+    function lpad(s, w, len) {
+        let str = s;
+        while (str.length < len) {
+            str = w + str;
+        }
+        return str;
+    }
+
+    // get all date properties ( based on PHP date object functionality )
+    const date_props = {
+        d: date < 10 ? '0' + date : date,
+        D: this.getDayAbbr(),
+        j: this.getDate(),
+        l: this.getDayFull(),
+        S: this.getDaySuffix(),
+        w: this.getDay(),
+        z: this.getDayOfYear(),
+        W: this.getWeekOfYear(),
+        F: this.getMonthName(),
+        m: month < 9 ? '0' + (month + 1) : month + 1,
+        M: this.getMonthAbbr(),
+        n: month + 1,
+        t: this.getMonthDayCount(),
+        L: this.isLeapYear() ? '1' : '0',
+        Y: this.getFullYear(),
+        y: this.getFullYear() + ''.substring(2, 4),
+        a: hours > 12 ? 'pm' : 'am',
+        A: hours > 12 ? 'PM' : 'AM',
+        g: hours % 12 > 0 ? hours % 12 : 12,
+        G: hours > 0 ? hours : "12",
+        h: hours % 12 > 0 ? hours % 12 : 12,
+        H: hours < 10 ? '0' + hours : hours,
+        i: minutes < 10 ? '0' + minutes : minutes,
+        s: seconds < 10 ? '0' + seconds : seconds,
+        Z: "UTC" + (tzOffset > 0 ? "+" : "") + tzOffset,
+        X: tzName,
+        _: lpad(milli, '0', 3)
+    };
+
+    // loop through format array of characters and add matching data else add the format character (:,/, etc.)
+    let date_string = "";
+    for (let i = 0; i < dateFormat.length; i++) {
+        let f = dateFormat[i];
+        if (f.match(/[a-zA-Z|_]/g)) {
+            date_string += date_props[f] ? date_props[f] : f; //'';
+        } else {
+            date_string += f;
+        }
+    }
+    return date_string;
+};
+
+  </script>
+
+</head>
+<body class="bg-gradient">
+
+  <!--div id="loading-message" style="width: 100%; text-align: center; display: block; z-index: 10; position: fixed; top: 5px; left: 0;">
+    <h1 class="display-data blink_me" style="color: lime;">Loading, please wait...</h1>
+  </div-->
+
+
+  <div class="background">
+    <div class="bg-data" id="bg-data"></div>
+  </div>
+
+  <div id="id01" class="w3-modal">
+    <div class="w3-modal-content">
+      <div class="image-container">
+        <span onclick="hideAbout();"
+              class="close-icon">&times;</span>
+        <img src="bonus.jpg" alt="Me!"/>
+        <span class="enhanced">Yeah, what!?</span>
+      </div>
+    </div>
+  </div>
+
+  <div id="id00" class="w3-full-page-modal" style="width: 100%;">
+    <!-- An example of a modal FULL page -->
+    <div class="" style="background-color: black;">
+      <div class="" style="background: black;">
+        <span onclick="hidePage00();"
+              class="close-icon bigger-close-icon">&times;</span>
+        <div style="overflow-y: auto;">
+          <h1>Turning a small birch cup</h1>
+          <div style="margin: 15px;">
+            <small>Click on the images to enlarge them</small>
+          </div>
+          <table style="margin: auto;">
+            <tr>
+              <td style="text-align: center; padding: 5px; border: 1px solid cyan; border-radius: 5px;"><a href="misc.pix/birch.cup/20200229_164736.jpg" target="new"><img src="misc.pix/birch.cup/20200229_164736.jpg" width="360" height="640"/></a></td>
+              <td style="text-align: center; padding: 5px; border: 1px solid cyan; border-radius: 5px;"><a href="misc.pix/birch.cup/20200229_171851.jpg" target="new"><img src="misc.pix/birch.cup/20200229_171851.jpg" height="360" width="640"/></a></td>
+            </tr>
+            <tr>
+              <td style="text-align: center; padding: 5px; border: 1px solid cyan; border-radius: 5px;"><a href="misc.pix/birch.cup/20200229_174851.jpg" target="new"><img src="misc.pix/birch.cup/20200229_174851.jpg" height="360" width="640"/></a></td>
+              <td style="text-align: center; padding: 5px; border: 1px solid cyan; border-radius: 5px;"><a href="misc.pix/birch.cup/20200229_174855.jpg" target="new"><img src="misc.pix/birch.cup/20200229_174855.jpg" height="360" width="640"/></a></td>
+            </tr>
+            <tr>
+              <td style="text-align: center; padding: 5px; border: 1px solid cyan; border-radius: 5px;"><a href="misc.pix/birch.cup/20200304_154020.jpg" target="new"><img src="misc.pix/birch.cup/20200304_154020.jpg" width="360" height="640"/></a></td>
+            </tr>
+          </table>
+          <hr/>
+          <span style="font-style: italic; font-weight: normal;">Oliv did it, 2020.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="id00-1" class="w3-full-page-modal" style="width: 100%;">
+    <!-- An example of a modal FULL page -->
+    <div class="" style="background-color: black;">
+      <div class="" style="background: black;">
+        <span onclick="hidePage001();"
+              class="close-icon bigger-close-icon" style="margin-right: 20px;">&times;</span>
+        <div style="overflow-y: auto;">
+          <!-- Deferred load for ./misc.pix/2020.02.Hawaii/index.html, big pictures... -->
+          <iframe id="hawaii-2020" src="" width="100%" style="min-height: 1000px;"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="id00-2" class="w3-full-page-modal" style="width: 100%;">
+    <!-- An example of a modal FULL page -->
+    <div class="" style="background-color: black;">
+      <div class="" style="background: black;">
+        <span onclick="hidePage002();"
+              class="close-icon bigger-close-icon" style="margin-right: 20px;">&times;</span>
+        <div style="overflow-y: auto;">
+           <iframe id="cors-work-around" src="" width="100%" style="min-height: 1000px;"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="id00-3" class="w3-full-page-modal" style="width: 100%;">
+    <!-- An example of a modal FULL page -->
+    <div class="" style="background-color: black;">
+      <div class="" style="background: black;">
+        <span onclick="hidePage003();"
+              class="close-icon bigger-close-icon" style="margin-right: 20px;">&times;</span>
+        <div style="overflow-y: auto;">
+           <iframe src="./systems/smoothing.spray.html" width="100%" style="min-height: 1000px;"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="id02" class="floating-menu no-shadow" onmouseleave="hideKebabMenu()" style="margin-top: 30px;">
+    <div>
+      <h4 style="margin-left: 10px;">More links</h4>
+      <ul>
+        <li><a href="index.2.html" title="See what 'cascading' actually means...">Other index...</a></li>
+        <li><a href="https://pages.github.com/" target="new" title="Your own pages, hosted on github.">pages.github</a></li>
+        <li><a href="http://hocus-blogus.blogspot.com/" target="new">Hocus Blogus</a></li>
+        <li><a href="http://raspberrypi.org/" target="new">RaspberryPi.org</a></li>
+        <li><a href="http://raspberrypi.org/blog" target="new">RaspberryPi Blog</a></li>
+        <li><a href="https://raspberrytips.com/" target="new">RaspberryPi Tips</a></li>
+        <li><a href="https://magpi.raspberrypi.org/" target="new">The MagPi</a></li>
+        <li><a href="https://twisteros.com/" target="new">Twister OS</a></li>
+        <li><a href="https://codepen.io/OlivierLD/" target="new">(my) CodePen</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!--div>
+    <h2 id="h2-title" style="margin: 0; font-style: normal; text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px silver;">This page is my (messy) workbench</h2>
+    <div style="z-index: -10; text-align: right;">
+      <span id="bg-title" 
+            title="Background image title">BG Image title</span>
+    </div>     
+  </div-->
+
+  <!--h1 style="font-style: normal;">&nbsp; &#9776;&nbsp; &#8801;</h1-->
+  <h1 title="The background is dynamic, its image is changing!&#013;Use the hamburger on the left to reach the menu.&#013;Also see the kebab on the right."
+      style="width: 100%; font-style: normal; text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px silver;"><span id="hamburger" style="cursor: pointer;" onclick="openNav()" onmouseover="openNav()" title="Hamburger">&nbsp; &#8801;</span> <span id="my-name">GrandLarge </span><span id="kebab" style="float: right; margin-top: 0px;" title="Kebab,&#013;Extra links...." onclick="showKebabMenu()" onmouseover="showKebabMenu()">&#8942;&nbsp;&nbsp;&nbsp;</span></h1>
+
+  <!--div style="font-size: 48px; color: yellow; text-align: center; text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px silver;" id="about-div">
+    Raspberry Pi
+  </div-->
+
+  <div class="switch-container" style="margin-left: 30px;" title="Cloud backgrounds only">
+    <label class="switch switch-element">
+      <input id="cloud-slider" type="checkbox" onchange="manageCloudClick(this);">
+      <span class="slider round"></span>
+    </label>
+    <span class="switch-element">Cloud BG only</span>
+  </div>
+
+  <div class="switch-container" style="margin-left: 30px;" title="Flip the slides automatically.&#13;The slider is much nicer than&#13;a check box, right ? 😎">
+    <label class="switch switch-element">
+      <input id="slide-slider" type="checkbox" onchange="manageClick(this);">
+      <span class="slider round"></span>
+    </label>
+    <span class="switch-element">Slides auto-scroll</span>
+  </div>
+
+  <div class="switch-container" style="margin-left: 30px;" title="Backgrounds change in random order">
+    <label class="switch switch-element">
+      <input id="bg-slider" type="checkbox" onchange="manageBGClick(this);">
+      <span class="slider round"></span>
+    </label>
+    <span class="switch-element">Random BG order</span>
+  </div>
+
+  <div class="switch-container" style="margin-left: 30px;" title="Two minutes, or one minute">
+    <label class="switch switch-element">
+      <input id="fast-bg-slider" type="checkbox" onchange="manageFastBGClick(this);">
+      <span class="slider round"></span>
+    </label>
+    <span class="switch-element">Change BG faster</span>
+  </div>
+
+  <div class="switch-container" style="margin-left: 30px;" title="On or off">
+    <label class="switch switch-element">
+      <input id="time-bg-slider" type="checkbox" onchange="manageTimeBGClick(this);">
+      <span class="slider round"></span>
+    </label>
+    <span class="switch-element">BG System Time Display</span>
+  </div>
+
+  <div style="margin-left: 30px; margin-top: 10px;">
+    <button id="change-bg" onclick="changeBGNow();" title="Change background image immediatly&#13;with transition effects">Change BG now</button>
+  </div>
+  <div style="margin-left: 30px; margin-top: 10px;">
+    <button id="start-stop-change-bg" onclick="changeBG_YN();" title="Automatic BG change, Y/N">Stop changing BG</button>
+  </div>
+  <div id="date-time-container" style="margin-left: 30px; margin-top: 10px;">
+    <!-- Date tine will show up here -->
+  </div>
+  <div id="bg-countdown-container" style="margin-left: 30px; margin-top: 10px; font-weight: normal; font-size: 12px;">
+    Change BG in <span id="count-down">00 s</span>
+  </div>
+
+  <div class="slideshow-container" style="margin-top: -260px;" title="What's in there...">
+
+    <div class="the-slides fade">
+      <div class="number-text">1 / 9</div>
+      <div class="display">
+        <span class="display-title">One of the best Single Board Computers</span>
+        <span class="display-data">Raspberry Pi</span>
+        <span class="display-unit">Raspberry Coffee<br/><small>Clouds and flakes</small></span>
+      </div>
+      <div class="text">ONE</div>
+    </div>
+
+    <div class="the-slides fade">
+      <div class="number-text">2 / 9</div>
+      <div class="display">
+        <span class="display-title">Some examples of Web Components</span>
+        <span class="display-data">Web Components</span>
+        <span class="display-unit">
+          A W3C Standard<br/>
+          <a href="./webcomponents/gallery.html" class="active-link" target="WebComp">WebComponents Samples</a>
+        </span>
+      </div>
+      <div class="text">TWO</div>
+    </div>
+
+    <div class="the-slides fade">
+      <div class="number-text">3 / 9</div>
+      <div class="display">
+        <span class="display-title">
+          If Python is a sand-box, Java is a football field!<br/>
+          Processing simplifies Java development, amazing graphics.
+        </span>
+        <span class="display-data">Java and<br/>Processing</span>
+        <span class="display-unit"><a href="http://processing.org" class="active-link" target="processing">Processing.org</a></span>
+      </div>
+      <div class="text">THREE</div>
+    </div>
+
+    <div class="the-slides fade">
+      <div class="number-text">4 / 9</div>
+      <div class="display">
+        <span class="display-title">A way to get started with algorithms & programming languages</span>
+        <span class="display-data">Python</span>
+        <span class="display-unit">Get started</span>
+      </div>
+      <div class="text">FOUR</div>
+    </div>
+
+    <div class="the-slides fade">
+      <div class="number-text">5 / 9</div>
+      <div class="display">
+        <span class="display-title">Arduino and other small boards</span>
+        <span class="display-data">Arduino & Co</span>
+        <span class="display-unit">Real time programming on small boards</span>
+      </div>
+      <div class="text">FIVE</div>
+    </div>
+
+    <div class="the-slides fade">
+      <div class="number-text">6 / 9</div>
+      <div class="display">
+        <span class="display-title">Also runs fine on Raspberry Pi</span>
+        <span class="display-data">HTML5, CSS3,<br/>ES6, NodeJS</span>
+        <span class="display-unit">Front-end and back-end</span>
+      </div>
+      <div class="text">SIX</div>
+    </div>
+
+    <div class="the-slides fade">
+      <div class="number-text">7 / 9</div>
+      <div class="display">
+        <span class="display-title">Mostly Raspberry Pi-based</span>
+        <span class="display-data">Embarked Software,<br/>Navigation Servers</span>
+        <span class="display-unit">NMEA, AIS, OpenCPN, REST, and friends</span>
+      </div>
+      <div class="text">SEVEN</div>
+    </div>
+
+    <div class="the-slides fade">
+      <div class="number-text">8 / 9</div>
+      <div class="display">
+        <span class="display-title">STL Files Generation</span>
+        <span class="display-data">3D Printing</span>
+        <span class="display-unit">OpenSCAD and related technologies</span>
+      </div>
+      <div class="text">EIGHT</div>
+    </div>
+
+    <div class="the-slides fade">
+      <div class="number-text">Bonus</div>
+      <div class="display">
+        <!-- See defaultMarqueeTextArray -->
+        <marquee-panel id="marquee-panel-01"
+                       class="marquee-01"
+                       width="480"
+                       height="350"
+                       nb-cols="140"
+                       nb-lines="68"
+                       title="To start or stop the marquee&#13;Use the link below"
+                       display-data='{ "text-array": ["Raspberry Pi", "Web Components", "Java & Processing", "HTML5, CSS3, ES6", "NodeJS", "Python", "Arduino & Co", "3D printing", "AI, ML, DL", "Artificial Intelligence", "Artificial Insanity", "and other toys..."], "x": 4, "y": 12 }'/>
+      </div>
+      <div class="text"><a href="javascript:void(0)" class="active-link" style="font-style: italic; font-size: 12px;" onclick="marqueeOnOff()">Marquee Panel (start or stop)</a></div>
+    </div>
+
+    <div class="prev" onclick="plusSlides(-1);" title="Previous&#13;Slide">&#10094;</div>
+    <div class="next" onclick="plusSlides(1);" title="Next&#13;Slide">&#10095;</div>
+
+    <div class="dots">
+      <span class="dot" onclick="currentSlide(1);" title="Raspberry Pi"></span>
+      <span class="dot" onclick="currentSlide(2);" title="Web Components"></span>
+      <span class="dot" onclick="currentSlide(3);" title="Java"></span>
+      <span class="dot" onclick="currentSlide(4);" title="Python"></span>
+      <span class="dot" onclick="currentSlide(5);" title="Arduino"></span>
+      <span class="dot" onclick="currentSlide(6);" title="Web 2.0"></span>
+      <span class="dot" onclick="currentSlide(7);" title="Sailing or so"></span>
+      <span class="dot" onclick="currentSlide(8);" title="3D Printing"></span>
+      <span class="dot" onclick="currentSlide(9);" title="Marquee"></span>
+    </div>
+  </div>
+
+  <dialog id="custom-alert" class="shadow-menu" style="width: 800px; border: 2px solid cyan; margin-top: 50px;">
+    <div class="dialog-header">
+      <span>Alert</span>
+      <span class="dialog-header-close" onclick="closeCustomAlert();">&times</span>
+    </div>
+    <div id="custom-alert-content">
+      <!-- Dynamic alert content -->
+    </div>
+  </dialog>
+
+  <dialog id="about-dialog" class="shadow-menu" style="width: 800px;">
+    <div class="dialog-header">
+      <span>Where did you just land?...</span>
+      <span class="dialog-header-close" onclick="closeAboutDialog();">&times</span>
+    </div>
+    <div>
+      <!-- About content -->
+      <div style="margin-top: 15px;">
+        This page is a sort of home page for several aspects of my work.<br/>
+        It includes links to articles, git repos, blogs, web pages, and other (isolated) resources.<br/>
+        It can also be seen as some kind of playground, to illustrate what a web-UI can look like (without pretending to be the best one, by far).<br/>
+        An interesting (in my books) thing to keep in mind: the Web-UI presented here contains <i>absolutely NO external library</i>. <b>No</b> JQuery, <b>no</b> AngularJS, <b>no</b> Underscore, etc.<br/>
+        <i>I do not mean to look down on those frameworks, that would be really beyond stupid. I just want/mean to cut dependencies.</i><br/>
+      </div>
+      <div style="margin-top: 15px;">
+        It uses several <i>recent</i> specifications from the <a href="https://www.w3.org/" target="W3C">W3C</a>, about ES6, HTML5, CSS3, that might not be supported (yet?) by all browsers...
+      </div>
+      <div style="margin-top: 15px;">
+        You might be sceptical about the structure of the site..., and I am with you about that.
+        It is a work in constant progress.
+      </div>
+      <div style="margin-top: 15px;">
+        This being said, enjoy the ride!
+      </div>
+    </div>
+  </dialog>
+
+  <dialog id="weather-links-dialog" class="shadow-menu">
+    <div class="dialog-header">
+      <span>Some Weather links...</span>
+      <span class="dialog-header-close" onclick="closeWeatherDialog();">&times</span>
+    </div>
+    <ul>
+      <li><a href="https://www.windy.com/-Show---add-more-layers/overlays?36.769,-124.508,7" target="weather" title="Windy">Windy</a></li>
+      <li><a href="https://earth.nullschool.net/#current/wind/surface/level/orthographic=-128.63,17.95,339" target="weather" title="Earth Wind Map">EarthWindMap</a></li>
+      <li><a href="http://weather.gmdss.org/metareas.html" target="weather" title="WMO">GMDSS Home (World Meteorological Organization)</a></li>
+      <li><a href="https://public.wmo.int/en" target="weather" title="WMO - new">World Meteorological Organization, new site</a></li>
+      <li><a href="https://www.weather.gov/marine/" target="weather" title="NWS Forecasts">NWS Weather Forecasts</a></li>
+      <li><a href="https://tgftp.nws.noaa.gov/fax/PYBA90.gif" target="weather" title="East Pac">East Pacific Surface Chart</a></li>
+      <li><a href="https://darksky.net/forecast/37.7489,-122.5072/ca12/en" target="weather" title="Dark Sky">Dark Sky</a></li>
+      <li><a href="http://www.oceanbeach.org/webcam.html" target="weather" title="Ocean Beach WebCam">Ocean Beach WebCam</a></li>
+      <li><a href="https://marine.weather.gov/MapClick.php?lon=-122.51095&lat=37.73344" target="weather" title="NOAA, OB">NOAA, for Ocean Beach</a></li>
+    </ul>
+    <ul>
+      <li><a href="http://arbor-studios.com/thirdavecam.html" target="weather" title="3rd Ave Web Cam">3rd Ave Web Cam</a></li>
+      <li><a href="https://www.windguru.cz/208860" target="weather" title="WindGuru, Ocean Beach">WindGuru, Ocean Beach</a></li>
+      <li><a href="https://www.windguru.cz/208863" target="weather" title="WindGuru, 3rd Ave">WindGuru, 3rd Avenue</a></li>
+    </ul>
+
+    <ul>
+      <li><a href="https://stellarium-web.org/" target="stellarium" title="Stellarium">Bonus: Stellarium Web</a></li>
+    </ul>
+
+    <!--button id="exit-weather-link" title="Close dialog">Close</button-->
+  </dialog>
+
+  <dialog id="qrcode-dialog" class="shadow-menu" style="width: 340px; border-radius: 10px; background: silver;">
+		<div class="dialog-header">
+		  <span style="color: cyan;">Scan this...</span>
+		  <span class="dialog-header-close" onclick="closeQRCodeDialog();">&times</span>
+		</div>
+		<div id="qrcode" style="width:250px; height:250px; margin:25px;"></div>
+	</dialog>
+
+  <!--
+    The Big Sliding Main Menu on the left
+
+    ◄ = &#9668;
+    ► = &#9658;
+    ▼ = &#9660;
+    ▲ = &#9650;
+  -->
+  <div id="side-nav" class="sidenav" onmouseleave="closeNav()"> <!-- Restored... -->
+    <a href="javascript:void(0)" id="close-nav-button" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="javascript:void(0)" class="active-link" style="margin-top: 20px; text-align: right;" onclick="showAbout()">About me</a>
+    <a href="javascript:void(0)" class="active-link" style="margin-top: 10px;" onclick="showWhatThisPageIs()">What this page is</a>
+
+    <!--a href="javascript:void(0)" class="active-link" onclick="marqueeOnOff()">Marquee Panel (start or stop)</a-->
+    <div> <!-- onmouseover="showSection('section-1');" onmouseleave="hideSection('section-1');"> -->
+      <a href="javascript:void(0)" onclick="showHideSection(this, 'section-1');"><span class="expand-collapse">&#9658;&nbsp;</span>Raspberry Pi: <i>Oliv on Pi</i></a>
+      <div id="section-1" class="sub-section">
+        <a class="active-link" href="http://raspberrypi.lediouris.net/" target="new">Java &amp; JVM</a>
+        <a href="javascript:void(0)" onclick="showHideSection(this, 'section-1.0');" title="Raspberry Pi at sea.&#13;All kinds of utilities in Java and Python."><span class="expand-collapse">&#9658;&nbsp;</span>Raspberry On Board</a>
+        <div id="section-1.0" class="sub-section">
+          <a class="active-link" href="https://github.com/OlivierLD/ROB/blob/master/README.md" target="new">Code Repo</a>
+          <a class="active-link" href="https://github.com/OlivierLD/ROB/blob/master/GET_STARTED.md" target="new">Get Started.</a>
+        </div>
+        <a href="javascript:void(0)">HTML5/CSS3/ES6</a>
+        <a href="javascript:void(0)">WebSockets</a>
+        <a class="active-link" href="https://github.com/OlivierLD/node.pi" target="new">NodeJS for Raspberry Pi</a>
+        <a class="active-link" href="https://github.com/OlivierLD/raspberry-coffee/blob/master/Papers/README.md" target="new">Bulk papers</a>
+        <!--a href="javascript:void(0)" onclick="showHideSection(this, 'section-1.1');"><span class="expand-collapse">&#9658;&nbsp;</span>Toy stores</a>
+        <div id="section-1.1" class="sub-section">
+          <a class="active-link" href="http://adafruit.com" target="new">Adafruit</a>
+          <a class="active-link" href="http://sparkfun.com" target="new">Sparkfun</a>
+          <a class="active-link" href="http://allelectronics.com" target="new">All Electronics</a>
+          <a class="active-link" href="https://aretronics.com/" target="new">AreTronics</a>
+          <a class="active-link" href="https://www.seeedstudio.com/" target="new">Seeed Studio</a>
+          <a class="active-link" href="https://www.servocity.com/" target="new">Actobotics/ServoCity</a>
+          <a class="active-link" href="https://www.robotshop.com/" target="new">RobotShop</a>
+          <a class="active-link" href="https://www.parallax.com/" target="new">Parallax</a>
+        </div-->
+      </div>
+    </div>
+    <div> <!-- onmouseover="showSection('section-2');" onmouseleave="hideSection('section-2');"> -->
+      <a href="javascript:void(0)" onclick="showHideSection(this, 'section-2');"><span class="expand-collapse">&#9658;&nbsp;</span>WebComponents</a>
+      <div id="section-2" class="sub-section">
+        <a class="active-link" href="./webcomponents/index.html" target="new">Index</a>
+        <a class="active-link" href="./webcomponents/gallery.html" target="new">Oliv's gallery (WiP)</a>
+        <a class="active-link" href="./webcomponents/carrousel.1.html" target="new" title="Work in Progress">A Carrousel Navigation Console</a>
+        <span style="padding-left: 250px;"><button class="button-link" title="QR Code for the Carrousel Console.&#13;Use it to reach it from other devices." onclick="makeCode('webcomponents/carrousel.1.html');" style="border-radius: 4px; font-size: 40%;">Carrousel QR Code</button></span>
+      </div>
+    </div>
+
+    <a href="javascript:void(0)" onclick="showHideSection(this, 'section-00');" title="Modal pages examples"><span class="expand-collapse">&#9658;&nbsp;</span>Single Page App (SPA) stuff</a>
+    <div id="section-00" class="sub-section">
+      <a href="javascript:void(0)" class="active-link" onclick="showPage00()">A Full Modal Page, with a &lt;div&gt;</a>
+      <a href="javascript:void(0)" class="active-link" onclick="showPage001()">A Full Modal Page, with an &lt;iframe&gt; (deferred loading)</a>
+      <a href="javascript:void(0)" class="active-link" onclick="showPage002()">A Full Modal Page, with an &lt;iframe&gt;, (external not allowed... CORS)</a>
+      <a href="javascript:void(0)" class="active-link" onclick="showPage003()">A Full Modal Page, with an &lt;iframe&gt;, linear regression</a>
+    </div>
+
+    <div> <!-- onmouseover="showSection('section-2.0');" onmouseleave="hideSection('section-2.0');"> -->
+      <a href="javascript:void(0)" onclick="showHideSection(this, 'section-2.0');"><span class="expand-collapse">&#9658;&nbsp;</span>Other code repositories</a>
+      <div id="section-2.0" class="sub-section">
+        <div class="sub-section-desc">Some git repos I own</div>
+        <a class="active-link" href="https://github.com/OlivierLD/raspberry-coffee" target="new">Raspberry Coffee</a>
+        <a class="active-link" href="https://github.com/OlivierLD/ROB" target="new">Raspberry On Board</a>
+        <a class="active-link" href="https://github.com/OlivierLD/oliv-ai" target="new" title="Artificial Intelligence">AI stuff, misc and bulks</a>
+        <a class="active-link" href="https://github.com/OlivierLD/small-boards" target="new">Small boards (Arduinos, Huzzah, Feather, M5Stick, etc)</a>
+        <a class="active-link" href="https://github.com/OlivierLD/SmartWatches" target="new">Smart Watches</a>
+        <a class="active-link" href="https://github.com/OlivierLD/WebComponents" target="new">WebComponents</a>
+        <a class="active-link" href="https://github.com/OlivierLD/JOB" target="new">JOB (Java On Board)</a>
+        <a class="active-link" href="https://github.com/OlivierLD/3DPrinting" target="new">3D Printing models</a>
+      </div>
+    </div>
+
+    <a href="javascript:void(0)" class="no-click">Jupyter Notebooks (Python & Java)</a>
+    <div> <!-- onmouseover="showSection('section-2.1');" onmouseleave="hideSection('section-2.1');"> -->
+      <a href="javascript:void(0)" onclick="showHideSection(this, 'section-2.1');"><span class="expand-collapse">&#9658;&nbsp;</span>OpenCV, in Python & Java</a>
+      <div id="section-2.1" class="sub-section">
+        <a class="active-link" href="https://github.com/OlivierLD/oliv-ai/blob/master/opencv/README.md" target="new">OpenCV examples</a>
+      </div>
+    </div>
+    <div> <!-- onmouseover="showSection('section-3');" onmouseleave="hideSection('section-3');"> -->
+      <a href="javascript:void(0)" title="Artificial Intelligence, Machine Learning, Deep Learning..." onclick="showHideSection(this, 'section-3');"><span class="expand-collapse">&#9658;&nbsp;</span>AI, ML, DL & Co</a>
+      <div id="section-3" class="sub-section">
+        <a class="active-link" href="https://github.com/OlivierLD/oliv-ai/blob/master/JupyterNotebooks/deep.learning.crash.course/README.md">Neural Network and Deep Learning</a>
+        <div class="sub-section-desc">An Artificial Intelligence Crash Course, from training a network to real hand-written digits recognition.</div>
+        <a class="active-link" href="./nn/one.neuron.webcomp.html">One Neuron at work</a>
+        <div class="sub-section-desc">A small tool, used in the presentation above...</div>
+      </div>
+    </div>
+    <div> <!-- onmouseover="showSection('section-4');" onmouseleave="hideSection('section-4');"> -->
+      <a href="javascript:void(0)" title="GPS (Leaflet, etc)" onclick="showHideSection(this, 'section-4');"><span class="expand-collapse">&#9658;&nbsp;</span>GPS</a>
+      <div id="section-4" class="sub-section">
+        <a class="active-link" href="./web.stuff/gps/GPS.api.html" target="new">GPS 101</a>
+        <a class="active-link" href="./web.stuff/gps/LocationFinder.html" target="new">GPS 101, with LeafLet</a>
+        <a class="active-link" href="./web.stuff/iss/ISS.GPS.api.html" target="new">GPS and ISS (CORS problem)</a>
+        <a class="active-link" href="./leafletjs/leaflet.sample.html" target="new">LeafLet JS example</a>
+        <a class="active-link" href="./leafletjs/leaflet.ortho.loxo.html" target="new">LeafLet JS, Great Circles and Rhumblines</a>
+        <a class="active-link" href="https://github.com/OlivierLD/ROB/tree/master/Serial-IO#wiring-for-adafruit-ultimate-gps" target="new">Read a GPS from Java</a>
+        <div class="sub-section-desc">Just reads the serial port and displays NMEA Sentences</div>
+        <a class="active-link" href="https://github.com/OlivierLD/oliv-ai/tree/master/JupyterNotebooks/nmea" target="new" title="With Jupyter Notebooks">Read a GPS from Python</a>
+        <div class="sub-section-desc">Reads the Serial Port, parses <code>RMC</code> and <code>GLL</code> sentences, feeds a cache accessible through REST requests</div>
+        <a class="active-link" href="https://github.com/OlivierLD/raspberry-coffee/tree/master/Processing/src/processing/NMEA" target="new">Read a GPS from Processing</a>
+        <div class="sub-section-desc">Java, simpler than Java...</div>
+        <a class="active-link" href="https://github.com/OlivierLD/node.pi#read-gps-data-through-a-serial-port" target="new">Read a GPS from JavaScript (NodeJS)</a>
+        <div class="sub-section-desc">Reads the Serial Port, parses <code>RMC</code> and <code>GLL</code> sentences</div>
+      </div>
+    </div>
+    <div> <!-- onmouseover="showSection('section-5');" onmouseleave="hideSection('section-5');"> -->
+      <a href="javascript:void(0)" title="Books, articles, papers, etc." onclick="showHideSection(this, 'section-5');"><span class="expand-collapse">&#9658;&nbsp;</span>Books & Articles</a>
+      <div id="section-5" class="sub-section">
+        <a class="active-link" href="./web.stuff/nse/index.html" target="new">Naviguer sans &eacute;lectricit&eacute;</a>
+        <div class="sub-section-desc">In French / En fran&ccedil;ais</div>
+        <a class="active-link" href="http://raspberrypi.lediouris.net/_Articles/readme.html" target="new">Enriching Marine Electronics</a>
+        <a class="active-link" href="https://github.com/OlivierLD/raspberry-coffee/blob/master/Project-Trunk/System-Languages/LanguageComparison.md" target="new">Languages Comparison</a>
+        <div class="sub-section-desc">Solve a System of equations, in more than 10 languages (Java, Python, Scala, C, etc)</div>
+        <a class="active-link" href="https://github.com/OlivierLD/ROB/tree/master/raspberry-sailor/MUX-implementations/RESTNavServer" target="new">A Navigation Server</a>
+        <ul style="margin: 0;">
+          <li><a class="active-link bold-link" style="padding-left: 0;" href="https://github.com/OlivierLD/raspberry-coffee/blob/master/Papers/happy.navserver/HappyNavserver.md" target="new">Happy Navigation Server</a></li>
+          <li><a class="active-link bold-link" style="padding-left: 0;" href="http://raspberrypi.lediouris.net/_Articles/data.logging/datalogging.html" target="new">Boat Data 101 (interactive)</a></li>
+          <li><a class="active-link bold-link" style="padding-left: 0;" href="https://github.com/OlivierLD/ROB/blob/master/raspberry-sailor/MUX-implementations/NMEA-multiplexer-basic/USE_CASES.md" target="new">Case Study. Nav Server implementation</a></li>
+        </ul>
+      </div>
+    </div>
+    <div> <!-- onmouseover="showSection('section-6');" onmouseleave="hideSection('section-6');"> -->
+      <a href="javascript:void(0)" onclick="showHideSection(this, 'section-6');"><span class="expand-collapse">&#9658;&nbsp;</span>Weather etc...</a>
+      <div id="section-6" class="sub-section">
+        <a class="active-link" href="http://donpedro.lediouris.net/software/html5/spot/spot.parser.html" target="SPOT">Online SPOT parser</a>
+        <a class="active-link" href="#" onclick="showWeatherDialog();">Misc Weather Links</a>
+      </div>
+    </div>
+
+    <div> <!-- onmouseover="showSection('section-2.0');" onmouseleave="hideSection('section-2.0');"> -->
+      <a href="javascript:void(0)" onclick="showHideSection(this, 'section-7');"><span class="expand-collapse">&#9658;&nbsp;</span>Misc &amp; Bulk</a>
+      <div id="section-7" class="sub-section">
+        <div class="sub-section-desc">Anything else...</div>
+        <a class="active-link" href="./web.stuff/boat.stuff/index.html" target="new">Boat Stuff</a>
+        <a class="active-link" href="./web.stuff/astro/index.html" target="new">Astro Stuff</a>
+        
+        <a href="javascript:void(0)" onclick="showHideSection(this, 'section-7.0');" title="Miscellaneous projects in their code repos."><span class="expand-collapse">&#9658;&nbsp;</span>Misc Projects</a>
+        <div id="section-7.0" class="sub-section">
+          <a class="active-link" href="https://github.com/OlivierLD/ROB/blob/master/raspberry-sailor/MUX-implementations/RESTNavServer/README.md" target="new">A REST Navigation Server on a Raspberry Pi</a>
+          <a class="active-link" href="https://github.com/OlivierLD/raspberry-coffee/blob/master/Project-Trunk/SunFlower-v2/README.md" target="new">Sun Flower (v2)</a>
+          <a class="active-link" href="https://github.com/OlivierLD/ROB/blob/master/raspberry-sailor/RaspberryPythonServers/python/pure.python.bme280/README.md" target="new">A Barograph for a few cents</a>
+          <a class="active-link" href="https://github.com/OlivierLD/ROB/blob/master/raspberry-sailor/MUX-implementations/NMEA-multiplexer-basic/HOWTO.md" target="new">The Cheapest Nav Station</a>
+          <a class="active-link" href="https://passe-coque.com" target="new">Passe-Coque</a>
+        </div>
+
+        <a class="active-link" href="./misc-and-bulk/index.html" target="new">Other odd and misc stuff...</a>
+      </div>
+    </div>
+
+    <div>
+      <a href="javascript:void(0)" onclick="showHideSection(this, 'section-8');"><span class="expand-collapse">&#9658;&nbsp;</span>Toy stores</a>
+      <div id="section-8" class="sub-section">
+        <a class="active-link" href="http://adafruit.com" target="new">Adafruit</a>
+        <a class="active-link" href="http://sparkfun.com" target="new">Sparkfun</a>
+        <a class="active-link" href="http://allelectronics.com" target="new">All Electronics</a>
+        <a class="active-link" href="https://aretronics.com/" target="new">AreTronics</a>
+        <a class="active-link" href="https://www.seeedstudio.com/" target="new">Seeed Studio</a>
+        <a class="active-link" href="https://www.servocity.com/" target="new">Actobotics/ServoCity</a>
+        <a class="active-link" href="https://www.robotshop.com/" target="new">RobotShop</a>
+        <a class="active-link" href="https://www.parallax.com/" target="new">Parallax</a>
+      </div>
+    </div>
+
+    <a href="javascript:void(0)" class="no-click">And more (to come...)</a>
+  </div>
+
+  <!-- Bottom -->
+  <div style="width: 100%; position: fixed; bottom: 5px; left: 0;">
+    <div style="margin: 10px;">
+      <!--small>
+        This page is for now more like a playground... It's showcasing some of what can be done from a Single Page Appliction (aka SPA).
+        All is done on the client side (HTML5, CSS3, ES6), there is no server side computing involved.<br/>
+        There is <i>absolutely <b>no</b></i> external library involved on the client side.<br/>
+        It does not even pretend to look good. And Safari might not like all of it (it does not support 100% of HTML5)...
+      </small-->
+    </div>
+    <hr style="border: 1px solid orange; width: 98%;"/>
+    <span style="margin: 3px; font-style: italic; font-size: 0.75em;">&copy; 2025, Grand Large.</span>
+  </div>
+</body>
+<script type="text/javascript">
+
+  // Left-right swipe gesture management on the slides
+  let xDown = null;
+  let yDown = null;
+
+  function handleTouchStart(evt) {
+    xDown = evt.touches[0].clientX;
+    yDown = evt.touches[0].clientY;
+  }
+
+  function handleTouchMove(evt) {
+    if (!xDown || !yDown) {
+      return;
+    }
+    let xUp = evt.touches[0].clientX;
+    let yUp = evt.touches[0].clientY;
+    let xDiff = xDown - xUp;
+    let yDiff = yDown - yUp;
+
+    // most significant
+    if (Math.abs(xDiff) > Math.abs(yDiff)) { // Left-right
+      if (xDiff > 0) {
+        /* left swipe */
+        plusSlides(1);
+      } else {
+        /* right swipe */
+        plusSlides(-1);
+      }
+    } else { // Up-Down, not needed here (yet...)
+      if (yDiff > 0) {
+        /* up swipe */
+      } else {
+        /* down swipe */
+      }
+    }
+    /* reset values */
+    xDown = null;
+    yDown = null;
+  }
+
+  let marqueeAnimationInterval;
+  let defaultMarqueeText = 'Raspberry Pi, Web Components, Java, NodeJS, Python, Arduino, Processing, AI, ML, DL, and other toys...';
+  function marquee(marqueeId, txtFieldId) {
+    if (marqueeAnimationInterval !== undefined) {
+      window.clearInterval(marqueeAnimationInterval); // Stop.
+      console.log('Stopped Marquee Animation');
+      marqueeAnimationInterval = undefined;
+    } else {
+      let txt = defaultMarqueeText;
+      if (txtFieldId !== undefined) {
+        txt = document.getElementById(txtFieldId).value;
+      }
+      let marqueeObj = document.getElementById(marqueeId);
+      if (marqueeObj !== undefined) {
+        let x = marqueeObj.nbCols;
+        let y = 12;
+        marqueeAnimationInterval = window.setInterval(function() { // Start
+          let luc = marqueeObj.lastUsedColumn;
+          if (luc > 0) {
+            x -= 1;
+          } else {
+            x = marqueeObj.nbCols; // Reset text on the right.
+          }
+          let toDisplay = new Date().format('d M Y H:i:s') + ', ' + txt;
+          let data = {
+            text: toDisplay,
+            x: x,
+            y: y
+          };
+          marqueeObj.displayData = JSON.stringify(data);
+          marqueeObj.repaint();
+        }, 20);
+        console.log('Marquee Animation started');
+      } else {
+        console.log('marqueeObj not found...');
+      }
+    }
+  }
+
+  let marqueeScrollUpAnimationInterval;
+  let defaultMarqueeTextArray = [ 'Raspberry Pi', 'Web Components', 'Java & Processing', 'HTML5, CSS3, ES6', 'NodeJS', 'Python', '3D Printing', 'Arduino & Co', 'AI, ML, DL', 'Artificial Intelligence', 'Artificial Insanity', 'and other toys...' ];
+  function marqueeScrollUp(marqueeId) {
+    if (marqueeScrollUpAnimationInterval !== undefined) {
+      window.clearInterval(marqueeScrollUpAnimationInterval); // Stop.
+      marqueeScrollUpAnimationInterval = undefined;
+    } else {
+      let marqueeObj = document.getElementById(marqueeId);
+      let x = marqueeObj.nbCols;
+      let yOffset = marqueeObj.yOffset;
+      let y = 12;
+      marqueeScrollUpAnimationInterval = window.setInterval(() => { // Start
+        let data = JSON.parse(marqueeObj.displayData); // { text-array: txt, x: x, y: y };
+        let arrayCardinality = 1;
+        if (data['text-array'] !== undefined) {
+          arrayCardinality = data['text-array'].length;
+        }
+        yOffset -= 1;
+        if (yOffset < -(arrayCardinality * 12)) {
+          yOffset = marqueeObj.nbLines;
+        }
+        marqueeObj.yOffset = yOffset;
+
+        let toDisplay = [];
+        toDisplay.push(new Date().format('d M Y H:i:s'));
+        defaultMarqueeTextArray.forEach(item => {
+          toDisplay.push(item);
+        });
+        data['text-array'] = toDisplay;
+        marqueeObj.displayData = JSON.stringify(data);
+        marqueeObj.repaint();
+      }, 30);
+    }
+  }
+
+  function showAbout() {
+    // document.getElementById('id01').style.display = 'block';
+    document.getElementById('id01').style.transform = 'scaleX(1)';
+  }
+
+  function hideAbout() {
+    // document.getElementById('id01').style.display = 'none';
+    document.getElementById('id01').style.transform = 'scaleX(0)';
+  }
+
+  function showPage00() {
+    // document.getElementById('id01').style.display = 'block';
+    document.getElementById('id00').style.transform = 'scaleY(1)';
+  }
+
+  function hidePage00() {
+    // document.getElementById('id01').style.display = 'none';
+    document.getElementById('id00').style.transform = 'scaleY(0)';
+  }
+
+  function showPage001() {
+    let frameUrl = "./misc.pix/2020.02.Hawaii/index.html";
+    document.getElementById('hawaii-2020').src = frameUrl;
+    // document.getElementById('id01').style.display = 'block';
+    document.getElementById('id00-1').style.transform = 'scaleY(1)';
+  }
+
+  function hidePage001() {
+    // document.getElementById('id01').style.display = 'none';
+    document.getElementById('id00-1').style.transform = 'scaleY(0)';
+  }
+
+  function showPage002() {
+    // CORS, use URL https://github.com/OlivierLD/raspberry-coffee/blob/master/NMEA-mux-WebUI/full-server-extended-v2/README.md
+    let corsUrl = "./index.2.html";
+      // "http://olivier.lediouris.net/";
+      // "https://github.com/OlivierLD/raspberry-coffee/blob/master/NMEA-mux-WebUI/full-server-extended-v2/README.md";
+    document.getElementById('cors-work-around').src = corsUrl;
+    // document.getElementById('id01').style.display = 'block';
+    document.getElementById('id00-2').style.transform = 'scaleY(1)';
+  }
+
+  function hidePage002() {
+    // document.getElementById('id01').style.display = 'none';
+    document.getElementById('id00-2').style.transform = 'scaleY(0)';
+  }
+
+  function showPage003() {
+    // document.getElementById('id01').style.display = 'block';
+    document.getElementById('id00-3').style.transform = 'scaleY(1)';
+  }
+
+  function hidePage003() {
+    // document.getElementById('id01').style.display = 'none';
+    document.getElementById('id00-3').style.transform = 'scaleY(0)';
+  }
+
+  function showKebabMenu() {
+    // document.getElementById('id02').style.display = 'block';
+    document.getElementById('id02').style.transform = 'scaleY(1)';
+  }
+
+  function hideKebabMenu() {
+    // document.getElementById('id02').style.display = 'block';
+    document.getElementById('id02').style.transform = 'scaleY(0)';
+  }
+
+  function marqueeOnOff() {
+    // marquee('marquee-panel-01'); // Marquee animation
+    marqueeScrollUp('marquee-panel-01'); // Marquee animation
+  }
+
+  function openNav() {
+      document.getElementById("side-nav").style.width =  getComputedStyle(document.documentElement).getPropertyValue('--expanded-nav-width'); // "450px";
+  }
+
+  function closeNav() {
+      document.getElementById("side-nav").style.width = "0";
+  }
+
+  function showSection(id) {
+  //document.getElementById(id).style.display = 'inline-block';
+    document.getElementById(id).style.visibility = 'visible';
+    document.getElementById(id).style.opacity = 1;
+    document.getElementById(id).style.height = 'auto';
+  }
+
+  function hideSection(id) {
+  //document.getElementById(id).style.display = 'none';
+    document.getElementById(id).style.visibility = 'hidden';
+    document.getElementById(id).style.opacity = 0;
+    document.getElementById(id).style.height = 0;
+  }
+
+  const COLLAPSED_LINE = "&#9658;&nbsp;";
+  const EXPANDED_LINE = "&#9660;&nbsp;";
+
+  function showHideSection(obj, id) {
+    let innerSpan = obj.querySelector('.expand-collapse');
+    if (document.getElementById(id).style.visibility === 'visible') {  // Then hide it
+      innerSpan.innerHTML = COLLAPSED_LINE;
+      hideSection(id);
+    } else { // Show it
+      innerSpan.innerHTML = EXPANDED_LINE;
+      showSection(id);
+    }
+  }
+
+  let v1 = 20; let dir1 = -0.25;
+  let v2 = 55; let dir2 = -0.1;
+  let green1 = 255, greenInc1 = -1;
+  let blue2 = 114, blueInc2 = -1;
+
+  let red = 127;
+  let green = 127;
+  let blue = 127;
+
+  function changeColor(color) {
+    let sign = Math.round(2 * Math.random());
+    color += Math.round(10 * Math.random() * (sign % 2 === 0 ? 1 : -1));
+    if (color < 0) {
+      color = 0;
+    }
+    if (color > 255) {
+      color = 255;
+    }
+    return color;
+  }
+
+  const SLOW_BG_INTERVAL = ((2 * 60) + 1) * 1000; // in ms.
+  const FAST_BG_INTERVAL = ((/*1 * */ 60) + 1) * 1000; // in ms.
+  let BG_INTERVAL = SLOW_BG_INTERVAL;
+  const BG_IMAGES = [
+    { name: "overcast.jpg", title: "Overcast", cat: "clouds" },
+    { name: "aconcagua.jpeg", title: "Aconcagua, Argentina", cat: "clouds" },
+    { name: "night.sky.01.jpeg", title: "Night sky", cat: "clouds" },
+    { name: "neuralnetwork.jpg", title: "Neural Network...", cat: "misc" },
+    { name: "next_wave.jpg", title: "THAT is a big wave...", cat: "misc" },
+    { name: "NorthernLight.2.jpeg", title: "Northern Light", cat: "misc" },
+    { name: "cloud.jpeg", title: "Cloud wave", cat: "clouds" },
+    { name: "creative-computing-resizedjpg.jpeg", title: "Data tunnel", cat: "misc" },
+    { name: "ag6.jpg", title: "Agents of SHIELD", cat: "misc" },
+    { name: "rpi.jpg", title: "Raspberry Pi", cat: "misc" },
+    { name: "above.cape.town.jpeg", title: "Sky above Cape Town", cat: "clouds" },
+    { name: "clouds.2.jpg", title: "High sky", cat: "clouds" },
+    { name: "hexagon-2-wallpapers.jpg", title: "Hexagons", cat: "misc" },
+    { name: "sky.above.Czechia.jpeg", title: "Sky above Czechia", cat: "clouds" },
+    { name: "cartago.costa.rica.jpeg", title: "Sky above Cartago, Costa Rica", cat: "clouds" },
+    { name: "matrix.jpg", title: "The Matrix has you", cat: "misc" },
+    { name: "pcb.jpg", title: "PCB", cat: "misc" },
+    { name: "sky.and.clouds.jpg", title: "Before night fall", cat: "clouds" },
+    { name: "sky.over.sf.bay.jpg", title: "Sky over the San Francisco Bay", cat: "clouds" },
+    { name: "cave_sky.jpeg", title: "From a cave", cat: "clouds" },
+    { name: "sky.roumania.jpg", title: "Sky above Roumania", cat: "clouds" },
+    { name: "sky.jpg", title: "Sky and sunset", cat: "clouds" },
+    { name: "en.ciseaux.jpeg", title: "Ready to gybe?", cat: "misc" },
+    { name: "snowflake.01.jpeg", title: "Snow Flake", cat: "flakes" },  // From https://wall.alphacoders.com/by_sub_category.php?id=202451&name=Snowflake+Wallpapers
+    { name: "la.licorne.jpeg", title: "La Licorne", cat: "misc" },
+    { name: "planking.jpg", title: "Woody!", cat: "misc" },
+    { name: "clouds.and.beams.jpeg", title: "Clouds and Beams", cat: "clouds" },
+    { name: "oregon.jpeg", title: "Oregon coast", cat: "misc" }
+  ];
+
+  let BG_CLOUDS_ONLY = [];
+  BG_IMAGES.forEach(img => {
+    if (img.cat === 'clouds') {
+      BG_CLOUDS_ONLY.push(img);
+    }
+  });
+
+  let bgToUse = BG_IMAGES;
+
+  let secondLeft = BG_INTERVAL / 1000;
+  let bgIndex = 0;
+  // Was `radial-gradient(at top, rgba(255, ${green1}, 0, 0.5) ${v1}%, rgba(1, 67, ${blue2}, 0.60) ${v2}%), `;
+  let currentBackground = `radial-gradient(at top, rgba(255, 255, 255, 0.00) 20%, rgba(10, 10, 0, 0.00) 55%)`;
+
+  let opacity = 0;
+  function darkenBackground() {
+    opacity += 1;
+    currentBackground = `radial-gradient(at top, rgba(255, 255, 255, ${(opacity / 100).toFixed(2)}) 20%, rgba(10, 10, 0, ${(opacity / 100).toFixed(2)}) 55%)`;
+    if (opacity < 100) {
+      setTimeout(darkenBackground, 10);
+    } else {
+      // Change image in the dark
+      if (!randomOrder) {
+        bgIndex += 1; // Sorted
+        bgIndex %= bgToUse.length;
+      } else {
+        let newBgIndex = Math.floor((Math.random() * bgToUse.length));
+        if (bgIndex === newBgIndex) {
+          bgIndex += 1;
+          bgIndex %= bgToUse.length;
+        } else {
+          bgIndex = newBgIndex;
+        }
+        // console.log(`>> BGIndex now ${bgIndex}, over ${BG_IMAGES.length}`);
+      }
+      secondLeft = BG_INTERVAL / 1000; // Reset count down
+      // console.log(`SecondLeft: ${secondLeft}`);
+      setTimeout(lightenBackground, 1);
+    }
+  }
+  function lightenBackground() {
+    opacity -= 1;
+    currentBackground = `radial-gradient(at top, rgba(255, 255, 255, ${(opacity / 100).toFixed(2)}) 20%, rgba(10, 10, 0, ${(opacity / 100).toFixed(2)}) 55%)`;
+    if (opacity > 0) {
+      setTimeout(lightenBackground, 50);
+    }
+  }
+
+  const ABOUT_DATA = [ // Use with innerHTML
+    "Raspberry Pi",
+    "Web&nbsp;Components",
+    "Java&nbsp;&amp;&nbsp;Processing",
+    "HTML5,&nbsp;CSS3,&nbsp;ES6",
+    "NodeJS",
+    "Python",
+    "3D Printing",
+    "Arduino&nbsp;&amp;&nbsp;Co"
+  ];
+  let aboutDiv = undefined;
+
+  let currentAboutIndex = 0;
+  let currentLeftMargin = 0;
+
+  function leftNewContent() {
+    if (currentLeftMargin > 0) {
+      currentLeftMargin -= 1;
+      aboutDiv.style.marginLeft = `${currentLeftMargin}%`;
+      setTimeout(leftNewContent, 10);
+    }
+  }
+
+  function leftOldContent() {
+    if (currentLeftMargin > -100) {
+      currentLeftMargin -= 1;
+      aboutDiv.style.marginLeft = `${currentLeftMargin}%`;
+      setTimeout(leftOldContent, 10);
+    } else {
+      currentAboutIndex += 1;
+      if (currentAboutIndex > (ABOUT_DATA.length - 1)) {
+        currentAboutIndex = 0;
+      }
+      aboutDiv.innerHTML = ABOUT_DATA[currentAboutIndex];
+      currentLeftMargin = 100;
+      setTimeout(leftNewContent, 10);
+    }
+  }
+
+  function swipeTitle() {
+    aboutDiv = document.getElementById('about-div');
+    // console.log(`About-Div, margin left: ${aboutDiv.style.marginLeft}`);
+    setTimeout(leftOldContent, 10);
+  }
+
+  let auto = false;
+  let cloudBGOnly = false;
+
+  function manageCloudClick(cb) {
+    cloudBGOnly = cb.checked;
+    bgToUse = cloudBGOnly ? BG_CLOUDS_ONLY : BG_IMAGES;
+  }
+
+  function manageClick(cb) {
+    auto = cb.checked;
+    if (auto) {
+      showSlides(slideIndex);
+    }
+  }
+
+  let randomOrder = false;
+  function manageBGClick(cb) {
+    randomOrder = cb.checked;
+  }
+
+  function manageFastBGClick(cb) {
+    BG_INTERVAL = (cb.checked ? FAST_BG_INTERVAL : SLOW_BG_INTERVAL);
+  }
+
+  function manageTimeBGClick(cb) {
+    if (cb.checked) { // Start
+      bgTime = true;
+    } else { // Stop
+      bgTime = false;
+      document.getElementById('bg-data').innerText = '';
+    }
+  }
+
+  let slideIndex = 1;
+  showSlides(slideIndex);
+
+  function plusSlides(n) {
+    showSlides(slideIndex += n);
+  }
+
+  function currentSlide(n) {
+    showSlides(slideIndex = n);
+  }
+
+  function showSlides(n) {
+    let slides = document.getElementsByClassName("the-slides");
+    let dots = document.getElementsByClassName("dot");
+    if (n > slides.length) {
+      slideIndex = 1;
+    }
+    if (n < 1) {
+      slideIndex = slides.length;
+    }
+    for (let i = 0; i < slides.length; i++) { // Hide them all
+                                              //  slides[i].style.display = "none";
+      slides[i].classList.remove("visible-slide");
+    }
+
+    if (!auto) {
+      for (let i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+      }
+//    slides[slideIndex - 1].style.display = "block";
+      slides[slideIndex - 1].classList.add("visible-slide"); // Show active one
+
+      dots[slideIndex - 1].className += " active";
+    } else { // Auto
+
+      slideIndex++;
+      if (slideIndex > slides.length) {
+        slideIndex = 1
+      }
+      for (let i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+      }
+//    slides[slideIndex - 1].style.display = "block";
+      slides[slideIndex - 1].classList.add("visible-slide");
+
+      dots[slideIndex - 1].className += " active";
+      let TEN_SEC = 10000; // In ms.
+      setTimeout(showSlides, TEN_SEC);
+    }
+    try {
+      let newTitle = document.querySelectorAll(".the-slides")[slideIndex - 1].querySelector(".display").querySelector(".display-data").innerText;
+      document.querySelector(".slideshow-container").title = newTitle;
+    } catch (err) {
+      console.log("Unconventional slide...");
+    }
+  }
+
+  let bgAnimation;
+  let bgTime = false;
+
+  function changeBGNow() {
+    if (bgAnimation !== undefined) {
+      clearInterval(bgAnimation);
+    }
+    setTimeout(darkenBackground, 1);
+    if (bgAnimation) { // If auto BG scroll, restart
+      bgAnimation = setInterval(() => {
+        setTimeout(darkenBackground, 1);
+      }, BG_INTERVAL); // in ms.
+    }
+  }
+
+  function changeBG_YN() {
+    if (bgAnimation !== undefined) { // Will stop
+      console.log("Stopping BG change...");
+      clearInterval(bgAnimation); 
+      bgAnimation = undefined;
+      document.getElementById("start-stop-change-bg").innerText = 'Resume BG Change';
+    } else { // Resume
+      console.log("Resuming BG change...");
+      bgAnimation = setInterval(() => {
+        setTimeout(darkenBackground, 1);
+      }, BG_INTERVAL); // in ms.
+      document.getElementById("start-stop-change-bg").innerText = 'Stop BG Change';
+    }
+
+  }
+
+  const NO_DIALOG_MESSAGE = "Your browser seems not to support dialogs...\nMaybe Chrome or Chromium would?";
+
+  function showWhatThisPageIs() {
+    let aboutDialog = document.getElementById("about-dialog");
+    if (aboutDialog.show !== undefined) {
+      aboutDialog.show();
+    } else {
+      alert(NO_DIALOG_MESSAGE);
+      aboutDialog.style.display = 'inline';
+    }
+  }
+
+  function closeAboutDialog() {
+    let aboutDialog = document.getElementById("about-dialog");
+    if (aboutDialog.close !== undefined) {
+      aboutDialog.close();
+    } else {
+      // alert(NO_DIALOG_MESSAGE);
+      aboutDialog.style.display = 'none';
+    }
+  }
+
+  function showWeatherDialog() {
+    let weatherDialog = document.getElementById("weather-links-dialog");
+    if (weatherDialog.show !== undefined) {
+        weatherDialog.show();
+    } else {
+        alert(NO_DIALOG_MESSAGE);
+        weatherDialog.style.display = 'inline';
+    }
+  }
+
+  function closeWeatherDialog() {
+    let weatherDialog = document.getElementById("weather-links-dialog");
+    if (weatherDialog.close !== undefined) {
+        weatherDialog.close();
+    } else {
+        // alert(NO_DIALOG_MESSAGE);
+        weatherDialog.style.display = 'none';
+    }
+  }
+
+  function closeWarning() {
+    document.getElementById("browser-warning").style.display = 'none'; //  classList.toggle('smooth');
+  }
+
+  function detectBrowser() {
+
+    let userAgent = navigator.userAgent;
+    let browserName;
+
+    if (userAgent.match(/chrome|chromium|crios/i)) {
+      browserName = "chrome";
+    } else if (userAgent.match(/firefox|fxios/i)) {
+      browserName = "firefox";
+    } else if (userAgent.match(/safari/i)) {
+      browserName = "safari";
+    } else if (userAgent.match(/opr\//i)) {
+      browserName = "opera";
+    } else if (userAgent.match(/edg/i)) {
+      browserName = "edge";
+    } else {
+      browserName = `No browser detection for [${userAgent}]`;
+    }
+
+    console.log(`Detected ${browserName}`);
+    if (browserName !== "chrome") {
+      document.getElementById('browser-name').innerText = browserName;
+      window.setTimeout(() => {
+        document.getElementById("browser-warning").classList.toggle('visible-div'); // style.display = 'block';
+      }, 1000);
+    }
+  }
+
+  (() => {
+
+    detectBrowser();
+
+    /* BG Animation goes here
+    bgAnimation = setInterval(() => {
+      v1 += dir1;
+      if (v1 > 20 || v1 < -20) {
+        dir1 *= -1;
+        v1 += dir1;
+      }
+      green1 += greenInc1;
+      if (green1 > 255 || green1 < 0) {
+        greenInc1 *= -1;
+        green1 += greenInc1;
+      }
+      blue2 += blueInc2;
+      if (blue2 > 255 || blue2 < 0) {
+        blueInc2 *= -1;
+        blue2 += blueInc2;
+      }
+      // https://www.w3schools.com/jsref/prop_style_background.asp
+      let dom = document.body;
+      // let content = `radial-gradient(at top, rgba(255, 255, 0, 0.5) 20%, rgba(1, 67, 114, 0.60) 55%)`;
+      let content = `${currentBackground}, `; // `radial-gradient(at top, rgba(255, ${green1}, 0, 0.5) ${v1}%, rgba(1, 67, ${blue2}, 0.60) ${v2}%), `;
+      content += `url("./backgrounds/${bgToUse[bgIndex].name}") no-repeat left top`;
+
+      // TODO Change bg image scale? add to content: dom.style.backgroundSize("150px 120px") ?
+
+      // A label/title for the BG image ?
+      let bgTitleElement = document.getElementById("bg-title");
+      if (bgTitleElement) {
+        bgTitleElement.innerText = bgToUse[bgIndex].title;
+      }
+
+      // console.log("Content:" + content);
+      dom.style.background = content;
+
+      let docElem = document.documentElement;
+      let body = document.getElementsByTagName('body')[0]; // could use document.body
+      // let w = window.innerWidth || docElem.clientWidth || body.clientWidth;
+      // let h = window.innerHeight || docElem.clientHeight || body.clientHeight;
+      dom.style.backgroundSize = 'cover'; // `${w}px ${h}px`;
+    }, 100);
+
+    */
+
+    window.addEventListener("resize", () => {
+      // document.getElementById('marquee-panel-01').width = document.body.clientWidth;
+    });
+
+    /**
+    bgAnimation = setInterval(() => {
+      setTimeout(darkenBackground, 1);
+    }, BG_INTERVAL);
+    */
+
+    function secToMinSec(sec) {
+      if (sec > 0) {
+        let min = Math.floor(sec / 60);
+        let secLeft = sec - (min * 60);
+        return (min > 0 ? `${min} m ` : '') + (secLeft > 0 ? `${secLeft} s` : '');
+      } else {
+        return '...';
+      }
+    }
+    
+    let countDown = setInterval(() => {
+      secondLeft -= 1;
+      // console.log(`CountDown: SecondLeft: ${secondLeft}`);
+      document.getElementById('count-down').innerText = secToMinSec(secondLeft);
+    }, 1000);
+
+    // setInterval(() => {
+    //   swipeTitle();
+    // }, 10 * 1000); // Every 10 s
+
+    setTimeout(() => {
+      // NOOP
+      // document.getElementById('marquee-panel-01').width = document.body.clientWidth;
+      // marquee('marquee-panel-01'); // Marquee animation
+    }, 1000);
+
+    setInterval(() => {
+      let now = new Date();
+      let timeData = now.format('D d M Y') + '<br/>' + now.format('H:i:s Z');
+      document.getElementById('date-time-container').innerHTML = timeData;
+      if (bgTime) {
+          document.getElementById('bg-data').innerHTML = now.format('H:i:s') + "<br/>" + now.format('Z');
+      }
+    }, 1000);
+
+    // Dialog management
+    let weatherDialog = document.getElementById("weather-links-dialog");
+    try {
+      document.getElementById('exit-weather-link').onclick = () => { weatherDialog.close(); };
+    } catch (err) {
+    }
+
+    console.log('Loaded! Pouet!');
+  })();
+
+</script>
+
+<script type="text/javascript">
+
+	let qrcode;
+	
+	let makeCode = (url) => {    
+    // alert("Aha!");
+		if (url === undefined) {
+			url = "index_00.html"; // Dummy
+		}
+    if (qrcode) {
+      let docLoc = document.location.href;
+      let toDisplay = docLoc.substring(0, docLoc.lastIndexOf('/')) + "/" + url; // document.location + url;
+      console.log(`Making QRCode for ${toDisplay}`);
+      qrcode.makeCode(toDisplay);
+      showQRCodeDialog();
+    } else {
+      alert("Not done loading yet...\nRe-try in a sec...");
+    }
+	};
+	
+	let showQRCodeDialog = () => {
+		let qrDialog = document.getElementById("qrcode-dialog");
+		if (qrDialog.show !== undefined) {
+			qrDialog.show();
+		} else {
+			// alert(NO_DIALOG_MESSAGE);
+			qrDialog.style.display = 'inline';
+		}
+	};
+
+	let closeQRCodeDialog = () => {
+		let qrDialog = document.getElementById("qrcode-dialog");
+		if (qrDialog.close !== undefined) {
+			qrDialog.close();
+		} else {
+			// alert(NO_DIALOG_MESSAGE);
+			qrDialog.style.display = 'none';
+		}
+	};
+
+  // TODO Fading in and out...
+  let customAlertOpened = false;
+  let showCustomAlert = (content) => {
+    let customAlert = document.getElementById("custom-alert");
+    document.getElementById('custom-alert-content').innerText = content;
+		if (customAlert.show !== undefined) {
+			customAlert.show();
+		} else {
+			customAlert.style.display = 'inline';
+		}
+    customAlertOpened = true;
+    window.setTimeout(closeCustomAlert, 5000);
+  };
+
+  let closeCustomAlert = () => {
+    let customAlert = document.getElementById("custom-alert");
+		if (customAlert.close !== undefined) {
+			customAlert.close();
+		} else {
+			customAlert.style.display = 'none';
+		}
+    customAlertOpened = false;
+  };
+
+  window.alert = showCustomAlert;  // Not in window.onload !
+
+  window.onload = () => {
+    // Free !
+
+  };
+	
+</script>
+
+</html>
