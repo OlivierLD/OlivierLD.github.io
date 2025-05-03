@@ -2017,10 +2017,11 @@ Date.prototype.format = function (dateFormat) {
 
     console.log(`Detected ${browserName}`);
     if (browserName !== "chrome") {
-      document.getElementById('browser-name').innerText = browserName;
-      window.setTimeout(() => {
-        document.getElementById("browser-warning").classList.toggle('visible-div'); // style.display = 'block';
-      }, 1000);
+      // document.getElementById('browser-name').innerText = browserName;
+      console.log(`Browser is ${browserName}.`);
+      // window.setTimeout(() => {
+      //   document.getElementById("browser-warning").classList.toggle('visible-div'); // style.display = 'block';
+      // }, 1000);
     }
   }
 

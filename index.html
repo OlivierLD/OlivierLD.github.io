@@ -2043,6 +2043,7 @@ Date.prototype.format = function (dateFormat) {
 
     detectBrowser();
 
+    // Start BAckground animation
     bgAnimation = setInterval(() => {
       v1 += dir1;
       if (v1 > 20 || v1 < -20) {
@@ -2111,13 +2112,13 @@ Date.prototype.format = function (dateFormat) {
     //   swipeTitle();
     // }, 10 * 1000); // Every 10 s
 
-    setTimeout(() => {
+    window.setTimeout(() => {
       // NOOP
       // document.getElementById('marquee-panel-01').width = document.body.clientWidth;
       // marquee('marquee-panel-01'); // Marquee animation
     }, 1000);
 
-    setInterval(() => {
+    window.setInterval(() => {
       let now = new Date();
       let timeData = now.format('D d M Y') + '<br/>' + now.format('H:i:s Z');
       document.getElementById('date-time-container').innerHTML = timeData;
@@ -2131,6 +2132,7 @@ Date.prototype.format = function (dateFormat) {
     try {
       document.getElementById('exit-weather-link').onclick = () => { weatherDialog.close(); };
     } catch (err) {
+      // dump it
     }
 
     console.log('Loaded! Pouet!');
