@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en_US">
+  <head>
+  	<link rel="icon" type="image/jpg" href="../../palm.04.jpg">
+  	<link rel="stylesheet" href="../../css/stylesheet.css" type="text/css"/>
+	<script type="module" src="../../webcomponents/widgets/slideshow/SlideShow.js"></script>
+	<style type="text/css">
+		:root {
+			--slider-scale: 0.5;
+		}
+
+		body {
+			background: black;
+			color: cyan;
+		}
+		.blink_me {
+			animation: blinker 0.5s linear infinite;
+		}
+		@keyframes blinker {
+			50% {
+				opacity: 0;
+			}
+		}
+		.display-data {
+			grid-area: middle;
+			text-align: center;
+			vertical-align: baseline;
+			margin: auto;
+			color: inherit;
+			font-size: 48px;
+			font-weight: bold;
+		}
+
+		/* Switch sliders */
+		.switch {
+			position: relative;
+			display: inline-block;
+			width: calc(var(--slider-scale) * 60px);
+			height: calc(var(--slider-scale) * 34px);
+		}
+
+		.switch input {
+			opacity: 0;
+			width: 0;
+			height: 0;
+		}
+
+		.slider {
+			position: absolute;
+			cursor: pointer;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background-color: #ccc;
+			-webkit-transition: .4s;
+			transition: .4s;
+		}
+
+		.slider:before {
+			position: absolute;
+			content: "";
+			height: calc(var(--slider-scale) * 26px);
+			width: calc(var(--slider-scale) * 26px);
+			left: calc(var(--slider-scale) * 4px);
+			bottom: calc(var(--slider-scale) * 4px);
+			background-color: white;
+			-webkit-transition: .4s;
+			transition: .4s;
+		}
+
+		input:checked + .slider {
+			background-color: #2196f3;
+		}
+
+		input:focus + .slider {
+			box-shadow: 0 0 1px #2196f3;
+		}
+
+		input:checked + .slider:before {
+			-webkit-transform: translateX(calc(var(--slider-scale) * 26px));
+			-ms-transform: translateX(calc(var(--slider-scale) * 26px));
+			transform: translateX(calc(var(--slider-scale) * 26px));
+		}
+
+		/* Rounded sliders */
+		.slider.round {
+			border-radius: calc(var(--slider-scale) * 34px);
+		}
+
+		.slider.round:before {
+			border-radius: 50%;
+		}
+
+		/* Switch grid */
+		.switch-container {
+			display: grid;
+			grid-template-columns: calc(var(--slider-scale) * 80px) 200px;
+			width: 500px;
+		}
+		.switch-element {
+			font-weight: normal;
+			place-self: flex-start;
+		}
+
+	</style>
+  </head>
+  <body>
+	<div id="loading-message" style="width: 100%; text-align: center; display: block; z-index: 10; position: fixed; top: 5px; left: 0;">
+		<!-- This will be hidden when page is loaded. See window.onload -->
+		<h1 class="display-data blink_me" style="color: orange;">Loading pictures, please wait...</h1>
+	</div>
+	
+  	<h1>Spi Ouest-France, 2025</h1>
+	<h5>Images load is deferred (on purpose)</h5>
+  	
+  	<script type="text/javascript">
+
+		let interval = undefined;
+
+		function setAuto(id, cb) {
+			if (cb.checked) {
+				interval = setInterval(() => { document.getElementById(id)._forward(); }, 5000);
+			} else {
+				clearInterval(interval);
+			}
+		}
+
+		function onSlideShowClick(src) {
+			console.log(">> Client side!! Slide " + src + " was clicked.");
+			window.open(src, '_blank'); // This is an example
+		}
+	</script>
+	<small>You can click on the slides...</small>
+	<br/>
+	<div style="height: 360px; margin: 2px;">
+		<slide-show id="slide-show-01"
+					width="640"
+					height="360">
+			<slide-show-image src="./DSC_2438.jpg" title="Spi Ouest France"></slide-show-image>
+			<slide-show-image src="./DSC_2440.jpg" title="Spi Ouest France"></slide-show-image>
+			<slide-show-image src="./DSC_2441.jpg" title="Spi Ouest France"></slide-show-image>
+			<slide-show-image src="./DSC_2443.jpg" title="Spi Ouest France"></slide-show-image>
+			<slide-show-image src="./DSC_2444.jpg" title="Spi Ouest France"></slide-show-image>
+			<slide-show-image src="./DSC_2445.jpg" title="Spi Ouest France"></slide-show-image>
+			<slide-show-image src="./DSC_2446.jpg" title="Spi Ouest France"></slide-show-image>
+		</slide-show>
+		
+	</div>
+	<script type="text/javascript">
+		window.onload = () => { // Important: window.onload
+			document.getElementById("slide-show-01").slideclick = onSlideShowClick;
+			document.getElementById("loading-message").style.display = "none"; // Hide loading message
+		};
+	</script>
+
+  <hr/>
+  <span style="font-style: italic; font-weight: normal;">Grand Large, 2025.</span>
+  </body>
+</html>
