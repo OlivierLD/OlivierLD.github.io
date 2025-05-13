@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<!-- Use a QS Prm 'lang' -->
+<html lang="en-US">
+<head>
+	<title>HTML5 / CSS3 Guitar Chords</title>
+	<meta charset="UTF-8">
+	<meta name="description" content="Free Web tutorials">
+	<meta name="keywords" content="HTML,CSS">
+	<meta name="author" content="olivierld.github.io">
+</head>
+
+<style type="text/css">
+fret-board {
+	--fret-board-bg: light-dark(#EEE, #333);
+	--fret-board-fret-c: light-dark(#000, #FFF);
+	--fret-board-fret-w: clamp(0.0625rem, 0.03125rem + 0.5cqi, 0.5rem);
+	--fret-board-string-c: light-dark(#0008, #FFF8);
+	--fret-board-string-w: clamp(0.0625rem, 0.03125rem + 0.5cqi, 0.125rem);
+
+	/* private consts */
+	--_frets: attr(frets type(<number>), 4);
+	--_strings: attr(strings type(<number>), 6);
+
+	aspect-ratio: 1 / 1;
+	background-color: var(--fret-board-bg);
+	border-radius: var(--fret-board-bdrs, .5rem);
+	box-sizing: border-box;
+	container-type: inline-size;
+	display: grid;
+	font-family: var(--fret-board-ff, inherit);
+	grid-template-columns: repeat(calc(var(--_strings) * 2), 1fr);
+	grid-template-rows:
+		var(--fret-board-top-row-h, 12%)
+		repeat(calc(var(--_frets)), 1fr)
+		var(--fret-board-bottom-row-h, 15%);
+	place-items: center;
+
+	/* Grid Lines (frets and strings) */
+	&::before {
+		background-color: var(--fret-board-fret-bg, #0000);
+		background-image:
+			linear-gradient(90deg, var(--fret-board-string-c) var(--fret-board-string-w), #0000 0 var(--fret-board-string-w)),
+			linear-gradient(180deg,  var(--fret-board-fret-c) var(--fret-board-fret-w), #0000 0 var(--fret-board-fret-w));
+		background-position: 0 var(--fret-board-fret-w), 0 0;
+		background-repeat: repeat-x, repeat-y;
+		background-size:
+			calc(100% / (var(--_strings) - 1) - (var(--fret-board-string-w) / var(--_strings))) calc(100% - (2 * var(--fret-board-fret-w))),
+			100% calc(100% / var(--_frets) - (var(--fret-board-fret-w) / var(--_frets)));
+		box-shadow: 0 calc(0px - var(--fred-board-fret-bbsw, 1.5cqi)) 0 0 var(--fret-board-fret-c);
+		content: '';
+		display: block;
+		grid-area: 2 / 2 / calc(var(--_frets) + 2) / calc(var(--_strings) * 2);
+		height: 100%;
+		width: 100%;
+	}
+	/* Chord Name */
+	&::after {
+		color: var(--fret-board-chord-c, light-dark(#222, #FFF));
+		content: attr(chord);
+		font-size: var(--fret-board-chord-fs, 7.5cqi);
+		font-weight: var(--fret-board-chord-fw, 500);
+		grid-column: 2 / span calc((var(--_strings) * 2) - 2);
+		grid-row: calc(var(--_frets) + 2);
+		text-align: center;
+		width: 100%;
+	}
+
+	/* Fret Number (optional). Set <li value="[number]"> to set fret offset */
+	ol {
+		align-items: center;
+		display: grid;
+		font-size: var(--fret-board-fret-number-fs, 5cqi);
+		font-weight: var(--fret-board-fret-number-fw, 400);
+		grid-column: 1;
+		grid-row: 2 / span var(--_frets);
+		grid-template-rows: repeat(var(--_frets), 1fr);
+		height: 100%;
+		list-style-position: inside;
+		padding: 0;
+	}
+}
+
+string-note {
+	--string-note-h: 12cqi;
+	--string-note-open-mute-h: 5cqi;
+
+	/* from attr() */
+	--barre: attr(barre type(<number>), 1);
+	--fret:  attr(fret type(<number>), 0);
+	--string:  attr(string type(<number>), 0);
+
+	aspect-ratio: 1;
+	background-color: var(--string-note-bg, currentColor);
+	border-radius: 50%; 
+	box-sizing: border-box;
+	display: grid;
+	grid-column: calc((var(--_strings) * 2) - (var(--string) * 2 - 1)) / span calc(var(--barre) * 2);
+	grid-row: calc(var(--fret) + 1);
+	height: var(--string-note-h);
+	isolation: isolate;
+	list-style: none;
+	place-content: center;
+
+	&::after {
+		color: var(--string-note-c, light-dark(#FFF, #222));
+		content: attr(finger);
+		font-size: var(--string-note-fs, 7cqi);
+		font-weight: var(--string-note-fw, 500);
+		text-box: cap alphabetic;
+	}
+	&[barre] {
+		aspect-ratio: unset;
+		border-radius: var(--string-note-h);
+		opacity: var(--string-note-barre-o, .6);
+		width: 100%;
+	}
+	&[mute], &[open] {
+		background-color: var(--string-note-mute-open-c, light-dark(#222, #FFF));
+		height: var(--string-note-open-mute-h);
+		width: var(--string-note-open-mute-h);
+	}
+	&[mute] {
+		border-image: conic-gradient(var(--fret-board-bg) 0 0) 50%/calc(50% - 0.25cqi);
+		rotate: 45deg;
+	}
+	&[open] {
+		border-radius: 50%;
+		mask: radial-gradient(circle farthest-side at center, #0000 calc(100% - 1cqi), #000 calc(100% - 1cqi + 1px));
+	}
+}
+
+
+/* For this demo only */
+body {
+	font-family: system-ui;
+	margin-inline: auto;
+	max-width: 1000px;
+	padding-inline: 1.5rem;
+}
+
+div {
+	display: grid;
+	gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+}
+
+h2 {
+	font-weight: 500;
+}
+
+/* Variations */
+.dusty-blue {
+	--fret-board-bg: #00bcd4;
+	--fret-board-chord-c: #065863;
+	--fret-board-fret-bg: #009eb3;
+	--fret-board-fret-c: #1a4a50;
+	--fret-board-string-c: #F0F0F0;
+	--string-note-bg: #1a4a50;
+	--string-note-c: #FFF;
+	--string-note-mute-open-c: #065863;
+}
+
+.dusty-green {
+	--fret-board-bg: #4caf50;
+	--fret-board-chord-c: #1b5e20;
+	--fret-board-fret-bg: #388e3c;
+	--fret-board-fret-c: #1c4a1e;
+	--fret-board-string-c: #F0F0F0;
+	--string-note-bg: #1c4a1e;
+	--string-note-c: #FFF;
+	--string-note-mute-open-c: #1b5e20;
+}
+
+.dusty-red {
+	--fret-board-bg: #e57373;
+	--fret-board-chord-c: #7f0000;
+	--fret-board-fret-bg: #bf4040;
+	--fret-board-fret-c: #962c2c;
+	--fret-board-string-c: #F0F0F0;
+	--string-note-bg: #6a1616;
+	--string-note-c: #FFF;
+	--string-note-mute-open-c: #7f0000;
+}
+
+.dusty-purple {
+	--fret-board-bg: #9575cd;
+	--fret-board-chord-c: #eeeafa;
+	--fret-board-fret-bg: #7e57c2;
+	--fret-board-fret-c: #3f2376;
+	--fret-board-string-c: #F0F0F0;
+	--string-note-bg: #3f2376;
+	--string-note-c: #FFF;
+	--string-note-mute-open-c: #eeeafa;
+}
+
+.dusty-orange {
+	--fret-board-bg: #f6b655;
+	--fret-board-chord-c: #4e2c05;
+	--fret-board-fret-bg: #f2960d;
+	--fret-board-fret-c: #5c320a;
+	--fret-board-string-c: #F0F0F0;
+	--string-note-bg: #5c320a;
+	--string-note-c: #FFF;
+	--string-note-mute-open-c: #4e2c05;
+}
+
+.dusty-teal {
+	--fret-board-bg: #00897b;
+	--fret-board-chord-c: #e0f2f1;
+	--fret-board-fret-bg: #12a190;
+	--fret-board-fret-c: #004d40;
+	--fret-board-string-c: #F0F0F0;
+	--string-note-bg: #004d40;
+	--string-note-c: #FFF;
+	--string-note-mute-open-c: #e0f2f1;
+}
+
+.dusty-gold {
+	--fret-board-bg: #ffd54f;
+	--fret-board-chord-c: #533f03;
+	--fret-board-fret-bg: #f7d56e;
+	--fret-board-fret-c: #533f03;
+	--fret-board-string-c: #533f03;
+	--string-note-bg: #54450b;
+	--string-note-c: #FFF;
+	--string-note-mute-open-c: #533f03;
+}
+
+.dusty-brown {
+	--fret-board-bg: #8d6e63;
+	--fret-board-chord-c: #efebe9;
+	--fret-board-fret-bg: #997466;
+	--fret-board-fret-c: #4e342e;
+	--fret-board-string-c: #F0F0F0;
+	--string-note-bg: #4e342e;
+	--string-note-c: #FFF;
+	--string-note-mute-open-c: #efebe9;
+}
+
+.dusty-rose {
+    --fret-board-bg: #e57373;
+    --fret-board-chord-c: #ffebee;
+    --fret-board-fret-bg: #ef9a9a;
+    --fret-board-fret-c: #c62828;
+    --fret-board-string-c: #ffebee;
+    --string-note-bg: #c62828;
+    --string-note-c: #ffebee;
+    --string-note-mute-open-c: #ffebee;
+}
+
+.dusty-amber {
+    --fret-board-bg: #ffb74d;
+    --fret-board-chord-c: #4e342e;
+    --fret-board-fret-bg: #ffcc80;
+    --fret-board-fret-c: #e65100;
+    --fret-board-string-c: #e65100;
+    --string-note-bg: #e65100;
+    --string-note-c: #fff3e0;
+    --string-note-mute-open-c: #4e342e;
+}
+
+.dusty-mint {
+    --fret-board-bg: #81c784;
+    --fret-board-chord-c: #1b5e20;
+    --fret-board-fret-bg: #a5d6a7;
+    --fret-board-fret-c: #1b5e20;
+    --fret-board-string-c: #e8f5e9;
+    --string-note-bg: #2e7d32;
+    --string-note-c: #e8f5e9;
+    --string-note-mute-open-c: #1b5e20;
+}
+
+.dusty-slate {
+    --fret-board-bg: #78909c;
+    --fret-board-chord-c: #eceff1;
+    --fret-board-fret-bg: #90a4ae;
+    --fret-board-fret-c: #263238;
+    --fret-board-string-c: #eceff1;
+    --string-note-bg: #455a64;
+    --string-note-c: #eceff1;
+    --string-note-mute-open-c: #eceff1;
+}    
+</style>
+
+<script type="text/javascript">
+
+let getQueryParameterByName = (name, url) => {
+    if (!url) {
+        url = window.location.href;
+    }
+    name = name.replace(/[\[\]]/g, "\\$&");
+    let regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) {
+        return null;
+    }
+    if (!results[2]) {
+        return '';
+    }
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+};
+
+let switchLanguage = (lang) => {
+    document.querySelectorAll('fret-board').forEach(fret => {
+        let chord = fret.getAttribute('chord');
+        switch (chord) {
+            case 'E Major':
+                fret.setAttribute('chord', (lang === 'FR') ? 'Mi Majeur' : 'E Major');
+                break;
+            case 'G Major':
+                fret.setAttribute('chord', (lang === 'FR') ? 'Sol Majeur' : 'G Major');
+                break;
+            case 'C Major':
+                fret.setAttribute('chord', (lang === 'FR') ? 'Do Majeur' : 'C Major');
+                break;
+            case 'D Major':
+                fret.setAttribute('chord', (lang === 'FR') ? 'Ré Majeur' : 'D Major');
+                break;
+            case 'A Major':
+                fret.setAttribute('chord', (lang === 'FR') ? 'La Majeur' : 'A Major');
+                break;
+            case 'F Major':
+                fret.setAttribute('chord', (lang === 'FR') ? 'Fa Majeur' : 'F Major');
+                break;
+            case 'A Minor':
+                fret.setAttribute('chord', (lang === 'FR') ? 'La Mineur' : 'A Minor');
+                break;
+            case 'E Minor':
+                fret.setAttribute('chord', (lang === 'FR') ? 'Mi Mineur' : 'E Minor');
+                break;
+            case 'D Minor':
+                fret.setAttribute('chord', (lang === 'FR') ? 'Ré Mineur' : 'D Minor');
+                break;
+            case 'A7':
+                fret.setAttribute('chord', (lang === 'FR') ? "La 7" : "A7");
+                break;
+            case 'E7':
+                fret.setAttribute('chord', (lang === 'FR') ? "Mi 7" : "E7");
+                break;
+            case 'B7':
+                fret.setAttribute('chord', (lang === 'FR') ? "Si 7" : "B7");
+                break;
+            // TODO More chords... (See Complex Chords)
+        }
+    });
+};
+
+window.onload = () => {
+	console.log(`${window.location.href} loaded !`);
+	let userLang = getQueryParameterByName('lang');
+
+    if (!userLang) { 
+		let browserUserLang = navigator.language || navigator.userLanguage; 
+		console.log("The browser's language is: " + browserUserLang);
+		if (browserUserLang) {
+			if (browserUserLang.substring(0, 2).toUpperCase() === 'FR') {
+				userLang = 'FR';
+			} else {
+				userLang = 'EN';
+				console.log("We'll speak english");
+			}
+		}
+	}
+	if (userLang) {
+		switchLanguage(userLang);
+	}
+
+};    
+
+/* JS *NOT NEEDED* for Chrome, only for Safari/Firefox */
+/* Uses the enhanced attr()-method in CSS */
+
+function isAdvancedAttrSupported() {
+  const T = document.createElement('div');
+  document.body.appendChild(T);
+  
+  try {
+    T.style.setProperty('--t', 'attr(data-test type(<number>), 0)');
+    T.dataset.test = "123";
+
+    const computedValue = getComputedStyle(T)
+      .getPropertyValue('--t')
+      .trim();
+    
+    return computedValue === "123";
+  } catch (e) {
+    return false;
+  } finally {
+    T.remove();
+  }
+}
+
+if (!isAdvancedAttrSupported()) {
+  const fretBoards = document.querySelectorAll('fret-board');
+  fretBoards.forEach(fret => {
+    fret.style.setProperty('--_strings', fret.getAttribute('strings'));
+    fret.style.setProperty('--_frets', fret.getAttribute('frets'));
+    const stringNotes = fret.querySelectorAll('string-note');
+    stringNotes.forEach(note => {
+      note.style.setProperty('--string', note.getAttribute('string') || 1);
+      note.style.setProperty('--fret', note.getAttribute('fret') || 0);
+      note.style.setProperty('--barre', note.getAttribute('barre') || 1);
+    });
+  });
+}
+</script>
+
+<body>
+<div>
+
+  <fret-board frets="4" strings="6" chord="E Major" class="dusty-blue">
+    <string-note string="6" open></string-note>
+    <string-note string="5" fret="2" finger="2"></string-note>
+    <string-note string="4" fret="2" finger="3"></string-note>
+    <string-note string="3" fret="1" finger="1"></string-note>
+    <string-note string="2" open></string-note>
+    <string-note string="1" open></string-note>
+  </fret-board>
+
+  <fret-board frets="4" strings="6" chord="G Major" class="dusty-rose">
+    <string-note string="6" fret="3" finger="2"></string-note>
+    <string-note string="5" fret="2" finger="1"></string-note>
+    <string-note string="4" open></string-note>
+    <string-note string="3" open></string-note>
+    <string-note string="2" open></string-note>
+    <string-note string="1" fret="3" finger="3"></string-note>
+  </fret-board>
+
+  <fret-board frets="4" strings="6" chord="C Major" class="dusty-amber">
+    <string-note string="6" mute></string-note>
+    <string-note string="5" fret="3" finger="3"></string-note>
+    <string-note string="4" fret="2" finger="2"></string-note>
+    <string-note string="3" open></string-note>
+    <string-note string="2" fret="1" finger="1"></string-note>
+    <string-note string="1" open></string-note>
+  </fret-board>
+
+  <fret-board frets="4" strings="6" chord="D Major" class="dusty-mint">
+    <string-note string="6" mute></string-note>
+    <string-note string="5" mute></string-note>
+    <string-note string="4" open></string-note>
+    <string-note string="3" fret="2" finger="1"></string-note>
+    <string-note string="2" fret="3" finger="3"></string-note>
+    <string-note string="1" fret="2" finger="2"></string-note>
+  </fret-board>
+
+  <fret-board frets="4" strings="6" chord="A Major" class="dusty-slate">
+    <string-note string="6" mute></string-note>
+    <string-note string="5" open></string-note>
+    <string-note string="4" fret="2" finger="2"></string-note>
+    <string-note string="3" fret="2" finger="3"></string-note>
+    <string-note string="2" fret="2" finger="4"></string-note>
+    <string-note string="1" open></string-note>
+  </fret-board>
+
+  <fret-board frets="4" strings="6" chord="F Major" class="dusty-green">
+    <string-note string="6" fret="1" barre="6" finger="1"></string-note>
+    <string-note string="3" fret="2" finger="2"></string-note>
+    <string-note string="5" fret="3" finger="3"></string-note>
+    <string-note string="4" fret="3" finger="4"></string-note>
+  </fret-board>
+
+  <fret-board frets="4" strings="6" chord="A Minor" class="dusty-red">
+    <string-note string="6" mute></string-note>
+    <string-note string="5" open></string-note>
+    <string-note string="4" fret="2" finger="2"></string-note>
+    <string-note string="3" fret="2" finger="3"></string-note>
+    <string-note string="2" fret="1" finger="1"></string-note>
+    <string-note string="1" open></string-note>
+  </fret-board>
+
+  <fret-board frets="4" strings="6" chord="E Minor" class="dusty-purple">
+    <string-note string="6" open></string-note>
+    <string-note string="5" fret="2" finger="2"></string-note>
+    <string-note string="4" fret="2" finger="3"></string-note>
+    <string-note string="3" open></string-note>
+    <string-note string="2" open></string-note>
+    <string-note string="1" open></string-note>
+  </fret-board>
+
+  <fret-board frets="4" strings="6" chord="D Minor" class="dusty-orange">
+    <string-note string="6" mute></string-note>
+    <string-note string="5" mute></string-note>
+    <string-note string="4" open></string-note>
+    <string-note string="3" fret="2" finger="2"></string-note>
+    <string-note string="2" fret="3" finger="3"></string-note>
+    <string-note string="1" fret="1" finger="1"></string-note>
+  </fret-board>
+
+  <fret-board frets="4" strings="6" chord="A7" class="dusty-teal">
+    <string-note string="6" mute></string-note>
+    <string-note string="5" open></string-note>
+    <string-note string="4" fret="2" finger="2"></string-note>
+    <string-note string="3" open></string-note>
+    <string-note string="2" fret="2" finger="3"></string-note>
+    <string-note string="1" open></string-note>
+  </fret-board>
+
+  <fret-board frets="4" strings="6" chord="E7" class="dusty-gold">
+    <string-note string="6" open></string-note>
+    <string-note string="5" fret="2" finger="2"></string-note>
+    <string-note string="4" open></string-note>
+    <string-note string="3" fret="1" finger="1"></string-note>
+    <string-note string="2" open></string-note>
+    <string-note string="1" open></string-note>
+  </fret-board>
+
+  <fret-board frets="4" strings="6" chord="B7" class="dusty-brown">
+    <string-note string="6" mute></string-note>
+    <string-note string="5" fret="2" finger="1"></string-note>
+    <string-note string="4" fret="1" finger="2"></string-note>
+    <string-note string="3" fret="2" finger="3"></string-note>
+    <string-note string="2" open></string-note>
+    <string-note string="1" fret="2" finger="4"></string-note>
+  </fret-board>
+
+</div>
+
+<h2>Complex Chords</h2>
+
+<div>
+
+  <fret-board frets="4" strings="6" chord="Cmaj9">
+    <string-note string="6" mute></string-note>
+    <string-note string="5" fret="3" finger="2"></string-note>
+    <string-note string="4" fret="2" finger="1"></string-note>
+    <string-note string="3" fret="4" finger="4"></string-note>
+    <string-note string="2" fret="3" finger="3"></string-note>
+    <string-note string="1" open></string-note>
+    <ol><li value="7"></li></ol>
+  </fret-board>
+
+  <fret-board frets="4" strings="6" chord="F#m7b5">
+    <string-note string="6" fret="2" barre="6" finger="1"></string-note>
+    <string-note string="5" fret="3" finger="2"></string-note>
+    <string-note string="3" fret="4" finger="4"></string-note>
+    <string-note string="2" fret="3" finger="3"></string-note>
+    <ol><li value="9"></li></ol>
+  </fret-board>
+
+  <fret-board frets="4" strings="6" chord="B13">
+    <string-note string="6" mute></string-note>
+    <string-note string="5" fret="2" finger="1"></string-note>
+    <string-note string="4" fret="4" finger="3"></string-note>
+    <string-note string="3" fret="3" finger="2"></string-note>
+    <string-note string="2" fret="4" finger="4"></string-note>
+    <string-note string="1" mute></string-note>
+    <ol><li value="6"></li></ol>
+  </fret-board>
+
+  <fret-board frets="4" strings="6" chord="Dm11">
+    <string-note string="6" mute></string-note>
+    <string-note string="5" fret="1" barre="5" finger="1"></string-note>
+    <string-note string="3" fret="2" finger="2"></string-note>
+    <string-note string="2" fret="3" finger="3"></string-note>
+    <string-note string="1" fret="3" finger="4"></string-note>
+    <ol><li value="5"></li></ol>
+  </fret-board>
+
+  <fret-board frets="4" strings="6" chord="Emaj7#11">
+    <string-note string="6" open></string-note>
+    <string-note string="5" fret="2" finger="2"></string-note>
+    <string-note string="4" fret="1" finger="1"></string-note>
+    <string-note string="3" fret="3" finger="4"></string-note>
+    <string-note string="2" fret="2" finger="3"></string-note>
+    <string-note string="1" open></string-note>
+    <ol><li value="11"></li></ol>
+  </fret-board>
+
+  <fret-board frets="4" strings="6" chord="Cadd9/G">
+    <string-note string="6" fret="3" finger="3"></string-note>
+    <string-note string="5" fret="2" finger="2"></string-note>
+    <string-note string="4" open></string-note>
+    <string-note string="3" barre="2" string="3" fret="2" finger="1"></string-note>
+    <string-note string="2" open></string-note>
+    <string-note string="1" fret="3" finger="4"></string-note>
+  </fret-board>
+
+  <fret-board frets="4" strings="6" chord="Am9">
+    <string-note string="6" mute></string-note>
+    <string-note string="5" open></string-note>
+    <string-note string="4" fret="2" finger="1"></string-note>
+    <string-note string="3" barre="2" string="3" fret="3" finger="3"></string-note>
+    <string-note string="1" fret="3" finger="4"></string-note>
+    <ol><li value="5"></li></ol>
+  </fret-board>
+
+  <fret-board frets="4" strings="6" chord="E7sus4">
+    <string-note string="6" open></string-note>
+    <string-note string="5" fret="2" finger="2"></string-note>
+    <string-note string="4" fret="2" finger="3"></string-note>
+    <string-note string="3" fret="2" finger="4"></string-note>
+    <string-note string="2" barre="2" string="2" fret="3" finger="1"></string-note>
+    <string-note string="1" open></string-note>
+    <ol><li value="7"></li></ol>
+  </fret-board>
+
+</div>
+
+<h2>Ukulele</h2>
+
+<div>
+
+  <fret-board frets="4" strings="4" chord="C Major">
+    <string-note string="4" open></string-note>
+    <string-note string="3" open></string-note>
+    <string-note string="2" open></string-note>
+    <string-note string="1" fret="3" finger="3"></string-note>
+  </fret-board>
+
+  <fret-board frets="4" strings="4" chord="G Major">
+    <string-note string="4" open></string-note>
+    <string-note string="3" fret="2" finger="1"></string-note>
+    <string-note string="2" fret="3" finger="3"></string-note>
+    <string-note string="1" fret="2" finger="2"></string-note>
+  </fret-board>
+
+  <fret-board frets="4" strings="4" chord="F Major">
+    <string-note string="4" fret="2" finger="2"></string-note>
+    <string-note string="3" open></string-note>
+    <string-note string="2" fret="1" finger="1"></string-note>
+    <string-note string="1" open></string-note>
+  </fret-board>
+
+  <fret-board frets="4" strings="4" chord="A Minor">
+    <string-note string="4" fret="2" finger="2"></string-note>
+    <string-note string="3" open></string-note>
+    <string-note string="2" open></string-note>
+    <string-note string="1" open></string-note>
+  </fret-board>
+
+</div>
+
+<h2>Mandolin</h2>
+
+<div>
+
+  <fret-board frets="4" strings="4" chord="G Major">
+    <string-note string="4" open></string-note>
+    <string-note string="3" open></string-note>
+    <string-note string="2" open></string-note>
+    <string-note string="1" fret="2" finger="2"></string-note>
+  </fret-board>
+
+  <fret-board frets="4" strings="4" chord="D Major">
+    <string-note string="4" fret="2" finger="2"></string-note>
+    <string-note string="3" fret="3" finger="3"></string-note>
+    <string-note string="2" fret="2" finger="1"></string-note>
+    <string-note string="1" open></string-note>
+  </fret-board>
+
+  <fret-board frets="4" strings="4" chord="A Major">
+    <string-note string="4" fret="2" finger="1"></string-note>
+    <string-note string="3" fret="2" finger="1"></string-note>
+    <string-note string="2" fret="2" finger="1"></string-note>
+    <string-note string="1" open></string-note>
+    <ol><li value="2"></li></ol>
+  </fret-board>
+
+  <fret-board frets="4" strings="4" chord="E Major">
+    <string-note string="4" fret="2" finger="1"></string-note>
+    <string-note string="3" fret="2" finger="1"></string-note>
+    <string-note string="2" open></string-note>
+    <string-note string="1" open></string-note>
+  </fret-board>
+
+</div>
+
+<h2>Banjo</h2>
+
+<div>
+
+  <fret-board frets="4" strings="5" chord="G Major">
+    <string-note string="5" open></string-note>
+    <string-note string="4" open></string-note>
+    <string-note string="3" open></string-note>
+    <string-note string="2" open></string-note>
+    <string-note string="1" open></string-note>
+  </fret-board>
+
+  <fret-board frets="4" strings="5" chord="C Major">
+    <string-note string="5" open></string-note>
+    <string-note string="4" fret="2" finger="2"></string-note>
+    <string-note string="3" open></string-note>
+    <string-note string="2" fret="1" finger="1"></string-note>
+    <string-note string="1" open></string-note>
+  </fret-board>
+
+  <fret-board frets="4" strings="5" chord="D Major">
+    <string-note string="5" open></string-note>
+    <string-note string="4" fret="4" finger="3"></string-note>
+    <string-note string="3" fret="4" finger="4"></string-note>
+    <string-note string="2" fret="3" finger="2"></string-note>
+    <string-note string="1" fret="2" finger="1"></string-note>
+  </fret-board>
+
+  <fret-board frets="4" strings="5" chord="D7">
+    <string-note string="5" open></string-note>
+    <string-note string="4" fret="4" finger="3"></string-note>
+    <string-note string="3" fret="2" finger="1"></string-note>
+    <string-note string="2" fret="3" finger="2"></string-note>
+    <string-note string="1" fret="2" finger="1"></string-note>
+  </fret-board>
+
+</div>
+</body>    
+
+</html>
