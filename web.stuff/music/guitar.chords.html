@@ -7,6 +7,7 @@
 	<meta name="description" content="Free Web tutorials">
 	<meta name="keywords" content="HTML,CSS">
 	<meta name="author" content="olivierld.github.io">
+  <link rel="icon" type="image/png" href="guitar.png">
 </head>
 
 <style type="text/css">
@@ -340,12 +341,15 @@ let switchLanguage = (lang) => {
             case 'B7':
                 fret.setAttribute('chord', (lang === 'FR') ? "Si 7" : "B7");
                 break;
+            case 'D7':
+                fret.setAttribute('chord', (lang === 'FR') ? "Ré 7" : "D7");
+                break;
             // More chords... (See Complex Chords)
             case 'Cmaj9':
-                fret.setAttribute('chord', (lang === 'FR') ? "Do majeur 9e" : "Cmaj9");
+                fret.setAttribute('chord', (lang === 'FR') ? "Do majeur 9" : "Cmaj9");
                 break;
             case 'F#m7b5':
-                fret.setAttribute('chord', (lang === 'FR') ? "Do majeur 9e" : "Cmaj9");
+                fret.setAttribute('chord', (lang === 'FR') ? "Fa# mineur 7b5" : "F#m7b5");
                 break;
             case 'B13':
                 fret.setAttribute('chord', (lang === 'FR') ? "Si 13" : "B13");
@@ -433,8 +437,8 @@ if (!isAdvancedAttrSupported()) {
 </script>
 
 <body>
+<h2>Guitar Chords</h2>
 <div>
-
   <fret-board frets="4" strings="6" chord="E Major" class="dusty-blue">
     <string-note string="6" open></string-note>
     <string-note string="5" fret="2" finger="2"></string-note>
@@ -730,6 +734,8 @@ if (!isAdvancedAttrSupported()) {
   </fret-board>
 
 </div>
+<hr style="margin-top: 20px;"/>
+&copy; 2025, Oliv Soft.
 </body>    
 
 </html>
