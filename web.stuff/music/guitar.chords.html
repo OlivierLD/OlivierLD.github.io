@@ -340,7 +340,34 @@ let switchLanguage = (lang) => {
             case 'B7':
                 fret.setAttribute('chord', (lang === 'FR') ? "Si 7" : "B7");
                 break;
-            // TODO More chords... (See Complex Chords)
+            // More chords... (See Complex Chords)
+            case 'Cmaj9':
+                fret.setAttribute('chord', (lang === 'FR') ? "Do majeur 9e" : "Cmaj9");
+                break;
+            case 'F#m7b5':
+                fret.setAttribute('chord', (lang === 'FR') ? "Do majeur 9e" : "Cmaj9");
+                break;
+            case 'B13':
+                fret.setAttribute('chord', (lang === 'FR') ? "Si 13" : "B13");
+                break;
+            case 'Dm11':
+                fret.setAttribute('chord', (lang === 'FR') ? "Ré mineur 11" : "Dm11");
+                break;
+            case 'Emaj7#11':
+                fret.setAttribute('chord', (lang === 'FR') ? "Mi majeur 7e #11" : "Emaj7#11");
+                break;
+            case 'Cadd9/G':
+                fret.setAttribute('chord', (lang === 'FR') ? "Do majeur add9/G" : "Cadd9/G");
+                break;
+            case 'Am9':
+                fret.setAttribute('chord', (lang === 'FR') ? "La mineur 9" : "Am9");
+                break;
+            case 'E7sus4':
+                fret.setAttribute('chord', (lang === 'FR') ? "Mi 7sus4" : "E7sus4");
+                break;
+            default:
+                console.log(`Unknown chord: ${chord}`);
+                break;
         }
     });
 };
