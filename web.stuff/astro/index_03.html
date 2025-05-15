@@ -601,32 +601,58 @@
 			let appCorrection = sdCorrected - result['horizon-depression-minutes'];
 			let appToObsCorrection = result['parallax-minutes'] - result['refraction-minutes'];
 			fmtDisplay += ("<table>");
-			fmtDisplay += ("<tr><th style='text-align: left;' colspan='2'>" + translator(ALMANAC) + "</th><th style='text-align: left;' colspan='4'>" + translator(CORRECTIONS) + "</th></tr>");
+			fmtDisplay += ("<tr>");
+			fmtDisplay += ("<td style='border: 1px solid blue; border-radius: 10px; vertical-align: top;'>");	
+			/*
+			  Left side
+			 */
+			fmtDisplay += ("<table>");
+			fmtDisplay += ("<tr><th style='text-align: left;' colspan='2'>" + translator(ALMANAC) + "</th></tr>");
 			// Line 1
-			fmtDisplay += ("<tr><td style='text-align: right;'>" + translator(GHA) + "</td><td style='text-align: right;'>" + decToSex(result['gha']) + "</td>");
-			fmtDisplay += (     "<td style='text-align: right;'>" + translator(HORIZON_DIP) + "</td><td style='text-align: right;'>" + (- result['horizon-depression-minutes']).toFixed(2) + "'</td>");
-			fmtDisplay += (     "<td style='text-align: right;'>" + translator(PARALLAX) + "</td><td style='text-align: right;'>" + result['parallax-minutes'].toFixed(2) + "'</td></tr>");
+			fmtDisplay += ("<tr><td style='text-align: right;'>" + translator(GHA) + "</td><td style='text-align: right;'>" + decToSex(result['gha']) + "</td></tr>");
 			// Line 1bis
-			fmtDisplay += ("<tr><td style='text-align: right;'>" + translator(LHA) + "</td><td style='text-align: right;'>" + decToSex(result['lha']) + "</td>");
-			fmtDisplay += (     "<td style='text-align: right;'></td><td style='text-align: right;'></td>");
-			fmtDisplay += (     "<td style='text-align: right;'></td><td style='text-align: right;'></td></tr>");
+			fmtDisplay += ("<tr><td style='text-align: right;'>" + translator(LHA) + "</td><td style='text-align: right;'>" + decToSex(result['lha']) + "</td></tr>");
 			// Line 2
-			fmtDisplay += ("<tr><td style='text-align: right;'>" + translator(DEC) + "</td><td style='text-align: right;'>" + decToSex(result['decl'], 'NS') + "</td>");
-			fmtDisplay += (     "<td style='text-align: right;'>" + translator(SEMI_DIAM) + "</td><td style='text-align: right;'>" + sdCorrected.toFixed(2) + "'</td>");
-			fmtDisplay += (     "<td style='text-align: right;'>" + translator(REFRACTION) + "</td><td style='text-align: right;'>" + (- result['refraction-minutes']).toFixed(2) + "'</td></tr>");
+			fmtDisplay += ("<tr><td style='text-align: right;'>" + translator(DEC) + "</td><td style='text-align: right;'>" + decToSex(result['decl'], 'NS') + "</td></tr>");
 			// Line 3
-			fmtDisplay += ("<tr><td style='text-align: right;'>" + translator(SEMI_DIAM) + "</td><td style='text-align: right;'>" + result['semi-diameter-minutes'].toFixed(2) + "'</td>");
-			fmtDisplay += (     "<td style='text-align: right;'>" + translator(APP_ALT) + "</td><td style='text-align: right;'><b>" + decToSex(result['observed-altitude-degrees'] - (appToObsCorrection / 60)) + "</b></td>");
-			fmtDisplay += (     "<td style='text-align: right;'>" + translator(OBS_ALT) + "</td><td style='text-align: right;'><b>" + decToSex(result['observed-altitude-degrees']) + "</b></td></tr>");
-			// Line 4
-			fmtDisplay += ("<tr><td style='text-align: right;'>" + translator(HOR_PARALLAX) + "</td><td style='text-align: right;'>" + (result['hp'] * 60).toFixed(2) + "'</td>");
-			fmtDisplay += (     "<td style='text-align: right;'>" + translator(APP_CORRECTION) + "</td><td style='text-align: right;'>" + appCorrection.toFixed(2) + "'</td>");
-			fmtDisplay += (     "<td style='text-align: right;'>" + translator(TOTAL_CORRECTION) + "</td><td style='text-align: right;'>" + result['total-correction-minutes'].toFixed(2) + "'</td></tr>");
+			fmtDisplay += ("<tr><td style='text-align: right;'>" + translator(SEMI_DIAM) + "</td><td style='text-align: right;'>" + result['semi-diameter-minutes'].toFixed(2) + "'</td></tr>");
+
 			if (result['lunar-distance'] !== undefined) {
 				// Line 5
 				fmtDisplay += ("<tr><td style='text-align: right;'>" + translator(LUNAR_DIST) + "</td><td style='text-align: right;'>" + decToSex(result['lunar-distance']) + "</td></tr>");
 			}
-			fmtDisplay += ("<tr><td style='text-align: center;' colspan='6'><hr/></td></tr>");
+			fmtDisplay += ("</table>");
+			fmtDisplay += ("</td><td style='border: 1px solid blue; border-radius: 10px; vertical-align: top;'>");
+			fmtDisplay += ("<table>");
+			/*
+			  Right side
+			 */
+			fmtDisplay += ("<tr><th style='text-align: left;' colspan='4'>" + translator(CORRECTIONS) + "</th></tr>");
+			// Line 1
+			fmtDisplay += ("<tr><td style='text-align: right;'>" + translator(HORIZON_DIP) + "</td><td style='text-align: right;'>" + (- result['horizon-depression-minutes']).toFixed(2) + "'</td>");
+			fmtDisplay += (     "<td style='text-align: right;'>" + translator(PARALLAX) + "</td><td style='text-align: right;'>" + result['parallax-minutes'].toFixed(2) + "'</td></tr>");
+			// Line 1bis
+			fmtDisplay += ("<tr><td style='text-align: right;'></td><td style='text-align: right;'></td>");
+			fmtDisplay += (     "<td style='text-align: right;'></td><td style='text-align: right;'></td></tr>");
+			// Line 2
+			fmtDisplay += ("<tr><td style='text-align: right;'>" + translator(SEMI_DIAM) + "</td><td style='text-align: right;'>" + sdCorrected.toFixed(2) + "'</td>");
+			fmtDisplay += (     "<td style='text-align: right;'>" + translator(REFRACTION) + "</td><td style='text-align: right;'>" + (- result['refraction-minutes']).toFixed(2) + "'</td></tr>");
+			// Line 3
+			fmtDisplay += ("<tr><td style='text-align: right;'>" + translator(APP_ALT) + "</td><td style='text-align: right;'><b>" + decToSex(result['observed-altitude-degrees'] - (appToObsCorrection / 60)) + "</b></td>");
+			fmtDisplay += (     "<td style='text-align: right;'>" + translator(OBS_ALT) + "</td><td style='text-align: right;'><b>" + decToSex(result['observed-altitude-degrees']) + "</b></td></tr>");
+			// Line 4
+			fmtDisplay += ("<tr><td style='text-align: right;'>" + translator(APP_CORRECTION) + "</td><td style='text-align: right;'>" + appCorrection.toFixed(2) + "'</td>");
+			fmtDisplay += (     "<td style='text-align: right;'>" + translator(TOTAL_CORRECTION) + "</td><td style='text-align: right;'>" + result['total-correction-minutes'].toFixed(2) + "'</td></tr>");
+
+			fmtDisplay += ("</table>");
+				
+
+			fmtDisplay += ("</td></tr>"); // </table>");
+			fmtDisplay += ("<tr><td style='border: 1px solid blue; border-radius: 10px; vertical-align: top;' colspan='2'>");
+			/*
+			  Estime / Dead Reckoning
+			 */
+			fmtDisplay += ("<table>");
 			fmtDisplay += ("<tr><th style='text-align: left;' colspan='6'>" + translator(DEAD_REC) + "</th></tr>");
 			// Line 6
 			fmtDisplay += ("<tr><td style='text-align: right;' colspan='3'>" + translator(OBS_ALT) + "</td><td style='text-align: left;' colspan='3'>" + decToSex(result['observed-altitude-degrees']) + "</td></tr>");
@@ -637,7 +663,10 @@
 			// Line 9
 			fmtDisplay += ("<tr><td style='text-align: right;' colspan='3'>" + translator(INTERCEPT) + "</td><td style='text-align: left;' colspan='3'>" + Math.abs(result['intercept-degrees'] * 60).toFixed(2) + "' " + (result['intercept-degrees'] < 0 ? translator(TOWARDS) : translator(AWAY)) + " " + translateBodyName(body) + "</td></tr>");
 
+			fmtDisplay += ("</table>")
+			fmtDisplay += ("</td></tr>");
 			fmtDisplay += ("</table>");
+
 			fmtDisplay += ("<hr/>");
 			fmtDisplay += ("<i>" + translator(WITH_DELTA_T) + " = " + result['delta-t'] + ' s</i>');
 			fmtDisplay += ("<hr/>");
@@ -1064,7 +1093,7 @@
 	S&eacute;lectionnez l'astre &agrave; observer.<br/>
 	Ensuite, vous pouvez :
 	<ul>
-		<li>Saisir la hauteur lue au sextant, et cliquer le bouton "Calcul"</li>
+		<li>Saisir la hauteur lue au sextant (aka instrumentale), et cliquer le bouton "Calcul"</li>
 		<li>Cliquer le bouton "Inverse", pour voir ce que vous <i>devriez</i> observer</li>
 	</ul>
 	Ensuite, voyez vous-m&ecirc;me, les donn&eacute;es doivent &ecirc;tre affich&eacute;es &agrave; l'&eacute;cran !
@@ -1178,15 +1207,15 @@ let translator = (id) => {
 		case REFRACTION:
 			return (langToUse === 'FR') ? 'R&eacute;fraction' : 'Refraction' ;
 		case APP_ALT:
-			return (langToUse === 'FR') ? 'Hauteur apparente' : 'Apparent Elevation' ;
+			return (langToUse === 'FR') ? 'Hauteur apparente<br/><small>(H. instr. &plusmn; semi-diam. + depr.hor.)</small>' : 'Apparent Elevation<br/><small>(Instr.Elev. &plusmn; semi-diam. + hor.dip)</small>' ;
 		case OBS_ALT:
-			return (langToUse === 'FR') ? 'Hauteur Observ&eacute;e' : 'Observed Elevation' ;
+			return (langToUse === 'FR') ? 'Hauteur Observ&eacute;e<br/><small>(H. instr + corr. totale)</small>' : 'Observed Elevation<br/><small>(Instr.Elev + Total Corr.)</small>' ;
 		case HOR_PARALLAX:
 			return (langToUse === 'FR') ? 'Parallaxe Horizontale' : 'Horizontal Parallax' ;
 		case APP_CORRECTION:
-			return (langToUse === 'FR') ? 'Correction Apparente' : 'Apparent Correction' ;
+			return (langToUse === 'FR') ? 'Correction Apparente<br/><small>(SD - Depr.Hor.)</small>' : 'Apparent Correction<br/><small>(SD - Horizon Dip)</small>' ;
 		case TOTAL_CORRECTION:
-			return (langToUse === 'FR') ? 'Correction Totale' : 'Total Correction' ;
+			return (langToUse === 'FR') ? 'Correction Totale<br/><small>(App Correction - refraction + hp)</small>' : 'Total Correction<br/><small>(App Correction - refraction + hp)</small>' ;
 		case HORIZON_DIP:
 			return (langToUse === 'FR') ? 'D&eacute;pression de l\'horizon' : 'Horizon Dip' ;
 		case PARALLAX:
@@ -1194,7 +1223,7 @@ let translator = (id) => {
 		case LUNAR_DIST:
 			return (langToUse === 'FR') ? 'Distance Lunaire' : 'Lunar Distance' ;
 		case DEAD_REC:
-			return (langToUse === 'FR') ? 'Estime' : 'Dead Reckoning' ;
+			return (langToUse === 'FR') ? 'Estime :' : 'Dead Reckoning:' ;
 		case Z:
 			return (langToUse === 'FR') ? 'Azimuth' : 'Z' ;
 		case EST_ALT:
