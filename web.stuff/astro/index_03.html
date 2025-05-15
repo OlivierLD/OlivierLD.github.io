@@ -800,7 +800,10 @@
 		<tr>
 			<td>
 				<div style="display: grid; grid-template-columns: auto auto;">
-					<h1 id="title-01">Sight Reduction</h1>
+					<div>
+						<h1 id="title-01">Sight Reduction</h1>
+						<span id="sub-title-01">Check your observations and calculations</span>
+					</div>
 					<img src="./pix/sextant.gif" alt="Sextant" style="background-color: white; padding: 10px; border-radius: 50%; border: 1px solid cyan;">
 				</div>
 			</td>
@@ -1120,6 +1123,7 @@ let getQueryParameterByName = (name, url) => {
 
 let translate = (lang) => {
 	document.getElementById('title-01').innerHTML = (lang === 'FR') ? 'Correction des hauteurs' : 'Sight Reduction';
+	document.getElementById('sub-title-01').innerHTML = (lang === 'FR') ? 'V&eacute;rifiez vos observations et vos calculs' : 'Check your observations and calculations';
 	document.getElementById('label-02').innerHTML = (lang === 'FR') ? 'Date UTC de l\'observation&nbsp;:' : 'UTC Date of observation:';
 	document.getElementById('label-03').innerHTML = (lang === 'FR') ? 'Latitude Estim&eacute;e&nbsp;:' : 'Estimated Latitude:';
 	document.getElementById('label-04').innerHTML = (lang === 'FR') ? 'Longitude Estim&eacute;e&nbsp;:' : 'Estimated Longitude:';
@@ -1155,7 +1159,7 @@ let translate = (lang) => {
 	document.getElementById('button-calc').innerHTML = (lang === 'FR') ? 'Calcul' : 'Calculate';
 	document.getElementById('button-calc').title = (lang === 'FR') ? 'Correction de la hauteur' : 'Sight Reduction';
 	document.getElementById('button-reverse').innerHTML = (lang === 'FR') ? 'Inverse' : 'Reverse';
-	document.getElementById('button-reverse').title = (lang === 'FR') ? 'Calcule la hauteur du sextant à votre position  pour la date donnée' : 'Calculate the Sextant elevation for your time and position';
+	document.getElementById('button-reverse').title = (lang === 'FR') ? 'Calcule la hauteur du sextant à votre position pour la date donnée' : 'Calculate the Sextant elevation for your time and position';
 
 	// Lang swicth
 	document.getElementById('lang-flag').src = (lang === 'FR') ? "./pix/us_uk_flag.png" : "./pix/france.gif";	
