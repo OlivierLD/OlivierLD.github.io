@@ -141,6 +141,15 @@
         .sf-style {
             text-shadow: 2px 2px 4px black, 0 0 25px white, 0 0 10px orange;
         }
+        .blink_me {
+			animation: blinker 0.5s linear infinite;
+		}
+		@keyframes blinker {
+			50% {
+				opacity: 0;
+			}
+		}
+
 	</style>
 
 </head>
@@ -148,7 +157,7 @@
     <h1>Boat pictures, from the past.</h1>
     <div id="loading-message" style="width: 100%; text-align: center; display: block;">
         <!-- This will be hidden when page is loaded. See window.onload -->
-        <h1 style="color: orange;">Loading, please wait...</h1>
+        <h1 class="blink_me" style="color: orange;">Loading, please wait...</h1>
     </div>
     <br/>
     <div>
