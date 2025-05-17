@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>From the past...</title>
+	<link rel="icon" type="image/png" href="../../../../../misc.pix/hummingbird.png">
+
+	<link rel="stylesheet" href="../../../../../css/stylesheet.css" type="text/css"/>
+	<script type="module" src="../../../../../webcomponents/widgets/slideshow/SlideShow.js"></script>
+	<style type="text/css">
+		body {
+			background: black;
+			color: cyan;
+            font-weight: normal;
+		}
+        a:link {
+            color: cyan;
+        }
+        .list-link {
+            color: white;
+            font-size: 20px;
+            text-shadow: 2px 2px 4px black, 0 0 25px white, 0 0 10px orange;
+            text-decoration: none;
+        }
+        a.list-link:hover {
+            color: cyan;
+            font-weight: bold;
+            cursor: pointer;
+            text-shadow: 4px 4px 8px black, 0 0 25px white, 0 0 10px cyan;
+        }
+
+        /* Tooltips, used below */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            border-bottom: 1px dotted black;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 200px;
+            background-color: silver;
+            color: navy;
+            text-transform: none;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 0;
+            position: absolute;
+            z-index: 1;
+            top: 150%;
+            left: 50%;
+            margin-left: -100px;
+            font-weight: normal;
+            padding: 6px; /* This hides the 'arrow'... */
+
+            /* Fade in tooltip - takes 1 second to go from 0% to 100% opac: */
+            opacity: 0;
+            transition: opacity 1s;
+        }
+
+        .tooltip .tooltiptext-right {
+            top: -5px;
+            left: 140%;
+            /*width: 200px;*/
+            margin-left: -60px;
+        }
+
+        .tooltip .tooltiptext::after {
+            content: "";
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: transparent transparent silver transparent;
+        }
+
+        .tooltip .tooltiptext-right::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            margin-left: -110px;
+            margin-top: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: transparent silver transparent transparent;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .tab {
+			overflow: hidden;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			background-color: rgba(241, 241, 241, 0.5);
+		}
+
+		/* Style the buttons inside the tab */
+		.tab button {
+			background-color: inherit;
+			float: left;
+			border: none;
+			outline: none;
+			cursor: pointer;
+			padding: 14px 16px;
+			transition: 0.3s;
+			font-size: 17px;
+		}
+
+		/* Change background color of buttons on hover */
+		.tab button:hover {
+			background-color: #ddd;
+		}
+
+		/* Create an active/current tablink class */
+		.tab button.active {
+			background-color: #ccc;
+		}
+
+        .bg-sf:after {
+            /* content: ''; */
+            background-image :url("./images/sf/ocean.beach.2.jpg");
+
+            background-size: cover;
+            background-repeat: repeat;
+            /* background-attachment: fixed; */
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.5; /* Here is your opacity */
+        }
+
+        .sf-style {
+            text-shadow: 2px 2px 4px black, 0 0 25px white, 0 0 10px orange;
+        }
+	</style>
+
+</head>
+<body>
+    <h1>Boat pictures, from the past.</h1>
+    <div id="loading-message" style="width: 100%; text-align: center; display: block;">
+        <!-- This will be hidden when page is loaded. See window.onload -->
+        <h1 style="color: orange;">Loading, please wait...</h1>
+    </div>
+    <br/>
+    <div>
+        <h2>1978, Alta&iuml;r, Requin F 187</h2>
+        <div style="margin: 2px;">
+            <slide-show id="slide-show-01"
+                        width="550"
+                        height="390"
+                        slideclick="onSlideShowClick">
+                <slide-show-image src="./Requin/Altair1.jpg" title="Larmor Baden, 1978" desc="Dans le Golfe du Morbihan"></slide-show-image>
+                <slide-show-image src="./Requin/Altair2.jpg" title="Port-Tudy, 1978" desc="..."></slide-show-image>
+                <slide-show-image src="./Requin/Altair3.jpg" title="Porz Lehr, Houat, 1978" desc="..."></slide-show-image>
+                <slide-show-image src="./Requin/Altair4.jpg" title="Porz Lehr, Houat, 1978" desc="..."></slide-show-image>
+            </slide-show>
+            
+        </div>
+    </div>
+
+    <div>
+        <h2>1980-1984, Construction du trimaran</h2>
+        <div style="margin: 2px;">
+            <slide-show id="slide-show-02"
+                        width="498"
+                        height="384"
+                        slideclick="onSlideShowClick">
+                <slide-show-image src="./Tri/001.jpg" title="31 d&eacute;cembre 1980, premier couple" desc="..."></slide-show-image>
+                <slide-show-image src="./Tri/002.jpg" title="Demi charpente" desc="..."></slide-show-image>
+                <slide-show-image src="./Tri/003.jpg" title="Moulage de la quille" desc="..."></slide-show-image>
+                <slide-show-image src="./Tri/004.jpg" title="D&eacute;but du premier pli" desc="..."></slide-show-image>
+                <slide-show-image src="./Tri/005.jpg" title="Pause syndicale" desc="..."></slide-show-image>
+                <slide-show-image src="./Tri/006.jpg" title="D&eacute;but du deuxi&egrave;me pli" desc="..."></slide-show-image>
+                <slide-show-image src="./Tri/007.jpg" title="Deuxi&egrave;me pli" desc="..."></slide-show-image>
+                <slide-show-image src="./Tri/008.jpg" title="Coque centrale, retourn&eacute;e" desc="..."></slide-show-image>
+                <slide-show-image src="./Tri/009.jpg" title="Sortie du chantier" desc="..."></slide-show-image>
+                <slide-show-image src="./Tri/010.jpg" title="Sortie du chantier" desc="..."></slide-show-image>
+                <slide-show-image src="./Tri/011.jpg" title="Arradon, 4 f&eacute;vrier 1984, Assemblage" desc="..."></slide-show-image>
+                <slide-show-image src="./Tri/012.jpg" title="Arradon, 4 f&eacute;vrier 1984, Assemblage" desc="..."></slide-show-image>
+                <slide-show-image src="./Tri/013.jpg" title="Arradon, 4 f&eacute;vrier 1984, Assemblage" desc="..."></slide-show-image>
+                <slide-show-image src="./Tri/014.jpg" title="Arradon, 4 f&eacute;vrier 1984, Assemblage" desc="..."></slide-show-image>
+                <slide-show-image src="./Tri/015.jpg" title="On attend la mar&eacute;e" desc="..."></slide-show-image>
+                <slide-show-image src="./Tri/016.jpg" title="Arradon, 4 f&eacute;vrier 1984, il flotte !" desc="..."></slide-show-image>
+                <slide-show-image src="./Tri/017.jpg" title="Premier matin" desc="..."></slide-show-image>
+                <slide-show-image src="./Tri/018.jpg" title="Premiers essais" desc="..."></slide-show-image>
+                <slide-show-image src="./Tri/019.jpg" title="Premiers essais" desc="..."></slide-show-image>
+                <slide-show-image src="./Tri/020.jpg" title="Qualification pour l'OSTAR" desc="..."></slide-show-image>
+                <slide-show-image src="./Tri/021.jpg" title="Qualification pour l'OSTAR" desc="..."></slide-show-image>
+                <slide-show-image src="./Tri/022.jpg" title="Qualification pour l'OSTAR" desc="..."></slide-show-image>
+                <slide-show-image src="./Tri/023.jpg" title="Qualification pour l'OSTAR" desc="..."></slide-show-image>
+                <slide-show-image src="./Tri/024.jpg" title="Troph&eacute;e des Multicoques, 1984" desc="..."></slide-show-image>
+            </slide-show>
+            
+        </div>
+    </div>
+
+
+    <div>
+        <h2>1984, Paul Ricard</h2>
+        <div style="margin: 2px;">
+            <slide-show id="slide-show-03"
+                        width="498"
+                        height="384"
+                        slideclick="onSlideShowClick">
+                <slide-show-image src="./PaulRicard/002.jpg" title="La soute" desc="..."></slide-show-image>
+                <slide-show-image src="./PaulRicard/003.jpg" title="Cuisine" desc="..."></slide-show-image>
+                <slide-show-image src="./PaulRicard/004.jpg" title="Table &agrave; cartes" desc="..."></slide-show-image>
+                <slide-show-image src="./PaulRicard/005.jpg" title="Monnet aux cr&ecirc;pes" desc="..."></slide-show-image>
+                <slide-show-image src="./PaulRicard/006.jpg" title="Saint Laurent - Calme" desc="..."></slide-show-image>
+                <slide-show-image src="./PaulRicard/007.jpg" title="Saint Laurent - Calme" desc="..."></slide-show-image>
+                <slide-show-image src="./PaulRicard/008.jpg" title="Saint Laurent - Calme" desc="..."></slide-show-image>
+                <slide-show-image src="./PaulRicard/009.jpg" title="Autoportrait" desc="..."></slide-show-image>
+                <slide-show-image src="./PaulRicard/010.jpg" title="Saint Laurent - Calme" desc="..."></slide-show-image>
+                <slide-show-image src="./PaulRicard/011.jpg" title="Saint Laurent - Calme" desc="..."></slide-show-image>
+                <slide-show-image src="./PaulRicard/012.jpg" title="Saint Laurent - Calme" desc="..."></slide-show-image>
+                <slide-show-image src="./PaulRicard/013.jpg" title="Rencontre dans la brume" desc="..."></slide-show-image>
+                <slide-show-image src="./PaulRicard/014.jpg" title="On approche du Canada" desc="..."></slide-show-image>
+                <slide-show-image src="./PaulRicard/015.jpg" title="On approche du Canada" desc="..."></slide-show-image>
+                <slide-show-image src="./PaulRicard/016.jpg" title="On approche d'Anticosti" desc="..."></slide-show-image>
+                <slide-show-image src="./PaulRicard/017.jpg" title="On approche d'Anticosti" desc="..."></slide-show-image>
+                <slide-show-image src="./PaulRicard/018.jpg" title="Sous le vent" desc="..."></slide-show-image>
+                <slide-show-image src="./PaulRicard/019.jpg" title="Remonter le courant" desc="..."></slide-show-image>
+                <slide-show-image src="./PaulRicard/020.jpg" title="Qu&eacute;bec - Saint Malo" desc="..."></slide-show-image>
+                <slide-show-image src="./PaulRicard/021.jpg" title="Ruta del Discubrimiento" desc="..."></slide-show-image>
+                <slide-show-image src="./PaulRicard/022.jpg" title="Coucher de soleil dans l'aliz&eacute;" desc="..."></slide-show-image>
+            </slide-show>
+            
+        </div>
+    </div>
+
+    <div>
+        <h2>1985, Roger &amp; Gallet</h2>
+        <div style="margin: 2px;">
+            <slide-show id="slide-show-04"
+                        width="498"
+                        height="384"
+                        slideclick="onSlideShowClick">
+                <slide-show-image src="./RogerGallet/001.jpg" title="Fine &eacute;quipe" desc="..."></slide-show-image>
+                <slide-show-image src="./RogerGallet/002.jpg" title="Brain Trust" desc="..."></slide-show-image>
+                <slide-show-image src="./RogerGallet/003.jpg" title="Master 85" desc="..."></slide-show-image>
+                <slide-show-image src="./RogerGallet/004.jpg" title="Master 85" desc="..."></slide-show-image>
+                <slide-show-image src="./RogerGallet/005.jpg" title="Troph&eacute;e 85" desc="..."></slide-show-image>
+            </slide-show>
+            
+        </div>
+    </div>
+
+    <div>
+        <h2>1986, Mil&egrave;ne V</h2>
+        <div style="margin: 2px;">
+            <slide-show id="slide-show-05"
+                        width="498"
+                        height="384"
+                        slideclick="onSlideShowClick">
+                <slide-show-image src="./Milene/001.jpg" title="Milene V, Falmouth, 1986" desc="..."></slide-show-image>
+                <slide-show-image src="./Milene/002.jpg" title="D&eacute;part de Palma" desc="..."></slide-show-image>
+                <slide-show-image src="./Milene/003.jpg" title="Copa de Ray, Palma 86" desc="..."></slide-show-image>
+            </slide-show>
+            
+        </div>
+    </div>
+
+    <div>
+        <h2>1987, C&ocirc;te d'Or 2</h2>
+        <div style="margin: 2px;">
+            <slide-show id="slide-show-06"
+                        width="498"
+                        height="384"
+                        slideclick="onSlideShowClick">
+                <slide-show-image src="./Cote_d_Or_2/001.jpg" title="Tour de l'Europe 1987, Arriv&eacute;e &agrave; Toulon, 32 n&oelig;uds" desc="..."></slide-show-image>
+                <slide-show-image src="./Cote_d_Or_2/002.jpg" title="Tour de l'Europe 1987, Arriv&eacute;e &agrave; Toulon, 32 n&oelig;uds" desc="..."></slide-show-image>
+            </slide-show>
+            
+        </div>
+    </div>
+
+    <hr/>
+
+    <div style="height: 150px;"><!-- Bottom padding ??? --></div>
+</body>
+
+<script type="text/javascript">
+
+    function onSlideShowClick(src) {
+        console.log(">> Client side!! Slide " + src + " was clicked.");
+        window.open(src, '_blank'); // This is an example
+    }
+
+    window.onload = () => { // Important: window.onload
+        // document.getElementById("slide-show-01").slideclick = onSlideShowClick;
+        document.getElementById("loading-message").style.display = "none"; // Hide loading message
+    };
+</script>
+
+</html>
