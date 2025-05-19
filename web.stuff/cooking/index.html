@@ -28,6 +28,9 @@
             color: white;
             font-size: 1.2em;
         }
+        a:link {
+            color: cyan;
+        }
 
 	</style>
 
@@ -37,6 +40,7 @@
 
 <section id="en-content" style="display: none;">
     <h1 class="screen-only">Recipes!</h1>
+    <a class="screen-only" href="javascript:void(0)" onclick="navTo('FR');">En fran&ccedil;ais</a>
     <hr class="screen-only"/>
     <h2>Hummus</h2>
     <h3>Ingredients</h3>
@@ -98,6 +102,7 @@
 
 <section id="fr-content" style="display: none;">
     <h1 class="screen-only">Recettes !</h1>
+    <a class="screen-only" href="javascript:void(0)" onclick="navTo('EN');">In English</a>
     <hr class="screen-only"/>
     <h2>Hummus</h2>
     <h3>Ingr&eacute;dients</h3>
@@ -169,6 +174,13 @@
 </body>
 
 <script type="text/javascript">
+
+    let navTo = (prm) => {
+        let url = window.location.href;
+        let newUrl = url.split('?')[0] + '?lang=' + prm;
+        console.log("New URL: " + newUrl);
+        window.location = newUrl;
+    };
 
     let getQueryParameterByName = (name, url) => {
         if (!url) {
