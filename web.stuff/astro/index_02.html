@@ -1464,13 +1464,17 @@ let toggleForeground = () => {
                             <option value="SKYMAP">Sky Map</option>
                         </select>
                         <br/>
-                        <input type="checkbox" onchange="setWithStars('sky-map-01', this);" checked>Stars.
-                        <input type="checkbox" onchange="setWithConst('sky-map-01', this);" checked>Const.
-                        <input type="checkbox" onchange="setStarNames('sky-map-01', this);" checked>Star Names.
-                        <input type="checkbox" onchange="setConstNames('sky-map-01', this);">Const Names.
-                        <input type="checkbox" onchange="setVisibleSky('sky-map-01', this);" checked>Visible sky.
-                        <input type="checkbox" onchange="setSkyGrid('sky-map-01', this);" checked>Sky grid.
-                        <input type="checkbox" onchange="setWanderingBodiesSM('sky-map-01', this);">Wandering bodies.
+                        <div style="display: grid; grid-template-columns: auto auto auto auto;">
+                            <span><input type="checkbox" onchange="setWithStars('sky-map-01', this);" checked>Stars.</span>
+                            <span><input type="checkbox" onchange="setWithConst('sky-map-01', this);" checked>Const.</span>
+                            <span><input type="checkbox" onchange="setStarNames('sky-map-01', this);" checked>Star Names.</span>
+                            <span><input type="checkbox" onchange="setConstNames('sky-map-01', this);">Const Names.</span>
+
+                            <span><input type="checkbox" onchange="setVisibleSky('sky-map-01', this);" checked>Visible sky.</span>
+                            <span><input type="checkbox" onchange="setSkyGrid('sky-map-01', this);" checked>Sky grid.</span>
+                            <span><input type="checkbox" onchange="setWanderingBodiesSM('sky-map-01', this);">Wandering bodies.</span>
+                            <span><input type="checkbox" onchange="setAriesLHASM('sky-map-01', this);">Aries LHA.</span>
+                        </div>
                     </td>
                 </tr>
             </table>
@@ -2369,7 +2373,7 @@ let toggleForeground = () => {
         context.fillText(displayData, sm._width - metrics.width - 10, 18); // this._height - 60);
 
         // LHA Aries Axis angle
-        if (sm.type === 'STARFINDER') {
+        if (sm.type === 'STARFINDER' && sm.ariesLHA) {
             let ariesLHAAngle = sm.LHAAries;
             let radius = Math.min(sm.width, sm.height) * 0.99 / 2;
 

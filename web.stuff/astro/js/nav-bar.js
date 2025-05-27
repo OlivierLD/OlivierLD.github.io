@@ -843,6 +843,11 @@ function setWanderingBodiesSM(id, cb) {
     document.getElementById(id).repaint();
 }
 
+function setAriesLHASM(id, cb) {
+    document.getElementById(id).ariesLHA = cb.checked;
+    document.getElementById(id).repaint();
+}
+
 function setMapType(id, list) {
     document.getElementById(id).type = list.value;
     document.getElementById(id).repaint();

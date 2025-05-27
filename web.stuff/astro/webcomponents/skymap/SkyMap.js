@@ -173,7 +173,8 @@ class SkyMap extends HTMLElement {
 			"sky-grid",               // boolean. Default true
 			"wandering-bodies",       // boolean. Default false
 			"latitude",               // Number [0..90], default 45, no sign! -> see hemisphere
-			"lha-aries"               // Number, Default 0.
+			"lha-aries",              // Number, Default 0.
+			"aries-lha"               // boolean, Default false. Display LHA Aries on StarFinder
 		];
 	}
 
@@ -292,6 +293,9 @@ class SkyMap extends HTMLElement {
 			case "lha-aries":
 				this.LHAAries = parseFloat(newVal);
 				break;
+			case "aries-lha":
+				this._ariesLHA = (newVal === 'true');
+				break;
 			default:
 				break;
 		}
@@ -347,6 +351,9 @@ class SkyMap extends HTMLElement {
 	set lhaAries(val) {
 		this.LHAAries = val;
 	}
+	set ariesLHA(val) {
+		this._ariesLHA = val;
+	}
 
 	set shadowRoot(val) {
 		this._shadowRoot = val;
@@ -393,6 +400,9 @@ class SkyMap extends HTMLElement {
 	}
 	get lhaAries() {
 		return this.LHAAries;
+	}
+	get ariesLHA() {
+		return this._ariesLHA;
 	}
 
 	get shadowRoot() {
