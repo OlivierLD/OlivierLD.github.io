@@ -772,8 +772,8 @@ class SkyMap extends HTMLElement {
 		if (this.doAfter !== undefined) {
 			console.log("Calling doAfter callback function");
 			this.doAfter(this, context);
-		} else {
-			console.log("No doAfter callback function defined");
+		// } else {
+		// 	console.log("No doAfter callback function defined");
 		}
 
 	}

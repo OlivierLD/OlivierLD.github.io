@@ -1494,8 +1494,10 @@ let toggleForeground = () => {
     <a href="javascript:void(0)" class="active-link list-link" onclick="toggleForeground();">Toggle foreground</a>
     <a href="javascript:void(0)" class="active-link list-link" onclick="showMarqueeDialog();">Marquee Panel</a>
     <hr style="color: rgb(192,192,192, 0.5); width: 90%;"/>
-    <a href="javascript:void(0)" class="active-link list-link" onclick="showSunPathDialog();" title="Can take time...&#13;Be patient.">Sun Path</a>
-    <a href="javascript:void(0)" class="active-link list-link" onclick="showSkyMapDialog();" title="Can take time...&#13;Be patient.">Sky Map</a>
+    <span>
+        <a href="javascript:void(0)" class="active-link list-link" style="display: inline;" onclick="showSunPathDialog();" title="Can take time...&#13;Be patient.">Sun Path</a> 
+        <a href="javascript:void(0)" class="active-link list-link" style="display: inline;" onclick="showSkyMapDialog();" title="Can take time...&#13;Be patient.">Sky Map</a>
+    </span>
     <hr style="color: rgb(192,192,192, 0.5); width: 90%;"/>
     <a href="javascript:void(0)" class="active-link" style="margin-top: 20px;">More links here, some day...</a>
 
@@ -2351,7 +2353,20 @@ let toggleForeground = () => {
     };
 
     let extraDrawingSkyMap = (sm, context) => {
-        console.log("Extra Sky Map drawings");
+
+        let utcOffsetInMinutes = new Date().getTimezoneOffset();
+        let utcTime = new Date(globalAstroData.epoch + (utcOffsetInMinutes * 60 * 1000)); // .getUTCDate();
+
+//      let date = utcTime.format("d-m-Y-l");
+        let date = utcTime.format("D d M Y");
+        let time = utcTime.format("H:i:s");
+        let UTCDate = date + ' ' + time + " UTC";
+
+        context.fillStyle = sm.skyMapColorConfig.ariesLabelColor;
+		context.font = "bold 16px Arial"; // "bold 40px Arial"
+        let displayData = UTCDate;
+        let metrics = context.measureText(displayData);
+        context.fillText(displayData, sm._width - metrics.width - 10, 18); // this._height - 60);
     };
 
     // Set default date values, start process(es)
