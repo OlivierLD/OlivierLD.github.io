@@ -770,7 +770,7 @@ class SkyMap extends HTMLElement {
 
 		// After (callback), like Plot Stars & Constellations ?
 		if (this.doAfter !== undefined) {
-			console.log("Calling doAfter callback function");
+			// console.log("Calling doAfter callback function");
 			this.doAfter(this, context);
 		// } else {
 		// 	console.log("No doAfter callback function defined");

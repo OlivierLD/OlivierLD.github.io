@@ -2353,7 +2353,7 @@ let toggleForeground = () => {
     };
 
     let extraDrawingSkyMap = (sm, context) => {
-
+        // UTC Date
         let utcOffsetInMinutes = new Date().getTimezoneOffset();
         let utcTime = new Date(globalAstroData.epoch + (utcOffsetInMinutes * 60 * 1000)); // .getUTCDate();
 
@@ -2367,6 +2367,26 @@ let toggleForeground = () => {
         let displayData = UTCDate;
         let metrics = context.measureText(displayData);
         context.fillText(displayData, sm._width - metrics.width - 10, 18); // this._height - 60);
+
+        // LHA Aries Axis angle
+        if (sm.type === 'STARFINDER') {
+            let ariesLHAAngle = sm.LHAAries;
+            let radius = Math.min(sm.width, sm.height) * 0.99 / 2;
+
+            let rad = Math.toRadians(ariesLHAAngle * sm._hemisphere);
+
+            let xFrom = (sm.canvas.width / 2);
+            let yFrom = (sm.canvas.height / 2);
+            let xTo = (sm.canvas.width / 2) - ((radius * 0.98) * Math.cos(rad - (1 * Math.PI / 2)));
+            let yTo = (sm.canvas.height / 2) - ((radius * 0.98) * Math.sin(rad - (1 * Math.PI / 2)));
+            context.moveTo(xFrom, yFrom);
+            context.lineTo(xTo, yTo);
+
+            context.lineWidth = 2;
+            context.strokeStyle = 'cyan'; // this.skyMapColorConfig.ticksColor;
+            context.stroke();
+            context.closePath();
+        }
     };
 
     // Set default date values, start process(es)

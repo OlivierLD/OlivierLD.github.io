@@ -146,7 +146,7 @@ let showSkyMapDialog = () => {
     }
     let sunPathDialog = document.getElementById(SKY_MAP_DIALOG_ID); // TODO Fix that
     
-    setSkyMapData(); // Display current data (TODO: Animate?)
+    setSkyMapData(); 
 
     if (sunPathDialog.show != undefined) {
         sunPathDialog.show();
