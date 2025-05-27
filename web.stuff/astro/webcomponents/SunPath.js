@@ -97,7 +97,8 @@ class SunPath extends HTMLElement {
 		this._previousClassName = "";
 		this.sunPathColorConfig = sunPathDefaultColorConfig;
 
-		this.doAFter = function(sunPath, context) { // Do-nothing by default; Callback, after drawing. Takes 'this' and the context as parameter.
+		this.doAFter = function(sunPath, context) { 
+			// Do-nothing by default; Callback, after drawing. Takes 'this' and the context as parameter.
 		};  
 	}
 
