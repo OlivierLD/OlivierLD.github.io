@@ -2284,7 +2284,6 @@ let toggleForeground = () => {
 			context.restore();
 		}
 		context.closePath();
-
     };
 
     let isWithin90degrees = (userZ, bodyZ) => { // May need some tweaks...
@@ -2374,6 +2373,9 @@ let toggleForeground = () => {
 
         // LHA Aries Axis angle
         if (sm.type === 'STARFINDER' && sm.ariesLHA) {
+            context.save();
+            context.beginPath();
+
             let ariesLHAAngle = sm.LHAAries;
             let radius = Math.min(sm.width, sm.height) * 0.99 / 2;
 
@@ -2390,6 +2392,7 @@ let toggleForeground = () => {
             context.strokeStyle = 'cyan'; // this.skyMapColorConfig.ticksColor;
             context.stroke();
             context.closePath();
+            context.restore();
         }
     };
 
