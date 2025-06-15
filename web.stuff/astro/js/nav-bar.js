@@ -275,7 +275,7 @@ let copyToClipboard = (fieldId) => {
     customAlert(`Value ${value} copied to clipboard`);
 };
 
-// TODO Calculate real sunPath & others
+// TO Calculate real sunPath & others
 // See getSunDataForAllDay, in astrorest.RESTImplementation, module RESTNauticalAlmanac
 const sunPath1 = [
     {
