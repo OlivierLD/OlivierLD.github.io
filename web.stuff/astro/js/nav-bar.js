@@ -208,6 +208,40 @@ let draggingSP = event => {
     }
 };
 
+let dragStartSM = event => {
+    // console.log("Start dragging");
+    event.dataTransfer.setData("drag-data", `${event.target.id}: ${new Date()} `); // Dummy, just for the example. See the ondrop function.
+    dragStartX = event.x; // clientX;
+    dragStartY = event.y; // clientY;
+    let dialogBox = document.getElementById('sky-map-dialog');
+    let computedStyle = window.getComputedStyle(dialogBox, null);
+    dialogXOrig = parseFloat(computedStyle.marginLeft.replace('px', ''));
+    dialogYOrig = parseFloat(computedStyle.marginTop.replace('px', ''));
+    // console.log("End");
+};
+
+let draggingSM = event => {
+    // console.log("Dragging!");
+    if (true) {
+        let dialogBox = document.getElementById('sky-map-dialog');
+        // let computedStyle = window.getComputedStyle(dialogBox, null);
+        if (event.buttons > 0) {
+            // if (event.x === 0 && event.y === 0) {
+            //     debugger;
+            // }
+            let deltaX = event.x - dragStartX; // clientX ;
+            let deltaY = event.y - dragStartY; // clientY;
+            let newLeft = `${dialogXOrig + deltaX}px`;
+            let newTop = `${dialogYOrig + deltaY}px`;
+            dialogBox.style.marginLeft = newLeft;
+            dialogBox.style.marginTop = newTop;
+            // console.log(`event.x:${event.x}, event.y:${event.y}, dragStartX: ${dragStartX}, dragStartY: ${dragStartY}, dialogXOrig:${dialogXOrig}, dialogYOrig:${dialogYOrig}, New Left: ${newLeft}, New Top: ${newTop}`);
+            // console.log("evt:", event);
+        }
+        event.preventDefault();
+    }
+};
+
 let customAlertExpanded = false;
 let expandCollapseAlertData = () => {
     document.getElementById('alert-zone').classList.toggle('visible-div');
