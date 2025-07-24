@@ -2155,7 +2155,7 @@ let toggleForeground = () => {
 //                                        console.log("Updating %s with %s", original, next);
                     elem.setCharAt(idx, next, sign);
                     original = elem.paddedValue;
-                    updateValue(idx);
+                    updateValue(idx); // Recursive call
                 }, 50);
             }
         }
