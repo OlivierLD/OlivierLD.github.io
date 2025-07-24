@@ -4,6 +4,8 @@
  ! Standalone.
  ! All ES6 AstroComputer
  ! Sight reduction, back and forth.
+ ! Dynamically bilingual.
+ ! Olivier Le Diouris, 2025.
  +-->
 <head>
 	<meta charset="UTF-8">
@@ -30,8 +32,8 @@
 			border: 2px solid silver;
 			border-radius: 10px;
 			width: 800px;
-			margin-left: 200px; 
-			margin-top: 10px; 
+			margin-left: 200px;
+			margin-top: 10px;
 			z-index: 1000;
 			box-shadow: 2px 2px 4px grey, 0 0 25px white, 0 0 7px cyan;
 		}
@@ -312,7 +314,7 @@
 			utcday: parseInt(payload.utcDate.substring(8, 10)),               //                   5  |  |  |  |
 			utchour: parseInt(payload.utcDate.substring(11, 13)),             //                      8  |  |  |
 			utcminute: parseInt(payload.utcDate.substring(14, 16)),           //                         11 |  |
-			utcsecond: parseInt(payload.utcDate.substring(17, 19)),           //                            14 | 
+			utcsecond: parseInt(payload.utcDate.substring(17, 19)),           //                            14 |
 			deltaT: DELTA_T,                                                  //                               17
 			noPlanets: false,
 			noStars: false
@@ -325,12 +327,12 @@
 		}
 
 		// SRU - Sight Reduction Utility
-		try { 
+		try {
 			// Default Sun
 			let ghaBody = globalAstroData.sun.GHA.raw;
 			let decBody = globalAstroData.sun.DEC.raw;
 			let hp = globalAstroData.sun.HP.raw; // in seconds of arc
-			let sd = globalAstroData.sun.SD.raw; 
+			let sd = globalAstroData.sun.SD.raw;
 			if (payload.cbd.name !== 'Sun') {
 				// Update the data !
 				ghaBody = getGHAFor(payload.cbd.name, globalAstroData);
@@ -361,7 +363,7 @@
 			console.log("Total Correction: to be ADDED to the instrumental (measured) elevation.");
 
 			console.log(`${payload.cbd.name} Z: ${sruBody.Z}`);
-			console.log(`${payload.cbd.name} alt: ${sruBody.alt}`); 
+			console.log(`${payload.cbd.name} alt: ${sruBody.alt}`);
 
 			/*
 			For the callback: {
@@ -382,7 +384,7 @@
 
 				estimated-altitude-degrees
 				intercept-degrees
-				
+
 				// added LHA
 				lha
 			}
@@ -417,7 +419,7 @@
 
 		} catch (err) {
 			console.log('Oops:', err)
-		}		
+		}
 	}
 
 	function calculateReverseSight(payload, callback) {
@@ -429,7 +431,7 @@
 			utcday: parseInt(payload.utcDate.substring(8, 10)),               //                   5  |  |  |  |
 			utchour: parseInt(payload.utcDate.substring(11, 13)),             //                      8  |  |  |
 			utcminute: parseInt(payload.utcDate.substring(14, 16)),           //                         11 |  |
-			utcsecond: parseInt(payload.utcDate.substring(17, 19)),           //                            14 | 
+			utcsecond: parseInt(payload.utcDate.substring(17, 19)),           //                            14 |
 			deltaT: DELTA_T,                                                  //                               17
 			noPlanets: false,
 			noStars: false
@@ -442,12 +444,12 @@
 		}
 
 		// SRU - Sight Reduction Utility
-		try { 
+		try {
 			// Default Sun
 			let ghaBody = globalAstroData.sun.GHA.raw;
 			let decBody = globalAstroData.sun.DEC.raw;
 			let hp = globalAstroData.sun.HP.raw; // in seconds of arc
-			let sd = globalAstroData.sun.SD.raw; 
+			let sd = globalAstroData.sun.SD.raw;
 			if (payload.cbd.name !== 'Sun') {
 				// Update the data !
 				ghaBody = getGHAFor(payload.cbd.name, globalAstroData);
@@ -478,7 +480,7 @@
 			console.log("Total Correction: to be ADDED to the instrumental (measured) elevation.");
 
 			console.log(`${payload.cbd.name} Z: ${sruBody.Z}`);
-			console.log(`${payload.cbd.name} alt: ${sruBody.alt}`); 
+			console.log(`${payload.cbd.name} alt: ${sruBody.alt}`);
 
 			/*
 			For the callback: {
@@ -602,7 +604,7 @@
 			let appToObsCorrection = result['parallax-minutes'] - result['refraction-minutes'];
 			fmtDisplay += ("<table>");
 			fmtDisplay += ("<tr>");
-			fmtDisplay += ("<td style='border: 1px solid blue; border-radius: 10px; vertical-align: top;'>");	
+			fmtDisplay += ("<td style='border: 1px solid blue; border-radius: 10px; vertical-align: top;'>");
 			/*
 			  Left side
 			 */
@@ -645,7 +647,7 @@
 			fmtDisplay += (     "<td style='text-align: right;'>" + translator(TOTAL_CORRECTION) + "</td><td style='text-align: right;'>" + result['total-correction-minutes'].toFixed(2) + "'</td></tr>");
 
 			fmtDisplay += ("</table>");
-				
+
 
 			fmtDisplay += ("</td></tr>"); // </table>");
 			fmtDisplay += ("<tr><td style='border: 1px solid blue; border-radius: 10px; vertical-align: top;' colspan='2'>");
@@ -771,7 +773,7 @@
 				  </td>
 				</tr>
 			</table>
-			
+
 		</div>
 		<hr/>
 		<div>
@@ -795,7 +797,7 @@
 			<i>OlivSoft never stops</i>
 		</div>
 	</dialog>
-	
+
 	<table width="100%">
 		<tr>
 			<td>
@@ -1162,9 +1164,9 @@ let translate = (lang) => {
 	document.getElementById('button-reverse').title = (lang === 'FR') ? 'Calcule la hauteur du sextant à votre position pour la date donnée' : 'Calculate the Sextant elevation for your time and position';
 
 	// Lang swicth
-	document.getElementById('lang-flag').src = (lang === 'FR') ? "./pix/us_uk_flag.png" : "./pix/france.gif";	
-	document.getElementById('lang-flag').alt = (lang === 'FR') ? "English" : "France";	
-	document.getElementById('lang-flag').title = (lang === 'FR') ? "Switch to English" : "En Fran&ccedil;ais";	
+	document.getElementById('lang-flag').src = (lang === 'FR') ? "./pix/us_uk_flag.png" : "./pix/france.gif";
+	document.getElementById('lang-flag').alt = (lang === 'FR') ? "English" : "France";
+	document.getElementById('lang-flag').title = (lang === 'FR') ? "Switch to English" : "En Fran&ccedil;ais";
 
 	// Help content
 	let helpContent = (lang === 'FR') ? document.getElementById('fr-help-content').innerHTML : document.getElementById('en-help-content').innerHTML;
@@ -1277,12 +1279,12 @@ let closeAboutDialog = () => {
 	}
 };
 
-// Find language to use	
+// Find language to use
 window.onload = () => {
 
 	let userLang = getQueryParameterByName('lang');
-	if (!userLang) { 
-		let browserUserLang = navigator.language || navigator.userLanguage; 
+	if (!userLang) {
+		let browserUserLang = navigator.language || navigator.userLanguage;
 		console.log("The browser's language is: " + browserUserLang);
 		if (browserUserLang) {
 			if (browserUserLang.substring(0, 2).toUpperCase() === 'FR') {
@@ -1301,6 +1303,6 @@ window.onload = () => {
 	if (langToUse !== 'EN') { // Then switch to French, default is EN.
 		translate(langToUse);
 	}
-};	
+};
 </script>
 </html>
