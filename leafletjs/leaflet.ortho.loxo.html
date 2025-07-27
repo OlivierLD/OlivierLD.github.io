@@ -16,7 +16,7 @@
     <!-- link rel="icon" type="image/ico" href="icons/hammerhead.02.ico" -->
     <link rel="icon" type="image/ico" href="./jellyfish.ico">
 
-    <!--    
+    <!--
     <link rel="stylesheet" href="leaflet/leaflet.css" />
     <script src="leaflet/leaflet.js"></script>
     -->
@@ -29,15 +29,15 @@
             crossorigin=""></script-->
     <!--link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
             integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
-            crossorigin=""/>            
+            crossorigin=""/>
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
             integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
-            crossorigin=""></script-->     
-            
+            crossorigin=""></script-->
+
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin=""/>
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
 
-    <!--link rel="stylesheet" href="http://i3.cdn-image.com/lcldsc/leaflet.css">            
+    <!--link rel="stylesheet" href="http://i3.cdn-image.com/lcldsc/leaflet.css">
     <script src="http://i3.cdn-image.com/lcldsc/leaflet.js"></script>
     <script src="http://i3.cdn-image.com/lcldsc/leaflet-providers.min.js"></script-->
 
@@ -174,8 +174,9 @@ OpenSource JavaScript map API at <a href="https://leafletjs.com/" target="leafle
     <span id="center-point" style="margin: 10px;"></span>
     <button id="reset-button" onclick="reset();">Reset Markers</button>
     <button id="calculate-button" onclick="calculate();" disabled>Calculate</button>
+    <button id="reverse-button" onclick="calculate(true);" disabled>Reverse</button>
 </div>
-<!-- Enable Geolocation APIs -->        
+<!-- Enable Geolocation APIs -->
 <div class="switch-container" style="margin-left: 30px;" title="Enable GeoLocation APIs">
     <label class="switch switch-element">
         <input id="geoloc-slider" type="checkbox" onchange="setGeolocation(this);">
@@ -199,11 +200,11 @@ OpenSource JavaScript map API at <a href="https://leafletjs.com/" target="leafle
         </td>
         <td valign="top" style="text-align: right; min-width: 200px;">
             <div id="curr-pos"></div>
-            <div id="distances" style="text-align: left; border: 1px solid cyan; border-radius: 5px; padding: 5px;" 
+            <div id="distances" style="text-align: left; border: 1px solid cyan; border-radius: 5px; padding: 5px;"
                  title="Great Circle distance,&#13;Great Circle Initial Route Angle,&#13;RhumLine (aka Loxodromy) Distance,&#13;Rhumline Route."></div>
         </td>
     </tr>
-</table>    
+</table>
 <div>
     Click 2 points on the chart (From and To), and then click the [Calculate] button...
 </div>
@@ -264,7 +265,7 @@ OpenSource JavaScript map API at <a href="https://leafletjs.com/" target="leafle
         while (lng < -180) {
             lng += 360;
         }
-        document.getElementById('curr-pos').innerHTML = `${decToSex(lat, "NS")}<br/>${decToSex(lng, "EW")}`;
+        document.getElementById('curr-pos').innerHTML = `Mouse at ${decToSex(lat, "NS")} / ${decToSex(lng, "EW")}`;
     });
 
     let from = null, to = null;
@@ -289,10 +290,10 @@ OpenSource JavaScript map API at <a href="https://leafletjs.com/" target="leafle
             to.addTo(map);
         } else {
             alert("From and to already exist.\nReset to enter new ones");
-        }     
+        }
         if (from !== null && to !== null) {
             document.getElementById("calculate-button").disabled = false;
-        }                    
+        }
     });
 
     let reset = () => {
@@ -318,6 +319,7 @@ OpenSource JavaScript map API at <a href="https://leafletjs.com/" target="leafle
         }
 
         document.getElementById("calculate-button").disabled = true;
+        document.getElementById("reverse-button").disabled = true;
         document.getElementById('distances').innerHTML = '';
     };
 
@@ -348,7 +350,7 @@ OpenSource JavaScript map API at <a href="https://leafletjs.com/" target="leafle
         }
 
         // const customColour = 'red'; // '#583470'
-        // const markerHtmlStyles = 
+        // const markerHtmlStyles =
         //    `background-color: ${customColour};
         //     width: 3rem;
         //     height: 3rem;
@@ -420,7 +422,14 @@ OpenSource JavaScript map API at <a href="https://leafletjs.com/" target="leafle
         }
     };
 
-    let calculate = () => { // With from and to
+    let calculate = (reverse = false) => { // With from and to
+
+        if (reverse) {
+            // Swap from and to
+            let tmp = from;
+            from = to;
+            to = tmp;
+        }
         // from._latlng, to._latlng
         console.log(`From ${decToSex(from._latlng.lat, 'NS')} / ${decToSex(from._latlng.lng, 'EW')}`);
         console.log(`To   ${decToSex(to._latlng.lat, 'NS')} / ${decToSex(to._latlng.lng, 'EW')}`);
@@ -446,7 +455,7 @@ OpenSource JavaScript map API at <a href="https://leafletjs.com/" target="leafle
 
         let gcDist = getGCDistanceDegreesNM({ lat: from._latlng.lat, lng: from._latlng.lng },
                                             { lat: to._latlng.lat, lng: to._latlng.lng });
-        console.log(`GC Distance: ${gcDist} nm, ari ${gc[0].z.toFixed(2)}`); 
+        console.log(`GC Distance: ${gcDist} nm, ari ${gc[0].z.toFixed(2)}`);
 
         // Returned heading in radians
         let rl = calculateRhumLine({ lat: Math.toRadians(from._latlng.lat), lng: Math.toRadians(from._latlng.lng) },
@@ -464,7 +473,8 @@ OpenSource JavaScript map API at <a href="https://leafletjs.com/" target="leafle
         polylineGroup.addTo(map);
 
         // Display distances
-        document.getElementById('distances').innerHTML = `<table><tr><td>GC Dist:</td><td style='text-align: right; padding-left: 20px;'>${
+        let htmlContent = `From ${decToSex(from._latlng.lat, 'NS')} / ${decToSex(from._latlng.lng, 'EW')}<br/>` +
+                          `To   ${decToSex(to._latlng.lat, 'NS')} / ${decToSex(to._latlng.lng, 'EW')}<br/>` + `<table><tr><td>GC Dist:</td><td style='text-align: right; padding-left: 20px;'>${
             gcDist.toFixed(2)
         } nm.</td></tr><tr><td>IRA:</td><td style='text-align: right; padding-left: 20px;'>${
             gc[0].z.toFixed(0)
@@ -473,6 +483,10 @@ OpenSource JavaScript map API at <a href="https://leafletjs.com/" target="leafle
         } nm.</td></tr><tr><td>Route:</td><td style='text-align: right; padding-left: 20px;'>${
             Math.toDegrees(rl.heading).toFixed(0)
         }&deg; t.</td></tr></table>`;
+
+        document.getElementById('distances').innerHTML = htmlContent;
+
+        document.getElementById("reverse-button").disabled = false;
     };
 
     if (Math.toRadians === undefined) {
@@ -488,13 +502,13 @@ OpenSource JavaScript map API at <a href="https://leafletjs.com/" target="leafle
     }
 
     /**
-     * 
+     *
      * @param { lat: float, lng: float } from values in Radians
      * @param { lat: float, lng: float } to values in Radians
      * Return distance in radians
      */
     let getGCDistance = (from, to) => {
-        let cos = Math.sin(from.lat) * Math.sin(to.lat) + Math.cos(from.lat) * 
+        let cos = Math.sin(from.lat) * Math.sin(to.lat) + Math.cos(from.lat) *
                   Math.cos(to.lat) * Math.cos(to.lng - from.lng);
         let dist = Math.acos(cos);
         return dist;
@@ -586,10 +600,10 @@ OpenSource JavaScript map API at <a href="https://leafletjs.com/" target="leafle
     const TO_WEST  = 3;
 
     /**
-     * 
+     *
      * @param { lat: float, lng: float } from values in Radians
      * @param { lat: float, lng: float } to values in Radians
-     * @param { int } nbPoints 
+     * @param { int } nbPoints
      */
     let calculateGreatCircle = (from, to, nbPoints) => {
         let nsDir = (to.lat > from.lat) ? TO_NORTH : TO_SOUTH;
