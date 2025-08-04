@@ -87,7 +87,8 @@ table.no-border td {
     <h1>Almanac Test, ES6 Celestial Computer</h1>
     <h2>Compute Celestial Almanac for a given period</h2>
     <div>
-        Compare the results with <a href="https://neoprogrammics.com/de405_usno_ae98/DE405_Sun.php" target="_new">this</a>.
+        Compare the results with <a href="https://neoprogrammics.com/de405_usno_ae98/DE405_Sun.php" target="_new">this</a>, <a href="https://www.nauticalalmanac.it/en/navigation-astronomy/the-nautical-almanac" target="_new">this</a>, ou <a href="https://www.thenauticalalmanac.com/" target="_new">that</a>.
+
     </div>
     <div id="screen-warning" class="screen-only screen-warning">
         <b><i>Note&nbsp;:</i></b>
@@ -101,11 +102,11 @@ table.no-border td {
                 Be patient, the generation can take time...
             </p>
             <p style="margin: 5px; padding: 5px; border: 1px solid silver; border-radius: 5px;">
-                Cette page est con&ccedil;ue pour être imprim&eacute;e depuis votre navigateur, sous forme de document papier ou de PDF. 
+                Cette page est con&ccedil;ue pour être imprim&eacute;e depuis votre navigateur, sous forme de document papier ou de PDF.
                 Une fois le document g&eacute;n&eacute;r&eacute; dans le navigateur, utilisez les fonctionnalit&eacute;s du navigateur
-                pour l'imprimer. Utilisez ensuite les diff&eacute;rents param&egrave;tres (comme l'&eacute;chelle, les arri&egrave;re-plans, etc.) pour le dimensionner 
+                pour l'imprimer. Utilisez ensuite les diff&eacute;rents param&egrave;tres (comme l'&eacute;chelle, les arri&egrave;re-plans, etc.) pour le dimensionner
                 de mani&egrave;re appropri&eacute;e, et envoyez-le
-                &agrave; votre imprimante, ou g&eacute;n&eacute;rez un fichier PDF &agrave; partir de celui-ci. La version &eacute;cran et la version 
+                &agrave; votre imprimante, ou g&eacute;n&eacute;rez un fichier PDF &agrave; partir de celui-ci. La version &eacute;cran et la version
                 imprim&eacute;e sont l&eacute;g&egrave;rement diff&eacute;rentes, il y a quelques artefacts - comme les sauts de page -
                 qui ne seront pas visibles dans la version &eacute;cran, tout comme les messages - comme celui que vous lisez actuellement - n'apparaîtront pas dans la version imprim&eacute;e.
                 <br/>
@@ -146,7 +147,7 @@ table.no-border td {
                     -->
                 </div>
                 <div style="vertical-align: middle;">
-                    For <input type="radio" name="duration" value="one-day" checked>One Day 
+                    For <input type="radio" name="duration" value="one-day" checked>One Day
                         <input type="radio" name="duration" value="one-week">One Week
                         <input type="radio" name="duration" value="one-month">One Month
                         <input type="radio" name="duration" value="one-year">Three Months
@@ -193,9 +194,9 @@ table.no-border td {
         let i = intValue;
         dec *= 60; //    let s = i + "°" + dec.toFixed(2) + "'";
         //    let s = i + String.fromCharCode(176) + dec.toFixed(2) + "'";
-    
+
         let s = ""; // sign
-    
+
         if (ns_ew !== undefined) {
             if (val < 0) {
                 s += ns_ew === 'NS' ? 'S' : 'W';
@@ -208,7 +209,7 @@ table.no-border td {
                 s += '-';
             }
         }
-    
+
         s += i + "°" + dec.toFixed(2) + "'";
         return s;
     };
@@ -355,8 +356,8 @@ table.no-border td {
 
             let ariesGHA = decToSex(calcResult.aries.GHA.raw); // calcResult.aries.GHA.fmt;
 
-            htmlContentSunMoonAries += (`<tr><td style='font-weight: bold;'>${ut}</td><td>${sunGHA}</td><td>${deltaSunGHA}</td><td>${sunRA}</td><td>${sunDecl}</td><td>${deltaSunDecl}</td>` + 
-                                            `<td>${moonGHA}</td><td>${deltaMoonGHA}</td><td>${moonRA}</td><td>${moonDecl}</td><td>${deltaMoonDecl}</td><td>${moonHp}</td><td>${ariesGHA}</td>` + 
+            htmlContentSunMoonAries += (`<tr><td style='font-weight: bold;'>${ut}</td><td>${sunGHA}</td><td>${deltaSunGHA}</td><td>${sunRA}</td><td>${sunDecl}</td><td>${deltaSunDecl}</td>` +
+                                            `<td>${moonGHA}</td><td>${deltaMoonGHA}</td><td>${moonRA}</td><td>${moonDecl}</td><td>${deltaMoonDecl}</td><td>${moonHp}</td><td>${ariesGHA}</td>` +
                                             `<td style='font-weight: bold;'>${ut}</td></tr>`);
 
             let venusGHA = decToSex(calcResult.venus.GHA.raw);
@@ -375,10 +376,10 @@ table.no-border td {
             let saturnRA = decToSex(calcResult.saturn.RA.raw);
             let saturnDecl = decToSex(calcResult.saturn.DEC.raw, "NS");
 
-            htmlContentPlanets += (`<tr><td style='font-weight: bold;'>${ut}</td><td>${venusGHA}</td><td>${venusRA}</td><td>${venusDecl}</td>` + 
-                                                                            `<td>${marsGHA}</td><td>${marsRA}</td><td>${marsDecl}</td>` + 
-                                                                            `<td>${jupiterGHA}</td><td>${jupiterRA}</td><td>${jupiterDecl}</td>` + 
-                                                                            `<td>${saturnGHA}</td><td>${saturnRA}</td><td>${saturnDecl}</td>` + 
+            htmlContentPlanets += (`<tr><td style='font-weight: bold;'>${ut}</td><td>${venusGHA}</td><td>${venusRA}</td><td>${venusDecl}</td>` +
+                                                                            `<td>${marsGHA}</td><td>${marsRA}</td><td>${marsDecl}</td>` +
+                                                                            `<td>${jupiterGHA}</td><td>${jupiterRA}</td><td>${jupiterDecl}</td>` +
+                                                                            `<td>${saturnGHA}</td><td>${saturnRA}</td><td>${saturnDecl}</td>` +
                                             `<td style='font-weight: bold;'>${ut}</td></tr>`);
 
             if (hours === 12) {
@@ -397,17 +398,17 @@ table.no-border td {
 
                 htmlContentSemiDiamAndCo += (
                     `<tr><td colspan='14'>&nbsp;</td></tr>` +
-                    `<tr>` + 
-                        `<td rowspan='3'></td>` + 
-                        `<td colspan='2'>&frac12;&nbsp;\u2300 ${semiDiamSun}'</td>` + 
-                        `<td colspan='3'>hp (&pi;) ${sunHP}'</td>` + 
-                        `<td colspan='3'>&frac12;&nbsp;\u2300 ${semiDiamMoon}'</td>` + 
-                        `<td colspan='2'>${moonPhase}</td>` + 
+                    `<tr>` +
+                        `<td rowspan='3'></td>` +
+                        `<td colspan='2'>&frac12;&nbsp;\u2300 ${semiDiamSun}'</td>` +
+                        `<td colspan='3'>hp (&pi;) ${sunHP}'</td>` +
+                        `<td colspan='3'>&frac12;&nbsp;\u2300 ${semiDiamMoon}'</td>` +
+                        `<td colspan='2'>${moonPhase}</td>` +
                         `<td rowspan='3' colspan='2'><img src='${phaseImageName}' alt='${calcResult.moon.phase.phaseAngle}' title='${calcResult.moon.phase.phaseAngle + '&deg'}'>` +
-                        `<td rowspan='3'></td>` + 
+                        `<td rowspan='3'></td>` +
                     `</tr>` +
                     `<tr><td colspan='5'>EoT at 12:00 UTC : ${calcResult.EOT.fmt}</td><td colspan='5'>Phase at 12:00 UTC : ${calcResult.moon.phase.phaseAngle.toFixed(2)}&deg;</td></tr>` +
-                    `<tr><td colspan='5'>Meridian Pass. Time : ${tPassSun}</td><td colspan='5'>Age : ${moonAge.toFixed(1)} day(s)</td></tr>` 
+                    `<tr><td colspan='5'>Meridian Pass. Time : ${tPassSun}</td><td colspan='5'>Age : ${moonAge.toFixed(1)} day(s)</td></tr>`
                 );
             }
 
@@ -456,12 +457,12 @@ table.no-border td {
 
                 htmlContentStarsPage += "<table>";
 
-                htmlContentStarsPage += `<tr><td>Mean Obliquity of Ecliptic</td><td>${ calcResult.obliq.fmt }</td></tr>`;                    
-                htmlContentStarsPage += `<tr><td>True Obliquity of Ecliptic</td><td>${ calcResult.trueObliq.fmt }</td></tr>`;                    
-                htmlContentStarsPage += `<tr><td>Delta &psi;</td><td>${ calcResult.dPsi }"</td></tr>`;                    
-                htmlContentStarsPage += `<tr><td>Delta &epsilon;</td><td>${ calcResult.dEps }"</td></tr>`;                    
-                htmlContentStarsPage += `<tr><td>Julian Date</td><td>${ calcResult.julianDay }</td></tr>`;                    
-                htmlContentStarsPage += `<tr><td>Julian Ephemeris Date</td><td>${ calcResult.julianEphemDay }</td></tr>`;                    
+                htmlContentStarsPage += `<tr><td>Mean Obliquity of Ecliptic</td><td>${ calcResult.obliq.fmt }</td></tr>`;
+                htmlContentStarsPage += `<tr><td>True Obliquity of Ecliptic</td><td>${ calcResult.trueObliq.fmt }</td></tr>`;
+                htmlContentStarsPage += `<tr><td>Delta &psi;</td><td>${ calcResult.dPsi }"</td></tr>`;
+                htmlContentStarsPage += `<tr><td>Delta &epsilon;</td><td>${ calcResult.dEps }"</td></tr>`;
+                htmlContentStarsPage += `<tr><td>Julian Date</td><td>${ calcResult.julianDay }</td></tr>`;
+                htmlContentStarsPage += `<tr><td>Julian Ephemeris Date</td><td>${ calcResult.julianEphemDay }</td></tr>`;
 
                 htmlContentStarsPage += "</table>";
 
@@ -480,7 +481,7 @@ table.no-border td {
         // htmlContentSemiDiamAndCo += "</table>";
 
         return ("<div class='page-break content'><hr/></div>" + "<br/>" + (
-            htmlContentSunMoonAries + "<br/>" + 
+            htmlContentSunMoonAries + "<br/>" +
             /* htmlContentSemiDiamAndCo + "<br/>" + */
             htmlContentPlanets + (
                 consoleWithStars ? (
@@ -575,7 +576,7 @@ table.no-border td {
             // console.log(`${calDate} < ${endDate} ? ... keep working: ${keepWorking}`);
             console.log(`Processing data for ${calDate.toDateString()}`);
 
-            if (keepWorking) { 
+            if (keepWorking) {
 
                 today = { // Start date
                     year: calDate.getFullYear(),
