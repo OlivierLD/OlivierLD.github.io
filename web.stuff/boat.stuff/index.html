@@ -82,7 +82,7 @@ a.list-link:hover {
 	<dialog id="qrcode-dialog" class="shadow-menu" style="width: 300px; border-radius: 10px;">
 		<div class="dialog-header">
 		  <span>Scan this...</span>
-		  <span class="dialog-header-close" onclick="closeQRCodeDialog();">&times</span>
+		  <span class="dialog-header-close" onclick="closeQRCodeDialog();" role="button">&times</span>
 		</div>
 		<div id="qrcode" style="width:250px; height:250px; margin:25px;"></div>
 	</dialog>
@@ -102,7 +102,7 @@ a.list-link:hover {
 			<ul>
 				<li><a class="list-link" href="https://taveacbaluchon.blogspot.com/" target="YQ">Baluchon Blog</a></li>
 				<li><a class="list-link" href="https://www.youtube.com/@quenetyann396" target="YQ">Yann Qu&eacute;net on YouTube</a></li>
-				
+
 			</ul>
 		</li>
 		<li><a class="list-link" href="https://www.yrvind.com/">Sven Yrvind (Lundin, Bris, etc)</a></li>
@@ -241,7 +241,7 @@ a.list-link:hover {
 			<li><a class="list-link" href="https://public.wmo.int/en" target="WMO">World Meteorological Organization (WMO)</a></li>
 			<li><a class="list-link" href="https://ocean.weather.gov/" target="OPC">US Ocean Prediction Center (OPC)</a></li>
 			<li><a class="list-link" href="https://www.noaa.gov/" target="NOAA">US National Oceanographic and Atmospheric Admininstration (NOAA)</a></li>
-			<li><a class="list-link" href="http://weather.gmdss.org/" target="WWMIWS">Worldwide Met-Ocean Information and Warning Service (WWMIWS)</a></li>	
+			<li><a class="list-link" href="http://weather.gmdss.org/" target="WWMIWS">Worldwide Met-Ocean Information and Warning Service (WWMIWS)</a></li>
 			<li>
 				<h3 style="margin: 3px;">NOAA Weather Faxes (US)</h3>
 				<ul>
@@ -280,7 +280,7 @@ a.list-link:hover {
 							<li><a class="list-link" href="weather/internet.faxes.NPac.html" target="WiP" title="moved, rescaled, rotated">Several Pacific faxes, reworked on the client side...</a></li>
 							<li><a class="list-link" href="weather/forecast.html" target="WiP" title="Several others">Several forecast web sites</a></li>
 						</ul>
-					</li>		
+					</li>
 				</ul>
 			</li>
 		</ul>
@@ -301,7 +301,7 @@ a.list-link:hover {
 	<h3>
 		<a href="javascript:void(0)" class="list-link" title="Weather" onclick="showHideSection(this, 'tide-section');">
 			<span class="expand-collapse">&#9658;&nbsp;</span>Tides
-		</a>. 
+		</a>.
 		This is a work in progress, pure Web Tide Application... All computations are done on the client side.
 	</h3>
     <div id="tide-section" class="sub-section">
@@ -356,18 +356,18 @@ a.list-link:hover {
 <script type="text/javascript">
 
 	let qrcode;
-	
-	let makeCode = (url) => {    
+
+	let makeCode = (url) => {
 		if (url === undefined) {
 			url = "index_00.html"; // Dummy
 		}
 		let docLoc = document.location.href;
 		let toDisplay = docLoc.substring(0, docLoc.lastIndexOf('/')) + "/" + url; // document.location + url;
-	
+
 		qrcode.makeCode(toDisplay);
 		showQRCodeDialog();
 	};
-	
+
 	let showQRCodeDialog = () => {
 		let qrDialog = document.getElementById("qrcode-dialog");
 		if (qrDialog.show !== undefined) {
@@ -421,9 +421,9 @@ a.list-link:hover {
 			width:  250,
 			height: 250
 		});
-	
+
 		// makeCode();
 	}
-	
+
 </script>
 </html>

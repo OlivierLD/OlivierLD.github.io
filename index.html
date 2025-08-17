@@ -657,14 +657,14 @@ button:hover, button:focus {
 }
 
 #bg-title {
-  color: rgba(192, 192, 192, 0.5); 
-  margin-right: 120px; 
-  padding: 10px; 
-  font-style: italic; 
-  text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px silver; 
-  border: 1px solid silver; 
+  color: rgba(192, 192, 192, 0.5);
+  margin-right: 120px;
+  padding: 10px;
+  font-style: italic;
+  text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px silver;
+  border: 1px solid silver;
   border-radius: 5px;
-  
+
 }
 #h2-title:hover, #kebab:hover, #hamburger:hover, #my-name:hover, #bg-title:hover {
     color: cyan;
@@ -685,7 +685,7 @@ button:hover, button:focus {
 }
 
 /* @media screen and (max-height: 450px) { */
-@media screen and (width <= 1000px) {  
+@media screen and (width <= 1000px) {
   h1 {
     font-size: 60px;
   }
@@ -912,11 +912,11 @@ Date.prototype.format = function (dateFormat) {
     <h1 class="display-data blink_me" style="color: lime;">Loading, please wait...</h1>
   </div>
 
-  <div id="browser-warning" class="smooth" 
+  <div id="browser-warning" class="smooth"
        style="position: absolute; z-index: 20; border: 2px solid orange; border-radius: 5px; padding: 5px; width: 95%; text-shadow: 2px 2px 4px black, 0 0 25px white, 0 0 5px silver; background-color: rgba(0, 0, 0, .55);">
     <div class="dialog-header" style="font-size: 150%;">
       <span style="color: red;"><i>Warning!</i></span>
-      <span class="dialog-header-close" onclick="closeWarning();">&times</span>
+      <span class="dialog-header-close" onclick="closeWarning();" role="button">&times</span>
     </div>
     <div style="padding: 10px;">
       This site is using cutting-edge ES6/HTML5/CSS3 features.
@@ -932,7 +932,7 @@ Date.prototype.format = function (dateFormat) {
     <div class="w3-modal-content">
       <div class="image-container">
         <span onclick="hideAbout();"
-              class="close-icon">&times;</span>
+              class="close-icon" role="button">&times;</span>
         <img src="bonus.jpg" alt="Me!"/>
         <span class="enhanced">Yeah, what!?</span>
       </div>
@@ -1030,9 +1030,9 @@ Date.prototype.format = function (dateFormat) {
   <div>
     <h2 id="h2-title" style="margin: 0; font-style: normal; text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px silver;">This page is my (messy) workbench</h2>
     <div style="z-index: -10; text-align: right;">
-      <span id="bg-title" 
+      <span id="bg-title"
             title="Background image title">BG Image title</span>
-    </div>     
+    </div>
   </div>
   <small class="help-header" style="margin-left: 5px; margin-top: -10px; position: absolute;">&gt; &nbsp;Work (constantly) in Progress. Use the hamburger (&#8801;) below to display the menu. See kebab (&#8942;) on the right.</small>
 
@@ -1428,7 +1428,7 @@ Date.prototype.format = function (dateFormat) {
         <div class="sub-section-desc">Anything else...</div>
         <a class="active-link" href="./web.stuff/boat.stuff/index.html" target="new">Boat Stuff</a>
         <a class="active-link" href="./web.stuff/astro/index.html" target="new">Astro Stuff</a>
-        
+
         <a href="javascript:void(0)" onclick="showHideSection(this, 'section-7.0');" title="Miscellaneous projects in their code repos."><span class="expand-collapse">&#9658;&nbsp;</span>Misc Projects</a>
         <div id="section-7.0" class="sub-section">
           <a class="active-link" href="https://github.com/OlivierLD/ROB/blob/master/raspberry-sailor/MUX-implementations/RESTNavServer/README.md" target="new">A REST Navigation Server on a Raspberry Pi</a>
@@ -1952,7 +1952,7 @@ Date.prototype.format = function (dateFormat) {
   function changeBG_YN() {
     if (bgAnimation !== undefined) { // Will stop
       console.log("Stopping BG change...");
-      clearInterval(bgAnimation); 
+      clearInterval(bgAnimation);
       bgAnimation = undefined;
       document.getElementById("start-stop-change-bg").innerText = 'Resume BG Change';
     } else { // Resume
@@ -2101,7 +2101,7 @@ Date.prototype.format = function (dateFormat) {
         return '...';
       }
     }
-    
+
     let countDown = setInterval(() => {
       secondLeft -= 1;
       // console.log(`CountDown: SecondLeft: ${secondLeft}`);
@@ -2143,8 +2143,8 @@ Date.prototype.format = function (dateFormat) {
 <script type="text/javascript">
 
 	let qrcode;
-	
-	let makeCode = (url) => {    
+
+	let makeCode = (url) => {
     // alert("Aha!");
 		if (url === undefined) {
 			url = "index_00.html"; // Dummy
@@ -2159,7 +2159,7 @@ Date.prototype.format = function (dateFormat) {
       alert("Not done loading yet...\nRe-try in a sec...");
     }
 	};
-	
+
 	let showQRCodeDialog = () => {
 		let qrDialog = document.getElementById("qrcode-dialog");
 		if (qrDialog.show !== undefined) {
@@ -2217,7 +2217,7 @@ Date.prototype.format = function (dateFormat) {
     document.getElementById("loading-message").style.display = "none"; // Hide loading message
 
   };
-	
+
 </script>
 
 </html>
