@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html>
+<!--
+ | Available from http://leafletjs.com/
+ | Tutorials and examples at https://leafletjs.com/examples.html
+ | Note: No native way to change orientation
+ +-->
+<head>
+
+    <title>Leaflet - Sailing 2025 !</title>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" /-->
+    <!-- link rel="icon" type="image/ico" href="icons/hammerhead.02.ico" -->
+    <link rel="icon" type="image/ico" href="../../boat.stuff/icons/hammerhead.02.ico">
+
+    <!--
+    <link rel="stylesheet" href="leaflet/leaflet.css" />
+    <script src="leaflet/leaflet.js"></script>
+    -->
+
+    <!--link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+          integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+          crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+            integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+            crossorigin=""></script-->
+    <!--link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+            integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+            crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+            integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+            crossorigin=""></script-->
+
+    <!--link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script-->
+
+    <!--link rel="stylesheet" href="http://i3.cdn-image.com/lcldsc/leaflet.css">
+    <script src="http://i3.cdn-image.com/lcldsc/leaflet.js"></script>
+    <script src="http://i3.cdn-image.com/lcldsc/leaflet-providers.min.js"></script-->
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+    <script type="module" src="../../../webcomponents/widgets/slideshow/SlideShow.js"></script>
+
+    <style>
+        :root {
+        --slide-width: 500px;
+        --slide-height: 400px;
+        --expanded-nav-width: 450px;
+        --slider-scale: 0.5;
+        }
+
+        body {
+            background: #f4f4f4;
+            font-family: "Source Code Pro", "Courier New", Helvetica, Geneva;
+            /* font-weight: bold; */
+        }
+
+        /* For the switch (slider) */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: calc(var(--slider-scale) * 60px);
+            height: calc(var(--slider-scale) * 34px);
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: calc(var(--slider-scale) * 26px);
+            width: calc(var(--slider-scale) * 26px);
+            left: calc(var(--slider-scale) * 4px);
+            bottom: calc(var(--slider-scale) * 4px);
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        input:checked + .slider {
+            background-color: #2196f3;
+        }
+
+        input:focus + .slider {
+            box-shadow: 0 0 1px #2196f3;
+        }
+
+        input:checked + .slider:before {
+            -webkit-transform: translateX(calc(var(--slider-scale) * 26px));
+            -ms-transform: translateX(calc(var(--slider-scale) * 26px));
+            transform: translateX(calc(var(--slider-scale) * 26px));
+        }
+
+        /* Rounded sliders */
+        .slider.round {
+            border-radius: calc(var(--slider-scale) * 34px);
+        }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
+
+        /* Switch grid */
+        .switch-container {
+            display: grid;
+            grid-template-columns: calc(var(--slider-scale) * 80px) 200px;
+        }
+        .switch-element {
+            place-self: flex-start;
+        }
+
+		button {
+			padding: 4px 20px;
+			/* give the background a gradient */
+			background:#ffae00; /* fallback for browsers that don't support gradients */
+			/* background: -webkit-linear-gradient(top, #ffae00, #d67600); */
+			background: -webkit-linear-gradient(top, rgba(255, 174, 0, 0.6), rgba(214, 118, 0, 0.6));
+			background: -moz-linear-gradient(top, #ffae00, #d67600);
+			background: -o-linear-gradient(top, #ffae00, #d67600);
+			/* background: linear-gradient(top, #ffae00, #d67600); */
+			background: linear-gradient(top, rgba(255, 174, 0, 0.6), rgba(214, 118, 0, 0.6));
+			border: 2px outset #dad9d8;
+			/* style the text */
+			font-family: Lato, Verdana, Andika, Arial, sans-serif; /* Andkia is available at http://www.google.com/webfonts/specimen/Andika */
+			font-size: 1.1em;
+			letter-spacing: 0.05em;
+			text-transform: uppercase;
+			color: #fff;
+			text-shadow: 0px 1px 10px #000;
+			/* add to small curve to the corners of the button */
+			-webkit-border-radius: 15px;
+			-moz-border-radius: 15px;
+			border-radius: 15px;
+			/* give the button a drop shadow */
+			-webkit-box-shadow: rgba(0, 0, 0, .55) 0 1px 6px;
+			-moz-box-shadow: rgba(0, 0, 0, .55) 0 1px 6px;
+			box-shadow: rgba(0, 0, 0, .55) 0 1px 6px;
+		}
+		/* NOW STYLE THE BUTTON'S HOVER STATE */
+		/*	button#rCoffee:hover, button#rCoffee:focus { */
+		button:hover, button:focus {
+			border:2px solid #dad9d8;
+		}
+
+        button:disabled {
+            background: silver;
+            color: gray;
+        }
+
+        .local-icon-class {
+            background: red;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Ao&ucirc;t 2025, Croisi&egrave;re Viollette</h1>
+<span>&Agrave; bord d'Id&eacute;fix, RM-1050.</span>
+
+<!--
+ | Try
+ | - map.panTo(new L.LatLng(40.737, -73.923));
+ | - map.setView(new L.LatLng(40.737, -73.923), 8);
+ | - map.flyTo(new L.LatLng(40.737, -73.923));
+ +-->
+
+<table>
+    <tr>
+        <td valign="top">
+            <div id="mapid" style="width: 1200px; height: 800px;"></div>
+        </td>
+        <td valign="top" style="text-align: right; min-width: 200px;">
+            <div id="curr-pos"></div>
+            <div id="curr-pos-raw"></div>
+            <div id="fly-to" style="text-align: left; border: 1px solid cyan; border-radius: 5px; padding: 5px;">
+                 Fly to ?
+                 <ul>
+                    <li><a class="list-link" href="" onclick="flyToZoom(0); return false;">Le Crouesty</a></li>
+                    <li><a class="list-link" href="" onclick="flyToZoom(1); return false;">Portz Gwen, Hoedic</a></li>
+                    <li><a class="list-link" href="" onclick="flyToZoom(2); return false;">Les Sables Rouges, Groix</a></li>
+                    <li><a class="list-link" href="" onclick="flyToZoom(3); return false;">Do&euml;lan</a></li>
+                    <li>
+                        Gl&eacute;nan
+                        <ul>
+                            <li><a class="list-link" href="" onclick="flyToZoom(4); return false;">Ile du Loc'h</a></li>
+                            <li><a class="list-link" href="" onclick="flyToZoom(5); return false;">Fort Cigogne</a></li>
+                            <li><a class="list-link" href="" onclick="flyToZoom(6); return false;">Penfret</a></li>
+                        </ul>
+                    </li>
+                    <li><a class="list-link" href="" onclick="flyToZoom(7); return false;">Les Moutons</a></li>
+                    <li><a class="list-link" href="" onclick="flyToZoom(8); return false;">Kernous</a></li>
+                    <li><a class="list-link" href="" onclick="flyToZoom(9); return false;">Beg Meil</a></li>
+                 </ul>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <div>
+                <h3>10 Ao&ucirc;t</h3>
+                <i><a class="list-link" href="" onclick="flyToZoom(0); return false;">Le Crouesty</a> - <a class="list-link" href="" onclick="flyToZoom(1); return false;">Hoedic</a></i><br/>
+                On se retrouve au Crouesty, et on d&eacute;colle pour Hoedic.<br/>
+                On y est dans l'apr&egrave;s midi, mouill&eacute; &agrave; Portz Gwen.
+            </div>
+            <div>
+                <h3>11 Ao&ucirc;t</h3>
+                <i><a class="list-link" href="" onclick="flyToZoom(1); return false;">Hoedic</a> - <a class="list-link" href="" onclick="flyToZoom(2); return false;">Groix</a></i><br/>
+            </div>
+            <div>
+                <h3>12 Ao&ucirc;t</h3>
+                <i><a class="list-link" href="" onclick="flyToZoom(2); return false;">Groix</a> - <a class="list-link" href="" onclick="flyToZoom(3); return false;">Do&euml;lan</a></i><br/>
+            </div>
+            <div>
+                <h3>13 Ao&ucirc;t</h3>
+                <i><a class="list-link" href="" onclick="flyToZoom(3); return false;">Do&euml;lan</a> - <a class="list-link" href="" onclick="flyToZoom(4); return false;">Gl&eacute;nan</a></i><br/>
+                Ile du Loc'h
+            </div>
+            <div>
+                <h3>14 Ao&ucirc;t</h3>
+                <i>Gl&eacute;nan</i><br/>
+                <a class="list-link" href="" onclick="flyToZoom(5); return false;">Fort Cigogne</a>
+            </div>
+            <div>
+                <h3>15 Ao&ucirc;t</h3>
+                <i>Gl&eacute;nan</i><br/>
+                <a class="list-link" href="" onclick="flyToZoom(6); return false;">Penfret</a> - <a class="list-link" href="" onclick="flyToZoom(7); return false;">Les Moutons</a> - <a class="list-link" href="" onclick="flyToZoom(8); return false;">Kernous</a><br/>
+            </div>
+            <div>
+                <h3>16 Ao&ucirc;t</h3>
+                <i><a class="list-link" href="" onclick="flyToZoom(9); return false;">Beg Meil</a></i><br/>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" valign="bottom" height="60">
+            <hr/>
+            <!--address>&copy; 2017, Le Diouris &amp; Co.</address-->
+            OpenSource JavaScript map API at <a href="https://leafletjs.com/" target="leaflet">leafletjs.com</a>
+        </td>
+    </tr>
+</table>
+
+<script>
+
+    let decToSex = (val, ns_ew) => {
+        let absVal = Math.abs(val);
+        let intValue = Math.floor(absVal);
+        let dec = absVal - intValue;
+        let i = intValue;
+        dec *= 60;
+        let min = dec.toFixed(4);
+        while (min.length < 7) {
+            min = '0' + min;
+        }
+        let s = i + "°" + min + "'";
+
+        if (val < 0) {
+            s += (ns_ew === 'NS' ? 'S' : 'W');
+        } else {
+            s += (ns_ew === 'NS' ? 'N' : 'E');
+        }
+        return s;
+    };
+
+    let getQSPrm = (prm) => {
+        let loc = document.location.toString();
+        if (loc.indexOf("?") > -1) {
+            let qs = loc.substring(loc.indexOf("?") + 1);
+            let prms = qs.split('&');
+            for (let i=0; i<prms.length; i++) {
+                let nv = prms[i].split('=');
+                if (nv.length === 2) {
+                    if (nv[0] === prm) {
+                        return nv[1];
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    /*
+    let map = L.map('mapid'); // .setView([51.505, -0.09], 13);
+
+    let mbAttr = 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community';
+    let mbUrl = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
+
+    const satLayer = L.tileLayer(mbUrl, {id: 'mapbox.streets', attribution: mbAttr, opacity: 1.0});
+    satLayer.addTo(map);
+
+
+    const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		maxZoom: 25,
+		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        opacity: 0.5
+	}).addTo(map);
+    */
+
+    let map = L.map('mapid'); // .setView([currentLatitude, currentLongitude], 13);
+
+	let mbAttr = 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community';
+	let mbUrl = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
+
+    const tiles = L.tileLayer(mbUrl, {
+		maxZoom: 19,
+		attribution: mbAttr
+	}).addTo(map);
+
+
+    // let polyline = L.polyline(latlngs, {color: 'red'}).addTo(map);
+    // // zoom the map to the polyline
+    // map.fitBounds(polyline.getBounds());
+
+    map.setView([47.75, -3.5], 8.5); // Centered (ish) on this trip
+
+    const ZOOM_POSITIONS = [
+        new L.LatLng(47.544725038405225, -2.8934307349481974),  // Le Crouesty
+        new L.LatLng(47.3415327114706, -2.890627384185791),     // Portz Gwen, Hoedic
+        new L.LatLng(47.62977460204848, -3.4153425693511967),   // Les sables rouges
+        new L.LatLng(47.77078709268901, -3.6093312066623193),   // Doelan
+        new L.LatLng(47.709401919693754, -3.9959434980119117),  // Ile du Loc'h
+        new L.LatLng(47.71565930733715, -3.9927651841208),      // Cigogne
+        new L.LatLng(47.72198614794312, -3.957538962058607),    // Penfret
+        new L.LatLng(47.77722241183118, -4.028816118989198),    // Moutons
+        new L.LatLng(47.88089878510406, -3.935218569458812),    // Kernous
+        new L.LatLng(47.86761540326134, -3.9837001214618795)    // Beg Meil
+    ];
+
+    const slideShowHedic = '<slide-show id="slide-show-hoedic" ' +
+                                          'width="800" ' +
+                                          'height="600" ' +
+                                          'slideclick="onSlideShowClick"> ' +
+                             '  <slide-show-image src="./pix/hoedic/04.jpeg" title="Portz Gwen"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/hoedic/05.jpeg" title="Portz Gwen"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/hoedic/06.jpeg" title="Portz Gwen"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/hoedic/03.jpeg" title="Couchant"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/hoedic/02.jpeg" title="Arc en ciel dans la brunme"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/hoedic/01.jpeg" title="Levant"></slide-show-image> ' +
+                             '</slide-show>';
+
+    const slideShowGroix = '<slide-show id="slide-show-groix" ' +
+                                          'width="800" ' +
+                                          'height="600" ' +
+                                          'slideclick="onSlideShowClick"> ' +
+                             '  <slide-show-image src="./pix/groix/01.jpeg" title="Les Sables Rouges"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/groix/02.jpeg" title="Le Biche"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/groix/03.jpeg" title="Le Biche"></slide-show-image> ' +
+                             '</slide-show>';
+
+    const slideShowDoelan = '<slide-show id="slide-show-doelan" ' +
+                                          'width="800" ' +
+                                          'height="600" ' +
+                                          'slideclick="onSlideShowClick"> ' +
+                             '  <slide-show-image src="./pix/doelan/01.jpeg" title="Le Rigolo"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/doelan/02.jpeg" title="Doelan"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/doelan/03.jpeg" title="Doelan"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/doelan/04.jpeg" title="Id&eacute;fix !"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/doelan/05.jpeg" title="Le mouillage et les voisins"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/doelan/06.jpeg" title="Un autre voisin"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/doelan/07.jpeg" title="Doelan, les deux feux"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/doelan/08.jpeg" title="Doelan"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/doelan/09.jpeg" title="Ap&eacute;ro"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/doelan/10.jpeg" title="Doelan"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/doelan/11.jpeg" title="Des murales..."></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/doelan/12.jpeg" title="Doelan"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/doelan/13.jpeg" title="Doelan"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/doelan/14.jpeg" title="Doelan"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/doelan/15.jpeg" title="Doelan"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/doelan/16.jpeg" title="Des murales"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/doelan/17.jpeg" title="Des murales"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/doelan/18.jpeg" title="Doelan"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/doelan/19.jpeg" title="Doelan"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/doelan/20.jpeg" title="Doelan"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/doelan/21.jpeg" title="Doelan"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/doelan/22.jpeg" title="Doelan"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/doelan/23.jpeg" title="Des murales"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/doelan/24.jpeg" title="Doelan, ap&eacute;ro !"></slide-show-image> ' +
+                             '</slide-show>';
+
+    const slideShowMoutons = '<slide-show id="slide-show-moutons" ' +
+                                          'width="800" ' +
+                                          'height="600" ' +
+                                          'slideclick="onSlideShowClick"> ' +
+                             '  <slide-show-image src="./pix/moutons/01.jpeg" title="Les Moutons"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/moutons/02.jpeg" title="Les Moutons"></slide-show-image> ' +
+                             '</slide-show>';
+
+    const slideShowLoch = '<slide-show id="slide-show-loch" ' +
+                                          'width="800" ' +
+                                          'height="600" ' +
+                                          'slideclick="onSlideShowClick"> ' +
+                             '  <slide-show-image src="./pix/glenan/loch.02.jpeg" title="Ile du Loc\'h, arc en ciel dans la brume"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/glenan/loch.03.jpeg" title="Ile du Loc\'h, arc en ciel dans la brume"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/glenan/loch.04.jpeg" title="Ile du Loc\'h, arc en ciel dans la brume"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/glenan/loch.05.jpeg" title="Ile du Loc\'h, arc en ciel dans la brume"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/glenan/loch.01.jpeg" title="Ile du Loc\'h, arc en ciel dans la brume"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/glenan/loch.06.jpeg" title="Ile du Loc\'h"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/glenan/loch.07.jpeg" title="Ile du Loc\'h"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/glenan/loch.08.jpeg" title="Ile du Loc\'h"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/glenan/loch.13.jpeg" title="Ile du Loc\'h"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/glenan/loch.09.jpeg" title="Ile du Loc\'h"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/glenan/loch.11.jpeg" title="Ile du Loc\'h"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/glenan/loch.12.jpeg" title="Ile du Loc\'h"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/glenan/loch.14.jpeg" title="Ile du Loc\'h, p&ecirc;che aux couteaux"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/glenan/loch.15.jpeg" title="Ile du Loc\'h, p&ecirc;che aux couteaux"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/glenan/loch.16.jpeg" title="Ile du Loc\'h"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/glenan/loch.17.jpeg" title="Ile du Loc\'h"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/glenan/loch.18.jpeg" title="Ile du Loc\'h"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/glenan/loch.19.jpeg" title="Ile du Loc\'h, p&ecirc;che aux couteaux"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/glenan/loch.20.jpeg" title="Ile du Loc\'h"></slide-show-image> ' +
+                             '</slide-show>';
+
+    const slideShowCigogne = '<slide-show id="slide-show-cigogne" ' +
+                                          'width="800" ' +
+                                          'height="600" ' +
+                                          'slideclick="onSlideShowClick"> ' +
+                             '  <slide-show-image src="./pix/glenan/cigogne.01.jpeg" title="Fort Cigogne"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/glenan/cigogne.02.jpeg" title="Fort Cigogne"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/glenan/cigogne.03.jpeg" title="Fort Cigogne"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/glenan/cigogne.04.jpeg" title="Fort Cigogne"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/glenan/cigogne.05.jpeg" title="Fort Cigogne"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/glenan/cigogne.06.jpeg" title="Fort Cigogne"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/glenan/cigogne.07.jpeg" title="Fort Cigogne"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/glenan/cigogne.08.jpeg" title="Fort Cigogne"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/glenan/cigogne.09.jpeg" title="Fort Cigogne"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/glenan/cigogne.10.jpeg" title="Fort Cigogne"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/glenan/cigogne.11.jpeg" title="Fort Cigogne"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/glenan/cigogne.12.jpeg" title="Fort Cigogne"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/glenan/cigogne.13.jpeg" title="Fort Cigogne"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/glenan/cigogne.14.jpeg" title="Fort Cigogne"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/glenan/cigogne.15.jpeg" title="Fort Cigogne"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/glenan/cigogne.16.jpeg" title="Fort Cigogne"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/glenan/cigogne.17.jpeg" title="Fort Cigogne"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/glenan/cigogne.18.jpeg" title="Fort Cigogne"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/glenan/cigogne.19.jpeg" title="Fort Cigogne"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/glenan/cigogne.20.jpeg" title="Fort Cigogne"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/glenan/cigogne.21.jpeg" title="Fort Cigogne"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/glenan/cigogne.22.jpeg" title="Fort Cigogne"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/glenan/cigogne.23.jpeg" title="Fort Cigogne"></slide-show-image> ' +
+                             '</slide-show>';
+
+    const slideShowPenfret = '<slide-show id="slide-show-penfret" ' +
+                                          'width="800" ' +
+                                          'height="600" ' +
+                                          'slideclick="onSlideShowClick"> ' +
+                             '  <slide-show-image src="./pix/glenan/penfret.01.jpeg" title="Penfret"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/glenan/penfret.02.jpeg" title="Penfret"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/glenan/penfret.03.jpeg" title="Penfret"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/glenan/penfret.04.jpeg" title="Penfret"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/glenan/penfret.05.jpeg" title="Penfret"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/glenan/penfret.06.jpeg" title="Penfret"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/glenan/penfret.07.jpeg" title="Penfret"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/glenan/penfret.08.jpeg" title="Penfret"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/glenan/penfret.09.jpeg" title="Penfret"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/glenan/penfret.10.jpeg" title="Penfret"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/glenan/penfret.11.jpeg" title="Penfret"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/glenan/penfret.12.jpeg" title="Penfret"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/glenan/penfret.13.jpeg" title="Penfret"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/glenan/penfret.14.jpeg" title="Penfret"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/glenan/penfret.15.jpeg" title="Penfret"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/glenan/penfret.16.jpeg" title="Penfret"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/glenan/penfret.17.jpeg" title="Penfret"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/glenan/penfret.18.jpeg" title="Penfret"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/glenan/penfret.19.jpeg" title="Penfret"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/glenan/penfret.20.jpeg" title="Penfret"></slide-show-image> ' +
+                             '</slide-show>';
+
+    const slideShowBegMeil = '<slide-show id="slide-show-begmeil" ' +
+                                          'width="800" ' +
+                                          'height="600" ' +
+                                          'slideclick="onSlideShowClick"> ' +
+                             '  <slide-show-image src="./pix/beg-meil/00.jpeg" title="Beg Meil"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/beg-meil/01.jpeg" title="Beg Meil"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/beg-meil/03.jpeg" title="Beg Meil"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/beg-meil/04.jpeg" title="Beg Meil"></slide-show-image> ' +
+                             '  <slide-show-image src="./pix/beg-meil/05.jpeg" title="Beg Meil"></slide-show-image> ' +
+                             '</slide-show>';
+
+
+    const MARKERS = [{
+        "latitude": 47.544725038405225,
+        "longitude": -2.8934307349481974,
+        "name": "Port du Crouesty",
+        "description": ""
+    }, {
+        "latitude": 47.3415327114706,
+        "longitude": -2.890627384185791,
+        "name": "Portz Gwen, Hoedic",
+        "description": slideShowHedic
+    }, {
+        "latitude": 47.62977460204848,
+        "longitude": -3.4153425693511967,
+        "name": "Les Sables Rouges",
+        "description": slideShowGroix
+    }, {
+        "latitude": 47.77078709268901,
+        "longitude": -3.6093312066623193,
+        "name": "Do&euml;lan",
+        "description": slideShowDoelan
+    }, {
+        "latitude": 47.709401919693754,
+        "longitude": -3.9959434980119117,
+        "name": "Ile du Loc'h, Premier mouillage dans l'archipel",
+        "description": slideShowLoch
+    }, {
+        "latitude": 47.71565930733715,
+        "longitude": -3.9927651841208,
+        "name": "Fort Cigogne",
+        "description": slideShowCigogne
+    }, {
+        "latitude": 47.72198614794312,
+        "longitude": -3.957538962058607,
+        "name": "Penfret, Sous le vent de l'&icirc;le...",
+        "description": slideShowPenfret
+    }, {
+        "latitude": 47.77722241183118,
+        "longitude": -4.028816118989198,
+        "name": "Les Moutons",
+        "description": slideShowMoutons
+    }, {
+        "latitude": 47.88089878510406,
+        "longitude":-3.935218569458812,
+        "name": "Plage de Kernous",
+        "description": "(click to enlarge)\n<br/>\n<a href=\"./pix/beg-meil/06.jpeg\" target=\"_blank\"><img src=\"./pix/beg-meil/06.jpeg\" width=\"256\" height=\"auto\" alt=\"Click to enlarge\"/></a>"
+    }, {
+        "latitude": 47.86761540326134,
+        "longitude": -3.9837001214618795,
+        "name": "Beg Meil",
+        "description": slideShowBegMeil
+    }];
+
+
+    // markers on the chart
+    if (true) {
+        MARKERS.forEach(mark => {
+            L.marker([(mark.latitude), (mark.longitude)], { title: mark.name })
+                .addTo(map)
+                .bindPopup('<b>' + mark.name + '</b><br/>' + mark.description, {maxWidth: 800}); // .openPopup();
+        });
+    }
+
+    function flyToZoom(idx) {
+        // map.panTo(ZOOM_POSITIONS[idx]);
+        // map.setView(ZOOM_POSITIONS[idx], 18);
+        map.flyTo(ZOOM_POSITIONS[idx]);
+    }
+
+    map.addEventListener('mousemove', (event) => {
+        // let lat = Math.round(event.latlng.lat * 100000) / 100000;
+        // let lng = Math.round(event.latlng.lng * 100000) / 100000;
+        let lat = event.latlng.lat;
+        let lng = event.latlng.lng;
+        while (lng > 180) {
+            lng -= 360;
+        }
+        while (lng < -180) {
+            lng += 360;
+        }
+        document.getElementById('curr-pos').innerHTML = `${decToSex(lat, "NS")}<br/>${decToSex(lng, "EW")}`;
+        if (getQSPrm('decimal') === 'Y') {
+            document.getElementById('curr-pos-raw').innerHTML = `${lat}<br/>${lng}`; // In decimal
+        }
+    });
+
+    if (Math.toRadians === undefined) {
+        Math.toRadians = (deg) => {
+            return deg * (Math.PI / 180);
+        };
+    }
+
+    if (Math.toDegrees === undefined) {
+        Math.toDegrees = (rad) => {
+            return rad * (180 / Math.PI);
+        };
+    }
+
+    function onSlideShowClick(src) {
+        console.log(">> Client side!! Slide " + src + " was clicked.");
+        window.open(src, '_blank'); // This is an example
+    }
+
+    window.onload = () => {
+        console.log("Loaded!");
+    };
+
+</script>
+
+</body>
+</html>
