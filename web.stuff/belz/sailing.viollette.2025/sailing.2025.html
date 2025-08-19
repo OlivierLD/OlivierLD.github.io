@@ -194,10 +194,10 @@
             <div id="curr-pos"></div>
             <div id="curr-pos-raw"></div>
             <div id="fly-to" style="text-align: left; border: 1px solid cyan; border-radius: 5px; padding: 5px;">
-                 Fly to ?
+                 Fly to ?..
                  <ul>
                     <li><a class="list-link" href="" onclick="flyToZoom(0); return false;">Le Crouesty</a></li>
-                    <li><a class="list-link" href="" onclick="flyToZoom(1); return false;">Portz Gwen, Hoedic</a></li>
+                    <li><a class="list-link" href="" onclick="flyToZoom(1); return false;">Portz Gwen, Ho&euml;dic</a></li>
                     <li><a class="list-link" href="" onclick="flyToZoom(2); return false;">Les Sables Rouges, Groix</a></li>
                     <li><a class="list-link" href="" onclick="flyToZoom(3); return false;">Do&euml;lan</a></li>
                     <li>
@@ -219,36 +219,47 @@
         <td colspan="2">
             <div>
                 <h3>10 Ao&ucirc;t</h3>
-                <i><a class="list-link" href="" onclick="flyToZoom(0); return false;">Le Crouesty</a> - <a class="list-link" href="" onclick="flyToZoom(1); return false;">Hoedic</a></i><br/>
-                On se retrouve au Crouesty, et on d&eacute;colle pour Hoedic.<br/>
-                On y est dans l'apr&egrave;s midi, mouill&eacute; &agrave; Portz Gwen.
+                <i><a class="list-link" href="" onclick="flyToZoom(0); /*return false;*/">Le Crouesty</a> - <a class="list-link" href="" onclick="flyToZoom(1); /*return false;*/">Ho&euml;dic</a></i><br/>
+                On se retrouve au Crouesty, et on d&eacute;colle pour Ho&euml;dic.<br/>
+                On y est dans l'apr&egrave;s midi, mouill&eacute; &agrave; Portz Gwen.<br/>
+                Le vent est au nordet, force 1 &agrave; 2, et le soleil est au rendez-vous.<br/>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; grid-gap: 10px;">
+                <img src="./pix/01.jpeg" alt="En route" style="width: 400px; height: auto;"/>
+                <img src="./pix/02.jpeg" alt="En route" style="width: 400px; height: auto;"/>
             </div>
             <div>
                 <h3>11 Ao&ucirc;t</h3>
-                <i><a class="list-link" href="" onclick="flyToZoom(1); return false;">Hoedic</a> - <a class="list-link" href="" onclick="flyToZoom(2); return false;">Groix</a></i><br/>
+                <i><a class="list-link" href="" onclick="flyToZoom(1); /*return false;*/">Ho&euml;dic</a> - <a class="list-link" href="" onclick="flyToZoom(2); /*return false;*/">Groix</a></i><br/>.
+                Vent de nordet, force 2 &agrave; 3, on part pour Groix.<br/>
             </div>
             <div>
                 <h3>12 Ao&ucirc;t</h3>
-                <i><a class="list-link" href="" onclick="flyToZoom(2); return false;">Groix</a> - <a class="list-link" href="" onclick="flyToZoom(3); return false;">Do&euml;lan</a></i><br/>
+                <i><a class="list-link" href="" onclick="flyToZoom(2); /*return false;*/">Groix</a> - <a class="list-link" href="" onclick="flyToZoom(3); /*return false;*/">Do&euml;lan</a></i><br/>.
+                Vent de nordet.
             </div>
             <div>
                 <h3>13 Ao&ucirc;t</h3>
-                <i><a class="list-link" href="" onclick="flyToZoom(3); return false;">Do&euml;lan</a> - <a class="list-link" href="" onclick="flyToZoom(4); return false;">Gl&eacute;nan</a></i><br/>
-                Ile du Loc'h
+                <i><a class="list-link" href="" onclick="flyToZoom(3); /*return false;*/">Do&euml;lan</a> - <a class="list-link" href="" onclick="flyToZoom(4); /*return false;*/">Gl&eacute;nan</a></i><br/>
+                Ile du Loc'h.<br/>
+                Vent d'ouest.
             </div>
             <div>
                 <h3>14 Ao&ucirc;t</h3>
                 <i>Gl&eacute;nan</i><br/>
-                <a class="list-link" href="" onclick="flyToZoom(5); return false;">Fort Cigogne</a>
+                <a class="list-link" href="" onclick="flyToZoom(5); /*return false;*/">Fort Cigogne</a>.<br/>
+                Vent de nordet, puis noroit.
             </div>
             <div>
                 <h3>15 Ao&ucirc;t</h3>
                 <i>Gl&eacute;nan</i><br/>
-                <a class="list-link" href="" onclick="flyToZoom(6); return false;">Penfret</a> - <a class="list-link" href="" onclick="flyToZoom(7); return false;">Les Moutons</a> - <a class="list-link" href="" onclick="flyToZoom(8); return false;">Kernous</a><br/>
+                Vent de nordet &agrave; est. Mouill&eacute;s sous le vent de l'&icirc;le de Penfret.<br/>
+                <a class="list-link" href="" onclick="flyToZoom(6); /*return false;*/">Penfret</a> - <a class="list-link" href="" onclick="flyToZoom(7); /*return false;*/">Les Moutons</a> - <a class="list-link" href="" onclick="flyToZoom(8); /*return false;*/">Kernous</a><br/>.
+                On est sous le vent de la plage de Kernous, et on y reste pour la nuit.<br/>
             </div>
             <div>
                 <h3>16 Ao&ucirc;t</h3>
-                <i><a class="list-link" href="" onclick="flyToZoom(9); return false;">Beg Meil</a></i><br/>
+                <i><a class="list-link" href="" onclick="flyToZoom(9); /*return false;*/">Beg Meil</a></i><br/>
             </div>
         </td>
     </tr>
@@ -327,12 +338,18 @@
 		attribution: mbAttr
 	}).addTo(map);
 
+    const tilesOSM = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		maxZoom: 19,
+		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        opacity: 0.5
+	}).addTo(map);
+
 
     // let polyline = L.polyline(latlngs, {color: 'red'}).addTo(map);
     // // zoom the map to the polyline
     // map.fitBounds(polyline.getBounds());
 
-    map.setView([47.75, -3.5], 8.5); // Centered (ish) on this trip
+    map.setView([47.6, -3.5], 10); // 8.5); // Centered (ish) on this trip
 
     const ZOOM_POSITIONS = [
         new L.LatLng(47.544725038405225, -2.8934307349481974),  // Le Crouesty
@@ -506,7 +523,7 @@
     }, {
         "latitude": 47.3415327114706,
         "longitude": -2.890627384185791,
-        "name": "Portz Gwen, Hoedic",
+        "name": "Portz Gwen, Hoëdic",
         "description": slideShowHedic
     }, {
         "latitude": 47.62977460204848,
@@ -516,7 +533,7 @@
     }, {
         "latitude": 47.77078709268901,
         "longitude": -3.6093312066623193,
-        "name": "Do&euml;lan",
+        "name": "Doëlan",
         "description": slideShowDoelan
     }, {
         "latitude": 47.709401919693754,
@@ -531,7 +548,7 @@
     }, {
         "latitude": 47.72198614794312,
         "longitude": -3.957538962058607,
-        "name": "Penfret, Sous le vent de l'&icirc;le...",
+        "name": "Penfret, sous le vent de l'île...",
         "description": slideShowPenfret
     }, {
         "latitude": 47.77722241183118,
@@ -542,7 +559,7 @@
         "latitude": 47.88089878510406,
         "longitude":-3.935218569458812,
         "name": "Plage de Kernous",
-        "description": "(click to enlarge)\n<br/>\n<a href=\"./pix/beg-meil/06.jpeg\" target=\"_blank\"><img src=\"./pix/beg-meil/06.jpeg\" width=\"256\" height=\"auto\" alt=\"Click to enlarge\"/></a>"
+        "description": "(click to enlarge)\n<br/>\n<a href=\"./pix/beg-meil/06.jpeg\" target=\"_blank\"><img src=\"./pix/beg-meil/06.jpeg\" width=\"400\" height=\"auto\" alt=\"Click to enlarge\"/></a>"
     }, {
         "latitude": 47.86761540326134,
         "longitude": -3.9837001214618795,
@@ -563,7 +580,8 @@
     function flyToZoom(idx) {
         // map.panTo(ZOOM_POSITIONS[idx]);
         // map.setView(ZOOM_POSITIONS[idx], 18);
-        map.flyTo(ZOOM_POSITIONS[idx]);
+        map.flyTo(ZOOM_POSITIONS[idx], 16);
+        // map.setZoom(18);
     }
 
     map.addEventListener('mousemove', (event) => {
