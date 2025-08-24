@@ -205,11 +205,12 @@ let refresh = () => {
 
       document.getElementById("ahl-value").innerText = `${document.getElementById('ahl-deg').value}\u00b0${document.getElementById('ahl-min').value}`;
       let cosAHL = Math.cos(Math.toRadians(Math.abs(decimalAHL)));
+      let cosAHLSign = Math.sign(cosAHL);
       document.getElementById("log-cos-ahl").innerText = Math.log10(cosAHL).toFixed(5);
 
       document.getElementById("log-sin-l-value").innerText = document.getElementById("log-sin-l").innerText;
       document.getElementById("log-sin-d-value").innerText = document.getElementById("log-sin-dec").innerText;
-      document.getElementById("log-sin-l-sin-d").innerText = parseFloat(document.getElementById("log-sin-l").innerText) + 
+      document.getElementById("log-sin-l-sin-d").innerText = parseFloat(document.getElementById("log-sin-l").innerText) +
                                                              parseFloat(document.getElementById("log-sin-dec").innerText);
 
       document.getElementById("log-sin-l-sin-d-value").innerText = document.getElementById("log-sin-l-sin-d").innerText;
@@ -222,10 +223,10 @@ let refresh = () => {
       document.getElementById("log-cos-d-value").innerText = document.getElementById("log-cos-dec").innerText;
       document.getElementById("log-cos-ahl-value").innerText = document.getElementById("log-cos-ahl").innerText;
 
-      document.getElementById("log-cos-l-cos-d-cos-ahl").innerText = (parseFloat(document.getElementById("log-cos-l").innerText) + 
-                                                                      parseFloat(document.getElementById("log-cos-dec").innerText) + 
+      document.getElementById("log-cos-l-cos-d-cos-ahl").innerText = (parseFloat(document.getElementById("log-cos-l").innerText) +
+                                                                      parseFloat(document.getElementById("log-cos-dec").innerText) +
                                                                       (cosAHLSign * parseFloat(document.getElementById("log-cos-ahl").innerText))).toFixed(6);
-                                                                     
+
       document.getElementById("log-cos-l-cos-d-cos-ahl-value").innerText = document.getElementById("log-cos-l-cos-d-cos-ahl").innerText;
       document.getElementById("cos-l-cos-d-cos-ahl").innerText = Math.pow(10, parseFloat(document.getElementById("log-cos-l-cos-d-cos-ahl").innerText)).toFixed(6);
 
@@ -258,7 +259,7 @@ let refresh = () => {
       let cosLtanD = Math.pow(10, parseFloat(document.getElementById("log-cos-l-tan-d").innerText));
       cosLtanD *= Math.sign(decimalDec);
       document.getElementById("cos-l-tan-d-2").innerText = cosLtanD.toFixed(6);
-      
+
       document.getElementById("l-value-4").innerText = document.getElementById('log-cos-l-tan-d').innerText;
       document.getElementById("log-sin-l-2").innerText = Math.log10(Math.sin(Math.toRadians(Math.abs(decimalLat)))).toFixed(5);
 
@@ -269,7 +270,7 @@ let refresh = () => {
       document.getElementById("log-cos-ahl-value-2").innerText = document.getElementById('log-cos-ahl-2').innerText;
       document.getElementById("log-sin-l-cos-ahl-2").innerText = parseFloat(document.getElementById('log-sin-l-2').innerText) +
                                                                  parseFloat(document.getElementById('log-cos-ahl-2').innerText);
-      
+
       document.getElementById("log-sin-l-cos-ahl-2-value").innerText = document.getElementById('log-sin-l-cos-ahl-2').innerText;
       let sinLcosAHL = Math.pow(10, parseFloat(document.getElementById("log-sin-l-cos-ahl-2").innerText));
       sinLcosAHL *= Math.sign(decimalLat);
@@ -285,7 +286,7 @@ let refresh = () => {
 
       document.getElementById("num-value").innerText = document.getElementById('log-sin-ahl').innerText;
       document.getElementById("den-value").innerText = document.getElementById('log-diff-one').innerText;
-      document.getElementById("log-quotient").innerText = (parseFloat(document.getElementById('log-sin-ahl').innerText) - 
+      document.getElementById("log-quotient").innerText = (parseFloat(document.getElementById('log-sin-ahl').innerText) -
                                                            parseFloat(document.getElementById('log-diff-one').innerText)).toFixed(6);
 
       document.getElementById("log-quotient-value").innerText = document.getElementById('log-quotient').innerText;
@@ -425,7 +426,7 @@ let decToSex = (val, ns_ew) => {
 </div>
 
 <div id="bottom-div" style="height: 40px; margin-top: 10px;">
-  <button onclick="refresh()" 
+  <button onclick="refresh()"
           style="margin-left: 20px; float: left;"
           title="Effectue le calcul&#13;avec les valeurs ci-dessus">Calcul</button>
   <div id="direct-value-div" style="float: right;">
@@ -642,49 +643,49 @@ let decToSex = (val, ns_ew) => {
         </tr>
         <tr>
           <td>sin(L).cos(AHL)</td>
-          <td>10 <sup><span id="log-sin-l-cos-ahl-2-value">...</span></sup></td>          
+          <td>10 <sup><span id="log-sin-l-cos-ahl-2-value">...</span></sup></td>
           <td>=</td>
           <td><span id="sin-l-cos-ahl"></span></td>
           <td>&lt;- attention au signe de L</td>
         </tr>
         <tr>
           <td>(cos(L).tan(D)) − (sin(L).cos(AHL))</td>
-          <td><span id="value-one">...</span> - <span id="value-two">...</span></td>          
+          <td><span id="value-one">...</span> - <span id="value-two">...</span></td>
           <td>=</td>
           <td><span id="diff-one"></span></td>
           <td></td>
         </tr>
         <tr>
           <td>log ((cos(L).tan(D)) − (sin(L).cos(AHL)))</td>
-          <td>log <span id="diff-one-value">...</span></td>          
+          <td>log <span id="diff-one-value">...</span></td>
           <td>=</td>
           <td><span id="log-diff-one"></span></td>
           <td></td>
         </tr>
         <tr>
           <td>log (num / den)</td>
-          <td>(<span id="num-value">...</span>) - (<span id="den-value">...</span>)</td>          
+          <td>(<span id="num-value">...</span>) - (<span id="den-value">...</span>)</td>
           <td>=</td>
           <td><span id="log-quotient"></span></td>
           <td></td>
         </tr>
         <tr>
           <td>num / den</td>
-          <td>10 <sup><span id="log-quotient-value">...</span></sup></td>          
+          <td>10 <sup><span id="log-quotient-value">...</span></sup></td>
           <td>=</td>
           <td><span id="quotient"></span></td>
           <td></td>
         </tr>
         <tr>
           <td>arctan(num / den)</td>
-          <td>atn(<span id="quotient-value">...</span>)</td>          
+          <td>atn(<span id="quotient-value">...</span>)</td>
           <td>=</td>
           <td><span id="atn-z"></span></td>
           <td></td>
         </tr>
         <tr>
           <td></td>
-          <td><b>Z</b></td>          
+          <td><b>Z</b></td>
           <td>=</td>
           <td><span id="atn-deg"></span></td>
           <td></td>
