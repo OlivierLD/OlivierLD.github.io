@@ -682,7 +682,11 @@
 			DRLng = longitude;
 			intercept = - result['intercept-degrees'] * 60; // in minutes of arc
 			azimuth = result['z']; // in degrees
-			observedBodyName = body;
+			if (result["observed-altitude-degrees"] >= 0) {
+				observedBodyName = body;
+			} else {
+				observedBodyName = `(${body} is not visible.)`;
+			}
 		};
 
 		/**
@@ -1088,8 +1092,8 @@
 		</div>
 	</div>
 	<hr/>
-	<div>
-		Chartless Map for LOPs...
+	<div id="chartless-title">
+		Mercator Canvas for LOPs...
 	</div>
 	<div style="display: grid; grid-template-columns: 1020px auto;">
 		<div style="border: 1px solid silver; border-radius: 5px; padding: 10px;">
@@ -1201,6 +1205,8 @@ let translate = (lang) => {
 	document.getElementById('button-calc').title = (lang === 'FR') ? 'Correction de la hauteur' : 'Sight Reduction';
 	document.getElementById('button-reverse').innerHTML = (lang === 'FR') ? 'Inverse' : 'Reverse';
 	document.getElementById('button-reverse').title = (lang === 'FR') ? 'Calcule la hauteur du sextant à votre position pour la date donnée' : 'Calculate the Sextant elevation for your time and position';
+
+	document.getElementById('chartless-title').innerHTML = (lang === 'FR') ? 'Canevas Mercator pour les droites de hauteur...' : 'Mercator Canvas for LOPs...';
 
 	// Lang swicth
 	document.getElementById('lang-flag').src = (lang === 'FR') ? "./pix/us_uk_flag.png" : "./pix/france.gif";
