@@ -22,7 +22,7 @@
 		}
 		.result-style {
 			margin: 10px;
-			max-height: 200px;
+			max-height: 400px;
 			overflow-y: scroll;
 		}
 		.help-dialog {
@@ -74,7 +74,9 @@
 	</style>
 	<!-- Scripts -->
     <!-- Main Module -->
-    <script type="module" src="app.js"></script> <!-- THAT is the key -->
+    <script type="module" src="app.js"></script> <!-- THAT is the key for celestial calculations -->
+
+	<script type="module" src="./webcomponents/ChartlessMap.js"></script>
 
 	<script type="text/javascript">
 
@@ -674,6 +676,13 @@
 			fmtDisplay += ("<hr/>");
 
 			document.getElementById("result").innerHTML = fmtDisplay;
+
+			// For the Chartless Map
+			DRLat = latitude;
+			DRLng = longitude;
+			intercept = - result['intercept-degrees'] * 60; // in minutes of arc
+			azimuth = result['z']; // in degrees
+			observedBodyName = body;
 		};
 
 		/**
@@ -751,6 +760,12 @@
 		if (reverse !== undefined && reverse === true) {
 			calculateReverseSight(requestPayload, reverseCallback);
 		}
+
+
+		if (calculateSR !== true) {
+			centerMapOn(map, DRLat, DRLng);
+		}
+		map.repaint()
 	}
 
 	</script>
@@ -1073,6 +1088,28 @@
 		</div>
 	</div>
 	<hr/>
+	<div>
+		Chartless Map for LOPs...
+	</div>
+	<div style="display: grid; grid-template-columns: 1020px auto;">
+		<div style="border: 1px solid silver; border-radius: 5px; padding: 10px;">
+			<chartless-map id="chartless-map-01"
+							class="chartless-map-01"
+							center-lat="47.677667"
+							center-lng="-3.135667"
+							chart-width="5.0"
+							width="1000"
+							height="600"></chartless-map>
+		</div>
+		<div style="padding: 10px;">
+			<button id="btn-zoom-in" style="margin-top: 10px; min-width: 30px; margin-bottom: 0px; padding: 5px;" title="Zoom in"
+					onclick="zoomIn();">+</button>
+			<br/>
+			<button id="btn-zoom-out" style="margin-top: 10px; min-width: 30px; margin-bottom: 0px; padding: 5px;" title="Zoom out"
+					onclick="zoomOut();">-</button>
+		</div>
+	</div>
+
 	<i>&copy; 2025, Oliv Cool Stuff Soft.</i>
 
 </body>
@@ -1106,6 +1143,8 @@
 
 
 <script type="text/javascript">
+
+const VERBOSE = false;
 
 let getQueryParameterByName = (name, url) => {
     if (!url) {
@@ -1279,6 +1318,188 @@ let closeAboutDialog = () => {
 	}
 };
 
+let map;
+
+function zoomIn() {
+    if (VERBOSE) {
+        console.log("Zooming in...");
+    }
+    map.chartWidth *= 0.8; // 20% zoom in
+    // map.repaint();
+}
+function zoomOut() {
+    if (VERBOSE) {
+        console.log("Zooming out...");
+    }
+    map.chartWidth *= 1.2; // 20% zoom out
+    // map.repaint();
+}
+
+/**
+ *
+ * @param start { lat: xx, lng: xx }, L & G in Degrees
+ * @param dist distance in nm
+ * @param bearing route in Degrees
+ * @return DR Position, L & G in Degrees
+ */
+function deadReckoning(start, dist, bearing) {
+	let radianDistance = Math.toRadians(dist / 60);
+	let finalLat = (Math.asin((Math.sin(Math.toRadians(start.lat)) * Math.cos(radianDistance)) +
+			(Math.cos(Math.toRadians(start.lat)) * Math.sin(radianDistance) * Math.cos(Math.toRadians(bearing)))));
+	let finalLng = Math.toRadians(start.lng) + Math.atan2(Math.sin(Math.toRadians(bearing)) * Math.sin(radianDistance) * Math.cos(Math.toRadians(start.lat)),
+			Math.cos(radianDistance) - Math.sin(Math.toRadians(start.lat)) * Math.sin(finalLat));
+	finalLat = Math.toDegrees(finalLat);
+	finalLng = Math.toDegrees(finalLng);
+
+	return {lat: finalLat, lng: finalLng};
+}
+
+function drawArrow(context, canvasX, canvasY, arrowLen, heading, color) {
+
+	// console.log(`Drawing arrow for heading ${heading}`);
+
+	context.beginPath();
+	context.lineWidth = 1.5;
+	// context.fillStyle = color;
+	context.strokeStyle = color;
+
+	let headAngle = 30;
+	context.moveTo(canvasX +  ((arrowLen / 2) * Math.sin(Math.toRadians(heading))),
+					canvasY - ((arrowLen / 2) * Math.cos(Math.toRadians(heading))));
+
+	context.lineTo(canvasX + ((arrowLen / 2) * Math.sin(Math.toRadians(heading))),
+					canvasY - ((arrowLen / 2) * Math.cos(Math.toRadians(heading))));
+	context.lineTo(canvasX - ((arrowLen / 2) * Math.sin(Math.toRadians(heading - headAngle))),
+					canvasY + ((arrowLen / 2) * Math.cos(Math.toRadians(heading - headAngle))));
+	context.lineTo(canvasX - ((arrowLen * 0.9 / 2) * Math.sin(Math.toRadians(heading - 0))),
+					canvasY + ((arrowLen * 0.9 / 2) * Math.cos(Math.toRadians(heading - 0)))); // Transom center
+	context.lineTo(canvasX - ((arrowLen / 2) * Math.sin(Math.toRadians(heading + headAngle))),
+					canvasY + ((arrowLen / 2) * Math.cos(Math.toRadians(heading + headAngle))));
+
+	context.closePath();
+	context.stroke();
+}
+
+let plotLOP = (map, context, dr, azimuth, intercept, bodyName) => {
+
+	console.log(`Plotting LOP for body ${bodyName}, azimuth ${azimuth}°, intercept ${intercept}nm`);
+
+	let color = 'gray';
+
+	context.save();
+	context.strokeStyle = color;
+	context.fillStyle = color;
+	context.lineWidth = 1;
+	let drCanvasPos = map.posToCanvas(dr.latitude, dr.longitude); // DR
+	console.log(`DR Canvas Pos: ${dr.latitude} / ${dr.longitude} => ${drCanvasPos.x} / ${drCanvasPos.y}`);
+	// The DR point
+	let markerRadius = 2;
+	context.beginPath();
+	// context.arc(drCanvasPos.x, drCanvasPos.y /*- beaconHeight*/ - (3 * (markerRadius / 3)), markerRadius / 3, 0, 2 * Math.PI, false);
+	context.arc(drCanvasPos.x, drCanvasPos.y, markerRadius, 0, 2 * Math.PI, false);
+	//          |              |              |             |  |            |
+	//          |              |              |             |  |            Counter clockwise
+	//          |              |              |             |  To angle (rad)
+	//          |              |              |             From angle (rad)
+	//          |              |              radius
+	//          |              Canvas y
+	//		    Canvas x
+    context.stroke();
+	context.fill();
+
+	context.closePath();
+
+	// Azimuth
+	let azimuthLengh = 200; // pixels
+	let azimuthRad = (azimuth * Math.PI) / 180.0;
+	let azimuthFront = {
+		x: drCanvasPos.x + (azimuthLengh * Math.sin(azimuthRad)),
+		y: drCanvasPos.y - (azimuthLengh * Math.cos(azimuthRad))
+	};
+	let azimuthBack = {
+		x: drCanvasPos.x - ((azimuthLengh / 2) * Math.sin(azimuthRad)),
+		y: drCanvasPos.y + ((azimuthLengh / 2) * Math.cos(azimuthRad))
+	};
+	context.beginPath();
+	context.moveTo(azimuthBack.x, azimuthBack.y);
+	context.lineTo(azimuthFront.x, azimuthFront.y); // Arrow head
+	context.lineWidth = 1;
+	context.strokeStyle = color;
+	context.stroke();
+	context.closePath();
+	drawArrow(context, azimuthFront.x, azimuthFront.y, 10, azimuth, color);
+	// Body Name
+	context.fillText(bodyName, azimuthFront.x + 3, azimuthFront.y);
+
+	// The LOP
+	// 1 - Get the point coordinates from the DR position, the azimuth and the intercept
+	let zPoint = /*Utilities.*/deadReckoning(
+		{ lat: dr.latitude, lng: dr.longitude },
+		intercept,                                // positive: to the body, negative, away from the body
+		azimuth); // in nautical miles
+	// 2 - Get the canvas coordinates of that point
+	let ZDrCanvasPos = map.posToCanvas(zPoint.lat, zPoint.lng);
+	console.log(`LOP Canvas Pos: ${zPoint.lat} / ${zPoint.lng} => ${ZDrCanvasPos.x} / ${ZDrCanvasPos.y}`);
+
+	// 3 - Draw the LOP
+	let lopLen = 200; // pixels
+	let lopRad = ((azimuth + 90) * Math.PI) / 180.0;
+	let lopLeft = {
+		x: ZDrCanvasPos.x + (lopLen * Math.sin(lopRad)),
+		y: ZDrCanvasPos.y - (lopLen * Math.cos(lopRad))
+	};
+	let lopRight = {
+		x: ZDrCanvasPos.x - (lopLen * Math.sin(lopRad)),
+		y: ZDrCanvasPos.y + (lopLen * Math.cos(lopRad))
+	};
+	context.beginPath();
+	context.moveTo(lopLeft.x, lopLeft.y);
+	context.lineTo(lopRight.x, lopRight.y);
+	context.lineWidth = 2;
+	context.strokeStyle = 'blue';
+	context.stroke();
+	context.closePath();
+
+	context.restore();
+}
+
+let minLat = 90.0, maxLat = -90.0;
+let minLng = 180.0, maxLng = -180.0;
+
+let centerMapOn = (map, centerLat, centerLng) => {
+	map.centerLat = centerLat; // This does the repaint... Delay it (see _delayedRepaint).
+	map.centerLng = centerLng;
+};
+
+// DR Position
+let DRLat = 47.60; // 46° 36.0' N
+let DRLng = -3.13; // 3° 7.8' W
+let azimuth = 0;
+let intercept = 0;
+let observedBodyName = "Nope";
+
+/*
+ * Used as the doAfter callback on the ChartlessMap.
+ */
+let updateMap = (elmt, context) => {
+
+    console.log(`...updateMap. Plotting DR Data and LOPs.`);
+
+	// TODO From the estimated poisition. Update it.
+
+	// plot DR position
+	elmt.plotMark(context,
+		{ latitude: DRLat, longitude: DRLng, label: "DR" },
+		10, 20,
+		'red',
+		["Dead Reckoning Position"],
+		true);
+
+	// Plot LOPs
+	plotLOP(elmt, context, { latitude: DRLat, longitude: DRLng, label: "DR" }, azimuth, intercept, observedBodyName);
+
+};
+
 // Find language to use
 window.onload = () => {
 
@@ -1303,6 +1524,10 @@ window.onload = () => {
 	if (langToUse !== 'EN') { // Then switch to French, default is EN.
 		translate(langToUse);
 	}
+
+	map = document.getElementById('chartless-map-01');
+    map.setDoAfter(updateMap);
+
 };
 </script>
 </html>
