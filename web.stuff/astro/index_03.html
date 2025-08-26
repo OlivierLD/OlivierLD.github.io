@@ -1515,16 +1515,14 @@ let observedBodyName = "Nope";
  */
 let updateMap = (elmt, context) => {
 
-    console.log(`...updateMap. Plotting DR Data and LOPs.`);
-
-	// TODO From the estimated poisition. Update it.
+    console.log(`...updateMap. Plotting DR Data and LOP(s).`);
 
 	// plot DR position
 	elmt.plotMark(context,
 		{ latitude: DRLat, longitude: DRLng, label: "DR" },
 		10, 20,
 		'red',
-		["Dead Reckoning Position"],
+		[(langToUse === 'FR' ? "Point estimé" : "Dead Reckoning Position")],
 		true);
 
 	// Plot LOPs
