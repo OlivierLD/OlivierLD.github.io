@@ -1386,6 +1386,25 @@ function drawArrow(context, canvasX, canvasY, arrowLen, heading, color) {
 	context.stroke();
 }
 
+let getBodyNameSymbol = (name) => {
+	switch (name) {
+		case 'Sun':
+			return '\u2609'; // ☉
+		case 'Moon':
+			return '\u263D';
+		case 'Venus':
+			return '\u2640'; // ♀
+		case 'Mars':
+			return '\u2642'; // ♂
+		case 'Jupiter':
+			return '\u2643'; // ♃
+		case 'Saturn':
+			return '\u2644'; // ♄
+		default: // Stars and Co
+			return name;
+	}
+};
+
 let plotLOP = (map, context, dr, azimuth, intercept, bodyName) => {
 
 	console.log(`Plotting LOP for body ${bodyName}, azimuth ${azimuth}°, intercept ${intercept}nm`);
@@ -1435,14 +1454,17 @@ let plotLOP = (map, context, dr, azimuth, intercept, bodyName) => {
 	context.closePath();
 	drawArrow(context, azimuthFront.x, azimuthFront.y, 10, azimuth, color);
 	// Body Name
-	context.fillText(bodyName, azimuthFront.x + 3, azimuthFront.y);
+	context.font = "bold 24px Arial";
+	context.fillText(getBodyNameSymbol(bodyName),
+	                 azimuthFront.x + 12,  // 12 = fontSize / 2
+					 azimuthFront.y + 12);
 
 	// The LOP
 	// 1 - Get the point coordinates from the DR position, the azimuth and the intercept
 	let zPoint = /*Utilities.*/deadReckoning(
 		{ lat: dr.latitude, lng: dr.longitude },
-		intercept,                                // positive: to the body, negative, away from the body
-		azimuth); // in nautical miles
+		intercept, // positive: TO the body, negative: AWAY FROM the body
+		azimuth);  // in nautical miles
 	// 2 - Get the canvas coordinates of that point
 	let ZDrCanvasPos = map.posToCanvas(zPoint.lat, zPoint.lng);
 	console.log(`LOP Canvas Pos: ${zPoint.lat} / ${zPoint.lng} => ${ZDrCanvasPos.x} / ${ZDrCanvasPos.y}`);
@@ -1463,6 +1485,10 @@ let plotLOP = (map, context, dr, azimuth, intercept, bodyName) => {
 	context.lineTo(lopRight.x, lopRight.y);
 	context.lineWidth = 2;
 	context.strokeStyle = 'blue';
+
+	// 4 - Print the intercept value
+	context.fillText(`${Math.abs(intercept.toFixed(2))} nm`, ZDrCanvasPos.x + 3, ZDrCanvasPos.y - 3);
+
 	context.stroke();
 	context.closePath();
 
