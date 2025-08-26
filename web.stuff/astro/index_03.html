@@ -1274,7 +1274,7 @@ let translator = (id) => {
 		case LUNAR_DIST:
 			return (langToUse === 'FR') ? 'Distance Lunaire' : 'Lunar Distance' ;
 		case DEAD_REC:
-			return (langToUse === 'FR') ? 'Estime :' : 'Dead Reckoning:' ;
+			return (langToUse === 'FR') ? 'R&eacute;sultats du calcul :' : 'Sight Reduction:' ;
 		case Z:
 			return (langToUse === 'FR') ? 'Azimuth' : 'Z' ;
 		case EST_ALT:
@@ -1508,7 +1508,7 @@ let DRLat = 0.0; // 47.60; // 46° 36.0' N
 let DRLng = 0.0; // -3.13; // 3° 7.8' W
 let azimuth = 0;
 let intercept = 0;
-let observedBodyName = "Nope";
+let observedBodyName = "";
 
 /*
  * Used as the doAfter callback on the ChartlessMap.
