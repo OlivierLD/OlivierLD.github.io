@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<!--
+  GHA Extrapolation, comparisons.
+ +-->
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Extrapolations</title>
+  	<link rel="icon" type="image/gif" href="../../astro/pix/sextant.gif">
+
+    <style type="text/css">
+* {
+  font-family: 'Courier New', Courier, monospace
+}
+
+th {
+  text-align: left;
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 5px;;
+}
+
+td {
+  text-align: left;
+  border: 1px solid black;
+  border-radius: 5px;;
+}
+
+    </style>
+    <script type="text/javascript">
+if (Math.toRadians === undefined) {
+	Math.toRadians = (deg) => {
+		return Math.PI * deg / 180;
+	};
+}
+
+if (Math.toDegrees === undefined) {
+	Math.toDegrees = (rad) => {
+		return rad * 180 / Math.PI;
+	};
+}
+
+let sexToDec = (deg, min) => {
+    return deg + ((min * 10 / 6) / 100);
+};
+
+let decToSex = (val, ns_ew) => {
+    let absVal = Math.abs(val);
+    let intValue = Math.floor(absVal);
+    let dec = absVal - intValue;
+    let i = intValue;
+    dec *= 60;
+//    var s = i + "°" + dec.toFixed(2) + "'";
+//    var s = i + String.fromCharCode(176) + dec.toFixed(2) + "'";
+    let s = "";
+    if (ns_ew !== undefined) {
+        if (val < 0) {
+            s += (ns_ew === 'NS' ? 'S' : 'W');
+        } else {
+            s += (ns_ew === 'NS' ? 'N' : 'E');
+        }
+        s += " ";
+    } else {
+        if (val < 0) {
+            s += '-'
+        }
+    }
+    s += i + "\u00b0" + dec.toFixed(2) + "'";
+
+    return s;
+};
+
+let calculate = () => {
+    let HH = parseInt(document.getElementById('HH').value);
+    let MI = parseInt(document.getElementById('MI').value);
+    let SS = parseInt(document.getElementById('SS').value);
+
+    let ahgDeg1 = parseInt(document.getElementById('ahg-deg-1').value);
+    let ahgMin1 = parseFloat(document.getElementById('ahg-min-1').value);
+    let ahgDeg2 = parseInt(document.getElementById('ahg-deg-2').value);
+    let ahgMin2 = parseFloat(document.getElementById('ahg-min-2').value);
+
+    let ahg1 = sexToDec(ahgDeg1, ahgMin1);
+    let ahg2 = sexToDec(ahgDeg2, ahgMin2);
+    let deltaAhg = ahg2 - ahg1;
+    let deltaTime = ((60 * MI) + SS); // in seconds
+    let deltaTimeHours = deltaTime / 3600; // in hours
+
+    let ahgAtTime = ahg1 + (deltaAhg * deltaTimeHours);
+    if (ahgAtTime < 0) {
+        ahgAtTime += 360;
+    } else if (ahgAtTime >= 360) {
+        ahgAtTime -= 360;
+    }
+
+    console.log("Delta AHG: " + deltaAhg + " for " + deltaTime + " seconds, " + deltaTimeHours + " hours");
+    console.log("AHG at " + HH + "h" + MI + "m" + SS + "s is " + ahgAtTime + "°, " + decToSex(ahgAtTime));
+
+    let resultDiv = document.getElementById('result');
+    resultDiv.innerHTML = "<h2>Resultat</h2>";
+    resultDiv.innerHTML += "<p>Delta AHG: " + decToSex(deltaAhg) + " for " + deltaTime + " seconds, " + deltaTimeHours.toFixed(4) + " hours</p>";
+    resultDiv.innerHTML += "<p>AHG at " + HH + "h" + MI + "m" + SS + "s is " + ahgAtTime.toFixed(2) + "°, <b>" + decToSex(ahgAtTime) + "</b></p>";
+
+    resultDiv.innerHTML += "<hr/>";
+    let with15degResult = ahg1 + (15.0 * deltaTimeHours);
+    resultDiv.innerHTML += "<p>With 15° per hour, AHG at " + HH + "h" + MI + "m" + SS + "s would be " + with15degResult.toFixed(4) + "°, <b>" + decToSex(with15degResult) + "</b></p>";
+
+
+    console.log("End of Calculation");
+}
+    </script>
+</head>
+<body>
+<h1>Extrapolations</h1>
+<p>
+  Le but est ici de comparer une extrapolation rigoureuse des valeurs de l'Angle Horaire Greenwich (AHG),
+  avec celles qu'on obtient avec les tables de conversion, ou un calcul manuel.
+</p>
+
+<div>
+  <table id="user-input">
+    <tr><td colspan="3">Heure (UTC) de l'observation</td></tr>
+    <tr>
+      <td>Heure</td>
+      <td>Minutes</td>
+      <td>Secondes</td>
+    </tr>
+    <tr>
+      <td><input type="number" id="HH" min="0" max="23" placeholder="HH" value="20" style="width: 50px; text-align: right;"></td>
+      <td><input type="number" id="MI" min="0" max="59" placeholder="HH" value="47" style="width: 50px; text-align: right;"></td>
+      <td><input type="number" id="SS" min="0" max="59" placeholder="HH" value="38" style="width: 50px; text-align: right;"></td>
+    </tr>
+    <tr>
+      <td colspan="2">AHG &agrave; l'heure ronde inf&eacute;rieure</td>
+      <td colspan="2">AHG &agrave; l'heure ronde inf&eacute;rieure <b>+ 1</b></td>
+    </tr>
+
+    <tr>
+      <td>
+        <input type="number" id="ahg-deg-1" min="0" max="360" step="1" placeholder="ahg degree" value="123" style="width: 50px; text-align: right;"/>&deg;
+      </td>
+      <td>
+        <input type="number" id="ahg-min-1" min="0" max="59" step="0.01" placeholder="ahg min" value="08.86" style="width: 60px; text-align: right;"/>'
+      </td>
+
+      <td>
+        <input type="number" id="ahg-deg-2" min="0" max="360" step="1" placeholder="ahg degree" value="138" style="width: 50px; text-align: right;"/>&deg;
+      </td>
+      <td>
+        <input type="number" id="ahg-min-2" min="0" max="59" step="0.01" placeholder="ahg min" value="09.04" style="width: 60px; text-align: right;"/>'
+      </td>
+    </tr>
+  </table>
+  <hr style="margin: 10px 20px 5px 20px;"/>
+  <button onclick="calculate()"
+          style="margin-left: 20px;"
+          title="Effectue le calcul&#13;avec les valeurs ci-dessus">Calcul</button>
+</div>
+
+<hr style="margin: 5px 20px 20px 20px;"/>
+
+
+<!-- The Result -->
+<div id="result" style="display: block;">
+
+</div>
+
+<hr/>
+<span style="font-style: italic;">Oliv-Soft never Stops</span>
+
+</body>
+</html>
