@@ -10,7 +10,7 @@
 
     <style type="text/css">
 * {
-  font-family: 'Courier New', Courier, monospace
+  font-family: Verdana, 'Courier New', Courier, monospace
 }
 
 th {
@@ -42,6 +42,14 @@ if (Math.toDegrees === undefined) {
 	};
 }
 
+let lpad = (s, w, len) => {
+    let str = s;
+    while (str.length < len) {
+        str = w + str;
+    }
+    return str;
+}
+
 let sexToDec = (deg, min) => {
     return deg + ((min * 10 / 6) / 100);
 };
@@ -67,7 +75,7 @@ let decToSex = (val, ns_ew) => {
             s += '-'
         }
     }
-    s += i + "\u00b0" + dec.toFixed(2) + "'";
+    s += i + "\u00b0" + lpad(dec.toFixed(2), '0', 5) + "'";
 
     return s;
 };
@@ -107,7 +115,7 @@ let calculate = () => {
 
     resultDiv.innerHTML += "<hr/>";
     let with15degResult = ahg1 + (15.0 * deltaTimeHours);
-    resultDiv.innerHTML += "<p>Avec 15° par heure, AHG &agrave; " + HH + "h" + MI + "m" + SS + "s serait " + with15degResult.toFixed(4) + "°, <b>" + decToSex(with15degResult) + "</b></p>";
+    resultDiv.innerHTML += "<p>Avec 15°00.00' par heure, AHG &agrave; " + HH + "h" + MI + "m" + SS + "s serait " + with15degResult.toFixed(4) + "°, <b>" + decToSex(with15degResult) + "</b></p>";
 
     console.log("End of Calculation");
 }
