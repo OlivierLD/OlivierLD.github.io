@@ -4,6 +4,8 @@
  * Warining: This one is NOT a WebComponent.
  */
 
+const VERBOSE = false;
+
 const directionColorConfigWhite = {
   bgColor:           'white',
   digitColor:        'black',
@@ -44,10 +46,9 @@ const directionColorConfigBlack = {
   knobOutlineColor:  'blue',
   font:              'Arial'
 };
-let directionColorConfig = directionColorConfigWhite; 
+let directionColorConfig = directionColorConfigWhite;
 
-function Direction(cName, dSize, majorTicks, minorTicks)
-{
+function Direction(cName, dSize, majorTicks, minorTicks) {
   if (majorTicks === undefined) {
     majorTicks = 45;
   }
@@ -66,17 +67,17 @@ function Direction(cName, dSize, majorTicks, minorTicks)
   this.valueToDisplay = 0;
   this.incr = 1;
   this.busy = false;
-  
+
   let instance = this;
-  
+
 //try { console.log('in the Direction constructor for ' + cName + " (" + dSize + ")"); } catch (e) {}
-  
+
   this.setDisplaySize = function(ds) {
     scale = ds / 100;
     displaySize = ds;
     this.drawDisplay(canvasName, displaySize, instance.previousValue);
   };
-  
+
   this.startStop = function (buttonName) {
 //  console.log('StartStop requested on ' + buttonName);
     let button = document.getElementById(buttonName);
@@ -101,8 +102,8 @@ function Direction(cName, dSize, majorTicks, minorTicks)
     }
     return num;
   }
-  
-  this.animate = function() {    
+
+  this.animate = function() {
     let value;
     if (arguments.length === 1) {
       value = arguments[0];
@@ -122,9 +123,9 @@ function Direction(cName, dSize, majorTicks, minorTicks)
       diff = value - on360(this.previousValue);
     }
     this.valueToDisplay = on360(this.previousValue);
-    
+
 //  console.log(canvasName + " going from " + this.previousValue + " to " + value);
-    
+
     this.incr = diff / 10;
 //    if (diff < 0)
 //      incr *= -1;
@@ -132,7 +133,7 @@ function Direction(cName, dSize, majorTicks, minorTicks)
       window.clearInterval(this.intervalID);
     }
     if (this.incr !== 0 && !this.busy) {
-      if (canvasName === 'twdCanvas') {   
+      if (VERBOSE && canvasName === 'twdCanvas') {
         console.log('Starting animation between ' + this.previousValue + ' and ' + value + ', step ' + this.incr);
       }
       this.busy = true;
@@ -144,19 +145,19 @@ function Direction(cName, dSize, majorTicks, minorTicks)
   function toRadians(d) {
     return Math.PI * d / 180;
   }
-  
+
   function toDegrees(d) {
     return d * 180 / Math.PI;
   }
-  
+
   this.displayAndIncrement = function(finalValue) {
     //console.log('Tic ' + inc + ', ' + finalValue);
     this.drawDisplay(canvasName, displaySize, this.valueToDisplay);
     this.valueToDisplay += this.incr;
-    if (canvasName === 'twdCanvas')
+    if (VERBOSE && canvasName === 'twdCanvas')
       console.log('       displayAndIncrement curr:' + this.valueToDisplay.toFixed(2) + ', final:' + finalValue + ', step ' + this.incr);
     if ((this.incr > 0 && this.valueToDisplay.toFixed(2) >= finalValue) || (this.incr < 0 && this.valueToDisplay.toFixed(2) <= finalValue)) {
-      if (canvasName === 'twdCanvas') {
+      if (VERBOSE && canvasName === 'twdCanvas') {
         console.log('Stop, ' + finalValue + ' reached, steps were ' + this.incr);
         //  console.log('Stop!')
       }
@@ -179,7 +180,7 @@ function Direction(cName, dSize, majorTicks, minorTicks)
     for (let i = 0, l = sheets.length; i < l; i++) {
       let sheet = sheets[i];
       try {
-        if (sheet.cssRules) { 
+        if (sheet.cssRules) {
           for (let j = 0, k = sheet.cssRules.length; j < k; j++) {
             let rule = sheet.cssRules[j];
             if (rule.selectorText && rule.selectorText.split(',').indexOf(selector) !== -1) {
@@ -205,25 +206,25 @@ function Direction(cName, dSize, majorTicks, minorTicks)
       directionColorConfig = directionColorConfigWhite;
     }
     let digitColor = directionColorConfig.digitColor;
-    
+
     let canvas = document.getElementById(displayCanvasName);
     let context = canvas.getContext('2d');
 
     let radius = displayRadius;
-  
+
     // Cleanup
   //context.fillStyle = "#ffffff";
     context.fillStyle = directionColorConfig.bgColor;
 //  context.fillStyle = "transparent";
-    context.fillRect(0, 0, canvas.width, canvas.height);    
+    context.fillRect(0, 0, canvas.width, canvas.height);
   //context.fillStyle = 'rgba(255, 255, 255, 0.0)';
-  //context.fillRect(0, 0, canvas.width, canvas.height);    
-  
+  //context.fillRect(0, 0, canvas.width, canvas.height);
+
     context.beginPath();
-  //context.arc(x, y, radius, startAngle, startAngle + Math.PI, antiClockwise);      
+  //context.arc(x, y, radius, startAngle, startAngle + Math.PI, antiClockwise);
     context.arc(canvas.width / 2, radius + 10, radius, 0, 2 * Math.PI, false);
     context.lineWidth = 5;
-  
+
     if (directionColorConfig.withGradient) {
       let grd = context.createLinearGradient(0, 5, 0, radius);
       grd.addColorStop(0, directionColorConfig.displayBackgroundGradient.from);// 0  Beginning
@@ -243,7 +244,7 @@ function Direction(cName, dSize, majorTicks, minorTicks)
     context.strokeStyle = directionColorConfig.outlineColor;
     context.stroke();
     context.closePath();
-    
+
     // Major Ticks
     context.beginPath();
     for (i = 0;i < 360 ;i+=majorTicks) {
@@ -258,7 +259,7 @@ function Direction(cName, dSize, majorTicks, minorTicks)
     context.strokeStyle = directionColorConfig.majorTickColor;
     context.stroke();
     context.closePath();
-  
+
     // Minor Ticks
     if (minorTicks > 0) {
       context.beginPath();
@@ -275,7 +276,7 @@ function Direction(cName, dSize, majorTicks, minorTicks)
       context.stroke();
       context.closePath();
     }
-    
+
     // Numbers
     context.beginPath();
     for (i = 0;i < 360 ;i+=majorTicks) {
@@ -289,7 +290,7 @@ function Direction(cName, dSize, majorTicks, minorTicks)
       context.fillText(str, - len / 2, (-(radius * .8) + 10));
       context.lineWidth = 1;
       context.strokeStyle = directionColorConfig.valueOutlineColor;
-      context.strokeText(str, - len / 2, (-(radius * .8) + 10)); // Outlined  
+      context.strokeText(str, - len / 2, (-(radius * .8) + 10)); // Outlined
       context.restore();
     }
     context.closePath();
@@ -302,15 +303,15 @@ function Direction(cName, dSize, majorTicks, minorTicks)
     context.font = "bold " + Math.round(scale * 40) + "px " + directionColorConfig.font; // "bold 40px Arial"
     let metrics = context.measureText(text);
     len = metrics.width;
-  
+
     context.beginPath();
     context.fillStyle = directionColorConfig.valueColor;
     context.fillText(text, (canvas.width / 2) - (len / 2), ((radius * .75) + 10));
     context.lineWidth = 1;
     context.strokeStyle = directionColorConfig.valueOutlineColor;
-    context.strokeText(text, (canvas.width / 2) - (len / 2), ((radius * .75) + 10)); // Outlined  
+    context.strokeText(text, (canvas.width / 2) - (len / 2), ((radius * .75) + 10)); // Outlined
     context.closePath();
-  
+
     // Hand
     context.beginPath();
     if (directionColorConfig.withHandShadow) {
@@ -333,7 +334,7 @@ function Direction(cName, dSize, majorTicks, minorTicks)
     x = (canvas.width / 2) - ((radius * 0.05) * Math.cos((2 * Math.PI * (displayValue / 360) + (2 * Math.PI / 2))));
     y = (radius + 10) - ((radius * 0.05) * Math.sin((2 * Math.PI * (displayValue / 360) + (2 * Math.PI / 2))));
     context.lineTo(x, y);
-  
+
     context.closePath();
     context.fillStyle = directionColorConfig.handColor;
     context.fill();
@@ -349,7 +350,7 @@ function Direction(cName, dSize, majorTicks, minorTicks)
     context.strokeStyle = directionColorConfig.knobOutlineColor;
     context.stroke();
   };
-  
+
   this.setValue = function(val) {
     instance.drawDisplay(canvasName, displaySize, val);
   };
