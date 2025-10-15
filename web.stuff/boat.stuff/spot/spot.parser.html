@@ -5,13 +5,13 @@
  +-->
 <html lang="en">
   <head>
-    <title>spot.parser</title>
+    <title>Spot Parser</title>
     <meta charset="UTF-8">
     <link rel="icon" type="image/jpg" href="../icons/hammerhead.02.ico">
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-  
+
     <script type="text/javascript" src="js/date.proto.js"></script>
     <script type="text/javascript" src="analog.display/AnalogDisplay.js"></script>
     <!--script type="text/javascript" src="temperature/Thermometer.js"></script-->
@@ -20,6 +20,7 @@
     <script type="text/javascript" src="graph/graph.js"></script>
     <script type="text/javascript" src="spot.parser.js"></script>
     <script type="text/javascript">
+
 // Line with arrow head
 function Line(x1, y1, x2, y2) {
   this.x1 = x1;
@@ -42,10 +43,10 @@ function getNbFeathers(tws) {
   };
 }
 
-  const FEATHER = 1;
-  const ARROW_HEAD = 2;
-  const ARROW_OPTION = FEATHER; // ARROW_HEAD; //
-  
+const FEATHER = 1;
+const ARROW_HEAD = 2;
+const ARROW_OPTION = FEATHER; // ARROW_HEAD; //
+
 
 const ARROW_LEN = 20;
 const BIG_FEATHER_BASE = 5;
@@ -149,7 +150,7 @@ Line.prototype.drawWindArrow = function(ctx, twa, tws, both) { // both: both end
     ctx.arc(this.x1, this.y1, DOT_RADIUS, 0, (2 * Math.PI), false);
     ctx.fill();
   }
-  
+
   if (both && ARROW_OPTION === ARROW_HEAD) {
     // draw the starting arrowhead
     let startRadians = Math.atan((this.y2 - this.y1) / (this.x2 - this.x1));
@@ -188,7 +189,7 @@ let displayScale = 0.75;
 
 let displayTWD, displayTWS, displayPRMSL, displayRain, thermometer, graph, map;
 let withTWD = true;
- 
+
 function setDefaultTimeZone() {
 
   let tzOffset = 0;
@@ -206,11 +207,11 @@ function setDefaultTimeZone() {
   }
    document.getElementById("tz").value = tzOffset;
 }
- 
+
 function updateOnClick(idx, tws, twd, prmsl, rain) {
    let txtDate = SpotParser.nmeaData[idx].getNMEADate();
 // console.log("Date is : " + reformatDate(txtDate));
-   let utc = document.getElementById("tz");   
+   let utc = document.getElementById("tz");
    document.getElementById("recno").innerHTML = "Record #<b style='color:red;'>" + (idx + 1) + "</b> of " + SpotParser.nmeaData.length + ", " +  reformatDate(txtDate) + " " + utc.options[utc.selectedIndex].text;
 
    let wd = parseFloat(twd);
@@ -218,13 +219,13 @@ function updateOnClick(idx, tws, twd, prmsl, rain) {
 
    let ws = parseFloat(tws);
    displayTWS.animate(ws);
-   
+
    let pr = parseFloat(prmsl);
    displayPRMSL.animate(pr);
-   
+
    let prate = parseFloat(rain);
    displayRain.animate(prate);
-   
+
    graph.drawGraph("graphCanvas", graphdata, idx);
 // graph.drawGraph("graphCanvas", rainData, idx); // TODO Option
    if (withTWD) { // with wind
@@ -247,7 +248,7 @@ function toRadians(d) {
 }
 
 function toDegrees(r) {
-  let deg = r * 180 / Math.PI; 
+  let deg = r * 180 / Math.PI;
   while (deg < 0) {
     deg += 360;
   }
@@ -307,7 +308,7 @@ let graphdata = [];
 //let rainData = []; // rain
 // Parse the data
 function onDataChange() {
-   let text = document.getElementById("spot").value;  
+   let text = document.getElementById("spot").value;
    let htmlLink = "";
 
    graphdata = []; // TWS
@@ -320,14 +321,14 @@ function onDataChange() {
 //     rainData.push(new Tuple(i, parseFloat(nmeaData[i].getNMEARain())));
      }
      graph = new Graph("graphCanvas", 650, 200, graphdata);
-     
+
      if (withTWD) { // with wind
        graph.drawWind(nmeaData);
      }
    }
    document.getElementById("links").innerHTML = htmlLink;
 }
- 
+
 function setPosOnMap() {
   try {
     placeMarker({ lat: SpotParser.position.lat, lng: SpotParser.position.lng });
@@ -336,7 +337,7 @@ function setPosOnMap() {
      // ...
   }
 }
- 
+
 function animateSpot() {
    let animateButton = document.getElementById("animate-button");
    if (!keepWorking) {
@@ -358,20 +359,20 @@ function animateSpot() {
      keepWorking = false;
    }
 }
- 
+
 let keepWorking = false;
- 
+
 function scrollData(i) {
    let data = SpotParser.nmeaData[i];
    graph.drawGraph("graphCanvas", graphdata, i);
 // graph.drawGraph("graphCanvas", rainData, i); // TODO on option
 
-   let utc = document.getElementById("tz");   
+   let utc = document.getElementById("tz");
    document.getElementById("recno").innerHTML = "Record #<b style='color:red;'>" + (i + 1) + "</b> of " + SpotParser.nmeaData.length + ", " +  data.getNMEADate() + " " + utc.options[utc.selectedIndex].text;
    updateOnClick(i, data.getNMEATws(), data.getNMEATwd(), data.getNMEAPrmsl(), data.getNMEARain());
    if (i < (SpotParser.nmeaData.length - 1) && keepWorking) {
-     setTimeout(function() { 
-                  scrollData(i+1); 
+     setTimeout(function() {
+                  scrollData(i+1);
                 }, 1000);
    } else {
      keepWorking = false;
@@ -380,10 +381,10 @@ function scrollData(i) {
      document.getElementById("recno").innerHTML = "Done.";
    }
 }
- 
-let defaultLocation = "0.0N,0.0E"; 
+
+let defaultLocation = "0.0N,0.0E";
 let spotMap = null; // L.map('map'); // Leaflet, Google,...
- 
+
 function loadMap() {
   spotMap = L.map('map'); // .setView([currentLatitude, currentLongitude], 13);
   spotMap.setView([0, 0], 3);
@@ -401,7 +402,7 @@ function loadMap() {
 		maxZoom: 19,
 		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 	}).addTo(spotMap);
-  
+
   spotMap.addEventListener('mousemove', (event) => {
         // let lat = Math.round(event.latlng.lat * 100000) / 100000;
         // let lng = Math.round(event.latlng.lng * 100000) / 100000;
@@ -434,7 +435,7 @@ function loadMap() {
         // document.getElementById('curr-pos-click-dec').innerHTML = `${lat}<br/>${lng}`;
     });
 }
- 
+
 let theMarker = null;
 
 function placeMarker(location) {
@@ -457,7 +458,7 @@ function buildRequest() {
    let spot = document.getElementById("spot-req");
    let req = "send spot:";
    req += (defaultLocation + "|");
-   req += (document.getElementById("nb-days").value + "," + 
+   req += (document.getElementById("nb-days").value + "," +
            document.getElementById("interval").value + "|");
 //   let data = "";
 //   if (document.getElementById("PRMSL").checked)
@@ -468,10 +469,10 @@ function buildRequest() {
 //     data += ((data.length > 0?",":"") + "RAIN");
    let data = "PRMSL,WIND,RAIN";
    req += data;
-   
+
    spot.innerHTML = req;
 }
- 
+
 function compose() {
    let anchor = document.getElementById("custom-request");
    let href = "mailto:query@saildocs.com?subject=spot&body=" + document.getElementById("spot-req").innerHTML.replace(" ", "%20");
@@ -542,7 +543,7 @@ window.alert = showCustomAlert; // Override!
   font-family: 'Source Code Pro', 'courier new';
   font-weight: bold;
   font-size: 16px;
-}      
+}
 .displayCanvas {
   border: 1px solid #9C9898;
   border-radius: 5px;
@@ -564,7 +565,7 @@ window.alert = showCustomAlert; // Override!
 }
     </style>
   </head>
-  <body> <!-- onunload="GUnload();" -->    
+  <body> <!-- onunload="GUnload();" -->
     <small>Last code update 20-Jan-2022 09:50 GMT+0100</small>
 
     <dialog id="spot-help" style="width: 400px; border-radius: 8px; z-index: 10; background-color: rgba(255, 255, 255, 0.80);">
@@ -574,12 +575,12 @@ window.alert = showCustomAlert; // Override!
       </div>
       This is a cool feature provided by <a href="https://saildocs.com/" target="SailMail">https://saildocs.com/</a>.
       <br/>
-      A SPOT bulletin is an extraction from a GRIB file, for a given location. <i style="color: blue;">It is ideal when you are anchored, 
+      A SPOT bulletin is an extraction from a GRIB file, for a given location. <i style="color: blue;">It is ideal when you are anchored,
       and you want to know what your next night(s) is(are) going to feel like</i>.
       <br/>
       You can obtain a SPOT bulletin by sending an email request to the address mentionned here.
       <br/>
-      This page will help you to build the request. 
+      This page will help you to build the request.
       Click on the map to define the spot you want the bulletin for, define the number of days, and the interval.
       <br/>
       Then send the generated request, through your favorite email client <b>in text format</b></b>.
@@ -600,7 +601,7 @@ window.alert = showCustomAlert; // Override!
         <h3>SPOT Request Generator and Parser</h3>
         <h4>Summary</h4>
         <div>
-          To get a SPOT bulletin you have to request it; you need to generate a SPOT Request, 
+          To get a SPOT bulletin you have to request it; you need to generate a SPOT Request,
           that will be sent in an email to <code>query@saildocs.com</code>.
           <br/>
           Then you receive a response to this email request: this is the spot bulletin.
@@ -709,15 +710,15 @@ internet and satellite including support for the Iridium GO!
 For more information on SailMail see the web page at www.sailmail.com
 or send a query to the office at sysop@sailmail.com.
 More information on Saildocs is available by sending an email to
-info@saildocs.com, this will return the how-to document (about 5K).          
+info@saildocs.com, this will return the how-to document (about 5K).
           </textarea>
           <br/>
-          Copy the content of the bulletin, <i>from the top</i>, at least to the last line of the 
+          Copy the content of the bulletin, <i>from the top</i>, at least to the last line of the
           tabular data (you can also copy the full content) in your clipboard.
           <br/>
           <i>Note:</i> You can use the content above, for tests.
           <br/>
-          Now, paste the copied bulletin in the text-box that says 
+          Now, paste the copied bulletin in the text-box that says
           <code style="background-color: white; color:gray; font-family: 'Courier New', Courier, monospace;">Paste SPOT bulletin here, and tab out.</code>,
           and tab out of the text-box (or just click anywhere else).
           <br/>
@@ -734,26 +735,26 @@ info@saildocs.com, this will return the how-to document (about 5K).
       </div>
       <div id="inner-alert"></div>
     </dialog>
-  
+
     <table>
       <tr>
         <td valign="top" colspan="4">
-          <h2>Spot GRIB Parser <a href="#" 
-                                  onclick="showHelpDialog();" 
+          <h2>Spot GRIB Parser <a href="#"
+                                  onclick="showHelpDialog();"
                                   style="padding: 0 5px 0 5px; border: 2px solid gray; border-radius: 50px;"
                                   title="Help!&#13;What is a SPOT bulletin?">?</a>
-                               <img src="manual.png" 
-                                    style="width: 25px; height: auto; vertical-align: baseline; margin-bottom: -4px; cursor: pointer;" 
+                               <img src="manual.png"
+                                    style="width: 25px; height: auto; vertical-align: baseline; margin-bottom: -4px; cursor: pointer;"
                                     onclick="showManual();"
-                                    title="Quick User Manual"/>   
+                                    title="Quick User Manual"/>
           </h2>
           <h4 style="margin-top: -10px;">Using <a href="https://saildocs.com/" target="saildocs">Saildocs</a> and <a href="https://leafletjs.com/" target="leaflet">LeafLet</a></h4>
         </td>
         <td colspan="1" valign="top" rowspan="2" style="text-align: right;">
-          <textarea id="spot" 
-                    style="margin: 2px; height: 100px; width: 365px;" 
-                    onchange="onDataChange();" 
-                    placeholder="Paste SPOT bulletin here, and tab out." 
+          <textarea id="spot"
+                    style="margin: 2px; height: 100px; width: 365px;"
+                    onchange="onDataChange();"
+                    placeholder="Paste SPOT bulletin here, and tab out."
                     spellcheck="false"
                     title="Paste here the bulletin&#13;received by email, at least from the top&#13;to the last data line."></textarea>
           <br/>
@@ -804,13 +805,13 @@ info@saildocs.com, this will return the how-to document (about 5K).
               </td>
             </tr>
             <!--tr>
-              <td>Data to retreive</td> 
+              <td>Data to retreive</td>
               <td>
                 <input type="checkbox" id="PRMSL" checked="true" onchange="buildRequest();">PRMSL</input>&nbsp;
                 <input type="checkbox" id="WIND" checked="true" onchange="buildRequest();">WIND</input>&nbsp;
-                <input type="checkbox" id="RAIN" checked="true" onchange="buildRequest();">RAIN</input>    
+                <input type="checkbox" id="RAIN" checked="true" onchange="buildRequest();">RAIN</input>
               </td>
-            </tr-->  
+            </tr-->
           </table>
         </td>
         <td rowspan="7" valign="top"><div id="map" style="width: 400px; height: 530px; z-index: 0; border: 2px solid blue; border-radius: 10px;"></div></td>
@@ -859,13 +860,13 @@ info@saildocs.com, this will return the how-to document (about 5K).
         </td>
       </tr>
       <tr>
-        <td colspan="4">  
-          <!-- Uncomment to have arrows instead of feathers -->    
+        <td colspan="4">
+          <!-- Uncomment to have arrows instead of feathers -->
           <!--small><i>Warning:</i> The wind arrows indicate the direction <b><i>in which</i></b> the wind is blowing</small-->
         </td>
       </tr>
       <tr>
-        <td colspan="4">      
+        <td colspan="4">
           <div id="recno">Record...</div>
         </td>
       </tr>
@@ -891,7 +892,7 @@ info@saildocs.com, this will return the how-to document (about 5K).
       </tr>
       <tr>
         <td colspan="5">
-          <div id="links" style="padding:5px; background:#ddd; border-radius:5px; overflow-x: scroll; border:1px solid #CCC; margin-top:3px; height:35px;"></div>          
+          <div id="links" style="padding:5px; background:#ddd; border-radius:5px; overflow-x: scroll; border:1px solid #CCC; margin-top:3px; height:35px;"></div>
         </td>
       </tr>
       <tr>
@@ -899,7 +900,7 @@ info@saildocs.com, this will return the how-to document (about 5K).
           <button id="animate-button" onclick="animateSpot();">Animate</button>
         </td>
       </tr>
-    </table>  
+    </table>
     <hr/>
     &copy; 2013, 2022, OlivSoft.
   </body>
@@ -909,7 +910,7 @@ window.onload = () => {
    displayTWS   = new AnalogDisplay('twsCanvas',   100 * displayScale,   50, 10, 1, true, 40);
    displayPRMSL = new AnalogDisplay('prmslCanvas', 100 * displayScale, 1045, 10, 1, true, 50, 985, 0);
    displayRain  = new Pluviometer('rainCanvas');
-   
+
    loadMap();
    setDefaultTimeZone();
 };
