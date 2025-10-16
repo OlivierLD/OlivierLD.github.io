@@ -932,8 +932,8 @@ info@saildocs.com, this will return the how-to document (about 5K).
                     spellcheck="false"
                     title="Paste here the bulletin&#13;received by email, at least from the top&#13;to the last data line."></textarea>
           <br/>
-          <small>
-            Paste your spot bulletin &uarr; in the box above, <b>including the header lines</b>.</small>
+          <small id="paste-instructions">
+            Paste your spot bulletin &uarr; in the box above, <b>including the header lines</b>.
           </small>
         </td>
       </tr>
@@ -1119,6 +1119,7 @@ let translate = (lang) => {
       // document.getElementById("custom-request").innerHTML = "Envoyez cette requête SPOT à";
       document.getElementById("instructions").innerHTML = "Requête dans le corps, <i>au format texte</i>, n'importe quel sujet.";
       document.getElementById("click-on-map").innerHTML = "Cliquez sur la carte pour localiser la position.";
+      document.getElementById("paste-instructions").innerHTML = "Collez votre bulletin SPOT &uarr; dans la boîte ci-dessus, <b>y compris les lignes d'en-tête</b>.";
       document.getElementById("spot-req").style.color = "red";
       document.getElementById("nb-days-prompt").textContent = "Nombre de jours ";
       // document.getElementById("interval").previousSibling.textContent = "Intervalle en heures ";
