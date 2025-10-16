@@ -212,7 +212,13 @@ function updateOnClick(idx, tws, twd, prmsl, rain) {
    let txtDate = SpotParser.nmeaData[idx].getNMEADate();
 // console.log("Date is : " + reformatDate(txtDate));
    let utc = document.getElementById("tz");
-   document.getElementById("recno").innerHTML = "Record #<b style='color:red;'>" + (idx + 1) + "</b> of " + SpotParser.nmeaData.length + ", " +  reformatDate(txtDate) + " " + utc.options[utc.selectedIndex].text;
+   // document.getElementById("recno").innerHTML = "Record #<b style='color:red;'>" + (idx + 1) + "</b> of " + SpotParser.nmeaData.length + ", " +  reformatDate(txtDate) + " " + utc.options[utc.selectedIndex].text;
+   if (!userLang || userLang != 'FR') {
+      document.getElementById("recno").innerHTML = "Record #<b style='color:red;'>" + (idx + 1) + "</b> of " + SpotParser.nmeaData.length + ", " +  reformatDate(txtDate) + " " + utc.options[utc.selectedIndex].text;
+   } else {
+      document.getElementById("recno").innerHTML = "Enregistrement #<b style='color:red;'>" + (idx + 1) + "</b> sur " + SpotParser.nmeaData.length + ", " +  reformatDate(txtDate) + " " + utc.options[utc.selectedIndex].text;
+   }
+
 
    let wd = parseFloat(twd);
    displayTWD.animate(wd);
@@ -368,7 +374,12 @@ function scrollData(i) {
 // graph.drawGraph("graphCanvas", rainData, i); // TODO on option
 
    let utc = document.getElementById("tz");
-   document.getElementById("recno").innerHTML = "Record #<b style='color:red;'>" + (i + 1) + "</b> of " + SpotParser.nmeaData.length + ", " +  data.getNMEADate() + " " + utc.options[utc.selectedIndex].text;
+   if (!userLang || userLang != 'FR') {
+      document.getElementById("recno").innerHTML = "Record #<b style='color:red;'>" + (i + 1) + "</b> of " + SpotParser.nmeaData.length + ", " +  data.getNMEADate() + " " + utc.options[utc.selectedIndex].text;
+   } else {
+      document.getElementById("recno").innerHTML = "Enregistrement #<b style='color:red;'>" + (i + 1) + "</b> sur " + SpotParser.nmeaData.length + ", " +  data.getNMEADate() + " " + utc.options[utc.selectedIndex].text;
+   }
+
    updateOnClick(i, data.getNMEATws(), data.getNMEATwd(), data.getNMEAPrmsl(), data.getNMEARain());
    if (i < (SpotParser.nmeaData.length - 1) && keepWorking) {
      setTimeout(function() {
@@ -583,13 +594,37 @@ window.alert = showCustomAlert; // Override!
       This page will help you to build the request.
       Click on the map to define the spot you want the bulletin for, define the number of days, and the interval.
       <br/>
-      Then send the generated request, through your favorite email client <b>in text format</b></b>.
+      Then send the generated request, through your favorite email client <b>in text format</b>.
       <br/>
       The bulletin should come to you within a few minutes, if not seconds.
       <br/>
       Then copy its content, and paste it in the box expecting it.
       <br/>
       And you're done!
+    </dialog>
+
+    <dialog id="spot-help-fr" style="width: 400px; border-radius: 8px; z-index: 10; background-color: rgba(255, 255, 255, 0.80);">
+      <div class="dialog-header">
+        <span>Qu'est-ce que c'est qu'un bulletin SPOT...</span>
+        <span class="dialog-header-close" onclick="closeDialog('spot-help');">&times;</span>
+      </div>
+      C'est une fonctionnalit&eacute; tr&egrave;s pratique fournie par <a href="https://saildocs.com/" target="SailMail">https://saildocs.com/</a>.
+      <br/>
+      Un bulletin SPOT est une extraction bas&eacute;e sur un fichier GRIB, pour une position donn&eacute;e. <i style="color: blue;">C'est id&eacute;al quand on est au mouillage,
+      et qu'on veut savoir de quoi la (ou les) prochaine(s) nuit(s) aura (auront) l'air</i>.
+      <br/>
+      On peut obtenir un bulletin SPOT en envoyant un email &agrave; l'adresse indiqu&eacute;e.
+      <br/>
+      Cette page va vous aider &agrave; constituer la requ&ecirc;te.
+      Cliquez sur la carte pour d&eacute;finir la position pour laquelle vous voulez le SPOT, d&eacute;finissez le nombre de jours, et l'intervalle.
+      <br/>
+      Envoyez ensuite la requ&ecirc;te en utilisant votre application email pr&eacute;fer&eacute;e <b>au format texte</b>.
+      <br/>
+      Le bulletin doit ensuite vous parvenir en r&eacute;ponse &agrave; votre email, en quelques minutes, voire secondes.
+      <br/>
+      Copiez-en le contenu, et collez-le dans la boite pr&eacute;vue &agrave; cet effet.
+      <br/>
+      Et c'est tout !
     </dialog>
 
     <dialog id="spot-user-manual" style="width: 600px; border-radius: 8px; z-index: 10; max-height: 90%; overflow-x: scroll; overflow-y: scroll; background-color: rgba(255, 255, 255, 0.80);">
@@ -728,6 +763,142 @@ info@saildocs.com, this will return the how-to document (about 5K).
       </div>
     </dialog>
 
+    <dialog id="spot-user-manual-fr" style="width: 600px; border-radius: 8px; z-index: 10; max-height: 90%; overflow-x: scroll; overflow-y: scroll; background-color: rgba(255, 255, 255, 0.80);">
+      <div class="dialog-header">
+        <span>Mode d'emploi - SPOT</span>
+        <span class="dialog-header-close" onclick="closeDialog('spot-user-manual');">&times;</span>
+      </div>
+      <div id="manual-content">
+        <h3>G&eacute;n&eacute;rateur et Parser de requ&ecirc;te SPOT</h3>
+        <h4>Sommaire</h4>
+        <div>
+          To get a SPOT bulletin you have to request it; you need to generate a SPOT Request,
+          that will be sent in an email to <code>query@saildocs.com</code>.
+          <br/>
+          Then you receive a response to this email request: this is the spot bulletin.
+          <br/>
+          You can then paste the content of the bulletin in the text-box expecting it, and you should be able to
+          see the bulletin rendered in a graphical way.
+        </div>
+        <h4>Generate the request</h4>
+        <div>
+          To locate the place you want the bulletin for, click on the chart (you can zoom in and out).
+          A click on the chart should update the position in the SPOT request, displayed in <span style="color: red; font-weight: bold;">red</span>.
+          <br/>
+          Also choose the range and the interval, with the drop-down lists.
+          <br/>
+          Your request is now ready to be used.
+          <br/>
+          You can:
+          <ul>
+            <li>Copy the <span style="color: red; font-weight: bold;">red</span> string into your clipboard</li>
+            <li>Click the <img src="icons8-copy-to-clipboard-50.png" style="width: 16px; height: auto; vertical-align: middle;" title="Copy request to clipboard"> Copy button</li>
+            <li>Click the link <span style="color: blue; text-decoration: underline;">query@saildocs.com</span>, if you have an email client configured on your system</li>
+          </ul>
+          <b><i>Important:</i></b> This email <i>MUST</i> be sent in <i>TEXT</i> format. No fancy
+          HTML formatting or what not.
+          <br/>
+          The email would look like this:
+          <pre>
+            TO: query@saildocs.com
+            SUBJECT: spot
+            BODY:
+            send spot:47.61644734678011N,2.8180347383022313W|5,3|PRMSL,WIND,RAIN
+          </pre>
+          Now send the email, the reponse should be in your inbox within minutes, if not seconds.
+        </div>
+        <h4>Rendering the bulletin</h4>
+        <div>
+          The bulletin you got as a response to your email looks like this:
+          <br/>
+          <textarea style="font-family: 'Courier New', Courier, monospace; width: 98%; height: 200px; max-height: 250px; overflow: scroll;" spellcheck="false">
+Data extracted from file gfs-20220117-00z.grb dated 2022/01/17 05:13:48
+request code: spot:37.77715986825405N,76.00255966186525W|5,3|PRMSL,WIND,RAIN
+
+Forecast for 37°47N 076°00W (see notes below)
+Date  Time  PRESS  WIND DIR RAIN
+        utc    hPa  kts deg mm/h
+----------- ------ ----- --- ----
+01-17 03:00  990.7  36.6 129 14.5
+01-17 06:00  991.7  25.7 209  0.0
+01-17 09:00  990.0  28.9 218  0.0
+01-17 12:00  990.6  31.9 237  0.0
+01-17 15:00  993.2  29.3 248  0.0
+01-17 18:00  994.1  26.7 256  0.0
+01-17 21:00  997.7  28.5 269  0.0
+
+01-18 00:00 1002.6  27.1 277  0.0
+01-18 03:00 1005.5  24.4 273  0.0
+01-18 06:00 1008.4  23.0 289  0.0
+01-18 09:00 1012.1  19.9 287  0.0
+01-18 12:00 1015.6  15.7 278  0.0
+01-18 15:00 1019.5  15.8 286  0.0
+01-18 18:00 1019.4  15.7 301  0.0
+01-18 21:00 1020.4  11.7 326  0.0
+
+01-19 00:00 1022.7  3.6 290  0.0
+01-19 03:00 1023.1  6.2 178  0.0
+01-19 06:00 1022.0  12.5 196  0.0
+01-19 09:00 1021.7  15.5 208  0.0
+01-19 12:00 1021.7  19.3 204  0.0
+01-19 15:00 1021.0  21.2 209  0.0
+01-19 18:00 1018.2  18.9 214  0.0
+01-19 21:00 1017.0  16.8 212  0.0
+
+01-20 00:00 1017.5  14.9 217  0.0
+01-20 03:00 1016.8  16.5 220  0.0
+01-20 06:00 1016.1  11.5 230  0.8
+01-20 09:00 1016.9  7.8 275  2.7
+01-20 12:00 1020.2  27.1 355  1.5
+01-20 15:00 1023.7  24.4 353  0.4
+01-20 18:00 1023.8  24.7 345  0.0
+01-20 21:00 1025.7  23.2 349  0.0
+
+01-21 00:00 1028.7  19.7 009  0.0
+01-21 03:00 1030.6  20.1 008  0.0
+01-21 06:00 1030.5  21.0 009  0.0
+01-21 09:00 1031.3  20.2 009  0.0
+01-21 12:00 1032.5  18.1 013  0.0
+01-21 15:00 1032.6  16.0 021  0.0
+01-21 18:00 1031.4  12.6 024  0.0
+01-21 21:00 1030.5  17.9 015  0.2
+
+01-22 00:00 1031.0  19.0 014  0.2
+
+Refer to notice & warnings sent 2021/12/28 11:53:43, for another copy send a (blank) email to: SpotWarning@saildocs.com
+
+=====
+Thanks for using Saildocs, an Internet document retrieval
+service for the bandwidth-impaired.  By using this service
+you agree to the Saildocs terms and conditions (send a
+blank email to: terms@saildocs.com for a copy).
+
+Saildocs is a service of Sailmail, a membership-owned email
+service built by cruising sailors for cruising sailors.
+Sailmail provides world-wide email via marine-band radio,
+internet and satellite including support for the Iridium GO!
+
+For more information on SailMail see the web page at www.sailmail.com
+or send a query to the office at sysop@sailmail.com.
+More information on Saildocs is available by sending an email to
+info@saildocs.com, this will return the how-to document (about 5K).
+          </textarea>
+          <br/>
+          Copy the content of the bulletin, <i>from the top</i>, at least to the last line of the
+          tabular data (you can also copy the full content) in your clipboard.
+          <br/>
+          <i>Note:</i> You can use the content above, for tests.
+          <br/>
+          Now, paste the copied bulletin in the text-box that says
+          <code style="background-color: white; color:gray; font-family: 'Courier New', Courier, monospace;">Paste SPOT bulletin here, and tab out.</code>,
+          and tab out of the text-box (or just click anywhere else).
+          <br/>
+          The rest should be straightforward.
+        </div>
+        <hr/>
+      </div>
+    </dialog>
+
     <dialog id="custom-alert" style="width: 400px; border-radius: 8px; z-index: 10;">
       <div class="dialog-header">
         <span>You've got a message...</span>
@@ -736,10 +907,13 @@ info@saildocs.com, this will return the how-to document (about 5K).
       <div id="inner-alert"></div>
     </dialog>
 
+    <a id="fr-lang-switch" href="javascript:void(0)" onclick="navTo('FR');" style="display: block;">En fran&ccedil;ais</a>
+    <a id="en-lang-switch" href="javascript:void(0)" onclick="navTo('EN');" style="display: none;">In English</a>
+
     <table>
       <tr>
         <td valign="top" colspan="4">
-          <h2>Spot GRIB Parser <a href="#"
+          <h2 id="h2-title">Spot GRIB Parser <a href="#"
                                   onclick="showHelpDialog();"
                                   style="padding: 0 5px 0 5px; border: 2px solid gray; border-radius: 50px;"
                                   title="Help!&#13;What is a SPOT bulletin?">?</a>
@@ -748,7 +922,7 @@ info@saildocs.com, this will return the how-to document (about 5K).
                                     onclick="showManual();"
                                     title="Quick User Manual"/>
           </h2>
-          <h4 style="margin-top: -10px;">Using <a href="https://saildocs.com/" target="saildocs">Saildocs</a> and <a href="https://leafletjs.com/" target="leaflet">LeafLet</a></h4>
+          <h4 id="h4-title" style="margin-top: -10px;">Using <a href="https://saildocs.com/" target="saildocs">Saildocs</a> and <a href="https://leafletjs.com/" target="leaflet">LeafLet</a></h4>
         </td>
         <td colspan="1" valign="top" rowspan="2" style="text-align: right;">
           <textarea id="spot"
@@ -765,21 +939,21 @@ info@saildocs.com, this will return the how-to document (about 5K).
       </tr>
       <tr>
         <td valign="top" colspan="4">
-          Send this spot request to <a href="mailto:query@saildocs.com?subject=spot" id="custom-request" onclick="compose();" target="mail" title="Send it">query@saildocs.com</a>
-          <button onclick="copyToClipboard('spot-req')"><img src="icons8-copy-to-clipboard-50.png" style="width: 16px; height: auto; vertical-align: middle;" title="Copy request to clipboard"></button>
+          <span id="send-to">Send this spot request to</span> <a href="mailto:query@saildocs.com?subject=spot" id="custom-request" onclick="compose();" target="mail" title="Send it">query@saildocs.com</a>
+          <button onclick="copyToClipboard('spot-req')"><img id="copy-image" src="icons8-copy-to-clipboard-50.png" style="width: 16px; height: auto; vertical-align: middle;" title="Copy request to clipboard"></button>
           :
           <div id="spot-req" class="spot-request" style="color: red; border: 1px solid black; border-radius: 5px; padding: 3px;">send spot:0.0N,0.0E|5,3|PRMSL,WIND,RAIN</div>
-          <small>Request in the body, <i>as text</i>, any subject.</small>
+          <small id="instructions">Request in the body, <i>as text</i>, any subject.</small>
         </td>
       </tr>
       <tr>
         <td colspan="4" valign="top">
           <table>
             <tr>
-              <td colspan="4">Click on the map to locate the spot.</td>
+              <td colspan="4" id="click-on-map">Click on the map to locate the spot.</td>
             </tr>
             <tr>
-              <td> Number of  days</td>
+              <td id="nb-days-prompt"> Number of  days</td>
               <td style="text-align: right;">
                 <select id="nb-days" onchange="buildRequest();" style="direction: rtl;">
                    <option value="1">1</option>
@@ -793,7 +967,7 @@ info@saildocs.com, this will return the how-to document (about 5K).
               </td>
             <!--/tr>
             <tr-->
-              <td>Interval in hours</td>
+              <td id="interval-prompt">Interval in hours</td>
               <td style="text-align: right;">
                 <select id="interval" onchange="buildRequest();" style="direction: rtl;">
                   <option value="3" selected="true">3</option>
@@ -818,7 +992,7 @@ info@saildocs.com, this will return the how-to document (about 5K).
       </tr>
       <tr>
         <td style="text-align: left;" colspan="4">
-          Your time zone:
+          <span id="tz-prompt">Your time zone:</span>
           <select id="tz" style="direction: ltr; font-family: 'Source Code Pro', 'courier new';">
             <option value="-12">UTC-12</option>
             <option value="-11">UTC-11</option>
@@ -871,10 +1045,10 @@ info@saildocs.com, this will return the how-to document (about 5K).
         </td>
       </tr>
       <tr>
-        <td style="text-align: center;">Wind Dir in &deg;</td>
-        <td style="text-align: center;">Wind Speed in knots</td>
-        <td style="text-align: center;">Pressure in hPa</td>
-        <td style="text-align: center;">Rain in mm/h</td>
+        <td style="text-align: center;" id="twd-label">Wind Dir in &deg;</td>
+        <td style="text-align: center;" id="tws-label">Wind Speed in knots</td>
+        <td style="text-align: center;" id="prmsl-label">Pressure in hPa</td>
+        <td style="text-align: center;" id="rain-label">Rain in mm/h</td>
       </tr>
       <tr>
         <td style="text-align: center;" valign="top" width="200">
@@ -905,14 +1079,122 @@ info@saildocs.com, this will return the how-to document (about 5K).
     &copy; 2013, 2025, OlivSoft.
   </body>
   <script type="text/javascript">
-window.onload = () => {
-   displayTWD   = new Direction('twdCanvas', 100 * displayScale, 45, 5);
-   displayTWS   = new AnalogDisplay('twsCanvas',   100 * displayScale,   50, 10, 1, true, 40);
-   displayPRMSL = new AnalogDisplay('prmslCanvas', 100 * displayScale, 1045, 10, 1, true, 50, 985, 0);
-   displayRain  = new Pluviometer('rainCanvas');
 
-   loadMap();
-   setDefaultTimeZone();
+  let navTo = (prm) => {
+      let url = window.location.href;
+      let newUrl = url.split('?')[0] + '?lang=' + prm;
+      console.log("New URL: " + newUrl);
+      window.location = newUrl;
+  };
+
+let getQueryParameterByName = (name, url) => {
+    if (!url) {
+        url = window.location.href;
+    }
+    name = name.replace(/[\[\]]/g, "\\$&");
+    let regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) {
+        return null;
+    }
+    if (!results[2]) {
+        return '';
+    }
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+};
+
+
+let translate = (lang) => {
+
+  switch (lang) {
+    case 'FR':
+      document.title = "Analyseur de bulletins SPOT";
+      document.getElementById("h2-title").innerHTML = "Analyseur de bulletins SPOT <a href=\"#\" onclick=\"showHelpDialog();\" style=\"padding: 0 5px 0 5px; border: 2px solid gray; border-radius: 50px;\" title=\"Aide !&#13;Qu'est-ce qu'un bulletin SPOT ?\">?</a> <img src=\"manual.png\" style=\"width: 25px; height: auto; vertical-align: baseline; margin-bottom: -4px; cursor: pointer;\" onclick=\"showManual();\" title=\"Manuel d'utilisation rapide\"/>";
+      document.getElementById("h4-title").innerHTML = "Utilisant <a href=\"https://saildocs.com/\" target=\"saildocs\">Saildocs</a> et <a href=\"https://leafletjs.com/\" target=\"leaflet\">LeafLet</a>";
+      document.getElementById("spot").setAttribute("placeholder", "Collez ici le bulletin SPOT, puis tabulez en dehors.");
+      document.getElementById("spot").setAttribute("title", "Collez ici le bulletin reçu par email, au moins de la première ligne jusqu'à la dernière ligne de données.");
+      document.getElementById("send-to").innerHTML = "Envoyez cette requête SPOT à ";
+      document.getElementById("copy-image").setAttribute("title", "Copier la requête dans le bloc-note.");
+
+      // document.getElementById("custom-request").innerHTML = "Envoyez cette requête SPOT à";
+      document.getElementById("instructions").innerHTML = "Requête dans le corps, <i>au format texte</i>, n'importe quel sujet.";
+      document.getElementById("click-on-map").innerHTML = "Cliquez sur la carte pour localiser la position.";
+      document.getElementById("spot-req").style.color = "red";
+      document.getElementById("nb-days-prompt").textContent = "Nombre de jours ";
+      // document.getElementById("interval").previousSibling.textContent = "Intervalle en heures ";
+      document.getElementById("interval-prompt").textContent = "Intervalle en heures ";
+      // document.getElementById("PRMSL").nextSibling.textContent = "PRMSL";
+      // document.getElementById("WIND").nextSibling.textContent = "WIND";
+      // document.getElementById("RAIN").nextSibling.textContent = "RAIN";
+      document.getElementById("tz-prompt").textContent = "Votre fuseau horaire : ";
+      document.getElementById("raw-data").nextSibling.textContent = "Brut";
+      document.getElementById("smooth-data").nextSibling.textContent = "Lissé";
+      document.getElementById("tooltip").nextSibling.textContent = "Info-bulle";
+      document.getElementById("utc-display").nextSibling.textContent = "UTC";
+      document.getElementById("recno").innerHTML = "Enregistrement...";
+      document.getElementById("animate-button").innerHTML = "Animer";
+
+      document.getElementById("twd-label").innerHTML = "TWD en &deg; ";
+      document.getElementById("tws-label").innerHTML = "TWS en n&oelig;uds ";
+      document.getElementById("prmsl-label").innerHTML = "Pression en hPa ";
+      document.getElementById("rain-label").innerHTML = "Pluie en mm/h ";
+
+      // lang swicth
+      document.getElementById("fr-lang-switch").style.display = "none";
+      document.getElementById("en-lang-switch").style.display = "block";
+
+      // dialogs
+      let helpDialog = document.getElementById("spot-help");
+      let frHelpContent = document.getElementById("spot-help-fr").innerHTML;
+      helpDialog.innerHTML = frHelpContent;
+
+      let manualDialog = document.getElementById("spot-user-manual");
+      let frManualContent = document.getElementById("spot-user-manual-fr").innerHTML;
+      manualDialog.innerHTML = frManualContent;
+
+      break;
+    case 'EN':
+    default:
+      // Default is EN, do nothing.
+      break;
+  }
+};
+
+let userLang;
+
+window.onload = () => {
+
+  userLang = getQueryParameterByName('lang');
+  if (!userLang) {
+      let browserUserLang = navigator.language || navigator.userLanguage;
+      console.log("The browser's language is: " + browserUserLang);
+      if (browserUserLang) {
+          if (browserUserLang.substring(0, 2).toUpperCase() === 'FR') {
+              userLang = 'FR';
+              console.log("On va parler français")
+          } else {
+              userLang = 'EN';
+              console.log("We'll speak english");
+          }
+      }
+  }
+  if (userLang) {
+      langToUse = userLang;
+      console.log(`Lang to use will be ${langToUse}`);
+  }
+  if (langToUse !== 'FR') { // Then switch to French, default is EN.
+      langToUse = 'EN';
+  }
+  translate(langToUse);
+
+
+  displayTWD   = new Direction('twdCanvas', 100 * displayScale, 45, 5);
+  displayTWS   = new AnalogDisplay('twsCanvas',   100 * displayScale,   50, 10, 1, true, 40);
+  displayPRMSL = new AnalogDisplay('prmslCanvas', 100 * displayScale, 1045, 10, 1, true, 50, 985, 0);
+  displayRain  = new Pluviometer('rainCanvas');
+
+  loadMap();
+  setDefaultTimeZone();
 };
   </script>
 </html>
