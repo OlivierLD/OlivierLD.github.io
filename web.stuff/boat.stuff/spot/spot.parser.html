@@ -772,44 +772,43 @@ info@saildocs.com, this will return the how-to document (about 5K).
         <h3>G&eacute;n&eacute;rateur et Parser de requ&ecirc;te SPOT</h3>
         <h4>Sommaire</h4>
         <div>
-          To get a SPOT bulletin you have to request it; you need to generate a SPOT Request,
-          that will be sent in an email to <code>query@saildocs.com</code>.
+          Pour avoir un bulletin SPOT, il faut le demander ; il vius faut composer une requ&ecirc;te SPOT,
+          qui sera envoy&eacute;e par email &agrave; <code>query@saildocs.com</code>.
           <br/>
-          Then you receive a response to this email request: this is the spot bulletin.
+          Vou recevrez ensuite un email en retour : il contient le bulletin SPOT.
           <br/>
-          You can then paste the content of the bulletin in the text-box expecting it, and you should be able to
-          see the bulletin rendered in a graphical way.
+          On peut ensuite en copier le contenu (Ctrl-C) et le coller (Ctrl-V) dans la bo&icirc;te pr&eacute;vue a cet effet, vous pourrez
+          alors visualiser le contenu du bulletin de mani&egrave;re graphique.
         </div>
-        <h4>Generate the request</h4>
+        <h4>Generation de la requ&ecirc;te</h4>
         <div>
-          To locate the place you want the bulletin for, click on the chart (you can zoom in and out).
-          A click on the chart should update the position in the SPOT request, displayed in <span style="color: red; font-weight: bold;">red</span>.
+          Pour d&eacute;finir la position qui fera l'objet du bulletin SPOT, cliquez sur la carte (on peut zoomer, avant et arri&egrave;re).
+          Un click sur la carte doit mettre &agrave; jour la position dans le requ&ecirc;te SPOT, affich&eacute;e en <span style="color: red; font-weight: bold;">rouge</span>.
           <br/>
-          Also choose the range and the interval, with the drop-down lists.
+          Choisissez aussi la dur&eacute;e (en jours) et l'intervalle (en heures), avec les drop-down listes.
           <br/>
-          Your request is now ready to be used.
+          La requ&ecirc;te est maintenant pr&ecirc;te &agrave; &ecirc;tre utilis&eacute;e.
           <br/>
-          You can:
+          Vous pouvez alors&nbsp;:
           <ul>
-            <li>Copy the <span style="color: red; font-weight: bold;">red</span> string into your clipboard</li>
-            <li>Click the <img src="icons8-copy-to-clipboard-50.png" style="width: 16px; height: auto; vertical-align: middle;" title="Copy request to clipboard"> Copy button</li>
-            <li>Click the link <span style="color: blue; text-decoration: underline;">query@saildocs.com</span>, if you have an email client configured on your system</li>
+            <li>Copier la requete en <span style="color: red; font-weight: bold;">rouge</span> dans le presse-papier</li>
+            <li>Utiliser le <img src="icons8-copy-to-clipboard-50.png" style="width: 16px; height: auto; vertical-align: middle;" title="Copier la requete dans le presse-papier"> Bouton Copy</li>
+            <li>Cliquer sur le lien <span style="color: blue; text-decoration: underline;">query@saildocs.com</span>, si vous avez un client email configure sur votre syst&egrave;me</li>
           </ul>
-          <b><i>Important:</i></b> This email <i>MUST</i> be sent in <i>TEXT</i> format. No fancy
-          HTML formatting or what not.
+          <b><i>Important :</i></b> L'email <i>DOIT</i> etre envoye au format <i>TEXTE</i> ! Pas de formattage HTML ou autres fantaisies.
           <br/>
-          The email would look like this:
+          L'email doit avoir cette allure&nbsp;:
           <pre>
             TO: query@saildocs.com
             SUBJECT: spot
             BODY:
             send spot:47.61644734678011N,2.8180347383022313W|5,3|PRMSL,WIND,RAIN
           </pre>
-          Now send the email, the reponse should be in your inbox within minutes, if not seconds.
+          Maintenant, envoyez l'email, la r&eacute;ponse doit vous parvenir en quelques minutes, voire secondes.
         </div>
-        <h4>Rendering the bulletin</h4>
+        <h4>Affichage du bulletin</h4>
         <div>
-          The bulletin you got as a response to your email looks like this:
+          Le bulletin que vous avez re&ccedil;u en r&eacute;ponse &agrave; votre email ressemble &agrave; ceci&nbsp;:
           <br/>
           <textarea style="font-family: 'Courier New', Courier, monospace; width: 98%; height: 200px; max-height: 250px; overflow: scroll;" spellcheck="false">
 Data extracted from file gfs-20220117-00z.grb dated 2022/01/17 05:13:48
@@ -884,16 +883,16 @@ More information on Saildocs is available by sending an email to
 info@saildocs.com, this will return the how-to document (about 5K).
           </textarea>
           <br/>
-          Copy the content of the bulletin, <i>from the top</i>, at least to the last line of the
-          tabular data (you can also copy the full content) in your clipboard.
+          Copiez le contenu du bulletin, <i>depuis le d&eacute;but</i>, au moins jusqu'&agrave; la derni&egrave;re ligne au format
+          tabulaire (vous pouvez aussi copier tout le contenu) dans votre presse-papier.
           <br/>
-          <i>Note:</i> You can use the content above, for tests.
+          <i>Note&nbsp;:</i> On peut utiliser le contenu ci-dessus, pour des tests.
           <br/>
-          Now, paste the copied bulletin in the text-box that says
-          <code style="background-color: white; color:gray; font-family: 'Courier New', Courier, monospace;">Paste SPOT bulletin here, and tab out.</code>,
-          and tab out of the text-box (or just click anywhere else).
+          Coller ensuite le bulletin copi&eacute; dans la bo&icirc;te qui dit
+          <code style="background-color: white; color:gray; font-family: 'Courier New', Courier, monospace;">Collez ici le bulletin SPOT, ouyis tabulez en dehors.</code>,
+          et tabulez en dehors (touche TAB), ou bien cliquez en dehors de la boite.
           <br/>
-          The rest should be straightforward.
+          La suite doit &ecirc;tre &eacute;vidente...
         </div>
         <hr/>
       </div>

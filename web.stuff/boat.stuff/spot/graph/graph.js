@@ -25,7 +25,7 @@ function Graph(cName,       // Canvas Name
       if (idx < SpotParser.nmeaData.length) {
         let str0;
         let str1; // = 'X : ' + x + ', ' + 'Y :' + y;
-        let str2;
+        let str2, str3, str4;
         try {
           str0 = `Record #${idx}`;
           str1 = SpotParser.nmeaData[idx].getNMEATws() + "kt @ " + SpotParser.nmeaData[idx].getNMEATwd() + "\xB0";
@@ -34,6 +34,8 @@ function Graph(cName,       // Canvas Name
           } else {
             str2 = reformatDate(SpotParser.nmeaData[idx].getNMEADate(), "d-M H:i");
           }
+          str3 = SpotParser.nmeaData[idx].getNMEARain() + "mm";
+          str4 = SpotParser.nmeaData[idx].getNMEAPrmsl() + "hPa";
   //      console.log("Bubble:" + str);
         } catch (err) {
           console.log(JSON.stringify(err));
@@ -62,6 +64,8 @@ function Graph(cName,       // Canvas Name
         // context.fillText(str2, x + 15, y + 37, 60);
         context.fillText(str1, xPos + 15, yPos + 37, 60);
         context.fillText(str2, xPos + 15, yPos + 49, 60);
+        context.fillText(str3, xPos + 15, yPos + 61, 60);
+        context.fillText(str4, xPos + 15, yPos + 73, 60);
       }
     }
   }, 0);
