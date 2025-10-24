@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Main MPS Index</title>
+    <link rel="icon" type="image/jpg" href="./palm.04.jpg">
+    <link rel="stylesheet" href="css/stylesheet.css" type="text/css"/>
+</head>
+<body>
+    <h1>MPS Index</h1>
+    <ul>
+        <li>
+            <a href="./mps.00.html" target="Test_01">First (dummy) Test for the REST services</a>
+            <br/>
+            <small>(just to check if the server is up and running)</small>
+        </li>
+        <li>
+            <a href="./mps.01.html" target="MPS_101">MPS 101, display MPS Cones for given bodies</a>
+            <br/>
+            <small>Now we're talking. This will show you what MPS is, where the cones are, what you will get your position from.</small>
+        </li>
+        <li>
+            <a href="./mps.02.html" target="REAL_MPS">For real: Compute your position with MPS Cones, Java back-end.</a>
+            <br/>
+            This is the real deal. But this one is a mess, a WiP...<br/>
+            <small>
+                You will be able to compute your position with MPS Cones, from the bodies <b>you</b> choose, and the observed altitudes <b>you</b> provide...<br/>
+                Requires the Java REST server to be up and running, like with
+                <pre>
+$ cd .../ROB/astro-computer/MPSServer
+$ ./runMPSServer.sh
+                </pre>
+            </small>
+            <ul>
+              <li><a href="https://github.com/OlivierLD/ROB/blob/master/astro-computer/MPSServer/HOW_TO.md" target="git">How-to</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="./mps.03.html" target="REAL_MPS">Compute your position with MPS Cones, Java back-end.</a>
+            <br/>
+            <small>
+                Same as above, but cleaner (no extra/invisible/unused components).<br/>
+                Requires the Java REST server to be up and running, like with
+                <pre>
+$ cd .../ROB/astro-computer/MPSServer
+$ ./runMPSServer.sh
+                </pre>
+            </small>
+        </li>
+        <li>
+            <a href="./mps.04.html" target="REAL_MPS">Compute your position with MPS Cones, PHP back-end.</a>
+            <br/>
+            <small>
+                Same as above, but using a PHP backend (with CORS).<br/>
+                Requires the Java HTTP server to be up and running, like with
+                <pre>
+$ cd .../ROB/astro-computer/MPSServer
+$ ./runMPSServer.sh
+$ cd .../astro-computer/AstroComputer/src/main/php.v7
+$ php -S localhost:8000
+                </pre>
+            </small>
+        </li>
+        <li>
+            <a href="./mps.05.html" target="REAL_MPS">Compute your position with MPS Cones, pure ES6 (no REST).</a>
+            <br/>
+            <small>
+                Same as above, but using a pure ES6 (client-side) implementation.<br/>
+                All you need is an HTTP server, like nodeJS (see the file <code>package.json)</code>)
+                <pre>
+$ cd .../ROB/astro-computer/MPSServer
+$ npm start
+                </pre>
+                or the one provided here (all in Java)
+                <pre>
+$ cd .../ROB/astro-computer/MPSServer
+$ ./runMPSServer.sh
+                </pre>
+            </small>
+        </li>
+    </ul>
+    <hr/>
+    <address>OlivSoft strikes again</address>
+</body>
+</html>

@@ -64,7 +64,7 @@ a.list-link:hover {
 							<button onclick="makeCode('index_02.html');">QR Code</button>
 							<br/>
 							<p><small>
-								This shows a rich Web UI, that can be served by a small machine (like a Raspberry pi Zero). The small machine provides the 
+								This shows a rich Web UI, that can be served by a small machine (like a Raspberry pi Zero). The small machine provides the
 								data, the data UI is rendered on another device, connected on the same network as the small machine (possibly emitted by it).
 								<br/>
 								The UI rendering is the most demanding process, taken care of by a phone, tablet, or laptop, connected on the network, and <i>not</i> by the server itself.
@@ -72,6 +72,13 @@ a.list-link:hover {
 							<p><small>
 								This brings us back to this <i><b>Entropy Zero</b></i> (EZ) computing paradigm. Network, but no Internet. Not cloud. Flake Computing.
 							</small></p>
+						</li>
+						<li>
+							MPS - M&eacute;thode du Plan des Sommets
+							<ul>
+								<li><a class="list-link" href="../mps/index.html" target="MPS">Doc...</a></li>
+								<li><a class="list-link" href="../mps/mps.05.html" target="MPS">MPS Workbench</a></li>
+							</ul>
 						</li>
 						<li>
 							<a class="list-link" href="index_03.html">Practice Sight Reduction</a>
@@ -105,7 +112,7 @@ a.list-link:hover {
 
 let qrcode;
 
-let makeCode = (url) => {    
+let makeCode = (url) => {
 	if (url === undefined) {
 		url = "index_00.html";
 	}
