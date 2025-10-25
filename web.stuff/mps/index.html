@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <!--
  | For LaTeX : https://www.overleaf.com/learn
+ | Config: https://docs.mathjax.org/en/v4.0/web/configuration.html
  |-->
 <html lang="fr">
 <head>
@@ -8,15 +9,31 @@
     <title>MPS</title>
     <link rel="icon" type="image/jpg" href="./palm.04.jpg">
     <link rel="stylesheet" href="css/doc.css" type="text/css"/>
-    <script type="text/x-mathjax-config">
+    <!--script type="text/x-mathjax-config">
   MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
-    </script>
+    </script-->
     <!--script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script-->
     <script type="text/javascript"
         async
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
     </script>
     <!--script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script-->
+    <!--script type="text/x-mathjax-config">
+  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script-->
+
+    <script type="text/javascript">
+    MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        },
+        "HTML-CSS": { availableFonts: ["TeX"] }
+    });
+    </script>
+
 
 </head>
 <body>
@@ -158,7 +175,7 @@ $$
 $$
 
     <i>Note</i>&nbsp;:<br/>
-    On utilise ici <code>atan2</code>, qui restitue des angles entre -&Pi; et +&Pi;, &agrave; la diff&eacute;rence de <code>atan</code>, qui restitue des angles entre -&Pi; / 2 et +&Pi; / 2.
+    On utilise ici <code>atan2</code>, qui restitue des angles entre $ -\pi $ et $ +\pi $, &agrave; la diff&eacute;rence de <code>atan</code>, qui restitue des angles entre $ -\dfrac{\pi} {2} $ et $ +\dfrac{\pi} {2} $.
 
     <hr/>
     Des liens&nbsp;:
