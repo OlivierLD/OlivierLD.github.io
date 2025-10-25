@@ -8,15 +8,15 @@
     <title>MPS</title>
     <link rel="icon" type="image/jpg" href="./palm.04.jpg">
     <link rel="stylesheet" href="css/doc.css" type="text/css"/>
-    <!--script type="text/x-mathjax-config">
+    <script type="text/x-mathjax-config">
   MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
-    </script-->
+    </script>
     <!--script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script-->
-    <!--script type="text/javascript"
+    <script type="text/javascript"
         async
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-    </script-->
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    </script>
+    <!--script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script-->
 
 </head>
 <body>
@@ -205,11 +205,13 @@ $$
     <br/>
     La distance <code>MS</code> est <code>r * (1 / tg(h))</code>, o&ugrave; <code>r</code> est le rayon de la Terre.<br/>
     Le rayon de la base du c&ocirc;ne est <code>r * cos(h)</code>.<br/>
-    La distance du centre le la Terre <code>O</code> au sommet <code>S</code> est <code> $ \sqrt{MS^2 + r^2} $</code>, not&eacute; aussi
+    La distance du centre le la Terre <code>O</code> au sommet <code>S</code> est $ \sqrt{MS^2 + r^2} $. <!--, not&eacute; aussi
 
     $$
     \sqrt{MS^2 + r^2}
     $$
+    -->
+    <br/>
 
     La distance <code>OS</code> est <code>MS / cos(h)</code>.<br/>
     Comme <code>MS</code> = <code>1 / tg(h)</code>, <code>OS</code> s'&eacute;crit aussi <code>(cos(h) / sin(h)) / cos(h)</code>, soit
@@ -217,7 +219,7 @@ $$
     <code>OS</code> = <code>1 / sin(h)</code>.<br/>
     La distance <code>PS</code> est &eacute;gale &agrave; <code>OS - r</code>.<br/>
     Donc <code>PS = (1 / sin(h)) - r</code>.<br/>
-
+    <br/>
     Voici le m&ecirc;me sch&eacute;ma (simpliste) avec deux astres. Ici, les astres ne sont pas situ&eacute;s dans le plan de la feuille...<br/>
     <!-- ![Another one](./images/figure.03.png) -->
     <img src="images/figure.03.png" width="600">
