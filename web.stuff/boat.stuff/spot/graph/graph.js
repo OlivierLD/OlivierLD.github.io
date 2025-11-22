@@ -249,8 +249,8 @@ function Graph(cName,       // Canvas Name
 
     if (idx !== undefined) {
       context.beginPath();
-      context.lineWidth = 1;
-      context.strokeStyle = 'green';
+      context.lineWidth = 3;
+      context.strokeStyle = 'rgba(0, 200, 0, 0.75)'; // 'green';
       context.moveTo(_idxX, 0);
       context.lineTo(_idxX, cHeight);
       context.stroke();

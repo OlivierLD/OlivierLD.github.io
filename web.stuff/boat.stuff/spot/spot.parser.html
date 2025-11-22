@@ -276,7 +276,6 @@ function updateOnClick(idx, tws, twd, prmsl, rain) {
       document.getElementById("recno").innerHTML = "Enregistrement #<b style='color:red;'>" + (idx + 1) + "</b> sur " + SpotParser.nmeaData.length + ", " +  reformatDate(txtDate) + " " + utc.options[utc.selectedIndex].text;
    }
 
-
    let wd = parseFloat(twd);
    displayTWD.animate(wd);
 
@@ -428,7 +427,7 @@ let keepWorking = false;
 function scrollData(i) {
    let data = SpotParser.nmeaData[i];
    graph.drawGraph("graphCanvas", graphdata, i);
-// graph.drawGraph("graphCanvas", rainData, i); // TODO on option
+// graph.drawGraph("graphCanvas", rainData, i); // TODO an option
 
    let utc = document.getElementById("tz");
    if (!userLang || userLang != 'FR') {
@@ -701,6 +700,8 @@ window.alert = showCustomAlert; // Override!
         <h3>SPOT Request Generator and Parser</h3>
         <h4>Summary</h4>
         <div>
+          It is a two-step process:
+          <br/>
           To get a SPOT bulletin you have to request it; you need to generate a SPOT Request,
           that will be sent in an email to <code>query@saildocs.com</code>.
           <br/>
@@ -709,7 +710,7 @@ window.alert = showCustomAlert; // Override!
           You can then paste the content of the bulletin in the text-box expecting it, and you should be able to
           see the bulletin rendered in a graphical way.
         </div>
-        <h4>Generate the request</h4>
+        <h4>1 - Generate the request</h4>
         <div>
           To locate the place you want the bulletin for, click on the chart (you can zoom in and out).
           A click on the chart should update the position in the SPOT request, displayed in <span style="color: red; font-weight: bold;">red</span>.
@@ -720,9 +721,10 @@ window.alert = showCustomAlert; // Override!
           <br/>
           You can:
           <ul>
-            <li>Copy the <span style="color: red; font-weight: bold;">red</span> string into your clipboard</li>
-            <li>Click the <img src="icons8-copy-to-clipboard-50.png" style="width: 16px; height: auto; vertical-align: middle;" title="Copy request to clipboard"> Copy button</li>
-            <li>Click the link <span style="color: blue; text-decoration: underline;">query@saildocs.com</span>, if you have an email client configured on your system</li>
+            <li>Copy the <span style="color: red; font-weight: bold;">red</span> string into your clipboard.</li>
+            <li>Click the <img src="icons8-copy-to-clipboard-50.png" style="width: 16px; height: auto; vertical-align: middle;" title="Copy request to clipboard"> Copy button, that put copy the request in the clipboard.</li>
+            <li>Click the link <span style="color: blue; text-decoration: underline;">query@saildocs.com</span>, if you have an email client configured on your system.</li>
+            <li>Click the link <span style="color: blue; text-decoration: underline;">Request QR Code</span>, and you can then flash it from a cell-phone or tablet, to send the email.</li>
           </ul>
           <b><i>Important:</i></b> This email <i>MUST</i> be sent in <i>TEXT</i> format. No fancy
           HTML formatting or what not.
@@ -736,7 +738,7 @@ window.alert = showCustomAlert; // Override!
           </pre>
           Now send the email, the reponse should be in your inbox within minutes, if not seconds.
         </div>
-        <h4>Rendering the bulletin</h4>
+        <h4>2 - Rendering the bulletin</h4>
         <div>
           The bulletin you got as a response to your email looks like this:
           <br/>
@@ -837,15 +839,17 @@ info@saildocs.com, this will return the how-to document (about 5K).
         <h3>G&eacute;n&eacute;rateur et Parser de requ&ecirc;te SPOT</h3>
         <h4>Sommaire</h4>
         <div>
-          Pour avoir un bulletin SPOT, il faut le demander ; il vius faut composer une requ&ecirc;te SPOT,
+          On procede en deux temps pour obtenir un bulletin SPOT.
+          <br/>
+          Pour avoir un bulletin SPOT, il faut le demander ; il vous faut composer une requ&ecirc;te SPOT,
           qui sera envoy&eacute;e par email &agrave; <code>query@saildocs.com</code>.
           <br/>
-          Vou recevrez ensuite un email en retour : il contient le bulletin SPOT.
+          Vou recevrez ensuite un email en retour&nbsp;: il contient le bulletin SPOT.
           <br/>
-          On peut ensuite en copier le contenu (Ctrl-C) et le coller (Ctrl-V) dans la bo&icirc;te pr&eacute;vue a cet effet, vous pourrez
+          On peut ensuite en copier le contenu (Ctrl-C) et le coller (Ctrl-V) dans la bo&icirc;te pr&eacute;vue &agrave; cet effet, vous pourrez
           alors visualiser le contenu du bulletin de mani&egrave;re graphique.
         </div>
-        <h4>Generation de la requ&ecirc;te</h4>
+        <h4>1 - G&eacute;n&eacute;ration de la requ&ecirc;te</h4>
         <div>
           Pour d&eacute;finir la position qui fera l'objet du bulletin SPOT, cliquez sur la carte (on peut zoomer, avant et arri&egrave;re).
           Un click sur la carte doit mettre &agrave; jour la position dans le requ&ecirc;te SPOT, affich&eacute;e en <span style="color: red; font-weight: bold;">rouge</span>.
@@ -856,9 +860,10 @@ info@saildocs.com, this will return the how-to document (about 5K).
           <br/>
           Vous pouvez alors&nbsp;:
           <ul>
-            <li>Copier la requete en <span style="color: red; font-weight: bold;">rouge</span> dans le presse-papier</li>
-            <li>Utiliser le <img src="icons8-copy-to-clipboard-50.png" style="width: 16px; height: auto; vertical-align: middle;" title="Copier la requete dans le presse-papier"> Bouton Copy</li>
-            <li>Cliquer sur le lien <span style="color: blue; text-decoration: underline;">query@saildocs.com</span>, si vous avez un client email configure sur votre syst&egrave;me</li>
+            <li>Copier la requete en <span style="color: red; font-weight: bold;">rouge</span> dans le presse-papier.</li>
+            <li>Utiliser le <img src="icons8-copy-to-clipboard-50.png" style="width: 16px; height: auto; vertical-align: middle;" title="Copier la requete dans le presse-papier"> bouton Copy, qui copiera la requ&ecirc;te dans le presse-papier.</li>
+            <li>Cliquer sur le lien <span style="color: blue; text-decoration: underline;">query@saildocs.com</span>, si vous avez un client email configur&eacute; sur votre syst&egrave;me.</li>
+            <li>Cliquer sur le lien <span style="color: blue; text-decoration: underline;">Request QR Code</span>, qu'on peut ensuite flasher &agrave; partir d'un t&eacute;l&eacute;phone ou d'une tablette, pour envoyer l'email.</li>
           </ul>
           <b><i>Important :</i></b> L'email <i>DOIT</i> etre envoye au format <i>TEXTE</i> ! Pas de formattage HTML ou autres fantaisies.
           <br/>
@@ -871,7 +876,7 @@ info@saildocs.com, this will return the how-to document (about 5K).
           </pre>
           Maintenant, envoyez l'email, la r&eacute;ponse doit vous parvenir en quelques minutes, voire secondes.
         </div>
-        <h4>Affichage du bulletin</h4>
+        <h4>2 - Affichage du bulletin</h4>
         <div>
           Le bulletin que vous avez re&ccedil;u en r&eacute;ponse &agrave; votre email ressemble &agrave; ceci&nbsp;:
           <br/>
