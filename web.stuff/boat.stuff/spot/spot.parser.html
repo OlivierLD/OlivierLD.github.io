@@ -954,7 +954,7 @@ info@saildocs.com, this will return the how-to document (about 5K).
           <i>Note&nbsp;:</i> On peut utiliser le contenu ci-dessus, pour des tests.
           <br/>
           Coller ensuite le bulletin copi&eacute; dans la bo&icirc;te qui dit
-          <code style="background-color: white; color:gray; font-family: 'Courier New', Courier, monospace;">Collez ici le bulletin SPOT, ouyis tabulez en dehors.</code>,
+          <code style="background-color: white; color:gray; font-family: 'Courier New', Courier, monospace;">Collez ici le bulletin SPOT re&ccedil;u par email, puis tabulez en dehors.</code>,
           et tabulez en dehors (touche TAB), ou bien cliquez en dehors de la boite.
           <br/>
           La suite doit &ecirc;tre &eacute;vidente...
@@ -992,7 +992,7 @@ info@saildocs.com, this will return the how-to document (about 5K).
           <textarea id="spot"
                     style="margin: 2px; height: 100px; width: 365px;"
                     onchange="onDataChange();"
-                    placeholder="Paste SPOT bulletin here, and tab out."
+                    placeholder="Paste here the SPOT bulletin received by email, and tab out."
                     spellcheck="false"
                     title="Paste here the bulletin&#13;received by email, at least from the top&#13;to the last data line."></textarea>
           <br/>
@@ -1176,7 +1176,7 @@ let translate = (lang) => {
       document.title = "Analyseur de bulletins SPOT";
       document.getElementById("h2-title").innerHTML = "Analyseur de bulletins SPOT <a href=\"#\" onclick=\"showHelpDialog();\" style=\"padding: 0 5px 0 5px; border: 2px solid gray; border-radius: 50px;\" title=\"Aide !&#13;Qu'est-ce qu'un bulletin SPOT ?\">?</a> <img src=\"manual.png\" style=\"width: 25px; height: auto; vertical-align: baseline; margin-bottom: -4px; cursor: pointer;\" onclick=\"showManual();\" title=\"Manuel d'utilisation rapide\"/>";
       document.getElementById("h4-title").innerHTML = "Utilisant <a href=\"https://saildocs.com/\" target=\"saildocs\">Saildocs</a> et <a href=\"https://leafletjs.com/\" target=\"leaflet\">LeafLet</a>";
-      document.getElementById("spot").setAttribute("placeholder", "Collez ici le bulletin SPOT, puis tabulez en dehors.");
+      document.getElementById("spot").setAttribute("placeholder", "Collez ici le bulletin SPOT reçu par email, puis tabulez en dehors.");
       document.getElementById("spot").setAttribute("title", "Collez ici le bulletin reçu par email, au moins de la première ligne jusqu'à la dernière ligne de données.");
       document.getElementById("send-to").innerHTML = "Envoyez cette requête SPOT à ";
       document.getElementById("copy-image").setAttribute("title", "Copier la requête dans le bloc-note.");
