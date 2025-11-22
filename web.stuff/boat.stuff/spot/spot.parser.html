@@ -67,6 +67,14 @@
     let spotReq = document.getElementById("spot-req").innerHTML;
     makeCode(encodeURIComponent(spotReq));
   };
+
+  let loadSample = () => {
+    let sampleData = document.getElementById("sample-data").innerHTML;
+    document.getElementById("spot").value = sampleData;
+    closeDialog('spot-user-manual');
+    onDataChange();
+  }
+
     </script>
     <!--script type="text/javascript">
       document.addEventListener("DOMContentLoaded", function() {
@@ -742,7 +750,7 @@ window.alert = showCustomAlert; // Override!
         <div>
           The bulletin you got as a response to your email looks like this:
           <br/>
-          <textarea style="font-family: 'Courier New', Courier, monospace; width: 98%; height: 200px; max-height: 250px; overflow: scroll;" spellcheck="false">
+          <textarea id="sample-data" style="font-family: 'Courier New', Courier, monospace; width: 98%; height: 200px; max-height: 250px; overflow: scroll;" spellcheck="false">
 Data extracted from file gfs-20220117-00z.grb dated 2022/01/17 05:13:48
 request code: spot:37.77715986825405N,76.00255966186525W|5,3|PRMSL,WIND,RAIN
 
@@ -826,6 +834,10 @@ info@saildocs.com, this will return the how-to document (about 5K).
           <br/>
           The rest should be straightforward.
         </div>
+        <h4>... an example</h4>
+        <div>
+          To see what a SPOT bulletin looks like, click <a href="#" onclick="loadSample(); return false;">here</a>.
+        </div>
         <hr/>
       </div>
     </dialog>
@@ -839,9 +851,9 @@ info@saildocs.com, this will return the how-to document (about 5K).
         <h3>G&eacute;n&eacute;rateur et Parser de requ&ecirc;te SPOT</h3>
         <h4>Sommaire</h4>
         <div>
-          On procede en deux temps pour obtenir un bulletin SPOT.
+          On proc&egrave;de en deux temps pour obtenir un bulletin SPOT.
           <br/>
-          Pour avoir un bulletin SPOT, il faut le demander ; il vous faut composer une requ&ecirc;te SPOT,
+          Pour avoir un bulletin SPOT, il faut le demander&nbsp;; il vous faut composer une requ&ecirc;te SPOT,
           qui sera envoy&eacute;e par email &agrave; <code>query@saildocs.com</code>.
           <br/>
           Vou recevrez ensuite un email en retour&nbsp;: il contient le bulletin SPOT.
@@ -880,7 +892,7 @@ info@saildocs.com, this will return the how-to document (about 5K).
         <div>
           Le bulletin que vous avez re&ccedil;u en r&eacute;ponse &agrave; votre email ressemble &agrave; ceci&nbsp;:
           <br/>
-          <textarea style="font-family: 'Courier New', Courier, monospace; width: 98%; height: 200px; max-height: 250px; overflow: scroll;" spellcheck="false">
+          <textarea id="sample-data" style="font-family: 'Courier New', Courier, monospace; width: 98%; height: 200px; max-height: 250px; overflow: scroll;" spellcheck="false">
 Data extracted from file gfs-20220117-00z.grb dated 2022/01/17 05:13:48
 request code: spot:37.77715986825405N,76.00255966186525W|5,3|PRMSL,WIND,RAIN
 
@@ -963,6 +975,10 @@ info@saildocs.com, this will return the how-to document (about 5K).
           et tabulez en dehors (touche TAB), ou bien cliquez en dehors de la boite.
           <br/>
           La suite doit &ecirc;tre &eacute;vidente...
+        </div>
+        <h4>... un exemple</h4>
+        <div>
+          Pour voir ce que donne un bulletin SPOT, cliquez <a href="#" onclick="loadSample(); return false;">ici</a>.
         </div>
         <hr/>
       </div>
