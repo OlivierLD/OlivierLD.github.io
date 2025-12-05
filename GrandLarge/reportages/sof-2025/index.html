@@ -110,10 +110,10 @@
 		<!-- This will be hidden when page is loaded. See window.onload -->
 		<h1 class="display-data blink_me" style="color: orange;">Loading pictures, please wait...</h1>
 	</div>
-	
+
   	<h1>Spi Ouest-France, 2025</h1>
 	<h5>Images load is deferred (on purpose)</h5>
-  	
+
   	<script type="text/javascript">
 
 		let interval = undefined;
@@ -128,7 +128,7 @@
 
 		function onSlideShowClick(src) {
 			console.log(">> Client side!! Slide " + src + " was clicked.");
-			window.open(src, '_blank'); // This is an example
+			window.open(src, '_blank'); // This is an example. Override if needed.
 		}
 	</script>
 	<small>You can click on the slides...</small>
@@ -145,7 +145,7 @@
 			<slide-show-image src="./DSC_2445.jpg" title="Spi Ouest France"></slide-show-image>
 			<slide-show-image src="./DSC_2446.jpg" title="Spi Ouest France"></slide-show-image>
 		</slide-show>
-		
+
 	</div>
 	<script type="text/javascript">
 		window.onload = () => { // Important: window.onload
