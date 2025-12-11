@@ -39,22 +39,17 @@
 <body>
 
 <div class="content">
-    <h2><a name="least-squares">R&eacute;solution d'un polyn&ocirc;me par la m&eacute;thode des moindres carr&eacute;s</a></h2>
+    <h2><a name="least-squares">R&eacute;solution d'une &eacute;quation par la m&eacute;thode des moindres carr&eacute;s</a></h2>
     <p>
         <h3>Le probl&egrave;me</h3>
         <p>
             On part d'un <i>nuage de points</i> (quelque chose de n&eacute;buleux), un ensemble de points (x, y) enregistr&eacute;s, qui repr&eacute;sentent une courbe plus ou moins irr&eacute;guli&egrave;re,
             voire compl&egrave;tement cahotique.<br/>
-            On cherche &agrave; d&eacute;terminer une courbe lisse, repr&eacute;sent&eacute;e par un polyn&ocirc;me de degr&eacute; donn&eacute;, qui soit aussi proche que possible de ce nuage de points.
-            <div style="margin-left: 30px;">
-                <h4>Attention</h4>
-                On parle bien ici de r&eacute;soudre un polyn&ocirc;me, qui est une <i>fonction</i> !!<br/>
-                Les coniques (qui d&eacute;crivent des cercles, ellipses, et autres) ne sont <i><b>pas</b></i> des <i>fonctions</i>, et ne sont donc pas concern&eacute;es par l'exemple cit&eacute;l ci-apr&egrave;s.
-            </div>
+            On cherche &agrave; d&eacute;terminer une courbe lisse, repr&eacute;sent&eacute;e par une &eacute;quation (qui comporte un nombre donn&eacute; de param&egrave;tres), qui soit aussi proche que possible de ce nuage de points.
         </p>
         <h3>L'approche</h3>
         <p>
-            Il s'agit donc ici de trouver les coefficients d'un polyn&ocirc;me de degr&eacute; donn&eacute; (choisi), afin que la courbe qui le repr&eacute;sente soit aussi proche que possible d'un ensemble de points donn&eacute;s.<br/>
+            Il s'agit donc ici de trouver les coefficients (aka param&egrave;tres) d'une &eacute;quation, impliquant un nombre donn&eacute; (choisi) de param&egrave;tres, afin que la courbe qui le repr&eacute;sente soit aussi proche que possible d'un ensemble de points donn&eacute;s.<br/>
             Autrement dit, que la courbe trouv&eacute;e colle autant que possible au nuage des points de d&eacute;part.
         </p>
         <table>
@@ -64,19 +59,21 @@
                     <img src="./images/before.png" alt="Nuage de points" title="Nuage de points" style="max-width: 90%; border: 1px solid silver;"/>
                 </td>
                 <td style="width: 50%; text-align: center;">
-                    <b>Donn&eacute;es finales : Courbe (ici de degr&eacute; 4)</b><br/>
+                    <b>Donn&eacute;es finales : Courbe (ici un polyn&ocirc;me de degr&eacute; 4)</b><br/>
                     <img src="./images/after.png" alt="Nuage de points &amp; courbe" title="Nuage de points &amp; courbe" style="max-width: 90%; border: 1px solid silver;"/>
                 </td>
             </tr>
         </table>
     </p>
     <hr/>
-    <i>Exemple</i>: D&eacute;termination des coefficients d'une courbe du <b>second degr&eacute;</b>, &agrave; partir d'un nuage de points enregistr&eacute;s. On choisit ici un degr&eacute; 2 pour simplifier les &eacute;quations qui suivent.
+    <h3>Exemple, illustr&eacute;</h3>
+    D&eacute;termination des coefficients d'une courbe polynomiale du <b>second degr&eacute;</b>, &agrave; partir d'un nuage de points enregistr&eacute;s. On choisit ici un degr&eacute; 2 pour simplifier les &eacute;quations qui suivent.
     La r&eacute;solution d'un polyn&ocirc;me de degr&eacute; sup&eacute;rieur suivrait le m&ecirc;me mode op&eacute;ratoire.
     <br/><br/>
-    On cherche donc &agrave; d&eacute;terminer une courbe du 2<sup>nd</sup> degr&eacute;, aussi proche que possible des points d'un ensemble donn&eacute;, enregistr&eacute;s &agrave; bord. <br/>
+    On cherche donc &agrave; d&eacute;terminer une les coefficients d'un polyn&ocirc;me du 2<sup>nd</sup> degr&eacute;, dont les &eacute;l&eacute;ments sont aussi proches que possible des points d'un ensemble donn&eacute;
+    (enregistr&eacute; &agrave; bord d'un bateau, dans le cas qui suit). <br/>
     <br/>
-    Les points peuvent &ecirc;tre d&eacute;finis (coordonn&eacute;s) de diff&eacute;rentes mani&egrave;res, par exemple ici un cap compas (HDC, pour HeaDing Compass) et une route fond (COG, pour Course Over Ground)
+    Les points peuvent &ecirc;tre d&eacute;finis (par leurs coordonn&eacute;s) de diff&eacute;rentes mani&egrave;res, par exemple ici un cap compas (HDC, pour HeaDing Compass) et une route fond (COG, pour Course Over Ground)
     pour une courbe de d&eacute;viation, un angle de vent r&eacute;el et une vitesse du bateau pour des polaires, etc.<br/><br/>
     Pour la commodit&eacute; de la notation, on prendra les points coordonn&eacute;s g&eacute;n&eacute;riquement, comme suit&nbsp;:
     <table>
@@ -252,7 +249,7 @@
             dev = a + (b \times \cos r) + (c \times \cos r) + (d \times \sin 2r) + (e \times \cos 2r)
             $$
             </div>
-            ce qui n'est manifestement pas un polyn&ocirc;me, mais comme ce sont les coefficients de la formule qu'on cherche,
+            ce qui n'est <i><b>manifestement pas un polyn&ocirc;me</b></i>, mais comme ce sont les coefficients de la formule qu'on cherche,
             la m&eacute;thode des moindres carr&eacute;s peut s'appliquer.
             <br/>
             Dans l'&eacute;quation ci-dessus, <code>r</code> est le Cap Compas, <code>dev</code> est la d&eacute;viation (&delta; entre <code>HDC</code> et <code>HDM</code>, cap compas et cap magn&eacute;tique<span class="screen-only">, voir <a href="#05-1-5">ici</a></span>).<br/>
