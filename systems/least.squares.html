@@ -1,0 +1,318 @@
+<!--
+    Printable and translatable.
+    Note in LaTeX:
+    $
+    \blah
+    $
+    is left justified,
+    $$
+    \blah
+    $$
+    is center justified.
+
+-->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>M&eacute;thode des moindres carr&eacute;s</title>
+    <!--author>Olivier Le Diouris</author-->
+    <meta name="author" content="Olivier Le Diouris">
+    <link rel="icon" type="image/png" href="./grad.jpg">
+    <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <!--script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script-->
+    <script type="text/javascript"
+        async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+
+    <link rel="stylesheet" href="../web.stuff/nse/main.css" />
+    <!-- link rel="stylesheet" media="screen" href="main.css" /-->
+    <link rel="stylesheet" media="print" href="../web.stuff/nse/print.css" />
+</head>
+<body>
+
+<div class="content">
+    <h2><a name="least-squares">R&eacute;solution d'un polyn&ocirc;me par la m&eacute;thode des moindres carr&eacute;s</a></h2>
+    <p>
+        <h3>Le probl&egrave;me</h3>
+        <p>
+            On part d'un <i>nuage de points</i>, un ensemble de points (x, y) enregistr&eacute;s, qui repr&eacute;sentent une courbe plus ou moins irr&eacute;guli&egrave;re,
+            voire compl&egrave;tement cahotique.<br/>
+            On cherche &agrave; d&eacute;terminer une courbe lisse, repr&eacute;sent&eacute;e par un polyn&ocirc;me de degr&eacute; donn&eacute;, qui soit aussi proche que possible de ce nuage de points.
+        </p>
+        <h3>L'approche</h3>
+        <p>
+            Il s'agit donc ici de trouver les coefficients d'un polyn&ocirc;me de degr&eacute; donn&eacute; (choisi), afin que la courbe qui le repr&eacute;sente soit aussi proche que possible d'un ensemble de points donn&eacute;s.<br/>
+            Autrement dit, que la courbe trouv&eacute;e colle autant que possible au nuage des points de d&eacute;part.
+        </p>
+        <table>
+            <tr>
+                <td style="width: 50%; text-align: center;">
+                    <b>Donn&eacute;es initiales : Nuage de points</b><br/>
+                    <img src="./images/before.png" alt="Nuage de points" title="Nuage de points" style="max-width: 90%; border: 1px solid silver;"/>
+                </td>
+                <td style="width: 50%; text-align: center;">
+                    <b>Donn&eacute;es finales : Courbe de degr&eacute; 4</b><br/>
+                    <img src="./images/after.png" alt="Nuage de points &amp; courbe" title="Nuage de points &amp; courbe" style="max-width: 90%; border: 1px solid silver;"/>
+                </td>
+            </tr>
+        </table>
+    </p>
+    <hr/>
+    <i>Exemple</i>: D&eacute;termination des coefficients d'une courbe du <b>second degr&eacute;</b>, &agrave; partir d'un nuage de points enregistr&eacute;s. On choisit ici un degr&eacute; 2 pour simplifier les &eacute;quations qui suivent.
+    La r&eacute;solution d'un polyn&ocirc;me de degr&eacute; sup&eacute;rieur suivrait le m&ecirc;me mode op&eacute;ratoire.
+    <br/><br/>
+    On cherche donc &agrave; d&eacute;terminer une courbe du 2<sup>nd</sup> degr&eacute;, aussi proche que possible des points d'un ensemble donn&eacute;, enregistr&eacute;s &agrave; bord. <br/>
+    <br/>
+    Les points peuvent &ecirc;tre d&eacute;finis (coordonn&eacute;s) de diff&eacute;rentes mani&egrave;res, par exemple ici un cap compas (HDC, pour HeaDing Compass) et une route fond (COG, pour Course Over Ground)
+    pour une courbe de d&eacute;viation, un angle de vent r&eacute;el et une vitesse du bateau pour des polaires, etc.<br/><br/>
+    Pour la commodit&eacute; de la notation, on prendra les points coordonn&eacute;s g&eacute;n&eacute;riquement, comme suit&nbsp;:
+    <table>
+        <tr>
+            <td>
+                <div class="postit">
+                    $$
+                       P^{HDC}_{COG} = P^x_y
+                    $$
+                </div>
+            </td>
+            <td>
+                , &eacute;crit aussi
+            </td>
+            <td>
+                <div class="postit">
+                    $$
+                       y = f(x)
+                    $$
+                </div>
+            </td>
+            <td>
+                o&ugrave;
+            </td>
+            <td>
+                <div class="postit">
+                    $$
+                       f(x) = ax^2 + bx + c
+                    $$
+                </div>
+            </td>
+        </tr>
+    </table>
+    <!--div class="postit">
+    $$
+       P^{HDC}_{COG} = P^x_y, ecrit aussi f(x) = y, ou f(x) = ax^2 + bx + c
+    $$
+    </div-->
+    Donc, pour tous les points $(x, y)$ du nuage de donn&eacute;es enregistr&eacute;es, on cherche les coefficients <code>a</code>, <code>b</code>, <code>c</code> et <code>d</code> d'un polyn&ocirc;me pour lequel
+    <div class="postit">
+    $$
+    ax^2 + bx + c
+    $$
+    </div>
+    est le plus proche possible de <code>y</code>, c'est &agrave; dire que la diff&eacute;rence
+    <div class="postit">
+    $$
+    ax^2 + bx + c - y
+    $$
+    </div>
+    soit la plus petite possible, donc, que pour tous les points enregistr&eacute;s, le carr&eacute; de cette diff&eacute;rence soit le plus proche possible de z&eacute;ro
+    (<i>on &eacute;l&egrave;ve au carr&eacute; pour supprimer le signe</i>, d'o&ugrave; le nom de la m&eacute;thode), et donc que le cumul de ces diff&eacute;rences soit en d&eacute;finitive la plus petite possible. <br/>
+    Ceci revient &agrave; calculer les coefficients <code>a</code>, <code>b</code> et <code>c</code> pour lesquels la d&eacute;riv&eacute;e premi&egrave;re de cette sommation des carr&eacute;s des diff&eacute;rences
+    par rapport &agrave; chacun des coefficients <code>a</code>, <code>b</code> et <code>c</code> est nulle, ce qui s'&eacute;crit&nbsp;:
+    <div class="postit">
+    $$ ([\Sigma(ax^2 + bx + c - y)^2])' = 0 $$
+    </div>
+    <div style="margin: 30px; padding: 5px; border: 1px solid silver; border-radius: 5px;">
+        Pour insister : <b>c'est bien ici le c&oelig;ur de la m&eacute;thode.</b><br/>
+        <div style="font-style: italic;">
+            Pour tous les points du nuage &agrave; r&eacute;soudre, pour chaque <code>x</code>, on calcule la valeur de la fonction polyn&ocirc;me <code>f(x)</code>, et on veut
+            que sa diff&eacute;rence avec <code>y</code> soit la plus petite possible.<br/>
+            Donc que la deriv&eacute;e de la fonction de cette diff&eacute;rence (au carr&eacute; pour supprimer les histoires de signe) soit nulle.
+        </div>
+    </div>
+    On d&eacute;veloppe la somme avant de d&eacute;river&nbsp;:
+    <table>
+        <tr>
+            <td>
+                <div class="postit smaller-plus">
+                    $$ ([\Sigma(ax^2 + bx + c - y)^2])' = 0 $$
+                </div>
+            </td>
+            <td>s'&eacute;crit aussi</td>
+            <td>
+                <div class="postit smaller-plus">
+                    $$ ([\Sigma((ax^2 + bx + c - y) \times (ax^2 + bx + c - y))])' = 0 $$
+                </div>
+            </td>
+        </tr>
+    </table>
+    <!--div class="postit">
+    $$ ([\Sigma(ax^2 + bx + c - y)^2])' = 0 $$ s'&eacute;crit aussi $$ ([\Sigma((ax^2 + bx + c - y) x (ax^2 + bx + c - y))])' = 0 $$
+    </div-->
+
+    </div>
+    <div class="postit smaller-plus">
+    $
+    S = a^2\Sigma x^4 + 2ab\Sigma x^3 + 2ac\Sigma x^2 - 2a\Sigma yx^2 + b^2\Sigma x^2 + 2bc\Sigma x - 2b\Sigma yx + c^2\Sigma x^0 - 2c\Sigma y + \Sigma y^2
+    $
+    </div>
+    On d&eacute;rive l'expression ainsi obtenue
+    <ul>
+        <li>
+            Par rapport &agrave; <code>a</code>&nbsp;:
+            <div class="postit">
+    $ \dfrac{\partial S}{\partial a} = 2a\Sigma x^4 + 2b\Sigma x^3 + 2c\Sigma x^2 - 2\Sigma yx^2 = 0 $
+            </div>
+        </li>
+        <li>
+            Par rapport &agrave; <code>b</code>&nbsp;:
+            <div class="postit">
+    $ \dfrac{\partial S}{\partial b} = 2a\Sigma x^3 + 2b\Sigma x^2 + 2c\Sigma x^1 - 2\Sigma yx^1 = 0 $
+            </div>
+        </li>
+        <li>
+            Par rapport &agrave; <code>c</code>&nbsp;:
+            <div class="postit">
+    $ \dfrac{\partial S}{\partial c} = 2a\Sigma x^2 + 2b\Sigma x^1 + 2c\Sigma x^0 - 2\Sigma yx^0 = 0 $
+            </div>
+        </li>
+    </ul>
+    On change les termes en <code>y</code> de c&ocirc;t&eacute;, on simplifie par 2, et on obtient la r&eacute;solution matricielle suivante&nbsp;:
+    <div class="postit">
+    $ \begin{vmatrix} a & b & c \end{vmatrix} = \begin{vmatrix} \Sigma x^4 & \Sigma x^3 & \Sigma x^2 \\ \Sigma x^3 & \Sigma x^2 & \Sigma x^1 \\ \Sigma x^2 & \Sigma x^1 & \Sigma x^0 \end{vmatrix} ^ {-1} \times \begin{vmatrix} \Sigma yx^2 \\ \Sigma yx^1 \\ \Sigma yx^0 \end{vmatrix} $
+    </div>
+    <i>Remarques</i>&nbsp;:
+    <br/>
+    - Les termes $ \Sigma x^0 $ repr&eacute;sentent le nombre de points dans la courbe &agrave; lisser.
+    <br/>
+    - Un polyn&ocirc;me du 2<sup>nd</sup> degr&eacute; a 3 coefficients, la dimension des matrices qu'on g&egrave;re (carr&eacute;e, ligne, et colonne) est donc 3.
+    <p>
+    Pour un polyn&ocirc;me de degr&eacute; <code>n</code>, le travail &agrave; effectuer se "r&eacute;sume" ainsi &agrave; inverser la matrice carr&eacute;e $ \Sigma x^{0->2n} $ et de
+    la multiplier par la matrice colonne $ \Sigma yx^{0->n} $ pour obtenir la matrice ligne des coefficients du polyn&ocirc;me recherch&eacute;.
+    </p>
+    <div class="doc-section">
+        <h3><a name="least-square-dev">Cas d'une courbe de d&eacute;viation</a></h3>
+        <p>
+            On cherche ici &agrave; &eacute;laborer une courbe de d&eacute;viation, &agrave; partir de points enregistr&eacute;s depuis la station NMEA du bord.
+            <br/>
+            Dans ce contexte, la station doit comporter un GPS, et un compas (compas &eacute;lectronique, donc). Le GPS permettra &agrave; la station NMEA de g&eacute;n&eacute;rer des cha&icirc;nes RMC - qui vont contenir
+            la route fond (Course Over Ground, aka COG), le compas fournira &agrave; la station ce dont elle a besoin pour g&eacute;n&eacute;rer les Caps Compas (Heading, aka HDG, HDM, etc, suivant les stations).
+            <br/>
+            Le fichier contenant les informations produites par la station NMEA aura ainsi une allure comme ceci&nbsp;:
+            <pre class="postit">
+    . . .
+    $IIRMC,190402,A,0854.980,S,14006.028,W,00.0,008,031110,10,E,A*07
+    $IIVHW,,,126,M,00.0,N,,*61
+    $IIVLW,02839,N,000.0,N*53
+    $IIVWR,027,R,07.2,N,,,,*61
+    $IIDPT,012.3,+0.7,*40
+    $IIGLL,0854.979,S,14006.029,W,190403,A,A*56
+    $IIHDG,126,,,10,E*16
+    . . .
+            </pre>
+            On note que le fichier peut contenir d'autres donn&eacute;es (<code>VHW</code>, <code>DPT</code>, <code>GLL</code>, <code>VLW</code>, etc), qu'on ignorera ici.
+            <br/>
+            Ce fichier sera ensuite travaill&eacute; pour produire un document o&ugrave; ne figureront que les donn&eacute;es qui nous concernent ici, &agrave; savoir la d&eacute;viation en fonction du cap.
+            <br/>
+            Par exemple (en <span title="JavaScript Object Notation">JSON</span> ici)&nbsp;:
+            <pre class="postit">
+    [
+        { "hdc": 210.000000, "dev": 4.000000 },
+        { "hdc": 210.000000, "dev": 4.000000 },
+        { "hdc": 210.000000, "dev": -1.000000 },
+        { "hdc": 210.000000, "dev": -2.000000 },
+        { "hdc": 208.000000, "dev": -4.000000 },
+        . . .
+    ]
+            </pre>
+            <div class="screen-only">
+                <p>
+                    Plus de d&eacute;tails sur ces op&eacute;rations sont disponibles dans d'autres documents&nbsp;:
+                    <ul>
+                        <li><a href="https://github.com/OlivierLD/ROB/blob/master/raspberry-sailor/Swing/Deviation-Tool/notebooks/LogfileToDeviation.ipynb" target="NB">Jupyter Notebook, en Java</a></li>
+                        <li><a href="https://htmlpreview.github.io/?https://github.com/OlivierLD/ROB/blob/master/raspberry-sailor/Swing/Deviation-Tool/README.html" target="dev-curve">Sur le proc&eacute;d&eacute;</a></li>
+                        <li><a href="https://github.com/OlivierLD/ROB/tree/master/raspberry-sailor/Swing/Deviation-Tool" target="ROB">Avec des exemples</a></li>
+                    </ul>
+                </p>
+            </div>
+            <br/>
+            <br/>
+            On consid&egrave;re donc que la forme g&eacute;n&eacute;rique d'une courbe de d&eacute;viation est
+            <div class="postit">
+            $$
+            dev = a + (b \times \cos r) + (c \times \cos r) + (d \times \sin 2r) + (e \times \cos 2r)
+            $$
+            </div>
+            ce qui n'est manifestement pas un polyn&ocirc;me, mais comme ce sont les coefficients de la formule qu'on cherche,
+            la m&eacute;thode des moindres carr&eacute;s peut s'appliquer.
+            <br/>
+            Dans l'&eacute;quation ci-dessus, <code>r</code> est le Cap Compas, <code>dev</code> est la d&eacute;viation (&delta; entre <code>HDC</code> et <code>HDM</code>, cap compas et cap magn&eacute;tique<span class="screen-only">, voir <a href="#05-1-5">ici</a></span>).<br/>
+            On cherche donc &agrave; d&eacute;finir une fonction <code>f</code> pour laquelle la d&eacute;viation <code>dev</code> est obtenue en fournissant <code>r</code>:
+            <div class="postit">
+                $$ dev = f(r) $$
+            </div>
+            Gr&acirc;ce au logging, on dispose d'un nuage de points qui comportent chacun au moins les informations suivantes&nbsp;:
+            <ul>
+                <li>HDC (Heading Compass)</li>
+                <li>COG (Course Over Ground)</li>
+            </ul>
+            Le logging doit s'effectuer sans courant, et sans d&eacute;rive, de fa&ccedil;on &agrave; &ecirc;tre s&ucirc;r que la diff&eacute;rence entre
+            le cap compas <code>HDC</code> (corrig&eacute; de la d&eacute;clinaison locale)
+            et la route fond (<code>COG</code>) est bien la d&eacute;viation <code>d</code>, que l'on cherche. Pas de d&eacute;rive, pas de courant,
+            la route fond est &eacute;gale &agrave; la route surface, qui est &eacute;gale au
+            cap vrai du bateau<span class="screen-only"> (voir <a href="#05-1-5">ici</a>)</span>.
+            <br/>
+            Les &eacute;l&eacute;ments du nuage de points dont on dispose (&eacute;labor&eacute; &agrave; partir du logging) sont d&eacute;finis en
+            <div class="postit">
+                $$ P_{d}^{HDC} = P_{d}^{r} = P_{y}^{x} $$
+            </div>
+            En abscisse le Cap Compas, en ordonn&eacute;e la d&eacute;viation.
+            <br/>
+            On cherche les valeurs de 5 coefficients&nbsp;:
+            <div class="postit">
+                $ \begin{vmatrix} a & b & c & d & e \end{vmatrix} $
+            </div>
+            La dimension des matrices &agrave; g&eacute;rer est donc cette fois-ci 5. On applique la m&eacute;thode des moindres carr&eacute;s, d&eacute;crite ci-dessus.
+            <br/>
+            On obtient les coefficients $ \begin{vmatrix} a & b & c & d & e \end{vmatrix} $ en r&eacute;solvant&nbsp;:
+            <div class="postit smaller">
+$
+  \begin{vmatrix} a & b & c & d & e \end{vmatrix}
+                =
+  \begin{vmatrix}
+  &n  &\sum_{i=0}^{n}\sin(r)  &\sum_{i=0}^{n}\cos(r)  &\sum_{i=0}^{n}\sin(2r)  &\sum_{i=0}^{n}\cos(2r) \\
+  &\sum_{i=0}^{n}\sin(r)  &\sum_{i=0}^{n}\sin(r)^2  &\sum_{i=0}^{n}\sin(r)cos(r)  &\sum_{i=0}^{n}\sin(2r)sin(r))  &\sum_{i=0}^{n}\cos(2r)sin(r) \\
+  &\sum_{i=0}^{n}\cos(r)  &\sum_{i=0}^{n}\cos(r)sin(r)  &\sum_{i=0}^{n}\cos(r)^2  & \sum_{i=0}^{n}\sin(2r)cos(r) &\sum_{i=0}^{n}\cos(2r)cos(r) \\
+  &\sum_{i=0}^{n}\sin(2r)  &\sum_{i=0}^{n}\sin(2r)sin(r)  &\sum_{i=0}^{n}\sin(2r)cos(r)  &\sum_{i=0}^{n}\sin(2r)^2  &\sum_{i=0}^{n}\cos(2r)sin(2r) \\
+  &\sum_{i=0}^{n}\cos(2r)  &\sum_{i=0}^{n}\cos(2r)sin(r)  &\sum_{i=0}^{n}\cos(2r)cos(r)  &\sum_{i=0}^{n}\cos(2r)sin(2r)  &\sum_{i=0}^{n}\cos(2r)^2
+ \end{vmatrix} ^{-1}
+
+\times
+
+ \begin{vmatrix}
+  &\sum_{i=0}^{n}\ dev \\
+  &\sum_{i=0}^{n}\ dev.sin(r) \\
+  &\sum_{i=0}^{n}\ dev.cos(r) \\
+  &\sum_{i=0}^{n}\ dev.sin(2r) \\
+  &\sum_{i=0}^{n}\ dev.cos(2r)
+ \end{vmatrix}
+
+ $
+            </div>
+            Fastoche&nbsp;!
+            <br>
+            <span class="screen-only">
+                Pour plus de d&eacute;tails, voir aussi <a href="https://htmlpreview.github.io/?https://github.com/OlivierLD/ROB/blob/master/raspberry-sailor/Swing/Deviation-Tool/README.html" target="dev-curve">ce document</a>,
+                et aussi <a href="https://github.com/OlivierLD/ROB/tree/master/raspberry-sailor/Swing/Deviation-Tool" target="ROB">celui-ci</a>, pour un exemple
+                complet (incluant le code pour la r&eacute;solution des matrices), partant du fichier de log, passant par le calcul des coefficients, et aboutissant &agrave; l'affichage de la courbe de d&eacute;viation, avec une interface Web.
+            </span>
+        </p>
+    </div>
+</div>
+
+
+</body>
+</html>
