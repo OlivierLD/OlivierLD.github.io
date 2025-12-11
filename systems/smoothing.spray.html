@@ -15,6 +15,10 @@
           color: cyan;
       }
 
+      a:link {
+        color: orange;
+      }
+
       th, td {
          border: 1px solid #CCC;
          border-radius: 5px;
@@ -27,7 +31,7 @@
       }
 
       button {
-        font-width: bold;
+        font-weight: bold;
         font-size: 16px;
         padding: 5px;
         border-radius: 16px;
@@ -102,7 +106,7 @@
                 alert("Degree must be a positive integer");
               } else {
                 let graphData = dataGraph.getData();
-                
+
                 // Uncomment to see the data in the console
                 // let out = "";
                 // graphData.forEach(pt => out += (JSON.stringify(pt) + ","));
@@ -163,7 +167,9 @@
         <td>
           Standalone. <i>Does not require a server to be running</i>. Can be used as a static page.
           <br/>
-          Quick introduction on the <a href="http://lediouris.net/original/sailing/PolarCO2/index.html" target="new">least square method</a>, in French.
+          Quick introduction on the <a href="http://lediouris.net/original/sailing/PolarCO2/index.html" target="new">least square method</a>, in French.<br/>
+          <a href="least.squares.html" target="_blank">La m&eacute;thode des moindres carr&eacute;s (FR)</a>,
+          <a href="least.squares.html" target="_blank">Least Squares Method explanation (EN)</a> <!-- TODO -->
         </td>
       </tr>
       <tr>
