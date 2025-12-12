@@ -19,12 +19,8 @@
     <!--author>Olivier Le Diouris</author-->
     <meta name="author" content="Olivier Le Diouris">
     <link rel="icon" type="image/png" href="./grad.jpg">
-    <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
-    </script>
     <!--script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script-->
     <script type="text/javascript"
-        async
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
     </script>
 
@@ -32,9 +28,44 @@
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script-->
 
+    <!--script type="text/javascript"-->
+    <!--script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [['$','$'], ['\\(','\\)']]
+        }
+    });
+    </script-->
+
+    <script type="text/javascript">
+        // That one is OK for the matrixes.
+    MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        },
+        "HTML-CSS": {
+            availableFonts: ["TeX"] /* ,
+            availableFonts: [],
+            // Disable preferred fonts to ensure web fonts are used
+            preferredFont: null,
+            // Force the use of the Neo-Euler web font for rendering math
+            webFont: "TeX" // "Neo-Euler" */
+        }
+    });
+    </script>
+
     <link rel="stylesheet" href="../web.stuff/nse/main.css" />
     <!-- link rel="stylesheet" media="screen" href="main.css" /-->
     <link rel="stylesheet" media="print" href="../web.stuff/nse/print.css" />
+
+    <!--style type="text/css">
+        html, body {
+            font-size: 1.125rem;
+        }
+    </style-->
 </head>
 <body>
 
@@ -67,14 +98,16 @@
     </p>
     <hr/>
     <h3>Exemple, illustr&eacute;</h3>
-    D&eacute;termination des coefficients d'une courbe polynomiale du <b>second degr&eacute;</b>, &agrave; partir d'un nuage de points enregistr&eacute;s. On choisit ici un degr&eacute; 2 pour simplifier les &eacute;quations qui suivent.
+    La m&eacute;thode des moindres carr&eacute;s ne concerne pas que les fonction polyn&ocirc;mes, loin de l&agrave;.<br/>
+    On veut ici e&eacute;terminer les coefficients d'une <b>courbe polynomiale</b> du <b>second degr&eacute;</b>, &agrave; partir d'un nuage de points enregistr&eacute;s.<br/>
+    On choisit ici un degr&eacute; 2 pour simplifier les &eacute;quations qui suivent.<br/>
     La r&eacute;solution d'un polyn&ocirc;me de degr&eacute; sup&eacute;rieur suivrait le m&ecirc;me mode op&eacute;ratoire.
     <br/><br/>
-    On cherche donc &agrave; d&eacute;terminer une les coefficients d'un polyn&ocirc;me du 2<sup>nd</sup> degr&eacute;, dont les &eacute;l&eacute;ments sont aussi proches que possible des points d'un ensemble donn&eacute;
+    On cherche donc &agrave; d&eacute;terminer les coefficients d'un polyn&ocirc;me du 2<sup>nd</sup> degr&eacute;, dont les &eacute;l&eacute;ments sont aussi proches que possible des points d'un ensemble donn&eacute;
     (enregistr&eacute; &agrave; bord d'un bateau, dans le cas qui suit). <br/>
     <br/>
     Les points peuvent &ecirc;tre d&eacute;finis (par leurs coordonn&eacute;s) de diff&eacute;rentes mani&egrave;res, par exemple ici un cap compas (HDC, pour HeaDing Compass) et une route fond (COG, pour Course Over Ground)
-    pour une courbe de d&eacute;viation, un angle de vent r&eacute;el et une vitesse du bateau pour des polaires, etc.<br/><br/>
+    pour d&eacute;terminer une courbe de d&eacute;viation, un angle de vent r&eacute;el et une vitesse du bateau pour d&eacute;terminer des polaires, etc.<br/><br/>
     Pour la commodit&eacute; de la notation, on prendra les points coordonn&eacute;s g&eacute;n&eacute;riquement, comme suit&nbsp;:
     <table>
         <tr>
@@ -238,6 +271,7 @@
                         <li><a href="https://github.com/OlivierLD/ROB/blob/master/raspberry-sailor/Swing/Deviation-Tool/notebooks/LogfileToDeviation.ipynb" target="NB">Jupyter Notebook, en Java</a></li>
                         <li><a href="https://htmlpreview.github.io/?https://github.com/OlivierLD/ROB/blob/master/raspberry-sailor/Swing/Deviation-Tool/README.html" target="dev-curve">Sur le proc&eacute;d&eacute;</a></li>
                         <li><a href="https://github.com/OlivierLD/ROB/tree/master/raspberry-sailor/Swing/Deviation-Tool" target="ROB">Avec des exemples</a></li>
+                        <li><a href="/systems/smoothing.spray.html" target="Smoothing-1">Lissage de polyn&ocirc;me, interactif.</a></li>
                     </ul>
                 </p>
             </div>
@@ -252,7 +286,7 @@
             ce qui n'est <i><b>manifestement pas un polyn&ocirc;me</b></i>, mais comme ce sont les coefficients de la formule qu'on cherche,
             la m&eacute;thode des moindres carr&eacute;s peut s'appliquer.
             <br/>
-            Dans l'&eacute;quation ci-dessus, <code>r</code> est le Cap Compas, <code>dev</code> est la d&eacute;viation (&delta; entre <code>HDC</code> et <code>HDM</code>, cap compas et cap magn&eacute;tique<span class="screen-only">, voir <a href="#05-1-5">ici</a></span>).<br/>
+            Dans l'&eacute;quation ci-dessus, <code>r</code> est le Cap Compas, <code>dev</code> est la d&eacute;viation (&delta; entre <code>HDC</code> et <code>HDM</code>, cap compas et cap magn&eacute;tique).<br/>
             On cherche donc &agrave; d&eacute;finir une fonction <code>f</code> pour laquelle la d&eacute;viation <code>dev</code> est obtenue en fournissant <code>r</code>:
             <div class="postit">
                 $$ dev = f(r) $$
