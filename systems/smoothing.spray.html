@@ -107,7 +107,9 @@
             document.execCommand("copy");
             document.body.removeChild(codeHolder);
             // alert(`Value ${value} copied to clipboard`);
-            alert(`Values also copied to clipboard`);
+            // console.log(`Value is a ${typeof(value)}`);
+            let jsonArray = JSON.parse(value); // Good for this very case.
+            alert(`${jsonArray.length} values also copied to clipboard`);
         };
 
         function goDrawing() {
@@ -208,6 +210,15 @@
         </td>
         <td valign="top" align="left" valign="top" colspan="1">
           <div id="json-result" style="width: 100%; height: 60px; white-space: nowrap; overflow: auto;">
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <small>Spray Radius</small><br/>
+          <div style="vertical-align: middle;">
+            <input type="range" id="sprayRadius" style="width: 50%;" min="0.1" max="5.0" step="0.05" value="0.5" oninput="dataGraph.setSprayRadius(parseFloat(this.value)); radius01.value = (this.value);"/>
+            <output name="radius" id="radius01" style="vertical-align: top;">0.5</output>
           </div>
         </td>
       </tr>

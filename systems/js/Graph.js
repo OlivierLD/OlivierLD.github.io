@@ -186,6 +186,12 @@ function Graph(cName,       // Canvas Name
 		withSprayPoints = sp;
 	};
 
+	let SPRAY_RADIUS = 0.5;
+
+	this.setSprayRadius = function (sr) {
+		SPRAY_RADIUS = sr;
+	};
+
 	this.setBoundaries = function (minX, maxX, minY, maxY) {
 		minx = minX;
 		maxx = maxX;
@@ -254,6 +260,7 @@ function Graph(cName,       // Canvas Name
 		}
 	});
 
+
 	canvas.addEventListener('mousemove', (evt) => {
 		if (withSprayPoints === true && spraying === true) {
 			let x = evt.pageX - canvas.offsetLeft;
@@ -268,7 +275,7 @@ function Graph(cName,       // Canvas Name
 			let centerY = (maxy - (y / yScale));
 
 			let nbPointsInSpray = 30;
-			let sprayRadius = 0.75; // .25;
+			let sprayRadius = SPRAY_RADIUS; // 0.75; // .25;
 			for (let i = 0; i < nbPointsInSpray; i++) {
 				let direction = Math.random() * 360;
 				let radius = sprayRadius * Math.random();
