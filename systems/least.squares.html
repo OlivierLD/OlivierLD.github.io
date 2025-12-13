@@ -251,6 +251,18 @@
     <div class="doc-section">
         <h3><a name="least-square-dev">Cas d'une courbe de d&eacute;viation</a></h3>
         <p>
+            <hr/>
+            <b>Pr&eacute;cision</b> : qu'est-ce que c'est que ce truc ?<br/>
+            &Agrave; bord d'un bateau, on a un compas, qui permet de savoir dans quelle direction on se dirige, &eacute;l&eacute;ment essentiel &agrave; la tenue de l'estime.<br/>
+            Le "nord vrai" (g&eacute;ographique) est celui des cartes.<br/>
+            Le "cap magn&eacute;tique" est celui qui fait intervenir la d&eacute;clinaison magn&eacute;tique locale (qui varie suivant l'endroit o&ugrave; on se trouve sur la plan&egrave;te, et la date).<br/>
+            Le "cap compas" est celui indiqu&eacute; par le compas, qui subit les influences magn&eacute;tiques du bateau lui-m&ecirc;me (m&eacute;tal, &eacute;quipements &eacute;lectriques, etc).<br/>
+            La d&eacute;viation est la diff&eacute;rence entre le cap compas et le cap magn&eacute;tique.<br/>
+            Elle d&eacute;pend de l'orientation du bateau, et est donc une fonction du cap compas lui-m&ecirc;me.<br/>
+            Sur un bateau en acier, elle peut atteinfre des valeurs &eacute;normes - comme 40 degr&eacute;s - dont il est sans aucun doute de bon ton de tenir compte...
+            <hr/>
+        </p>
+        <p>
             On cherche ici &agrave; &eacute;laborer une courbe de d&eacute;viation, &agrave; partir de points enregistr&eacute;s depuis la station NMEA du bord.
             <br/>
             Dans ce contexte, la station doit comporter un GPS, et un compas (compas &eacute;lectronique, donc). Le GPS permettra &agrave; la station NMEA de g&eacute;n&eacute;rer des cha&icirc;nes RMC - qui vont contenir
