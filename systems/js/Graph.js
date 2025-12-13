@@ -228,6 +228,7 @@ function Graph(cName,       // Canvas Name
 
 	canvas.addEventListener('mousedown', (evt) => {
 		if (withSprayPoints === true) {
+			// Start Spraying
 			console.log('Start spraying');
 			canvas.style.cursor = 'crosshair';
 			spraying = true;
@@ -267,7 +268,7 @@ function Graph(cName,       // Canvas Name
 			let centerY = (maxy - (y / yScale));
 
 			let nbPointsInSpray = 30;
-			let sprayRadius = .25;
+			let sprayRadius = 0.75; // .25;
 			for (let i = 0; i < nbPointsInSpray; i++) {
 				let direction = Math.random() * 360;
 				let radius = sprayRadius * Math.random();

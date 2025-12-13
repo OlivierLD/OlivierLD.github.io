@@ -96,6 +96,20 @@
           dataGraph.drawPoints("dataCanvas", graphData);
         };
 
+        let copyToClipboard = (fieldId) => {
+            let value = document.getElementById(fieldId).innerText;
+            let codeContent = value; // .replaceAll("<br>", "\n");
+            // console.log(codeContent);
+            let codeHolder = document.createElement("textarea"); // To keep the format, 'input' would not.
+            codeHolder.value = codeContent;
+            document.body.appendChild(codeHolder);
+            codeHolder.select();
+            document.execCommand("copy");
+            document.body.removeChild(codeHolder);
+            // alert(`Value ${value} copied to clipboard`);
+            alert(`Value copied to clipboard`);
+        };
+
         function goDrawing() {
           let degreeStr = document.getElementById("degree").value;
           if (degreeStr.trim().length === 0) {
@@ -133,6 +147,8 @@
           // console.log(JSON.stringify(graphData));
           let messZone = document.getElementById("err-mess");
           messZone.innerText = JSON.stringify(graphData);
+          // -> to clipboard
+          copyToClipboard("err-mess");
         }
 
         function zoomIn() {
@@ -163,7 +179,7 @@
     <table width="100%" border="1">
       <tr>
         <td colspan="1">
-          <h2>Polynomial Smoothing, Regression</h2>
+          <h2>Polynomial Smoothing, Linear Regression</h2>
         </td>
         <td>
           Standalone. <i>Does not require a server to be running</i>. Can be used as a static page.
