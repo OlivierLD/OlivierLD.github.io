@@ -21,7 +21,6 @@
     <link rel="icon" type="image/png" href="./grad.jpg">
     <!--script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script-->
     <script type="text/javascript"
-            async
             src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
     </script>
 
@@ -217,7 +216,26 @@
             </div>
         </li>
     </ul>
-    On change les termes en <code>y</code> de c&ocirc;t&eacute;, on simplifie par 2, et on obtient la r&eacute;solution matricielle suivante&nbsp;:
+    On change les termes en <code>y</code> de c&ocirc;t&eacute;, on simplifie par 2 :
+    <ul>
+        <li>
+            <div class="postit">
+    $ a\Sigma x^4 + b\Sigma x^3 + c\Sigma x^2 = \Sigma yx^2 $
+            </div>
+        </li>
+        <li>
+            <div class="postit">
+    $ a\Sigma x^3 + b\Sigma x^2 + c\Sigma x^1 = \Sigma yx^1 $
+            </div>
+        </li>
+        <li>
+            <div class="postit">
+    $ a\Sigma x^2 + b\Sigma x^1 + c\Sigma x^0 = \Sigma yx^0 $
+            </div>
+        </li>
+    </ul>
+
+    et on obtient la r&eacute;solution matricielle suivante&nbsp;:
     <div class="postit">
     $ \begin{vmatrix} a & b & c \end{vmatrix} = \begin{vmatrix} \Sigma x^4 & \Sigma x^3 & \Sigma x^2 \\ \Sigma x^3 & \Sigma x^2 & \Sigma x^1 \\ \Sigma x^2 & \Sigma x^1 & \Sigma x^0 \end{vmatrix} ^ {-1} \times \begin{vmatrix} \Sigma yx^2 \\ \Sigma yx^1 \\ \Sigma yx^0 \end{vmatrix} $
     </div>
