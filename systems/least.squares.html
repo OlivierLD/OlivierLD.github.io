@@ -67,10 +67,11 @@
         }
     </style-->
 </head>
-<body>
 
-<div class="content">
+<section id="fr-content" style="display: none;">
     <h2><a name="least-squares">R&eacute;solution d'une &eacute;quation par la m&eacute;thode des moindres carr&eacute;s</a></h2>
+    <span class="screen-only">Traduisible et imprimable</span><br/>
+    <a class="screen-only" href="javascript:void(0)" onclick="navTo('EN');">In English</a>
     <p>
         <h3>Le probl&egrave;me</h3>
         <p>
@@ -99,7 +100,7 @@
     <hr/>
     <h3>Exemple, illustr&eacute;</h3>
     La m&eacute;thode des moindres carr&eacute;s ne concerne pas que les fonction polyn&ocirc;mes, loin de l&agrave;.<br/>
-    On veut ici e&eacute;terminer les coefficients d'une <b>courbe polynomiale</b> du <b>second degr&eacute;</b>, &agrave; partir d'un nuage de points enregistr&eacute;s.<br/>
+    On veut ici d&eacute;terminer les coefficients d'une <b>courbe polynomiale</b> du <b>second degr&eacute;</b>, &agrave; partir d'un nuage de points enregistr&eacute;s.<br/>
     On choisit ici un degr&eacute; 2 pour simplifier les &eacute;quations qui suivent.<br/>
     La r&eacute;solution d'un polyn&ocirc;me de degr&eacute; sup&eacute;rieur suivrait le m&ecirc;me mode op&eacute;ratoire.
     <br/><br/>
@@ -189,7 +190,6 @@
     </table>
     On d&eacute;veloppe la somme avant de d&eacute;river&nbsp;:
 
-    </div>
     <div class="postit smaller-plus">
     $
     S = a^2\Sigma x^4 + 2ab\Sigma x^3 + 2ac\Sigma x^2 - 2a\Sigma yx^2 + b^2\Sigma x^2 + 2bc\Sigma x - 2b\Sigma yx + c^2\Sigma x^0 - 2c\Sigma y + \Sigma y^2
@@ -379,7 +379,330 @@ $
             </div>
         </p>
     </div>
+</section>
+
+<section id="en-content" style="display: none;">
+    <h2><a name="least-squares">Solving an Equation Using the Least Squares Method</a></h2>
+    <span class="screen-only">Translatable and printable</span><br/>
+    <a class="screen-only" href="javascript:void(0)" onclick="navTo('FR');">En fran&ccedil;ais</a>
+    <p>
+        <h3>The problem</h3>
+        <p>
+            We start with a <i>point cloud</i> (something nebulous), a set of recorded points (x, y) that represent a more or less irregular, or even completely chaotic, curve.<br/>
+            We want to determine a smooth curve, represented by an equation (which has a given number of parameters), that is as close as possible to this point cloud.
+        </p>
+        <h3>The Approach</h3>
+        <p>
+            The goal here is to find the coefficients (also known as parameters) of an equation, involving a given (chosen) number of parameters,
+            so that the curve representing it is as close as possible to a given set of points.<br/>
+            In other words, the resulting curve should fit the initial point cloud as closely as possible.
+        </p>
+        <table>
+            <tr>
+                <td style="width: 50%; text-align: center;">
+                    <b>Initial Data : Cloud of Points</b><br/>
+                    <img src="./images/before.png" alt="Nuage de points" title="Nuage de points" style="max-width: 90%; border: 1px solid silver;"/>
+                </td>
+                <td style="width: 50%; text-align: center;">
+                    <b>Final data: Curve (here a polynomial of degree 4)</b><br/>
+                    <img src="./images/after.png" alt="Nuage de points &amp; courbe" title="Nuage de points &amp; courbe" style="max-width: 90%; border: 1px solid silver;"/>
+                </td>
+            </tr>
+        </table>
+    </p>
+    <hr/>
+    <h3>Illustrated Example</h3>
+    The least squares method is not limited to polynomial functions, far from it.<br/>
+    Here, we want to determine the coefficients of a quadratic polynomial curve from a set of recorded points.<br/>
+    We choose a degree 2 polynomial to simplify the following equations.<br/>
+    Solving a higher-degree polynomial would follow the same procedure.
+    <br/><br/>
+    We therefore seek to determine the coefficients of a quadratic polynomial whose elements are as close as
+    possible to the points of a given set (recorded on board a boat, in the following case). <br/>
+    <br/>
+    The points can be defined (by their coordinates) in different ways, for example, here a compass heading (HDC) and a course over ground (COG) to determine a
+    deviation curve, a true wind angle and boat speed to determine polars, etc.<br/><br/>
+    For the sake of notation, we will take the coordinate points generically, as follows:
+    <table>
+        <tr>
+            <td>
+                <div class="postit">
+                    $$
+                       P^{HDC}_{COG} = P^x_y
+                    $$
+                </div>
+            </td>
+            <td>
+                , also written
+            </td>
+            <td>
+                <div class="postit">
+                    $$
+                       y = f(x)
+                    $$
+                </div>
+            </td>
+            <td>
+                or
+            </td>
+            <td>
+                <div class="postit">
+                    $$
+                       f(x) = ax^2 + bx + c
+                    $$
+                </div>
+            </td>
+        </tr>
+    </table>
+    <!--div class="postit">
+    $$
+       P^{HDC}_{COG} = P^x_y, ecrit aussi f(x) = y, ou f(x) = ax^2 + bx + c
+    $$
+    </div-->
+    herefore, for all points (x,y) in the recorded data cloud, we are looking for the coefficients a, b, and c of a polynomial for which
+    <div class="postit">
+    $$
+    ax^2 + bx + c
+    $$
+    </div>
+    is as close as possible to <code>y</code>, that is to say that the difference
+    <div class="postit">
+    $$
+    ax^2 + bx + c - y
+    $$
+    </div>
+    this difference should be as small as possible, meaning that for all recorded points, the square of this difference should be as close to zero as
+    possible (squaring removes the sign,
+    hence the name of the method), and therefore the sum of these differences should ultimately be as small as possible.<br/>
+    This amounts to calculating the coefficients <code>a</code>, <code>b</code>, and <code>c</code> for which the first derivative of this summation of the squares of the differences with
+    respect to each of the coefficients a, b, and c is zero, which can be written as:
+    <div class="postit">
+    $$ ([\Sigma(ax^2 + bx + c - y)^2])' = 0 $$
+    </div>
+    <div style="margin: 30px; padding: 5px; border: 1px solid silver; border-radius: 5px;">
+        To emphasize: <b>this is the core of the method</b>.<br/>
+
+        <div style="font-style: italic;">
+            For all the points in the cloud to be solved, for each <code>x</code>, we calculate the value of the function (here a polynomial) <code>f(x)</code>,
+            and we want its difference with <code>y</code> to be as small as possible.<br/>
+            <u>Therefore</u>, we want the derivative of the function of this difference (squared, to eliminate any sign issues) to be zero.
+        </div>
+    </div>
+    <table>
+        <tr>
+            <td>
+                <div class="postit smaller-plus">
+                    $$ ([\Sigma(ax^2 + bx + c - y)^2])' = 0 $$
+                </div>
+            </td>
+            <td>can be also written</td>
+            <td>
+                <div class="postit smaller-plus">
+                    $$ ([\Sigma((ax^2 + bx + c - y) \times (ax^2 + bx + c - y))])' = 0 $$
+                </div>
+            </td>
+        </tr>
+    </table>
+    We expand the sum before differentiating:
+
+    <div class="postit smaller-plus">
+    $
+    S = a^2\Sigma x^4 + 2ab\Sigma x^3 + 2ac\Sigma x^2 - 2a\Sigma yx^2 + b^2\Sigma x^2 + 2bc\Sigma x - 2b\Sigma yx + c^2\Sigma x^0 - 2c\Sigma y + \Sigma y^2
+    $
+    </div>
+    We derive the expression thus obtained
+    <ul>
+        <li>
+            Compared to <code>a</code>:
+            <div class="postit">
+    $ \dfrac{\partial S}{\partial a} = 2a\Sigma x^4 + 2b\Sigma x^3 + 2c\Sigma x^2 - 2\Sigma yx^2 = 0 $
+            </div>
+        </li>
+        <li>
+            Compared to <code>b</code>:
+            <div class="postit">
+    $ \dfrac{\partial S}{\partial b} = 2a\Sigma x^3 + 2b\Sigma x^2 + 2c\Sigma x^1 - 2\Sigma yx^1 = 0 $
+            </div>
+        </li>
+        <li>
+            Compared to <code>c</code>:
+            <div class="postit">
+    $ \dfrac{\partial S}{\partial c} = 2a\Sigma x^2 + 2b\Sigma x^1 + 2c\Sigma x^0 - 2\Sigma yx^0 = 0 $
+            </div>
+        </li>
+    </ul>
+    We swap the y-terms, we simplify by 2:
+    <ul>
+        <li>
+            <div class="postit">
+    $ a\Sigma x^4 + b\Sigma x^3 + c\Sigma x^2 = \Sigma yx^2 $
+            </div>
+        </li>
+        <li>
+            <div class="postit">
+    $ a\Sigma x^3 + b\Sigma x^2 + c\Sigma x^1 = \Sigma yx^1 $
+            </div>
+        </li>
+        <li>
+            <div class="postit">
+    $ a\Sigma x^2 + b\Sigma x^1 + c\Sigma x^0 = \Sigma yx^0 $
+            </div>
+        </li>
+    </ul>
+
+    and we obtain the following matrix resolution:
+    <div class="postit">
+    $ \begin{vmatrix} a & b & c \end{vmatrix} = \begin{vmatrix} \Sigma x^4 & \Sigma x^3 & \Sigma x^2 \\ \Sigma x^3 & \Sigma x^2 & \Sigma x^1 \\ \Sigma x^2 & \Sigma x^1 & \Sigma x^0 \end{vmatrix} ^ {-1} \times \begin{vmatrix} \Sigma yx^2 \\ \Sigma yx^1 \\ \Sigma yx^0 \end{vmatrix} $
+    </div>
+    <i>Notes</i>&nbsp;:
+    <br/>
+    - The terms $ \Sigma x^0 $ epresent the number of points on the curve to be smoothed.
+    <br/>
+    - A quadratic polynomial has 3 coefficients, so the dimension of the matrices we are working with (square, row, and column) is 3.
+    <p>
+    For a polynomial of degree <code>n</code>, the work to be done essentially involves inverting the square matrix $ \Sigma x^{0->2n} $ and
+    multiplying it by the column matrix $ \Sigma yx^{0->n} $ to obtain the row matrix of coefficients of the desired polynomial.
+    </p>
+    <div class="doc-section">
+        <h3><a name="least-square-dev">Cas d'une courbe de d&eacute;viation</a></h3>
+        <p>
+            <hr/>
+            <b>Pr&eacute;cision</b> : qu'est-ce que c'est que ce truc ?<br/>
+            &Agrave; bord d'un bateau, on a un compas, qui permet de savoir dans quelle direction on se dirige, &eacute;l&eacute;ment essentiel &agrave; la tenue de l'estime.<br/>
+            Le "nord vrai" (g&eacute;ographique) est celui des cartes.<br/>
+            Le "cap magn&eacute;tique" est celui qui fait intervenir la d&eacute;clinaison magn&eacute;tique locale (qui varie suivant l'endroit o&ugrave; on se trouve sur la plan&egrave;te, et la date).<br/>
+            Le "cap compas" est celui indiqu&eacute; par le compas, qui subit les influences magn&eacute;tiques du bateau lui-m&ecirc;me (m&eacute;tal, &eacute;quipements &eacute;lectriques, etc).<br/>
+            La d&eacute;viation est la diff&eacute;rence entre le cap compas et le cap magn&eacute;tique.<br/>
+            Elle d&eacute;pend <b>du bateau</b>, et de son cap, et est donc une fonction du cap compas lui-m&ecirc;me.<br/>
+            Sur un bateau en acier, elle peut atteindre des valeurs &eacute;normes - comme 40 degr&eacute;s - dont il est sans aucun doute de bon ton de tenir compte...
+            <hr/>
+        </p>
+        <p>
+            On cherche ici &agrave; &eacute;laborer une courbe de d&eacute;viation, &agrave; partir de points enregistr&eacute;s depuis la station NMEA du bord.
+            <br/>
+            Dans ce contexte, la station doit comporter un GPS, et un compas (compas &eacute;lectronique, donc). Le GPS permettra &agrave; la station NMEA de g&eacute;n&eacute;rer des cha&icirc;nes RMC - qui vont contenir
+            la route fond (Course Over Ground, aka COG), le compas fournira &agrave; la station ce dont elle a besoin pour g&eacute;n&eacute;rer les Caps Compas (Heading, aka HDG, HDM, etc, suivant les stations).
+            <br/>
+            Le fichier contenant les informations produites par la station NMEA aura ainsi une allure comme celle-ci&nbsp;:
+            <pre class="postit">
+    . . .
+    $IIRMC,190402,A,0854.980,S,14006.028,W,00.0,008,031110,10,E,A*07
+    $IIVHW,,,126,M,00.0,N,,*61
+    $IIVLW,02839,N,000.0,N*53
+    $IIVWR,027,R,07.2,N,,,,*61
+    $IIDPT,012.3,+0.7,*40
+    $IIGLL,0854.979,S,14006.029,W,190403,A,A*56
+    $IIHDG,126,,,10,E*16
+    . . .
+            </pre>
+            On note que le fichier peut contenir d'autres donn&eacute;es (<code>VHW</code>, <code>DPT</code>, <code>GLL</code>, <code>VLW</code>, etc), qu'on ignorera ici.
+            <br/>
+            Ce fichier sera ensuite travaill&eacute; pour produire un document o&ugrave; ne figureront que les donn&eacute;es qui nous concernent ici, &agrave; savoir la d&eacute;viation en fonction du cap.
+            <br/>
+            Par exemple (en <span title="JavaScript Object Notation">JSON</span> ici)&nbsp;:
+            <pre class="postit">
+    [
+        { "hdc": 210.000000, "dev": 4.000000 },
+        { "hdc": 210.000000, "dev": 4.000000 },
+        { "hdc": 210.000000, "dev": -1.000000 },
+        { "hdc": 210.000000, "dev": -2.000000 },
+        { "hdc": 208.000000, "dev": -4.000000 },
+        . . .
+    ]
+            </pre>
+            <div class="screen-only">
+                <p>
+                    Plus de d&eacute;tails sur ces op&eacute;rations sont disponibles dans d'autres documents&nbsp;:
+                    <ul>
+                        <li><a href="https://github.com/OlivierLD/ROB/blob/master/raspberry-sailor/Swing/Deviation-Tool/notebooks/LogfileToDeviation.ipynb" target="NB">Jupyter Notebook, en Java</a></li>
+                        <li><a href="https://htmlpreview.github.io/?https://github.com/OlivierLD/ROB/blob/master/raspberry-sailor/Swing/Deviation-Tool/README.html" target="dev-curve">Sur le proc&eacute;d&eacute;</a></li>
+                        <li><a href="https://github.com/OlivierLD/ROB/tree/master/raspberry-sailor/Swing/Deviation-Tool" target="ROB">Avec des exemples</a></li>
+                        <li><a href="/systems/smoothing.spray.html" target="Smoothing-1">Lissage de polyn&ocirc;me, interactif.</a></li>
+                    </ul>
+                </p>
+            </div>
+            <br/>
+            <br/>
+            On consid&egrave;re donc que la forme g&eacute;n&eacute;rique d'une courbe de d&eacute;viation est
+            <div class="postit">
+            $$
+            dev = a + (b \times \cos r) + (c \times \cos r) + (d \times \sin 2r) + (e \times \cos 2r)
+            $$
+            </div>
+            ce qui n'est <i><b>manifestement pas un polyn&ocirc;me</b></i>, mais comme ce sont les coefficients de la formule qu'on cherche,
+            la m&eacute;thode des moindres carr&eacute;s peut s'appliquer.
+            <br/>
+            Dans l'&eacute;quation ci-dessus, <code>r</code> est le Cap Compas, <code>dev</code> est la d&eacute;viation (&delta; entre <code>HDC</code> et <code>HDM</code>, cap compas et cap magn&eacute;tique).<br/>
+            On cherche donc &agrave; d&eacute;finir une fonction <code>f</code> pour laquelle la d&eacute;viation <code>dev</code> est obtenue en fournissant <code>r</code>:
+            <div class="postit">
+                $$ dev = f(r) $$
+            </div>
+            Gr&acirc;ce au logging, on dispose d'un nuage de points qui comportent chacun au moins les informations suivantes&nbsp;:
+            <ul>
+                <li>HDC (Heading Compass)</li>
+                <li>COG (Course Over Ground)</li>
+            </ul>
+            Le logging doit s'effectuer sans courant, et sans d&eacute;rive, de fa&ccedil;on &agrave; &ecirc;tre s&ucirc;r que la diff&eacute;rence entre
+            le cap compas <code>HDC</code> (corrig&eacute; de la d&eacute;clinaison locale)
+            et la route fond (<code>COG</code>) est bien la d&eacute;viation <code>d</code>, que l'on cherche. Pas de d&eacute;rive, pas de courant,
+            la route fond est &eacute;gale &agrave; la route surface, qui est &eacute;gale au
+            cap vrai du bateau.
+            <br/>
+            Les &eacute;l&eacute;ments du nuage de points dont on dispose (&eacute;labor&eacute; &agrave; partir du logging) sont d&eacute;finis en
+            <div class="postit">
+                $$ P_{d}^{HDC} = P_{d}^{r} = P_{y}^{x} $$
+            </div>
+            En abscisse le Cap Compas, en ordonn&eacute;e la d&eacute;viation.
+            <br/>
+            On cherche les valeurs de 5 coefficients&nbsp;:
+            <div class="postit">
+                $ \begin{vmatrix} a & b & c & d & e \end{vmatrix} $
+            </div>
+            La dimension des matrices &agrave; g&eacute;rer est donc cette fois-ci 5. On applique la m&eacute;thode des moindres carr&eacute;s, d&eacute;crite ci-dessus.
+            <br/>
+            On obtient les coefficients $ \begin{vmatrix} a & b & c & d & e \end{vmatrix} $ en r&eacute;solvant&nbsp;:
+            <div class="postit smaller-plus">
+$
+  \begin{vmatrix} a & b & c & d & e \end{vmatrix}
+                =
+  \begin{vmatrix}
+  &n  &\sum_{i=0}^{n}\sin(r)  &\sum_{i=0}^{n}\cos(r)  &\sum_{i=0}^{n}\sin(2r)  &\sum_{i=0}^{n}\cos(2r) \\
+  &\sum_{i=0}^{n}\sin(r)  &\sum_{i=0}^{n}\sin(r)^2  &\sum_{i=0}^{n}\sin(r)cos(r)  &\sum_{i=0}^{n}\sin(2r)sin(r))  &\sum_{i=0}^{n}\cos(2r)sin(r) \\
+  &\sum_{i=0}^{n}\cos(r)  &\sum_{i=0}^{n}\cos(r)sin(r)  &\sum_{i=0}^{n}\cos(r)^2  & \sum_{i=0}^{n}\sin(2r)cos(r) &\sum_{i=0}^{n}\cos(2r)cos(r) \\
+  &\sum_{i=0}^{n}\sin(2r)  &\sum_{i=0}^{n}\sin(2r)sin(r)  &\sum_{i=0}^{n}\sin(2r)cos(r)  &\sum_{i=0}^{n}\sin(2r)^2  &\sum_{i=0}^{n}\cos(2r)sin(2r) \\
+  &\sum_{i=0}^{n}\cos(2r)  &\sum_{i=0}^{n}\cos(2r)sin(r)  &\sum_{i=0}^{n}\cos(2r)cos(r)  &\sum_{i=0}^{n}\cos(2r)sin(2r)  &\sum_{i=0}^{n}\cos(2r)^2
+ \end{vmatrix} ^{-1}
+
+\times
+
+ \begin{vmatrix}
+  &\sum_{i=0}^{n}\ dev \\
+  &\sum_{i=0}^{n}\ dev.sin(r) \\
+  &\sum_{i=0}^{n}\ dev.cos(r) \\
+  &\sum_{i=0}^{n}\ dev.sin(2r) \\
+  &\sum_{i=0}^{n}\ dev.cos(2r)
+ \end{vmatrix}
+
+ $
+            </div>
+            Fastoche&nbsp;!
+            <br>
+            <div style="margin-top: 20px;" class="screen-only">
+                Pour plus de d&eacute;tails, voir aussi <a href="https://htmlpreview.github.io/?https://github.com/OlivierLD/ROB/blob/master/raspberry-sailor/Swing/Deviation-Tool/README.html" target="dev-curve">ce document</a>,
+                et aussi <a href="https://github.com/OlivierLD/ROB/tree/master/raspberry-sailor/Swing/Deviation-Tool" target="ROB">celui-ci</a>, pour un exemple
+                complet (incluant le code pour la r&eacute;solution des matrices), partant du fichier de log, passant par le calcul des coefficients, et aboutissant &agrave; l'affichage de la courbe de d&eacute;viation, avec une interface Web.
+            </div>
+        </p>
+    </div>
+</section>
+
+<body>
+
+
+<div id="full-content">
+
 </div>
+
 <hr/>
 <address>
     <small>
@@ -388,4 +711,72 @@ $
     </small>
 </address>
 </body>
+
+<script type="text/javascript">
+
+    let navTo = (prm) => {
+        let url = window.location.href;
+        let newUrl = url.split('?')[0] + '?lang=' + prm;
+        console.log("New URL: " + newUrl);
+        window.location = newUrl;
+    };
+
+    let getQueryParameterByName = (name, url) => {
+        if (!url) {
+            url = window.location.href;
+        }
+        name = name.replace(/[\[\]]/g, "\\$&");
+        let regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+        if (!results) {
+            return null;
+        }
+        if (!results[2]) {
+            return '';
+        }
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+    };
+
+    let translate = (lang) => {
+        let enContent = document.getElementById('en-content');
+        let frContent = document.getElementById('fr-content');
+
+        let fullContent = document.getElementById('full-content');
+        if (lang === 'FR') {
+            // enContent.style.display = 'none';
+            // frContent.style.display = 'block';
+            fullContent.innerHTML = frContent.innerHTML;
+        } else {
+            // enContent.style.display = 'block';
+            // frContent.style.display = 'none';
+            fullContent.innerHTML = enContent.innerHTML;
+        }
+    };
+
+    window.onload = () => { // Important: window.onload
+        let userLang = getQueryParameterByName('lang');
+        if (!userLang) {
+            let browserUserLang = navigator.language || navigator.userLanguage;
+            console.log("The browser's language is: " + browserUserLang);
+            if (browserUserLang) {
+                if (browserUserLang.substring(0, 2).toUpperCase() === 'FR') {
+                    userLang = 'FR';
+                    console.log("On va parler français")
+                } else {
+                    userLang = 'EN';
+                    console.log("We'll speak english");
+                }
+            }
+        }
+        if (userLang) {
+            langToUse = userLang;
+            console.log(`Lang to use will be ${langToUse}`);
+        }
+        if (langToUse !== 'FR') { // Then switch to French, default is EN.
+            langToUse = 'EN';
+        }
+        translate(langToUse);
+    };
+</script>
+
 </html>
