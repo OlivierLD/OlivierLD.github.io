@@ -696,7 +696,6 @@ $
 <body>
 
 <div id="full-content">
-
 </div>
 
 <hr/>
@@ -710,69 +709,69 @@ $
 
 <script type="text/javascript">
 
-    let navTo = (prm) => {
-        let url = window.location.href;
-        let newUrl = url.split('?')[0] + '?lang=' + prm;
-        console.log("New URL: " + newUrl);
-        window.location = newUrl;
-    };
+let navTo = (prm) => {
+    let url = window.location.href;
+    let newUrl = url.split('?')[0] + '?lang=' + prm;
+    console.log("New URL: " + newUrl);
+    window.location = newUrl;
+};
 
-    let getQueryParameterByName = (name, url) => {
-        if (!url) {
-            url = window.location.href;
-        }
-        name = name.replace(/[\[\]]/g, "\\$&");
-        let regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-            results = regex.exec(url);
-        if (!results) {
-            return null;
-        }
-        if (!results[2]) {
-            return '';
-        }
-        return decodeURIComponent(results[2].replace(/\+/g, " "));
-    };
+let getQueryParameterByName = (name, url) => {
+    if (!url) {
+        url = window.location.href;
+    }
+    name = name.replace(/[\[\]]/g, "\\$&");
+    let regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) {
+        return null;
+    }
+    if (!results[2]) {
+        return '';
+    }
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+};
 
-    let translate = (lang) => {
-        let enContent = document.getElementById('en-content');
-        let frContent = document.getElementById('fr-content');
+let translate = (lang) => {
+    let enContent = document.getElementById('en-content');
+    let frContent = document.getElementById('fr-content');
 
-        let fullContent = document.getElementById('full-content');
-        if (lang === 'FR') {
-            // enContent.style.display = 'none';
-            // frContent.style.display = 'block';
-            fullContent.innerHTML = frContent.innerHTML;
-        } else {
-            // enContent.style.display = 'block';
-            // frContent.style.display = 'none';
-            fullContent.innerHTML = enContent.innerHTML;
-        }
-    };
+    let fullContent = document.getElementById('full-content');
+    if (lang === 'FR') {
+        // enContent.style.display = 'none';
+        // frContent.style.display = 'block';
+        fullContent.innerHTML = frContent.innerHTML;
+    } else {
+        // enContent.style.display = 'block';
+        // frContent.style.display = 'none';
+        fullContent.innerHTML = enContent.innerHTML;
+    }
+};
 
-    window.onload = () => { // Important: window.onload
-        let userLang = getQueryParameterByName('lang');
-        if (!userLang) {
-            let browserUserLang = navigator.language || navigator.userLanguage;
-            console.log("The browser's language is: " + browserUserLang);
-            if (browserUserLang) {
-                if (browserUserLang.substring(0, 2).toUpperCase() === 'FR') {
-                    userLang = 'FR';
-                    console.log("On va parler français")
-                } else {
-                    userLang = 'EN';
-                    console.log("We'll speak english");
-                }
+window.onload = () => { // Important: window.onload
+    let userLang = getQueryParameterByName('lang');
+    if (!userLang) {
+        let browserUserLang = navigator.language || navigator.userLanguage;
+        console.log("The browser's language is: " + browserUserLang);
+        if (browserUserLang) {
+            if (browserUserLang.substring(0, 2).toUpperCase() === 'FR') {
+                userLang = 'FR';
+                console.log("On va parler français")
+            } else {
+                userLang = 'EN';
+                console.log("We'll speak english");
             }
         }
-        if (userLang) {
-            langToUse = userLang;
-            console.log(`Lang to use will be ${langToUse}`);
-        }
-        if (langToUse !== 'FR') { // Then switch to French, default is EN.
-            langToUse = 'EN';
-        }
-        translate(langToUse);
-    };
+    }
+    if (userLang) {
+        langToUse = userLang;
+        console.log(`Lang to use will be ${langToUse}`);
+    }
+    if (langToUse !== 'FR') { // Then switch to French, default is EN.
+        langToUse = 'EN';
+    }
+    translate(langToUse);
+};
 </script>
 
 </html>

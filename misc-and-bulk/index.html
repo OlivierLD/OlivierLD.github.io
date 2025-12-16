@@ -57,12 +57,12 @@
 </head>
 <body>
     <h1>Whatever does not fit anywhere else...</h1>
-    <svg xmlns="http://www.w3.org/2000/svg"
-         version="1.1"
-         style="width: 400px; height: 300px;"
-         onload="startUp();">
+<svg xmlns="http://www.w3.org/2000/svg"
+      version="1.1"
+      style="width: 400px; height: 300px;"
+      onload="startUp();"> <!-- svg tag closed below... -->
 
- <script>
+ <script type="text/javascript">
 
    /* Evolved from DHTML version
     @ http://www.dhteumeuleu.com */
@@ -318,22 +318,26 @@
         <a class="list-link" href="../web.stuff/cooking/index.html?lang=FR" target="cooking">Recettes !</a>
       </li>
       <li>
-        <span style="color: orange;">Math stuff, des trucs de math...</span>
-        <ul>
-          <li title="Bilingual, printable">
-            <a class="list-link" href="../systems/least.squares.html?lang=FR" target="lsm">M&eacute;thode des moindres carr&eacute;s</a>,
-            <a class="list-link" href="../systems/least.squares.html?lang=EN" target="lsm">Least Squares Method</a>
-          </li>
-          <li>
-            <span style="color: orange;">Jupyter notebooks, Algerbra, Calculus, Numerical Analysis... WiP !</span>
-            <ul>
-              <li><a class="list-link" href="https://github.com/OlivierLD/raspberry-coffee/tree/master/Algebra/jupyter" target="jupyter">Index (on git)</a></li>
-              <li><a class="list-link" href="https://github.com/OlivierLD/raspberry-coffee/blob/master/Algebra/jupyter/LeastSquare.ipynb" target="jupyter">Least Squares (Moindres carr&eacute;s)</a></li>
-              <li><a class="list-link" href="https://github.com/OlivierLD/raspberry-coffee/blob/master/Algebra/jupyter/LowPassFilter.ipynb" target="jupyter">Low Pass Filter (Filtre passe-bas)</a></li>
-              <li><a class="list-link" href="https://github.com/OlivierLD/raspberry-coffee/blob/master/Algebra/jupyter/MatrixSystems.ipynb" target="jupyter">Matrixes, Equation Systems (Matrices, syst&egrave;mes d'&eacute;quations)</a></li>
-            </ul>
-          </li>
-        </ul>
+        <h3><a href="javascript:void(0)" class="list-link" title="Math stuff" onclick="showHideSection(this, 'math-stuff');"><span class="expand-collapse">&#9658;&nbsp;</span>Math stuff, des trucs de math...</a></h3>
+        <div id="math-stuff" class="sub-section" style="visibility: hidden; height: 0;">
+          <ul>
+            <li title="Bilingual, printable">
+              <a class="list-link" href="../systems/least.squares.html?lang=FR" target="lsm">M&eacute;thode des moindres carr&eacute;s</a>,
+              <a class="list-link" href="../systems/least.squares.html?lang=EN" target="lsm">Least Squares Method</a>
+            </li>
+            <li>
+              <h3><a href="javascript:void(0)" class="list-link" title="Jupyter Notebooks" onclick="showHideSection(this, 'jupyter-notebooks');"><span class="expand-collapse">&#9658;&nbsp;</span>Jupyter notebooks, Algerbra, Calculus, Numerical Analysis... WiP !</a></h3>
+              <div id="jupyter-notebooks" class="sub-section" style="visibility: hidden; height: 0;">
+                <ul>
+                  <li><a class="list-link" href="https://github.com/OlivierLD/raspberry-coffee/tree/master/Algebra/jupyter" target="jupyter">Index (on git)</a></li>
+                  <li><a class="list-link" href="https://github.com/OlivierLD/raspberry-coffee/blob/master/Algebra/jupyter/LeastSquare.ipynb" target="jupyter">Least Squares (Moindres carr&eacute;s)</a></li>
+                  <li><a class="list-link" href="https://github.com/OlivierLD/raspberry-coffee/blob/master/Algebra/jupyter/LowPassFilter.ipynb" target="jupyter">Low Pass Filter (Filtre passe-bas)</a></li>
+                  <li><a class="list-link" href="https://github.com/OlivierLD/raspberry-coffee/blob/master/Algebra/jupyter/MatrixSystems.ipynb" target="jupyter">Matrixes, Equation Systems (Matrices, syst&egrave;mes d'&eacute;quations)</a></li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </div>
       </li>
     </ul>
 
