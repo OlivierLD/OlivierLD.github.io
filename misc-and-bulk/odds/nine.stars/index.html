@@ -10,7 +10,7 @@
 * {
     font-family: 'Courier New', Courier, monospace;
     /*font-size: 2em;*/
-}        
+}
 
 *:focus {
     text-shadow: 2px 2px 4px black, 0 0 25px white, 0 0 10px orange;
@@ -66,8 +66,8 @@ button:hover, button:focus {
 /*
 Olivier né le 06/03/1959
 
-L’année correspond à l’élément adulte. Pour les chinois, nous passons à l’âge adulte lorsque nous devenons autonomes, 
-indépendants financièrement; c’est pourquoi une femme au foyer par exemple, sera le plus souvent sous l’influence de 
+L’année correspond à l’élément adulte. Pour les chinois, nous passons à l’âge adulte lorsque nous devenons autonomes,
+indépendants financièrement; c’est pourquoi une femme au foyer par exemple, sera le plus souvent sous l’influence de
 son élément enfant; c’est sur lui qu’elle va se reposer.
 
 Donc: 1+9+5+9= 24 -> 2+4=6 11-6=5 => Terre 5
@@ -83,7 +83,7 @@ Pour l’élément enfant il n’y a pas de calcul, il dépend de ton élément 
 
         const NINE_STARS = [
           "Eau",   // 1
-          "Terre", // 2 
+          "Terre", // 2
           "Bois",  // 3
           "Bois",  // 4
           "Terre", // 5
@@ -107,6 +107,7 @@ Pour l’élément enfant il n’y a pas de calcul, il dépend de ton élément 
             index = parseInt(finalStr);
 
             return 11 - index;
+            // return NINE_STARS.length + 1 - index;
         };
 
         const NB_DAY = [
@@ -268,14 +269,14 @@ Pour l’élément enfant il n’y a pas de calcul, il dépend de ton élément 
             let dayValue = document.getElementById('day-value').value;
 
             console.log(`Read year ${yearValue}`);
-            let adultIndex = findAdult(yearValue);
+            let adultIndex = findAdult(yearValue); // TODO FIx that... NINE_STARS.length
             let adultElement = `${NINE_STARS[adultIndex - 1]} ${adultIndex}`;
             console.log(`Adult: ${adultElement}`);
             let childIndex = findYouth(adultIndex, parseInt(monthValue), parseInt(dayValue));
             let childElement = `${NINE_STARS[childIndex - 1]} ${childIndex}`;
 
             let htmlContent = `<b>${dayValue} ${MONTHS[monthValue - 1]} ${yearValue}</b>` + "<br/>" +
-                              `&Eacute;l&eacute;ment adulte : ${adultElement}` + 
+                              `&Eacute;l&eacute;ment adulte : ${adultElement}` +
                               '<br/>' +
                               `&Eacute;l&eacute;ment enfant : ${childElement}`;
             document.getElementById('result').innerHTML = htmlContent;
