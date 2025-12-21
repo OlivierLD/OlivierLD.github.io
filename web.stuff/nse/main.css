@@ -25,6 +25,13 @@ h5 {
     padding: 5px;
 }
 
+.bordered-box {
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0;
+}
+
 .indent-one {
     margin-left: 50px;
 }
@@ -41,7 +48,7 @@ h5 {
 .overlined {
     border-top: 2px solid black;
 }
-  
+
 .overlined-red {
     border-top: 2px solid red;
 }
@@ -49,7 +56,7 @@ h5 {
 .print-only {
     display: none;
 }
-.print-only-2 { 
+.print-only-2 {
     display: none;
 }
 
@@ -58,11 +65,11 @@ h5 {
     .screen-only {
         display: none;
     }
-}  
+}
 
-/* 
-   Believe it or not, that works 
-   <pouet-pouet>Duh</pouet-pouet> 
+/*
+   Believe it or not, that works
+   <pouet-pouet>Duh</pouet-pouet>
    is in dark pink
 */
 pouet-pouet {

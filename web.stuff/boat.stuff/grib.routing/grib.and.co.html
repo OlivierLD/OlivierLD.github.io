@@ -82,7 +82,7 @@
         Pour obtenir des fichiers GRIB, il faut addresser une requ&ecirc;te &agrave; un serveur de donn&eacute;es m&eacute;t&eacute;orologiques, en pr&eacute;cisant la r&eacute;gion g&eacute;ographique, la p&eacute;riode et les param&egrave;tres souhait&eacute;s.<br/>
         Pour la zone, et la p&eacute;riode, on pr&eacute;cisera aussi le maillage (r&eacute;solution) de la grille.<br/>
         <i>Exemple :</i>
-        <div class="postit">
+        <div class="postit bordered-box">
             GFS:65N,45S,130E,110W|2,2|0,6..24|PRMSL,WIND,HGT500,TEMP,WAVES,RAIN
         </div>
         La requ&ecirc;te ci-dessus concerne :<br/>
@@ -100,6 +100,18 @@
             &Ccedil;a n'est certes pas aussi pr&eacute;cis, mais bien souvent le r&eacute;sutat est suffisant pour la navigation de plaisance.
         </div>
         Le standard des fichiers GRIB a deux versions (1, et 2). Il convient pour les exploiter de savoir quelle est la version du fichier re&ccedil;u, et de disposer d'un logiciel adapt&eacute;.<br/>
+        <h3>Envoi d'une requ&ecirc;te</h3>
+        On peut enover la requ&ecirc;te ci-dessus &agrave; <code>query@saildocs.com</code>, par email.<br/>
+        Le sujet de l'email n'a pas d'importance, le corps du message contient la requ&ecirc;te, en <i><b>plain text</b></i>.<br/>
+        Par exemple <a href="mailto:query@saildocs.com?subject=GRIBRequest&body=GFS:65N,45S,130E,110W|2,2|0,6..24|PRMSL,WIND,HGT500,TEMP,WAVES,RAIN" target="new">envoyer cette requ&ecirc;te</a> par email &agrave; Saildocs.<br/>
+        La reponse arrive en g&eacute;n&eacute;ral en quelques minutes - voire secondes, avec un <a href="GFS20251221161301416.grb">fichier GRIB</a> en pi&egrave;ce jointe.<br/>
+        Plusieurs services permettent d'envoyer des requ&ecirc;tes GRIB, par exemple :<br/>
+        <ul>
+            <li><a class="list-link" href="https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast-system" target="NCEI">NOAA NCEI GFS</a></li>
+            <li><a class="list-link" href="https://www.ventusky.com/" target="Ventusky">Ventusky</a></li>
+            <li><a class="list-link" href="https://www.passageweather.com/grib-files/" target="PassageWeather">Passage Weather</a></li>
+            <li><a class="list-link" href="https://saildocs.com/" target="SailMail">https://saildocs.com/</a></li>
+        </ul>
     </p>
 
     <p>
@@ -107,6 +119,8 @@
         Les polaires d'un bateau sont des courbes qui repr&eacute;sentent la vitesse du bateau en fonction de l'angle et de la force du vent apparent.<br/>
         Le vent apparent est celui qui fait avancer un voilier, c'est la combinaison du vent r&eacute;el et de la vitesse du bateau.<br/>
         Le vent apparent d&eacute;pendant du vent r&eacute;el et de la vitesse du bateau, les polaires permettent de d&eacute;terminer la vitesse du bateau pour une direction et une force de vent donn&eacute;es.<br/>
+
+        Voir <a href="https://github.com/OlivierLD/ROB/blob/master/raspberry-sailor/PolarSmoother/README.md" target="PolarSmoother">ici</a> pour un outil de lissage des polaires.<br/>
     </p>
 
     <p>
@@ -122,7 +136,7 @@
             Genre "Quarante n&oelig;uds sur le nez, non merci !"
         </div>
         <h3>Isochrones</h3>
-        Les isochrones sont le lieu des positions atteignables par le bateau en un temps donn&eacute; (iso: identique, chronos: temps. Lieu de points ateignables dans le m&ecirc;me temps.).<br/>
+        Les isochrones sont le lieu des positions atteignables par le bateau en un temps donn&eacute; (iso: identique, chronos: temps. Lieu de points atteignables dans le m&ecirc;me temps.).<br/>
         Une m&eacute;thode de routage couramment utilis&eacute;e est la m&eacute;thode des isochrones.<br/>
         Elle consiste &agrave; tracer des lignes isochrones, c'est-&agrave;-dire des lignes qui repr&eacute;sentent les positions atteignables par le bateau en un temps donn&eacute;.<br/>
         En utilisant les polaires du bateau et les donn&eacute;es m&eacute;t&eacute;orologiques (GRIB), on peut calculer les isochrones &agrave; intervalles de temps r&eacute;guliers, en tenant compte des conditions de vent et de courant.<br/>
@@ -140,7 +154,9 @@
         Au troisi&egrave;me isochrone, on aura 36 &times; 36 &times; 36 = 46.656 points, 1.679.616 au quatri&egrave;me ! Et ainsi de suite...<br/>
         Ceci peut mettre n'importe quel ordinateur - si puissant soit-il - sur le toit avant d'atteindre la destination.<br/>
         Il est donc n&eacute;cessaire de r&eacute;duire le nombre de points de chaque isochrone.
-
+        <p>
+            . . .
+        </p>
     </p>
 
 </section>
