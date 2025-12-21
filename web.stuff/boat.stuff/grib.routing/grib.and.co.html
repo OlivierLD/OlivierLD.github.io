@@ -1,0 +1,162 @@
+<!--
+    Printable and translatable.
+-->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>GRIBs, polaires, routage</title>
+    <!--author>Olivier Le Diouris</author-->
+    <meta name="author" content="Olivier Le Diouris">
+    <link rel="icon" type="image/png" href="../small.boat.png">
+    <!--script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script-->
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+
+    <!--link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script-->
+
+    <!--script type="text/javascript"-->
+    <!--script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [['$','$'], ['\\(','\\)']]
+        }
+    });
+    </script-->
+
+    <script type="text/javascript">
+        // That one is OK for the matrixes.
+    MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        },
+        "HTML-CSS": {
+            availableFonts: ["TeX"] /* ,
+            availableFonts: [],
+            // Disable preferred fonts to ensure web fonts are used
+            preferredFont: null,
+            // Force the use of the Neo-Euler web font for rendering math
+            webFont: "TeX" // "Neo-Euler" */
+        }
+    });
+    </script>
+
+    <link rel="stylesheet" href="../../nse/main.css" />
+    <!-- link rel="stylesheet" media="screen" href="main.css" /-->
+    <link rel="stylesheet" media="print" href="../../nse/print.css" />
+
+    <style type="text/css">
+        body {
+            width: fit-content;
+        }
+    </style>
+</head>
+
+<section id="fr-content" style="display: none;">
+    <h2><a name="least-squares">GRIBs, polaires, routage</a></h2>
+    <span class="screen-only">Traduisible et imprimable</span>
+    <a class="screen-only" href="javascript:void(0)" onclick="navTo('EN');"><img src="../../../systems/images/us_uk_flag.png" style="width: 30px;" title="In English" alt="In English"></a>
+    <p>
+        Travaux en cours . . .
+    </p>
+
+</section>
+
+<section id="en-content" style="display: none;">
+    <h2><a name="least-squares">GRIBs, polars, routing</a></h2>
+    <span class="screen-only">Translatable and printable</span>
+    <a class="screen-only" href="javascript:void(0)" onclick="navTo('FR');"><img src="../../../systems/images/france.gif" style="width: 30px;" title="En fran&ccedil;ais" alt="En fran&ccedil;ais"></a>
+    <p>
+        WiP . . .
+    </p>
+
+</section>
+
+<body>
+
+<div id="full-content">
+</div>
+
+<hr/>
+<address>
+    <small>
+        &copy; Olivier Le Diouris - 2025<br/>
+        <a href="../index.html" target="_top">OlivierLD.github.io</a>
+    </small>
+</address>
+</body>
+
+<script type="text/javascript">
+
+let navTo = (prm) => {
+    let url = window.location.href;
+    let newUrl = url.split('?')[0] + '?lang=' + prm;
+    console.log("New URL: " + newUrl);
+    window.location = newUrl;
+};
+
+let getQueryParameterByName = (name, url) => {
+    if (!url) {
+        url = window.location.href;
+    }
+    name = name.replace(/[\[\]]/g, "\\$&");
+    let regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) {
+        return null;
+    }
+    if (!results[2]) {
+        return '';
+    }
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+};
+
+let translate = (lang) => {
+    let enContent = document.getElementById('en-content');
+    let frContent = document.getElementById('fr-content');
+
+    let fullContent = document.getElementById('full-content');
+    if (lang === 'FR') {
+        // enContent.style.display = 'none';
+        // frContent.style.display = 'block';
+        fullContent.innerHTML = frContent.innerHTML;
+    } else {
+        // enContent.style.display = 'block';
+        // frContent.style.display = 'none';
+        fullContent.innerHTML = enContent.innerHTML;
+    }
+};
+
+window.onload = () => { // Important: window.onload
+    let userLang = getQueryParameterByName('lang');
+    if (!userLang) {
+        let browserUserLang = navigator.language || navigator.userLanguage;
+        console.log("The browser's language is: " + browserUserLang);
+        if (browserUserLang) {
+            if (browserUserLang.substring(0, 2).toUpperCase() === 'FR') {
+                userLang = 'FR';
+                console.log("On va parler français")
+            } else {
+                userLang = 'EN';
+                console.log("We'll speak english");
+            }
+        }
+    }
+    if (userLang) {
+        langToUse = userLang;
+        console.log(`Lang to use will be ${langToUse}`);
+    }
+    if (langToUse !== 'FR') { // Then switch to French, default is EN.
+        langToUse = 'EN';
+    }
+    translate(langToUse);
+};
+</script>
+
+</html>
