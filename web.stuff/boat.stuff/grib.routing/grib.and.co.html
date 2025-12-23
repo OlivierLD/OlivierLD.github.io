@@ -189,7 +189,17 @@
         Le nombre de points &agrave; g&eacute;rer devient rapidement tr&egrave;s important, c'est exponentiel !<br/>
         Au troisi&egrave;me isochrone, on aura 36 &times; 36 &times; 36 = 46.656 points, 1.679.616 au quatri&egrave;me ! Et ainsi de suite...<br/>
         Ceci peut mettre n'importe quel ordinateur - si puissant soit-il - sur le toit avant d'atteindre la destination.<br/>
-        Il est donc n&eacute;cessaire de r&eacute;duire le nombre de points de chaque isochrone.
+        Il est donc n&eacute;cessaire de r&eacute;duire le nombre de points de chaque isochrone.<br/>
+        Une m&eacute;thode efficace est d'utiliser l'enveloppe convexe des points.<br/><br/>
+        L'enveloppe convexe est le plus petit polygone convexe qui contient tous les points.<br/>
+        <i><b>Intuitivement</b></i>, c'est comme de mettre un &eacute;lastique autour des points, l'&eacute;lastique va se tendre pour englober tous les points, formant ainsi l'enveloppe convexe.<br/>
+        En ne gardant que les points de l'enveloppe convexe (en &eacute;liminant ceux qui sont &agrave; l'int&eacute;rieur de l'&eacute;lastique), on r&eacute;duit significativement le nombre de points &agrave; g&eacute;rer.
+        <div style="text-align: center;">
+            <img src="docs/enveloppe.png" title="enveloppe convexe" style="max-width: 80%; border: 1px solid black;"/>
+        </div>
+        En rouge, les points du premier isochrone.<br/>
+        En jaune et vert, ceux du deuxi&egrave;me.<br/>
+        Seuls les points de l'enveloppe convexe (en vert) sont conserv&eacute;s. Les jaunes sont &eacute;limin&eacute;s.
         <p>
             . . .
         </p>
