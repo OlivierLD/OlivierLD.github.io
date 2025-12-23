@@ -99,12 +99,48 @@
             Afin de diminuer la taille des fichiers &agrave; recevoir - on n'a pas toujours un d&eacute;bit Internet infini - on peut jouer sur le maillage, et proc&eacute;der ensuite &agrave; un lissage des donn&eacute;es.<br/>
             &Ccedil;a n'est certes pas aussi pr&eacute;cis, mais bien souvent le r&eacute;sutat est suffisant pour la navigation de plaisance.
         </div>
+        <div>
+            Le fichier re&ccedil;u apr&egrave;s la requ&ecirc;te est un fichier binaire (num&eacute;rique), illisible en l'&eacute;tat.<br/>
+            Mais son contenu peut &ecirc;tre visualis&eacute; avec un logiciel adapt&eacute; (on y reviendra). <!--, par exemple <a class="list-link" href="https://www.zygrib.org/" target="zyGrib">zyGrib</a> (gratuit).--><br/>
+            Le format de son contenu peut sans ausun doute &ecirc;tre compare &agrave; celui d'une feuille Excel (on dit feuille de calcul !), avec des lignes et des colonnes, chaque cellule contenant une valeur pour un param&egrave;tre donn&eacute; (vent, pression, temp&eacute;rature, etc) &agrave; une
+            position g&eacute;ographique (latitude, longitude) et &agrave; un instant donn&eacute; (heure de la pr&eacute;vision).<br/>
+            <div style="text-align: center;">
+                <img src="docs/grib.04.png" title="Contenu du GRIB" style="max-width: 80%; border: 1px solid black;"/>
+            </div>
+            Au dessus, les onglets correspondant aux diff&eacute;rentes dates et heures, en dessous, les onglets des param&egrave;tres disponibles.<br/>
+        </div>
+        <div style="margin-top: 10px;">
+            Voyons la requ&ecirc;te suivante :
+            <div class="postit bordered-box">
+                GFS:65N,14N,100W,10E|4,4|0,12..168|PRMSL,WIND,HGT500,TEMP,WAVES,RAIN
+            </div>
+            On y remarque que le maillage est de 4&deg; en latitude et 4&deg; en longitude, au lieu de 2&deg; dans l'exemple pr&eacute;c&eacute;dent,
+            et qu'on aura un grib toutes les 12 heures, au lieu de 6 pr&eacute;c&eacute;demment.<br/>
+            Ceci devrait all&eacute;ger la taille du <a href="docs/NorthAtlantic_2025_12_23_09_10_41_CET.grb">fichier</a> &agrave; recevoir.<br/>
+            En revanche, la definition est moindre, ainsi qu'on peut le voir ici :<br/>
+            <div style="text-align: center;">
+                <img src="docs/grib.01.png" title="Cellulles de 4 degr&eacute;s" style="max-width: 80%; border: 1px solid black;"/>
+            </div>
+            On voit bien que la d&eacute;finition du vent est moins bonne.<br/>
+            Le lissage peut r&eacute;soudre cette situation, en appliquant un lissage de facteur 4 (on divise chaque cellule en 4&times;4=16).<br/>
+            <div style="text-align: center;">
+                <img src="docs/grib.02.png" title="Celulles de 1 degr&eacute;" style="max-width: 80%; border: 1px solid black;"/>
+            </div>
+            Ce lissage est appliqu&eacute; ici au vent, il s'appliquera de meme aux autres param&egrave;tres (PRMSL, 500MB, RAIN, TEMP, etc).<br/>
+            Le lissage appliqu&eacute; ici est g&eacute;ographique, il peut aussi s'appliquer dans le temps, pour passer d'un intervalle de 12 heures &agrave; un intervalle de 3 heures, par exemple..<br/>
+            <br/>
+            Il peut aussi parfois &ecirc;tre int&eacute;ressant d'afficher les donn&eacute;es du GRIB en 3D :
+            <div style="text-align: center;">
+                <img src="docs/grib.03.png" title="PRMSL &ap; 500MB" style="max-width: 80%; border: 1px solid black;"/>
+            </div>
+        </div>
+        <br/>
         Le standard des fichiers GRIB a deux versions (1, et 2). Il convient pour les exploiter de savoir quelle est la version du fichier re&ccedil;u, et de disposer d'un logiciel adapt&eacute;.<br/>
         <h3>Envoi d'une requ&ecirc;te</h3>
         On peut enover la requ&ecirc;te ci-dessus &agrave; <code>query@saildocs.com</code>, par email.<br/>
         Le sujet de l'email n'a pas d'importance, le corps du message contient la requ&ecirc;te, en <i><b>plain text</b></i>.<br/>
         Par exemple <a href="mailto:query@saildocs.com?subject=GRIBRequest&body=GFS:65N,45S,130E,110W|2,2|0,6..24|PRMSL,WIND,HGT500,TEMP,WAVES,RAIN" target="new">envoyer cette requ&ecirc;te</a> par email &agrave; Saildocs.<br/>
-        La reponse arrive en g&eacute;n&eacute;ral en quelques minutes - voire secondes, avec un <a href="GFS20251221161301416.grb">fichier GRIB</a> en pi&egrave;ce jointe.<br/>
+        La reponse arrive en g&eacute;n&eacute;ral en quelques minutes - voire secondes, avec un <a href="docs/GFS20251221161301416.grb">fichier GRIB</a> en pi&egrave;ce jointe.<br/>
         Plusieurs services permettent d'envoyer des requ&ecirc;tes GRIB, par exemple :<br/>
         <ul>
             <li><a class="list-link" href="https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast-system" target="NCEI">NOAA NCEI GFS</a></li>
@@ -136,7 +172,7 @@
             Genre "Quarante n&oelig;uds sur le nez, non merci !"
         </div>
         <h3>Isochrones</h3>
-        Les isochrones sont le lieu des positions atteignables par le bateau en un temps donn&eacute; (iso - &iota;&sigma;&omicron;: identique, chronos - &chi;&rho;&omicron;&nu;&omicron;&sigma; : temps. IsoChrone => temps identique. Lieu de points atteignables dans le m&ecirc;me temps.).<br/>
+        Les isochrones sont le lieu des positions atteignables par le bateau en un temps donn&eacute; (iso - &iota;&sigma;&omicron;: identique, chronos - &chi;&rho;&omicron;&nu;&omicron;&sigma; : temps. IsoChrone &rarr; temps identique. Lieu de points atteignables dans le m&ecirc;me temps.).<br/>
         Une m&eacute;thode de routage couramment utilis&eacute;e est la m&eacute;thode des isochrones.<br/>
         Elle consiste &agrave; tracer des lignes isochrones, c'est-&agrave;-dire des lignes qui repr&eacute;sentent les positions atteignables par le bateau en un temps donn&eacute;.<br/>
         En utilisant les polaires du bateau et les donn&eacute;es m&eacute;t&eacute;orologiques (GRIB), on peut calculer les isochrones &agrave; intervalles de temps r&eacute;guliers, en tenant compte des conditions de vent et de courant.<br/>
