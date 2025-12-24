@@ -105,7 +105,7 @@
             Le format de son contenu peut sans ausun doute &ecirc;tre compare &agrave; celui d'une feuille Excel (on dit feuille de calcul !), avec des lignes et des colonnes, chaque cellule contenant une valeur pour un param&egrave;tre donn&eacute; (vent, pression, temp&eacute;rature, etc) &agrave; une
             position g&eacute;ographique (latitude, longitude) et &agrave; un instant donn&eacute; (heure de la pr&eacute;vision).<br/>
             <div style="text-align: center;">
-                <img src="docs/grib.04.png" title="Contenu du GRIB" style="max-width: 80%; border: 1px solid black;"/>
+                <img src="docs/grib.04.png" title="Contenu du GRIB" style="max-width: 60%; border: 1px solid black;"/>
             </div>
             Au dessus, les onglets correspondant aux diff&eacute;rentes dates et heures, en dessous, les onglets des param&egrave;tres disponibles.<br/>
         </div>
@@ -117,7 +117,7 @@
             On y remarque que le maillage est de 4&deg; en latitude et 4&deg; en longitude, au lieu de 2&deg; dans l'exemple pr&eacute;c&eacute;dent,
             et qu'on aura un grib toutes les 12 heures, au lieu de 6 pr&eacute;c&eacute;demment.<br/>
             Ceci devrait all&eacute;ger la taille du <a href="docs/NorthAtlantic_2025_12_23_09_10_41_CET.grb">fichier</a> &agrave; recevoir.<br/>
-            En revanche, la definition est moindre, ainsi qu'on peut le voir ici :<br/>
+            En revanche, la d&eacute;finition est moindre, ainsi qu'on peut le voir ici :<br/>
             <div style="text-align: center;">
                 <img src="docs/grib.01.png" title="Cellulles de 4 degr&eacute;s" style="max-width: 80%; border: 1px solid black;"/>
             </div>
@@ -140,7 +140,7 @@
         On peut enover la requ&ecirc;te ci-dessus &agrave; <code>query@saildocs.com</code>, par email.<br/>
         Le sujet de l'email n'a pas d'importance, le corps du message contient la requ&ecirc;te, en <i><b>plain text</b></i>.<br/>
         Par exemple <a href="mailto:query@saildocs.com?subject=GRIBRequest&body=GFS:65N,45S,130E,110W|2,2|0,6..24|PRMSL,WIND,HGT500,TEMP,WAVES,RAIN" target="new">envoyer cette requ&ecirc;te</a> par email &agrave; Saildocs.<br/>
-        La reponse arrive en g&eacute;n&eacute;ral en quelques minutes - voire secondes, avec un <a href="docs/GFS20251221161301416.grb">fichier GRIB</a> en pi&egrave;ce jointe.<br/>
+        La r&eacute;ponse arrive en g&eacute;n&eacute;ral en quelques minutes - voire secondes, avec un <a href="docs/GFS20251221161301416.grb">fichier GRIB</a> en pi&egrave;ce jointe.<br/>
         Plusieurs services permettent d'envoyer des requ&ecirc;tes GRIB, par exemple :<br/>
         <ul>
             <li><a class="list-link" href="https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast-system" target="NCEI">NOAA NCEI GFS</a></li>
@@ -186,7 +186,7 @@
         Ce calcul s'effectue avec les donn&eacute;es du GRIB, pour chacun des points du premier isochone (o&ugrave; les conditions sont maintenant diff&eacute;rentes les unes des autres).<br/>
         On obtient donc 36 &times; 36 = 1.296 points.<br/>
         On continue ainsi jusqu'&agrave; atteindre le point d'arriv&eacute;e.<br/>
-        Le nombre de points &agrave; g&eacute;rer devient rapidement tr&egrave;s important, c'est exponentiel !<br/>
+        Le nombre de points &agrave; g&eacute;rer devient rapidement tr&egrave;s important (voire trop), c'est exponentiel !<br/>
         Au troisi&egrave;me isochrone, on aura 36 &times; 36 &times; 36 = 46.656 points, 1.679.616 au quatri&egrave;me ! Et ainsi de suite...<br/>
         Ceci peut mettre n'importe quel ordinateur - si puissant soit-il - sur le toit avant d'atteindre la destination.<br/>
         Il est donc n&eacute;cessaire de r&eacute;duire le nombre de points de chaque isochrone.<br/>
@@ -195,18 +195,19 @@
         <i><b>Intuitivement</b></i>, c'est comme de mettre un &eacute;lastique autour des points, l'&eacute;lastique va se tendre pour englober tous les points, formant ainsi l'enveloppe convexe.<br/>
         En ne gardant que les points de l'enveloppe convexe (en &eacute;liminant ceux qui sont &agrave; l'int&eacute;rieur de l'&eacute;lastique), on r&eacute;duit significativement le nombre de points &agrave; g&eacute;rer.
         <div style="text-align: center;">
-            <img src="docs/enveloppe.png" title="enveloppe convexe" style="max-width: 80%; border: 1px solid black;"/>
+            <img src="docs/enveloppe.png" title="enveloppe convexe" style="max-width: 40%; border: 1px solid black;"/>
         </div>
         En rouge, les points du premier isochrone.<br/>
         En jaune et vert, ceux du deuxi&egrave;me.<br/>
-        Seuls les points de l'enveloppe convexe (en vert) sont conserv&eacute;s. Les jaunes sont &eacute;limin&eacute;s.
-        <p>
-            . . .
-        </p>
+        Seuls les points de l'enveloppe convexe (en vert) sont conserv&eacute;s. Les jaunes sont &eacute;limin&eacute;s.<br/>
+        Voir ci-dessous les effets de la m&eacute;thode sur un vrai routage (ne pas h&eacute;siter &agrave; zoomer) :
         <div style="text-align: center;">
             <img src="docs/routing.01.png" title="Routing" style="max-width: 80%; border: 1px solid black;"/>
         </div>
 
+        <p>
+            La suite arrive. . .
+        </p>
     </p>
 
 </section>
