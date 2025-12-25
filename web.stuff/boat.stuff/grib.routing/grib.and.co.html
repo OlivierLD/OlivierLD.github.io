@@ -55,6 +55,10 @@
         body {
             width: fit-content;
         }
+        .pb-for-print {
+            page-break-before: always;
+        }
+
     </style>
 </head>
 
@@ -63,8 +67,11 @@
 <section id="fr-content" style="display: none;">
 
     <h1><a name="least-squares">GRIBs, polaires, routage</a></h1>
-    <span class="screen-only">Traduisible et imprimable - La version '&eacute;cran' contient des liens qui n'apparaissent pas dans la version imprimable.</span>
+    <span class="screen-only">Traduisible et imprimable</span>
     <a class="screen-only" href="javascript:void(0)" onclick="navTo('EN');"><img src="../../../systems/images/us_uk_flag.png" style="width: 30px;" title="In English" alt="In English"></a>
+    <div class="screen-only" style="font-size: small;">
+         La version '&eacute;cran' contient des liens qui n'apparaissent pas dans la version imprimable, qui diff&egrave;re aussi de l'autre par sa mise en page.
+    </div>
     <hr class="screen-only"/>
     <div class="screen-only">
         Sommaire :
@@ -84,8 +91,11 @@
             <li>Un algorithme de routage</li>
         </ul>
         Ce document pr&eacute;sente ces diff&eacute;rents &eacute;l&eacute;ments, et donne quelques pistes pour r&eacute;aliser un tel routage.
+        <div style="text-align: center; margin-top: 20px;">
+            <img src="docs/polar.jpg" title="Polar !"/>
+        </div>
     </p>
-    <p>
+    <p class="pb-for-print">
         <div style="display: grid; grid-template-columns: auto auto; gap: 20px;">
             <h2><a name="grib">GRIB</a></h2>
             <div class="screen-only" style="text-align: right; margin-top: 20px;"><a href="#">Top</a></div>
@@ -165,7 +175,7 @@
         </ul>
     </p>
 
-    <p>
+    <p class="pb-for-print">
         <div style="display: grid; grid-template-columns: auto auto; gap: 20px;">
             <h2><a name="polars">Polaires</a></h2>
             <div class="screen-only" style="text-align: right; margin-top: 20px;"><a href="#">Top</a></div>
@@ -225,7 +235,7 @@
         </div>
     </p>
 
-    <p>
+    <p class="pb-for-print">
         <div style="display: grid; grid-template-columns: auto auto; gap: 20px;">
             <h2><a name="routing">Routage</a></h2>
             <div class="screen-only" style="text-align: right; margin-top: 20px;"><a href="#">Top</a></div>
@@ -296,9 +306,11 @@
 
 <section id="en-content" style="display: none;">
     <h1><a name="least-squares">GRIBs, polars, routing</a></h1>
-    <span class="screen-only">Translatable and printable - The screen version contains links that do not show up in the print one.</span>
+    <span class="screen-only">Translatable and printable</span>
     <a class="screen-only" href="javascript:void(0)" onclick="navTo('FR');"><img src="../../../systems/images/france.gif" style="width: 30px;" title="En fran&ccedil;ais" alt="En fran&ccedil;ais"></a>
-
+    <div class="screen-only" style="font-size: small;">
+        The screen version contains links that do not show up in the print one, which also contains some page breaks absent from the screen version.
+    </div>
     <hr class="screen-only"/>
     <div class="screen-only">
         Summary :
@@ -319,8 +331,11 @@
             <li>A routing algorithm</li>
         </ul>
         This document presents these different elements, and gives some guidance on how to carry out such routing.
+        <div style="text-align: center; margin-top: 20px;">
+            <img src="docs/polar.jpg" title="Polar !"/>
+        </div>
     </p>
-    <p>
+    <p class="pb-for-print">
         <div style="display: grid; grid-template-columns: auto auto; gap: 20px;">
             <h2><a name="grib">GRIB</a></h2>
             <div class="screen-only" style="text-align: right; margin-top: 20px;"><a href="#">Top</a></div>
@@ -401,7 +416,7 @@
         </ul>
     </p>
 
-    <p>
+    <p class="pb-for-print">
         <div style="display: grid; grid-template-columns: auto auto; gap: 20px;">
             <h2><a name="polars">Polars</a></h2>
             <div class="screen-only" style="text-align: right; margin-top: 20px;"><a href="#">Top</a></div>
@@ -462,7 +477,7 @@
         </div>
     </p>
 
-    <p>
+    <p class="pb-for-print">
         <div style="display: grid; grid-template-columns: auto auto; gap: 20px;">
             <h2><a name="routing">Routing</a></h2>
             <div class="screen-only" style="text-align: right; margin-top: 20px;"><a href="#">Top</a></div>
