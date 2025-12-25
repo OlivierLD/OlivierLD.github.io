@@ -58,9 +58,12 @@
     </style>
 </head>
 
+<body>
+
 <section id="fr-content" style="display: none;">
+
     <h1><a name="least-squares">GRIBs, polaires, routage</a></h1>
-    <span class="screen-only">Traduisible et imprimable</span>
+    <span class="screen-only">Traduisible et imprimable - La version '&eacute;cran' contient des liens qui n'apparaissent pas dans la version imprimable.</span>
     <a class="screen-only" href="javascript:void(0)" onclick="navTo('EN');"><img src="../../../systems/images/us_uk_flag.png" style="width: 30px;" title="In English" alt="In English"></a>
     <hr class="screen-only"/>
     <div class="screen-only">
@@ -101,7 +104,7 @@
         <ul>
             <li>la zone g&eacute;ographique d&eacute;limit&eacute;e par les coordonn&eacute;es 65N,45S,130E,110W (coin sup&eacute;rieur gauche 65N-130E, coin inf&eacute;rieur droit 45S-110E), c'est l'Oc&eacute;an Pacifique</li>
             <li>un maillage de 2&deg; en latitude et 2&deg; en longitude</li>
-            <li>des pr&eacute;visions &agrave; 0h, 6h, 12h, 18h et 24h (toutes les 6H, pendant 14H)</li>
+            <li>des pr&eacute;visions &agrave; 0h, 6h, 12h, 18h et 24h (toutes les 6H, pendant 24H)</li>
             <li>les param&egrave;tres suivants : pression au niveau de la mer (PRMSL), vent (WIND), hauteur g&eacute;opotentielle &agrave; 500 hPa (HGT500), temp&eacute;rature (TEMP), vagues (WAVES) et pr&eacute;cipitations (RAIN)</li>
         </ul>
         La taille du fichier GRIB esp&eacute;r&eacute; est bien &eacute;videmment fonction de la taille de la zone, du maillage, de la p&eacute;riode et des param&egrave;tres demand&eacute;s.<br/>
@@ -138,8 +141,8 @@
             <div style="text-align: center;">
                 <img src="docs/grib.02.png" title="Celulles de 1 degr&eacute;" style="max-width: 80%; border: 1px solid black;"/>
             </div>
-            Ce lissage est appliqu&eacute; ici au vent, il s'appliquera de meme aux autres param&egrave;tres (PRMSL, 500MB, RAIN, TEMP, etc).<br/>
-            Le lissage appliqu&eacute; ici est g&eacute;ographique, il peut aussi s'appliquer dans le temps, pour passer d'un intervalle de 12 heures &agrave; un intervalle de 3 heures, par exemple..<br/>
+            Ce lissage est appliqu&eacute; ici au vent, il s'appliquera de m&ecirc;me aux autres param&egrave;tres (PRMSL, 500MB, RAIN, TEMP, etc).<br/>
+            Le lissage appliqu&eacute; ici est g&eacute;ographique, il peut aussi s'appliquer dans le temps, pour passer d'un intervalle de 12 heures &agrave; un intervalle de 3 heures, par exemple.<br/>
             <br/>
             Il peut aussi parfois &ecirc;tre int&eacute;ressant d'afficher les donn&eacute;es du GRIB en 3D :
             <div style="text-align: center;">
@@ -292,15 +295,241 @@
 
 <section id="en-content" style="display: none;">
     <h1><a name="least-squares">GRIBs, polars, routing</a></h1>
-    <span class="screen-only">Translatable and printable</span>
+    <span class="screen-only">Translatable and printable - The screen version contains links that do not show up in the print one.</span>
     <a class="screen-only" href="javascript:void(0)" onclick="navTo('FR');"><img src="../../../systems/images/france.gif" style="width: 30px;" title="En fran&ccedil;ais" alt="En fran&ccedil;ais"></a>
+
+    <hr class="screen-only"/>
+    <div class="screen-only">
+        Summary :
+        <ul>
+            <li><a href="#grib">GRIB</a></li>
+            <li><a href="#polars">Polars</a></li>
+            <li><a href="#routing">Routing</a></li>
+        </ul>
+    </div>
+    <hr class="screen-only"/>
     <p>
-        WiP . . . English version coming soon.
+        Ultimately, we want to create a route for the boat, that is, determine the optimal route between a starting point and a destination,
+        taking into account weather conditions (wind, current, waves) and the boat's performance (polar diagrams).<br/>
+        To do this, several elements are needed:<br/>
+        <ul>
+            <li>The boat's polars</li>
+            <li>Weather data, usually in GRIB format</li>
+            <li>A routing algorithm</li>
+        </ul>
+        This document presents these different elements, and gives some guidance on how to carry out such routing.
+    </p>
+    <p>
+        <div style="display: grid; grid-template-columns: auto auto; gap: 20px;">
+            <h2><a name="grib">GRIB</a></h2>
+            <div class="screen-only" style="text-align: right; margin-top: 20px;"><a href="#">Top</a></div>
+        </div>
+        The acronym GRIB stands for "GRIdded Binary".<br/>
+        It is a standard binary file format for disseminating meteorological data.<br/>
+        It is used to transmit weather forecasts, including wind, atmospheric pressure, temperature, etc., on a geographic and temporal grid.<br/>
+        To obtain GRIB files, a request must be sent to a meteorological data server, specifying the geographic region, the time period, and the desired parameters.<br/>
+        For the area and time period, the grid resolution must also be specified.<br/>
+        <i>Example :</i>
+        <div class="postit bordered-box">
+            GFS:65N,45S,130E,110W|2,2|0,6..24|PRMSL,WIND,HGT500,TEMP,WAVES,RAIN
+        </div>
+        The above request concerns:<br/>
+        <ul>
+            <li>The geographical area delimited by the coordinates 65N, 45S, 130E, 110W (upper left corner 65N-130E, lower right corner 45S-110E) is the Pacific Ocean.</li>
+            <li>a grid of 2° in latitude and 2° in longitude</li>
+            <li>orecasts at 0am, 6am, 12pm, 6pm and 24h (every 6 hours, for 24 hours)</li>
+            <li>the following parameters: sea level pressure (PRMSL), wind (WIND), 500 hPa geopotential height (HGT500), temperature (TEMP), waves (WAVES) and precipitation (RAIN)</li>
+        </ul>
+        The expected GRIB file size obviously depends on the size of the area, the grid resolution, the time period, and the parameters requested.<br/>
+        The finer the grid resolution, the more parameters there are, and the longer the time period, the larger the file will be.<br/>
+        <div style="font-style: italic; margin: 10px; padding: 5px; border: 1px solid gray; border-radius: 5px; background-color: #f0f0f0;">
+            <b>Note:</b><br/>
+            To reduce the size of the files to be received — since unlimited internet bandwidth isn't always available — you can adjust the network mesh and then smooth the data.<br/>
+            While not as precise, the result is often sufficient for recreational navigation.
+        </div>
+        <div>
+            The file received after the request is a binary (digital) file, unreadable in its current state.<br/>
+            However, its contents can be viewed with suitable software (we'll come back to that). Its format can undoubtedly be compared to that of an Excel spreadsheet,
+            with rows and columns, each cell containing a value for a given parameter (wind, pressure, temperature, etc.) at a specific geographic location (latitude, longitude)
+            and at a given time (the forecast time).<br/>
+            <div style="text-align: center;">
+                <img src="docs/grib.04.png" title="Contenu du GRIB" style="max-width: 60%; border: 1px solid black;"/>
+            </div>
+            Above are the tabs corresponding to the different dates and times, below are the tabs for the available settings.<br/>
+        </div>
+        <div style="margin-top: 10px;">
+            Let's look at the following query:
+            <div class="postit bordered-box">
+                GFS:65N,14N,100W,10E|4,4|0,12..168|PRMSL,WIND,HGT500,TEMP,WAVES,RAIN
+            </div>
+            Note that the grid spacing is 4° in latitude and 4° in longitude, instead of 2° in the previous example, and that a GRIB file will be
+            generated every 12 hours, instead of every 6 hours previously.<br/>
+            This should reduce the size of the <a href="docs/NorthAtlantic_2025_12_23_09_10_41_CET.grb">received file</a>.<br/>
+            However, the resolution is lower, as can be seen here:<br/>
+            <div style="text-align: center;">
+                <img src="docs/grib.01.png" title="Cellulles de 4 degr&eacute;s" style="max-width: 80%; border: 1px solid black;"/>
+            </div>
+            It's clear that the wind definition is less accurate.<br/>
+            Smoothing can resolve this issue by applying a smoothing factor of 4 (dividing each cell into 4&times;4=16).<br/>
+            <div style="text-align: center;">
+                <img src="docs/grib.02.png" title="Celulles de 1 degr&eacute;" style="max-width: 80%; border: 1px solid black;"/>
+            </div>
+
+
+            This smoothing is applied here to the wind; it will be applied similarly to the other parameters (PRMSL, 500MB, RAIN, TEMP, etc.).<br/>
+            LThe smoothing applied here is geographical; it can also be applied over time, for example, to go from a 12-hour interval to a 3-hour interval.<br/>
+            <br/>
+            It can also sometimes be useful to display the GRIB data in 3D.
+            <div style="text-align: center;">
+                <img src="docs/grib.03.png" title="PRMSL &amp; 500MB" style="max-width: 80%; border: 1px solid black;"/>
+            </div>
+        </div>
+        <br/>
+        The GRIB file standard has two versions (1 and 2). To use them, you need to know which version the received file is and have suitable software.<br/>
+        <h3>Sending a request</h3>
+        The above request can be sent to <code>query@saildocs.com</code> by email.<br/>
+        The email subject doesn't matter; the body of the message contains the request in <i><b>plain text</b></i>.<br/>
+        For example <a href="mailto:query@saildocs.com?subject=GRIBRequest&body=GFS:65N,45S,130E,110W|2,2|0,6..24|PRMSL,WIND,HGT500,TEMP,WAVES,RAIN" target="new">send this request</a> by email to Saildocs.<br/>
+        The response usually arrives within minutes — if not seconds — with a <a href="docs/GFS20251221161301416.grb">GRIB file</a> attached.<br/>
+        Several services allow you to send GRIB requests, for example:<br/>
+        <ul>
+            <li><a class="list-link" href="https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast-system" target="NCEI">NOAA NCEI GFS</a></li>
+            <li><a class="list-link" href="https://www.ventusky.com/" target="Ventusky">Ventusky</a></li>
+            <li><a class="list-link" href="https://www.passageweather.com/grib-files/" target="PassageWeather">Passage Weather</a></li>
+            <li><a class="list-link" href="https://saildocs.com/" target="SailMail">https://saildocs.com/</a></li>
+        </ul>
+    </p>
+
+    <p>
+        <div style="display: grid; grid-template-columns: auto auto; gap: 20px;">
+            <h2><a name="polars">Polars</a></h2>
+            <div class="screen-only" style="text-align: right; margin-top: 20px;"><a href="#">Top</a></div>
+        </div>
+        A boat's polars are curves that represent the boat's speed as a function of the apparent wind angle and strength.<br/>
+        The apparent wind is the force that propels a sailboat; it's the combination of the true wind and the boat's speed.<br/>
+        Since the apparent wind depends on the true wind and the boat's speed, polars allow us to determine the boat's speed for a given wind direction and speed.<br/>
+        See <a href="https://github.com/OlivierLD/ROB/blob/master/raspberry-sailor/PolarSmoother/README.md" target="PolarSmoother">here</a> for a polar smoothing tool.<br/>
+        <br/>
+        Polars are functions of two variables: the apparent wind angle (AWA) and the apparent wind speed (AWS).<br/>
+        They can often be represented by one or more polynomial functions.<br/>
+        <br/>
+        Real-world sailing data, recorded during sea trials, can be used to create a boat's polars.<br/>
+        <div style="text-align: center;">
+            <img src="docs/polar.01.png" title="Raw data" style="max-width: 40%; border: 1px solid black;"/>
+        </div>
+        We can then choose the degree of the polynomials to use for smoothing, and use a least-squares method
+        (see <a href="../../../systems/least.squares.html?lang=EN" target="MC">here</a>) to fit the polars to the raw data.<br/>
+        <br/>
+        These curves are called "polars" because they are often represented in a polar coordinate system, where the angle is the apparent wind angle, and the distance from
+        the center is the boat's speed.<br/>
+        However, they can also be represented in a Cartesian coordinate system, where — for example — the Y-axis represents the apparent wind angle, and the X-axis the boat's speed.
+        This is less intuitive...<br/>
+        <div style="display: grid; grid-template-columns: auto auto auto; margin: 10px;">
+            <div style="text-align: center;">
+                <img src="docs/polar.02.png" title="Raw data" style="max-width: 90%; border: 1px solid black;"/>
+                <br/>
+                Polar coordinates
+            </div>
+            <div style="text-align: center;">
+                <img src="docs/polar.03.png" title="Raw data" style="max-width: 90%; border: 1px solid black;"/>
+                <br/>
+                Cartesian coordinates
+            </div>
+            <div style="text-align: center;">
+                <img src="docs/polar.04.png" title="Raw data" style="max-width: 90%; border: 1px solid black;"/>
+                <br/>
+                Degrees of polynomials
+            </div>
+        </div>
+        The third image shows the degree chosen for the polynomials.<br/>
+        We distinguish between the degree of the polars (5 above) and the degree of the coefficients (3 above).<br/>
+        The degree of the polars defines the complexity of the curve, while the degree of the coefficients defines the polynomial that will
+        determine the coefficients of the polar for a given wind force.<br/>
+        Thus, the polars will have the form
+        $$ V_{boat} (x, AWS) = a_{AWS}.x^5 + b_{AWS}.x^4 + c_{AWS}.x^3 + d_{AWS}.x^2 + e_{AWS}.x^1  + f_{AWS} $$
+        where $ x $ is the angle of the apprent wind, and the coefficients $a_{AWS}$, $b_{AWS}$, $c_{AWS}$, $d_{AWS}$, $e_{AWS}$ et $f_{AWS}$ depend on the apparent wind speed (AWS), according to a polynomial function of degree 3:<br/>
+        $$ a_{AWS} = A.AWS^3 + B.AWS^2 + C.AWS + D, etc. $$ <br/>
+        Thus, for any wind angle ($ x, aka AWA $) and for any wind force ($ AWS $), given this data, we can calculate the speed of the boat ($ V_{boat} $).<br/>
+        The polars thus generated can also be visualized in 3D.
+        <div style="display: grid; grid-template-columns: auto auto; margin: 10px;">
+            <div style="text-align: center;">
+                <img src="docs/polar.05.png" title="3D data" style="max-width: 90%; border: 1px solid black;"/>
+            </div>
+            <div style="text-align: center;">
+                <img src="docs/polar.06.png" title="3D data" style="max-width: 90%; border: 1px solid black;"/>
+            </div>
+        </div>
+    </p>
+
+    <p>
+        <div style="display: grid; grid-template-columns: auto auto; gap: 20px;">
+            <h2><a name="routing">Routing</a></h2>
+            <div class="screen-only" style="text-align: right; margin-top: 20px;"><a href="#">Top</a></div>
+        </div>
+        Careful, this is where things get a little complicated... everything comes together!<br/>
+        <p>
+            We previously saw how to obtain meteorological data (GRIB files) and how to define the boat's performance (polar diagrams).<br/>
+            It remains to determine a routing algorithm that will find the optimal path between a starting point and a destination, taking into account weather conditions and the boat's performance.<br/>
+            This involves a significant amount of calculation, because at any given moment, the boat's position depends on the wind direction and strength, which vary over time and space.<br/>
+            It is clearly impossible to do this manually, even with a calculator!<br/>
+            This task must be entrusted to a computer, using a suitable algorithm.
+        </p>
+
+        Several routing algorithms exist, with varying degrees of complexity.<br/>
+        The simplest is Dijkstra's routing, which finds the shortest path between two points in a weighted graph.<br/>
+        <div style="font-style: italic; margin: 10px; padding: 5px; border: 1px solid gray; border-radius: 5px; background-color: #f0f0f0;">
+            <b>Note: Routing Objectives</b><br/>
+            When racing, the goal is obviously to reach the destination as quickly as possible.<br/>
+            When cruising, you might also want to avoid areas of bad weather, or conversely, take advantage of specific weather conditions.<br/>
+            Routing can therefore incorporate additional criteria, beyond just travel time.<br/>
+            For example, "Forty knots on the nose? No thanks!"
+        </div>
+        <h3>Isochrones</h3>
+        Isochrones are the locus of positions reachable by a boat in a given time (iso - &iota;&sigma;&omicron;: identical,
+        chronos - &chi;&rho;&omicron;&nu;&omicron;&sigma;: time. IsoChrone &rarr; identical time. Location of points reachable in the same time).<br/>
+        A commonly used routing method is the isochrone method.<br/>
+        It consists of drawing isochrone lines, that is, lines that represent the positions reachable by the boat in a given time.<br/>
+        Using the boat's polar diagrams and meteorological data (GRIB), isochrones can be calculated at regular time intervals, taking into account wind and current conditions.<br/>
+        By connecting successive isochrones, a graph of possible positions is obtained.<br/>
+        A pathfinding algorithm (such as Dijkstra's algorithm) can then be applied to find the optimal path between the starting point and the destination.
+
+        <h3>Convex Envelopes</h3>
+        So, as described above, starting from the initial position, we calculate the locations of points reachable within a given time—let's say, for example, 3 hours—with the calculation performed every 10 degrees.
+        This gives us 36 points (360/10).<br/>
+        For each of these 36 points, we repeat the same calculation to obtain the points reachable in an additional 3 hours (i.e., 6 hours from the start).<br/>
+        This calculation is performed using GRIB data for each point of the first isochone (where the conditions are now different).<br/>
+        This gives us 36 &times; 36 = 1,296 points.<br/>
+        We continue in this way until we reach the destination.<br/>
+        The number of points to manage quickly becomes very large (even excessive); it's exponential!<br/>
+        At the third isochrone, we have 36 &times; 36 &times; 36 = 46,656 points, and 1,679,616 at the fourth! And so on...<br/>
+        This can crash any computer — no matter how powerful — before it reaches its destination.<br/>
+        Therefore, it's necessary to reduce the number of points on each isochrone.<br/>
+        An efficient method is to use the convex hull of the points.<br/>
+        The convex hull is the smallest convex polygon that contains all the points.<br/><br/>
+
+        <i><b>Intuitively</b></i>, it's like putting a rubber band around the points; the rubber band will stretch to encompass all the points, thus forming the convex hull.<br/>
+        By keeping only the points on the convex hull (eliminating those inside the rubber band), we significantly reduce the number of points to manage.
+
+        <div style="text-align: center;">
+            <img src="docs/enveloppe.png" title="enveloppe convexe" style="max-width: 40%; border: 1px solid black;"/>
+        </div>
+        In red, the points of the first isochrone.<br/>
+        In yellow and green, those of the second.<br/>
+        Only the points on the convex hull (in green) are retained. The yellow ones are eliminated.<br/>
+        See below the effects of the method on a real-world routing (feel free to zoom in):
+        <div style="text-align: center;">
+            <img src="docs/routing.01.png" title="Routing" style="max-width: 80%; border: 1px solid black;"/>
+        </div>
+        The final result is the optimal path (in blue) between the starting point and the destination.<br/>
+        This result can then be exported in various formats for use by navigation software (for example, in GPX format, but this is far from the only available format).<br/>
+        <br/>
+    </p>
+    <p class="screen-only">
+        All the screenshots above are from a routing and navigation software developed in Java (among other languages).
+        All the source code is available in its <a class="list-link" href="https://github.com/OlivierLD/ROB/tree/master/raspberry-sailor/Swing/WeatherWizard" target="GitHub">GitHub</a> repository.<br/>
     </p>
 
 </section>
-
-<body>
 
 <div id="full-content">
 </div>
@@ -349,13 +578,58 @@ let translate = (lang) => {
         // frContent.style.display = 'block';
         fullContent.innerHTML = frContent.innerHTML;
         frContent.innerHTML = '';  // Required for anchors to work.
+        enContent.innerHTML = '';  // Required for anchors to work.
     } else {
         // enContent.style.display = 'block';
         // frContent.style.display = 'none';
         fullContent.innerHTML = enContent.innerHTML;
         enContent.innerHTML = '';  // Required for anchors to work.
+        frContent.innerHTML = '';  // Required for anchors to work.
     }
+    // The title
+    document.getElementsByTagName('title')[0].innerText =
+        (lang === 'FR' ? 'GRIBs, polaires, routage' : 'GRIBs, polars, routing');
 };
+
+let translateNew = (lang) => {
+
+    let contentName = `version_${lang}.html`;
+    let contentPlaceHolder = document.getElementById('full-content');
+
+    let generateFetchMessage = (name, response) => {
+        return `Fetching ${name}...<br/> Data Response: ${response.status} - ${response.statusText}<br/><b>En d&eacute;veloppement...<br/>Disponible prochainement.</b>`;
+    };
+	fetch(contentName)
+            .then(response => {  // Warning... the NOT_FOUND error lands here, apparently.
+                console.log(`Data Response: ${response.status} - ${response.statusText}`);
+				if (response.status !== 200) { // There is a problem...
+                    alert('Oops !')
+					contentPlaceHolder.innerHTML = generateFetchMessage(contentName, response); // `Fetching ${contentName}...<br/> Data Response: ${response.status} - ${response.statusText}<br/><b>En d&eacute;veloppement...<br/>Disponible prochainement.</b>`;
+				} else {
+					response.text().then(doc => {
+						console.log(`Code data loaded, length: ${doc.length}.`);
+                        let node = new DOMParser().parseFromString(doc, "text/html");
+                        let content = node.getElementsByTagName("section").item(0).innerHTML; // Assume there is a <section>
+                        contentPlaceHolder.innerHTML = content;
+					});
+				}
+            },
+            (error, errmess) => {
+                console.log("Ooch");
+                let message;
+                if (errmess) {
+                    let mess = JSON.parse(errmess);
+                    if (mess.message) {
+                        message = mess.message;
+                    }
+                }
+                console.debug("Failed to get code data..." +
+                    (error ? (typeof(error) === 'object' ? JSON.stringify(error, null, 2) : error) : ' - ') +
+                    ', ' +
+                    (message ? message : ' - ')
+                );
+            });
+}
 
 window.onload = () => { // Important: window.onload
     let userLang = getQueryParameterByName('lang');
@@ -380,6 +654,7 @@ window.onload = () => { // Important: window.onload
         langToUse = 'EN';
     }
     translate(langToUse);
+    // translateNew(langToUse);
 };
 </script>
 

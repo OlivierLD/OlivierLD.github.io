@@ -746,6 +746,10 @@ let translate = (lang) => {
         // frContent.style.display = 'none';
         fullContent.innerHTML = enContent.innerHTML;
     }
+        // The title
+    document.getElementsByTagName('title')[0].innerHTML =
+        (lang === 'FR' ? 'M&eacute;thode des moindres carr&eacute;s' : 'Least squares method');
+
 };
 
 window.onload = () => { // Important: window.onload
