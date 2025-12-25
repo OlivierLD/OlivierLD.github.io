@@ -604,8 +604,9 @@ let translate = (lang) => {
         frContent.innerHTML = '';  // Required for anchors to work.
     }
     // The title
-    document.getElementsByTagName('title')[0].innerText =
-        (lang === 'FR' ? 'GRIBs, polaires, routage' : 'GRIBs, polars, routing');
+    document.getElementsByTagName('title')[0].innerText = (lang === 'FR' ? 'GRIBs, polaires, routage' : 'GRIBs, polars, routing');
+    // Lang
+    document.getElementsByTagName('html')[0].setAttribute('lang', (lang === 'FR' ? 'fr' : 'en'));
 };
 
 let translateNew = (lang) => {
