@@ -63,14 +63,14 @@
     <span class="screen-only">Traduisible et imprimable</span>
     <a class="screen-only" href="javascript:void(0)" onclick="navTo('EN');"><img src="../../../systems/images/us_uk_flag.png" style="width: 30px;" title="In English" alt="In English"></a>
     <hr class="screen-only"/>
-    <p class="screen-only">
+    <div class="screen-only">
         Sommaire :
         <ul>
             <li><a href="#grib">GRIB</a></li>
             <li><a href="#polars">Polaires</a></li>
             <li><a href="#routing">Routage</a></li>
         </ul>
-    </p>
+    </div>
     <hr class="screen-only"/>
     <p>
         On veut en d&eacute;finitive faire un routage pour le bateau, c'est &agrave; dire de d&eacute;terminer la route optimale entre un point de d&eacute;part et un point d'arriv&eacute;e, en tenant compte des conditions m&eacute;t&eacute;orologiques (vent, courant, vagues) et des performances du bateau (polaires).<br/>
@@ -83,7 +83,10 @@
         Ce document pr&eacute;sente ces diff&eacute;rents &eacute;l&eacute;ments, et donne quelques pistes pour r&eacute;aliser un tel routage.
     </p>
     <p>
-        <h2><a name="grib">GRIB</a></h2>
+        <div style="display: grid; grid-template-columns: auto auto; gap: 20px;">
+            <h2><a name="grib">GRIB</a></h2>
+            <div class="screen-only" style="text-align: right; margin-top: 20px;"><a href="#">Top</a></div>
+        </div>
         L'acronyme GRIB signifie "GRIdded Binary" (binaire en grille).<br/>
         C'est un format de fichier binaire standard pour la diffusion de donn&eacute;es m&eacute;t&eacute;orologiques.<br/>
         Il est utilis&eacute; pour transmettre des pr&eacute;visions m&eacute;t&eacute;orologiques, notamment les vents, la pression atmosph&eacute;rique, les temp&eacute;ratures, etc., sur une grille g&eacute;ographique
@@ -160,7 +163,10 @@
     </p>
 
     <p>
-        <h2><a name="polars">Polaires</a></h2>
+        <div style="display: grid; grid-template-columns: auto auto; gap: 20px;">
+            <h2><a name="polars">Polaires</a></h2>
+            <div class="screen-only" style="text-align: right; margin-top: 20px;"><a href="#">Top</a></div>
+        </div>
         Les polaires d'un bateau sont des courbes qui repr&eacute;sentent la vitesse du bateau en fonction de l'angle et de la force du vent apparent.<br/>
         Le vent apparent est celui qui fait avancer un voilier, c'est la combinaison du vent r&eacute;el et de la vitesse du bateau.<br/>
         Le vent apparent d&eacute;pendant du vent r&eacute;el et de la vitesse du bateau, les polaires permettent de d&eacute;terminer la vitesse du bateau pour une direction et une force de vent donn&eacute;es.<br/>
@@ -202,15 +208,27 @@
         Le degr&eacute; des polaires d&eacute;finit la complexit&eacute; de la courbe, le degr&eacute; des coefficients d&eacute;finit le polyn&ocirc;me qui permettra de d&eacute;terminer les coefficients de la polaire pour une force de vent donn&eacute;e.<br/>
         Ainsi, les polaires auront la forme
         $$ V_{boat} (x, AWS) = a_{AWS}.x^5 + b_{AWS}.x^4 + c_{AWS}.x^3 + d_{AWS}.x^2 + e_{AWS}.x^1  + f_{AWS} $$
-        o&ugrave; les coefficients $a_{AWS}$, $b_{AWS}$, $c_{AWS}$, $d_{AWS}$, $e_{AWS}$ et $f_{AWS}$ d&eacute;pendent de la force du vent apparent (AWS), suivant une fonction polyn&ocirc;me de degr&eacute; 3 :<br/>
+        o&ugrave; $ x $ est l'angle du vent apparent, et les coefficients $a_{AWS}$, $b_{AWS}$, $c_{AWS}$, $d_{AWS}$, $e_{AWS}$ et $f_{AWS}$ d&eacute;pendent de la force du vent apparent (AWS), suivant une fonction polyn&ocirc;me de degr&eacute; 3 :<br/>
         $$ a_{AWS} = A.AWS^3 + B.AWS^2 + C.AWS + D, etc. $$ <br/>
-        Ainsi, pour tout angle de vent (AWA) et pour toute force de vent (AWS) donn&eacute;e, on peut calculer la vitesse du bateau (Vboat).<br/>
+        Ainsi, pour tout angle de vent ($ x, ou AWA $) et pour toute force de vent ($ AWS $) donn&eacute;e, on peut calculer la vitesse du bateau ($ V_{boat} $).<br/>
 
     </p>
 
     <p>
-        <h2><a name="routing">Routage</a></h2>
+        <div style="display: grid; grid-template-columns: auto auto; gap: 20px;">
+            <h2><a name="routing">Routage</a></h2>
+            <div class="screen-only" style="text-align: right; margin-top: 20px;"><a href="#">Top</a></div>
+        </div>
         Attention, c'est l&agrave; que les choses se compliquent un peu..., tout s'assemble !<br/>
+        <p>
+            On a vu pr&eacute;c&eacute;demment comment obtenir les donn&eacute;es m&eacute;t&eacute;orologiques (GRIB), et comment d&eacute;finir les performances du bateau (polaires).<br/>
+            Il reste &agrave; d&eacute;terminer un algorithme de routage, qui permettra de trouver le chemin optimal entre un point de d&eacute;part et un point d'arriv&eacute;e,
+            en tenant compte des conditions m&eacute;t&eacute;orologiques et des performances du bateau.<br/>
+            Ceci fait intervenir une quantit&eacute; importante de calculs, car &agrave; chaque instant, la position du bateau d&eacute;pend de la direction et de la force du vent, qui varient dans le temps et l'espace.<br/>
+            Il est clairement impensable de faire cela &agrave; la main, m&ecirc;me avec une calculatrice !<br/>
+            C'est un travail &agrave; confier &agrave; un ordinateur, avec un algorithme adapt&eacute;.
+        </p>
+
         Plusieurs algorithmes de routage existent, avec des degr&eacute;s de complexit&eacute; variables.<br/>
         Le plus simple est le routage par Dijkstra, qui permet de trouver le chemin le plus court entre deux points dans un graphe pond&eacute;r&eacute;.<br/>
         <div style="font-style: italic; margin: 10px; padding: 5px; border: 1px solid gray; border-radius: 5px; background-color: #f0f0f0;">
@@ -253,10 +271,13 @@
         <div style="text-align: center;">
             <img src="docs/routing.01.png" title="Routing" style="max-width: 80%; border: 1px solid black;"/>
         </div>
-
-        <p>
-            La suite arrive. . .
-        </p>
+        Le r&eacute;sultat final est le chemin optimal (en bleu) entre le point de d&eacute;part et le point d'arriv&eacute;e.<br/>
+        Ce r&eacute;sultat peut ensuite &ecirc;tre export&eacute; sous diff&eacute;rents formats, afin d'&eacute;tre utilis&eacute; par un logiciel de
+        navigation (par exemple au format GPX, mais c'est loin d'&ecirc;tre le seul format disponible).<br/>
+    </p>
+    <p class="screen-only">
+        Toutes les saisies d'&eacute;cran ci-dessus proviennent d'un logiciel de routage et de navigation, d&eacute;velopp&eacute; en Java (entre autres langages).
+        Tout le code source est disponible dans son <a class="list-link" href="https://github.com/OlivierLD/ROB/tree/master/raspberry-sailor/Swing/WeatherWizard" target="GitHub">r&eacute;f&eacute;rentiel GitHub</a>.<br/>
     </p>
 
 </section>
@@ -266,7 +287,7 @@
     <span class="screen-only">Translatable and printable</span>
     <a class="screen-only" href="javascript:void(0)" onclick="navTo('FR');"><img src="../../../systems/images/france.gif" style="width: 30px;" title="En fran&ccedil;ais" alt="En fran&ccedil;ais"></a>
     <p>
-        WiP . . .
+        WiP . . . English version coming soon.
     </p>
 
 </section>
