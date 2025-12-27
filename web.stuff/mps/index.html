@@ -32,16 +32,28 @@
         "HTML-CSS": { availableFonts: ["TeX"] }
     });
     </script>
+    <style type="text/css">
+        code {
+            color: black;
+        }
+        @media print {
+            *, html, body, a:link, a:visited {
+                color: black;
+            }
+        }
+
+    </style>
 
 </head>
 <body>
 
-    <!-- Start -->
+<!-- Start -->
 <h1>M&eacute;thode du Plan des Sommets (MPS)</h1>
 M&eacute;thode &eacute;labor&eacute;e par Yves Robin-Jouan, en 1995-96.
 <p>
-Il s'agit d'une m&eacute;thode de point astronomique destin&eacute;e &agrave; trouver sa position sur la Terre, &agrave; partir de l'observation d'un astre au sextant.<br/>
-Ceci n&eacute;cessite - comme dans le cas d'autres m&eacute;thodes - de conna&icirc;tre l'heure exacte - &agrave; la seconde pr&egrave;s - de l'observation, afin d'en d&eacute;duire les coordonn&eacute;es de l'astre observ&eacute;.
+    Il s'agit d'une m&eacute;thode de point astronomique destin&eacute;e &agrave; trouver sa position sur la Terre, &agrave; partir de l'observation d'un (ou plusieurs) astre(s) au sextant.<br/>
+    Ceci n&eacute;cessite - comme dans le cas d'autres m&eacute;thodes - de conna&icirc;tre l'heure exacte - &agrave; la seconde pr&egrave;s - de l'observation, afin d'en d&eacute;duire les coordonn&eacute;es de l'astre observ&eacute;.<br/>
+    &Agrave; la diff&eacute;rence de la m&eacute;thode des droites de hauteur - de Marcq Saint-Hilaire - il n'est pas n&eacute;cessaire ici de partir d'une position estim&eacute;e, ce qui constitue l'int&eacute;ret majeur de cette m&eacute;thode.
 </p>
 
 <image src="./images/cone.png" width="40"/> Ce document est en chantier...<br/>
@@ -57,7 +69,12 @@ Ceci est une impl&eacute;mentation des projets <a href="https://github.com/Olivi
 <li><a href="#le-principe">Le principe</a></li>
 <li><a href="#en-pratique">En pratique</li>
 <li><a href="#graphique">Une approche graphique</a></li>
-<li><a href="#iterative">Approche it&eacute;rative</a></li>
+<li>
+    <a href="#iterative">Approche it&eacute;rative</a>
+    <ul>
+        <li><a href="#newton">La m&eacute;thode de Newton</a></li>
+    </ul>
+</li>
 <li><a href="#equation">R&eacute;soudre l'&eacute;quation de la distance entre les points de deux cercles</a></li>
 </ul>
 <hr/>
@@ -288,10 +305,15 @@ $$
     <br/>
 
     <i>Note</i>&nbsp;: On fait figurer plusieurs astres dans les diagrammes ci-dessous - le Soleil, la Lune, Mars, Spica (&alpha; Libra). C'est juste pour l'exemple. Il est hautement improbable
-    de les voir tous en m&ecirc;me temps.
+    de les voir tous en m&ecirc;me temps, quand le Soleil est lev&eacute;, on ne voit en g&eacute;n&eacute;ral gu&egrave;re d'&eacute;toiles.
     <br/><br/>
-    <i>Une autre Note</i>&nbsp;: Le sommet de tous les c&ocirc;nes, et la position de l'observateur, se trouvent tous dans le m&ecirc;me plan.<br/>
+    <i>Une autre Note</i>&nbsp;: Le sommet de tous les c&ocirc;nes, et la position de l'observateur, se trouvent tous dans le m&ecirc;me plan, ainsi qu'en t&eacute;moigne les figures pr&eacute;c&eacute;dentes.<br/>
     D'o&ugrave; - sans doute - le nom de la m&eacute;thode...<br/>
+    <br/>
+    <i>Pour &ecirc;tre s&ucirc;r</i>&nbsp;:
+    Les <b>bases des c&ocirc;nes</b> utilis&eacute;s ne se trouvent en aucun cas dans le m&ecirc;me plan ! Ce qui rend les calculs &agrave; effectuer un peu plus complexes que si c'&eacute;tait le cas...<br/>
+    Si ce n'est pas d&eacute;j&agrave; clair, &ccedil;a devrait le devenir dans les figures qui suivent.
+    <br/>
     <br/>
     La position de l'observateur - celle qu'on cherche, donc - est &agrave; l'intersection de la base des c&ocirc;nes, dans les figures qui suivent,
     c'est <code>47º40.66'N / 3º08.14'W</code>.
@@ -403,17 +425,18 @@ Vaste sujet... &Ccedil;a vient !
     tr&egrave;s (voire trop) complexe. La solution &agrave; laquelle on arrive n'est pas "exacte", mais on a une id&eacute;e de sa pr&eacute;cision, et c'est d&eacute;j&agrave; pas mal.<br/>
     Cette m&eacute;thode est particuli&egrave;rement s&eacute;duisante dans un contexte informatique.
 
-    <h4>La m&eacute;thode de Newton, en deux mots.</h4>
+    <h4><a name="newton">La m&eacute;thode de Newton, en deux mots.</a></h4>
     La fa&ccedil;on de proc&eacute;der est la suivante&nbsp;:
     <ul>
         <li>Admettons pour cet exemple qu'on cherche la valeur de <code>x</code> pour laquelle <code>y = f(x) = 0</code>. <code>f(x)</code> est cette fonction (pas n&eacute;cessairement une fonction, d'ailleurs, &ccedil;a peut &ecirc;tre une conique, ou n'importe quelle autre acrobatie), dont on a la formule, mais dont l'obtention de la (ou des) racine(s) fait peur.</li>
-        <li>On va partir d'une valeur de <code>x</code> pour laquelle on sait qu'`y</code> est d'un c&ocirc;t&eacute; du r&eacute;sultat attendu (qui est donc <code>0</code>), qu'on va finir par se retrouver de l'autre en faisant progresser <code>x</code> d'une valeur <code>deltaX</code>.</li>
+        <li>On va partir d'une valeur de <code>x</code> pour laquelle on sait qu'<code>y</code> est d'un c&ocirc;t&eacute; du r&eacute;sultat attendu (qui est donc <code>0</code>), qu'on va finir par se retrouver de l'autre en faisant progresser <code>x</code> d'une valeur <code>deltaX</code>.</li>
         <li>On commence. On part de <code>x</code>, on calcule <code>y</code>, on trouve une valeur inf&eacute;rieure &agrave; <code>0</code>. On note cet <code>x</code>.</li>
         <li>On continue, on augmente <code>x</code> de <code>detlaX</code>. On recalcule <code>y</code>.</li>
         <li>Tant que le signe de <code>y</code> ne change pas, on continue.</li>
-        <li>Le signe de <code>y</code> change ! On note la valeur de <code>x</code>, on l'appelle <code>x2</code>.</li>
+        <li><i>Le signe de <code>y</code> change !</i> On note la valeur de <code>x</code>, on l'appelle <code>x2</code>.</li>
         <li>Et la pr&eacute;c&eacute;dente valeur de <code>x</code>, on l'appelle <code>x1</code>.</li>
         <li>On reprend le proc&eacute;d&eacute; au d&eacute;but, mais entre <code>x1</code> et <code>x2</code>, avec un <code>deltaX</code> plus petit (par exemple divis&eacute; par 10).</li>
+        <li>Et ainsi de suite, c'est comme si on zoomait sur la racine recherch&eacute;e.</li>
         <li>Et on arr&ecirc;te - arbitrairement - quand la pr&eacute;cision requise (analogue &agrave; <code>deltaX</code>) est atteinte. La racine (le r&eacute;sultat) recherch&eacute;e est entre <code>x1</code> et <code>x2</code>, lesquels sont
         s&eacute;par&eacute;s d'une valeur <code>deltaX</code>. Il appartient d&egrave;s lors &agrave; l'utilisateur de savoir si cette pr&eacute;cision est suffisante, ou s'il faut poursuivre les it&eacute;rations.</li>
     </ul>
