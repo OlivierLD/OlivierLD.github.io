@@ -1084,6 +1084,14 @@ Date.prototype.format = function (dateFormat) {
     <span class="switch-element">BG System Time Display</span>
   </div>
 
+  <div class="switch-container" style="margin-left: 30px;" title="On or off">
+    <label class="switch switch-element">
+      <input id="img-bg-slider" type="checkbox" onchange="manageImageBGClick(this);">
+      <span class="slider round"></span>
+    </label>
+    <span class="switch-element">Remove Image BG</span>
+  </div>
+
   <div style="margin-left: 30px; margin-top: 10px;">
     <button id="change-bg" onclick="changeBGNow();" title="Change background image immediatly&#13;with transition effects">Change BG now</button>
   </div>
@@ -1878,6 +1886,14 @@ Date.prototype.format = function (dateFormat) {
     }
   }
 
+  function manageImageBGClick(cb) {
+    if (cb.checked) { // On, remove BG Image
+      withImageBG = false;
+    } else {          // Off, WITH BG Image
+      withImageBG = true;
+    }
+  }
+
   let slideIndex = 1;
   showSlides(slideIndex);
 
@@ -1937,6 +1953,8 @@ Date.prototype.format = function (dateFormat) {
 
   let bgAnimation;
   let bgTime = false;
+
+  let withImageBG = true;
 
   function changeBGNow() {
     if (bgAnimation !== undefined) {
@@ -2065,6 +2083,7 @@ Date.prototype.format = function (dateFormat) {
       let dom = document.body;
       // let content = `radial-gradient(at top, rgba(255, 255, 0, 0.5) 20%, rgba(1, 67, 114, 0.60) 55%)`;
       let content = `${currentBackground}, `; // `radial-gradient(at top, rgba(255, ${green1}, 0, 0.5) ${v1}%, rgba(1, 67, ${blue2}, 0.60) ${v2}%), `;
+
       content += `url("./backgrounds/${bgToUse[bgIndex].name}") no-repeat left top`;
 
       // TODO Change bg image scale? add to content: dom.style.backgroundSize("150px 120px") ?
@@ -2076,7 +2095,12 @@ Date.prototype.format = function (dateFormat) {
       }
 
       // console.log("Content:" + content);
-      dom.style.background = content;
+      if (withImageBG) {
+        dom.style.background = content;
+      } else {
+        dom.style.background = '';
+        dom.style.backgroundColor = 'black';
+      }
 
       let docElem = document.documentElement;
       let body = document.getElementsByTagName('body')[0]; // could use document.body
