@@ -97,7 +97,7 @@
             <li>Les donn&eacute;es m&eacute;t&eacute;orologiques, g&eacute;n&eacute;ralement au format GRIB</li>
             <li>Un algorithme de routage</li>
         </ul>
-        Ce document pr&eacute;sente ces diff&eacute;rents &eacute;l&eacute;ments, et donne quelques pistes pour r&eacute;aliser un tel routage.
+        Ce document pr&eacute;sente ces diff&eacute;rents &eacute;l&eacute;ments, et donne quelques pistes pour r&eacute;aliser un tel travail.
         <div style="text-align: center; margin-top: 20px;">
             <img src="docs/polar.jpg" title="Polar !"/>
         </div>
@@ -122,7 +122,7 @@
             <li>la zone g&eacute;ographique d&eacute;limit&eacute;e par les coordonn&eacute;es 65N,45S,130E,110W (coin sup&eacute;rieur gauche 65N-130E, coin inf&eacute;rieur droit 45S-110E), c'est l'Oc&eacute;an Pacifique</li>
             <li>un maillage de 2&deg; en latitude et 2&deg; en longitude</li>
             <li>des pr&eacute;visions &agrave; 0h, 6h, 12h, 18h et 24h (toutes les 6H, pendant 24H)</li>
-            <li>les param&egrave;tres suivants : pression au niveau de la mer (PRMSL), vent (WIND), hauteur g&eacute;opotentielle &agrave; 500 hPa (HGT500), temp&eacute;rature (TEMP), vagues (WAVES) et pr&eacute;cipitations (RAIN)</li>
+            <li>les param&egrave;tres suivants : pression au niveau de la mer (PRMSL, en anglais <b>PR</b>essure at <b>M</b>ean <b>S</b>ea <b>L</b>evel), vent (WIND), hauteur g&eacute;opotentielle &agrave; 500 hPa (HGT500), temp&eacute;rature (TEMP), vagues (WAVES) et pr&eacute;cipitations (RAIN)</li>
         </ul>
         La taille du fichier GRIB esp&eacute;r&eacute; est bien &eacute;videmment fonction de la taille de la zone, du maillage, de la p&eacute;riode et des param&egrave;tres demand&eacute;s.<br/>
         Plus le maillage est serr&eacute;, plus les param&egrave;tres sont nombreux, plus la p&eacute;riode est longue, plus le fichier sera volumineux.<br/>
@@ -744,13 +744,13 @@ TWA	2	3	4	5	6	7	8	9	10	11	12	13	14	15	16	17	18	19	20	21	22	23	24	25	26	27	28	29	
     <p>
         Ultimately, we want to create a route for the boat, that is, determine the optimal route between a starting point and a destination,
         taking into account weather conditions (wind, current, waves) and the boat's performance (polar diagrams).<br/>
-        To do this, several elements are needed:<br/>
+        To do this, several elements are required:<br/>
         <ul>
             <li>The boat's polars</li>
             <li>Weather data, usually in GRIB format</li>
             <li>A routing algorithm</li>
         </ul>
-        This document presents these different elements, and gives some guidance on how to carry out such routing.
+        This document presents these different elements, and gives some guidance on how to carry out such a job.
         <div style="text-align: center; margin-top: 20px;">
             <img src="docs/polar.jpg" title="Polar !"/>
         </div>
@@ -772,9 +772,9 @@ TWA	2	3	4	5	6	7	8	9	10	11	12	13	14	15	16	17	18	19	20	21	22	23	24	25	26	27	28	29	
         The above request concerns:<br/>
         <ul>
             <li>The geographical area delimited by the coordinates 65N, 45S, 130E, 110W (upper left corner 65N-130E, lower right corner 45S-110E) is the Pacific Ocean.</li>
-            <li>a grid of 2° in latitude and 2° in longitude</li>
-            <li>orecasts at 0am, 6am, 12pm, 6pm and 24h (every 6 hours, for 24 hours)</li>
-            <li>the following parameters: sea level pressure (PRMSL), wind (WIND), 500 hPa geopotential height (HGT500), temperature (TEMP), waves (WAVES) and precipitation (RAIN)</li>
+            <li>a grid of 2&deg; in latitude and 2&deg; in longitude</li>
+            <li>forecasts at 0am, 6am, 12pm, 6pm and 12am (every 6 hours, for 24 hours)</li>
+            <li>the following parameters: sea level pressure (PRMSL, which means <b>PR</b>essure at <b>M</b>ean <b>S</b>ea <b>L</b>evel), wind (WIND), 500 hPa geopotential height (HGT500), temperature (TEMP), waves (WAVES) and precipitation (RAIN)</li>
         </ul>
         The expected GRIB file size obviously depends on the size of the area, the grid resolution, the time period, and the parameters requested.<br/>
         The finer the grid resolution, the more parameters there are, and the longer the time period, the larger the file will be.<br/>
