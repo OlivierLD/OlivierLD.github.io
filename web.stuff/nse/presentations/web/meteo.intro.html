@@ -17,7 +17,7 @@
   MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
     </script>
     <!--script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script-->
-    <script type="text/javascript" 
+    <script type="text/javascript"
             async
             src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
     </script>
@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="../../main.css" />
     <!-- link rel="stylesheet" media="screen" href="main.css" /-->
     <link rel="stylesheet" media="print" href="../../print.css" />
-    
+
     <style type="text/css">
         .legend {
             font-style: italic;
@@ -38,7 +38,7 @@
             /* for the iamges */
             filter: blur(8px);
             -webkit-filter: blur(8px);
-        }        
+        }
     </style>
 </head>
 <body>
@@ -54,7 +54,7 @@
             The following document is designed to be visualized from a web browser, or printed from it (a pdf can also be generated from the page).
             The printed version will have page breaks and other formattings that will not be displayed from the web browser.<br/>
             Likewise, the web version has links that would be meaningless in a printed document.<br/>
-            When printing, you will have the possibility - from the dialog showing up in the browser - to hide or show different 
+            When printing, you will have the possibility - from the dialog showing up in the browser - to hide or show different
             data like headers, footers, page numbers, etc, and even scale.<br/>
             <b>But</b>, I'm still looking for a (free) way to generate the page numbers in the table of contents...
         </div>
@@ -89,7 +89,7 @@
     <div style="text-align: left; margin-left: 30px; margin-top: 130px;">
         <i>The more you know, the less you need... (Yvon Chouinard)</i>
     </div>
-</div>    
+</div>
 
 <div class="blank-for-print"></div>
 
@@ -98,8 +98,8 @@
     <div style="margin: 20px;">
         <span style="font-style: italic; font-weight: bold;">Tout ceci ne serait pas arriv&eacute; sans <a href="https://fr.wikipedia.org/wiki/Robert_FitzRoy" target="WP">Robert FitzRoy</a>.</span>
     </div>
-    <!-- 
-        role=list necessary because WebKit removes list semantic when list-style-type: none 
+    <!--
+        role=list necessary because WebKit removes list semantic when list-style-type: none
         taken from https://codepen.io/nzakas/pen/rNJaeMo
         WARNING&nbsp;!!! Page numbers are NOT automatically generated&nbsp;!!
     -->
@@ -132,7 +132,7 @@
     <h1><a name="01">Pr&eacute;ambule</a></h1>
     <div>
         <div>
-            On va exposer dans ce document les principes de base utilis&eacute;s en m&eacute;t&eacute;o marine - avec ou sans &eacute;lectricit&eacute; (sans forc&eacute;ment pouvoir recevoir de fax, ou de fichier GRIB) - 
+            On va exposer dans ce document les principes de base utilis&eacute;s en m&eacute;t&eacute;o marine - avec ou sans &eacute;lectricit&eacute; (sans forc&eacute;ment pouvoir recevoir de fax, ou de fichier GRIB) -
             afin de pouvoir anticiper les changements de temps, essentiellement la force et la direction du vent, lesquels ont un impact direct sur l'&eacute;tat de la mer, et
             ipso-facto, sur le moral de l'&eacute;quipage.
         </div>
@@ -148,7 +148,7 @@
                     </ul>
                 </li>
             </ul>
-            Aussi, on parlera n&eacute;anmoins de la fa&ccedil;on de lire et d'interpr&eacute;ter les faxes et GRIBs dont on peut disposer &agrave; terre avant de 
+            Aussi, on parlera n&eacute;anmoins de la fa&ccedil;on de lire et d'interpr&eacute;ter les faxes et GRIBs dont on peut disposer &agrave; terre avant de
             partir (et pourquoi pas en mer, on ne sait jamais..., on ne va pas jouer les int&eacute;gristes).<br/>
             Les lecteurs avertis sauront faire le tri&nbsp;!
         </div>
@@ -156,7 +156,7 @@
             Note&nbsp;: Afin de rester concis, on n'entrera pas toujours dans les d&eacute;tails&nbsp;; le but de ce document est d'abord d'&eacute;noncer les concepts
             &agrave; connaitre (sans forc&eacute;ment les d&eacute;crire int&eacute;gralement) pour mettre les pr&eacute;visions m&eacute;t&eacute;orologiques en &oelig;uvre.<br/>
             Les ph&eacute;nom&egrave;nes qu'on va d&eacute;crire plus avant rel&egrave;vent de la thermodynamique, une science qui peut parfois (voire souvent) devenir complexe,
-            et qui peut potentiellement en d&eacute;courager plus d'un...<br/> 
+            et qui peut potentiellement en d&eacute;courager plus d'un...<br/>
             On va t&acirc;cher ici de les pr&eacute;senter de fa&ccedil;on plus "intuitive" (et non pas superficielle).<br/>
             De la m&ecirc;me fa&ccedil;on, on citera des noms (comme Coriolis, Hadley, vent g&eacute;ostrophique), qui sont autant des points de d&eacute;part pour une recherche plus approfondie...<br/>
         </div>
@@ -182,10 +182,10 @@
             <div>
                 Ceux qui ont d&eacute;j&agrave; pris une douche chaude, ferm&eacute;e avec un rideau, connaissent ce ph&eacute;nom&egrave;ne - ou au moins ses sympt&ocirc;mes.<br/>
                 L'air sous la douche devient plus chaud que celui qui est &agrave; l'ext&eacute;rieur du rideau, et a donc tendance &agrave; s'&eacute;lever.<br/>
-                Le vide ainsi cr&eacute;&eacute; dans le bas tend &agrave; &ecirc;tre combl&eacute; par de l'air venant de l'ext&eacute;rieur du rideau 
-                (car "la nature a horreur du vide", disait Aristote), et d&eacute;place en cons&eacute;quence le bas du rideau vers les chevilles de celui 
+                Le vide ainsi cr&eacute;&eacute; dans le bas tend &agrave; &ecirc;tre combl&eacute; par de l'air venant de l'ext&eacute;rieur du rideau
+                (car "la nature a horreur du vide", disait Aristote), et d&eacute;place en cons&eacute;quence le bas du rideau vers les chevilles de celui
                 ou celle qui est sous la douche.<br/>
-                
+
                  <div style="text-align: center; margin: 30px;">
                     <img src="./meteo/meteo.01.jpg" title="Chaud, &amp; froid." style="width: 20%;">
                  </div>
@@ -223,7 +223,7 @@
                     <i>Dessin ici bient&ocirc;t</i>
                 </div-->
 
-                En fonction de la nature de terre, l'inertie thermique peut varier. 
+                En fonction de la nature de terre, l'inertie thermique peut varier.
                 Une c&ocirc;te rocheuse se r&eacute;chauffera et se refroidira plus vite qu'une c&ocirc;te agricole ou foresti&egrave;re.<br/>
                 De m&ecirc;me, une mer profonde aura plus d'inertie thermique qu'une lagune ou une mer peu profonde...
             </div>
@@ -241,12 +241,12 @@
         <div>
             Pr&egrave;s des c&ocirc;tes, <i>ce ph&eacute;nom&egrave;ne existe toujours</i>. D'autres ph&eacute;nom&egrave;nes peuvent s'y ajouter (on verra lesquels ensuite), mais il est <i>toujours</i> pr&eacute;sent.<br/>
             Ce ph&eacute;nom&egrave;ne est quotidien, il se produit &agrave; l'&eacute;chelle d'une journ&eacute;e.
-            <div style="margin-left: 20px; font-style: italic; border: 1px solid silver; border-radius: 5px; padding: 5px;">
+            <div style="margin-left: 20px; margin-top: 10px; font-style: italic; border: 1px solid silver; border-radius: 5px; padding: 5px;">
                 Il est int&eacute;ressant de constater qu'il existe (au moins) un endroit dans le monde o&ugrave; ce ph&eacute;nom&egrave;ne existe &agrave; l'&eacute;chelle d'une ann&eacute;e.<br/>
                 Pour apparaitre &agrave; cette &eacute;chelle de temps, il doit falloir une grosse masse de terre, et une grosse masse de mer...<br/>
                 L'Himalaya, voil&agrave; une grosse masse de terre, et rocheuse en plus&nbsp;! Et c'est &agrave; proximit&eacute; de l'Oc&eacute;an Indien&nbsp;!<br/>
                 Et bien entre ces deux-l&agrave;, intervient ce genre de "brise" thermique &agrave; l'&eacute;chelle d'une ann&eacute;e... On l'appelle "la Mousson", qui souffle entre l'Inde et l'Arabie.<br/>
-                Mousson s&egrave;che de la terre &agrave; la mer (en hiver), mousson humide de la mer &agrave; la terre (en &eacute;t&eacute;). Et celle-ci 
+                Mousson s&egrave;che de la terre &agrave; la mer (en hiver), mousson humide de la mer &agrave; la terre (en &eacute;t&eacute;). Et celle-ci
                 ne s'appelle pas "humide" pour rien, qu'est-ce qu'il d&eacute;gringole&nbsp;!
                 <div style="margin: 10px 30px 0px 30px; border: 1px dashed silver; border-radius: 5px; padding: 5px;">
                     Accessoirement, cette route entre l'Inde et l'Arabie - o&ugrave; le vent souffle dans un sens la moiti&eacute; de l'ann&eacute;e, et dans l'autre sens pendant l'autre
@@ -254,8 +254,9 @@
                     Comme les bateaux remontaient mal au vent &agrave; cette &eacute;poque, en choissisant judicieusement la p&eacute;riode de l'ann&eacute;e o&ugrave; on voulait voyager, on
                     pouvait faire la route au portant dans les deux sens&nbsp;!..<br/>
                     Les techniques de navigation se sont d&eacute;velopp&eacute;es de paire avec ce commerce - notamment les techniques de navigation astronomique - et curieusement,
-                    les math&eacute;matiques se sont d&eacute;velopp&eacute;es &agrave; cette &eacute;poque, &agrave; cet endroit. Voyez l'origine du mot "Alg&egrave;bre".<br/> 
-                    Et si on l&egrave;ve le nez la nuit, il y a un nombre incroyable d'&eacute;toiles qui ont des noms arabes&nbsp;!<br/>
+                    les math&eacute;matiques se sont d&eacute;velopp&eacute;es &agrave; cette &eacute;poque, &agrave; cet endroit. Voyez l'origine du mot "Alg&egrave;bre".<br/>
+                    Et si on l&egrave;ve le nez la nuit, il y a un nombre incroyable d'&eacute;toiles qui ont des noms arabes
+                    (ma pr&eacute;f&eacute;r&eacute;e est sans doute "Zuben Elgenubi", dans la constellation de la Balance - &alpha; Librae)&nbsp;!<br/>
                     Rien de nouveau ici, mais c'est toujours &eacute;tonnant de voir comment la science avance d&egrave;s qu'il y a de l'argent &agrave; gagner... 💰
                 </div>
             </div>
@@ -276,7 +277,7 @@
             <li>La puissance de la force de Coriolis</li>
         </ul>
         <h4>Temp&eacute;rature</h4>
-        En moyenne - et en gros - la temp&eacute;rature d&eacute;croit au fur et &agrave; mesure que la latitude augmente. Il fait plus chaud &agrave; l'&eacute;quateur (latitude 0) 
+        En moyenne - et en gros - la temp&eacute;rature d&eacute;croit au fur et &agrave; mesure que la latitude augmente. Il fait plus chaud &agrave; l'&eacute;quateur (latitude 0)
         qu'au p&ocirc;le (latitude 90). Ceci est valable dans les deux h&eacute;misph&egrave;res de la Terre.<br/>
         Ces diff&eacute;rences de temp&eacute;rature vont donner lieu &agrave; l'apparition de cellules convectives, d&eacute;cisives, dont on va reparler.
         <h4>Force de Coriolis</h4>
@@ -292,12 +293,12 @@
 
     </div>
     <div style="border: 1px solid silver; border-radius: 10px; padding: 10px; margin: 10px;">
-        <i>Note</i>&nbsp;: Dans la terminologie utilis&eacute;e pour d&eacute;signer ces r&eacute;gions, le terme "sub-tropical" me semble ambigu. "Sub" signifie "en-dessous", et 
+        <i>Note</i>&nbsp;: Dans la terminologie utilis&eacute;e pour d&eacute;signer ces r&eacute;gions, le terme "sub-tropical" me semble ambigu. "Sub" signifie "en-dessous", et
         cette zone "sub-tropicale" se trouve &ecirc;tre celle qui est au-dessus du tropique, et non pas en-dessous (et ce dans les deux h&eacute;misph&egrave;res, si on consid&egrave;re la valeur absolue de la latitude)...
     </div>
     <div>
         On parlera ici surtout de la m&eacute;t&eacute;o dans les zones sub-tropicales et temp&eacute;r&eacute;es, o&ugrave; la force de Coriolis est suffisament importante pour g&eacute;n&eacute;rer des ph&eacute;nom&egrave;nes
-        cycloniques. &Agrave; l'inverse des zones tropicales, proches de l'&eacute;quateur, o&ugrave; elle est plus faible, voire nulle. Ce qui engendre des ph&eacute;nom&egrave;nes comme le tr&egrave;s fameux "Pot-au-Noir", aussi nomm&eacute; ITCZ 
+        cycloniques. &Agrave; l'inverse des zones tropicales, proches de l'&eacute;quateur, o&ugrave; elle est plus faible, voire nulle. Ce qui engendre des ph&eacute;nom&egrave;nes comme le tr&egrave;s fameux "Pot-au-Noir", aussi nomm&eacute; ITCZ
         (Inter Tropical Convergence Zone), ou Zone de Convergence Inter-Tropicale, o&ugrave; r&egrave;gne ce que certains appellent - &agrave; juste titre - un joyeux bordel.<br/>
         Pour cette m&ecirc;me raison, on n'a <i>jamais</i> de cyclone (ou typhon, c'est la m&ecirc;me chose, mais ailleurs dans le monde) &agrave; l'&eacute;quateur.
     </div>
@@ -308,7 +309,7 @@
 <div class="content doc-section"> <!-- in-the-middle"> -->
     <h1 style="text-align: center; font-size: 3em;"><a name="04">Les fronts</a></h1>
     <div>
-        Comme d&eacute;j&agrave; &eacute;voqu&eacute;, deux masses d'air de temp&eacute;ratures diff&eacute;rentes se se m&eacute;langent pas.<br/>
+        Comme d&eacute;j&agrave; &eacute;voqu&eacute;, deux masses d'air de temp&eacute;ratures diff&eacute;rentes ne se m&eacute;langent pas.<br/>
         Ceci pour des raisons que la thermodynamique peut expliquer, mais qui d&eacute;passent largement le cadre de ce document (leur hygrom&eacute;trie, entre beaucoup d'autres).
     </div>
     <div>
@@ -372,9 +373,9 @@
         <h3><a name="04-1-2">Sur un front froid</a></h3>
         <div>
             Le front froid &eacute;tant nettement plus vertical que son homologue chaud, les nuages qui vont s'y d&eacute;velopper auront eux aussi
-            une forme verticale. Le plus fameux d'entre eux est le Cumulo-Nimbus, qui s'&eacute;tend verticalement de 300 m&egrave;tres d'altitude &agrave; 
+            une forme verticale. Le plus fameux d'entre eux est le Cumulo-Nimbus, qui s'&eacute;tend verticalement de 300 m&egrave;tres d'altitude &agrave;
             5 voire 6.000 m&egrave;tres, d'un seul tenant&nbsp;!...<br/>
-            Il g&eacute;n&egrave;re des orages, et des courants ascendants et descendants tr&egrave;s violents. Ces courants ne nous concernent gu&egrave;re, 
+            Il g&eacute;n&egrave;re des orages, et des courants ascendants et descendants tr&egrave;s violents. Ces courants ne nous concernent gu&egrave;re,
             mais ils sont si violents que les avions (et autres planneurs) ont interdiction d'y voler, c'est un coup &agrave; y laisser des plumes...
             <!-- TODO Un dessin -->
             <!--div style="text-align: center; margin: 30px;">
@@ -393,7 +394,7 @@
                 Front occlus
                 <ul>
                     <li>
-                        Ceci apparait quand le front froid qui part du centre de la d&eacute;pression rattrape son homologue chaud. 
+                        Ceci apparait quand le front froid qui part du centre de la d&eacute;pression rattrape son homologue chaud.
                         On imagine le genre de circulation d'air &agrave; laquelle &ccedil;a peut donner lieu, et les nuages que &ccedil;a g&eacute;n&egrave;re...<br/>
                         Le point o&ugrave; le front occlus se s&eacute;pare en front froid et front chaud s'appelle "point triple".<br/>
                         En r&egrave;gle g&eacute;n&eacute;rale, si on a le choix, c'est un endroit &agrave; &eacute;viter.
@@ -423,7 +424,7 @@
     <div> <!-- class="content doc-section"> -->
         <h2><a name="04-3">Le front sub-tropical</a></h2>
         Comme mentionn&eacute; ci-avant, le terme sub-tropical est ambigu, voire trompeur (&agrave; mon avis).<br/>
-        Ce "front sub-tropical" est plus un concept qu'un front r&eacute;el, il repr&eacute;sente cette ligne de d&eacute;marcation entre l'air venu des p&ocirc;les, et celui qui vient des 
+        Ce "front sub-tropical" est plus un concept qu'un front r&eacute;el, il repr&eacute;sente cette ligne de d&eacute;marcation entre l'air venu des p&ocirc;les, et celui qui vient des
         zones tropicales. On verra que ce front est sujet &agrave; des "ondulations", lesquelles pourront donner naissance aux ph&eacute;nom&egrave;nes qui nous int&eacute;ressent ici, d&eacute;pressions et anticyclones.<br/>
         Ce front est grosso modo &agrave; mi-chemin entre les p&ocirc;les et l'&eacute;quateur. (90 - 0) / 2 = 45... 45&deg; de latitude, on n'est pas loin de la r&eacute;alit&eacute;.
     </div>
@@ -446,7 +447,7 @@
         il va se mettre &agrave; onduler. Cette ondulation va donner lieu &agrave; la formation des fronts qu'on &eacute;voquait avant, &agrave; la formation d'un front froid lorsque l'air froid
         pousse l'air chaud, et d'un front chaud lorsque l'air chaud pousse l'air froid.
         <div style="margin: 10px;">
-            Pour la clart&eacute; du document, on pr&eacute;sente les cas de figure qui arrivent dans l'h&eacute;misph&egrave;re nord. La m&ecirc;me chose arrive de la m&ecirc;me mani&egrave;re dans l'h&eacute;mishp&egrave;re sud, mais avec 
+            Pour la clart&eacute; du document, on pr&eacute;sente les cas de figure qui arrivent dans l'h&eacute;misph&egrave;re nord. La m&ecirc;me chose arrive de la m&ecirc;me mani&egrave;re dans l'h&eacute;mishp&egrave;re sud, mais avec
             des directions diff&eacute;rentes. On y reviendra.
         </div>
         <div style="text-align: center; margin: 30px;">
@@ -501,7 +502,7 @@
             </div>
             <div>
                 Ceci est identique dans les deux h&eacute;misph&egrave;res. Certes, la force de Coriolis est invers&eacute;e dans l'h&eacute;misph&egrave;re sud, mais comme le p&ocirc;le est au sud - et non
-                plus au nord, le sens de d&eacute;placement des d&eacute;pressions se trouve &ecirc;tre le m&ecirc;me que dans l'h&eacute;misph&egrave;re nord. Le sens de leur rotation, lui, est bien invers&eacute;. Dans 
+                plus au nord, le sens de d&eacute;placement des d&eacute;pressions se trouve &ecirc;tre le m&ecirc;me que dans l'h&eacute;misph&egrave;re nord. Le sens de leur rotation, lui, est bien invers&eacute;. Dans
                 l'h&eacute;misph&egrave;re sud, les d&eacute;pressions tournent bien dans des aiguilles d'une montre.
             </div>
             <div>
@@ -519,7 +520,7 @@
             <div style="border: 1px solid silver; border-radius: 10px; padding: 10px; margin: 10px;">
                 On appelle "circulation cyclonique" le sens de rotation des cyclones - et des d&eacute;pressions donc. Ce sens est celui des aiguilles d'une montre dans l'h&eacute;mish&egrave;re sud,
                 et contraire &agrave; celui des aiguilles d'une montre dans l'h&eacute;misph&egrave;re nord.<br/>
-                "Anticyclone" est le nom qu'on donne en fran&ccedil;ais aux hautes pressions, qui circulent - tournent - dans le sens oppos&eacute; &agrave; celui des basses pressions, qu'on appelle 
+                "Anticyclone" est le nom qu'on donne en fran&ccedil;ais aux hautes pressions, qui circulent - tournent - dans le sens oppos&eacute; &agrave; celui des basses pressions, qu'on appelle
                 donc "d&eacute;pressions" en fran&ccedil;ais.<br/>
                 Ainsi, les anticyclones tournent dans le sens des aiguilles d'une montre dans l'h&eacute;misph&egrave;re nord, et dans l'autre sens dans l'h&eacute;misph&egrave;re sud.
             </div>
@@ -527,7 +528,7 @@
             D'autres anticyclones apparaissent &eacute;galement, aux p&ocirc;les, pour des raisons de circulation analogues.<br/>
             Cette latitude - et celles qui lui tournent autour sont appell&eacute;es les "Horse Latitudes" par les anglophones, "Latitudes des chevaux" en fran&ccedil;ais.<br/>
             Dans les anticyclones, le vent est faible... Les voiliers avancent moins vite. Le chevaux qui se trouvaient parfois embarqu&eacute;s sur ces voiliers avaient toujours aussi soif,
-            quelle que soit la force du vent... Pour &eacute;conomiser l'eau potable, il n'&eacute;tait pas exceptionnel que ces &eacute;quid&eacute;s soient balanc&eacute;s par-dessus bord... 
+            quelle que soit la force du vent... Pour &eacute;conomiser l'eau potable, il n'&eacute;tait pas exceptionnel que ces &eacute;quid&eacute;s soient balanc&eacute;s par-dessus bord...
             D'o&ugrave; le nom de cette zone.
             <div>
                 Quand un anticyclone produit une sorte d'excroissance oblongue dans sa forme, on appelle &ccedil;a une dorsale.
@@ -538,7 +539,7 @@
     <div>  <!-- class="content doc-section"> -->
         <h2><a name="05-1">Isobars</a></h2>
         "Isobar" est un mot qui vient du grec "βάρος (baros)" qui signifie "poids", c'est une ligne qui relie les points d'&eacute;gale pression.<br/>
-        On rappelle que la pression atmosph&eacute;rique moyenne (ou nominale) au niveau de la mer est de 1013.25 mb (millibar, ou hecto-Pascal, le Pascal &eacute;tant 
+        On rappelle que la pression atmosph&eacute;rique moyenne (ou nominale) au niveau de la mer est de 1013.25 mb (millibar, ou hecto-Pascal, le Pascal &eacute;tant
         l'unit&eacute; l&eacute;gale de pression du syst&egrave;me MKSA - M&egrave;tre-Kilo-Seconde-Amp&egrave;re),
         laquelle correspond &agrave; 760 mmHg (millim&egrave;tres de mercure), valeur et unit&eacute; utilis&eacute;es nagu&egrave;re.<br/><br/>
         L'espace entre les isobars sur la carte peut donner une id&eacute;e du gradient (de la "pente") de la perturbation.<br/>
@@ -552,7 +553,7 @@
         Quand une d&eacute;pression pr&eacute;sente une excroissance, longiforme, on appelle &ccedil;a un <i>thalweg</i> (qui signifie "vall&eacute;e", en allemand).<br/>
         Comme cette configuration a pour effet connexe de resserer les isobars, on y constatera fr&eacute;quemment une acc&eacute;l&eacute;ration du vent.<br/>
         Le m&ecirc;me genre de configuration dans le cas d'un anticyclone s'appelle une <i>dorsale</i>, et peut donner lieu &agrave; des ph&eacute;nom&egrave;nes analogues.
-    </div> 
+    </div>
 
 </div>
 <hr class="screen-only"/>
@@ -588,17 +589,17 @@
             La carte ci-dessus est int&eacute;ressante (quand on est &agrave; terre). Il y a de l'ambiance&nbsp;!<br/>
             C'est une carte am&eacute;ricaine, d'o&ugrave; les <b>L</b> pour "low", basse pression, et les <b>H</b> pour "high", haute pression.<br/>
             On y voit plusieurs d&eacute;pressions (on note le <b>HURCN FORCE</b>, pour "Hurricane Force", force ouragan, au moins 12 Beaufort, et le
-            <b>DVLPG HURCN FORCE</b>, pour "Developping Hurricane Force", force ouragan en d&eacute;veloppement...), on y voit des <b>TS</b>, pour "Tropical Storm", 
-            temp&ecirc;te tropicale, <b>DVLPG STORM</b> pour "Developping Storm", temp&ecirc;te en d&eacute;veloppement, <b>GALE</b>, coup de vent, etc. On y voit des fronts occlus, 
+            <b>DVLPG HURCN FORCE</b>, pour "Developping Hurricane Force", force ouragan en d&eacute;veloppement...), on y voit des <b>TS</b>, pour "Tropical Storm",
+            temp&ecirc;te tropicale, <b>DVLPG STORM</b> pour "Developping Storm", temp&ecirc;te en d&eacute;veloppement, <b>GALE</b>, coup de vent, etc. On y voit des fronts occlus,
             et on note le trajet des d&eacute;pressions, on va y revenir.<br/>
-            Quand une fl&egrave;che part du centre de la d&eacute;pression, et finit vers une croix (<b>&times;</b>), cette croix d&eacute;signe la position estim&eacute;e du centre 
+            Quand une fl&egrave;che part du centre de la d&eacute;pression, et finit vers une croix (<b>&times;</b>), cette croix d&eacute;signe la position estim&eacute;e du centre
             du ph&eacute;nom&egrave;ne 24 heures apr&egrave;s la parution du fax.
         </div>
         <div style="text-align: left;">
             <h2>En mer, en pratique</h2>
             En fonction des informations dont on dispose, on va pouvoir anticiper l'&eacute;volution des conditions m&eacute;t&eacute;o de diff&eacute;rentes mani&egrave;res.<br/>
             Dans tous les cas de figure, un barom&egrave;tre sera un outil pr&eacute;cieux.<br/>
-            Le plus int&eacute;ressant n'est pas tant la valeur qu'il indique (qui requiert un &eacute;talonnage), que la fa&ccedil;on dont elle varie (plus ou moins vite)&nbsp;; 
+            Le plus int&eacute;ressant n'est pas tant la valeur qu'il indique (qui requiert un &eacute;talonnage), que la fa&ccedil;on dont elle varie (plus ou moins vite)&nbsp;;
             un barographe affiche la courbe de cette &eacute;volution, on la voit d'un seul coup d'&oelig;il.
             <div class="content doc-section">
                 <h3>Avec un r&eacute;cepteur de carte m&eacute;t&eacute;o</h3>
@@ -622,7 +623,7 @@
 
             <div class="content doc-section">
                 <h3>Sans r&eacute;cepteur de carte m&eacute;t&eacute;o</h3>
-                On n'a donc <i>pas</i> ici la possibilit&eacute; de mettre &agrave; jour les cartes re&ccedil;ues avant de prendre la mer, on t&acirc;chera donc de d&eacute;duire l'&eacute;volution de 
+                On n'a donc <i>pas</i> ici la possibilit&eacute; de mettre &agrave; jour les cartes re&ccedil;ues avant de prendre la mer, on t&acirc;chera donc de d&eacute;duire l'&eacute;volution de
                 la situation des observations qu'on peut faire (barom&egrave;tre, nuages, &eacute;volution de la force et de la direction du vent). C'est l&agrave; qu'un journal de bord
                 bien tenu peut faire une sacr&eacute;e diff&eacute;rence.<br/>
                 Sur les journaux de bord que je tiens, je dispose au moins des colonnes suivantes&nbsp;:
@@ -636,13 +637,13 @@
                 <code>Mer</code> d&eacute;signe l'&eacute;tat de la mer (Calme, Belle, Peu Agit&eacute;e, Agit&eacute;e, etc).<br/>
                 <code>Visi</code> d&eacute;signe la visibilit&eacute; en milles. La visibilit&eacute; est analogue &agrave; l'humidit&eacute; de l'air.<br/>
                 <code>Baro</code>, comme on a dit, permet de voir l'<i>&eacute;volution</i> de la pression atmosph&eacute;rique.<br/>
-                <code>Nuages</code>, en octats, et genre. Comme <code style="background: silver; padding: 2px 5px; border-radius: 5px;">2/8 Cu</code> (deux huiti&egrave;mes de Cumulus), 
-                <code style="background: silver; padding: 2px 5px; border-radius: 5px;">8/8 St</code> (huit huiti&egrave;mes de Stratus), 
+                <code>Nuages</code>, en octats, et genre. Comme <code style="background: silver; padding: 2px 5px; border-radius: 5px;">2/8 Cu</code> (deux huiti&egrave;mes de Cumulus),
+                <code style="background: silver; padding: 2px 5px; border-radius: 5px;">8/8 St</code> (huit huiti&egrave;mes de Stratus),
                 <code style="background: silver; padding: 2px 5px; border-radius: 5px;">4/8 St, StCu</code> (quatre huiti&egrave;mes de Stratus et de Strato-Cumulus).
                 Ceci afin de d&eacute;tecter l'arriv&eacute;e et l'&eacute;volution possible des fronts.<br/>
                 <br/>
                 Il est int&eacute;ressant de noter que ces colonnes <i>ne sont pas</i> destin&eacute;es &agrave; la tenue de l'estime, mais bien &agrave; anticiper l'&eacute;volution de la situation m&eacute;t&eacute;eo.<br/>
-                Int&eacute;ressant &eacute;galement, dans les zones tropicales, ces colonnes ont nettement moins d'int&eacute;r&ecirc;t. On n'est pas dans les quaranti&egrave;mes, ni dans les horse latitudes, 
+                Int&eacute;ressant &eacute;galement, dans les zones tropicales, ces colonnes ont nettement moins d'int&eacute;r&ecirc;t. On n'est pas dans les quaranti&egrave;mes, ni dans les horse latitudes,
                 l'&eacute;volution de la situation ne d&eacute;pend pas des m&ecirc;mes param&egrave;tres...<br/>
                 <br/>
                 Les donn&eacute;es consign&eacute;es dans livre de bord vont nous permettre de d&eacute;tecter ce qu'on devrait voir sur une carte m&eacute;t&eacute;o.<br/>
@@ -702,7 +703,7 @@
         GRIB est un acronyme qui signifie "GRIdded Binary", ou - selon les sources - "General Regularly-distributed Information in Binary form".<br/>
         Ce sont des fichiers informatiques qui contiennent des donn&eacute;es m&eacute;t&eacute;orologiques et assimil&eacute;es, dans un format bien pr&eacute;cis,
         qui fait l'objet d'un standard document&eacute;. Leur acc&egrave;s requiert une connexion Internet.<br/>
-        Ce sont des fichiers num&eacute;riques (illisibles par un humain), qui contiennent des donn&eacute;es comme celles des faxes, sur une p&eacute;riode donn&eacute;e. 
+        Ce sont des fichiers num&eacute;riques (illisibles par un humain), qui contiennent des donn&eacute;es comme celles des faxes, sur une p&eacute;riode donn&eacute;e.
         On peut par exemple avoir la force et la direction du vent, sur un maillage de 0.5&deg; par 0.5&deg;, toutes les 3 heures, pendant 5 jours.<br/>
         On peut y ajouter la temp&eacute;rature de l'air, la pression atmosph&eacute;rique, le 500mb, l'&eacute;tat de la mer, les pr&eacute;cipitations... La liste est longue.<br/>
     </div>
@@ -710,7 +711,7 @@
         Pour en disposer, il faut donc avoir une connexion Internet (ou un moyen de les t&eacute;l&eacute;charger, comme SailMail), mais aussi un ordinateur pour en d&eacute;chiffrer le contenu et l'afficher comme il convient.
     </div>
     <div>
-        Moyennant quoi, il y a beaucoup de choses &agrave; faire avec des GRIBs et un minimum de code... Il existe plusieurs logiciels - gratuits ou pas - qui 
+        Moyennant quoi, il y a beaucoup de choses &agrave; faire avec des GRIBs et un minimum de code... Il existe plusieurs logiciels - gratuits ou pas - qui
         permettent d'en visualiser le contenu, et moyennant le fait qu'on aie envie de soulever le capot (et d'&eacute;crire du code informatique), on peut aller encore plus loin.
         Entre l'affichage, le routage, et bien d'autres choses, il "suffit" d'avoir de l'imagination&nbsp;!
         <div style="text-align: center; margin-top: 10px;">
@@ -768,7 +769,7 @@
         <div>
             <h3>Les aliz&eacute;s</h3>
             Les aliz&eacute;s sont g&eacute;n&eacute;r&eacute;s par l'extr&eacute;mit&eacute; des anticyclones des horse latitudes, du c&ocirc;t&eacute; du Pot-au-Noir.<br/>
-            Ainsi, dans les deux h&eacute;misph&egrave;res, ils soufflent d'est en ouest. Avec une composante nord dans l'h&eacute;misph&egrave;re nord (ce qui donne un aliz&eacute; entre 
+            Ainsi, dans les deux h&eacute;misph&egrave;res, ils soufflent d'est en ouest. Avec une composante nord dans l'h&eacute;misph&egrave;re nord (ce qui donne un aliz&eacute; entre
             NE et ENE), et une composante sud dans l'h&eacute;misph&egrave;re sud (ce qui donne un aliz&eacute; entre SE et ESE).<br/>
             L'aliz&eacute; est un vent constant, et costaud&nbsp;! Il vaut mieux l'avoir dans le dos que sur le nez&nbsp;!
             <div style="text-align: center; margin: 30px;">
@@ -776,14 +777,14 @@
                 <div class="legend" style="text-align: left;">
                     Aliz&eacute; dans l'h&eacute;misph&egrave;re nord.
                     <br/>
-                    Dans le sud de l'anticyclone, l'air chaud monte de la zone &eacute;quatoriale sous l'effet d'une cellule convective. 
+                    Dans le sud de l'anticyclone, l'air chaud monte de la zone &eacute;quatoriale sous l'effet d'une cellule convective.
                     La rotation de l'anticyclone entraine cet air avec lui, ce qui lui imprime une composante d'Est en Ouest.
                 </div>
             </div>
         </div>
         <div>
             <h3>Les Horse Latitudes</h3>
-            C'est la latitude o&ugrave; se d&eacute;veloppent des anticyclones, ce qui donne lieu &agrave; un vent faible (d'o&ugrave; 
+            C'est la latitude o&ugrave; se d&eacute;veloppent des anticyclones, ce qui donne lieu &agrave; un vent faible (d'o&ugrave;
             le nom de cette zone, d&eacute;j&agrave; &eacute;voqu&eacute;).<br/>
             L'<b>anticyclone des A&ccedil;ores</b> est un repr&eacute;sentant bien connu de cette famille.
         </div>
@@ -792,13 +793,13 @@
             Les <b>quaranti&egrave;mes</b> sont cette zone situ&eacute;e entre les anticylones des horse latitudes, et les basses pressions g&eacute;n&eacute;r&eacute;es
             entre les cellules polaires et les cellules de Ferell.<br/>
             &Agrave; cause de la g&eacute;ographie de chaque hemisph&egrave;re, les vents qui soufflent dans les quaranti&egrave;mes sont nettement plus
-            forts dans l'h&eacute;misph&egrave;re sud que dans l'h&eacute;misph&egrave;re nord. Il y a beaucoup plus de terre sur leur trajet dans l'h&eacute;misph&egrave;re 
+            forts dans l'h&eacute;misph&egrave;re sud que dans l'h&eacute;misph&egrave;re nord. Il y a beaucoup plus de terre sur leur trajet dans l'h&eacute;misph&egrave;re
             nord que dans l'h&eacute;misph&egrave;re sud. D'o&ugrave; le nom qu'on leur a donn&eacute;, "Roaring Forties", quaranti&egrave;mes rugissants...
         </div>
         <div>
             <h3>Les zones polaires</h3>
             La circulation de l'air dans les cellules polaires y g&eacute;n&egrave;re des anticyclones.<br/>
-            Ainsi, entre les d&eacute;pressions des quaranti&egrave;mes, et ces anticyclones, il existe un courant - un vent - qui souffle dans 
+            Ainsi, entre les d&eacute;pressions des quaranti&egrave;mes, et ces anticyclones, il existe un courant - un vent - qui souffle dans
             la m&ecirc;me direction que l'aliz&eacute;, d'est en ouest. Mais moins chaud.
             <div style="border: 1px solid silver; border-radius: 5px; margin: 5px 20px; padding: 10px;">
                 Certains concurrents de l'OSTAR ont d&eacute;j&agrave; tent&eacute; d'emprunter cette route, o&ugrave; on est au portant d'Europe aux USA,
@@ -825,8 +826,8 @@
 <div class="content doc-section"> <!-- in-the-middle"> -->
     <h1 style="text-align: center; font-size: 3em;"><a name="11">Conclusion</a></h1>
     <!-- Ben voil&agrave;, y'a plus qu'&agrave;&nbsp;! -->
-    On dispose maintenant de plusieurs &eacute;l&eacute;ments qui sont tous autant de param&egrave;tres d'une m&ecirc;me &eacute;quation, qui peut permettre d'anticiper 
-    la situation m&eacute;t&eacute;o l&agrave; o&ugrave; on navigue. C'est une &eacute;quation complexe, c'est le moins qu'on puisse dire, et les combinaisons de tous ces 
+    On dispose maintenant de plusieurs &eacute;l&eacute;ments qui sont tous autant de param&egrave;tres d'une m&ecirc;me &eacute;quation, qui peut permettre d'anticiper
+    la situation m&eacute;t&eacute;o l&agrave; o&ugrave; on navigue. C'est une &eacute;quation complexe, c'est le moins qu'on puisse dire, et les combinaisons de tous ces
     param&egrave;tres sont nombreuses&nbsp;!<br/>
     Et comme souvent en pareil cas, c'est en pratiquant qu'on va y arriver&nbsp;!
 </div>
@@ -860,7 +861,7 @@
         <li><a href="https://www.amazon.fr/M%C3%A9t%C3%A9orologie-marine-plaisancier-r%C3%A9gatier-Pen-Duick/dp/2855130352" target="_new">M&eacute;t&eacute;o Marine, Claude Fons</a></li>
         <li><a href="https://northu.com/product/north-u-weather-pack/" target="_new">Weather for Sailors (North U)</a></li>
         <li><a href="https://www.google.fr/books/edition/Heavy_Weather_Avoidance_and_Route_Design/ELvc20RnY4MC?hl=en&gbpv=1&dq=inauthor:%22Mike+Ma-Li+Chen%22&printsec=frontcover" target="_new">Heavy Weather Avoidance, Ma-Li Chen &amp; Lee Chesneau</a></li>
-        <li><a href="https://diffusion.shom.fr/ouvrages/rsx-95.html" target="_new">M&eacute;t&eacute;orologie Maritime, SHOM</a></li>    
+        <li><a href="https://diffusion.shom.fr/ouvrages/rsx-95.html" target="_new">M&eacute;t&eacute;orologie Maritime, SHOM</a></li>
     </ul>
 </div>
 
@@ -894,7 +895,7 @@
         }
         return null;
     }
-    
+
     window.onload = () => {
         console.log('Loaded&nbsp;!');
         /*
@@ -917,6 +918,6 @@
         }
         console.log('Done loading.');
     };
-    
+
     </script>
     </html>
