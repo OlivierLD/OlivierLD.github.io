@@ -154,7 +154,7 @@
     };
 
     // Add tabs here  at will,as needed, by div id.
-    const TABS = ['kayak', 'todo', '2022', '2023', '2024', '2025'];
+    const TABS = ['kayak', 'todo', '2022', '2023', '2024', '2025', '2026'];
 
     let openTab = (evt, tabNum) => {
         let tabLinks = document.getElementsByClassName("tablinks");
@@ -195,7 +195,8 @@
         <button class="tablinks" onclick="openTab(event, 2);">2022</button>
         <button class="tablinks" onclick="openTab(event, 3); reCenterPT(); reCenterGx();">2023</button>
         <button class="tablinks" onclick="openTab(event, 4);">2024</button>
-        <button class="tablinks active" onclick="openTab(event, 5);">2025</button>
+        <button class="tablinks" onclick="openTab(event, 5);">2025</button>
+        <button class="tablinks active" onclick="openTab(event, 6);">2026</button>
     </div>
 
     <div id="kayak" style="display: none;">
@@ -595,7 +596,7 @@
 
     </div>
 
-    <div id="2025" style="display: block; margin: 15px; height: 650px; overflow-y: scroll;">
+    <div id="2025" style="display: none; margin: 15px; height: 650px; overflow-y: scroll;">
         <ul>
             <li><a class="list-link" href="#feb-mar">Tout jaune !</a></li>
             <li><a class="list-link" href="#sailing-03">Deux jours &agrave; Houat</a></li>
@@ -722,6 +723,19 @@
         <div style="display: grid; grid-template-columns: auto auto;">
             <img src="./images/noel.2025.01.jpeg" title="Nouvelle housse !" style="width: 70%;">
             <img src="./images/noel.2025.02.jpeg" title="Nouvelle housse !" style="width: 70%;">
+        </div>
+
+    </div>
+
+    <div id="2026" style="display: block; margin: 15px; height: 650px; overflow-y: scroll;">
+        <ul>
+            <li><a class="list-link" href="#jan-2026">Goretti !</a></li>
+        </ul>
+
+        <h2><a name="jan-2026">8 janvier 2026</a></h2>
+        <div>
+            Temp&ecirc;te Goretti, &ccedil;a souffle !<br/>
+            <img src="./images/goretti.2026.png" title="Goretti !" style="width: 800px; margin: 10px;"></img>
         </div>
 
     </div>
