@@ -1027,7 +1027,7 @@ Date.prototype.format = function (dateFormat) {
     </div>
   </div>
 
-  <div>
+  <div style="min-height: 50px;">
     <h2 id="h2-title" style="margin: 0; font-style: normal; text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px silver;">This page is my (messy) workbench</h2>
     <div style="z-index: -10; text-align: right;">
       <span id="bg-title"
@@ -1889,8 +1889,10 @@ Date.prototype.format = function (dateFormat) {
   function manageImageBGClick(cb) {
     if (cb.checked) { // On, remove BG Image
       withImageBG = false;
+      document.getElementById('bg-title').style.display = 'none';
     } else {          // Off, WITH BG Image
       withImageBG = true;
+      document.getElementById('bg-title').style.display = 'inline';
     }
   }
 
