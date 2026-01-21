@@ -10,6 +10,24 @@ function Graph(cName,       // Canvas Name
   let minx, miny, maxx, maxy;
   let context;
 
+  this.doOnClick = function(idx) { // Default
+    console.log("Clicked on index: " + idx);
+  }
+
+  let onClick = function(evt) {
+    let coords = relativeMouseCoords(evt, canvas);
+    let x = coords.x;
+    let y = coords.y;
+    // console.log("Click: x=" + x + ", y=" + y);
+    let idx = Math.round(x / xScale);
+    return idx;
+  }
+
+  let onclickCallback = function(evt) {
+    let idx = onClick(evt);
+    instance.doOnClick(idx);
+  }
+
   let canvas = document.getElementById(cName);
   canvas.addEventListener('mousemove', (evt) => {
     if (document.getElementById("tooltip").checked) {
@@ -21,7 +39,7 @@ function Graph(cName,       // Canvas Name
       y = coords.y;
 //    console.log("Mouse: x=" + x + ", y=" + y);
 
-      let idx = Math.round(x / xScale);
+      let idx = Math.round(x / xScale) + 1;
       if (idx < SpotParser.nmeaData.length) {
         let str0;
         let str1; // = 'X : ' + x + ', ' + 'Y :' + y;
@@ -69,6 +87,9 @@ function Graph(cName,       // Canvas Name
       }
     }
   }, 0);
+
+
+  canvas.addEventListener('click', onclickCallback, false);
 
   function relativeMouseCoords(event, element) {
     let totalOffsetX = 0;

@@ -392,6 +392,11 @@ function onDataChange() {
      }
      graph = new Graph("graphCanvas", 650, 200, graphdata);
 
+     graph.doOnClick = function(idx) {
+       let data = SpotParser.nmeaData[idx];
+       updateOnClick(idx, data.getNMEATws(), data.getNMEATwd(), data.getNMEAPrmsl(), data.getNMEARain());
+     };
+
      if (withTWD) { // with wind
        graph.drawWind(nmeaData);
      }
