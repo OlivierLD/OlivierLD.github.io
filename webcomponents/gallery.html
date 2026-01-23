@@ -223,7 +223,7 @@
                     let actualCall = fullCall.substring(functionCallIndex);
                     actualCall = actualCall.substring(0, actualCall.indexOf(';'));
                     // let regExp = new RegExp("^showHide\((['a-zA-Z]*)\).*", "");
-                    let regExp = /^showHide\('([a-zA-Z\-\d]*)'\).*/ 
+                    let regExp = /^showHide\('([a-zA-Z\-\d]*)'\).*/
                     let matches = regExp.exec(actualCall);
                     if (matches && matches[1]) {
                         let theId = matches[1];
@@ -251,7 +251,7 @@
                     let actualCall = fullCall.substring(functionCallIndex);
                     actualCall = actualCall.substring(0, actualCall.indexOf(';'));
                     // let regExp = new RegExp("^showHide\((['a-zA-Z]*)\).*", "");
-                    let regExp = /^showHide\('([a-zA-Z\-\d]*)'\).*/ 
+                    let regExp = /^showHide\('([a-zA-Z\-\d]*)'\).*/
                     let matches = regExp.exec(actualCall);
                     if (matches && matches[1]) {
                         let theId = matches[1];
@@ -434,7 +434,7 @@
             let element = document.getElementById(elem);
             let valueEl = document.getElementById(valId);
             let targetVal = parseInt(valueEl.value);
-            
+
             let origin = element.value;
             // console.log(`Ah! ${origin}, to ${targetVal}`);
             let delta = Math.abs(origin - targetVal);
@@ -1068,7 +1068,7 @@
 
             let lastPointToPlot = null;
             for (let i = 0; i < gc.length; i++) {
-                let panelPoint; 
+                let panelPoint;
                 if (worldMap.projection.type === 'GLOBE') {
                     panelPoint = worldMap.getPanelPoint(gc[i].pos.lat, gc[i].pos.lng);
                 } else {
@@ -1512,7 +1512,7 @@
 
 <!-- Perspective sliders -->
 <span id="head-up-command" onclick="collapseExpandHeadsup();" style="cursor: pointer;" tabindex="0"
-	  title="Show/Hide HeadUp Controls">+ Head up</span> 
+	  title="Show/Hide HeadUp Controls">+ Head up</span>
 <div id="button-span-zone" style="display: none; text-align: center;">
     <button onclick="toggleHeadsUp();" style="border-radius: 5px; margin: 5px;"
 		    title="Click this for HeadUp display, is a wind shield for example...">Head Up</button>
@@ -1520,7 +1520,7 @@
 <div id="heads-up-sliders" style="display: none;">
 	<table width="100%">
 		<tr>
-			<td width="25%">    
+			<td width="25%">
 				<h5 style="color: cyan;">Padding</h5>
 				<input type="range" value="50" min="0" max="200" style="width: 90%;"
 					   oninput="setPadding.call(this, event); padding01.value = this.value;"/>
@@ -1608,7 +1608,7 @@
 <hr/>
 
 <div style="margin: 10px; padding: 10px;">
-    <a href="#" style="padding: 5px; border: 1px solid orange; border-radius: 5px;" onclick="expandAll()">Expand All</a> 
+    <a href="#" style="padding: 5px; border: 1px solid orange; border-radius: 5px;" onclick="expandAll()">Expand All</a>
     <a href="#" style="padding: 5px; border: 1px solid orange; border-radius: 5px;" onclick="collapseAll()">Collapse All</a>
 </div>
 
@@ -3416,7 +3416,7 @@
                                          width="400"
                                          height="140"></jumbo-plus-display>
                  </div>
- 
+
                  <div class="black-frame centered">
                      Value:
                      <input type="text"
@@ -3432,7 +3432,7 @@
                      </button>
                  </div>
              </td>
- 
+
          </tr>
      </table>
  </div>
@@ -3775,7 +3775,7 @@
      </table>
  </div>
  <hr/>
- 
+
 <!--
     WORLD MAP
  +-->
@@ -3920,7 +3920,7 @@
 							   height="600"></world-map>
                 </div>
                 <div>
-                    <pre style="font-weight: bold; text-align: left; color: white; vertical-align: top; margin-top: 4px;">    
+                    <pre style="font-weight: bold; text-align: left; color: white; vertical-align: top; margin-top: 4px;">
   &lt;world-map id="world-map-04"
              class="worldmap-display"
              title="World Map - Mercator"
@@ -3937,7 +3937,7 @@
 							style="margin-top: 3px;">Pos to SF
 					</button>
                     <button onclick="callAfter('world-map-04')" title="Satellites and Great Circle (Paris-Hawaii)">After</button>
-                </div> 
+                </div>
             </div>
             Move the mouse on the map, and see its coordinates below.
             <div class="black-frame">
@@ -3947,7 +3947,7 @@
             </div>
 
             <script type="text/javascript">
-let map = document.getElementById('world-map-04'); 
+let map = document.getElementById('world-map-04');
 
 map.wmCallback = prm => {
     // console.log(`Callback invoked with:${JSON.stringify(prm)}`);
@@ -3970,7 +3970,7 @@ map.addEventListener('mousemove', evt => {
     // console.log(`Mouse X:${x}, Y:${y}`);
     // // let y = evt.offsetY + rect.height;  // y position within the element.
 
-    let pos = map.canvasToPos(x, y - 6); // Cheated!!! 
+    let pos = map.canvasToPos(x, y - 6); // Cheated!!!
     // console.log(` --> ${JSON.stringify(pos)}`);
     // if (x === 0) {
     //     debugger;
@@ -3983,8 +3983,8 @@ map.addEventListener('mousemove', evt => {
 
     map.title = `${strLat}\n${strLng}`;
 });
-                    
-               </script>           
+
+               </script>
 			</td>
 		</tr>
 	</table>
@@ -4352,6 +4352,17 @@ map.addEventListener('mousemove', evt => {
  +-->
 <div style="cursor: pointer;" onclick="showHide('dir-16-points');" tabindex="0"><b><u><a id="a-dir-16" href="#a-dir-16">Direction, 16 points</a></u></b></div>
 <div id="dir-16-points" class="smooth">
+                <!--pre style="font-weight: bold; text-align: left; color: white; vertical-align: top; margin-top: 6px;">
+&lt;dir-16-points id="dir-16-01"
+               class="dir-16-day"
+               title="16 points"
+               width="220"
+               height="220"
+               value="N">&lt;/dir-16-points>
+                </pre-->
+	<table>
+        <tr>
+            <td style="vertical-align: top;">
                 <pre style="font-weight: bold; text-align: left; color: white; vertical-align: top; margin-top: 6px;">
 &lt;dir-16-points id="dir-16-01"
                class="dir-16-day"
@@ -4360,7 +4371,19 @@ map.addEventListener('mousemove', evt => {
                height="220"
                value="N">&lt;/dir-16-points>
                 </pre>
-	<table>
+            </td>
+            <td style="vertical-align: top;">
+                <pre style="font-weight: bold; text-align: left; color: white; vertical-align: top; margin-top: 6px;">
+&lt;dir-16-points id="dir-16-02"
+               class="dir-16-day"
+               title="32 points"
+               width="220"
+               height="220"
+               value="N"
+               option="32">&lt;/dir-16-points>
+                </pre>
+            </td>
+        </tr>
 		<tr>
 			<td valign="top">
 				<div class="black-frame centered">
@@ -4381,14 +4404,39 @@ map.addEventListener('mousemove', evt => {
 						   value="SSE"/>
 					<button onclick="setData('v-dir-16-01', 'dir-16-01')"
 							title="Set 16 value"
-							style="margin-top: 3px;">Set
-					</button>
+							style="margin-top: 3px;">Set</button>
 					<br/>
 					<button onclick="animate16Dir('dir-16-01')"
 							title="Set 16 value"
-							style="margin-top: 3px;">Animate
-					</button>
+							style="margin-top: 3px;">Animate</button>
 
+				</div>
+			</td>
+			<td valign="top">
+				<div class="black-frame centered">
+					<dir-16-points id="dir-16-02"
+								   class="dir-16-day"
+								   title="32 points"
+								   width="220"
+								   height="220"
+								   value="N"
+                                   option="32"></dir-16-points>
+				</div>
+				<div class="black-frame centered">
+					Value:
+					<input type="text"
+						   id="v-dir-16-02"
+						   placeholder="N4NE"
+						   title="Value to set"
+						   style="width: 80px; text-align: center;"
+						   value="N4NE"/>
+					<button onclick="setData('v-dir-16-02', 'dir-16-02')"
+							title="Set 16 value"
+							style="margin-top: 3px;">Set</button>
+					<br/>
+					<button onclick="animate32Dir('dir-16-02')"
+							title="Set 32 value"
+							style="margin-top: 3px;">Animate</button>
 				</div>
 			</td>
 		</tr>
@@ -7050,7 +7098,7 @@ const DATA_TO_RECENTER_3 = [218,204,195,198,201,211,210,215,211,214,209,218,220,
 							193,191,189,193,189,189,189,189,190,187,189,191,191,193,192,192,194,193,193,191,192,193,192,
 							193,192,194,192,190,193,190,190,190,190,192,192,192,192,194,191,193];
 
-// One point every 15 minutes                            
+// One point every 15 minutes
 const BAROGRAPH_DATA = [1003.58,1003.83,1003.84,1004.16,1004.27,1004.44,1004.74,1004.79,1004.87,1005.07,1005.2,1005.23,1005.4,
                         1005.4,1005.66,1005.74,1005.76,1006.05,1006.34,1006.33,1006.55,1006.63,1006.8,1006.98,1007.06,1007.0,
                         1007.15,1007.04,1007.0,1007.04,1007.18,1007.37,1007.48,1007.61,1007.73,1007.89,1007.94,1007.99,1008.13,
@@ -7251,7 +7299,7 @@ function plotGraphRC(graphId, recenter, lineColor='lime', graphLabel='Reworking 
 	elmt.repaint();
 }
 
-const PRMSL_URL = './baroData.json';	
+const PRMSL_URL = './baroData.json';
 var prmslData;
 const DAYS = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY'];
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -7265,7 +7313,7 @@ fetch(PRMSL_URL)
         console.log(`Response: ${response.status}, ${response.statusText}`);
         response.json().then(doc => {
             prmslData = doc.y;
-            console.log(`PRMSL data loaded, ${doc.x.length} elements`); 
+            console.log(`PRMSL data loaded, ${doc.x.length} elements`);
             // Process it here if needed
             // Find the first "midnight"
             // let startIdx = 0;
@@ -7280,7 +7328,7 @@ fetch(PRMSL_URL)
             // "2023-03-19T08:42:33"
             //  |    |  |  |
             //  |    |  |  11
-            //  |    |  8  
+            //  |    |  8
             //  |    5
             //  0
             let fullStrDate = `${MONTHS[parseInt(doc.x[startIdx].substring(5, 7)) - 1]} ${parseInt(doc.x[startIdx].substring(8, 10))}, ${parseInt(doc.x[startIdx].substring(0, 4))} ${doc.x[startIdx].substring(11)}`;
@@ -7290,7 +7338,7 @@ fetch(PRMSL_URL)
             console.log(`${fullStrDate} is a ${DAYS[firstWeekDayIdx]}`);
 
         });
-    }, 
+    },
     (error, errmess) => {
         console.log("Ooch");
         let message;
@@ -7393,7 +7441,7 @@ function plotBarographRC(graphId, recenter, lineColor='lime', graphLabel='Rework
                         // console.log(`VGridLabel: ${val}`);
                         // 0 to 360, step 45
                         let i = (val / 45) % 7;
-                        return DAYS[i]; 
+                        return DAYS[i];
                     });
                 };
                 </script-->
@@ -7441,7 +7489,7 @@ function plotBarographRC(graphId, recenter, lineColor='lime', graphLabel='Rework
                     });
                 </script>
             </td>
-        </tr>    
+        </tr>
 	</table>
 </div>
 <hr/>
@@ -7519,7 +7567,7 @@ function plotBarographRC(graphId, recenter, lineColor='lime', graphLabel='Rework
                tilt="-15"
                label="This is the Moon"/>
                  </pre>
- 
+
      <table>
          <tr>
              <td valign="top">
@@ -7845,97 +7893,97 @@ function plotBarographRC(graphId, recenter, lineColor='lime', graphLabel='Rework
        </tr>
     </table>
 </div>
-<hr/>     
- 
+<hr/>
+
 <!--
     CHARTLESS MAP
  +-->
  <div style="cursor: pointer;" onclick="showHide('chartless-map');" tabindex="0"><b><u><a id="a-chartless" href="#a-chartless">Chartless Map</a></u></b></div>
  <script type="text/javascript">
- 
+
  function doAfterChartlessMap(id) {
      callAfter(id);
      document.getElementById(id).repaint();
  }
- 
+
  function callAfter(id) {
      let chartLessMap = document.getElementById(id);
      // Draw something on the chart, the center of the chart, in red.
      chartLessMap.setDoAfter((elmt, context) => {
-     
+
          console.log("Chartless Map, on the doAfter method.");
-         
+
          // let center = ChartlessMap.posToCanvas(this._centerLat, this._centerLng, this._projection, this._centerLat, this._centerLng, this._chartWidth, this._width, this._height);
          let center = elmt.posToCanvas(elmt._centerLat, elmt._centerLng);
          // Plot center
          context.save();
-     
+
          context.beginPath();
          context.strokeStyle = 'red';
          context.lineWidth = 1;
          console.log(`Plotting chart center on ${center.x} x ${center.y}`);
          context.moveTo(center.x, center.y - 20);
          context.lineTo(center.x, center.y + 20);
-     
+
          context.moveTo(center.x - 20, center.y);
          context.lineTo(center.x + 20, center.y);
          context.stroke();
          context.closePath();
-     
+
          context.beginPath();
          context.lineWidth = 4;
          context.arc(center.x, center.y, 10, 0, 2 * Math.PI, false);
          context.stroke();
          context.closePath();
-     
+
          context.restore();
      });
  }
- 
+
  const trackData = 'trackData.json';
  let trackColor = 'navy';
  function animateTrack(id) {
- 
+
      const map = document.getElementById(id);
- 
+
      let loadPathData = () => {
          map.chartWidth = 0.125; // THAT is a zoom...
          let latlngsData = [];
          let idx = 0;
- 
+
          map.setDoAfter((elmt, context) => {
              // console.log(`Plotting track of ${idx + 1} points.`);
- 
+
              // Plot Center
              if (true) {
                  let center = elmt.posToCanvas(elmt._centerLat, elmt._centerLng);
- 
+
                  context.save();
-         
+
                  context.beginPath();
                  context.strokeStyle = 'red';
                  context.lineWidth = 1;
                  // console.log(`Plotting chart center on ${center.x} x ${center.y}`);
                  context.moveTo(center.x, center.y - 20);
                  context.lineTo(center.x, center.y + 20);
-             
+
                  context.moveTo(center.x - 20, center.y);
                  context.lineTo(center.x + 20, center.y);
                  context.stroke();
                  context.closePath();
-             
+
                  context.beginPath();
                  context.lineWidth = 4;
                  context.arc(center.x, center.y, 10, 0, 2 * Math.PI, false);
                  context.stroke();
                  context.closePath();
-             
+
                  context.restore();
              }
- 
+
              // Markers
              let markerAndTrackColor = 'navy';
- 
+
              markers = [
                  { label: "Oyster Point Port",
                     latitude: 37.664375,
@@ -7956,8 +8004,8 @@ function plotBarographRC(graphId, recenter, lineColor='lime', graphLabel='Rework
                  let extraMess = [];
                  elmt.plotMark(context, marker, markerRadius, beaconHeight, markerAndTrackColor, extraMess); // method defined in the ChartlessMap WebComp.
              });
- 
- 
+
+
              // The points of the track
              context.beginPath();
              context.strokeStyle = trackColor;
@@ -7974,16 +8022,16 @@ function plotBarographRC(graphId, recenter, lineColor='lime', graphLabel='Rework
              }
              context.stroke();
              context.closePath();
- 
-         });        
- 
+
+         });
+
          fetch(trackData)
              .then(response => {
                  console.log(`Data Response: ${response.status} - ${response.statusText}`);
                  response.json().then(doc => {
                      latlngsData = doc;
                      console.log(`Path data loaded, ${doc.length} elements`);
- 
+
                      let func = (i) => {
                          let pos = latlngsData[i];
                          // console.log(`Plotting el[${i}], ${pos.lat} /  ${pos.lng}`);
@@ -7999,23 +8047,23 @@ function plotBarographRC(graphId, recenter, lineColor='lime', graphLabel='Rework
                              console.log("Done with the track");
                          }
                      };
- 
+
                      // window.setTimeout(() => {
                          func(idx);
                      // }, 100);
- 
+
                  });
              });
      }
- 
+
      loadPathData();
  }
- 
+
  function onSlider(event) {
      let chart = document.getElementById('chartless-map-01');
      chart.chartWidth = this.value;
  }
- 
+
  function chartMouseMoveFeedback(moveData) {
      // console.log(`Move Data: ${JSON.stringify(moveData)}`);
      let chart = document.getElementById('chartless-map-01');
@@ -8024,7 +8072,7 @@ function plotBarographRC(graphId, recenter, lineColor='lime', graphLabel='Rework
      document.getElementById('cursor-Y').innerText = moveData.y;
      document.getElementById('cursor-POS').innerText = `${chart.decToSex(moveData.pos.lat, "NS")} / ${chart.decToSex(moveData.pos.lng, "EW")}`;
  }
- 
+
  let setStyle = (opt) => {
      document.getElementById('chartless-map-01').className = opt.value;
      switch (opt.value) {
@@ -8039,13 +8087,13 @@ function plotBarographRC(graphId, recenter, lineColor='lime', graphLabel='Rework
              trackColor = 'navy';
              break;
      }
- 
- 
- 
+
+
+
      document.getElementById('chartless-map-01').repaint();
  };
- 
- 
+
+
      </script>
      <div id="chartless-map" class="smooth">
      <table>
@@ -8085,7 +8133,7 @@ function plotBarographRC(graphId, recenter, lineColor='lime', graphLabel='Rework
                  </div>
              </td>
              <td valign="top">
- 
+
                  <table>
                      <tr>
                          <td>Style:</td>
@@ -8119,21 +8167,21 @@ function plotBarographRC(graphId, recenter, lineColor='lime', graphLabel='Rework
                  </div>
              </td>
          </tr>
-         <tr> 
+         <tr>
              <td>
                  <button onclick="doAfterChartlessMap('chartless-map-01');">Set Call After</button>
                  <button onclick="animateTrack('chartless-map-01');">Read track data</button>
              </td>
          </tr>
      </table>
- </div>  
-<hr/> 
+ </div>
+<hr/>
 
 <!-- End of Demo Components -->
 
 </div> <!-- Inner Container -->
 </div> <!-- Outer Container -->
-  
+
 <!-- The end -->
 <table width="100%">
 	<tr>
@@ -8153,7 +8201,7 @@ function plotBarographRC(graphId, recenter, lineColor='lime', graphLabel='Rework
             // console.log(`VGridLabel: ${val}`);
             // 0 to ..., step 96
             let i = (((val - startIdx) / 96) + firstWeekDayIdx) % 7;
-            return DAYS[i]; 
+            return DAYS[i];
         });
         document.getElementById('chartless-map-01').setMouseMoveFeedback(chartMouseMoveFeedback);
     }

@@ -36,7 +36,8 @@ const default16PointsColorConfig = {
 	font: 'Arial' /* 'Source Code Pro' */
 };
 
-const cardValues = [
+
+const card16Values = [
 	{ name: 'N', value: 0 },
 	{ name: 'NNE', value: 22.5 },
 	{ name: 'NE', value: 45 },
@@ -55,7 +56,44 @@ const cardValues = [
 	{ name: 'NNW', value: 337.5 }
 ];
 
-const FONT_SIZE = 60;
+const card32Values = [
+	{ name: 'N', value: 0 },
+	{ name: 'N4NE', display: 'N\u00bcNE', value: 11.25 },
+	{ name: 'NNE', value: 22.5 },
+	{ name: 'NE4N', display: 'NE\u00bcN', value: 33.75 },
+	{ name: 'NE', value: 45 },
+	{ name: 'NE4E', display: 'NE\u00bcE', value: 56.25 },
+	{ name: 'ENE', value: 67.5 },
+	{ name: 'E4NE', display: 'E\u00bcNE', value: 78.75 },
+	{ name: 'E', value: 90 },
+	{ name: 'E4SE', display: 'E\u00bcSE', value: 101.25 },
+	{ name: 'ESE', value: 112.5 },
+	{ name: 'SE4E', display: 'SE\u00bcE', value: 123.75 },
+	{ name: 'SE', value: 135 },
+	{ name: 'SE4S', display: 'SE\u00bcS', value: 146.25 },
+	{ name: 'SSE', value: 157.5 },
+	{ name: 'S4SE', display: 'S\u00bcSE', value: 168.75 },
+	{ name: 'S', value: 180 },
+	{ name: 'S4SW', display: 'S\u00bcSW', value: 191.25 },
+	{ name: 'SSW', value: 202.5 },
+	{ name: 'SW4S', display: 'SW\u00bcS', value: 213.75 },
+	{ name: 'SW', value: 225 },
+	{ name: 'SW4W', display: 'SW\u00bcW', value: 236.25 },
+	{ name: 'WSW', value: 247.5 },
+	{ name: 'W4SW', display: 'W\u00bcSW', value: 258.75 },
+	{ name: 'W', value: 270 },
+	{ name: 'W4NW', display: 'W\u00bcNW', value: 281.25 },
+	{ name: 'WNW', value: 292.5 },
+	{ name: 'NW4W', display: 'NW\u00bcW', value: 303.75 },
+	{ name: 'NW', value: 315 },
+	{ name: 'NW4N', display: 'NW\u00bcN', value: 326.25 },
+	{ name: 'NNW', value: 337.5 },
+	{ name: 'N4NW', display: 'N\u00bcNW', value: 348.75 },
+];
+
+let cardValues = card16Values; // Default
+
+const FONT_SIZE = 50; // TODO Corellate to "option" 16 / 32 ?
 // import * as Utilities from "../utilities/Utilities.js";
 
 /* global HTMLElement */
@@ -65,7 +103,8 @@ class Raw16PointsDir extends HTMLElement {
 		return [
 			"width",        // Integer. Canvas width
 			"height",       // Integer. Canvas height
-			"value"         // Object like { name: 'NNE', value: 22.5 }
+			"value",        // Object like { name: 'NNE', value: 22.5 }
+			"option"        // Integer. 16 or 32 points
 		];
 	}
 
@@ -84,6 +123,7 @@ class Raw16PointsDir extends HTMLElement {
 		this._value       = { name: 'N', value: 0 };
 		this._width       = 150;
 		this._height      = 150;
+		this._option      = 16; // 16 or 32 points
 
 		this.scale = Math.min(this._width, this._height) / 150;
 
@@ -130,6 +170,13 @@ class Raw16PointsDir extends HTMLElement {
 			case "height":
 				this._height = parseInt(newVal);
 				break;
+			case "option":
+				this._option = parseInt(newVal);
+				if (this._option === 32) {
+					cardValues = card32Values;
+				} else {
+					cardValues = card16Values;
+				}
 			default:
 				break;
 		}
@@ -158,6 +205,9 @@ class Raw16PointsDir extends HTMLElement {
 		this.setAttribute("height", val);
 		this.scale = Math.min(this._width, this._height) / 150;
 	}
+	set option(val) {
+		this.setAttribute("option", val);
+	}
 	set shadowRoot(val) {
 		this._shadowRoot = val;
 	}
@@ -170,6 +220,9 @@ class Raw16PointsDir extends HTMLElement {
 	}
 	get height() {
 		return this._height;
+	}
+	get option() {
+		return this._option;
 	}
 	get shadowRoot() {
 		return this._shadowRoot;
@@ -278,7 +331,7 @@ class Raw16PointsDir extends HTMLElement {
 		}
 
 		// Value
-		let text = dirValue.name;
+		let text = dirValue.display ? dirValue.display : dirValue.name;
 		let fontSize = FONT_SIZE;
 		let len = 0;
 		context.font = Math.round(this.scale * fontSize) + "px " + this.colorConfig.font; // "40px Arial"
@@ -291,6 +344,12 @@ class Raw16PointsDir extends HTMLElement {
 		context.closePath();
 
 		// LEDs
+		if (this._option === 32) { // A reminder...
+			cardValues = card32Values;
+		} else {
+			cardValues = card16Values;
+		}
+
 		for (let led=0; led<cardValues.length; led++) {
 			let angle = Math.toRadians(cardValues[led].value + 90);
 			// Led center
