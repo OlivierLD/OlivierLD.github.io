@@ -477,6 +477,36 @@ class CompassDisplay extends HTMLElement {
 			context.font = "bold " + Math.round(scale * 15) + "px Arial"; // Like "bold 15px Arial"
 			context.fillStyle = digitColor;
 			let str = i.toString();
+			if (this.majorTicks === 45) { // 8 points, use N, NE, E, SE, S, SW, W, NW
+				switch (i) {
+					case 0:
+						str = "N";
+						break;
+					case 45:
+						str = "NE";
+						break;
+					case 90:
+						str = "E";
+						break;
+					case 135:
+						str = "SE";
+						break;
+					case 180:
+						str = "S";
+						break;
+					case 225:
+						str = "SW";
+						break;
+					case 270:
+						str = "W";
+						break;
+					case 315:
+						str = "NW";
+						break;
+					default:
+						break;
+				}
+			}
 			let len = context.measureText(str).width;
 			context.fillText(str, -len / 2, (-(radius * .8) + 10));
 			context.lineWidth = 1;
