@@ -212,6 +212,10 @@ function Graph(cName,       // Canvas Name
 		return graphData;
 	};
 
+	this.resetData = function () {
+		graphData = [];
+	}
+
 	let canvas = document.getElementById(cName);
 
 	canvas.addEventListener('click', (evt) => {

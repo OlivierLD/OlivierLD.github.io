@@ -153,6 +153,11 @@
           copyToClipboard("err-mess");
         }
 
+        function resetPoints() {
+          dataGraph.resetData();
+          dataGraph.drawPoints("dataCanvas", []); // Cleanup display
+        }
+
         function zoomIn() {
           let minX, maxX, minY, maxY;
           [minX, maxX, minY, maxY] = dataGraph.getBoundaries();
@@ -201,10 +206,13 @@
           <span style="position: absolute; margin-top: 18px; margin-left: 10px;font-size: 20px; font-weight: bold;">
             Required Degree : <input id="degree" type="number" style="text-align: right; width: 40px;" min="1" placeholder="Degree" size="3" value="3">
             <span style="margin-left: 20px;">
-              <button onclick="goDrawing();">Resolve</button>
+              <button onclick="goDrawing();" title="Proceed!">Resolve</button>
             </span>
             <span style="margin-left: 20px;">
               <button onclick="spitPoints();" title="Spit Point coordinates in the console">Spit points</button>
+            </span>
+            <span style="margin-left: 20px;">
+              <button onclick="resetPoints();" title="Remove all existing points">Reset points</button>
             </span>
           </span>
         </td>
