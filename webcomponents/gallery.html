@@ -600,9 +600,18 @@
         let dir16AnimationInterval;
         let dir16IdxValue;
 
-        const cardVals = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"];
+        let dir32AnimationInterval;
+        let dir32IdxValue;
+
+        const card16Vals = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"];
+        const card32Vals = ["N", "N4NE", "NNE", "NE4N", "NE", "NE4E", "ENE", "E4NE", "E", "E4SE", "ESE", "SE4E", "SE", "SE4S", "SSE", "S4SE", "S", "S4SW", "SSW", "SW4W", "SW", "SW4S", "WSW", "W4SW", "W", "W4NW", "WNW", "NW4W", "NW", "NW4N", "NNW", "N4NW"];
+
+        // let cardVals = card16Vals;
 
         function animate16Dir(id) {
+
+            let cardVals = card16Vals;
+
             if (dir16AnimationInterval !== undefined) {
                 window.clearInterval(dir16AnimationInterval);
                 dir16AnimationInterval = undefined;
@@ -612,6 +621,23 @@
                     document.getElementById(id).value = cardVals[dir16IdxValue];
                     dir16IdxValue += 1;
                     dir16IdxValue = dir16IdxValue % cardVals.length;
+                }, 1000);
+            }
+        }
+
+        function animate32Dir(id) {
+
+            let cardVals = card32Vals;
+
+            if (dir32AnimationInterval !== undefined) {
+                window.clearInterval(dir32AnimationInterval);
+                dir32AnimationInterval = undefined;
+            } else {
+                dir32IdxValue = 0;
+                dir32AnimationInterval = window.setInterval(() => {
+                    document.getElementById(id).value = cardVals[dir32IdxValue];
+                    dir32IdxValue += 1;
+                    dir32IdxValue = dir32IdxValue % cardVals.length;
                 }, 1000);
             }
         }
@@ -4350,7 +4376,7 @@ map.addEventListener('mousemove', evt => {
 <!--
     DIR-16-POINTS
  +-->
-<div style="cursor: pointer;" onclick="showHide('dir-16-points');" tabindex="0"><b><u><a id="a-dir-16" href="#a-dir-16">Direction, 16 points</a></u></b></div>
+<div style="cursor: pointer;" onclick="showHide('dir-16-points');" tabindex="0"><b><u><a id="a-dir-16" href="#a-dir-16">Direction, 16/32 points</a></u></b></div>
 <div id="dir-16-points" class="smooth">
                 <!--pre style="font-weight: bold; text-align: left; color: white; vertical-align: top; margin-top: 6px;">
 &lt;dir-16-points id="dir-16-01"
