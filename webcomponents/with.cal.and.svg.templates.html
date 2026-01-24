@@ -22,36 +22,64 @@
 <body class="bg-img">
 
 	<h1 class="black-frame outline">These are Web Components in HTML Templates</h1>
+	<h3 class="black-frame outline">This is not working as it used to...</h3>
 
 	<div style="display: grid; grid-template-areas: 'left right' 'bottom bottom'; grid-gap: 10px;">
-		<div id="calendar-placeholder" style="grid-area: left; vertical-align: top; text-align: center; padding-top: 55px;"></div>
-		<div id="svg-clock-placeholder" style="grid-area: right; vertical-align: top;"></div>
-		<div id="split-flap-placeholder" style="grid-area: bottom;"></div>
+		<div id="calendar-placeholder" style="grid-area: left; vertical-align: top; text-align: center; padding-top: 55px;">
+			<!--iframe src="./templates/calendar.template.html" style="height: 300px; width: 100%;"></iframe-->
+		</div>
+		<div id="svg-clock-placeholder" style="grid-area: right; vertical-align: top;">
+			<iframe src="./templates/svg.clock.template.html" style="height: 300px; width: 400px;"></iframe>
+		</div>
+		<div id="split-flap-placeholder" style="grid-area: bottom;">
+			<!--iframe src="./templates/split.flap.template.html" style="height: 300px; width: 100%;"></iframe-->
+		</div>
 	</div>
 
 	<script>
-let linkCal = document.querySelector('link[rel="import"][id="import-01"]'); // Simplify this, is [rel="import"] necessary?
-let contentCal = linkCal.import;
 
-let linkSF = document.querySelector('link[rel="import"][id="import-02"]');
-let contentSF = linkSF.import;
+	async function loadTemplate (filename, where) {
+		const res = await fetch(filename);
+		const text = await res.text();
+		console.log("Inserting template from [%s] into [%s]", filename, where);
+		// console.log(text);
+		document.getElementById(where).insertAdjacentHTML('afterend', text); // See https://www.w3schools.com/jsref/met_node_insertadjacenthtml.asp
+	}
 
-let linkClk = document.querySelector('link[rel="import"][id="import-03"]');
-let contentClk = linkClk.import;
+	window.onload = () => {
 
-// Grab DOMs from the templates.
-let cal = contentCal.querySelector('#calendar-id');
-document.getElementById("calendar-placeholder").appendChild(cal.cloneNode(true));
+		let linkCal = document.querySelector('link[rel="import"][id="import-01"]'); // Simplify this, is [rel="import"] necessary?
+		let contentCal = linkCal.href;
 
-let sf = contentSF.querySelector('#split-flap-id');
-document.getElementById("split-flap-placeholder").appendChild(sf.cloneNode(true));
+		let linkSF = document.querySelector('link[rel="import"][id="import-02"]');
+		let contentSF = linkSF.href;
 
-let sc = contentClk.querySelector('#svg-clock-id');
-document.getElementById("svg-clock-placeholder").appendChild(sc.cloneNode(true));
+		let linkClk = document.querySelector('link[rel="import"][id="import-03"]');
+		let contentClk = linkClk.href;
 
-window.onload = () => {
-	updateCalendar();
-};
+		if (true) {
+			loadTemplate(contentCal, "calendar-placeholder").then( () => {
+				console.log("Calendar template loaded.");
+			});
+		}
+
+		if (true) {
+			loadTemplate(contentSF, "split-flap-placeholder").then( () => {
+				console.log("Split Flap template loaded.");
+			});
+		}
+
+		if (false) {
+			loadTemplate(contentClk, "svg-clock-placeholder").then( () => {
+				console.log("SVG Clock template loaded.");
+			});
+		}
+	};
+
+
+// window.onload = () => {
+// 	updateCalendar();
+// };
 	</script>
 
 	<hr/>
