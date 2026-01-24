@@ -52,7 +52,8 @@ class CompassDisplay extends HTMLElement {
 			"with-rose",    // Boolean, draw the rose or not
 			"with-border",  // Boolean
 			"label",        // String. HDG, COG, etc
-			"value"         // Float. Heading to display
+			"value",        // Float. Heading to display
+			"option"        // String. 'card-points' | 'digits'
 		];
 	}
 
@@ -76,6 +77,7 @@ class CompassDisplay extends HTMLElement {
 		this._with_rose   = true;
 		this._with_border = true;
 		this._label       = undefined;
+		this._option      = undefined; // 'card-points' | 'digits'
 
 		this._previousClassName = "";
 		this.compassDisplayColorConfig = defaultCompassDisplayColorConfig; // Init
@@ -130,6 +132,9 @@ class CompassDisplay extends HTMLElement {
 			case "label":
 				this._label = newVal;
 				break;
+			case "option":
+				this._option = newVal;
+				break;
 			default:
 				break;
 		}
@@ -143,10 +148,10 @@ class CompassDisplay extends HTMLElement {
 		}
 	}
 
-	set value(option) {
-		this.setAttribute("value", option);
+	set value(val) {
+		this.setAttribute("value", val);
 		if (compassDisplayVerbose) {
-			console.log(">> Value option:", option);
+			console.log(">> Value option:", val);
 		}
 //	this.repaint();
 	}
@@ -170,6 +175,9 @@ class CompassDisplay extends HTMLElement {
 	}
 	set label(val) {
 		this.setAttribute("label", val);
+	}
+	set option(val) {
+		this.setAttribute("option", val);
 	}
 	set shadowRoot(val) {
 		this._shadowRoot = val;
@@ -198,6 +206,9 @@ class CompassDisplay extends HTMLElement {
 	}
 	get label() {
 		return this._label;
+	}
+	get option() {
+		return this._option;
 	}
 	get shadowRoot() {
 		return this._shadowRoot;
@@ -333,7 +344,7 @@ class CompassDisplay extends HTMLElement {
 		context.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
 		context.beginPath();
-		if (this.withBorder === true) {
+		if (this.withBorder === true) {  // Draw circle around
 			//context.arc(x, y, radius, startAngle, startAngle + Math.PI, antiClockwise);
 			context.arc(this.canvas.width / 2, radius + 10, radius, 0, 2 * Math.PI, false);
 			context.lineWidth = 5;
@@ -466,45 +477,138 @@ class CompassDisplay extends HTMLElement {
 			context.closePath();
 		}
 
-		// Numbers
+		// Numbers, or card points names
 		context.beginPath();
-		let scale = 1;
+		// let scale = 1;
+		let scale = this.height / 300; // Based on a 300x300 design
 		for (let i = 0; i < 360; i += this.majorTicks) {
 			let heading = i - this._value;
 			context.save();
-			context.translate(this.canvas.width / 2, (radius + 10)); // canvas.height);
+			let offset = 10;
+			if (i % 45 !== 0 && (this.majorTicks === 22.5 || this.majorTicks === 11.25)) {
+				if (this.majorTicks === 22.5) {
+					offset = 20;
+				} else {
+					offset = 30;
+				}
+				// context.rotate((2 * Math.PI * ((heading + 10) / 360)));
+			}
+
+			context.translate(this.canvas.width / 2, (radius + offset)); // canvas.height);
 			context.rotate((2 * Math.PI * (heading / 360)));
 			context.font = "bold " + Math.round(scale * 15) + "px Arial"; // Like "bold 15px Arial"
+			if (i % 45 !== 0 && (this.majorTicks === 22.5 || this.majorTicks === 11.25)) {
+				if (this.majorTicks === 22.5) {
+					context.font = "bold " + Math.round(scale * 10) + "px Arial"; // Like "bold 12px Arial"
+				} else {
+					context.font = "bold " + Math.round(scale * 6) + "px Arial"; // Like "bold 10px Arial"
+				}
+				// context.rotate((2 * Math.PI * ((heading + 10) / 360)));
+			}
 			context.fillStyle = digitColor;
-			let str = i.toString();
-			if (this.majorTicks === 45) { // 8 points, use N, NE, E, SE, S, SW, W, NW
-				switch (i) {
-					case 0:
-						str = "N";
-						break;
-					case 45:
-						str = "NE";
-						break;
-					case 90:
-						str = "E";
-						break;
-					case 135:
-						str = "SE";
-						break;
-					case 180:
-						str = "S";
-						break;
-					case 225:
-						str = "SW";
-						break;
-					case 270:
-						str = "W";
-						break;
-					case 315:
-						str = "NW";
-						break;
-					default:
-						break;
+			let str = i.toString(); // Numbers
+			if (this.option === 'card-points') {
+				if (this.majorTicks === 45 || this.majorTicks === 22.5 || this.majorTicks === 11.25) { // x * 8 points, use N, NE, E, SE, S, SW, W, NW
+					switch (i) {
+						case 0:
+							str = "N";
+							break;
+						case 11.25:
+							str = "N\u00bcNE";
+							break;
+						case 22.5:
+							str = "NNE";
+							break;
+						case 33.75:
+							str = "NE\u00bcN";
+							break;
+						case 45:
+							str = "NE";
+							break;
+						case 56.25:
+							str = "NE\u00bcE";
+							break;
+						case 67.5:
+							str = "ENE";
+							break;
+						case 78.75:
+							str = "E\u00bcNE";
+							break;
+						case 90:
+							str = "E";
+							break;
+						case 101.25:
+							str = "E\u00bcSE";
+							break;
+						case 112.5:
+							str = "ESE";
+							break;
+						case 123.75:
+							str = "SE\u00bcE";
+							break;
+						case 135:
+							str = "SE";
+							break;
+						case 146.25:
+							str = "SE\u00bcS";
+							break;
+						case 157.5:
+							str = "SSE";
+							break;
+						case 168.75:
+							str = "S\u00bcSE";
+							break;
+						case 180:
+							str = "S";
+							break;
+						case 191.25:
+							str = "S\u00bcSW";
+							break;
+						case 202.5:
+							str = "SSW";
+							break;
+						case 213.75:
+							str = "SW\u00bcS";
+							break;
+						case 225:
+							str = "SW";
+							break;
+						case 236.25:
+							str = "SW\u00bcW";
+							break;
+						case 247.5:
+							str = "WSW";
+							break;
+						case 258.75:
+							str = "W\u00bcSW";
+							break;
+						case 270:
+							str = "W";
+							break;
+						case 281.25:
+							str = "W\u00bcNW";
+							break;
+						case 292.5:
+							str = "WNW";
+							break;
+						case 303.75:
+							str = "NW\u00bcW";
+							break;
+						case 315:
+							str = "NW";
+							break;
+						case 326.25:
+							str = "NW\u00bcN";
+							break;
+						case 337.5:
+							str = "NNW";
+							break;
+						case 348.75:
+							str = "N\u00bcNW";
+							break;
+						default:
+							break;
+					}
 				}
 			}
 			let len = context.measureText(str).width;
