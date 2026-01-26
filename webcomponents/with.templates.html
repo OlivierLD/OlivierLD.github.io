@@ -1,4 +1,8 @@
 <!DOCTYPE html>
+<!--
+ | Uses saync functions to load templates into placeholders.
+ | This is easier to manage than Promises, that's all.
+ +-->
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
@@ -354,7 +358,7 @@
 
   <script>
 
-	const parser = new DOMParser();
+	const parser = new DOMParser(); // Used by loadTemplateBackup
 
 	async function loadTemplateBackup (filename) {
 		const res = await fetch(filename);
