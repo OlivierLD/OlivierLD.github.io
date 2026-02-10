@@ -87,6 +87,9 @@ let marqueeScrollUp = (marqueeId) => {
                 toDisplay.push("Jupiter D: " + globalAstroData.jupiter.DEC.fmt);
                 toDisplay.push("Saturn GHA: " + globalAstroData.saturn.GHA.fmt);
                 toDisplay.push("Saturn D: " + globalAstroData.saturn.DEC.fmt);
+                toDisplay.push("-----------------------");
+                // EoT ?
+                toDisplay.push("EoT: " + globalAstroData.EOT.fmt);
             }
             if (userPos !== undefined && userPos.longitude !== undefined) {
                 let lhaSun  = calcLHA(globalAstroData.sun.GHA.raw, userPos.longitude);
@@ -1385,13 +1388,13 @@ let toggleForeground = () => {
         <div style="margin-bottom: 10px;">
             <!-- See defaultMarqueeTextArray -->
             <marquee-panel id="marquee-panel-01"
-                        class="marquee-01"
-                        width="600"
-                        height="350"
-                        nb-cols="200"
-                        nb-lines="68"
-                        title="Computed Data"
-                        display-data='{ "text-array": ["You must have", "triggered a computation", "to see something", "in here..."], "x": 4, "y": 12 }'/>
+                           class="marquee-01"
+                           width="600"
+                           height="350"
+                           nb-cols="200"
+                           nb-lines="68"
+                           title="Computed Data"
+                           display-data='{ "text-array": ["You must have", "triggered a computation", "to see something", "in here..."], "x": 4, "y": 12 }'/>
         </div>
     </dialog>
 
