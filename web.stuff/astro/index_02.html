@@ -716,7 +716,7 @@ let drawElevation = (divId, elev, color, circleColor) => { // colors in hex, lik
     let text2 = document.createElementNS(XMLNS, 'text');
     let fontSize2 = 16;
     text2.setAttribute('x', FRAME_WIDTH - (label2.length * fontSize2 * 0.8)); // right. TODO Find a way to use measureText...
-    console.log(`==> label2.length=${label2.length}, x=${FRAME_WIDTH - (label2.length * fontSize2 * 1.0)}`);
+    // console.log(`==> label2.length=${label2.length}, x=${FRAME_WIDTH - (label2.length * fontSize2 * 1.0)}`);
     text2.setAttribute('y', `${(0) + (fontSize2 / 1) + 2}`); // top
     text2.setAttributeNS(null, 'font-size', fontSize2);
     text2.setAttributeNS(null, 'font-weight', 'bold');
