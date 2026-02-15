@@ -49,6 +49,7 @@ let globalSRUStars;
 let marqueeScrollUpAnimationInterval;
 // let defaultMarqueeTextArray = [ 'Raspberry Pi', 'Web Components', 'Java & Processing', 'HTML5, CSS3, ES6', 'NodeJS', 'Python', '3D Printing', 'Arduino & Co', 'AI, ML, DL', 'Artificial Intelligence', 'Artificial Insanity', 'and other toys...' ];
 
+// Start/Stop the marquee scroll up animation
 let marqueeScrollUp = (marqueeId) => {
     if (marqueeScrollUpAnimationInterval !== undefined) {
         window.clearInterval(marqueeScrollUpAnimationInterval); // Stop.
@@ -1396,7 +1397,8 @@ let toggleForeground = () => {
                            nb-cols="200"
                            nb-lines="68"
                            title="Computed Data"
-                           display-data='{ "text-array": ["You must have", "triggered a computation", "to see something", "in here..."], "x": 4, "y": 12 }'/>
+                           display-data='{ "text-array": ["You must have", "triggered a computation", "to see something", "in here..."], "x": 4, "y": 12 }'
+                           onclick="marqueeScrollUp('marquee-panel-01');"/>
         </div>
     </dialog>
 
