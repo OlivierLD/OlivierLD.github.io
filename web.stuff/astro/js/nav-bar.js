@@ -93,7 +93,7 @@ let showMarqueeDialog = () => {
         // alert(BAD_BROWSER);
         marqueeDialog.style.display = 'inline';
     }
-    marqueeScrollUp("marquee-panel-01"); // Start
+    marqueeScrollUp("marquee-panel-01"); // Start/Stop
 };
 
 let closeMarqueeDialog = () => {
@@ -114,7 +114,7 @@ let showSunPathDialog = () => {
         return;
     }
     let sunPathDialog = document.getElementById(SUN_PATH_DIALOG_ID);
-    
+
     setSunPathData(); // Display current data (TODO: Animate?)
 
     if (sunPathDialog.show != undefined) {
@@ -145,8 +145,8 @@ let showSkyMapDialog = () => {
         return;
     }
     let sunPathDialog = document.getElementById(SKY_MAP_DIALOG_ID); // TODO Fix that
-    
-    setSkyMapData(); 
+
+    setSkyMapData();
 
     if (sunPathDialog.show != undefined) {
         sunPathDialog.show();
@@ -754,30 +754,30 @@ let setSunPathData = () => {
     let duration = `${year.toString()}-${lpad(month.toString(), '0', 2)}-${lpad(day.toString(), '0', 2)}T${lpad(hour.toString(), '0', 2)}:${lpad(minute.toString(), '0', 2)}:${lpad(second.toFixed(0), '0', 2) + '.000'}Z`;
 
     // That step is demanding... (Rise & Set adjustments)
-    let sunBodyData = CelestialComputer.getSunDataForDate(globalAstroData.deltaT, 
-                                                          duration, 
-                                                          userPos.latitude, 
-                                                          userPos.longitude, 
+    let sunBodyData = CelestialComputer.getSunDataForDate(globalAstroData.deltaT,
+                                                          duration,
+                                                          userPos.latitude,
+                                                          userPos.longitude,
                                                           globalAstroData.epoch,
-                                                          globalAstroData.sun.DEC.raw, 
+                                                          globalAstroData.sun.DEC.raw,
                                                           globalAstroData.sun.GHA.raw,
-                                                          globalAstroData.sun.HP.raw, 
-                                                          globalAstroData.sun.SD.raw, 
+                                                          globalAstroData.sun.HP.raw,
+                                                          globalAstroData.sun.SD.raw,
                                                           globalAstroData.EOT.raw);
-    sunBodyData.altitude =  sunBodyData.elev; // Small Tx.                                                        
+    sunBodyData.altitude =  sunBodyData.elev; // Small Tx.
 
     // elem1.sunPath = sunPath1;       // get it from CelestialComputer.getSunDataForAllDay
     const STEP = 20;
-    let sunPath = CelestialComputer.getSunDataForAllDay(sunBodyData, 
-                                                        globalAstroData.deltaT, 
-                                                        userPos.latitude, 
-                                                        userPos.longitude, 
-                                                        STEP, 
+    let sunPath = CelestialComputer.getSunDataForAllDay(sunBodyData,
+                                                        globalAstroData.deltaT,
+                                                        userPos.latitude,
+                                                        userPos.longitude,
+                                                        STEP,
                                                         globalAstroData.epoch);
     let txSunPath = [];
     sunPath.forEach( sp => {
         txSunPath.push({ epoch: sp.epoch, alt: sp.he, z: sp.z });
-    });                                                        
+    });
     elem1.sunPath = txSunPath;
     // elem1.sunData = sunData1;       // get it from CelestialComputer.getSunDataForDate
     elem1.sunData = sunBodyData;
@@ -792,7 +792,7 @@ let setSunPathData = () => {
         let srJupiter = sightReduction(userPos.latitude, userPos.longitude, globalAstroData.jupiter.GHA.raw, globalAstroData.jupiter.DEC.raw);
         let srSaturn = sightReduction(userPos.latitude, userPos.longitude, globalAstroData.saturn.GHA.raw, globalAstroData.saturn.DEC.raw);
 
-        elem1.sunPos = { he: srSun.alt, z: srSun.Z }; 
+        elem1.sunPos = { he: srSun.alt, z: srSun.Z };
         elem1.moonPos = { he: srMoon.alt, z: srMoon.Z, phase: globalAstroData.moon.phase.phaseAngle }; // moonPos;
         elem1.venusPos = { he: srVenus.alt, z: srVenus.Z }; // venusPos;
         elem1.marsPos = { he: srMars.alt, z: srMars.Z }; // marsPos;
@@ -865,12 +865,12 @@ function setWanderingBodiesSM(id, cb) {
     document.getElementById(id).wanderingBodies = cb.checked;
     if (cb.checked === true) {
         document.getElementById(id).wanderingBodiesData = [
-            { "name": "sun", "decl": globalAstroData.sun.DEC.raw, "gha": globalAstroData.sun.GHA.raw }, 
-            { "name": "moon", "decl": globalAstroData.moon.DEC.raw, "gha": globalAstroData.moon.GHA.raw }, 
-            { "name": "aries", "decl": 0, "gha": globalAstroData.aries.GHA.raw }, 
-            { "name": "venus", "decl": globalAstroData.venus.DEC.raw, "gha": globalAstroData.venus.GHA.raw }, 
-            { "name": "mars", "decl": globalAstroData.mars.DEC.raw , "gha": globalAstroData.mars.GHA.raw }, 
-            { "name": "jupiter", "decl": globalAstroData.jupiter.DEC.raw , "gha":  globalAstroData.jupiter.GHA.raw }, 
+            { "name": "sun", "decl": globalAstroData.sun.DEC.raw, "gha": globalAstroData.sun.GHA.raw },
+            { "name": "moon", "decl": globalAstroData.moon.DEC.raw, "gha": globalAstroData.moon.GHA.raw },
+            { "name": "aries", "decl": 0, "gha": globalAstroData.aries.GHA.raw },
+            { "name": "venus", "decl": globalAstroData.venus.DEC.raw, "gha": globalAstroData.venus.GHA.raw },
+            { "name": "mars", "decl": globalAstroData.mars.DEC.raw , "gha": globalAstroData.mars.GHA.raw },
+            { "name": "jupiter", "decl": globalAstroData.jupiter.DEC.raw , "gha":  globalAstroData.jupiter.GHA.raw },
             { "name": "saturn", "decl": globalAstroData.saturn.DEC.raw, "gha": globalAstroData.saturn.GHA.raw }
         ];
     }
@@ -894,15 +894,15 @@ function setLHAAries(id, value) {
 
 let setSkyMapData = () => {
     let sm = document.getElementById('sky-map-01');
-    
+
     let bodiesUpdater = () => {
         sm.wanderingBodiesData = [
-            { "name": "sun", "decl": globalAstroData.sun.DEC.raw, "gha": globalAstroData.sun.GHA.raw }, 
-            { "name": "moon", "decl": globalAstroData.moon.DEC.raw, "gha": globalAstroData.moon.GHA.raw }, 
-            { "name": "aries", "decl": 0, "gha": globalAstroData.aries.GHA.raw }, 
-            { "name": "venus", "decl": globalAstroData.venus.DEC.raw, "gha": globalAstroData.venus.GHA.raw }, 
-            { "name": "mars", "decl": globalAstroData.mars.DEC.raw , "gha": globalAstroData.mars.GHA.raw }, 
-            { "name": "jupiter", "decl": globalAstroData.jupiter.DEC.raw , "gha":  globalAstroData.jupiter.GHA.raw }, 
+            { "name": "sun", "decl": globalAstroData.sun.DEC.raw, "gha": globalAstroData.sun.GHA.raw },
+            { "name": "moon", "decl": globalAstroData.moon.DEC.raw, "gha": globalAstroData.moon.GHA.raw },
+            { "name": "aries", "decl": 0, "gha": globalAstroData.aries.GHA.raw },
+            { "name": "venus", "decl": globalAstroData.venus.DEC.raw, "gha": globalAstroData.venus.GHA.raw },
+            { "name": "mars", "decl": globalAstroData.mars.DEC.raw , "gha": globalAstroData.mars.GHA.raw },
+            { "name": "jupiter", "decl": globalAstroData.jupiter.DEC.raw , "gha":  globalAstroData.jupiter.GHA.raw },
             { "name": "saturn", "decl": globalAstroData.saturn.DEC.raw, "gha": globalAstroData.saturn.GHA.raw }
         ];
 
@@ -912,25 +912,25 @@ let setSkyMapData = () => {
             let lhaAries  = calcLHA(globalAstroData.aries.GHA.raw, userPos.longitude);
             sm.LHAAries = lhaAries;
         }
-        
+
         sm.repaint();
     }
     skyMapUpdater = window.setInterval(bodiesUpdater, 1000);
 
     sm.stars = true;
-    sm.wanderingBodies = false; 
+    sm.wanderingBodies = false;
 	sm.constellations = true;
 	sm.starNames = true;
 	sm.constellationNames = false;
 	sm.visibleSky = true;
     sm.skyGrid = true;
 	sm.wanderingBodiesData = [
-        { "name": "sun", "decl": globalAstroData.sun.DEC.raw, "gha": globalAstroData.sun.GHA.raw }, 
-        { "name": "moon", "decl": globalAstroData.moon.DEC.raw, "gha": globalAstroData.moon.GHA.raw }, 
-        { "name": "aries", "decl": 0, "gha": globalAstroData.aries.GHA.raw }, 
-        { "name": "venus", "decl": globalAstroData.venus.DEC.raw, "gha": globalAstroData.venus.GHA.raw }, 
-        { "name": "mars", "decl": globalAstroData.mars.DEC.raw , "gha": globalAstroData.mars.GHA.raw }, 
-        { "name": "jupiter", "decl": globalAstroData.jupiter.DEC.raw , "gha":  globalAstroData.jupiter.GHA.raw }, 
+        { "name": "sun", "decl": globalAstroData.sun.DEC.raw, "gha": globalAstroData.sun.GHA.raw },
+        { "name": "moon", "decl": globalAstroData.moon.DEC.raw, "gha": globalAstroData.moon.GHA.raw },
+        { "name": "aries", "decl": 0, "gha": globalAstroData.aries.GHA.raw },
+        { "name": "venus", "decl": globalAstroData.venus.DEC.raw, "gha": globalAstroData.venus.GHA.raw },
+        { "name": "mars", "decl": globalAstroData.mars.DEC.raw , "gha": globalAstroData.mars.GHA.raw },
+        { "name": "jupiter", "decl": globalAstroData.jupiter.DEC.raw , "gha":  globalAstroData.jupiter.GHA.raw },
         { "name": "saturn", "decl": globalAstroData.saturn.DEC.raw, "gha": globalAstroData.saturn.GHA.raw }
     ];
 
