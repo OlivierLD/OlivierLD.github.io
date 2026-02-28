@@ -2919,22 +2919,26 @@ let toggleForeground = () => {
     function computeCones(payload) {
 
         let mpsData = document.getElementById('mps-data');
-        window.setTimeout(() => {
+        // window.setTimeout(() => {
+            console.log("Starting calculation...")
             mpsData.innerHTML += "<br/>Computing...";
             messManager("Computing...", "<span class='blink'>Please wait</span>");
-        }, 5); // like in another thread...
+        // }, 5); // like in another thread...
 
-        let computedPos = MPSToolBox.computeConesIntersection(payload, false);
-        let mess = `Calculated intersection:<br/>` +
-                    `<b>${decToSex(computedPos.latitude, "NS")} / ${decToSex(computedPos.longitude, "EW")}</b>`;
-        let newData = mess;
-        let before = mpsData.innerHTML;
-        if (before.length > 0) {
-            newData = before + '<br/>' + newData;
-        }
-        mpsData.innerHTML = newData;
-        // In a dialog
-        messManager("Calculated intersection", `<b>${decToSex(computedPos.latitude, "NS")} / ${decToSex(computedPos.longitude, "EW")}</b>`);
+        window.setTimeout(() => {
+            let computedPos = MPSToolBox.computeConesIntersection(payload, false);
+            console.log("Calculation completed.");
+            let mess = `Calculated intersection:<br/>` +
+                        `<b>${decToSex(computedPos.latitude, "NS")} / ${decToSex(computedPos.longitude, "EW")}</b>`;
+            let newData = mess;
+            let before = mpsData.innerHTML;
+            if (before.length > 0) {
+                newData = before + '<br/>' + newData;
+            }
+            mpsData.innerHTML = newData;
+            // In a dialog
+            messManager("Calculated intersection", `<b>${decToSex(computedPos.latitude, "NS")} / ${decToSex(computedPos.longitude, "EW")}</b>`);
+        }, 10); // like in another thread...
     }
 
     // Set default date values, start process(es), etc
