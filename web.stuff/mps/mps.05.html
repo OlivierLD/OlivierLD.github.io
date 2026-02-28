@@ -1190,17 +1190,21 @@ let toggleForeground = () => {
             cursor: pointer;
         }
 
+        .no-pointer {
+            pointer-events: none;
+        }
+
     </style>
 </head>
 <body>
 
 <!-- A node to be cloned, for the bodies and their observed altitude -->
 <div id="one-body-template" style="display: none; grid-template-columns: 30px 150px 800px; text-align: left;">
-    <input type="checkbox" name="${body}" id="${body}" value="${body}"/>
+    <input type="checkbox" name="${body}" id="${body}" value="${body}" onchange="cbClicked(this);"/>
     <label for="${body}">${body}</label>
     <div>On
-        <input class="day" type="number" placeholder="day" min="1" max="31" title="Day of the Month">
-        <select class="month" title="Month of the year">
+        <input class="day" type="number" placeholder="day" min="1" max="31" title="Day of the Month" disabled>
+        <select class="month" title="Month of the year" disabled>
             <option value="1">Jan</option>
             <option value="2">Feb</option>
             <option value="3">Mar</option>
@@ -1214,16 +1218,16 @@ let toggleForeground = () => {
             <option value="11">Nov</option>
             <option value="12">Dec</option>
         </select>
-        <input class="year" type="number" placeholder="year" min="0" title="year">
+        <input class="year" type="number" placeholder="year" min="0" title="year" disabled>
         at
-        <input class="hours" type="number" placeholder="hours" min="0" max="23" title="Hour of the day [0..23]">:
-        <input class="minutes" type="number" placeholder="minutes" min="0" max="59" title="minutes">:
-        <input class="seconds" type="number" placeholder="seconds" min="0" max="59" title="seconds"> UTC,
+        <input class="hours" type="number" placeholder="hours" min="0" max="23" title="Hour of the day [0..23]" disabled>:
+        <input class="minutes" type="number" placeholder="minutes" min="0" max="59" title="minutes" disabled>:
+        <input class="seconds" type="number" placeholder="seconds" min="0" max="59" title="seconds" disabled> UTC,
         Obs Alt
-        <input class="alt-deg" type="number" placeholder="degrees" min="0" max="90" title="Observed Altitude in degrees">°
-        <input class="alt-min" type="number" placeholder="minutes" min="0.00" max="59.99" title="minutes" size="4">'
+        <input class="alt-deg" type="number" placeholder="degrees" min="0" max="90" title="Observed Altitude in degrees" disabled>°
+        <input class="alt-min" type="number" placeholder="minutes" min="0.00" max="59.99" title="minutes" size="4" disabled>'
 
-        <a class="button-like" onclick="reverseHeightForBody(this);" title="Calculate what the altitue should be&#13;for ${body}" style="display: none; margin-left: 10px;">Reverse</a>
+        <a class="button-like no-pointer" onclick="reverseHeightForBody(this);" title="Calculate what the altitue should be&#13;for ${body}" style="display: none; margin-left: 10px;">Reverse</a>
     </div>
 </div>
 
@@ -2788,6 +2792,22 @@ let toggleForeground = () => {
             context.stroke();
             context.closePath();
             context.restore();
+        }
+    };
+
+    function cbClicked(cb) {
+        let bodyId = cb.parentElement.querySelectorAll("input")[0].id;
+        let siblingDivs = cb.parentElement.querySelectorAll("input");
+        if (cb.checked) {
+            console.log(`${bodyId} is checked.`);
+            siblingDivs.forEach(sib => sib.disabled = false);
+            cb.parentElement.querySelectorAll("select")[0].disabled = false;
+            cb.parentElement.querySelectorAll("a.button-like")[0].classList.toggle('no-pointer');
+        } else {
+            console.log(`${bodyId} is unchecked.`);
+            siblingDivs.forEach(sib => sib.disabled = true);
+            cb.parentElement.querySelectorAll("select")[0].disabled = true;
+            cb.parentElement.querySelectorAll("a.button-like")[0].classList.toggle('no-pointer');
         }
     };
 
