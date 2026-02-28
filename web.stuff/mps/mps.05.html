@@ -2919,9 +2919,10 @@ let toggleForeground = () => {
     function computeCones(payload) {
 
         let mpsData = document.getElementById('mps-data');
-        mpsData.innerHTML += "<br/>Computing...";
-
-        messManager("Computing...", "<span class='blink'>Please wait</span>");
+        window.setTimeout(() => {
+            mpsData.innerHTML += "<br/>Computing...";
+            messManager("Computing...", "<span class='blink'>Please wait</span>");
+        }, 5); // like in another thread...
 
         let computedPos = MPSToolBox.computeConesIntersection(payload, false);
         let mess = `Calculated intersection:<br/>` +
