@@ -2904,17 +2904,19 @@ let toggleForeground = () => {
     // Returns the calculated position
     function computeCones(payload) {
 
-	    let computedPos = MPSToolBox.computeConesIntersection(payload, false);
+        let mpsData = document.getElementById('mps-data');
+        mpsData.innerHTML += "<br/>Computing...";
+
+        let computedPos = MPSToolBox.computeConesIntersection(payload, false);
         let mess = `Calculated intersection:<br/>` +
                     `<b>${decToSex(computedPos.latitude, "NS")} / ${decToSex(computedPos.longitude, "EW")}</b>`;
-        let mpsData = document.getElementById('mps-data');
-        let before = mpsData.innerHTML;
         let newData = mess;
+        let before = mpsData.innerHTML;
         if (before.length > 0) {
             newData = before + '<br/>' + newData;
         }
         mpsData.innerHTML = newData;
-
+        // In a dialog
         messManager("Calculated intersection", `<b>${decToSex(computedPos.latitude, "NS")} / ${decToSex(computedPos.longitude, "EW")}</b>`);
     }
 
