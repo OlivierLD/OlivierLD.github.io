@@ -1194,6 +1194,20 @@ let toggleForeground = () => {
             pointer-events: none;
         }
 
+        .blink {
+            animation: blinker 1.5s linear infinite;
+            color: red;
+            font-size: 1.5em;
+            /* Larger, responsive font size */
+            margin-bottom: 20px;
+        }
+        @keyframes blinker {
+            50% {
+                opacity: 0;
+            }
+        }
+
+
     </style>
 </head>
 <body>
@@ -2906,6 +2920,8 @@ let toggleForeground = () => {
 
         let mpsData = document.getElementById('mps-data');
         mpsData.innerHTML += "<br/>Computing...";
+
+        messManager("Computing...", "<span class='blink'>Please wait</span>");
 
         let computedPos = MPSToolBox.computeConesIntersection(payload, false);
         let mess = `Calculated intersection:<br/>` +
