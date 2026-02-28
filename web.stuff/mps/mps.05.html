@@ -2926,18 +2926,24 @@ let toggleForeground = () => {
         // }, 5); // like in another thread...
 
         window.setTimeout(() => {
-            let computedPos = MPSToolBox.computeConesIntersection(payload, false);
-            console.log("Calculation completed.");
-            let mess = `Calculated intersection:<br/>` +
-                        `<b>${decToSex(computedPos.latitude, "NS")} / ${decToSex(computedPos.longitude, "EW")}</b>`;
-            let newData = mess;
-            let before = mpsData.innerHTML;
-            if (before.length > 0) {
-                newData = before + '<br/>' + newData;
+            try {
+                let computedPos = MPSToolBox.computeConesIntersection(payload, false);
+                console.log("Calculation completed.");
+                let mess = `Calculated intersection:<br/>` +
+                            `<b>${decToSex(computedPos.latitude, "NS")} / ${decToSex(computedPos.longitude, "EW")}</b>`;
+                let newData = mess;
+                let before = mpsData.innerHTML;
+                if (before.length > 0) {
+                    newData = before + '<br/>' + newData;
+                }
+                mpsData.innerHTML = newData;
+                // In a dialog
+                messManager("Calculated intersection", `<b>${decToSex(computedPos.latitude, "NS")} / ${decToSex(computedPos.longitude, "EW")}</b>`);
+            } catch (err) {
+                console.log(`Error ${err}`);
+                messManager("Oops!", `Error occured:<br/> ${err}`);
+
             }
-            mpsData.innerHTML = newData;
-            // In a dialog
-            messManager("Calculated intersection", `<b>${decToSex(computedPos.latitude, "NS")} / ${decToSex(computedPos.longitude, "EW")}</b>`);
         }, 10); // like in another thread...
     }
 
