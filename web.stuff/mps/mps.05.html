@@ -2942,7 +2942,7 @@ let toggleForeground = () => {
             } catch (err) {
                 console.log(`Error ${err}`);
                 messManager("Oops!", `Error occured:<br/> ${err}`);
-
+                mpsData.innerHTML += `<br/>Error occured:<br/> ${err}`;
             }
         }, 10); // like in another thread...
     }
