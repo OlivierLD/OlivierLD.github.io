@@ -1435,6 +1435,7 @@ let toggleForeground = () => {
                         </div>
                     </td>
                     <td>
+                        <!-- vertical slider -->
                         <input type="range"
                                style="/*-webkit-appearance: slider-vertical;*/ writing-mode: vertical-lr; direction: rtl; width: 8px; height: 440px; margin-left: 0;"
                                min="-90"
@@ -1445,9 +1446,10 @@ let toggleForeground = () => {
                 </tr>
                 <tr>
                     <td>
+                        <!-- Horizontal slider -->
                         <input type="range" style="/*width: 566px;*/ width: 450px; height: 8px; margin-left: 0;"
-                               min="-90"
-                               max="90"
+                               min="-180"
+                               max="180"
                                value="0"
                                onchange="setNewZOffset(this, 'sun-path-01');">
                     </td>
