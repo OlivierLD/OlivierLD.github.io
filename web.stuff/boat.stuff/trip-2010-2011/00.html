@@ -4,6 +4,59 @@
     <title>Don Pedro Polynesian trip - 2010-2011</title>
     <script type="text/javascript" src="js/script.js"></script>
     <script type="text/javascript" src="js/prev.next.js"></script>
+    <style type="text/css">
+.pcc-dialog {
+    width: 85%; /*800px; */
+    margin-top: 40px;
+    z-index: 3;
+    position: absolute;
+    /* max-height: 550px;  */
+    /* overflow: auto; */
+}
+.pcc-dialog-content {
+    /* height: 95%; */
+    min-height: 400px;
+    max-height: 500px;
+    /* max-height: 400px;  */
+    overflow: auto;
+    margin-top: 10px;
+}
+.dialog-header-close {
+    font-size: 48px;
+    margin: -30px 10px 0 0;
+    padding: 0 18px;
+}
+.dialog-header-close:hover {
+    /* color: silver; */
+    cursor: pointer;
+    /* text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000; */
+    /* text-shadow: 2px 2px 4px black, 0 0 25px white, 0 0 7px silver; */
+    font-size: 50px;
+}
+.close-place {
+    text-align: right;
+    margin: 5px 0;
+}
+.dialog-header {
+    position: relative;
+    /* float: left; */
+    height: 20px;
+    font-size: 24px;
+    font-weight: 700;
+    display: grid;
+    grid-template-columns: auto auto;
+}
+.dialog-title {
+    float: left;
+    display: block;
+}
+.dialog-header-close {
+    /* float: right; */
+    text-align: right;
+    margin-right: 10px;
+    aspect-ratio: 1 / 1;
+}
+    </style>
 </head>
 <body> <!-- background="bground.jpg" -->
 
@@ -11,7 +64,54 @@
 if (!getPrint()) {
     prevNext(0, true, 'EN');
 }
+
+const NO_DIALOG_MESSAGE = "Dialog tag not supported.";
+
+let showAboutDialog = () => {
+    let aboutDialog = document.getElementById("about-dialog");
+    if (aboutDialog.show !== undefined) {
+        aboutDialog.style.display = 'inline';
+        aboutDialog.show();
+    } else {
+      alert(NO_DIALOG_MESSAGE);
+      aboutDialog.style.display = 'inline';
+    }
+};
+
+// let aboutDialogOpened = true;
+
+let closeAboutDialog = () => {
+    let aboutDialog = document.getElementById("about-dialog");
+    if (aboutDialog.close !== undefined) {
+        aboutDialog.close();
+        aboutDialog.style.display = 'none';
+    } else {
+        // alert(NO_DIALOG_MESSAGE);
+        aboutDialog.style.display = 'none';
+    }
+};
+
 </script>
+
+<dialog id="about-dialog" class="shadow-menu pcc-dialog" style="display: none;">
+	<div class="dialog-header">
+		<span class="dialog-title"> Don Pedro </span>
+		<div class="close-place">
+            <span class="dialog-header-close" onclick="closeAboutDialog();" role="button" aria-label="Close Dialog" title="Close Dialog">&times;</span>
+        </div>
+	</div>
+	<div id="dialog-content" class="pcc-dialog-content">
+		The name "Don Pedro" came to us through a poem by Guillaume Apollinaire, from the "Bestiaire" (published in "Alcools"), "Le Dromadaire".<br/>
+        <img src="img/bestiaire.jpg">
+        <br/>
+        Don Pedro d'Alfaroubeira was also the brother of the king of Portugal, Henry the Navigator.
+        <div style="display: grid; grid-template-columns: 50% 50%;">
+            <img src="img/DomPedro.01.jpeg" style="width: 90%;">
+            <img src="img/DomPedro.02.jpeg" style="width: 90%;">
+        </div>
+        His statue is exposed in Cascais, at the mouth of the Tage river, that flows in Lisbon.
+	</div>
+</dialog>
 
 <table width="98%">
     <tr>
