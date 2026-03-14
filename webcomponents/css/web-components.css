@@ -612,6 +612,44 @@ compass-display .green {
 	--wandering-bodies-labels-color: red;
 }
 
+.celestial-sphere-display-01 {
+	--background-color: white;
+	--ticks-color: gray;
+	--ticks-labels-color: black;
+ 	--sky-background: rgb(21, 21, 86);
+	--heading-ticks-color: orange;
+	--sky-grid-color: pink;
+	--declination-color: lightgray;
+	--card-points-color: cyan;
+	--equatorial-grid-color: blue;
+	--constellation-lines-color: lightGray;
+	--constellation-names-color: orange;
+	--star-color: gold;
+	--star-names-color: white;
+	--star-circle-color: black;
+	--wandering-bodies-color: orangered;
+	--wandering-bodies-labels-color: red;
+}
+
+.celestial-sphere-display-02 {
+	--background-color: white;
+	--ticks-color: gray;
+	--ticks-labels-color: black;
+ 	--sky-background: rgb(122, 122, 131);
+	--heading-ticks-color: red;
+	--sky-grid-color: pink;
+	--declination-color: lightgray;
+	--card-points-color: cyan;
+	--equatorial-grid-color: blue;
+	--constellation-lines-color: lightGray;
+	--constellation-names-color: white;
+	--star-color: cyan;
+	--star-names-color: white;
+	--star-circle-color: black;
+	--wandering-bodies-color: orangered;
+	--wandering-bodies-labels-color: red;
+}
+
 .boat-overview-01 {
 	--grid-color: gray;
 	--display-background-gradient-from: darkgray;

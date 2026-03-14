@@ -30,6 +30,7 @@
 	<script type="module" src="widgets/compass.2/CompassDisplay.js"></script>
 	<script type="module" src="widgets/worldmap/WorldMap.js"></script>
 	<script type="module" src="widgets/skymap/SkyMap.js"></script>
+	<script type="module" src="widgets/celestialsphere/CelestialSphere.js"></script>
 	<script type="module" src="widgets/ledpanel/LedPanel.js"></script>
 	<script type="module" src="widgets/marquee/MarqueePanel.js"></script>
 	<script type="module" src="widgets/raw/Raw16PointsDir.js"></script>
@@ -211,6 +212,11 @@
     </style>
 
 	<script type="text/javascript">
+
+        function _showHide(id, cb) {
+            let element = document.getElementById(id);
+            element.style.display = cb.checked ? 'block' : 'none';
+        }
 
         function expandAll() {
             let expandableNodes = document.querySelectorAll("div[onclick][tabindex]");
@@ -1285,6 +1291,40 @@
             document.getElementById(id).repaint();
         }
 
+        function setWanderingBodiesCS(id, cb) {
+            document.getElementById(id).wanderingBodies = cb.checked;
+            if (cb.checked === true) {
+                document.getElementById(id).wanderingBodiesData = [
+                {   "name": "sun",
+                    "decl": -20.04044686148565,
+                    "gha": 155.6529121226147
+                }, {"name": "moon", "decl": 23.16309834765886, "gha": 333.80030094991827}, {
+                    "name": "aries",
+                    "decl": 0,
+                    "gha": 32.94240012811581
+                }, {"name": "venus", "decl": -11.050714772347902, "gha": 187.22301328597055}, {
+                    "name": "mars",
+                    "decl": -23.63545138636733,
+                    "gha": 136.0959874339015
+                }, {"name": "jupiter", "decl": -3.8939103945425586, "gha": 38.329413872258606}, {
+                    "name": "saturn",
+                    "decl": -3.333562139273032,
+                    "gha": 199.44442264190673
+                }];
+            }
+            document.getElementById(id).repaint();
+        }
+
+        function setUseBoatHeadingCS(id, cb) {
+            document.getElementById(id).useHeading = cb.checked;
+            document.getElementById(id).repaint();
+        }
+
+        function setBoatShape(id, list) {
+            document.getElementById(id).boatShape = list.value;
+            document.getElementById(id).repaint();
+        }
+
         function setMapType(id, list) {
             document.getElementById(id).type = list.value;
             document.getElementById(id).repaint();
@@ -1292,6 +1332,16 @@
 
         function setLHAAries(id, value) {
             document.getElementById(id).lhaAries = (parseInt(value) >= 0 ? parseInt(value) : parseInt(value) + 360);
+            document.getElementById(id).repaint();
+        }
+
+        function setLHAAries_2(id, value) {
+            document.getElementById(id).LHAAries = (parseInt(value) >= 0 ? parseInt(value) : parseInt(value) + 360);
+            document.getElementById(id).repaint();
+        }
+
+        function setBoatHeading(id, value) {
+            document.getElementById(id).heading = (parseInt(value) >= 0 ? parseInt(value) : parseInt(value) + 360);
             document.getElementById(id).repaint();
         }
 
@@ -4105,6 +4155,128 @@ map.addEventListener('mousemove', evt => {
 				<input type="range" value="35" min="1" max="89" style="width: 90%;"
 					   oninput="setObserverLatitude('sky-map-01', this.value); setObserverLatitude('sky-map-02', this.value); obsLat.value = this.value;"/>
 				<output name="obsLat" id="obsLat" style="color: cyan;">35</output>
+			</td>
+		</tr>
+	</table>
+</div>
+<hr/>
+<div style="cursor: pointer;" onclick="showHide('celestial-sphere');" tabindex="0"><b><u><a id="a-celestial-sphere" href="#a-celestial-sphere">Celestial Sphere</a></u></b></div>
+<div id="celestial-sphere" class="smooth">
+	<table>
+		<tr>
+			<td>
+                This shows the visible sky above a given position on Earth. All body positions are defined from the LHA Aries (&gamma;).<br/>
+                Boat heading can be set too. Zenith is at the center of the circle, dotted circles aroud it represent the Altitudes of the different bodies, from 0&deg; to 90&deg;
+                <pre style="font-weight: bold; text-align: left; color: white; vertical-align: top; margin-top: 6px;">
+&lt;celestial-sphere id="celestial-sphere-01"
+                  class="celestial-sphere-display-01"
+                  width="800"
+                  height="500"
+                  latitude="35"
+                  longitude="-3"
+                  heading="0"
+                  use-heading="false"/>
+                </pre>
+				<button onclick="showHideSiblingWidget(this);">Show/Hide widget</button>
+			</td>
+		</tr>
+		<tr style="display: none;">
+			<td valign="top">
+				<div class="black-frame centered">
+                    <celestial-sphere id="celestial-sphere-01"
+                                      class="celestial-sphere-display-01"
+                                      width="600"
+                                      height="500"
+                                      latitude="35"
+                                      longitude="-3"
+                                      heading="0"
+                                      use-heading="false"/>
+				</div>
+                <div style="display: grid; grid-template-columns: auto auto auto auto;">
+                    <span><input type="checkbox" onchange="setWithStars('celestial-sphere-01', this);" checked>Stars.</span>
+                    <span><input type="checkbox" onchange="setWithConst('celestial-sphere-01', this);" checked>Constellations.</span>
+                    <span><input type="checkbox" onchange="setStarNames('celestial-sphere-01', this);" checked>Star Names.</span>
+                    <span><input type="checkbox" onchange="setConstNames('celestial-sphere-01', this);">Constellation Names.</span>
+
+                    <span><input type="checkbox" onchange="setWanderingBodiesCS('celestial-sphere-01', this);">Wandering bodies.</span>
+                    <span><input type="checkbox" onchange="setUseBoatHeadingCS('celestial-sphere-01', this); _showHide('boat-shapes-1', this);">Show Boat Heading.</span>
+                    <!--span>
+                        <select onchange="setBoatShape('celestial-sphere-01', this);" style="padding: 5px; border-radius: 5px;">
+                            <option value="MONO" selected>Monohull</option>
+                            <option value="CATA">Catamaran</option>
+                            <option value="TRI">Trimaran</option>
+                            <option value="PLANE">Plane</option>
+                        </select>
+                    </span-->
+                </div>
+                <div id="boat-shapes-1" style="display: none;">
+                    Boat Shape:
+                    <input type="radio" name="boat-shape-1" value="MONO" onchange="if (this.checked) { setBoatShape('celestial-sphere-01', this); }" checked>Monohull</input>
+                    <input type="radio" name="boat-shape-1" value="CATA" onchange="if (this.checked) { setBoatShape('celestial-sphere-01', this); }">Catamaran</input>
+                    <input type="radio" name="boat-shape-1" value="TRI" onchange="if (this.checked) { setBoatShape('celestial-sphere-01', this); }">Trimaran</input>
+                    <input type="radio" name="boat-shape-1" value="PLANE" onchange="if (this.checked) { setBoatShape('celestial-sphere-01', this); }">Plane</input>
+                </div>
+			</td>
+			<td valign="top">
+				<div class="black-frame centered">
+                    <celestial-sphere id="celestial-sphere-02"
+                                      class="celestial-sphere-display-02"
+                                      width="600"
+                                      height="500"
+                                      latitude="35"
+                                      longitude="-3"
+                                      heading="0"
+                                      use-heading="false"/>
+				</div>
+                <div style="display: grid; grid-template-columns: auto auto auto auto;">
+                    <span><input type="checkbox" onchange="setWithStars('celestial-sphere-02', this);" checked>Stars.</span>
+                    <span><input type="checkbox" onchange="setWithConst('celestial-sphere-02', this);" checked>Constellations.</span>
+                    <span><input type="checkbox" onchange="setStarNames('celestial-sphere-02', this);" checked>Star Names.</span>
+                    <span><input type="checkbox" onchange="setConstNames('celestial-sphere-02', this);">Constellation Names.</span>
+
+                    <span><input type="checkbox" onchange="setWanderingBodiesCS('celestial-sphere-02', this);">Wandering bodies.</span>
+                    <span><input type="checkbox" onchange="setUseBoatHeadingCS('celestial-sphere-02', this); _showHide('boat-shapes-2', this);">Show Boat Heading.</span>
+                    <!--span>
+                        <select onchange="setBoatShape('celestial-sphere-01', this);" style="padding: 5px; border-radius: 5px;">
+                            <option value="MONO" selected>Monohull</option>
+                            <option value="CATA">Catamaran</option>
+                            <option value="TRI">Trimaran</option>
+                            <option value="PLANE">Plane</option>
+                        </select>
+                    </span-->
+                </div>
+                <div id="boat-shapes-2" style="display: none;">
+                    Boat Shape:
+                    <input type="radio" name="boat-shape-2" value="MONO" onchange="if (this.checked) { setBoatShape('celestial-sphere-02', this); }" checked>Monohull</input>
+                    <input type="radio" name="boat-shape-2" value="CATA" onchange="if (this.checked) { setBoatShape('celestial-sphere-02', this); }">Catamaran</input>
+                    <input type="radio" name="boat-shape-2" value="TRI" onchange="if (this.checked) { setBoatShape('celestial-sphere-02', this); }">Trimaran</input>
+                    <input type="radio" name="boat-shape-2" value="PLANE" onchange="if (this.checked) { setBoatShape('celestial-sphere-02', this); }">Plane</input>
+                </div>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<h5 style="color: cyan;">LHA Aries</h5>
+				<input type="range" value="0" min="-180" max="180" style="width: 500px;"
+					   oninput="setLHAAries_2('celestial-sphere-01', this.value); setLHAAries_2('celestial-sphere-02', this.value); LHAAries.value = (parseInt(this.value) >= 0 ? parseInt(this.value) : parseInt(this.value) + 360) + '&deg;';"/>
+				<output name="LHAAries" id="LHAAries" style="color: cyan;">0&deg;</output>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<h5 style="color: cyan;">Boat Heading</h5>
+				<input type="range" value="0" min="0" max="360" style="width: 500px;"
+					   oninput="setBoatHeading('celestial-sphere-01', this.value); setBoatHeading('celestial-sphere-02', this.value); BoatHeading.value = (parseInt(this.value) >= 0 ? parseInt(this.value) : parseInt(this.value) + 360) + '&deg;';"/>
+				<output name="BoatHeading" id="BoatHeading" style="color: cyan;">0&deg;</output>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<h5 style="color: cyan;">User's Latitude</h5>
+				<!--input type="range" value="35" min="0" max="90" style="width: 500px;" -->
+				<input type="range" value="35" min="-90" max="90" style="width: 500px;"
+					   oninput="setObserverLatitude('celestial-sphere-01', this.value); setObserverLatitude('celestial-sphere-02', this.value); UserLatitude.value = Math.abs(parseInt(this.value)) + '&deg;' + (parseInt(this.value) >= 0 ? 'N' : 'S');"/>
+				<output name="UserLatitude" id="UserLatitude" style="color: cyan;">35&deg;N</output>
 			</td>
 		</tr>
 	</table>
