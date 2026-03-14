@@ -968,7 +968,7 @@ class CelestialSphere extends HTMLElement {
 							maxRA = Math.max(constellations[i].stars[s].ra, maxRA);
 						}
 					}
-					let centerDec = (this.observerLatitude >= 0 ? 1 : -1) * (maxD + minD) / 2;
+					let centerDec = /*(this.observerLatitude >= 0 ? 1 : -1) * */ (maxD + minD) / 2;
 					let centerRA = (maxRA + minRA) / 2;
 					let lng = (360 - (centerRA * 360 / 24));
 					lng += (/*(this.observerLatitude >= 0 ? 1 : -1) * */this.LHAAries);
