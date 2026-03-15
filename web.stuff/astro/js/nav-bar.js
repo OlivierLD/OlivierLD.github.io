@@ -19,6 +19,7 @@ const HELP_DIALOG_ID = "help-dialog";
 const MARQUEE_DIALOG_ID = "marquee-dialog";
 const SUN_PATH_DIALOG_ID = "sun-path-dialog";
 const SKY_MAP_DIALOG_ID = "sky-map-dialog";
+const CELEST_SPHERE_DIALOG_ID = "celestial-sphere-dialog";
 
 const BAD_BROWSER = "Your browser does not know about dialogs!\nPlease find one that does.\nYou can do it.";
 
@@ -169,6 +170,37 @@ let closeSkyMapDialog = () => {
     }
 };
 
+let showCelestialSphereDialog = () => {
+    if (!globalAstroData) {
+        showCustomAlert('Missing Data', '<p>⚠️&nbsp;<i><b>Compute something first!</b></i></p><p>(Menu > Background Parameters)</p>');
+        // alert("Compute something first!\n(Menu > Background Parameters)");
+        return;
+    }
+    let celestSphereDialog = document.getElementById(CELEST_SPHERE_DIALOG_ID);
+
+    setCelestSphereData();
+
+    if (celestSphereDialog.show != undefined) {
+        celestSphereDialog.show();
+    } else {
+        // alert(BAD_BROWSER);
+        celestSphereDialog.style.display = 'inline';
+    }
+};
+
+let closeCelestialSphereDialog = () => {
+    let celestSphereDialog = document.getElementById(CELEST_SPHERE_DIALOG_ID);
+    if (celestSphereDialog.close !== undefined) {
+        celestSphereDialog.close();
+    } else {
+        // alert(BAD_BROWSER);
+        celestSphereDialog.style.display = 'none';
+    }
+    if (celestSphereUpdater !== undefined) {
+        window.clearInterval(celestSphereUpdater);
+    }
+};
+
 let dragStartX = 0;
 let dragStartY = 0;
 let dialogXOrig = 0;
@@ -224,6 +256,40 @@ let draggingSM = event => {
     // console.log("Dragging!");
     if (true) {
         let dialogBox = document.getElementById('sky-map-dialog');
+        // let computedStyle = window.getComputedStyle(dialogBox, null);
+        if (event.buttons > 0) {
+            // if (event.x === 0 && event.y === 0) {
+            //     debugger;
+            // }
+            let deltaX = event.x - dragStartX; // clientX ;
+            let deltaY = event.y - dragStartY; // clientY;
+            let newLeft = `${dialogXOrig + deltaX}px`;
+            let newTop = `${dialogYOrig + deltaY}px`;
+            dialogBox.style.marginLeft = newLeft;
+            dialogBox.style.marginTop = newTop;
+            // console.log(`event.x:${event.x}, event.y:${event.y}, dragStartX: ${dragStartX}, dragStartY: ${dragStartY}, dialogXOrig:${dialogXOrig}, dialogYOrig:${dialogYOrig}, New Left: ${newLeft}, New Top: ${newTop}`);
+            // console.log("evt:", event);
+        }
+        event.preventDefault();
+    }
+};
+
+let dragStartCS = event => {
+    // console.log("Start dragging");
+    event.dataTransfer.setData("drag-data", `${event.target.id}: ${new Date()} `); // Dummy, just for the example. See the ondrop function.
+    dragStartX = event.x; // clientX;
+    dragStartY = event.y; // clientY;
+    let dialogBox = document.getElementById('celestial-sphere-dialog');
+    let computedStyle = window.getComputedStyle(dialogBox, null);
+    dialogXOrig = parseFloat(computedStyle.marginLeft.replace('px', ''));
+    dialogYOrig = parseFloat(computedStyle.marginTop.replace('px', ''));
+    // console.log("End");
+};
+
+let draggingCS = event => {
+    // console.log("Dragging!");
+    if (true) {
+        let dialogBox = document.getElementById('celestial-sphere-dialog');
         // let computedStyle = window.getComputedStyle(dialogBox, null);
         if (event.buttons > 0) {
             // if (event.x === 0 && event.y === 0) {
@@ -877,6 +943,22 @@ function setWanderingBodiesSM(id, cb) {
     document.getElementById(id).repaint();
 }
 
+function setWanderingBodiesCS(id, cb) {
+    document.getElementById(id).wanderingBodies = cb.checked;
+    if (cb.checked === true) {
+        document.getElementById(id).wanderingBodiesData = [
+            { "name": "sun", "decl": globalAstroData.sun.DEC.raw, "gha": globalAstroData.sun.GHA.raw },
+            { "name": "moon", "decl": globalAstroData.moon.DEC.raw, "gha": globalAstroData.moon.GHA.raw },
+            { "name": "aries", "decl": 0, "gha": globalAstroData.aries.GHA.raw },
+            { "name": "venus", "decl": globalAstroData.venus.DEC.raw, "gha": globalAstroData.venus.GHA.raw },
+            { "name": "mars", "decl": globalAstroData.mars.DEC.raw , "gha": globalAstroData.mars.GHA.raw },
+            { "name": "jupiter", "decl": globalAstroData.jupiter.DEC.raw , "gha":  globalAstroData.jupiter.GHA.raw },
+            { "name": "saturn", "decl": globalAstroData.saturn.DEC.raw, "gha": globalAstroData.saturn.GHA.raw }
+        ];
+    }
+    document.getElementById(id).repaint();
+}
+
 function setAriesLHASM(id, cb) {
     document.getElementById(id).ariesLHA = cb.checked;
     document.getElementById(id).repaint();
@@ -943,4 +1025,54 @@ let setSkyMapData = () => {
     sm.mapType = 'STARFINDER'; // Default
 
     sm.repaint();
+};
+
+let setCelestSphereData = () => {
+    let cs = document.getElementById('celestial-sphere-01');
+
+    let bodiesUpdater = () => {
+        cs.wanderingBodiesData = [
+            { "name": "sun", "decl": globalAstroData.sun.DEC.raw, "gha": globalAstroData.sun.GHA.raw },
+            { "name": "moon", "decl": globalAstroData.moon.DEC.raw, "gha": globalAstroData.moon.GHA.raw },
+            { "name": "aries", "decl": 0, "gha": globalAstroData.aries.GHA.raw },
+            { "name": "venus", "decl": globalAstroData.venus.DEC.raw, "gha": globalAstroData.venus.GHA.raw },
+            { "name": "mars", "decl": globalAstroData.mars.DEC.raw , "gha": globalAstroData.mars.GHA.raw },
+            { "name": "jupiter", "decl": globalAstroData.jupiter.DEC.raw , "gha":  globalAstroData.jupiter.GHA.raw },
+            { "name": "saturn", "decl": globalAstroData.saturn.DEC.raw, "gha": globalAstroData.saturn.GHA.raw }
+        ];
+
+        if (userPos !== undefined && userPos.longitude !== undefined) {
+            cs.latitude = userPos.latitude;
+            cs.longitude = userPos.longitude;
+            let lhaAries  = calcLHA(globalAstroData.aries.GHA.raw, userPos.longitude);
+            cs.LHAAries = lhaAries;
+        }
+
+        cs.repaint();
+    }
+    celestSphereUpdater = window.setInterval(bodiesUpdater, 1000);
+
+    cs.stars = true;
+    cs.wanderingBodies = false;
+	cs.constellations = true;
+	cs.starNames = true;
+	cs.constellationNames = false;
+	cs.wanderingBodiesData = [
+        { "name": "sun", "decl": globalAstroData.sun.DEC.raw, "gha": globalAstroData.sun.GHA.raw },
+        { "name": "moon", "decl": globalAstroData.moon.DEC.raw, "gha": globalAstroData.moon.GHA.raw },
+        { "name": "aries", "decl": 0, "gha": globalAstroData.aries.GHA.raw },
+        { "name": "venus", "decl": globalAstroData.venus.DEC.raw, "gha": globalAstroData.venus.GHA.raw },
+        { "name": "mars", "decl": globalAstroData.mars.DEC.raw , "gha": globalAstroData.mars.GHA.raw },
+        { "name": "jupiter", "decl": globalAstroData.jupiter.DEC.raw , "gha":  globalAstroData.jupiter.GHA.raw },
+        { "name": "saturn", "decl": globalAstroData.saturn.DEC.raw, "gha": globalAstroData.saturn.GHA.raw }
+    ];
+
+    if (userPos !== undefined && userPos.longitude !== undefined) {
+        // sm.hemisphere = (userPos.latitude >= 0 ? 'N' : 'S');
+        cs.latitude = userPos.latitude;
+        cs.longitude = userPos.longitude;
+        let lhaAries  = calcLHA(globalAstroData.aries.GHA.raw, userPos.longitude);
+        cs.LHAAries = lhaAries;
+    }
+    cs.repaint();
 };
