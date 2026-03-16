@@ -960,6 +960,11 @@ function setWanderingBodiesCS(id, cb) {
     document.getElementById(id).repaint();
 }
 
+function setCelestialEquatorCS(id, cb) {
+    document.getElementById(id).celestialEquator = cb.checked;
+    document.getElementById(id).repaint();
+}
+
 function setAriesLHASM(id, cb) {
     document.getElementById(id).ariesLHA = cb.checked;
     document.getElementById(id).repaint();

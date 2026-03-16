@@ -1562,7 +1562,8 @@ let toggleForeground = () => {
                                               latitude="35"
                                               longitude="-3"
                                               heading="0"
-                                              use-heading="false"/>
+                                              use-heading="false"
+                                              celestial-equator="false"/>
                         </div>
                         <div>
                             <button onclick="zoomIn('celestial-sphere-01');" title="Zoom In">+</button>
@@ -1577,6 +1578,7 @@ let toggleForeground = () => {
 
                             <span><input type="checkbox" onchange="setWanderingBodiesCS('celestial-sphere-01', this);">Wandering bodies.</span>
                             <!--span><input type="checkbox" onchange="setUseBoatHeadingCS('celestial-sphere-01', this); showHide('boat-shapes', this);">Show Boat Heading.</span-->
+                            <span><input type="checkbox" onchange="setCelestialEquatorCS('celestial-sphere-01', this);">With Celestial Equator.</span>
                         </div>
                         <!--div id="boat-shapes" style="display: none;">
                             Boat Shape:

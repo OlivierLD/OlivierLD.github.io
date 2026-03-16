@@ -1320,6 +1320,11 @@
             document.getElementById(id).repaint();
         }
 
+        function setCelestialEquatorCS(id, cb) {
+            document.getElementById(id).celestialEquator = cb.checked;
+            document.getElementById(id).repaint();
+        }
+
         function setBoatShape(id, list) {
             document.getElementById(id).boatShape = list.value;
             document.getElementById(id).repaint();
@@ -4175,7 +4180,8 @@ map.addEventListener('mousemove', evt => {
                   latitude="35"
                   longitude="-3"
                   heading="0"
-                  use-heading="false"/>
+                  use-heading="false"
+                  celestial-equator="false"/>
                 </pre>
 				<button onclick="showHideSiblingWidget(this);">Show/Hide widget</button>
 			</td>
@@ -4190,7 +4196,8 @@ map.addEventListener('mousemove', evt => {
                                       latitude="35"
                                       longitude="-3"
                                       heading="0"
-                                      use-heading="false"/>
+                                      use-heading="false"
+                                      celestial-equator="false"/>
 				</div>
                 <div style="display: grid; grid-template-columns: auto auto auto auto;">
                     <span><input type="checkbox" onchange="setWithStars('celestial-sphere-01', this);" checked>Stars.</span>
@@ -4200,6 +4207,7 @@ map.addEventListener('mousemove', evt => {
 
                     <span><input type="checkbox" onchange="setWanderingBodiesCS('celestial-sphere-01', this);">Wandering bodies.</span>
                     <span><input type="checkbox" onchange="setUseBoatHeadingCS('celestial-sphere-01', this); _showHide('boat-shapes-1', this);">Show Boat Heading.</span>
+                    <span><input type="checkbox" onchange="setCelestialEquatorCS('celestial-sphere-01', this);">With Celestial Equator.</span>
                     <!--span>
                         <select onchange="setBoatShape('celestial-sphere-01', this);" style="padding: 5px; border-radius: 5px;">
                             <option value="MONO" selected>Monohull</option>
@@ -4226,7 +4234,8 @@ map.addEventListener('mousemove', evt => {
                                       latitude="35"
                                       longitude="-3"
                                       heading="0"
-                                      use-heading="false"/>
+                                      use-heading="false"
+                                      celestial-equator="false"/>
 				</div>
                 <div style="display: grid; grid-template-columns: auto auto auto auto;">
                     <span><input type="checkbox" onchange="setWithStars('celestial-sphere-02', this);" checked>Stars.</span>
@@ -4236,6 +4245,7 @@ map.addEventListener('mousemove', evt => {
 
                     <span><input type="checkbox" onchange="setWanderingBodiesCS('celestial-sphere-02', this);">Wandering bodies.</span>
                     <span><input type="checkbox" onchange="setUseBoatHeadingCS('celestial-sphere-02', this); _showHide('boat-shapes-2', this);">Show Boat Heading.</span>
+                    <span><input type="checkbox" onchange="setCelestialEquatorCS('celestial-sphere-02', this);">With Celestial Equator.</span>
                     <!--span>
                         <select onchange="setBoatShape('celestial-sphere-01', this);" style="padding: 5px; border-radius: 5px;">
                             <option value="MONO" selected>Monohull</option>
