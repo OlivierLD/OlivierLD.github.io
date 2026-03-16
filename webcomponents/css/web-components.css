@@ -619,6 +619,7 @@ compass-display .green {
  	--sky-background: rgb(21, 21, 86);
 	--heading-ticks-color: orange;
 	--sky-grid-color: pink;
+	--ecliptic-color: lime;
 	--declination-color: lightgray;
 	--card-points-color: cyan;
 	--equatorial-grid-color: blue;
@@ -638,6 +639,7 @@ compass-display .green {
  	--sky-background: rgb(122, 122, 131);
 	--heading-ticks-color: red;
 	--sky-grid-color: pink;
+	--ecliptic-color: orange;
 	--declination-color: lightgray;
 	--card-points-color: cyan;
 	--equatorial-grid-color: blue;
