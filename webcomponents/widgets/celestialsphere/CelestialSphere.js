@@ -24,6 +24,7 @@ import '../utilities/date.proto.js';
 
 /* The map data */
 import constellations from "../skymap/stars/constellations.js";
+import { zodiacMembers } from "../skymap/stars/constellations.js";
 // import * as Utilities from "../utilities/Utilities.js";
 // import constellations from "./stars/constellations"; // minifyJs does NOT like the .js extension
 
@@ -56,6 +57,65 @@ const celestialSphereDefaultColorConfig = {
 	wanderingBodiesNameColor: 'limegreen',
 	boatFillColor: 'silver', // unused
 	boatOutlineColor: 'rgba(192, 192, 192, 0.75'
+};
+
+let drawSun = (context, center, outsideRadius, color) => {
+
+    let posFromAngle = (radius, angle) => {
+        let point = {x: radius * Math.sin(angle),
+                    y: radius * Math.cos(angle) };
+        return point;
+    };
+
+    let r1 = outsideRadius / 2;
+    let r2 = outsideRadius;
+
+    let outside = [
+		posFromAngle(r2, 0),                // 0
+		posFromAngle(r2, Math.PI / 4),      // 1
+		posFromAngle(r2, Math.PI / 2),      // 2
+		posFromAngle(r2, 3 * Math.PI / 4),  // 3
+		posFromAngle(r2, Math.PI),          // 4
+		posFromAngle(r2, 5 * Math.PI / 4),  // 5
+		posFromAngle(r2, 3 * Math.PI / 2),  // 6
+		posFromAngle(r2, 7 * Math.PI / 4)   // 7
+    ];
+    let inside = [
+		posFromAngle(r1, (Math.PI / 8) + 0),                // 0
+		posFromAngle(r1, (Math.PI / 8) + Math.PI / 4),      // 1
+		posFromAngle(r1, (Math.PI / 8) + Math.PI / 2),      // 2
+		posFromAngle(r1, (Math.PI / 8) + 3 * Math.PI / 4),  // 3
+		posFromAngle(r1, (Math.PI / 8) + Math.PI),          // 4
+		posFromAngle(r1, (Math.PI / 8) + 5 * Math.PI / 4),  // 5
+		posFromAngle(r1, (Math.PI / 8) + 3 * Math.PI / 2),  // 6
+		posFromAngle(r1, (Math.PI / 8) + 7 * Math.PI / 4)   // 7
+    ];
+
+  // console.log(`We have ${outside.length} + ${inside.length} points`);
+
+	context.beginPath();
+
+	context.moveTo(center.x + outside[0].x, center.y + outside[0].y);
+	context.lineTo(center.x + inside[0].x, center.y + inside[0].y);
+	context.lineTo(center.x + outside[1].x, center.y + outside[1].y);
+	context.lineTo(center.x + inside[1].x, center.y + inside[1].y);
+	context.lineTo(center.x + outside[2].x, center.y + outside[2].y);
+	context.lineTo(center.x + inside[2].x, center.y + inside[2].y);
+	context.lineTo(center.x + outside[3].x, center.y + outside[3].y);
+	context.lineTo(center.x + inside[3].x, center.y + inside[3].y);
+	context.lineTo(center.x + outside[4].x, center.y + outside[4].y);
+	context.lineTo(center.x + inside[4].x, center.y + inside[4].y);
+	context.lineTo(center.x + outside[5].x, center.y + outside[5].y);
+	context.lineTo(center.x + inside[5].x, center.y + inside[5].y);
+	context.lineTo(center.x + outside[6].x, center.y + outside[6].y);
+	context.lineTo(center.x + inside[6].x, center.y + inside[6].y);
+	context.lineTo(center.x + outside[7].x, center.y + outside[7].y);
+	context.lineTo(center.x + inside[7].x, center.y + inside[7].y);
+
+	context.closePath();
+
+	context.fillStyle = color;
+	context.fill();
 };
 
 function getLHA(gha, longitude) {
@@ -977,7 +1037,7 @@ class CelestialSphere extends HTMLElement {
 					}
 				}
 				if (this._constellationNames) {
-					// Calculate the center of the constellation
+					// Calculate the center of the constellation. Pb with Pisces (a wide one, around RA=0, see below, Math.abs(maxRA - minRA) > 12)...
 					let minD = undefined, maxD = undefined, minRA = undefined, maxRA = undefined;
 					for (let s = 0; s < constellations[i].stars.length; s++) {
 						if (s === 0) {
@@ -992,8 +1052,14 @@ class CelestialSphere extends HTMLElement {
 							maxRA = Math.max(constellations[i].stars[s].ra, maxRA);
 						}
 					}
+					if (Math.abs(maxRA - minRA) > 12) {
+						minRA += 24;
+					}
 					let centerDec = (this.observerLatitude >= 0 ? 1 : -1) * (maxD + minD) / 2;
 					let centerRA = (maxRA + minRA) / 2;
+					while (centerRA > 24) {
+						centerRA -= 24;
+					}
 					let lng = (360 - (centerRA * 360 / 24));
 					lng += (/*this._hemisphere * */this.LHAAries);
 					if (lng > 180) {
@@ -1006,6 +1072,12 @@ class CelestialSphere extends HTMLElement {
 					context.font = "bold " + Math.round(10 * this._zoom) + "px Arial"; // Like "bold 15px Arial"
 					context.fillStyle = this.celestialSphereColorConfig.constellationNameColor;
 					let str = constellations[i].name;
+					const found = zodiacMembers.find((element) => element === constellations[i].name);
+					if (found) {
+						// console.log(`${constellation.name} is in Zodiac`);
+						context.font = "bold " + Math.round(14 * this._zoom) + "px Arial";
+						context.fillStyle = 'lime'; // TODO A CSS entry
+					}
 					let len = context.measureText(str).width;
 					context.fillText(str, (this.canvas.width / 2) - p.x - (len / 2), (this.canvas.height / 2) + p.y - 2);
 				}
@@ -1171,22 +1243,29 @@ class CelestialSphere extends HTMLElement {
 					// console.log(`${body.name} = He: ${sr.alt}, Z: ${sr.Z}`); //  { he: srSun.alt, z: srSun.Z };
 					if (true || sr.alt >= 0) {
 						let p = this.plotOnSphere(sr.alt, sr.Z, radius);
-						context.beginPath();
-						context.fillStyle = this.celestialSphereColorConfig.wanderingBodiesColor;
-						const bodyRadius = 4;
-						context.arc((self.canvas.width / 2) - p.x, (self.canvas.height / 2) + p.y, bodyRadius, 0, 2 * Math.PI, false);
-						context.fill();
-						context.strokeStyle = this.celestialSphereColorConfig.starCircleColor;
-						context.lineWidth = 0.5;
-						context.stroke();
+						if (body.name !== 'sun') {
+							context.beginPath();
+							context.fillStyle = this.celestialSphereColorConfig.wanderingBodiesColor;
+							const bodyRadius = 4;
+							context.arc((self.canvas.width / 2) - p.x, (self.canvas.height / 2) + p.y, bodyRadius, 0, 2 * Math.PI, false);
+							context.fill();
+							context.strokeStyle = this.celestialSphereColorConfig.starCircleColor;
+							context.lineWidth = 0.5;
+							context.stroke();
 
-						context.font = "bold " + Math.round(30 /*24*/) + "px Arial"; // Like "bold 15px Arial"
-						context.fillStyle = this.celestialSphereColorConfig.wanderingBodiesNameColor;
-						let str = CelestialSphere.findSymbol(body.name);
-						let len = context.measureText(str).width;
-						context.fillText(str, (self.canvas.width / 2) - p.x - (len / 2), (self.canvas.height / 2) + p.y - 4);
+							context.font = "bold " + Math.round(30 /*24*/) + "px Arial"; // Like "bold 15px Arial"
+							context.fillStyle = this.celestialSphereColorConfig.wanderingBodiesNameColor;
+							let str = CelestialSphere.findSymbol(body.name);
+							let len = context.measureText(str).width;
+							context.fillText(str, (self.canvas.width / 2) - p.x - (len / 2), (self.canvas.height / 2) + p.y - 4);
 
-						context.closePath();
+							context.closePath();
+						} else {
+							drawSun(context, {
+								x: (self.canvas.width / 2) - p.x,
+								y: (self.canvas.height / 2) + p.y
+							}, 16 * this._zoom, "orange");
+						}
 					}
 				} else {
 					// Obliquity ?
