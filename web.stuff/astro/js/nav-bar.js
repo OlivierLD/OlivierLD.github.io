@@ -944,6 +944,7 @@ function setWanderingBodiesSM(id, cb) {
 }
 
 function setWanderingBodiesCS(id, cb) {
+    // May nit match the ecliptic data...
     document.getElementById(id).wanderingBodies = cb.checked;
     if (cb.checked === true) {
         document.getElementById(id).wanderingBodiesData = [
