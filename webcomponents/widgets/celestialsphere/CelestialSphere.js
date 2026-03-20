@@ -54,7 +54,8 @@ const celestialSphereDefaultColorConfig = {
 	starCircleColor: 'black',
 	starNameColor: 'white',
 	wanderingBodiesColor: 'orangered', // 'cyan',
-	wanderingBodiesNameColor: 'limegreen',
+	wanderingBodiesSymbolColor: 'limegreen',
+	wanderingBodiesNameColor: 'silver',
 	boatFillColor: 'silver', // unused
 	boatOutlineColor: 'rgba(192, 192, 192, 0.75'
 };
@@ -479,6 +480,9 @@ class CelestialSphere extends HTMLElement {
 											colorConfig.wanderingBodiesColor = value;
 											break;
 										case '--wandering-bodies-labels-color':
+											colorConfig.wanderingBodiesSymbolColor = value;
+											break;
+										case '--wandering-bodies-names-color':
 											colorConfig.wanderingBodiesNameColor = value;
 											break;
 										default:
@@ -1253,11 +1257,17 @@ class CelestialSphere extends HTMLElement {
 							context.lineWidth = 0.5;
 							context.stroke();
 
+							// Body Symbol
 							context.font = "bold " + Math.round(30 /*24*/) + "px Arial"; // Like "bold 15px Arial"
-							context.fillStyle = this.celestialSphereColorConfig.wanderingBodiesNameColor;
+							context.fillStyle = this.celestialSphereColorConfig.wanderingBodiesSymbolColor;
 							let str = CelestialSphere.findSymbol(body.name);
 							let len = context.measureText(str).width;
-							context.fillText(str, (self.canvas.width / 2) - p.x - (len / 2), (self.canvas.height / 2) + p.y - 4);
+							context.fillText(str, (self.canvas.width / 2) - p.x - (len / 2), (self.canvas.height / 2) + p.y - 8);
+							// Body name
+							context.font = "bold " + Math.round(12 * this._zoom) + "px Arial"; // Like "bold 15px Arial"
+							context.fillStyle = this.celestialSphereColorConfig.wanderingBodiesNameColor;
+							len = context.measureText(body.name).width;
+							context.fillText(body.name, (self.canvas.width / 2) - p.x - (len / 2), (self.canvas.height / 2) + p.y + (16 * this._zoom));
 
 							context.closePath();
 						} else {
