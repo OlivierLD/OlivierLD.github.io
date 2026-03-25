@@ -149,6 +149,40 @@ let setNewZOffset = (range, id) => {
     <script type="text/javascript" src="js/ajax.manager.js"></script>
 
     <script type="text/javascript">
+/**
+ *
+ * @param { lat: float, lng: float } from values in Radians
+ * @param { lat: float, lng: float } to values in Radians
+ * Return distance in radians
+ */
+function getGCDistance(from, to) {
+	let cos = Math.sin(Math.toRadians(from.lat)) * Math.sin(Math.toRadians(to.lat)) + Math.cos(Math.toRadians(from.lat)) *
+			  Math.cos(Math.toRadians(to.lat)) * Math.cos(Math.toRadians(to.lng - from.lng));
+	let dist = Math.acos(cos);
+	return dist;
+};
+
+/**
+ *  All in Radians
+ */
+function getCOG(p1, p2) {
+    let COG = 0;
+    if (p2.lng === p1.lng) {
+        if (p1.lat > p2.lat) {
+            COG = Math.PI;
+        }
+    } else {
+        COG = Math.atan2(Math.toRadians(p2.lat - p1.lat) / Math.toRadians(p2.lng - p1.lng));
+        if (isNaN(COG)) {
+            COG = (p1.lat > p2.lat) ? Math.PI : 0;
+        }
+    }
+    return COG;
+};
+
+    </script>
+
+    <script type="text/javascript">
 
 let transformDataForWorldWebComp = json => {
     let newObj = {};
@@ -329,6 +363,9 @@ const options = {
     timeout: 5000
 };
 
+let prevPos = null;
+let prevTime = null;
+
 // Called from navigator.geolocation.getCurrentPosition
 // Used by setGeolocation
 const onPosSuccess = (pos) => {
@@ -363,9 +400,27 @@ const onPosSuccess = (pos) => {
     document.getElementById('pos-lng-min-01').value = lngMinVal;
 
     if (autoUpdate) {
-        console.log("Auto-Updating user's position...");
+        console.log(`Auto-Updating user's position at ${new Date()} to ${pos}...`);
         updatePosition(); // As if the button was clicked !
-        // TODO Store position, to deduct COG & SOG
+        // Store position, to deduct COG & SOG
+        let now = new Date().getTime();
+        // COG = arctan ((p2.lat - p1.lat) / (p2.lng - p1.lng))
+        // Distance & time => SOG
+        if (prevPos !== null && prevTime !== null) {
+            // Update SOG & COG
+            let cog = getCOG({ lat: prevPos.coords.latitude, lng: prevPos.coords.longitude },
+                             { lat: pos.coords.latitude, lng: pos.coords.longitude });
+            let dist = getGCDistance({ lat: prevPos.coords.latitude, lng: prevPos.coords.longitude },
+                                     { lat: pos.coords.latitude, lng: pos.coords.longitude });
+            let deltaTs = (now - prevTime) / 1000; // in seconds
+            let speed = (Math.toDegrees(dist) * 60.0) / (3600 * deltaTs); // in knots
+            if (speed > 0.01) {
+                // TODO La suite... Forward the SOG & COG
+                console.log(`Dist: ${Math.toDegrees(dist) * 60} nm, COG: ${Math.toDegrees(cog)}\xba, in ${(now - prevTime) / 1000}s => ${speed} kts`);
+            }
+        }
+        prevPos = pos;
+        prevTime = now;
     }
 };
 
@@ -1642,7 +1697,7 @@ let toggleForeground = () => {
     <div style="vertical-align: top; margin-top: 0; font-style: normal; text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px silver;">
         <h1 style="cursor: pointer;" onclick="openNav()" title="Click for menu"><span style="cursor: pointer;" onclick="openNav()" onmouseover="openNav()" title="Hamburger">&nbsp; &#8801;</span> ES6 Celestial Computer <span style="font-size: 0.75em;">- SPA with BG Components</span></h1>
     </div>
-    <div style="text-align: right;"><small>Last code update March 15, 2026, 08:45 CET</small></div>
+    <div style="text-align: right;"><small>Last code update March 25, 2026, 13:45 CET</small></div>
 </div>
 <div class="background bg-container"
      style="margin: 10px; margin-top: 50px; border: 2px solid rgba(0, 255, 255, 0.5); border-radius: 10px;">
