@@ -434,9 +434,13 @@ const onPosSuccess = (pos) => {
                 document.getElementById("jumbo-02").value = speed.toFixed(1);
                 document.getElementById("jumbo-04").value = speed.toFixed(1);
             }
+            prevPos = pos;
+            prevTime = now;
         }
-        prevPos = pos;
-        prevTime = now;
+        if (prevPos === null) {
+            prevPos = pos;
+            prevTime = now;
+        }
     }
 };
 
