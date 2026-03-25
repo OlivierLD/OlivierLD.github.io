@@ -418,26 +418,27 @@ const onPosSuccess = (pos) => {
 
             // For tests, simulations.
             if (false) {
-                cog += ((Math.random() - 0.5) * 10);
-                speed += (10 * Math.random());
+                cog += ((Math.random() - 0.5) * 1);
+                speed += (1 * Math.random());
             }
             while (cog < 0) {
                 cog += 360;
             }
 
             if (speed > 0.01) {
+                // console.log("Updating SOG/COG.");
                 hdg = cog;
                 // La suite... Forward the SOG & COG
-                console.log(`Dist: ${Math.toDegrees(dist) * 60} nm, COG: ${Math.toDegrees(cog)}\xba, in ${(now - prevTime) / 1000}s => ${speed} kts`);
-                document.getElementById("jumbo-01").value = cog.toFixed(0);
-                document.getElementById("jumbo-03").value = cog.toFixed(0);
+                // console.log(`Dist: ${Math.toDegrees(dist) * 60} nm, COG: ${Math.toDegrees(cog)}\xba, in ${(now - prevTime) / 1000}s => ${speed} kts`);
+                document.getElementById("jumbo-01").value = (cog % 360).toFixed(2);
+                document.getElementById("jumbo-03").value = (cog % 360).toFixed(2);
                 document.getElementById("jumbo-02").value = speed.toFixed(1);
                 document.getElementById("jumbo-04").value = speed.toFixed(1);
             }
             prevPos = pos;
             prevTime = now;
         }
-        if (prevPos === null) {
+        if (prevPos === null || prevTime === null) {
             prevPos = pos;
             prevTime = now;
         }
@@ -1715,9 +1716,9 @@ let toggleForeground = () => {
 
 <div style="display: grid; grid-template-columns: auto auto;" title="Single Page Application with Background SVG &amp; Web Components">
     <div style="vertical-align: top; margin-top: 0; font-style: normal; text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px silver;">
-        <h1 style="cursor: pointer;" onclick="openNav()" title="Click for menu"><span style="cursor: pointer;" onclick="openNav()" onmouseover="openNav()" title="Hamburger">&nbsp; &#8801;</span> ES6 Celestial Computer <span style="font-size: 0.75em;">- SPA with BG Components</span></h1>
+        <h1 style="cursor: pointer;" onclick="openNav()" title="Click for menu"><span style="cursor: pointer;" onclick="openNav()" onmouseover="openNav()" title="Hamburger">&nbsp; &#8801;</span> ES6 Celestial Computer <span style="font-size: 0.75em;">- SPA with BG WebComponents</span></h1>
     </div>
-    <div style="text-align: right;"><small>Last code update March 25, 2026, 17:00 CET</small></div>
+    <div style="text-align: right;"><small>Last code update March 25, 2026, 17:20 CET</small></div>
 </div>
 <div class="background bg-container"
      style="margin: 10px; margin-top: 50px; border: 2px solid rgba(0, 255, 255, 0.5); border-radius: 10px;">
