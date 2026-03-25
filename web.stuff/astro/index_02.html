@@ -400,7 +400,7 @@ const onPosSuccess = (pos) => {
     document.getElementById('pos-lng-min-01').value = lngMinVal;
 
     if (autoUpdate) {
-        console.log(`Auto-Updating user's position at ${new Date()} to ${JSON.stringify(pos)}...`);
+        // console.log(`Auto-Updating user's position at ${new Date()} to ${JSON.stringify(pos)}...`);
         updatePosition(); // As if the button was clicked !
         // Store position, to deduct COG & SOG
         let now = new Date().getTime();
@@ -410,13 +410,29 @@ const onPosSuccess = (pos) => {
             // Update SOG & COG
             let cog = getCOG({ lat: prevPos.coords.latitude, lng: prevPos.coords.longitude },
                              { lat: pos.coords.latitude, lng: pos.coords.longitude });
+
             let dist = getGCDistance({ lat: prevPos.coords.latitude, lng: prevPos.coords.longitude },
                                      { lat: pos.coords.latitude, lng: pos.coords.longitude });
             let deltaTs = (now - prevTime) / 1000; // in seconds
             let speed = (Math.toDegrees(dist) * 60.0) / (3600 * deltaTs); // in knots
+
+            // For tests, simulations.
+            if (false) {
+                cog += ((Math.random() - 0.5) * 10);
+                speed += (10 * Math.random());
+            }
+            while (cog < 0) {
+                cog += 360;
+            }
+
             if (speed > 0.01) {
-                // TODO La suite... Forward the SOG & COG
+                hdg = cog;
+                // La suite... Forward the SOG & COG
                 console.log(`Dist: ${Math.toDegrees(dist) * 60} nm, COG: ${Math.toDegrees(cog)}\xba, in ${(now - prevTime) / 1000}s => ${speed} kts`);
+                document.getElementById("jumbo-01").value = cog.toFixed(0);
+                document.getElementById("jumbo-03").value = cog.toFixed(0);
+                document.getElementById("jumbo-02").value = speed.toFixed(1);
+                document.getElementById("jumbo-04").value = speed.toFixed(1);
             }
         }
         prevPos = pos;
@@ -1697,7 +1713,7 @@ let toggleForeground = () => {
     <div style="vertical-align: top; margin-top: 0; font-style: normal; text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px silver;">
         <h1 style="cursor: pointer;" onclick="openNav()" title="Click for menu"><span style="cursor: pointer;" onclick="openNav()" onmouseover="openNav()" title="Hamburger">&nbsp; &#8801;</span> ES6 Celestial Computer <span style="font-size: 0.75em;">- SPA with BG Components</span></h1>
     </div>
-    <div style="text-align: right;"><small>Last code update March 25, 2026, 13:48 CET</small></div>
+    <div style="text-align: right;"><small>Last code update March 25, 2026, 16:04 CET</small></div>
 </div>
 <div class="background bg-container"
      style="margin: 10px; margin-top: 50px; border: 2px solid rgba(0, 255, 255, 0.5); border-radius: 10px;">
@@ -2371,6 +2387,8 @@ let toggleForeground = () => {
 
     // Random Simulation
     let sensorUpdater = () => {
+        let autoUpdate = document.getElementById('auto-geoloc-slider').checked;
+
         if (simulatePressureAndHeading) {
             let diff = (Math.random() - 0.5) * 2.0; // [-1..1]
             hdg += diff;
@@ -2383,12 +2401,14 @@ let toggleForeground = () => {
                 _hdg -= 360;
             }
             document.getElementById("jumbo-01").value = _hdg; // .toFixed(0);
-        } else {
-            document.getElementById("jumbo-01").value = 0.0;
+//        } else {
         }
-        document.getElementById("jumbo-02").value = 0.0;
-        document.getElementById("jumbo-03").value = 0.0;
-        document.getElementById("jumbo-04").value = 0.0;
+        if (!autoUpdate) {
+            document.getElementById("jumbo-01").value = 0.0;
+            document.getElementById("jumbo-02").value = 0.0;
+            document.getElementById("jumbo-03").value = 0.0;
+            document.getElementById("jumbo-04").value = 0.0;
+        }
     };
 
     let prmslUpdater = () => { // Simulator
