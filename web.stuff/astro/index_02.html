@@ -332,11 +332,15 @@ const options = {
 // Called from navigator.geolocation.getCurrentPosition
 // Used by setGeolocation
 const onPosSuccess = (pos) => {
+
+    // Auto update ?
+    let autoUpdate = document.getElementById('auto-geoloc-slider').checked;
+
     document.getElementById('geo-mess').style.display = 'block'; // Display message
     // Doc at https://w3c.github.io/geolocation-api/
     // Position object at https://w3c.github.io/geolocation-api/#position_interface
     //
-    console.log('lat= ' + pos.coords.latitude + ' lon= ' + pos.coords.longitude); // + ' hdg= ' + pos.coords.heading + ' spd= ' + pos.coords.speed + ' m/s');
+    // console.log('lat= ' + pos.coords.latitude + ' lon= ' + pos.coords.longitude); // + ' hdg= ' + pos.coords.heading + ' spd= ' + pos.coords.speed + ' m/s');
     //  console.log("Pos data:" + pos.coords);
     // Feed the fields:
     // pos-lat-sign-01, pos-lat-deg-01, pos-lat-min-01
@@ -357,6 +361,12 @@ const onPosSuccess = (pos) => {
     document.getElementById('pos-lng-deg-01').value = lngDegVal;
     let lngMinVal = parseFloat(((lng - lngDegVal) * 60.0).toFixed(2));
     document.getElementById('pos-lng-min-01').value = lngMinVal;
+
+    if (autoUpdate) {
+        console.log("Auto-Updating user's position...");
+        updatePosition(); // As if the button was clicked !
+        // TODO Store position, to deduct COG & SOG
+    }
 };
 
 // Called from navigator.geolocation.getCurrentPosition
@@ -449,7 +459,7 @@ let updatePosition = () => {
         // URL to bookmark
         let toBookmark = `${window.location.protocol}//${window.location.hostname}:${window.location.pathname}?lat=${lat}&long=${lng}`;
 
-        console.log("Bookmark this URL: " + toBookmark);
+        // console.log("Bookmark this URL: " + toBookmark);
         document.getElementById("url-to-bookmark").innerText = toBookmark;
         document.getElementById("url-placeHolder").style.display = "block";
     } else {
@@ -1873,15 +1883,27 @@ let toggleForeground = () => {
                             <span class="tooltiptext tooltiptext-right">Set position value on the map</span>
                         </button>
                         <br/>
-                        <!-- Enable Geolocation APIs -->
-                        <div class="switch-container" style="margin-left: 30px;" title="Enable GeoLocation APIs">
-                            <label class="switch switch-element">
-                              <input id="geoloc-slider" type="checkbox" onchange="setGeolocation(this);">
-                              <span class="slider round"></span>
-                            </label>
-                            <span class="switch-element">Enable GeoLocation</span>
+                        <div>
+                        <div style="display: flex;">
+                            <!-- Enable Geolocation APIs -->
+                            <div class="switch-container" style="margin-left: 30px;" title="Enable GeoLocation APIs">
+                                <label class="switch switch-element">
+                                <input id="geoloc-slider" type="checkbox" onchange="setGeolocation(this);">
+                                <span class="slider round"></span>
+                                </label>
+                                <span class="switch-element">Enable GeoLocation</span>
+                            </div>
+                            <!-- Auto-update Geolocation -->
+                            <div class="switch-container" style="margin-left: 30px;" title="Auto Update GeoLocation?">
+                                <label class="switch switch-element">
+                                <input id="auto-geoloc-slider" type="checkbox"> <!-- Will be considered opPsSuccess -->
+                                <span class="slider round"></span>
+                                </label>
+                                <span class="switch-element">Auto-update Position</span>
+                            </div>
                         </div>
-                        <div id="geo-mess" style="display: none;"><small style="font-style: italic; color: yellow;">(hit "Set Position" when GeoLocation is obtained)</small></div>
+                        </div>
+                        <div id="geo-mess" style="display: none;"><small style="font-style: italic; color: yellow;">(hit "Set Position" when GeoLocation is obtained, or enable Auto-update)</small></div>
 
                         <div id="url-placeHolder" style="display: none;">
                             <div id="alert-zone" class="smooth" style="padding: 2px; border: 1px solid red; border-radius: 5px; padding: 5px;"> <!-- display: none;  -->
