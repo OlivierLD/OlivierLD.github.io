@@ -151,9 +151,9 @@ let setNewZOffset = (range, id) => {
     <script type="text/javascript">
 /**
  *
- * @param { lat: float, lng: float } from values in Radians
- * @param { lat: float, lng: float } to values in Radians
- * Return distance in radians
+ * @param { lat: float, lng: float } from values in degrees
+ * @param { lat: float, lng: float } to values in degrees
+ * @returns distance in radians
  */
 function getGCDistance(from, to) {
 	let cos = Math.sin(Math.toRadians(from.lat)) * Math.sin(Math.toRadians(to.lat)) + Math.cos(Math.toRadians(from.lat)) *
@@ -163,19 +163,20 @@ function getGCDistance(from, to) {
 };
 
 /**
- *  All in Radians
+ *  Return COG in Radians
+ *
+ * @param p1 {lat: float, lng: float}, all in radians, or all in degrees
+ * @param p2 {lat: float, lng: float}, all in radians, or all in degrees
+ * @returns {mumber} COG in radians
  */
 function getCOG(p1, p2) {
     let COG = 0;
-    if (p2.lng === p1.lng) {
-        if (p1.lat > p2.lat) {
-            COG = Math.PI;
-        }
-    } else {
-        COG = Math.atan2(Math.toRadians(p2.lat - p1.lat) / Math.toRadians(p2.lng - p1.lng));
-        if (isNaN(COG)) {
-            COG = (p1.lat > p2.lat) ? Math.PI : 0;
-        }
+    let deltaY = (p2.lat - p1.lat);
+    let deltaX = (p2.lng - p1.lng);
+    COG = Math.atan2(deltaY, deltaX);
+    // console.log(`Y: ${deltaY}, X: ${deltaX}, COG=${Math.toDegrees(COG)}\xba`);
+    if (isNaN(COG)) { // Should not happen...
+        COG = (p1.lat > p2.lat) ? Math.PI : 0;
     }
     return COG;
 };
@@ -366,8 +367,22 @@ const options = {
 let prevPos = null;
 let prevTime = null;
 
-// Called from navigator.geolocation.getCurrentPosition
-// Used by setGeolocation
+/**
+ * Called from navigator.geolocation.getCurrentPosition
+ * Used by setGeolocation
+ * @param pos, a GeolocationPosition: {
+ *     "timestamp": 1774508324044,
+ *     "coords": {
+ *         "accuracy": 35,                     // position accuracy
+ *         "latitude": 47.67779540333332,
+ *         "longitude": -3.1356094633333327,
+ *         "altitude": 0,
+ *         "altitudeAccuracy": null,
+ *         "heading": null,
+ *         "speed": null.                     // in m/s
+ *     }
+ * }
+ */
 const onPosSuccess = (pos) => {
 
     // Auto update ?
@@ -400,21 +415,40 @@ const onPosSuccess = (pos) => {
     document.getElementById('pos-lng-min-01').value = lngMinVal;
 
     if (autoUpdate) {
+        let textMessage = "";
         // console.log(`Auto-Updating user's position at ${new Date()} to ${JSON.stringify(pos)}...`);
         updatePosition(); // As if the button was clicked !
+        //
+        if (pos.coords.heading !== null || pos.coords.speed !== null) {
+            console.log(`From geoloc: heading: ${pos.coords.heading}, speed:${pos.coords.speed}, time:${pos.timestamp}`);
+        }
         // Store position, to deduct COG & SOG
         let now = new Date().getTime();
-        // COG = arctan ((p2.lat - p1.lat) / (p2.lng - p1.lng))
+        // COG = arctan2 ((p2.lat - p1.lat), (p2.lng - p1.lng))
         // Distance & time => SOG
         if (prevPos !== null && prevTime !== null) {
-            // Update SOG & COG
-            let cog = getCOG({ lat: prevPos.coords.latitude, lng: prevPos.coords.longitude },
-                             { lat: pos.coords.latitude, lng: pos.coords.longitude });
 
-            let dist = getGCDistance({ lat: prevPos.coords.latitude, lng: prevPos.coords.longitude },
-                                     { lat: pos.coords.latitude, lng: pos.coords.longitude });
-            let deltaTs = (now - prevTime) / 1000; // in seconds
-            let speed = (Math.toDegrees(dist) * 60.0) / (3600 * deltaTs); // in knots
+            // Update SOG & COG
+            let cog;
+            if (pos.coords.heading !== null) {
+                textMessage += "Heading from GeoLoc<br/>";
+                cog = pos.coords.heading;
+            } else {
+                textMessage += "Heading from Dead Reckoning.<br/>";
+                cog = getCOG({ lat: prevPos.coords.latitude, lng: prevPos.coords.longitude },
+                             { lat: pos.coords.latitude, lng: pos.coords.longitude });
+            }
+            let speed;
+            if (pos.coords.speed !== null) {
+                textMessage += "Speed from GeoLoc<br/>";
+                speed = pos.coords.speed * (1.94384); // m/s to knots
+            } else {
+                textMessage += "Speed from Dead Reckoning.<br/>";
+                let dist = getGCDistance({ lat: prevPos.coords.latitude, lng: prevPos.coords.longitude },
+                                        { lat: pos.coords.latitude, lng: pos.coords.longitude });
+                let deltaTs = (now - prevTime) / 1000; // in seconds
+                speed = (Math.toDegrees(dist) * 60.0) / (3600 * deltaTs); // in knots
+            }
 
             // For tests, simulations.
             if (false) {
@@ -424,8 +458,8 @@ const onPosSuccess = (pos) => {
             while (cog < 0) {
                 cog += 360;
             }
-
-            if (speed > 0.01) {
+            // TODO Speed and COG damping/smoothing ?
+            if (true || speed > 0.01) {
                 // console.log("Updating SOG/COG.");
                 hdg = cog;
                 // La suite... Forward the SOG & COG
@@ -437,6 +471,8 @@ const onPosSuccess = (pos) => {
             }
             prevPos = pos;
             prevTime = now;
+
+            document.getElementById("free-text-zone").innerHTML = textMessage;
         }
         if (prevPos === null || prevTime === null) {
             prevPos = pos;
@@ -1718,7 +1754,7 @@ let toggleForeground = () => {
     <div style="vertical-align: top; margin-top: 0; font-style: normal; text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px silver;">
         <h1 style="cursor: pointer;" onclick="openNav()" title="Click for menu"><span style="cursor: pointer;" onclick="openNav()" onmouseover="openNav()" title="Hamburger">&nbsp; &#8801;</span> ES6 Celestial Computer <span style="font-size: 0.75em;">- SPA with BG WebComponents</span></h1>
     </div>
-    <div style="text-align: right;"><small>Last code update March 25, 2026, 17:20 CET</small></div>
+    <div style="text-align: right;"><small>Last code update March 26, 2026, 08:20 CET</small></div>
 </div>
 <div class="background bg-container"
      style="margin: 10px; margin-top: 50px; border: 2px solid rgba(0, 255, 255, 0.5); border-radius: 10px;">
@@ -1977,6 +2013,7 @@ let toggleForeground = () => {
                                 </label>
                                 <span class="switch-element">Auto-update Position</span>
                             </div>
+                            <div id="free-text-zone" style="font-size: 0.75rem; font-style: italic;"></div>
                         </div>
                         </div>
                         <div id="geo-mess" style="display: none;"><small style="font-style: italic; color: yellow;">(hit "Set Position" when GeoLocation is obtained, or enable Auto-update)</small></div>
