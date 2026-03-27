@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--
   HTML5, CSS3, ES6
-  Oliv's home page.
+  Grand Large's home page.
  +-->
 <html lang="en-US">
 <head>
@@ -657,14 +657,14 @@ button:hover, button:focus {
 }
 
 #bg-title {
-  color: rgba(192, 192, 192, 0.5); 
-  margin-right: 120px; 
-  padding: 10px; 
-  font-style: italic; 
-  text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px silver; 
-  border: 1px solid silver; 
+  color: rgba(192, 192, 192, 0.5);
+  margin-right: 120px;
+  padding: 10px;
+  font-style: italic;
+  text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px silver;
+  border: 1px solid silver;
   border-radius: 5px;
-  
+
 }
 #h2-title:hover, #kebab:hover, #hamburger:hover, #my-name:hover, #bg-title:hover {
     color: cyan;
@@ -685,7 +685,7 @@ button:hover, button:focus {
 }
 
 /* @media screen and (max-height: 450px) { */
-@media screen and (width <= 1000px) {  
+@media screen and (width <= 1000px) {
   h1 {
     font-size: 60px;
   }
@@ -925,30 +925,17 @@ Date.prototype.format = function (dateFormat) {
     </div>
   </div>
 
-  <div id="id00" class="w3-full-page-modal" style="width: 100%;">
+  <div id="id00" class="w3-full-page-modal" style="width: 100%; height: 100%;">
     <!-- An example of a modal FULL page -->
     <div class="" style="background-color: black;">
       <div class="" style="background: black;">
         <span onclick="hidePage00();"
               class="close-icon bigger-close-icon">&times;</span>
         <div style="overflow-y: auto;">
-          <h1>Turning a small birch cup</h1>
+          <h1>Contacts</h1>
           <div style="margin: 15px;">
-            <small>Click on the images to enlarge them</small>
+            <small>. . .</small>
           </div>
-          <table style="margin: auto;">
-            <tr>
-              <td style="text-align: center; padding: 5px; border: 1px solid cyan; border-radius: 5px;"><a href="misc.pix/birch.cup/20200229_164736.jpg" target="new"><img src="misc.pix/birch.cup/20200229_164736.jpg" width="360" height="640"/></a></td>
-              <td style="text-align: center; padding: 5px; border: 1px solid cyan; border-radius: 5px;"><a href="misc.pix/birch.cup/20200229_171851.jpg" target="new"><img src="misc.pix/birch.cup/20200229_171851.jpg" height="360" width="640"/></a></td>
-            </tr>
-            <tr>
-              <td style="text-align: center; padding: 5px; border: 1px solid cyan; border-radius: 5px;"><a href="misc.pix/birch.cup/20200229_174851.jpg" target="new"><img src="misc.pix/birch.cup/20200229_174851.jpg" height="360" width="640"/></a></td>
-              <td style="text-align: center; padding: 5px; border: 1px solid cyan; border-radius: 5px;"><a href="misc.pix/birch.cup/20200229_174855.jpg" target="new"><img src="misc.pix/birch.cup/20200229_174855.jpg" height="360" width="640"/></a></td>
-            </tr>
-            <tr>
-              <td style="text-align: center; padding: 5px; border: 1px solid cyan; border-radius: 5px;"><a href="misc.pix/birch.cup/20200304_154020.jpg" target="new"><img src="misc.pix/birch.cup/20200304_154020.jpg" width="360" height="640"/></a></td>
-            </tr>
-          </table>
           <hr/>
           <span style="font-style: italic; font-weight: normal;">Oliv did it, 2020.</span>
         </div>
@@ -1016,9 +1003,9 @@ Date.prototype.format = function (dateFormat) {
   <!--div>
     <h2 id="h2-title" style="margin: 0; font-style: normal; text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px silver;">This page is my (messy) workbench</h2>
     <div style="z-index: -10; text-align: right;">
-      <span id="bg-title" 
+      <span id="bg-title"
             title="Background image title">BG Image title</span>
-    </div>     
+    </div>
   </div-->
 
   <!--h1 style="font-style: normal;">&nbsp; &#9776;&nbsp; &#8801;</h1-->
@@ -1100,8 +1087,8 @@ Date.prototype.format = function (dateFormat) {
         <span class="display-title">Commander les photos des diff&eacute;rents reportages</span>
         <span class="display-data">Commander</span>
         <span class="display-unit">
-          A W3C Standard<br/>
-          <a href="./webcomponents/gallery.html" class="active-link" target="WebComp">WebComponents Samples</a>
+          Passer une commande<!--br/>
+          <a href="./webcomponents/gallery.html" class="active-link" target="WebComp">WebComponents Samples</a-->
         </span>
       </div>
       <div class="text">TWO</div>
@@ -1114,7 +1101,7 @@ Date.prototype.format = function (dateFormat) {
           Contactez-nous pour toute question, remarque ou suggestion
         </span>
         <span class="display-data">Contact</span>
-        <span class="display-unit"><a href="http://processing.org" class="active-link" target="processing">Processing.org</a></span>
+        <span class="display-unit"><!--a href="http://processing.org" class="active-link" target="processing">Processing.org</a--></span>
       </div>
       <div class="text">THREE</div>
     </div>
@@ -1133,7 +1120,7 @@ Date.prototype.format = function (dateFormat) {
   <dialog id="custom-alert" class="shadow-menu" style="width: 800px; border: 2px solid cyan; margin-top: 50px;">
     <div class="dialog-header">
       <span>Alert</span>
-      <span class="dialog-header-close" onclick="closeCustomAlert();">&times</span>
+      <span class="dialog-header-close" onclick="closeCustomAlert();">&times;</span>
     </div>
     <div id="custom-alert-content">
       <!-- Dynamic alert content -->
@@ -1143,7 +1130,7 @@ Date.prototype.format = function (dateFormat) {
   <dialog id="about-dialog" class="shadow-menu" style="width: 800px;">
     <div class="dialog-header">
       <span>Where did you just land?...</span>
-      <span class="dialog-header-close" onclick="closeAboutDialog();">&times</span>
+      <span class="dialog-header-close" onclick="closeAboutDialog();">&times;</span>
     </div>
     <div>
       <!-- About content -->
@@ -1170,7 +1157,7 @@ Date.prototype.format = function (dateFormat) {
   <dialog id="weather-links-dialog" class="shadow-menu">
     <div class="dialog-header">
       <span>Some Weather links...</span>
-      <span class="dialog-header-close" onclick="closeWeatherDialog();">&times</span>
+      <span class="dialog-header-close" onclick="closeWeatherDialog();">&times;</span>
     </div>
     <ul>
       <li><a href="https://www.windy.com/-Show---add-more-layers/overlays?36.769,-124.508,7" target="weather" title="Windy">Windy</a></li>
@@ -1199,7 +1186,7 @@ Date.prototype.format = function (dateFormat) {
   <dialog id="qrcode-dialog" class="shadow-menu" style="width: 340px; border-radius: 10px; background: silver;">
 		<div class="dialog-header">
 		  <span style="color: cyan;">Scan this...</span>
-		  <span class="dialog-header-close" onclick="closeQRCodeDialog();">&times</span>
+		  <span class="dialog-header-close" onclick="closeQRCodeDialog();">&times;</span>
 		</div>
 		<div id="qrcode" style="width:250px; height:250px; margin:25px;"></div>
 	</dialog>
@@ -1224,25 +1211,19 @@ Date.prototype.format = function (dateFormat) {
         <!--a class="active-link" href="http://raspberrypi.lediouris.net/" target="new">Spi Ouest-France 2025</a-->
         <a href="javascript:void(0)" class="active-link" onclick="showPage001()">Spi Ouest-France 2025</a>
 
-        <a class="active-link" href="https://github.com/OlivierLD/raspberry-coffee/blob/master/Papers/README.md" target="new">La suite...</a>
+        <a class="active-link" onclick="showCustomAlert('Coming soon.');">La suite...</a>
       </div>
     </div>
     <div> <!-- onmouseover="showSection('section-2');" onmouseleave="hideSection('section-2');"> -->
       <a href="javascript:void(0)" onclick="showHideSection(this, 'section-2');"><span class="expand-collapse">&#9658;&nbsp;</span>Commander</a>
       <div id="section-2" class="sub-section">
-        <a class="active-link" href="./webcomponents/index.html" target="new">Index</a>
-        <a class="active-link" href="./webcomponents/gallery.html" target="new">Oliv's gallery (WiP)</a>
-        <a class="active-link" href="./webcomponents/carrousel.1.html" target="new" title="Work in Progress">A Carrousel Navigation Console</a>
-        <span style="padding-left: 250px;"><button class="button-link" title="QR Code for the Carrousel Console.&#13;Use it to reach it from other devices." onclick="makeCode('webcomponents/carrousel.1.html');" style="border-radius: 4px; font-size: 40%;">Carrousel QR Code</button></span>
+        <a class="active-link" onclick="showCustomAlert('Coming soon.');">Bon de Commande</a>
       </div>
     </div>
 
     <a href="javascript:void(0)" onclick="showHideSection(this, 'section-00');" title="Modal pages examples"><span class="expand-collapse">&#9658;&nbsp;</span>Contact</a>
     <div id="section-00" class="sub-section">
-      <a href="javascript:void(0)" class="active-link" onclick="showPage00()">A Full Modal Page, with a &lt;div&gt;</a>
-      <a href="javascript:void(0)" class="active-link" onclick="showPage001()">A Full Modal Page, with an &lt;iframe&gt; (deferred loading)</a>
-      <a href="javascript:void(0)" class="active-link" onclick="showPage002()">A Full Modal Page, with an &lt;iframe&gt;, (external not allowed... CORS)</a>
-      <a href="javascript:void(0)" class="active-link" onclick="showPage003()">A Full Modal Page, with an &lt;iframe&gt;, linear regression</a>
+        <a class="active-link" onclick="showCustomAlert('Coming soon.');">Envoyer un message</a>
     </div>
 
     <a href="javascript:void(0)" class="no-click">And more (to come...)</a>
@@ -1646,7 +1627,7 @@ Date.prototype.format = function (dateFormat) {
   function changeBG_YN() {
     if (bgAnimation !== undefined) { // Will stop
       console.log("Stopping BG change...");
-      clearInterval(bgAnimation); 
+      clearInterval(bgAnimation);
       bgAnimation = undefined;
       document.getElementById("start-stop-change-bg").innerText = 'Resume BG Change';
     } else { // Resume
@@ -1795,7 +1776,7 @@ Date.prototype.format = function (dateFormat) {
         return '...';
       }
     }
-    
+
     let countDown = setInterval(() => {
       secondLeft -= 1;
       // console.log(`CountDown: SecondLeft: ${secondLeft}`);
@@ -1836,8 +1817,8 @@ Date.prototype.format = function (dateFormat) {
 <script type="text/javascript">
 
 	let qrcode;
-	
-	let makeCode = (url) => {    
+
+	let makeCode = (url) => {
     // alert("Aha!");
 		if (url === undefined) {
 			url = "index_00.html"; // Dummy
@@ -1852,7 +1833,7 @@ Date.prototype.format = function (dateFormat) {
       alert("Not done loading yet...\nRe-try in a sec...");
     }
 	};
-	
+
 	let showQRCodeDialog = () => {
 		let qrDialog = document.getElementById("qrcode-dialog");
 		if (qrDialog.show !== undefined) {
@@ -1903,7 +1884,7 @@ Date.prototype.format = function (dateFormat) {
     // Free !
 
   };
-	
+
 </script>
 
 </html>
