@@ -95,7 +95,7 @@ let closeAboutDialog = () => {
 
 </script>
 
-<dialog id="about-dialog" class="shadow-menu pcc-dialog" style="display: none;">
+<dialog id="about-dialog" class="shadow-menu pcc-dialog" style="display: none; padding: 45px;">
 	<div class="dialog-header">
 		<span class="dialog-title"> Don Pedro </span>
 		<div class="close-place">
@@ -104,7 +104,15 @@ let closeAboutDialog = () => {
 	</div>
 	<div id="dialog-content" class="pcc-dialog-content">
 		Le nom "Don Pedro" nous est venu d'un po&euml;me de Guillaume Apollinaire, extrait du Bestiaire (paru dans "Alcools"), "Le Dromadaire".<br/>
-        <img src="img/bestiaire.jpg">
+        <div style="display: grid; grid-template-columns: auto auto; padding: 20px;">
+            <img src="img/bestiaire.jpg">
+            <div>
+                <img src="./1.dromadaire.gif">
+                <img src="./1.dromadaire.gif">
+                <img src="./1.dromadaire.gif">
+                <img src="./1.dromadaire.gif">
+            </div>
+        </div>
         <br/>
         Don Pedro d'Alfaroubeira &eacute;tait aussi le fr&egrave;re du roi du Portugal, Henri le Navigateur.
         <div style="display: grid; grid-template-columns: 50% 50%;">
