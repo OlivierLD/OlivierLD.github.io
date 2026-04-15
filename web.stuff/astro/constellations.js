@@ -1,3 +1,4 @@
+// TODO Consolidate, with skymap/stars/costellations.js
 // Unused. "zodiac" field is added to constellations.
 const zodiac = ["Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo", "Libra", "Scorpius", "Sagittarius", "Capricornus", "Aquarius", "Pisces"];
 export const zodiacMembers = zodiac;
