@@ -584,8 +584,8 @@ class WorldMap extends HTMLElement {
 		let aries = { lat: Math.toRadians(obl), lng: Math.toRadians(longitude) };
 		let eclCenter = this.deadReckoningRadians(aries, 90 * 60, 0); // "Center" of the Ecliptic
 
-		context.fillStyle = this.worldmapColorConfig.tropicColor;
-		for (let hdg=0; hdg<360; hdg++) {
+		context.fillStyle = 'yellow'; // this.worldmapColorConfig.tropicColor;
+		for (let hdg=0; hdg<360; hdg+=0.5) {
 			let pt = this.deadReckoningRadians(eclCenter, 90 * 60, hdg);
 			let pp = this.getPanelPoint(Math.toDegrees(pt.lat), Math.toDegrees(pt.lng));
 
