@@ -1754,7 +1754,7 @@ let toggleForeground = () => {
     <div style="vertical-align: top; margin-top: 0; font-style: normal; text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px silver;">
         <h1 style="cursor: pointer;" onclick="openNav()" title="Click for menu"><span style="cursor: pointer;" onclick="openNav()" onmouseover="openNav()" title="Hamburger">&nbsp; &#8801;</span> ES6 Celestial Computer <span style="font-size: 0.75em;">- SPA with BG WebComponents</span></h1>
     </div>
-    <div style="text-align: right;"><small>Last code update April 15, 2026, 08:40 CET</small></div>
+    <div style="text-align: right;"><small>Last code update April 15, 2026, 12:30 CET</small></div>
 </div>
 <div class="background bg-container"
      style="margin: 10px; margin-top: 50px; border: 2px solid rgba(0, 255, 255, 0.5); border-radius: 10px;">
@@ -2543,6 +2543,51 @@ let toggleForeground = () => {
 			context.restore();
 		}
 		context.closePath();
+
+        // Ecliptic ?
+        if (wm.withWanderingBodies && globalAstroData) {
+            let ghaAries = globalAstroData.aries.GHA.raw;
+            let obliquity = globalAstroData.trueObliq.raw;
+            let longitude = (ghaAries < 180) ? -ghaAries : 360 - ghaAries;
+            // console.log(`Aries GHA ${ghaAries} becomes Lng: ${longitude}`);
+            longitude += 90; // Extremum, max depth.
+            while (longitude > 360) {
+                longitude -= 360;
+            }
+            while (longitude < -180) {
+                longitude += 360;
+            }
+            while (longitude > 180) {
+                longitude -= 360;
+            }
+
+            let aries90 = { lat: obliquity, lng: longitude };
+
+            context.fillStyle = 'lime';
+            let label;
+            for (let hdg=0; hdg<360; hdg++) {
+                let _lat = aries90.lat * Math.cos(Math.toRadians(hdg));
+                let _lng = aries90.lng + hdg;
+                while (_lng > 360) {
+                    _lng -= 360;
+                }
+                while (_lng < -180) {
+                    _lng += 360;
+                }
+                while (_lng > 180) {
+                    _lng -= 360;
+                }
+                // Ecliptic Point
+                // console.log(`Plotting ecliptic point at lat ${_lat}, lng ${_lng}`);
+				let p = wm.getPanelPoint(_lat, _lng);
+				let thisPointIsBehind = wm.isBehind(Math.toRadians(_lat), Math.toRadians(_lng - wm.globeViewLngOffset));
+
+				if (wm.transparentGlobe || !thisPointIsBehind) {
+					context.fillRect(p.x, p.y, 1, 1);
+				}
+
+            }
+        }
     };
 
     let isWithin90degrees = (userZ, bodyZ) => { // May need some tweaks...
