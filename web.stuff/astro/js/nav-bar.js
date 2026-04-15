@@ -943,6 +943,16 @@ function setWanderingBodiesSM(id, cb) {
     document.getElementById(id).repaint();
 }
 
+function showHide(id, cb) {
+    let element = document.getElementById(id);
+    element.style.display = cb.checked ? 'block' : 'none';
+}
+
+function setBoatShape(id, list) {
+    document.getElementById(id).boatShape = list.value;
+    document.getElementById(id).repaint();
+}
+
 function setWanderingBodiesCS(id, cb) {
     // May nit match the ecliptic data...
     document.getElementById(id).wanderingBodies = cb.checked;
@@ -958,6 +968,11 @@ function setWanderingBodiesCS(id, cb) {
             { "obliq": globalAstroData.trueObliq.raw }  // obliq, or trueObliq ?
         ];
     }
+    document.getElementById(id).repaint();
+}
+
+function setUseBoatHeadingCS(id, cb) {
+    document.getElementById(id).useHeading = cb.checked;
     document.getElementById(id).repaint();
 }
 

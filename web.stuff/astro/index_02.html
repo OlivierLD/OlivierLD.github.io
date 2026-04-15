@@ -1699,16 +1699,16 @@ let toggleForeground = () => {
                             <span><input type="checkbox" onchange="setConstNames('celestial-sphere-01', this);">Constellation Names.</span>
 
                             <span><input type="checkbox" onchange="setWanderingBodiesCS('celestial-sphere-01', this);">Wandering bodies.</span>
-                            <!--span><input type="checkbox" onchange="setUseBoatHeadingCS('celestial-sphere-01', this); showHide('boat-shapes', this);">Show Boat Heading.</span-->
+                            <span><input type="checkbox" onchange="setUseBoatHeadingCS('celestial-sphere-01', this); showHide('boat-shapes', this);">Show Boat Heading.</span>
                             <span><input type="checkbox" onchange="setCelestialEquatorCS('celestial-sphere-01', this);">With Celestial Equator.</span>
                         </div>
-                        <!--div id="boat-shapes" style="display: none;">
+                        <div id="boat-shapes" style="display: none;">
                             Boat Shape:
                             <input type="radio" name="boat-shape" value="MONO" onchange="if (this.checked) { setBoatShape('celestial-sphere-01', this); }" checked>Monohull</input>
                             <input type="radio" name="boat-shape" value="CATA" onchange="if (this.checked) { setBoatShape('celestial-sphere-01', this); }">Catamaran</input>
                             <input type="radio" name="boat-shape" value="TRI" onchange="if (this.checked) { setBoatShape('celestial-sphere-01', this); }">Trimaran</input>
                             <input type="radio" name="boat-shape" value="PLANE" onchange="if (this.checked) { setBoatShape('celestial-sphere-01', this); }">Plane</input>
-                        </div-->
+                        </div>
                     </td>
                 </tr>
             </table>
@@ -1754,7 +1754,7 @@ let toggleForeground = () => {
     <div style="vertical-align: top; margin-top: 0; font-style: normal; text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px silver;">
         <h1 style="cursor: pointer;" onclick="openNav()" title="Click for menu"><span style="cursor: pointer;" onclick="openNav()" onmouseover="openNav()" title="Hamburger">&nbsp; &#8801;</span> ES6 Celestial Computer <span style="font-size: 0.75em;">- SPA with BG WebComponents</span></h1>
     </div>
-    <div style="text-align: right;"><small>Last code update April 15, 2026, 13:40 CET</small></div>
+    <div style="text-align: right;"><small>Last code update April 15, 2026, 14:15 CET</small></div>
 </div>
 <div class="background bg-container"
      style="margin: 10px; margin-top: 50px; border: 2px solid rgba(0, 255, 255, 0.5); border-radius: 10px;">
@@ -2443,10 +2443,13 @@ let toggleForeground = () => {
                 _hdg -= 360;
             }
             document.getElementById("jumbo-01").value = _hdg; // .toFixed(0);
+            document.getElementById("celestial-sphere-01").heading = _hdg;
 //        } else {
         }
         if (!autoUpdate) {
-            document.getElementById("jumbo-01").value = 0.0;
+            if (!simulatePressureAndHeading) {
+                document.getElementById("jumbo-01").value = 0.0;
+            }
             document.getElementById("jumbo-02").value = 0.0;
             document.getElementById("jumbo-03").value = 0.0;
             document.getElementById("jumbo-04").value = 0.0;
