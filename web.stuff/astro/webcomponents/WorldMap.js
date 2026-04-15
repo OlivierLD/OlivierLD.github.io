@@ -956,13 +956,13 @@ class WorldMap extends HTMLElement {
 		if (!font.includes('italic')) {
 			context.font = `italic ${font}`;
 		}
-		context.fillStyle = 'silver'; // TODO A CSS entry
+		context.fillStyle = (constellation.zodiac) ? 'limegreen' : 'silver'; // TODO A CSS entry?
 		let text = constellation.name;
 		let metrics = context.measureText(text);
 		// TODO A style for the constellation name
 		context.fillText(text,
 			minX + ((maxX - minX) / 2) - (metrics.width / 2),
-			minY + ((maxY - minY) / 2) + (10 / 2)); 
+			minY + ((maxY - minY) / 2) + (10 / 2));
 		// context.fillText(constellation.name, minX, minY);
 		context.closePath();
 
@@ -1312,7 +1312,7 @@ class WorldMap extends HTMLElement {
 						context.lineWidth = this.worldmapColorConfig.chartLineWidth;
 						context.beginPath();
 						context.strokeStyle = this.worldmapColorConfig.chartColor;
-	
+
 						for (let p = 0; p < point.length; p++) {
 							let lat = parseFloat(point[p].Lat);
 							let lng = parseFloat(point[p].Lng);
@@ -2356,7 +2356,7 @@ class WorldMap extends HTMLElement {
 		if (this.astronomicalData !== undefined && this.astronomicalData.deltaT !== undefined) {
 			context.fillStyle = this.worldmapColorConfig.displayPositionColor;
 			context.font = "12px Arial"; // "bold 40px Arial"
-			let deltaT = "\u0394T=" + this.astronomicalData.deltaT + " s";  
+			let deltaT = "\u0394T=" + this.astronomicalData.deltaT + " s";
 			context.fillText(deltaT, 10, this.height - 5);
 		}
 	}

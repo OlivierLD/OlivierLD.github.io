@@ -262,7 +262,7 @@ let displayWorldData = (astroData) => {
 
     // Set user position!!
     if (astroData === undefined) {
-        worldMap.setUserPosition({ longitude: -122.507, latitude: 37.7489 });
+        worldMap.setUserPosition({ longitude: -122.507, latitude: 37.7489 }); // SF
     } else {
         worldMap.setUserPosition({ longitude: astroData.from.longitude, latitude: astroData.from.latitude, gridSquare: astroData.gridSquare });
         worldMap.setAstronomicalData(astroData);

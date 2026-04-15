@@ -1,3 +1,9 @@
+// Unused. "zodiac" field is added to constellations.
+const zodiac = ["Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo", "Libra", "Scorpius", "Sagittarius", "Capricornus", "Aquarius", "Pisces"];
+export const zodiacMembers = zodiac;
+
+// "ra" is expressed in hours [0..24[
+// "d" in degrees [-90..90]
 let CONSTELLATION_LIST;
 export default CONSTELLATION_LIST = [
   {
@@ -142,6 +148,7 @@ export default CONSTELLATION_LIST = [
   },
   {
     "name": "Leo",
+    "zodiac": true,
     "stars": [
       {
         "name": "Regulus",
@@ -570,6 +577,7 @@ export default CONSTELLATION_LIST = [
   },
   {
     "name": "Taurus",
+    "zodiac": true,
     "stars": [
       {
         "name": "Aldebaran",
@@ -636,6 +644,7 @@ export default CONSTELLATION_LIST = [
   },
   {
     "name": "Gemini",
+    "zodiac": true,
     "stars": [
       {
         "name": "Castor",
@@ -765,6 +774,7 @@ export default CONSTELLATION_LIST = [
   },
   {
     "name": "Aries",
+    "zodiac": true,
     "stars": [
       {
         "name": "Hamal",
@@ -786,6 +796,7 @@ export default CONSTELLATION_LIST = [
   },
   {
     "name": "Cancer",
+    "zodiac": true,
     "stars": [
       {
         "name": "acubens",
@@ -825,6 +836,7 @@ export default CONSTELLATION_LIST = [
   },
   {
     "name": "Virgo",
+    "zodiac": true,
     "stars": [
       {
         "name": "Spica",
@@ -958,6 +970,7 @@ export default CONSTELLATION_LIST = [
   },
   {
     "name": "Libra",
+    "zodiac": true,
     "stars": [
       {
         "name": "Zubenelgenubi",
@@ -1010,6 +1023,7 @@ export default CONSTELLATION_LIST = [
   },
   {
     "name": "Scorpius",
+    "zodiac": true,
     "stars": [
       {
         "name": "Antares",
@@ -1151,6 +1165,7 @@ export default CONSTELLATION_LIST = [
   },
   {
     "name": "Sagittarius",
+    "zodiac": true,
     "stars": [
       {
         "name": "Kaus Australis",
@@ -1251,6 +1266,7 @@ export default CONSTELLATION_LIST = [
   },
   {
     "name": "Capricornus",
+    "zodiac": true,
     "stars": [
       {
         "name": "alpha",
@@ -1303,6 +1319,7 @@ export default CONSTELLATION_LIST = [
   },
   {
     "name": "Aquarius",
+    "zodiac": true,
     "stars": [
       {
         "name": "psi",
@@ -1409,6 +1426,7 @@ export default CONSTELLATION_LIST = [
   },
   {
     "name": "Pisces",
+    "zodiac": true,
     "stars": [
       {
         "name": "tau",
