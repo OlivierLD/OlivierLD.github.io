@@ -180,6 +180,13 @@ let showCelestialSphereDialog = () => {
 
     setCelestSphereData();
 
+    // Reset chevck boxes to default values
+    document.getElementById("cscb-01").checked = true; // Stars
+    document.getElementById("cscb-02").checked = true; // Constellations
+    document.getElementById("cscb-03").checked = true; // Star Names
+    document.getElementById("cscb-04").checked = false; // Constellation Names
+    document.getElementById("cscb-05").checked = false; // Wandering bodies
+
     if (celestSphereDialog.show != undefined) {
         celestSphereDialog.show();
     } else {

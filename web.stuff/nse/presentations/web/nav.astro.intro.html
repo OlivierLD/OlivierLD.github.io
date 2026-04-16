@@ -15,7 +15,7 @@
   MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
     </script>
     <!--script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script-->
-    <script type="text/javascript" 
+    <script type="text/javascript"
         async
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
     </script>
@@ -34,7 +34,7 @@
     /* for the iamges */
     filter: blur(8px);
     -webkit-filter: blur(8px);
-}        
+}
 
     </style>
 </head>
@@ -51,7 +51,7 @@
             The following document is designed to be visualized from a web browser, or printed from it (a pdf can also be generated from the page).
             The printed version will have page breaks and other formattings that will not be displayed from the web browser.<br/>
             Likewise, the web version has links that would be meaningless in a printed document.<br/>
-            When printing, you will have the possibility - from the dialog showing up in the browser - to hide or show different 
+            When printing, you will have the possibility - from the dialog showing up in the browser - to hide or show different
             data like headers, footers, page numbers, etc, and even scale.<br/>
             <b>But</b>, I'm still looking for a (free) way to generate the page numbers in the table of contents...
         </p>
@@ -86,13 +86,13 @@
     <div style="text-align: left; margin-left: 30px; margin-top: 130px;">
         <i>The more you know, the less you need... (Yvon Chouinard)</i>
     </div>
-</div>    
+</div>
 
 <div class="blank-for-print"></div>
 
 <div class="table-content screen-only">
-    <!-- 
-        role=list necessary because WebKit removes list semantic when list-style-type: none 
+    <!--
+        role=list necessary because WebKit removes list semantic when list-style-type: none
         taken from https://codepen.io/nzakas/pen/rNJaeMo
         WARNING !!! Page numbers are NOT automatically generated !!
     -->
@@ -218,7 +218,7 @@
                 La position de l'astre observ&eacute;.
                 <ul>
                     <li>
-                        On la calcule &agrave; l'aide des almanachs nautiques ou astronomiques (qu'on appelle aussi <i>&eacute;ph&eacute;m&eacute;rides</i>). 
+                        On la calcule &agrave; l'aide des almanachs nautiques ou astronomiques (qu'on appelle aussi <i>&eacute;ph&eacute;m&eacute;rides</i>).
                         Ces documents donnent pour tout instant les coordonn&eacute;es de diff&eacute;rents astres (Soleil, Lune, plan&egrave;tes, &eacute;toiles).
                     </li>
                 </ul>
@@ -289,7 +289,7 @@
         <li>Pour avoir sa position estim&eacute;e, il faut un livre de bord bien tenu, et &agrave; jour.</li>
         <li>Pour avoir la position de l'astre observ&eacute;, il faut des &eacute;ph&eacute;m&eacute;rides &agrave; jour (&agrave; savoir pour l'heure de l'observation).</li>
     </ul>
-</div>    
+</div>
 
 <div class="content doc-section">
     <h1><a name="02-3">Premi&egrave;re d&eacute;finition</a></h1>
@@ -312,7 +312,7 @@
             </li>
             <li>Sa latitude s'appelle la <b>D&eacute;clinaison</b>, not&eacute;e <b>D</b></li>
             <li>
-                Sa longitude s'appelle <b>Angle Horaire &agrave; Greenwich</b>, not&eacute; <b>AHG</b> (ou aussi <b>AHvo</b>, pour Angle Horaire au vrai z&eacute;ro)
+                Sa longitude s'appelle <b>Angle Horaire &agrave; Greenwich</b>, not&eacute; <b>AHG</b> (ou aussi <b>AHvo</b>, pour Angle Horaire au vrai z&eacute;ro), compt&eacute;e de 0 &agrave; 360&deg;.
                 <ul>
                     <li>
                         On retrouvera souvent cet "Angle Horaire". Cette expression est utilis&eacute;e pour les angles qu'on compte
@@ -328,21 +328,43 @@
     </p>
     <h2 style="font-style: italic;">Note, Point Vernal</h2>
     <p>
-        Le Soleil, la Lune, et les plan&egrave;tes, se d&eacute;placent dans le ciel, la Terre fait partie du m&ecirc;me syst&egrave;me. On les appelle des "<b>astres errants</b>". 
+        Le Soleil, la Lune, et les plan&egrave;tes, se d&eacute;placent dans le ciel, la Terre fait partie du m&ecirc;me syst&egrave;me. On les appelle des "<b>astres errants</b>".
         Les &Eacute;ph&eacute;m&eacute;rides Nautiques donnent pour chaque instant la position de ces astres (de leur <b>P<i>g</i></b>).<br/>
         &Agrave; l'inverse, les &eacute;toiles ne se d&eacute;placent pas dans le ciel, elles conservent la m&ecirc;me position d'un jour &agrave; l'autre.
         On note d'ailleurs que sur les <i>Cartes du Ciel</i>, seules figurent les &eacute;toiles (pas de plan&egrave;tes, pas de Soleil, pas de Lune), puisque leurs positions relatives demeurent inchang&eacute;es.<br/>
         On introduit ici la notion de <b>Point Vernal</b>. Le Point Vernal est situ&eacute; &agrave; l'intersection de l'&Eacute;quateur C&eacute;leste, et de l'&Eacute;cliptique.<br/>
         L'&Eacute;quateur C&eacute;leste est la projection de l'&eacute;quateur de la Terre sur la sph&egrave;re c&eacute;leste.<br/>
         L'&Eacute;cliptique est le plan dans lequel la Terre se d&eacute;place au long de l'ann&eacute;e.<br/>
-        Ce Point Vernal (not&eacute; aussi <b>&gamma;</b>, symbole de la constellation du B&eacute;lier, dans laquelle se trouve le Point Vernal) a - au m&ecirc;me titre que les &eacute;toiles - des coordonn&eacute;es fixes dans le ciel.
+        Ce Point Vernal (not&eacute; aussi <b>&gamma;</b>, lettre grecque "gamma", symbole de la constellation du B&eacute;lier, dans laquelle se trouve le Point Vernal) a - au m&ecirc;me titre que les &eacute;toiles - des coordonn&eacute;es fixes dans le ciel.
         <div style="text-align: center;">
             <img src="../../images/pt.vernal.png" width="80%">
         </div>
-        Ainsi, on a d&eacute;fini pour les &eacute;toiles cette notion d'<b>Angle Horaire Sid&eacute;ral</b> (not&eacute; AHso), qui d&eacute;finit le d&eacute;calage de Longitude entre une &eacute;toile et le Point Vernal.<br/>
+        Ainsi, on a d&eacute;fini pour les &eacute;toiles cette notion d'<b>Angle Horaire Sid&eacute;ral</b> (not&eacute; AHso dans les documents en fran&ccedil;ais, SHA dans les documents en anglais), qui d&eacute;finit le d&eacute;calage de Longitude entre une &eacute;toile et le Point Vernal.<br/>
         La D&eacute;clinaison du Point Vernal &eacute;tant 0 (car il est sur l'&Eacute;quateur, par d&eacute;finition), la notion de D&eacute;clinaison pour les &eacute;toiles reste inchang&eacute;e.<br/>
-        L'int&eacute;r&ecirc;t ici, est que, si on dispose des coordonn&eacute;es du Point Vernal dans les &Eacute;ph&eacute;m&eacute;rides, on peut - moyennant le fait qu'on ait l'Angle Horaire Sid&eacute;ral des &eacute;toiles (qui est invariant),
-        alors en d&eacute;duire les coordonn&eacute;es (AHG et D) des &eacute;toiles qui nous int&eacute;ressent.
+        L'int&eacute;r&ecirc;t ici, est que, si on dispose des coordonn&eacute;es du Point Vernal dans les &Eacute;ph&eacute;m&eacute;rides (son Angle Horaire &agrave; Greenwich), on peut - moyennant le fait qu'on ait l'Angle Horaire Sid&eacute;ral des &eacute;toiles (qui est invariant),
+        alors en d&eacute;duire les coordonn&eacute;es (AHG et D) des &eacute;toiles qui nous int&eacute;ressent.<br/>
+        <div class="postit">
+            <b><i>Note&nbsp;</i></b>:<br/>
+            En astronomie, on utilise aussi pour les coordonn&eacute;es &eacute;toiles la notion d'Ascension Droite (AD) et de D&eacute;clinaison (D).<br/>
+            L'Ascension Droite est l'angle mesur&eacute; &agrave; partir du Point Vernal, dans le sens <b>contraire</b> des aiguilles d'une montre, jusqu'&agrave; l'&eacute;toile consid&eacute;r&eacute;e.
+            <b><i>Cet angle est mesur&eacute; en heures&nbsp;!</i></b>, de 0 &agrave; 24h, et non en degr&eacute;s.
+            <br/>
+            Ainsi, si Vega, &alpha; Lyrae, a une Ascension Droite de 18h36m47.40s, et une D&eacute;clinaison de +38&deg;48'09" (en notation astronomique),
+            elle a - en notation nautique - un Angle Horaire Sid&eacute;ral de 80&deg;32.40' et une D&eacute;clinaison de N 38&deg;48.15'.
+            <!-- Vega, α Lyrae	80°32.40'	N 38°48.15' -->
+            <div style="margin: 10px 40px;; border: 1px solid silver; border-radius: 5px; padding: 10px;">
+                Donc&nbsp;: <br/>
+                <b>AHG = AHso + AHvo &gamma;</b><br/>
+                <b>D = D&eacute;clinaison de l'&eacute;toile</b><br/>
+                L'angle <b>horaire</b> est mesur&eacute; en <b>degr&eacute;s</b>, dans le sens des aiguilles d'une montre (d'o&ugrave; son nom), de 0 &agrave; 360&deg;.<br/>
+                L'<b>ascension droite</b>, qui n'a rien d'une ascension, ni d'une droite, est mesur&eacute;e en <b>heures</b>, mais dans le sens <b>contraire</b> des aiguilles d'une montre, comme les angles en trigonom&eacute;trie
+                (&ccedil;a s'appelle aussi le "sens direct").
+                <br/>
+                Ah c'est pratique&nbsp;!
+                <br/>
+                La seule chose que ces deux syst&egrave;mes de coordonn&eacute;es (qui sont cens&eacute;s adresser <i>le m&ecirc;me probl&egrave;me</i>) ont en commun, leur r&eacute;f&eacute;rence, &agrave; savoir le Point Vernal.
+            </div>
+        </div>
     </p>
 </div>
 
@@ -353,7 +375,7 @@
         <p>
             <ul>
                 <li>
-                    Pour exposer le principe de la fa&ccedil;on la plus claire possible, on va d'abord consid&eacute;rer le cas 
+                    Pour exposer le principe de la fa&ccedil;on la plus claire possible, on va d'abord consid&eacute;rer le cas
                     o&ugrave; l'observateur (not&eacute; <b>Obs</b> sur les figures suivantes) se trouve sur le m&ecirc;me m&eacute;ridien que le point P<i>g</i>.
                 </li>
                 <li>
@@ -438,7 +460,7 @@
                     <div class="screen-only content doc-section">
                         Plus de d&eacute;tails <a href="/web.stuff/nse/nse.html#05-2-9-1" target="_blank">ici</a>.
                     </div>
-                    
+
                 </li>
             </ul>
         </p>
@@ -593,7 +615,7 @@
         <li>En pratique, on est rarement assez pr&egrave;s du point <b>P<i>g</i></b> pour qu'un tel <i>cercle d'&eacute;gales hauteurs</i> tienne sur la carte.</li>
         <li>
             De fait, ce cercle est souvent tellement grand que sur une longueur de 20 ou 30 milles sur sa circonf&eacute;rence,
-            il est assimilable &agrave; une droite, qu'on appelle <i>droite d'&eacute;gales hauteurs</i> (que tout le monde 
+            il est assimilable &agrave; une droite, qu'on appelle <i>droite d'&eacute;gales hauteurs</i> (que tout le monde
             abr&egrave;ge en <i>droite de hauteurs</i>).
         </li>
         <li>
@@ -650,14 +672,14 @@
     <ul>
         <li>Tout ce qu'on sait &agrave; pr&eacute;sent, c'est qu'on est quelque part sur cette droite.</li>
         <li>
-            Afin d'affiner cette information, on fait une deuxi&egrave;me droite quelques heures plus tard (ou avec un autre astre, 
+            Afin d'affiner cette information, on fait une deuxi&egrave;me droite quelques heures plus tard (ou avec un autre astre,
             s'il y en a de disponibles), afin que la nouvelle droite n'ait pas le m&ecirc;me azimuth que la premi&egrave;re.
         </li>
     </ul>
     <img src="16.png" style="width: 90vw;">
     <ul>
         <li>
-            On translate ensuite la premi&egrave;re droite de la distance parcourue dans l'intervalle de temps qui s&eacute;pare les deux observations, 
+            On translate ensuite la premi&egrave;re droite de la distance parcourue dans l'intervalle de temps qui s&eacute;pare les deux observations,
             dans la direction qu'on a suivie.
         </li>
         <li>
@@ -741,4 +763,3 @@ window.onload = () => {
 <!--
   <iframe style="border-radius:12px" src="https://open.spotify.com/embed/artist/0b2B3PwcYzQAhuJacmcYgc?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
   -->
-  
