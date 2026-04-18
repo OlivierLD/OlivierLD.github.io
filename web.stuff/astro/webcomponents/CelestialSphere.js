@@ -1080,10 +1080,15 @@ class CelestialSphere extends HTMLElement {
 					if (found) {
 						// console.log(`${constellation.name} is in Zodiac`);
 						context.font = "bold " + Math.round(14 * this._zoom) + "px Arial";
-						context.fillStyle = 'lime'; // TODO A CSS entry
+						context.fillStyle = 'lime'; // TODO A CSS entry ?
 					}
 					let len = context.measureText(str).width;
 					context.fillText(str, (this.canvas.width / 2) - p.x - (len / 2), (this.canvas.height / 2) + p.y - 2);
+					if (found) { // Add Zodiac symbol
+						str = CelestialSphere.findZodiacSymbol(constellations[i].name);
+						len = context.measureText(str).width;
+						context.fillText(str, (this.canvas.width / 2) - p.x - (len / 2), (this.canvas.height / 2) + p.y - 2 + Math.round(16 * this._zoom));
+					}
 				}
 			}
 
@@ -1171,6 +1176,40 @@ class CelestialSphere extends HTMLElement {
 				return '\u2644';
 			default:
 				return bodyName;
+		}
+	}
+
+	static findZodiacSymbol(signName) {
+		// See https://html-shark.com/HTML/Zodiac.htm
+		switch (signName.toUpperCase()) {
+			case 'ARIES':
+				return '\u2648';
+			case 'TAURUS':
+				return '\u2649';
+			case 'GEMINI':
+				return '\u264A';
+			case 'CANCER':
+				return '\u264B';
+			case 'LEO':
+				return '\u264C';
+			case 'VIRGO':
+				return '\u264D';
+			case 'LIBRA':
+				return '\u264E';
+			case 'SCORPIO':
+			case 'SCORPIUS':
+				return '\u264F';
+			case 'SAGITTARIUS':
+				return '\u2650';
+			case 'CAPRICORN':
+			case 'CAPRICORNUS':
+				return '\u2651';
+			case 'AQUARIUS':
+				return '\u2652';
+			case 'PISCES':
+				return '\u2653';
+			default:
+				return signName;
 		}
 	}
 
