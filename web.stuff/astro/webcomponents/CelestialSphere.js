@@ -147,6 +147,7 @@ class CelestialSphere extends HTMLElement {
 			"longitude",              // Number [-180..180], default 3 (see below)
 			"heading",                // Boat (true) heading (N, 0 by default)
 			"use-heading",            // true or false. Heading North (0 true) if false
+			"equ-grid",               // true or false. Default false
 			"boat-shape",             // MONO, CATA, TRI, PLANE
 			"celestial-equator"       // true or false. Default false
 			// Hidden: a zoom factor
@@ -206,6 +207,7 @@ class CelestialSphere extends HTMLElement {
 		this._withConstellations = true;
 		this._withWanderingBodies = false;
 		this._withCelestialEquator = false;
+		this._withEquatorialGrid = false;
 		this._wanderingBodiesData = undefined;
 
 		this._previousClassName = "";
@@ -274,6 +276,9 @@ class CelestialSphere extends HTMLElement {
 			case "use-heading":
 				this._use_heading = (newVal === 'true');
 				break;
+			case "equ-grid":
+				this._withEquatorialGrid = (newVal === 'true');
+				break;
 			case "boat-shape":
 				switch (newVal) {
 					case 'MONO':
@@ -339,6 +344,9 @@ class CelestialSphere extends HTMLElement {
 	set useHeading(val) {
 		this._use_heading = val;
 	}
+	set equGrid(val) {
+		this._withEquatorialGrid = val;
+	}
 	set boatShape(val) {
 		this._boatShape = val;
 	}
@@ -388,6 +396,9 @@ class CelestialSphere extends HTMLElement {
 	}
 	get useHeading() {
 		return this._use_heading;
+	}
+	get equGrid() {
+		return this._withEquatorialGrid;
 	}
 	get boatShape() {
 		return this._boatShape;
@@ -928,14 +939,14 @@ class CelestialSphere extends HTMLElement {
 		context.stroke();
 		context.closePath();
 
-		// Declinations circles
+		// Declinations circles, Azimuthal grid (Zenith centered).
 		context.save();
 		context.beginPath();
 		context.setLineDash([5]);
 		context.lineWidth = 1; // 0.5;
 		context.strokeStyle = this.celestialSphereColorConfig.declinationCircleColor;
 		for (let i=10; i<90; i+=10) { // [80..10]
-			if (i === 0) {
+			if (i === 0) {n// unlikely...
 				continue;
 			}
 			context.beginPath();
@@ -945,6 +956,46 @@ class CelestialSphere extends HTMLElement {
 			context.closePath();
 		}
 		context.restore();
+
+		// Equatorial grid option.
+		if (this._withEquatorialGrid) {
+			context.save();
+			context.lineWidth = 0.5;
+			context.strokeStyle = 'white'; // this.celestialSphereColorConfig.declinationCircleColor;
+
+			// let maxDeltaX = 0, maxDeltaY = 0;
+
+			for (let i=80; i>-90; i-=10) { // [80..-80], circles diams, from pole to equator.
+				let dec = i;
+				let prevPoint;
+				context.beginPath();
+				for (let gha=0; gha<=360; gha+=10) {
+					// Sight Reduction !
+					let sr = CelestialSphere.sightReduction(this.observerLatitude, this.observerLongitude, gha, dec);
+					if (sr.alt >= 0) {
+						let p = this.plotOnSphere(sr.alt, sr.Z /*- (this.useHeading ? this.heading : 0)*/, radius);
+						if (prevPoint === undefined) {
+							context.moveTo((this.canvas.width / 2) - p.x, (this.canvas.height / 2) + p.y);
+						} else {
+							// console.log(`Plotting point From ${prevPoint.x}, ${prevPoint.y} to ${p.x}, ${p.y}, deltaX = ${p.x - prevPoint.x}, deltaY = ${p.y - prevPoint.y}`);
+							// console.log(`Plotting : deltaX = ${p.x - prevPoint.x}, deltaY = ${p.y - prevPoint.y}`);
+							// maxDeltaX = Math.max(maxDeltaX, Math.abs(p.x - prevPoint.x));
+							// maxDeltaY = Math.max(maxDeltaY, Math.abs(p.y - prevPoint.y));
+							if (Math.abs(p.x - prevPoint.x) > 100) { // To avoid big strikes accross the globe...
+								context.moveTo((this.canvas.width / 2) - p.x, (this.canvas.height / 2) + p.y);
+							} else {
+								context.lineTo((this.canvas.width / 2) - p.x, (this.canvas.height / 2) + p.y);
+							}
+						}
+						prevPoint = p;
+					}
+				}
+				// console.log(`Max deltaX = ${maxDeltaX}, maxDeltaY = ${maxDeltaY}`);
+				context.stroke();
+				context.closePath();
+			}
+			context.restore();
+		}
 
 		if (this._use_heading) {
 			this.drawBoat(context, this._heading);
@@ -1084,11 +1135,9 @@ class CelestialSphere extends HTMLElement {
 					}
 					let len = context.measureText(str).width;
 					context.fillText(str, (this.canvas.width / 2) - p.x - (len / 2), (this.canvas.height / 2) + p.y - 2);
-					if (found) { // Add Zodiac symbol
-						str = CelestialSphere.findZodiacSymbol(constellations[i].name);
-						len = context.measureText(str).width;
-						context.fillText(str, (this.canvas.width / 2) - p.x - (len / 2), (this.canvas.height / 2) + p.y - 2 + Math.round(16 * this._zoom));
-					}
+					str = CelestialSphere.findZodiacSymbol(constellations[i].name);
+					len = context.measureText(str).width;
+					context.fillText(str, (this.canvas.width / 2) - p.x - (len / 2), (this.canvas.height / 2) + p.y - 2 + Math.round(16 * this._zoom));
 				}
 			}
 
