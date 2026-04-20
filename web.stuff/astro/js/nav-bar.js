@@ -993,6 +993,11 @@ function setEquatorGridCS(id, cb) {
     document.getElementById(id).repaint();
 }
 
+function setAzimutalGridCS(id, cb) {
+    document.getElementById(id).azimutalGrid = cb.checked;
+    document.getElementById(id).repaint();
+}
+
 function setAriesLHASM(id, cb) {
     document.getElementById(id).ariesLHA = cb.checked;
     document.getElementById(id).repaint();

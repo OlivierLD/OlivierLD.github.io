@@ -207,6 +207,7 @@ class CelestialSphere extends HTMLElement {
 		this._withConstellations = true;
 		this._withWanderingBodies = false;
 		this._withCelestialEquator = false;
+		this._withAzimutalGrid = true;
 		this._withEquatorialGrid = false;
 		this._wanderingBodiesData = undefined;
 
@@ -276,6 +277,9 @@ class CelestialSphere extends HTMLElement {
 			case "use-heading":
 				this._use_heading = (newVal === 'true');
 				break;
+			case "azimutal-grid":
+				this._withAzimutalGrid = (newVal === 'true');
+				break;
 			case "equ-grid":
 				this._withEquatorialGrid = (newVal === 'true');
 				break;
@@ -344,6 +348,9 @@ class CelestialSphere extends HTMLElement {
 	set useHeading(val) {
 		this._use_heading = val;
 	}
+	set azimutalGrid(val) {
+		this._withAzimutalGrid = val;
+	}
 	set equGrid(val) {
 		this._withEquatorialGrid = val;
 	}
@@ -396,6 +403,9 @@ class CelestialSphere extends HTMLElement {
 	}
 	get useHeading() {
 		return this._use_heading;
+	}
+	get azimutalGrid() {
+		return this._withAzimutalGrid;
 	}
 	get equGrid() {
 		return this._withEquatorialGrid;
@@ -940,22 +950,24 @@ class CelestialSphere extends HTMLElement {
 		context.closePath();
 
 		// Declinations circles, Azimuthal grid (Zenith centered).
-		context.save();
-		context.beginPath();
-		context.setLineDash([5]);
-		context.lineWidth = 1; // 0.5;
-		context.strokeStyle = this.celestialSphereColorConfig.declinationCircleColor;
-		for (let i=10; i<90; i+=10) { // [80..10]
-			if (i === 0) {n// unlikely...
-				continue;
-			}
+		if (this._withAzimutalGrid) {
+			context.save();
 			context.beginPath();
-			let r = Math.round((radius * 0.92) * (90 - i) / 90);
-			context.arc(this.canvas.width / 2, this.canvas.height / 2, r, 0, 2 * Math.PI, false);
-			context.stroke();
-			context.closePath();
+			context.setLineDash([5]);
+			context.lineWidth = 1; // 0.5;
+			context.strokeStyle = this.celestialSphereColorConfig.declinationCircleColor;
+			for (let i=10; i<90; i+=10) { // [80..10]
+				if (i === 0) {n// unlikely...
+					continue;
+				}
+				context.beginPath();
+				let r = Math.round((radius * 0.92) * (90 - i) / 90);
+				context.arc(this.canvas.width / 2, this.canvas.height / 2, r, 0, 2 * Math.PI, false);
+				context.stroke();
+				context.closePath();
+			}
+			context.restore();
 		}
-		context.restore();
 
 		// Equatorial grid option.
 		if (this._withEquatorialGrid) {
@@ -1084,9 +1096,10 @@ class CelestialSphere extends HTMLElement {
 						let p2 = this.plotOnSphere(sr2.alt, sr2.Z /*- (this.useHeading ? this.heading : 0)*/, radius); // this.plotCoordinates(dec, lng, radius);
 						context.strokeStyle = this.celestialSphereColorConfig.constellationLineColor;
 						context.lineWidth = 0.5;
-						context.moveTo((this.canvas.width / 2) - p1.x, (this.canvas.height / 2) + p1.y);
-						context.lineTo((this.canvas.width / 2) - p2.x, (this.canvas.height / 2) + p2.y);
-
+						if (Math.abs(p2.x - p1.x) < 100 && Math.abs(p2.y - p1.y) < 100) { // To avoid big strikes accross the screen...
+							context.moveTo((this.canvas.width / 2) - p1.x, (this.canvas.height / 2) + p1.y);
+							context.lineTo((this.canvas.width / 2) - p2.x, (this.canvas.height / 2) + p2.y);
+						}
 						context.stroke();
 						context.closePath();
 					}
