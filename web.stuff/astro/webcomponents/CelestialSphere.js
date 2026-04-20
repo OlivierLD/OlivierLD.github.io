@@ -47,7 +47,7 @@ const celestialSphereDefaultColorConfig = {
 	declinationCircleColor: 'cyan',
 	ariesLabelColor: 'silver',
 	cardPointLabelsColor: 'red',
-	equatorialGridColor: 'blue',
+	equatorialGridColor: 'white',
 	constellationLineColor: 'lightGray',
 	constellationNameColor: 'orange',
 	starColor: 'gold',
@@ -973,11 +973,16 @@ class CelestialSphere extends HTMLElement {
 		if (this._withEquatorialGrid) {
 			context.save();
 			context.lineWidth = 0.5;
-			context.strokeStyle = 'white'; // this.celestialSphereColorConfig.declinationCircleColor;
+			context.strokeStyle = this.celestialSphereColorConfig.equatorialGridColor; // 'white';
 
+			let _radius = radius * 0.92;
 			// let maxDeltaX = 0, maxDeltaY = 0;
-
-			for (let i=80; i>-90; i-=10) { // [80..-80], circles diams, from pole to equator.
+			for (let i=80; i>-90; i-=10) { // Dec. [80..-80], circles diams, from pole to equator.
+				if (i == 0) {
+					context.strokeStyle = 'cyan';
+				} else {
+					context.strokeStyle = 'white';
+				}
 				let dec = i;
 				let prevPoint;
 				context.beginPath();
@@ -985,18 +990,19 @@ class CelestialSphere extends HTMLElement {
 					// Sight Reduction !
 					let sr = CelestialSphere.sightReduction(this.observerLatitude, this.observerLongitude, gha, dec);
 					if (sr.alt >= 0) {
-						let p = this.plotOnSphere(sr.alt, sr.Z /*- (this.useHeading ? this.heading : 0)*/, radius);
+						let p = this.plotOnSphere(sr.alt, sr.Z /*- (this.useHeading ? this.heading : 0)*/, _radius);
 						if (prevPoint === undefined) {
-							context.moveTo((this.canvas.width / 2) - p.x, (this.canvas.height / 2) + p.y);
+							// context.arc((this.width * this._zoom / 2) - p.x, (this.height * this._zoom / 2) + p.y, bodyRadius, 0, 2 * Math.PI, false);
+							context.moveTo((this.width * this._zoom / 2) - p.x, (this.height * this._zoom / 2) + p.y);
 						} else {
 							// console.log(`Plotting point From ${prevPoint.x}, ${prevPoint.y} to ${p.x}, ${p.y}, deltaX = ${p.x - prevPoint.x}, deltaY = ${p.y - prevPoint.y}`);
 							// console.log(`Plotting : deltaX = ${p.x - prevPoint.x}, deltaY = ${p.y - prevPoint.y}`);
 							// maxDeltaX = Math.max(maxDeltaX, Math.abs(p.x - prevPoint.x));
 							// maxDeltaY = Math.max(maxDeltaY, Math.abs(p.y - prevPoint.y));
 							if (Math.abs(p.x - prevPoint.x) > 100) { // To avoid big strikes accross the globe...
-								context.moveTo((this.canvas.width / 2) - p.x, (this.canvas.height / 2) + p.y);
+								context.moveTo((this.width * this._zoom / 2) - p.x, (this.height * this._zoom / 2) + p.y);
 							} else {
-								context.lineTo((this.canvas.width / 2) - p.x, (this.canvas.height / 2) + p.y);
+								context.lineTo((this.width * this._zoom / 2) - p.x, (this.height * this._zoom / 2) + p.y);
 							}
 						}
 						prevPoint = p;
@@ -1187,7 +1193,7 @@ class CelestialSphere extends HTMLElement {
 						context.lineWidth = 0.5;
 						context.stroke();
 
-						if (constellations[i].stars[s].name.charAt(0) === constellations[i].stars[s].name.charAt(0).toUpperCase() && this._starNames) { // Star name, starts with uppercase
+						if (constellations[i].stars[s].name.charAt(0) === constellations[i].stars[s].name.charAt(0).toUpperCase() && this._starNames) { // if star name starts with uppercase
 							context.font = "bold " + Math.round(10 * this._zoom) + "px Arial"; // Like "bold 15px Arial"
 							context.fillStyle = this.celestialSphereColorConfig.starNameColor;
 							let str = constellations[i].stars[s].name;
