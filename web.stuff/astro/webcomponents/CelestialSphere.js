@@ -1149,8 +1149,10 @@ class CelestialSphere extends HTMLElement {
 					let len = context.measureText(str).width;
 					context.fillText(str, (this.canvas.width / 2) - p.x - (len / 2), (this.canvas.height / 2) + p.y - 2);
 					str = CelestialSphere.findZodiacSymbol(constellations[i].name);
-					len = context.measureText(str).width;
-					context.fillText(str, (this.canvas.width / 2) - p.x - (len / 2), (this.canvas.height / 2) + p.y - 2 + Math.round(16 * this._zoom));
+					if (str !== null) { // Zodiac symbol
+						len = context.measureText(str).width;
+						context.fillText(str, (this.canvas.width / 2) - p.x - (len / 2), (this.canvas.height / 2) + p.y - 2 + Math.round(16 * this._zoom));
+					}
 				}
 			}
 
@@ -1271,7 +1273,7 @@ class CelestialSphere extends HTMLElement {
 			case 'PISCES':
 				return '\u2653';
 			default:
-				return signName;
+				return null;
 		}
 	}
 
