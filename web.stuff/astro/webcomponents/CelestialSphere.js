@@ -152,6 +152,10 @@ class CelestialSphere extends HTMLElement {
 			"celestial-equator"       // true or false. Default false
 			// Hidden: a zoom factor
 			// Ecliptic ? -> with wandering-bodies
+			// LHAAries
+			// with-azimutal-grid default false
+			// majorTicks
+			// minorTicks
 		];
 	}
 
@@ -194,9 +198,10 @@ class CelestialSphere extends HTMLElement {
 		this._use_heading = false;
 
 		this.majorTicks = 45; // prm ?
+		this.haValueStep = 15; // prm ?
 		this.minorTicks =  5; // prm ?
 
-		this.LHAAries = 0;
+		this.LHAAries = 0; // "Hidden" attribute.
 
 		this.observerLatitude = 45;
 		this.observerLongitude = -3;
@@ -214,8 +219,8 @@ class CelestialSphere extends HTMLElement {
 		this._previousClassName = "";
 		this.celestialSphereColorConfig = celestialSphereDefaultColorConfig;
 
-		this.doAFter = function(sunPath, context) {
-			// Do-nothing by default; Callback, after drawing. Takes 'this' and the context as parameter.
+		this.doAFter = function(celestialSphere, context) {
+			// Do-nothing by default; Callback, after drawing. Takes 'this' and the context as parameters.
 		};
 	}
 
@@ -835,7 +840,9 @@ class CelestialSphere extends HTMLElement {
 
 
 		if (true) { // this._type === MapType.STARFINDER_TYPE) { // OPTION StarFinder
+			context.save();
 			// Major ticks
+			context.lineWidth = 2;
 			context.beginPath();
 			for (let i = 0; i < 360; i++) {
 				if (i % this.majorTicks === 0) {
@@ -848,6 +855,8 @@ class CelestialSphere extends HTMLElement {
 					context.lineTo(xTo, yTo);
 				}
 			}
+			context.restore();
+
 			context.lineWidth = 1;
 			context.strokeStyle = this.celestialSphereColorConfig.ticksColor;
 			context.stroke();
@@ -875,7 +884,7 @@ class CelestialSphere extends HTMLElement {
 			// LHA values
 			context.beginPath();
 			for (let i = 0; i < 360; i++) {
-				if (i % this.majorTicks === 0) {
+				if (i % this.haValueStep === 0) {
 					context.save();
 					context.translate(this.canvas.width / 2, (this.canvas.height / 2)); // canvas.height);
 					let __currentAngle = - Math.toRadians(i - ((this.observerLatitude >= 0 ? 1 : -1) * this.LHAAries));
@@ -883,7 +892,7 @@ class CelestialSphere extends HTMLElement {
 					context.font = "bold " + Math.round(10 * this._zoom) + "px Arial"; // Like "bold 15px Arial"
 					context.fillStyle = this.celestialSphereColorConfig.tickLabelsColor;
 					let lha = (this.observerLatitude >= 0 || i === 0 ? i : (360 - i));
-					let str = lha.toString() + '°';
+					let str = lha.toString() + '°'; // The value to display.
 					let len = context.measureText(str).width;
 					context.fillText(str, -len / 2, (-(radius * 0.98) + 10));
 					// context.lineWidth = 1;
