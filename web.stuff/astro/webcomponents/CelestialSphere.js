@@ -951,68 +951,12 @@ class CelestialSphere extends HTMLElement {
 
 		// Declinations circles, Azimuthal grid (Zenith centered).
 		if (this._withAzimutalGrid) {
-			context.save();
-			context.beginPath();
-			context.setLineDash([5]);
-			context.lineWidth = 1; // 0.5;
-			context.strokeStyle = this.celestialSphereColorConfig.declinationCircleColor;
-			for (let i=10; i<90; i+=10) { // [80..10]
-				if (i === 0) {n// unlikely...
-					continue;
-				}
-				context.beginPath();
-				let r = Math.round((radius * 0.92) * (90 - i) / 90);
-				context.arc(this.canvas.width / 2, this.canvas.height / 2, r, 0, 2 * Math.PI, false);
-				context.stroke();
-				context.closePath();
-			}
-			context.restore();
+			this.drawAzimutalGrid(context, radius * 0.92);
 		}
 
 		// Equatorial grid option.
 		if (this._withEquatorialGrid) {
-			context.save();
-			context.lineWidth = 0.5;
-			context.strokeStyle = this.celestialSphereColorConfig.equatorialGridColor; // 'white';
-
-			let _radius = radius * 0.92;
-			// let maxDeltaX = 0, maxDeltaY = 0;
-			for (let i=80; i>-90; i-=10) { // Dec. [80..-80], circles diams, from pole to equator.
-				if (i == 0) {
-					context.strokeStyle = 'cyan';
-				} else {
-					context.strokeStyle = 'white';
-				}
-				let dec = i;
-				let prevPoint;
-				context.beginPath();
-				for (let gha=0; gha<=360; gha+=10) {
-					// Sight Reduction !
-					let sr = CelestialSphere.sightReduction(this.observerLatitude, this.observerLongitude, gha, dec);
-					if (sr.alt >= 0) {
-						let p = this.plotOnSphere(sr.alt, sr.Z /*- (this.useHeading ? this.heading : 0)*/, _radius);
-						if (prevPoint === undefined) {
-							// context.arc((this.width * this._zoom / 2) - p.x, (this.height * this._zoom / 2) + p.y, bodyRadius, 0, 2 * Math.PI, false);
-							context.moveTo((this.width * this._zoom / 2) - p.x, (this.height * this._zoom / 2) + p.y);
-						} else {
-							// console.log(`Plotting point From ${prevPoint.x}, ${prevPoint.y} to ${p.x}, ${p.y}, deltaX = ${p.x - prevPoint.x}, deltaY = ${p.y - prevPoint.y}`);
-							// console.log(`Plotting : deltaX = ${p.x - prevPoint.x}, deltaY = ${p.y - prevPoint.y}`);
-							// maxDeltaX = Math.max(maxDeltaX, Math.abs(p.x - prevPoint.x));
-							// maxDeltaY = Math.max(maxDeltaY, Math.abs(p.y - prevPoint.y));
-							if (Math.abs(p.x - prevPoint.x) > 100) { // To avoid big strikes accross the globe...
-								context.moveTo((this.width * this._zoom / 2) - p.x, (this.height * this._zoom / 2) + p.y);
-							} else {
-								context.lineTo((this.width * this._zoom / 2) - p.x, (this.height * this._zoom / 2) + p.y);
-							}
-						}
-						prevPoint = p;
-					}
-				}
-				// console.log(`Max deltaX = ${maxDeltaX}, maxDeltaY = ${maxDeltaY}`);
-				context.stroke();
-				context.closePath();
-			}
-			context.restore();
+			this.drawEquatorialGrid(context, radius * 0.92);
 		}
 
 		if (this._use_heading) {
@@ -1337,6 +1281,68 @@ class CelestialSphere extends HTMLElement {
 				context.closePath();
 			}
 		}
+	}
+
+	drawAzimutalGrid(context, radius) {
+		context.save();
+		context.beginPath();
+		context.setLineDash([5]);
+		context.lineWidth = 1; // 0.5;
+		context.strokeStyle = this.celestialSphereColorConfig.declinationCircleColor;
+		for (let i=10; i<90; i+=10) { // [80..10]
+			if (i === 0) {n// unlikely...
+				continue;
+			}
+			context.beginPath();
+			let r = Math.round((radius * 1.0) * (90 - i) / 90);
+			context.arc(this.canvas.width / 2, this.canvas.height / 2, r, 0, 2 * Math.PI, false);
+			context.stroke();
+			context.closePath();
+		}
+		context.restore();
+	}
+
+	drawEquatorialGrid(context, radius) {
+		context.save();
+		context.lineWidth = 0.5;
+		context.strokeStyle = this.celestialSphereColorConfig.equatorialGridColor; // 'white';
+
+		// let maxDeltaX = 0, maxDeltaY = 0;
+		for (let i=80; i>-90; i-=10) { // Dec. [80..-80], circles diams, from pole to equator.
+			// if (i == 0) {
+			// 	context.strokeStyle = 'cyan';
+			// } else {
+			// 	context.strokeStyle = 'white';
+			// }
+			let dec = i;
+			let prevPoint;
+			context.beginPath();
+			for (let gha=0; gha<=360; gha+=10) {
+				// Sight Reduction !
+				let sr = CelestialSphere.sightReduction(this.observerLatitude, this.observerLongitude, gha, dec);
+				if (sr.alt >= 0) {
+					let p = this.plotOnSphere(sr.alt, sr.Z /*- (this.useHeading ? this.heading : 0)*/, radius);
+					if (prevPoint === undefined) {
+						context.moveTo((this.width * this._zoom / 2) - p.x, (this.height * this._zoom / 2) + p.y);
+					} else {
+						// console.log(`Plotting point From ${prevPoint.x}, ${prevPoint.y} to ${p.x}, ${p.y}, deltaX = ${p.x - prevPoint.x}, deltaY = ${p.y - prevPoint.y}`);
+						// console.log(`Plotting : deltaX = ${p.x - prevPoint.x}, deltaY = ${p.y - prevPoint.y}`);
+						// maxDeltaX = Math.max(maxDeltaX, Math.abs(p.x - prevPoint.x));
+						// maxDeltaY = Math.max(maxDeltaY, Math.abs(p.y - prevPoint.y));
+						if (Math.abs(p.x - prevPoint.x) > 100) { // To avoid big strikes accross the globe...
+							context.moveTo((this.width * this._zoom / 2) - p.x, (this.height * this._zoom / 2) + p.y);
+						} else {
+							context.lineTo((this.width * this._zoom / 2) - p.x, (this.height * this._zoom / 2) + p.y);
+						}
+					}
+					prevPoint = p;
+				}
+			}
+			// console.log(`Max deltaX = ${maxDeltaX}, maxDeltaY = ${maxDeltaY}`);
+			context.stroke();
+			context.closePath();
+		}
+		context.restore();
 	}
 
 	drawWanderingBodies(context, radius) {
