@@ -1,0 +1,1815 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+ ! Standalone.
+ ! All ES6 AstroComputer
+ ! Standalone Celestial Sphere.
+ ! Dynamically bilingual.
+ ! Olivier Le Diouris, 2026.
+ +-->
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Standalone Celestial Sphere</title>
+	<link rel="icon" type="image/gif" href="./pix/sextant.gif">
+	<link rel="stylesheet" href="./css/stylesheet.css">
+	<style type="text/css">
+		.celestial-sphere-display-01 {
+			--background-color: white;
+			--ticks-color: gray;
+			--ticks-labels-color: black;
+			--sky-map-month-color: red;
+			--sky-background: rgb(21, 21, 86);
+			--visible-sky-color: navy;
+			--skyline-color: blue;
+			--hour-ticks-color: blue;
+			--hour-tick-label-color: blue;
+			--sky-grid-color: cyan;
+			--declination-color: cyan;
+			--aries-label-color: black;
+			--card-points-color: red;
+			--nsew-color: blue;
+			--equatorial-grid-color: white;
+			--constellation-lines-color: lightGray;
+			--constellation-names-color: orange;
+			--star-color: gold;
+			--star-names-color: white;
+			--star-circle-color: black;
+			--wandering-bodies-color: orangered;
+			--wandering-bodies-labels-color: limegreen;
+		}
+
+		.bg-img {
+			position: relative;
+			width: 100%;
+			height: 100%;
+			background: radial-gradient(at top, rgba(255, 255, 255, 0.25) 20%, rgba(1, 67, 114, 0.20) 55%), url("./pix/dacron.gif");
+		}
+		.result-style {
+			margin: 10px;
+			max-height: 400px;
+			overflow-y: scroll;
+		}
+		.help-dialog {
+			background-color: rgba(0, 0, 0, 0.75);
+			padding: 2em;
+			color: silver;
+			border: 2px solid silver;
+			border-radius: 10px;
+			width: 800px;
+			margin-left: 200px;
+			margin-top: 10px;
+			z-index: 1000;
+			box-shadow: 2px 2px 4px grey, 0 0 25px white, 0 0 7px cyan;
+		}
+		.dialog-header {
+			font-size: 48px;
+			font-weight: 700;
+		}
+		.dialog-header-close {
+			float: right;
+			font-size: 3rem;
+		}
+		.dialog-header-close:hover {
+			color: cyan;
+			cursor: pointer;
+			text-shadow: 5px 5px 10px rgb(78, 39, 39), 0 0 25px white, 0 0 7px cyan;
+		}
+		.help-icon:hover {
+			cursor: pointer;
+			box-shadow: 5px 5px 10px rgb(78, 39, 39), 0 0 25px white, 0 0 7px cyan;
+		}
+
+		/* Font size */
+		*, td, li, span {
+			font-size: 1.1rem;
+		}
+		h1 {
+			font-size: 2rem;
+		}
+
+		@media screen and (max-width: 720px) {
+			*, td, li, span {
+				font-size: 1rem;
+			}
+			h1 {
+				font-size: 1rem;
+			}
+		}
+	</style>
+	<!-- Scripts -->
+    <!-- Main Module -->
+    <script type="module" src="app.js"></script> <!-- THAT is the key for celestial calculations -->
+
+    <script type="module" src="./webcomponents/CelestialSphere.js"></script>
+
+	<script type="text/javascript">
+
+	let langToUse = 'EN';
+
+	function decToSex(val, ns_ew) {
+		var absVal = Math.abs(val);
+		var intValue = Math.floor(absVal);
+		var dec = absVal - intValue;
+		var i = intValue;
+		dec *= 60;
+		var s = "";
+		if (ns_ew !== undefined) {
+			if (val < 0) {
+				s += (ns_ew === 'NS' ? 'S' : 'W');
+			} else {
+				s += (ns_ew === 'NS' ? 'N' : 'E');
+			}
+		}
+		s += " ";
+		s += i + "&deg;" + dec.toFixed(2) + "'";
+		return s;
+	}
+
+	function switchLanguage() {
+		let newURL = location.origin + location.pathname;
+		if (langToUse === 'FR') {
+			// Switch to English
+			location.replace(newURL + "?lang=EN");
+		} else {
+			// Switch to French
+			location.replace(newURL + "?lang=FR");
+		}
+	}
+
+	function updateFieldToNow() {
+		let now = new Date();
+		let year = now.getUTCFullYear();
+		let month = now.getUTCMonth() + 1;
+		let day = now.getUTCDate();
+		let hours = now.getUTCHours();
+		let minutes = now.getUTCMinutes();
+		let seconds = now.getUTCSeconds();
+
+		document.getElementById('calendar-year-01').value = year;
+		document.getElementById('calendar-month-01').value = (month < 10 ? '0' + month : month);
+		document.getElementById('calendar-day-01').value = day;
+		document.getElementById('watch-value-01').value =
+				(hours < 10 ? '0' + hours : hours) + ':' +
+				(minutes < 10 ? '0' + minutes : minutes) + ':' +
+				(seconds < 10 ? '0' + seconds : seconds);
+	}
+
+    // Used by setGeolocation
+    let geoInterval;
+    const options = {
+        enableHighAccuracy: true,
+        maximumAge: 0,
+        timeout: 5000
+    };
+
+    // Called from navigator.geolocation.getCurrentPosition
+    // Used by setGeolocation
+    const onPosSuccess = (pos) => {
+
+        // Doc at https://w3c.github.io/geolocation-api/
+        // Position object at https://w3c.github.io/geolocation-api/#position_interface
+        //
+        console.log('lat= ' + pos.coords.latitude + ' lon= ' + pos.coords.longitude); // + ' hdg= ' + pos.coords.heading + ' spd= ' + pos.coords.speed + ' m/s');
+        console.log(`GeoLocation position: ${decToSex(pos.coords.latitude, 'NS')} / ${decToSex(pos.coords.longitude, 'EW')}`);
+        // console.log("Pos data:" + pos.coords);
+        // document.getElementById('center-point').innerHTML = `Centered on ${decToSex(pos.coords.latitude, 'NS')} / ${decToSex(pos.coords.longitude, 'EW')}`;
+
+
+        // set the pos.coords.latitude, pos.coords.longitude
+		let latSign = Math.sign(pos.coords.latitude);
+		let latDeg = Math.floor(Math.abs(pos.coords.latitude));
+		let latMin = (Math.abs(pos.coords.latitude) - latDeg) * 60.0;
+		document.getElementById('pos-lat-sign-01').value = latSign < 0 ? 'S' : 'N';
+		document.getElementById('pos-lat-deg-01').value = latDeg;
+		document.getElementById('pos-lat-min-01').value = latMin.toFixed(2);
+
+		let lngSign = Math.sign(pos.coords.longitude);
+		let lngDeg = Math.floor(Math.abs(pos.coords.longitude));
+		let lngMin = (Math.abs(pos.coords.longitude) - lngDeg) * 60.0;
+		document.getElementById('pos-lng-sign-01').value = lngSign < 0 ? 'W' : 'E';
+		document.getElementById('pos-lng-deg-01').value = lngDeg;
+		document.getElementById('pos-lng-min-01').value = lngMin.toFixed(2);
+
+	};
+
+    // Called from navigator.geolocation.getCurrentPosition
+    // Used by setGeolocation
+    const onPosError = (err) => {
+        let errMess;
+        if (err.code === err.PERMISSION_DENIED) {
+            errMess = 'Location access was denied by the user.';
+        } else {
+            errMess = 'location error (' + err.code + '): ' + err.message;
+        }
+        console.error(errMess);
+    };
+
+    let setGeolocation = (slider) => {
+        console.log(`GeoLocation turned ${slider.checked ? 'ON' : 'OFF'}`);
+        if (slider.checked) { // ON
+            geoInterval = setInterval(() => {
+            /* let watchId = */ navigator.geolocation.getCurrentPosition(onPosSuccess, onPosError, options);
+            }, 1000);
+        } else {              // OFF
+            if (geoInterval) {
+                clearInterval(geoInterval);
+            }
+        }
+    };
+
+	const LOWER_LIMB = 1;
+	const UPPER_LIMB = 2;
+
+	const DELTA_T = 69.2201; // Will be re-calculated anyway.
+
+	function findStarGHA(bodyName, globalData) {
+		for (const star of globalData.stars) {
+			// console.log(`Looking for GHA for [${bodyName}], now on [${star.name}]`);
+			if (star.name === bodyName) {
+				// console.log("--> Found it!");
+				return star.gha;
+			}
+		}
+		return null; // ie not found
+	};
+	function findStarDEC(bodyName, globalData) {
+		for (const star of globalData.stars) {
+			// console.log(`Looking for D for [${bodyName}], now on [${star.name}]`);
+			if (star.name === bodyName) {
+				// console.log("--> Found it!");
+				return star.decl;
+			}
+		}
+		return null; // ie not found
+	};
+
+	function getGHAFor(bodyName, globalData) {
+		switch (bodyName) {
+			case 'Moon':
+				return globalData.moon.GHA.raw;
+			case 'Venus':
+				return globalData.venus.GHA.raw;
+			case 'Mars':
+				return globalData.mars.GHA.raw;
+			case 'Jupiter':
+				return globalData.jupiter.GHA.raw;
+			case 'Saturn':
+				return globalData.saturn.GHA.raw;
+			default: // Star ?
+				return findStarGHA(bodyName, globalData);
+		}
+		return null;
+	};
+	function getDECFor(bodyName, globalData) {
+		switch (bodyName) {
+			case 'Moon':
+				return globalData.moon.DEC.raw;
+			case 'Venus':
+				return globalData.venus.DEC.raw;
+			case 'Mars':
+				return globalData.mars.DEC.raw;
+			case 'Jupiter':
+				return globalData.jupiter.DEC.raw;
+			case 'Saturn':
+				return globalData.saturn.DEC.raw;
+			default: // Star ?
+				return findStarDEC(bodyName, globalData);
+		}
+		return null;
+	}
+	function getHPFor(bodyName, globalData) {
+		switch (bodyName) {
+			case 'Moon':
+				return globalData.moon.HP.raw;
+			case 'Venus':
+				return globalData.venus.HP.raw;
+			case 'Mars':
+				return globalData.mars.HP.raw;
+			case 'Jupiter':
+				return globalData.jupiter.HP.raw;
+			case 'Saturn':
+				return globalData.saturn.HP.raw;
+			default: // Star ?
+				return 0;
+		}
+		return null;
+	}
+	function getSDFor(bodyName, globalData) {
+		switch (bodyName) {
+			case 'Moon':
+				return globalData.moon.SD.raw;
+			case 'Venus':
+				return globalData.venus.SD.raw;
+			case 'Mars':
+				return globalData.mars.SD.raw;
+			case 'Jupiter':
+				return globalData.jupiter.HP.raw;
+			case 'Saturn':
+				return globalData.saturn.SD.raw;
+			default: // Star ?
+				return 0;
+		}
+		return null;
+	}
+
+	function calculateSightReduction(payload, callback) {
+		console.log(payload);
+
+		let calculationData = {                                               // utcDate like 2025-03-31T14:16:31, duration format.
+			utcyear: parseInt(payload.utcDate.substring(0, 4)),               //              |    |  |  |  |  |
+			utcmonth: parseInt(payload.utcDate.substring(5, 7)),              //              0    |  |  |  |  |
+			utcday: parseInt(payload.utcDate.substring(8, 10)),               //                   5  |  |  |  |
+			utchour: parseInt(payload.utcDate.substring(11, 13)),             //                      8  |  |  |
+			utcminute: parseInt(payload.utcDate.substring(14, 16)),           //                         11 |  |
+			utcsecond: parseInt(payload.utcDate.substring(17, 19)),           //                            14 |
+			deltaT: DELTA_T,                                                  //                               17
+			noPlanets: false,
+			noStars: false
+		};
+
+		let globalAstroData = sampleMain(calculationData); // in app.js
+		if (false) {
+			console.log("Calculation done %d-%d-%d %d:%d:%d UTC:", calculationData.utcyear, calculationData.utcmonth, calculationData.utcday, calculationData.utchour, calculationData.utcminute, calculationData.utcsecond);
+			console.log("Result:\n", JSON.stringify(globalAstroData, null, 2));
+		}
+
+		// SRU - Sight Reduction Utility
+		try {
+			// Default Sun
+			let ghaBody = globalAstroData.sun.GHA.raw;
+			let decBody = globalAstroData.sun.DEC.raw;
+			let hp = globalAstroData.sun.HP.raw; // in seconds of arc
+			let sd = globalAstroData.sun.SD.raw;
+			if (payload.cbd.name !== 'Sun') {
+				// Update the data !
+				ghaBody = getGHAFor(payload.cbd.name, globalAstroData);
+				decBody = getDECFor(payload.cbd.name, globalAstroData);
+				hp = getHPFor(payload.cbd.name, globalAstroData);
+				sd = getSDFor(payload.cbd.name, globalAstroData);
+			}
+			let sruBody = sightReduction(payload.estimatedPosition.latitude, payload.estimatedPosition.longitude, ghaBody, decBody);
+			// document.getElementById('sru-elev-z').innerHTML =
+			//     `SUN<br/>Elev: ${sru.alt.toFixed(2)}&deg;<br/>Z: ${sru.Z.toFixed(1)}&deg;`;
+
+			// hp, semi-diam (upper-lower limb), refraction, horizon depression
+			let horizonDip = getHorizonDip(payload.cbd.eyeHeight); // 1.80 meters above the surface
+			let refraction = 0;
+			if (payload.cbd.instrumentalAltitude > 0) {
+				refraction = getRefraction(payload.cbd.instrumentalAltitude);
+			}
+			let limb =  (payload.cbd.limb === 'UPPER') ? UPPER_LIMB : LOWER_LIMB; // Get it from the form
+			if (limb === UPPER_LIMB) {
+				sd = -sd; // in seconds of arc.
+			}
+
+			console.log(`${payload.cbd.name} SD: ${sd / 60.0}', dip:${horizonDip}', refraction:${refraction}', HP: ${hp / 60.0}'`);
+			let apparentCorrection = (sd / 60.0) - horizonDip;
+			let totalCorrection = apparentCorrection - (isNaN(refraction) ? 0 : refraction) + (hp / 60.0);
+			console.log(`Apparent Correction (SD - Horizon Dip): ${apparentCorrection.toFixed(2)}'`);
+			console.log(`Total Correction (App Correction - refraction + hp): ${totalCorrection.toFixed(2)}'`);
+			console.log("Total Correction: to be ADDED to the instrumental (measured) elevation.");
+
+			console.log(`${payload.cbd.name} Z: ${sruBody.Z}`);
+			console.log(`${payload.cbd.name} alt: ${sruBody.alt}`);
+
+			/*
+			For the callback: {
+				decl: -16.40498367695131
+				delta-t: 68.9677
+				gha: 84.8538302416593
+				horizon-depression-minutes: 2.361287784239778
+				horizontal-parallax-minutes: 0.1479020927681669
+				hp: 0.0024650348794694483
+				instrumental-altitude: 25.119431796329224
+				lunar-distance: 4.873968467166731
+				observed-altitude-degrees: 25.317291337175323
+				parallax-minutes: 0.13369661970764085
+				refraction-minutes: 2.040395775549588
+				sd: 0.2689926565141308
+				semi-diameter-minutes: 16.139559390847847
+				total-correction-minutes: 11.871572450766122
+
+				estimated-altitude-degrees
+				intercept-degrees
+
+				// added LHA
+				lha
+			}
+			*/
+
+			// All bodies...
+			callbackContent = {
+				"decl": decBody,
+				"delta-t": globalAstroData.deltaT,
+				"gha": ghaBody,
+				"horizon-depression-minutes": horizonDip,
+				"horizontal-parallax-minutes": hp,
+				"hp": hp / 3600.0,
+				"instrumental-altitude": payload.cbd.instrumentalAltitude,
+				// "lunar-distance": globalAstroData.lunarDist.raw,
+				"observed-altitude-degrees": payload.cbd.instrumentalAltitude + (totalCorrection / 60.0),
+				"estimated-altitude-degrees": sruBody.alt,
+				"intercept-degrees": sruBody.alt - (payload.cbd.instrumentalAltitude + (totalCorrection / 60.0)),
+				"parallax-minutes": hp / 60.0,
+				"refraction-minutes": refraction,
+				"sd": sd / 3600.0,
+				"semi-diameter-minutes": sd / 60.0,
+				"total-correction-minutes": totalCorrection,
+				"z": sruBody.Z,
+				"lha": ghaBody + payload.estimatedPosition.longitude
+			}
+			if (payload.cbd.name === 'Sun') {
+				callbackContent["lunar-distance"] =  globalAstroData.lunarDist.raw;
+			}
+
+			callback(callbackContent);
+
+		} catch (err) {
+			console.log('Oops:', err)
+		}
+	}
+
+	function calculateReverseSight(payload, callback) {
+		console.log(payload);
+
+		let calculationData = {                                               // utcDate like 2025-03-31T14:16:31, duration format.
+			utcyear: parseInt(payload.utcDate.substring(0, 4)),               //              |    |  |  |  |  |
+			utcmonth: parseInt(payload.utcDate.substring(5, 7)),              //              0    |  |  |  |  |
+			utcday: parseInt(payload.utcDate.substring(8, 10)),               //                   5  |  |  |  |
+			utchour: parseInt(payload.utcDate.substring(11, 13)),             //                      8  |  |  |
+			utcminute: parseInt(payload.utcDate.substring(14, 16)),           //                         11 |  |
+			utcsecond: parseInt(payload.utcDate.substring(17, 19)),           //                            14 |
+			deltaT: DELTA_T,                                                  //                               17
+			noPlanets: false,
+			noStars: false
+		};
+
+		let globalAstroData = sampleMain(calculationData); // in app.js
+		if (false) {
+			console.log("Calculation done %d-%d-%d %d:%d:%d UTC:", calculationData.utcyear, calculationData.utcmonth, calculationData.utcday, calculationData.utchour, calculationData.utcminute, calculationData.utcsecond);
+			console.log("Result:\n", JSON.stringify(globalAstroData, null, 2));
+		}
+
+		// SRU - Sight Reduction Utility
+		try {
+			// Default Sun
+			let ghaBody = globalAstroData.sun.GHA.raw;
+			let decBody = globalAstroData.sun.DEC.raw;
+			let hp = globalAstroData.sun.HP.raw; // in seconds of arc
+			let sd = globalAstroData.sun.SD.raw;
+			if (payload.cbd.name !== 'Sun') {
+				// Update the data !
+				ghaBody = getGHAFor(payload.cbd.name, globalAstroData);
+				decBody = getDECFor(payload.cbd.name, globalAstroData);
+				hp = getHPFor(payload.cbd.name, globalAstroData);
+				sd = getSDFor(payload.cbd.name, globalAstroData);
+			}
+			let sruBody = sightReduction(payload.estimatedPosition.latitude, payload.estimatedPosition.longitude, ghaBody, decBody);
+			// document.getElementById('sru-elev-z').innerHTML =
+			//     `SUN<br/>Elev: ${sru.alt.toFixed(2)}&deg;<br/>Z: ${sru.Z.toFixed(1)}&deg;`;
+
+			// hp, semi-diam (upper-lower limb), refraction, horizon depression
+			let horizonDip = getHorizonDip(payload.cbd.eyeHeight); // 1.80 meters above the surface
+			let refraction = 0;
+			if (sruBody.alt > 0) {
+				refraction = getRefraction(sruBody.alt);
+			}
+			let limb =  (payload.cbd.limb === 'UPPER') ? UPPER_LIMB : LOWER_LIMB; // Get it from the form
+			if (limb === UPPER_LIMB) {
+				sd = -sd; // in seconds of arc.
+			}
+
+			console.log(`${payload.cbd.name} SD: ${sd / 60.0}', dip:${horizonDip}', refraction:${refraction}', HP: ${hp / 60.0}'`);
+			let apparentCorrection = (sd / 60.0) - horizonDip;
+			let totalCorrection = apparentCorrection - (isNaN(refraction) ? 0 : refraction) + (hp / 60.0);
+			console.log(`Apparent Correction (SD - Horizon Dip): ${apparentCorrection.toFixed(2)}'`);
+			console.log(`Total Correction (App Correction - refraction + hp): ${totalCorrection.toFixed(2)}'`);
+			console.log("Total Correction: to be ADDED to the instrumental (measured) elevation.");
+
+			console.log(`${payload.cbd.name} Z: ${sruBody.Z}`);
+			console.log(`${payload.cbd.name} alt: ${sruBody.alt}`);
+
+			/*
+			For the callback: {
+				decl: -16.40498367695131
+				delta-t: 68.9677
+				gha: 84.8538302416593
+				horizon-depression-minutes: 2.361287784239778
+				horizontal-parallax-minutes: 0.1479020927681669
+				hp: 0.0024650348794694483
+				instrumental-altitude: 25.119431796329224
+				lunar-distance: 4.873968467166731
+				observed-altitude-degrees: 25.317291337175323
+				parallax-minutes: 0.13369661970764085
+				refraction-minutes: 2.040395775549588
+				sd: 0.2689926565141308
+				semi-diameter-minutes: 16.139559390847847
+				total-correction-minutes: 11.871572450766122
+				// added lha
+				lha: 84.8538302416593
+			}
+			*/
+
+			// All bodies...
+			callbackContent = {
+				"decl": decBody,
+				"delta-t": globalAstroData.deltaT,
+				"gha": ghaBody,
+				"horizon-depression-minutes": horizonDip,
+				"horizontal-parallax-minutes": hp,
+				"hp": hp / 3600.0,
+				"instrumental-altitude": sruBody.alt - (totalCorrection / 60.0),
+				// "lunar-distance": globalAstroData.lunarDist.raw,
+				"observed-altitude-degrees": sruBody.alt,
+				"parallax-minutes": hp / 60.0,
+				"refraction-minutes": refraction,
+				"sd": sd / 3600.0,
+				"semi-diameter-minutes": sd / 60.0,
+				"total-correction-minutes": totalCorrection,
+				"z": sruBody.Z,
+				"lha": ghaBody + payload.estimatedPosition.longitude
+			}
+			if (payload.cbd.name === 'Sun') {
+				callbackContent["lunar-distance"] =  globalAstroData.lunarDist.raw;
+			}
+
+			callback(callbackContent);
+
+		} catch (err) {
+			console.log('Oops:', err)
+		}
+	}
+
+	function calculateSR(reverse) {
+		// Gather user data
+		let day = document.getElementById('calendar-day-01').value;
+		let utcDate =
+				document.getElementById('calendar-year-01').value + '-' +
+				document.getElementById('calendar-month-01').value + '-' +
+				(day.length < 2 ? '0' : '') + day + 'T' +
+				document.getElementById('watch-value-01').value;
+		let latitude =
+				(parseInt(document.getElementById('pos-lat-deg-01').value) +
+				(parseFloat(document.getElementById('pos-lat-min-01').value) / 60)) *
+				(document.getElementById('pos-lat-sign-01').value === 'S' ? (-1) : 1);
+		let longitude =
+				(parseInt(document.getElementById('pos-lng-deg-01').value) +
+				(parseFloat(document.getElementById('pos-lng-min-01').value) / 60)) *
+				(document.getElementById('pos-lng-sign-01').value === 'W' ?  (-1) : 1);
+
+		let body = document.getElementById('celestial-body').value;
+		let limb = document.getElementById('limb').value;
+
+		let sextantAltitude =
+				parseInt(document.getElementById('sextant-degrees').value) +
+				(parseFloat(document.getElementById('sextant-minutes').value) / 60);
+
+		let eyeHeight = parseFloat(document.getElementById('eye-height').value);
+
+		let requestPayload = {
+			"estimatedPosition": {
+				"latitude": latitude,
+				"longitude": longitude
+			},
+			"utcDate": utcDate,
+			"cbd": { // cbd: callback data
+				"name": body,
+				"instrumentalAltitude": sextantAltitude,
+				"limb": limb,
+				"eyeHeight": eyeHeight
+			}
+		};
+		/**
+		 * Callback function for the sight reduction
+		 * @param {JSON} result like: {
+		 *		decl: -16.40498367695131,
+		 *		delta-t: 68.9677,
+		 *		estimated-altitude-degrees: 25.317291337175323,
+		 *		gha: 84.8538302416593,
+		 *		horizon-depression-minutes: 2.361287784239778,
+		 *		horizontal-parallax-minutes: 0.1479020927681669,
+		 *		hp: 0.0024650348794694483,
+		 *		intercept-degrees: -0.0002860101440127494,
+		 *		lunar-distance: 4.873968467166731,
+		 *		observed-altitude-degrees: 25.31700532703131,
+		 *		parallax-minutes: 0.13399483310705615,
+		 *		refraction-minutes: 2.061946817836327,
+		 *		sd: 0.2689926565141308,
+		 *		semi-diameter-minutes: 16.139559390847847,
+		 *		total-correction-minutes: 11.850319621878798,
+		 *		z: 139.58829918131767
+		 *  }
+		 * @returns none
+		 */
+		 let srCallback = function(result) {
+			//	console.log("Result:", result);
+
+			let fmtDisplay = "<hr/>";
+
+			let sdCorrected = result['semi-diameter-minutes'] * (limb === 'LOWER' ? 1 : -1);
+			let appCorrection = sdCorrected - result['horizon-depression-minutes'];
+			let appToObsCorrection = result['parallax-minutes'] - result['refraction-minutes'];
+			fmtDisplay += ("<table>");
+			fmtDisplay += ("<tr>");
+			fmtDisplay += ("<td style='border: 1px solid blue; border-radius: 10px; vertical-align: top;'>");
+			/*
+			  Left side
+			 */
+			fmtDisplay += ("<table>");
+			fmtDisplay += ("<tr><th style='text-align: left;' colspan='2'>" + translator(ALMANAC) + "</th></tr>");
+			// Line 1
+			fmtDisplay += ("<tr><td style='text-align: right;'>" + translator(GHA) + "</td><td style='text-align: right;'>" + decToSex(result['gha']) + "</td></tr>");
+			// Line 1bis
+			fmtDisplay += ("<tr><td style='text-align: right;'>" + translator(LHA) + "</td><td style='text-align: right;'>" + decToSex(result['lha']) + "</td></tr>");
+			// Line 2
+			fmtDisplay += ("<tr><td style='text-align: right;'>" + translator(DEC) + "</td><td style='text-align: right;'>" + decToSex(result['decl'], 'NS') + "</td></tr>");
+			// Line 3
+			fmtDisplay += ("<tr><td style='text-align: right;'>" + translator(SEMI_DIAM) + "</td><td style='text-align: right;'>" + result['semi-diameter-minutes'].toFixed(2) + "'</td></tr>");
+
+			if (result['lunar-distance'] !== undefined) {
+				// Line 5
+				fmtDisplay += ("<tr><td style='text-align: right;'>" + translator(LUNAR_DIST) + "</td><td style='text-align: right;'>" + decToSex(result['lunar-distance']) + "</td></tr>");
+			}
+			fmtDisplay += ("</table>");
+			fmtDisplay += ("</td><td style='border: 1px solid blue; border-radius: 10px; vertical-align: top;'>");
+			fmtDisplay += ("<table>");
+			/*
+			  Right side
+			 */
+			fmtDisplay += ("<tr><th style='text-align: left;' colspan='4'>" + translator(CORRECTIONS) + "</th></tr>");
+			// Line 1
+			fmtDisplay += ("<tr><td style='text-align: right;'>" + translator(HORIZON_DIP) + "</td><td style='text-align: right;'>" + (- result['horizon-depression-minutes']).toFixed(2) + "'</td>");
+			fmtDisplay += (     "<td style='text-align: right;'>" + translator(PARALLAX) + "</td><td style='text-align: right;'>" + result['parallax-minutes'].toFixed(2) + "'</td></tr>");
+			// Line 1bis
+			fmtDisplay += ("<tr><td style='text-align: right;'></td><td style='text-align: right;'></td>");
+			fmtDisplay += (     "<td style='text-align: right;'></td><td style='text-align: right;'></td></tr>");
+			// Line 2
+			fmtDisplay += ("<tr><td style='text-align: right;'>" + translator(SEMI_DIAM) + "</td><td style='text-align: right;'>" + sdCorrected.toFixed(2) + "'</td>");
+			fmtDisplay += (     "<td style='text-align: right;'>" + translator(REFRACTION) + "</td><td style='text-align: right;'>" + (- result['refraction-minutes']).toFixed(2) + "'</td></tr>");
+			// Line 3
+			fmtDisplay += ("<tr><td style='text-align: right;'>" + translator(APP_ALT) + "</td><td style='text-align: right;'><b>" + decToSex(result['observed-altitude-degrees'] - (appToObsCorrection / 60)) + "</b></td>");
+			fmtDisplay += (     "<td style='text-align: right;'>" + translator(OBS_ALT) + "</td><td style='text-align: right;'><b>" + decToSex(result['observed-altitude-degrees']) + "</b></td></tr>");
+			// Line 4
+			fmtDisplay += ("<tr><td style='text-align: right;'>" + translator(APP_CORRECTION) + "</td><td style='text-align: right;'>" + appCorrection.toFixed(2) + "'</td>");
+			fmtDisplay += (     "<td style='text-align: right;'>" + translator(TOTAL_CORRECTION) + "</td><td style='text-align: right;'>" + result['total-correction-minutes'].toFixed(2) + "'</td></tr>");
+
+			fmtDisplay += ("</table>");
+
+
+			fmtDisplay += ("</td></tr>"); // </table>");
+			fmtDisplay += ("<tr><td style='border: 1px solid blue; border-radius: 10px; vertical-align: top;' colspan='2'>");
+			/*
+			  Estime / Dead Reckoning
+			 */
+			fmtDisplay += ("<table>");
+			fmtDisplay += ("<tr><th style='text-align: left;' colspan='6'>" + translator(DEAD_REC) + "</th></tr>");
+			// Line 6
+			fmtDisplay += ("<tr><td style='text-align: right;' colspan='3'>" + translator(OBS_ALT) + "</td><td style='text-align: left;' colspan='3'>" + decToSex(result['observed-altitude-degrees']) + "</td></tr>");
+			// Line 7
+			fmtDisplay += ("<tr><td style='text-align: right;' colspan='3'>" + translator(Z) + "</td><td style='text-align: left;' colspan='3'>" + decToSex(result['z']) + "</td></tr>");
+			// Line 8
+			fmtDisplay += ("<tr><td style='text-align: right;' colspan='3'>" + translator(EST_ALT) + "</td><td style='text-align: left;' colspan='3'>" + decToSex(result['estimated-altitude-degrees']) + "</td></tr>");
+			// Line 9
+			fmtDisplay += ("<tr><td style='text-align: right;' colspan='3'>" + translator(INTERCEPT) + "</td><td style='text-align: left;' colspan='3'>" + Math.abs(result['intercept-degrees'] * 60).toFixed(2) + "' " + (result['intercept-degrees'] < 0 ? translator(TOWARDS) : translator(AWAY)) + " " + translateBodyName(body) + "</td></tr>");
+
+			fmtDisplay += ("</table>")
+			fmtDisplay += ("</td></tr>");
+			fmtDisplay += ("</table>");
+
+			fmtDisplay += ("<hr/>");
+			fmtDisplay += ("<i>" + translator(WITH_DELTA_T) + " = " + result['delta-t'] + ' s</i>');
+			fmtDisplay += ("<hr/>");
+
+			document.getElementById("result").innerHTML = fmtDisplay;
+
+			// For the Chartless Map
+			DRLat = latitude;
+			DRLng = longitude;
+			intercept = - result['intercept-degrees'] * 60; // in minutes of arc
+			azimuth = result['z']; // in degrees
+			if (result["observed-altitude-degrees"] >= 0) {
+				observedBodyName = body;
+			} else {
+				observedBodyName = `(${body} is not visible.)`;
+			}
+		};
+
+		/**
+		 * Callback function for the reverse - sight reduction
+		 * @param {JSON} result like: {
+		 *  	decl: -16.40498367695131,
+		 *  	delta-t: 68.9677,
+		 *  	gha: 84.8538302416593,
+		 *  	horizon-depression-minutes: 2.361287784239778,
+		 *  	horizontal-parallax-minutes: 0.1479020927681669,
+		 *  	hp: 0.0024650348794694483,
+		 *  	instrumental-altitude: 25.119431796329224,
+		 *  	lunar-distance: 4.873968467166731,
+		 *  	observed-altitude-degrees: 25.317291337175323,
+		 *  	parallax-minutes: 0.13369661970764085,
+		 *  	refraction-minutes: 2.040395775549588,
+		 *  	sd: 0.2689926565141308,
+		 *  	semi-diameter-minutes: 16.139559390847847,
+		 *  	total-correction-minutes: 11.871572450766122
+		 *  }
+		 * @returns none
+		 */
+		let reverseCallback = function(result) {
+			//	console.log("Result:", result);
+
+			let hi = result['instrumental-altitude'];
+			let degPart = Math.floor(hi);
+			let minPart = ((hi - degPart) * 60).toFixed(2);
+
+			document.getElementById("sextant-degrees").value = degPart;
+			document.getElementById("sextant-minutes").value = minPart;
+
+			let fmtDisplay = "<hr/>";
+
+			let sdCorrected = result['semi-diameter-minutes'] * (limb === 'LOWER' ? 1 : -1);
+			let appCorrection = sdCorrected - result['horizon-depression-minutes'];
+			let appToObsCorrection = result['parallax-minutes'] - result['refraction-minutes'];
+			fmtDisplay += ("<table>");
+			fmtDisplay += ("<tr><th style='text-align: left;' colspan='2'>" + translator(ALMANAC) + "</th><th style='text-align: left;' colspan='4'>" + translator(CORRECTIONS) + "</th></tr>");
+			// Line 1
+			fmtDisplay += ("<tr><td style='text-align: right;'>" + translator(GHA) + "</td><td style='text-align: right;'>" + decToSex(result['gha']) + "</td>");
+			fmtDisplay += (     "<td style='text-align: right;'>" + translator(HORIZON_DIP) + "</td><td style='text-align: right;'>" + (- result['horizon-depression-minutes']).toFixed(2) + "'</td>");
+			fmtDisplay += (     "<td style='text-align: right;'>" + translator(PARALLAX) + "</td><td style='text-align: right;'>" + result['parallax-minutes'].toFixed(2) + "'</td></tr>");
+			// Line 1bis
+			fmtDisplay += ("<tr><td style='text-align: right;'>" + translator(LHA) + "</td><td style='text-align: right;'>" + decToSex(result['lha']) + "</td>");
+			fmtDisplay += (     "<td style='text-align: right;'></td><td style='text-align: right;'></td>");
+			fmtDisplay += (     "<td style='text-align: right;'></td><td style='text-align: right;'></td></tr>");
+			// Line 2
+			fmtDisplay += ("<tr><td style='text-align: right;'>" + translator(DEC) + "</td><td style='text-align: right;'>" + decToSex(result['decl'], 'NS') + "</td>");
+			fmtDisplay += (     "<td style='text-align: right;'>" + translator(SEMI_DIAM) + "</td><td style='text-align: right;'>" + sdCorrected.toFixed(2) + "'</td>");
+			fmtDisplay += (     "<td style='text-align: right;'>" + translator(REFRACTION) + "</td><td style='text-align: right;'>" + (- result['refraction-minutes']).toFixed(2) + "'</td></tr>");
+			// Line 3
+			fmtDisplay += ("<tr><td style='text-align: right;'>" + translator(SEMI_DIAM) + "</td><td style='text-align: right;'>" + result['semi-diameter-minutes'].toFixed(2) + "'</td>");
+			fmtDisplay += (     "<td style='text-align: right;'>" + translator(APP_ALT) + "</td><td style='text-align: right;'><b>" + decToSex(result['observed-altitude-degrees'] - (appToObsCorrection / 60)) + "</b></td>");
+			fmtDisplay += (     "<td style='text-align: right;'>" + translator(OBS_ALT) + "</td><td style='text-align: right;'><b>" + decToSex(result['observed-altitude-degrees']) + "</b></td></tr>");
+			// Line 4
+			fmtDisplay += ("<tr><td style='text-align: right;'>" + translator(HOR_PARALLAX) + "</td><td style='text-align: right;'>" + (result['hp'] * 60).toFixed(2) + "'</td>");
+			fmtDisplay += (     "<td style='text-align: right;'>" + translator(APP_CORRECTION) + "</td><td style='text-align: right;'>" + appCorrection.toFixed(2) + "'</td>");
+			fmtDisplay += (     "<td style='text-align: right;'>" + translator(TOTAL_CORRECTION) + "</td><td style='text-align: right;'>" + result['total-correction-minutes'].toFixed(2) + "'</td></tr>");
+			if (result['lunar-distance'] !== undefined) {
+				fmtDisplay += ("<tr><td style='text-align: right;'>" + translator(LUNAR_DIST) + "</td><td style='text-align: right;'>" + decToSex(result['lunar-distance']) + "</td></tr>");
+			}
+
+			fmtDisplay += ("</table>");
+			fmtDisplay += ("<hr/>");
+			fmtDisplay += ("<i>" + translator(WITH_DELTA_T) + " = " + result['delta-t'] + ' s</i>');
+			fmtDisplay += ("<hr/>");
+
+			document.getElementById("result").innerHTML = fmtDisplay;
+		};
+
+		if (reverse === undefined || reverse === false) {
+			calculateSightReduction(requestPayload, srCallback);
+		}
+		if (reverse !== undefined && reverse === true) {
+			calculateReverseSight(requestPayload, reverseCallback);
+		}
+
+
+		if (calculateSR !== true) {
+			centerMapOn(map, DRLat, DRLng);
+		}
+		map.repaint()
+	}
+
+function calculateAstroData(payload, callback) {
+	// console.log(payload);
+
+	let calculationData = {                                               // utcDate like 2025-03-31T14:16:31, duration format.
+		utcyear: parseInt(payload.utcDate.substring(0, 4)),               //              |    |  |  |  |  |
+		utcmonth: parseInt(payload.utcDate.substring(5, 7)),              //              0    |  |  |  |  |
+		utcday: parseInt(payload.utcDate.substring(8, 10)),               //                   5  |  |  |  |
+		utchour: parseInt(payload.utcDate.substring(11, 13)),             //                      8  |  |  |
+		utcminute: parseInt(payload.utcDate.substring(14, 16)),           //                         11 |  |
+		utcsecond: parseInt(payload.utcDate.substring(17, 19)),           //                            14 |
+		deltaT: DELTA_T,                                                  //                               17
+		noPlanets: false,
+		noStars: false
+	};
+
+	let globalAstroData = sampleMain(calculationData); // in app.js
+
+	callback(globalAstroData);
+}
+
+let updateLHA = (value) => {
+	// console.log(`Updating LHA Aries : ${value}`);
+	lha = value;
+	if (typeof lha === 'string') {
+		lha = parseFloat(value);
+	}
+	let cs = document.getElementById("celestial-sphere-01");
+	cs.LHAAries = lha;
+	cs.repaint();
+}
+
+let globalAstroData;
+
+let updateFromButton= (id) => {
+
+	let day = document.getElementById('calendar-day-01').value;
+	let utcDate =
+			document.getElementById('calendar-year-01').value + '-' +
+			document.getElementById('calendar-month-01').value + '-' +
+			(day.length < 2 ? '0' : '') + day + 'T' +
+			document.getElementById('watch-value-01').value;
+	let latitude =
+			(parseInt(document.getElementById('pos-lat-deg-01').value) +
+			(parseFloat(document.getElementById('pos-lat-min-01').value) / 60)) *
+			(document.getElementById('pos-lat-sign-01').value === 'S' ? (-1) : 1);
+	let longitude =
+			(parseInt(document.getElementById('pos-lng-deg-01').value) +
+			(parseFloat(document.getElementById('pos-lng-min-01').value) / 60)) *
+			(document.getElementById('pos-lng-sign-01').value === 'W' ?  (-1) : 1);
+
+	let body;
+	let limb;
+
+	let sextantAltitude;
+
+	let eyeHeight;
+
+	let requestPayload = {
+		"estimatedPosition": {
+			"latitude": latitude,
+			"longitude": longitude
+		},
+		"utcDate": utcDate,
+		"cbd": { // cbd: callback data
+			"name": body,
+			"instrumentalAltitude": sextantAltitude,
+			"limb": limb,
+			"eyeHeight": eyeHeight
+		}
+	};
+
+	let value = 35; // Default value. Calculated b elow in the callback
+
+	let srCallback = function(result) {
+		// console.log("Result:", result);
+		globalAstroData = result;
+
+		let ghaAries = result.aries.GHA.raw;
+		let longitude = userPos.longitude;
+		let lha = (ghaAries + longitude) % 360;
+		if (lha < 0) {
+			lha += 360;
+		}
+		value = lha;
+	    document.getElementById(id).value = value; // The slider
+		sliderValue01.value = decToSex(value); // The value label
+		updateLHA(value);
+	}
+
+	calculateAstroData(requestPayload, srCallback);
+
+	// document.getElementById(id).value = value;
+	// updateLHA(value);
+}
+
+function onSlider(event) {
+	// Manage Slider change
+	// console.log(`Slider: ${this.value}`);
+	pathIdx = parseInt(this.value);
+	moveTo(pathIdx, true);
+}
+
+let updatePosition = () => {
+
+	let sgnLat = document.getElementById("pos-lat-sign-01").value;
+	let degLat = parseInt(document.getElementById("pos-lat-deg-01").value);
+	let minLat = parseFloat(document.getElementById("pos-lat-min-01").value);
+	let lat = (degLat + (minLat / 60.0)) * (sgnLat === 'N' ? 1 : -1);
+
+	let sgnLng = document.getElementById("pos-lng-sign-01").value;
+	let degLng = parseInt(document.getElementById("pos-lng-deg-01").value);
+	let minLng = parseFloat(document.getElementById("pos-lng-min-01").value);
+	let lng = (degLng + (minLng / 60.0)) * (sgnLng === 'E' ? 1 : -1);
+
+	//		console.log("Setting pos to " + lat + "/" + lng);
+	setUserPos(lat, lng);
+};
+
+let userPos = { // Default SF
+    latitude: 37.7489,
+    longitude: -122.507
+};
+
+let setUserPos = (lat, lng) => {
+    userPos.latitude = lat;
+    userPos.longitude = lng;
+
+    let celestialSphere = document.getElementById('celestial-sphere-01');
+
+    // Set user position!!
+    celestialSphere.latitude = userPos.latitude;
+    celestialSphere.longitude = userPos.longitude;
+    celestialSphere.repaint();
+};
+
+function showHide(id, cb) {
+    let element = document.getElementById(id);
+    element.style.display = cb.checked ? 'block' : 'none';
+}
+
+function setBoatShape(id, list) {
+    document.getElementById(id).boatShape = list.value;
+    document.getElementById(id).repaint();
+}
+
+function setWanderingBodiesCS(id, cb) {
+    // May not match the ecliptic data...
+    document.getElementById(id).wanderingBodies = cb.checked;
+    if (cb.checked === true) {
+
+		if (globalAstroData === undefined) {
+			updateFromButton('data-slider');
+		}
+
+        document.getElementById(id).wanderingBodiesData = [
+            { "name": "sun", "decl": globalAstroData.sun.DEC.raw, "gha": globalAstroData.sun.GHA.raw },
+            { "name": "moon", "decl": globalAstroData.moon.DEC.raw, "gha": globalAstroData.moon.GHA.raw },
+            { "name": "aries", "decl": 0, "gha": globalAstroData.aries.GHA.raw },
+            { "name": "venus", "decl": globalAstroData.venus.DEC.raw, "gha": globalAstroData.venus.GHA.raw },
+            { "name": "mars", "decl": globalAstroData.mars.DEC.raw , "gha": globalAstroData.mars.GHA.raw },
+            { "name": "jupiter", "decl": globalAstroData.jupiter.DEC.raw , "gha":  globalAstroData.jupiter.GHA.raw },
+            { "name": "saturn", "decl": globalAstroData.saturn.DEC.raw, "gha": globalAstroData.saturn.GHA.raw },
+            { "obliq": globalAstroData.trueObliq.raw }  // obliq, or trueObliq ?
+        ];
+    }
+    document.getElementById(id).repaint();
+}
+
+function setUseBoatHeadingCS(id, cb) {
+    document.getElementById(id).useHeading = cb.checked;
+    document.getElementById(id).repaint();
+}
+
+function setCelestialEquatorCS(id, cb) {
+    document.getElementById(id).celestialEquator = cb.checked;
+    document.getElementById(id).repaint();
+}
+
+function setEquatorGridCS(id, cb) {
+    document.getElementById(id).equGrid = cb.checked;
+    document.getElementById(id).repaint();
+}
+
+function setAzimutalGridCS(id, cb) {
+    document.getElementById(id).azimutalGrid = cb.checked;
+    document.getElementById(id).repaint();
+}
+
+function setWithStars(id, cb) {
+    document.getElementById(id).stars = cb.checked;
+    document.getElementById(id).repaint();
+}
+
+function setWithConst(id, cb) {
+    document.getElementById(id).constellations = cb.checked;
+    document.getElementById(id).repaint();
+}
+
+function setStarNames(id, cb) {
+    document.getElementById(id).starNames = cb.checked;
+    document.getElementById(id).repaint();
+}
+
+function setConstNames(id, cb) {
+    document.getElementById(id).constellationNames = cb.checked;
+    document.getElementById(id).repaint();
+}
+
+function setBoatShape(id, list) {
+    document.getElementById(id).boatShape = list.value;
+    document.getElementById(id).repaint();
+}
+
+function zoomIn(id) {
+    let element = document.getElementById(id);
+    let origZoom = element.zoom;
+    element.zoom = origZoom * 1.1;
+
+    element.repaint();
+}
+
+function zoomOut(id) {
+    let element = document.getElementById(id);
+    let origZoom = element.zoom;
+    element.zoom = origZoom / 1.1;
+
+    element.repaint();
+}
+
+function resetZoom(id) {
+    let element = document.getElementById(id);
+    element.zoom = 1.0;
+    element.repaint();
+}
+	</script>
+</head>
+<body class="bg-img">
+	<dialog id="about-dialog" class="help-dialog" style="color: cyan;">
+		<div class="dialog-header">
+			<table width="100%">
+				<tr>
+				  <td>Help !...</td>
+				  <td style="padding-left: 20px;">
+					<span>
+						<img src="./pix/n.gif" width="48" title="NC" style="vertical-align: middle; padding: 5px;">
+						<br/>
+						<img src="./pix/c.gif" width="48" title="NC" style="vertical-align: middle; padding: 5px;">
+					</span>
+				  </td>
+				  <td>
+					<span class="dialog-header-close" onclick="closeAboutDialog();">&times</span>
+				  </td>
+				</tr>
+			</table>
+
+		</div>
+		<hr/>
+		<div>
+			<div id="help-content-top" style="max-height: 390px; overflow-y: scroll;">
+				<!-- About content -->
+				<div id="help-content" style="margin-top: 15px; font-size: 1.1em;">
+					This is a way to practice sextant observations without spending time on almanacs and calculation tables.
+					<br/>
+					Enter the UTC Date - or click the "Now" button.<br/>
+					Enter your estimated position - or enable the "GeoLocation".<br/>
+					Select the body to observe.<br/>
+					Then, you may:
+					<ul>
+						<li>Enter your sextant elevation and hit the "Calculate" button</li>
+						<li>Hit the "Reverse" button, to see what you should observe</li>
+					</ul>
+					You would then see for yourself, data should be displayed on screen!
+				</div>
+			</div>
+			<hr style="margin-top: 15px; margin-bottom: 5px;"/>
+			<i>OlivSoft never stops</i>
+		</div>
+	</dialog>
+
+	<table width="100%">
+		<tr>
+			<td>
+				<div style="display: grid; grid-template-columns: auto auto;">
+					<div>
+						<h1 id="title-01">Celestial Sphere widget at Work</h1>
+						<!--span id="sub-title-01">Check your observations and calculations</span-->
+					</div>
+					<img src="./pix/sextant.gif" alt="Sextant" style="background-color: white; padding: 10px; border-radius: 50%; border: 1px solid cyan;">
+				</div>
+			</td>
+			<td><a href="javascript:void(0)" onclick="switchLanguage();"><image id="lang-flag" class="help-icon" src="./pix/france.gif" alt="French Flag" title="En Fran&ccedil;ais" style="width: 27px; margin-left: 30px;"></image></a></td>
+			<td style="text-align: right; padding-right: 30px;">
+				<img src="./pix/drowning.svg" class="help-icon" style="width: 38px; border-radius: 50%;" id="whatzat" title="Heeeeeeelp !!" onclick="showAboutDialog();"/>
+			</td>
+		</tr>
+	</table>
+	<hr/>
+
+	<!-- A div for the user to set the UTC time -->
+	<div id="user-time-set">
+		<div id="user-time-widgets" style="display: block; padding: 10px;">
+			<span id="label-02" style="margin: 5px;">UTC Date of observation:</span>
+			<br/>
+			<input type="number"
+						 id="calendar-day-01"
+						 placeholder="DD"
+						 title="Day to set"
+						 style="width: 45px; text-align: center;"
+						 value="01"/>
+			<select id="calendar-month-01">
+				<option value="01" id="month-01" selected>Jan</option>
+				<option value="02" id="month-02">Feb</option>
+				<option value="03" id="month-03">Mar</option>
+				<option value="04" id="month-04">Apr</option>
+				<option value="05" id="month-05">May</option>
+				<option value="06" id="month-06">Jun</option>
+				<option value="07" id="month-07">Jul</option>
+				<option value="08" id="month-08">Aug</option>
+				<option value="09" id="month-09">Sep</option>
+				<option value="10" id="month-10">Oct</option>
+				<option value="11" id="month-11">Nov</option>
+				<option value="12" id="month-12">Dec</option>
+			</select>
+			<input type="number"
+				   id="calendar-year-01"
+				   placeholder="YYYY"
+				   title="Year to set"
+				   style="width: 70px; text-align: center;"
+				   value="1970"/>
+			<input type="text"
+				   id="watch-value-01"
+				   placeholder="00:00:00"
+				   title="UTC Time to set"
+				   style="width: 80px; text-align: center;"
+				   value="00:00:00"/>
+			&nbsp;&nbsp;
+			<button id="button-now"
+					onclick="updateFieldToNow()"
+					title="Set date value to current time"
+					style="margin-top: 3px; border-radius: 3px; box-shadow: 2px 2px silver;">Now</button>
+		</div>
+		<div id="user-pos-widgets" style="display: block; padding: 10px;">
+			<table>
+				<tr>
+					<td id="label-03">Observer's Latitude:</td>
+					<td>
+						<select id="pos-lat-sign-01">
+							<option value="N" selected>N</option>
+							<option value="S">S</option>
+						</select>
+					</td>
+					<td>
+						<input type="number"
+								id="pos-lat-deg-01"
+								placeholder="Deg"
+								title="Lat degrees to set"
+								style="width: 40px; text-align: center;"
+								min="0"
+								max="90"
+								step="1"
+								value="35"/>
+						<span>&deg;</span>
+					</td>
+					<td>
+						<input type="number"
+								id="pos-lat-min-01"
+								placeholder="Minutes"
+								title="Lat minutes to set"
+								style="width: 70px; text-align: center;"
+								min="0"
+								max="59.99"
+								step="0.01"
+								value="00.00"/>
+						<span>'</span>
+					</td>
+				</tr>
+			    <tr>
+					<td id="label-04">Observer's Longitude:</td>
+					<td>
+						<select id="pos-lng-sign-01">
+							<option value="E">E</option>
+							<option value="W" selected>W</option>
+						</select>
+					</td>
+					<td>
+						<input type="number"
+							   id="pos-lng-deg-01"
+							   placeholder="Deg"
+							   title="Lng degrees to set"
+							   style="width: 40px; text-align: center;"
+							   min="0"
+							   max="180"
+							   step="1"
+							   value="3"/>
+						<span>&deg;</span>
+					</td>
+					<td>
+						<input type="number"
+								id="pos-lng-min-01"
+								placeholder="Minutes"
+								title="Lng minutes to set"
+								style="width: 70px; text-align: center;"
+								min="0"
+								max="59.99"
+								step="0.01"
+								value="00.00"/>
+						<span>'</span>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4">
+						<div class="switch-container" style="margin-left: 30px;" title="Enable GeoLocation APIs">
+							<label class="switch switch-element" style="border: 2px solid blue; border-radius: 14px;">
+								<input id="geoloc-slider" type="checkbox" onchange="setGeolocation(this);">
+								<span class="slider round"></span>
+							</label>
+							<span id="label-05" class="switch-element">Enable GeoLocation</span>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4">
+						<span><button onclick="updatePosition();">Set Position</button></span>
+						<span><button onclick="updateFromButton('data-slider');" title="For the current date and time,&#13;at the user's position">Set Aries LHA</button></span>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div style="display: none;">
+			<div id="user-obs-widgets" style="display: block; padding: 10px;">
+				<table>
+					<tr>
+						<td id="label-06">Body:</td>
+						<td>
+							<!-- Body list -->
+							<select id="celestial-body">
+								<option id="label-body-sun" value="Sun" selected>Sun</option>
+								<option id="label-body-moon" value="Moon">Moon</option>
+								<option id="label-body-venus" value="Venus">Venus</option>
+								<option value="Mars">Mars</option>
+								<option value="Jupiter">Jupiter</option>
+								<option id="label-body-saturn" value="Saturn">Saturn</option>
+								<option value="Acamar">Acamar</option>
+								<option value="Achenar">Achenar</option>
+								<option value="Acrux">Acrux</option>
+								<option value="Adhara">Adhara</option>
+								<option value="Aldebaran">Aldebaran</option>
+								<option value="Alioth">Alioth</option>
+								<option value="Alkaid">Alkaid</option>
+								<option value="Al Na'ir">Al Na'ir</option>
+								<option value="Alnilam">Alnilam</option>
+								<option value="Alphard">Alphard</option>
+								<option value="Alphecca">Alphecca</option>
+								<option value="Alpheratz">Alpheratz</option>
+								<option value="Altair">Altair</option>
+								<option value="Ankaa">Ankaa</option>
+								<option value="Antares">Antares</option>
+								<option value="Arcturus">Arcturus</option>
+								<option value="Atria">Atria</option>
+								<option value="Avior">Avior</option>
+								<option value="Bellatrix">Bellatrix</option>
+								<option value="Betelgeuse">Betelgeuse</option>
+								<option value="Canopus">Canopus</option>
+								<option value="Capella">Capella</option>
+								<option value="Deneb">Deneb</option>
+								<option value="Denebola">Denebola</option>
+								<option value="Diphda">Diphda</option>
+								<option value="Dubhe">Dubhe</option>
+								<option value="Elnath">Elnath</option>
+								<option value="Eltanin">Eltanin</option>
+								<option value="Enif">Enif</option>
+								<option value="Fomalhaut">Fomalhaut</option>
+								<option value="Gacrux">Gacrux</option>
+								<option value="Gienah">Gienah</option>
+								<option value="Hadar">Hadar</option>
+								<option value="Hamal">Hamal</option>
+								<option value="Kaus Australis">Kaus Australis</option>
+								<option value="Kochab">Kochab</option>
+								<option value="Markab">Markab</option>
+								<option value="Menkar">Menkar</option>
+								<option value="Menkent">Menkent</option>
+								<option value="Miaplacidus">Miaplacidus</option>
+								<option value="Mirfak">Mirfak</option>
+								<option value="Nunki">Nunki</option>
+								<option value="Peacock">Peacock</option>
+								<option value="Polaris">Polaris</option>
+								<option value="Pollux">Pollux</option>
+								<option value="Procyon">Procyon</option>
+								<option value="Rasalhague">Rasalhague</option>
+								<option value="Regulus">Regulus</option>
+								<option value="Rigel">Rigel</option>
+								<option value="Rigil Kent">Rigil Kent</option>
+								<option value="Sabik">Sabik</option>
+								<option value="Schedar">Schedar</option>
+								<option value="Shaula">Shaula</option>
+								<option value="Sirius">Sirius</option>
+								<option value="Spica">Spica</option>
+								<option value="Suhail">Suhail</option>
+								<option value="Vega">Vega</option>
+								<option value="Zubenelgenubi">Zubenelgenubi</option>
+							</select>
+
+							<!-- Upper/Lower limb -->
+							<select id="limb">
+								<option id="label-limb-01" value="LOWER" selected>Lower Limb</option>
+								<option id="label-limb-02" value="UPPER">Upper Limb</option>
+							</select>
+
+						</td>
+					</tr>
+					<tr>
+						<!-- Instrumental elevation -->
+						<td id="label-07">Sextant Elevation:</td>
+						<td>
+							<input type="number"
+									id="sextant-degrees"
+									placeholder="Deg"
+									title="Elevation degrees"
+									style="width: 50px; text-align: center;"
+									min="0"
+									max="90"
+									step="1"
+									value="0"/>
+							<span>&deg;</span>
+							<input type="number"
+									id="sextant-minutes"
+									placeholder="Minutes"
+									title="Elevation minutes"
+									style="width: 70px; text-align: center;"
+									min="0"
+									max="59.99"
+									step="0.01"
+									value="00.00"/>
+							<span>'</span>
+						</td>
+					</tr>
+					<tr>
+						<td id="label-08">Eye Height (meters):</td>
+						<td>
+							<input type="number"
+									id="eye-height"
+									placeholder="Meters"
+									title="Eye height above surface"
+									style="width: 60px; text-align: center;"
+									min="0"
+									step="0.1"
+									value="1.8"/>
+							<span>m</span>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div>
+				<button id="button-calc" onclick="calculateSR();" style="border-radius: 3px; box-shadow: 2px 2px silver;" title="Sight Reduction">Calculate</button>
+				<button id="button-reverse" onclick="calculateSR(true);" style="border-radius: 3px; box-shadow: 2px 2px silver;" title="Calculate the Sextant elevation for your time and position">Reverse</button>
+			</div>
+			<div id="result" class="result-style">
+
+			</div>
+		</div>
+	</div>
+	<hr/>
+	<div style="display: grid; grid-template-columns: 840px;">
+		<div class="black-frame centered" style="width: 800px; height: 500px; overflow: scroll;">
+			<!-- Celestial Sphere goes here -->
+			<celestial-sphere id="celestial-sphere-01"
+								class="celestial-sphere-display-01"
+								width="800"
+								height="500"
+								latitude="35"
+								longitude="-3"
+								heading="0"
+								use-heading="false"
+								celestial-equator="false"/>
+		</div>
+		<div>
+			<!-- Horizontal slider for LHA Aries -->
+			<input type="range" id="data-slider" value="0" min="0" max="360" style="width: 85%;"
+				oninput="onSlider.call(this, event); sliderValue01.value = decToSex(parseFloat(this.value)); updateLHA(this.value);"/>
+			<output name="padding" id="sliderValue01" style="color: black;">0</output>
+		</div>
+		<div style="margin: 20px;">
+			<button onclick="zoomIn('celestial-sphere-01');" title="Zoom In">+</button>
+			<button onclick="zoomOut('celestial-sphere-01');" title="Zoom Out">-</button>
+			<button onclick="resetZoom('celestial-sphere-01');" title="Reset Zoom">Reset</button>
+		</div>
+		<hr style="width: 100%;"/>
+		<div style="display: grid; grid-template-columns: auto auto auto auto;">
+			<span><input type="checkbox" id="cscb-01" onchange="setWithStars('celestial-sphere-01', this);" checked>Stars.</span>
+			<span><input type="checkbox" id="cscb-02" onchange="setWithConst('celestial-sphere-01', this);" checked>Constellations.</span>
+			<span><input type="checkbox" id="cscb-03" onchange="setStarNames('celestial-sphere-01', this);" checked>Star Names.</span>
+			<span><input type="checkbox" id="cscb-04" onchange="setConstNames('celestial-sphere-01', this);">Constellation Names.</span>
+
+			<span><input type="checkbox" id="cscb-05" onchange="setWanderingBodiesCS('celestial-sphere-01', this);">Wandering bodies.</span>
+			<span><input type="checkbox" onchange="setUseBoatHeadingCS('celestial-sphere-01', this); showHide('boat-shapes', this);">Show Boat Heading.</span>
+			<span><input type="checkbox" onchange="setCelestialEquatorCS('celestial-sphere-01', this);">With Celestial Equator.</span>
+			<span><input type="checkbox" onchange="setAzimutalGridCS('celestial-sphere-01', this);" checked>With Azimutal Grid.</span>
+			<span><input type="checkbox" onchange="setEquatorGridCS('celestial-sphere-01', this);">With Equatorial Grid.</span>
+		</div>
+		<div id="boat-shapes" style="display: none;">
+			Boat Shape:
+			<input type="radio" name="boat-shape" value="MONO" onchange="if (this.checked) { setBoatShape('celestial-sphere-01', this); }" checked>Monohull</input>
+			<input type="radio" name="boat-shape" value="CATA" onchange="if (this.checked) { setBoatShape('celestial-sphere-01', this); }">Catamaran</input>
+			<input type="radio" name="boat-shape" value="TRI" onchange="if (this.checked) { setBoatShape('celestial-sphere-01', this); }">Trimaran</input>
+			<input type="radio" name="boat-shape" value="PLANE" onchange="if (this.checked) { setBoatShape('celestial-sphere-01', this); }">Plane</input>
+		</div>
+	</div>
+	<hr/>
+	<i>&copy; 2026, Oliv Cool Stuff Soft.</i>
+
+</body>
+
+<div id="en-help-content" style="display: none;">
+	This is a way to practice sextant observations without spending time on almanacs and calculation tables.
+	<br/>
+	Enter the UTC Date - or click the "Now" button.<br/>
+	Enter your estimated position - or enable the "GeoLocation".<br/>
+	Select the body to observe.<br/>
+	Then, you may:
+	<ul>
+		<li>Enter your sextant elevation and hit the "Calculate" button</li>
+		<li>Hit the "Reverse" button, to see what you <i>should</i> observe</li>
+	</ul>
+	You would then see for yourself, data should be displayed on screen!
+</div>
+<div id="fr-help-content" style="display: none;">
+	Ceci est une mani&egrave;re de s'entra&icirc;ner au maniement du sextant sans devoir se perdre dans les &eacute;ph&eacute;m&eacute;rides et les tables de calcul.
+	<br/>
+	Saisissez la date UTC de l'observation - ou cliquez sur le bouton  "Heure actuelle".<br/>
+	Saisissez votre position estim&eacute;e - ou bien passez en "GeoLocalisation".<br/>
+	S&eacute;lectionnez l'astre &agrave; observer.<br/>
+	Ensuite, vous pouvez :
+	<ul>
+		<li>Saisir la hauteur lue au sextant (aka instrumentale), et cliquer le bouton "Calcul"</li>
+		<li>Cliquer le bouton "Inverse", pour voir ce que vous <i>devriez</i> observer</li>
+	</ul>
+	Ensuite, voyez vous-m&ecirc;me, les donn&eacute;es doivent &ecirc;tre affich&eacute;es &agrave; l'&eacute;cran !
+</div>
+
+
+<script type="text/javascript">
+
+const VERBOSE = false;
+
+let getQueryParameterByName = (name, url) => {
+    if (!url) {
+        url = window.location.href;
+    }
+    name = name.replace(/[\[\]]/g, "\\$&");
+    let regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) {
+        return null;
+    }
+    if (!results[2]) {
+        return '';
+    }
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+};
+
+let translate = (lang) => {
+	document.getElementById('title-01').innerHTML = (lang === 'FR') ? 'Correction des hauteurs' : 'Sight Reduction';
+	document.getElementById('sub-title-01').innerHTML = (lang === 'FR') ? 'V&eacute;rifiez vos observations et vos calculs' : 'Check your observations and calculations';
+	document.getElementById('label-02').innerHTML = (lang === 'FR') ? 'Date UTC de l\'observation&nbsp;:' : 'UTC Date of observation:';
+	document.getElementById('label-03').innerHTML = (lang === 'FR') ? 'Latitude Estim&eacute;e&nbsp;:' : 'Estimated Latitude:';
+	document.getElementById('label-04').innerHTML = (lang === 'FR') ? 'Longitude Estim&eacute;e&nbsp;:' : 'Estimated Longitude:';
+	document.getElementById('label-05').innerHTML = (lang === 'FR') ? 'G&eacute;oLocalisation' : 'Enable GeoLocation';
+	document.getElementById('label-06').innerHTML = (lang === 'FR') ? 'Astre&nbsp;:' : 'Body:';
+	document.getElementById('label-07').innerHTML = (lang === 'FR') ? 'Hauteur lue au sextant&nbsp;:' : 'Sextant Elevation:';
+	document.getElementById('label-08').innerHTML = (lang === 'FR') ? 'Hauteur de l\'&oelig;il (en m&egrave;tres)&nbsp;:' : 'Eye Height (meters):';
+
+	document.getElementById('label-limb-01').innerHTML = (lang === 'FR') ? 'Bord inf&eacute;rieur' : 'Lower Limb';
+	document.getElementById('label-limb-02').innerHTML = (lang === 'FR') ? 'Bord sup&eacute;rieur' : 'Upper Limb';
+
+	document.getElementById('label-body-sun').innerHTML = (lang === 'FR') ? 'Soleil' : 'Sun';
+	document.getElementById('label-body-moon').innerHTML = (lang === 'FR') ? 'Lune' : 'Moon';
+	document.getElementById('label-body-venus').innerHTML = (lang === 'FR') ? 'V&eacute;nus' : 'Venus';
+	document.getElementById('label-body-saturn').innerHTML = (lang === 'FR') ? 'Saturne' : 'Saturn';
+
+	// months
+	document.getElementById('month-01').innerHTML = (lang === 'FR') ? 'Jan' : 'Jan';
+	document.getElementById('month-02').innerHTML = (lang === 'FR') ? 'F&eacute;v' : 'Feb';
+	document.getElementById('month-03').innerHTML = (lang === 'FR') ? 'Mar' : 'Mar';
+	document.getElementById('month-04').innerHTML = (lang === 'FR') ? 'Avr' : 'Apr';
+	document.getElementById('month-05').innerHTML = (lang === 'FR') ? 'Mai' : 'May';
+	document.getElementById('month-06').innerHTML = (lang === 'FR') ? 'Juin' : 'Jun';
+	document.getElementById('month-07').innerHTML = (lang === 'FR') ? 'Juil' : 'Jul';
+	document.getElementById('month-08').innerHTML = (lang === 'FR') ? 'Ao&ucirc;t' : 'Aug';
+	document.getElementById('month-09').innerHTML = (lang === 'FR') ? 'Sep' : 'Sep';
+	document.getElementById('month-10').innerHTML = (lang === 'FR') ? 'Oct' : 'Oct';
+	document.getElementById('month-11').innerHTML = (lang === 'FR') ? 'Nov' : 'Nov';
+	document.getElementById('month-12').innerHTML = (lang === 'FR') ? 'D&eacute;c' : 'Dec';
+
+	document.getElementById('button-now').innerHTML = (lang === 'FR') ? 'Heure actuelle' : 'Now';
+	document.getElementById('button-now').title = (lang === 'FR') ? 'Met la valeur de la date à celle de la date actuelle' : 'Set date value to current time';
+	document.getElementById('button-calc').innerHTML = (lang === 'FR') ? 'Calcul' : 'Calculate';
+	document.getElementById('button-calc').title = (lang === 'FR') ? 'Correction de la hauteur' : 'Sight Reduction';
+	document.getElementById('button-reverse').innerHTML = (lang === 'FR') ? 'Inverse' : 'Reverse';
+	document.getElementById('button-reverse').title = (lang === 'FR') ? 'Calcule la hauteur du sextant à votre position pour la date donnée' : 'Calculate the Sextant elevation for your time and position';
+
+	document.getElementById('chartless-title').innerHTML = (lang === 'FR') ? 'Canevas Mercator pour les droites de hauteur...' : 'Mercator Canvas for LOPs...';
+
+	// Lang swicth
+	document.getElementById('lang-flag').src = (lang === 'FR') ? "./pix/us_uk_flag.png" : "./pix/france.gif";
+	document.getElementById('lang-flag').alt = (lang === 'FR') ? "English" : "France";
+	document.getElementById('lang-flag').title = (lang === 'FR') ? "Switch to English" : "En Fran&ccedil;ais";
+
+	// Help content
+	let helpContent = (lang === 'FR') ? document.getElementById('fr-help-content').innerHTML : document.getElementById('en-help-content').innerHTML;
+	document.getElementById('help-content').innerHTML = helpContent;
+};
+
+const ALMANAC = 1;
+const CORRECTIONS = 2;
+const GHA = 3;
+const HORIZON_DIP = 4;
+const PARALLAX = 5;
+const DEC = 6;
+const SEMI_DIAM = 7;
+const REFRACTION = 8;
+const APP_ALT = 9;
+const OBS_ALT = 10;
+const HOR_PARALLAX = 11;
+const APP_CORRECTION = 12;
+const TOTAL_CORRECTION = 13;
+const LUNAR_DIST = 14;
+const DEAD_REC = 15;
+const Z = 16;
+const EST_ALT = 17;
+const INTERCEPT = 18;
+const AWAY = 19;
+const TOWARDS = 20;
+const WITH_DELTA_T = 21;
+const LHA = 22;
+
+let translator = (id) => {
+	switch (id) {
+		case ALMANAC:
+			return (langToUse === 'FR') ? '&Eacute;ph&eacute;m&eacute;rides :' : 'Almanac:' ;
+		case CORRECTIONS:
+			return (langToUse === 'FR') ? 'Corrections :' : 'Correction:' ;
+		case GHA:
+			return (langToUse === 'FR') ? 'AHvo' : 'GHA' ;
+		case LHA:
+			return (langToUse === 'FR') ? 'AHL' : 'LHA' ;
+		case DEC:
+			return (langToUse === 'FR') ? 'D&eacute;clinaison' : 'Dec' ;
+		case SEMI_DIAM:
+			return (langToUse === 'FR') ? 'Demi-diam&egrave;tre' : 'Semi-diameter' ;
+		case REFRACTION:
+			return (langToUse === 'FR') ? 'R&eacute;fraction' : 'Refraction' ;
+		case APP_ALT:
+			return (langToUse === 'FR') ? 'Hauteur apparente<br/><small>(H. instr. &plusmn; semi-diam. + depr.hor.)</small>' : 'Apparent Elevation<br/><small>(Instr.Elev. &plusmn; semi-diam. + hor.dip)</small>' ;
+		case OBS_ALT:
+			return (langToUse === 'FR') ? 'Hauteur Observ&eacute;e<br/><small>(H. instr + corr. totale)</small>' : 'Observed Elevation<br/><small>(Instr.Elev + Total Corr.)</small>' ;
+		case HOR_PARALLAX:
+			return (langToUse === 'FR') ? 'Parallaxe Horizontale' : 'Horizontal Parallax' ;
+		case APP_CORRECTION:
+			return (langToUse === 'FR') ? 'Correction Apparente<br/><small>(SD - Depr.Hor.)</small>' : 'Apparent Correction<br/><small>(SD - Horizon Dip)</small>' ;
+		case TOTAL_CORRECTION:
+			return (langToUse === 'FR') ? 'Correction Totale<br/><small>(App Correction - refraction + hp)</small>' : 'Total Correction<br/><small>(App Correction - refraction + hp)</small>' ;
+		case HORIZON_DIP:
+			return (langToUse === 'FR') ? 'D&eacute;pression de l\'horizon' : 'Horizon Dip' ;
+		case PARALLAX:
+			return (langToUse === 'FR') ? 'Parallaxe' : 'Parallax' ;
+		case LUNAR_DIST:
+			return (langToUse === 'FR') ? 'Distance Lunaire' : 'Lunar Distance' ;
+		case DEAD_REC:
+			return (langToUse === 'FR') ? 'R&eacute;sultats du calcul :' : 'Sight Reduction:' ;
+		case Z:
+			return (langToUse === 'FR') ? 'Azimuth' : 'Z' ;
+		case EST_ALT:
+			return (langToUse === 'FR') ? 'Hauteur Estim&eacute;e' : 'Estimated Elevation' ;
+		case INTERCEPT:
+			return (langToUse === 'FR') ? 'Intercept' : 'Intercept' ;
+		case AWAY:
+			return (langToUse === 'FR') ? 'Plus loin de l\'astre,' : 'Away from' ;
+		case TOWARDS:
+			return (langToUse === 'FR') ? 'Vers' : 'towards' ;
+		case WITH_DELTA_T:
+			return (langToUse === 'FR') ? 'Calcul&eacute avec DetlaT' : 'Calculated with DeltaT' ;
+		default:
+			break;
+	}
+	return null;
+}
+
+let translateBodyName = (name) => {
+	switch (name) {
+		case 'Sun':
+			return (langToUse === 'FR') ? 'le Soleil' : 'Sun' ;
+		case 'Moon':
+			return (langToUse === 'FR') ? 'la Lune' : 'Moon' ;
+		default:
+			return name;
+	}
+}
+
+let showAboutDialog = () => {
+	let aboutDialog = document.getElementById("about-dialog");
+	if (aboutDialog.show !== undefined) {
+		aboutDialog.show();
+	} else {
+		// alert(NO_DIALOG_MESSAGE);
+		aboutDialog.style.display = 'inline';
+	}
+};
+
+let closeAboutDialog = () => {
+	let aboutDialog = document.getElementById("about-dialog");
+	if (aboutDialog.close !== undefined) {
+		aboutDialog.close();
+	} else {
+		// alert(NO_DIALOG_MESSAGE);
+		aboutDialog.style.display = 'none';
+	}
+};
+
+/**
+ *
+ * @param start { lat: xx, lng: xx }, L & G in Degrees
+ * @param dist distance in nm
+ * @param bearing route in Degrees
+ * @return DR Position, L & G in Degrees
+ */
+function deadReckoning(start, dist, bearing) {
+	let radianDistance = Math.toRadians(dist / 60);
+	let finalLat = (Math.asin((Math.sin(Math.toRadians(start.lat)) * Math.cos(radianDistance)) +
+			(Math.cos(Math.toRadians(start.lat)) * Math.sin(radianDistance) * Math.cos(Math.toRadians(bearing)))));
+	let finalLng = Math.toRadians(start.lng) + Math.atan2(Math.sin(Math.toRadians(bearing)) * Math.sin(radianDistance) * Math.cos(Math.toRadians(start.lat)),
+			Math.cos(radianDistance) - Math.sin(Math.toRadians(start.lat)) * Math.sin(finalLat));
+	finalLat = Math.toDegrees(finalLat);
+	finalLng = Math.toDegrees(finalLng);
+
+	return {lat: finalLat, lng: finalLng};
+}
+
+function drawArrow(context, canvasX, canvasY, arrowLen, heading, color) {
+
+	// console.log(`Drawing arrow for heading ${heading}`);
+
+	context.beginPath();
+	context.lineWidth = 1.5;
+	// context.fillStyle = color;
+	context.strokeStyle = color;
+
+	let headAngle = 30;
+	context.moveTo(canvasX +  ((arrowLen / 2) * Math.sin(Math.toRadians(heading))),
+					canvasY - ((arrowLen / 2) * Math.cos(Math.toRadians(heading))));
+
+	context.lineTo(canvasX + ((arrowLen / 2) * Math.sin(Math.toRadians(heading))),
+					canvasY - ((arrowLen / 2) * Math.cos(Math.toRadians(heading))));
+	context.lineTo(canvasX - ((arrowLen / 2) * Math.sin(Math.toRadians(heading - headAngle))),
+					canvasY + ((arrowLen / 2) * Math.cos(Math.toRadians(heading - headAngle))));
+	context.lineTo(canvasX - ((arrowLen * 0.9 / 2) * Math.sin(Math.toRadians(heading - 0))),
+					canvasY + ((arrowLen * 0.9 / 2) * Math.cos(Math.toRadians(heading - 0)))); // Transom center
+	context.lineTo(canvasX - ((arrowLen / 2) * Math.sin(Math.toRadians(heading + headAngle))),
+					canvasY + ((arrowLen / 2) * Math.cos(Math.toRadians(heading + headAngle))));
+
+	context.closePath();
+	context.stroke();
+}
+
+let getBodyNameSymbol = (name) => {
+	switch (name) {
+		case 'Sun':
+			return '\u2609'; // ☉
+		case 'Moon':
+			return '\u263D';
+		case 'Venus':
+			return '\u2640'; // ♀
+		case 'Mars':
+			return '\u2642'; // ♂
+		case 'Jupiter':
+			return '\u2643'; // ♃
+		case 'Saturn':
+			return '\u2644'; // ♄
+		default: // Stars and Co
+			return name;
+	}
+};
+
+let plotLOP = (map, context, dr, azimuth, intercept, bodyName) => {
+
+	console.log(`Plotting LOP for body ${bodyName}, azimuth ${azimuth}°, intercept ${intercept}nm`);
+
+	let color = 'gray';
+
+	context.save();
+	context.strokeStyle = color;
+	context.fillStyle = color;
+	context.lineWidth = 1;
+	let drCanvasPos = map.posToCanvas(dr.latitude, dr.longitude); // DR
+	console.log(`DR Canvas Pos: ${dr.latitude} / ${dr.longitude} => ${drCanvasPos.x} / ${drCanvasPos.y}`);
+	// The DR point
+	let markerRadius = 2;
+	context.beginPath();
+	// context.arc(drCanvasPos.x, drCanvasPos.y /*- beaconHeight*/ - (3 * (markerRadius / 3)), markerRadius / 3, 0, 2 * Math.PI, false);
+	context.arc(drCanvasPos.x, drCanvasPos.y, markerRadius, 0, 2 * Math.PI, false);
+	//          |              |              |             |  |            |
+	//          |              |              |             |  |            Counter clockwise
+	//          |              |              |             |  To angle (rad)
+	//          |              |              |             From angle (rad)
+	//          |              |              radius
+	//          |              Canvas y
+	//		    Canvas x
+    context.stroke();
+	context.fill();
+
+	context.closePath();
+
+	// Azimuth
+	let azimuthLengh = 200; // pixels
+	let azimuthRad = (azimuth * Math.PI) / 180.0;
+	let azimuthFront = {
+		x: drCanvasPos.x + (azimuthLengh * Math.sin(azimuthRad)),
+		y: drCanvasPos.y - (azimuthLengh * Math.cos(azimuthRad))
+	};
+	let azimuthBack = {
+		x: drCanvasPos.x - ((azimuthLengh / 2) * Math.sin(azimuthRad)),
+		y: drCanvasPos.y + ((azimuthLengh / 2) * Math.cos(azimuthRad))
+	};
+	context.beginPath();
+	context.moveTo(azimuthBack.x, azimuthBack.y);
+	context.lineTo(azimuthFront.x, azimuthFront.y); // Arrow head
+	context.lineWidth = 1;
+	context.strokeStyle = color;
+	context.stroke();
+	context.closePath();
+	drawArrow(context, azimuthFront.x, azimuthFront.y, 10, azimuth, color);
+	// Body Name
+	context.font = "bold 24px Arial";
+	context.fillText(getBodyNameSymbol(bodyName),
+	                 azimuthFront.x + 12,  // 12 = fontSize / 2
+					 azimuthFront.y + 12);
+
+	// The LOP
+	// 1 - Get the point coordinates from the DR position, the azimuth and the intercept
+	let zPoint = /*Utilities.*/deadReckoning(
+		{ lat: dr.latitude, lng: dr.longitude },
+		intercept, // positive: TO the body, negative: AWAY FROM the body
+		azimuth);  // in nautical miles
+	// 2 - Get the canvas coordinates of that point
+	let ZDrCanvasPos = map.posToCanvas(zPoint.lat, zPoint.lng);
+	console.log(`LOP Canvas Pos: ${zPoint.lat} / ${zPoint.lng} => ${ZDrCanvasPos.x} / ${ZDrCanvasPos.y}`);
+
+	// 3 - Draw the LOP
+	let lopLen = 200; // pixels
+	let lopRad = ((azimuth + 90) * Math.PI) / 180.0;
+	let lopLeft = {
+		x: ZDrCanvasPos.x + (lopLen * Math.sin(lopRad)),
+		y: ZDrCanvasPos.y - (lopLen * Math.cos(lopRad))
+	};
+	let lopRight = {
+		x: ZDrCanvasPos.x - (lopLen * Math.sin(lopRad)),
+		y: ZDrCanvasPos.y + (lopLen * Math.cos(lopRad))
+	};
+	context.beginPath();
+	context.moveTo(lopLeft.x, lopLeft.y);
+	context.lineTo(lopRight.x, lopRight.y);
+	context.lineWidth = 2;
+	context.strokeStyle = 'blue';
+
+	// 4 - Print the intercept value
+	context.fillText(`${Math.abs(intercept.toFixed(2))} nm`, ZDrCanvasPos.x + 3, ZDrCanvasPos.y - 3);
+
+	context.stroke();
+	context.closePath();
+
+	context.restore();
+}
+
+let minLat = 90.0, maxLat = -90.0;
+let minLng = 180.0, maxLng = -180.0;
+
+let centerMapOn = (map, centerLat, centerLng) => {
+	map.centerLat = centerLat; // This does the repaint... Delay it (see _delayedRepaint).
+	map.centerLng = centerLng;
+};
+
+// DR Position
+let DRLat = 0.0; // 47.60; // 46° 36.0' N
+let DRLng = 0.0; // -3.13; // 3° 7.8' W
+let azimuth = 0;
+let intercept = 0;
+let observedBodyName = "";
+
+/*
+ * Used as the doAfter callback on the ChartlessMap.
+ */
+let updateMap = (elmt, context) => {
+
+    console.log(`...updateMap. Plotting DR Data and LOP(s).`);
+
+	// plot DR position
+	elmt.plotMark(context,
+		{ latitude: DRLat, longitude: DRLng, label: "DR" },
+		10, 20,
+		'red',
+		[(langToUse === 'FR' ? "Point estimé" : "Dead Reckoning Position")],
+		true);
+
+	// Plot LOPs
+	plotLOP(elmt, context, { latitude: DRLat, longitude: DRLng, label: "DR" }, azimuth, intercept, observedBodyName);
+
+};
+
+// Find language to use
+window.onload = () => {
+
+	let userLang = getQueryParameterByName('lang');
+	if (!userLang) {
+		let browserUserLang = navigator.language || navigator.userLanguage;
+		console.log("The browser's language is: " + browserUserLang);
+		if (browserUserLang) {
+			if (browserUserLang.substring(0, 2).toUpperCase() === 'FR') {
+				userLang = 'FR';
+				console.log("On va parler français")
+			} else {
+				userLang = 'EN';
+				console.log("We'll speak english");
+			}
+		}
+	}
+	if (userLang) {
+		langToUse = userLang;
+		console.log(`Lang to use will be ${langToUse}`);
+	}
+	if (langToUse !== 'EN') { // Then switch to French, default is EN.
+		translate(langToUse);
+	}
+
+};
+</script>
+</html>
