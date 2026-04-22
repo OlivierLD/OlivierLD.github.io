@@ -96,6 +96,66 @@
 				font-size: 1rem;
 			}
 		}
+        /* Button tooltips, used below */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            border-bottom: 1px dotted black;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 200px;
+            background-color: silver;
+            color: navy;
+            text-transform: none;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 0;
+            position: absolute;
+            z-index: 1;
+            top: 150%;
+            left: 50%;
+            margin-left: -100px;
+
+            /* Fade in tooltip - takes 1 second to go from 0% to 100% opac: */
+            opacity: 0;
+            transition: opacity 1s;
+        }
+
+        .tooltip .tooltiptext-right {
+            top: -5px;
+            left: 140%;
+            /*width: 200px;*/
+            margin-left: -60px;
+        }
+
+        .tooltip .tooltiptext::after {
+            content: "";
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: transparent transparent silver transparent;
+        }
+
+        .tooltip .tooltiptext-right::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            margin-left: -110px;
+            margin-top: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: transparent silver transparent transparent;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
 	</style>
 	<!-- Scripts -->
     <!-- Main Module -->
@@ -875,9 +935,12 @@ let updateFromButton= (id) => {
 
 function onSlider(event) {
 	// Manage Slider change
-	// console.log(`Slider: ${this.value}`);
+	console.log(`>> Slider: ${this.value}`);
 	pathIdx = parseInt(this.value);
 	moveTo(pathIdx, true);
+
+	document.getElementById('cscb-05').checked = false;
+	document.getElementById('celestial-sphere-01').wanderingBodies = false;
 }
 
 let updatePosition = () => {
@@ -1039,17 +1102,10 @@ function resetZoom(id) {
 			<div id="help-content-top" style="max-height: 390px; overflow-y: scroll;">
 				<!-- About content -->
 				<div id="help-content" style="margin-top: 15px; font-size: 1.1em;">
-					This is a way to practice sextant observations without spending time on almanacs and calculation tables.
+					This is a way to see how stars rotate around the celestial pole.<br/>
+					You can set your position and the time, set the Equatorial Grid, and then use the slider to adjust the Aries LHA.
 					<br/>
-					Enter the UTC Date - or click the "Now" button.<br/>
-					Enter your estimated position - or enable the "GeoLocation".<br/>
-					Select the body to observe.<br/>
-					Then, you may:
-					<ul>
-						<li>Enter your sextant elevation and hit the "Calculate" button</li>
-						<li>Hit the "Reverse" button, to see what you should observe</li>
-					</ul>
-					You would then see for yourself, data should be displayed on screen!
+					More help soon!...
 				</div>
 			</div>
 			<hr style="margin-top: 15px; margin-bottom: 5px;"/>
@@ -1068,7 +1124,7 @@ function resetZoom(id) {
 					<img src="./pix/sextant.gif" alt="Sextant" style="background-color: white; padding: 10px; border-radius: 50%; border: 1px solid cyan;">
 				</div>
 			</td>
-			<td><a href="javascript:void(0)" onclick="switchLanguage();"><image id="lang-flag" class="help-icon" src="./pix/france.gif" alt="French Flag" title="En Fran&ccedil;ais" style="width: 27px; margin-left: 30px;"></image></a></td>
+			<td><!--a href="javascript:void(0)" onclick="switchLanguage();"><image id="lang-flag" class="help-icon" src="./pix/france.gif" alt="French Flag" title="En Fran&ccedil;ais" style="width: 27px; margin-left: 30px;"></image></a--></td>
 			<td style="text-align: right; padding-right: 30px;">
 				<img src="./pix/drowning.svg" class="help-icon" style="width: 38px; border-radius: 50%;" id="whatzat" title="Heeeeeeelp !!" onclick="showAboutDialog();"/>
 			</td>
@@ -1115,9 +1171,13 @@ function resetZoom(id) {
 				   value="00:00:00"/>
 			&nbsp;&nbsp;
 			<button id="button-now"
+                    class="tooltip"
 					onclick="updateFieldToNow()"
 					title="Set date value to current time"
-					style="margin-top: 3px; border-radius: 3px; box-shadow: 2px 2px silver;">Now</button>
+					style="margin-top: 3px; border-radius: 3px; box-shadow: 2px 2px silver;">
+				Now
+				<span class="tooltiptext">Set current date-time value</span>
+			</button>
 		</div>
 		<div id="user-pos-widgets" style="display: block; padding: 10px;">
 			<table>
@@ -1200,8 +1260,18 @@ function resetZoom(id) {
 				</tr>
 				<tr>
 					<td colspan="4">
-						<span><button onclick="updatePosition();">Set Position</button></span>
-						<span><button onclick="updateFromButton('data-slider');" title="For the current date and time,&#13;at the user's position">Set Aries LHA</button></span>
+						<span>
+							<button class="tooltip" onclick="updatePosition();">
+								Set Position
+								<span class="tooltiptext">Set User Position</span>
+							</button>
+						</span>
+						<span>
+							<button class="tooltip" onclick="updateFromButton('data-slider');">
+								Set Aries LHA
+								<span class="tooltiptext">For the current date and time, at the user's position</span>
+							</button>
+						</span>
 					</td>
 				</tr>
 			</table>
@@ -1391,30 +1461,13 @@ function resetZoom(id) {
 </body>
 
 <div id="en-help-content" style="display: none;">
-	This is a way to practice sextant observations without spending time on almanacs and calculation tables.
+	This is a way to see how stars rotate around the celestial pole.<br/>
+	You can set your position and the time, set the Equatorial Grid, and then use the slider to adjust the Aries LHA.
 	<br/>
-	Enter the UTC Date - or click the "Now" button.<br/>
-	Enter your estimated position - or enable the "GeoLocation".<br/>
-	Select the body to observe.<br/>
-	Then, you may:
-	<ul>
-		<li>Enter your sextant elevation and hit the "Calculate" button</li>
-		<li>Hit the "Reverse" button, to see what you <i>should</i> observe</li>
-	</ul>
-	You would then see for yourself, data should be displayed on screen!
+	More help soon!...
 </div>
 <div id="fr-help-content" style="display: none;">
-	Ceci est une mani&egrave;re de s'entra&icirc;ner au maniement du sextant sans devoir se perdre dans les &eacute;ph&eacute;m&eacute;rides et les tables de calcul.
-	<br/>
-	Saisissez la date UTC de l'observation - ou cliquez sur le bouton  "Heure actuelle".<br/>
-	Saisissez votre position estim&eacute;e - ou bien passez en "GeoLocalisation".<br/>
-	S&eacute;lectionnez l'astre &agrave; observer.<br/>
-	Ensuite, vous pouvez :
-	<ul>
-		<li>Saisir la hauteur lue au sextant (aka instrumentale), et cliquer le bouton "Calcul"</li>
-		<li>Cliquer le bouton "Inverse", pour voir ce que vous <i>devriez</i> observer</li>
-	</ul>
-	Ensuite, voyez vous-m&ecirc;me, les donn&eacute;es doivent &ecirc;tre affich&eacute;es &agrave; l'&eacute;cran !
+	Bient&ocirc;t...
 </div>
 
 
@@ -1806,7 +1859,7 @@ window.onload = () => {
 		langToUse = userLang;
 		console.log(`Lang to use will be ${langToUse}`);
 	}
-	if (langToUse !== 'EN') { // Then switch to French, default is EN.
+	if (false && langToUse !== 'EN') { // Then switch to French, default is EN.
 		translate(langToUse);
 	}
 
