@@ -1082,7 +1082,7 @@ class CelestialSphere extends HTMLElement {
 					if (Math.abs(maxRA - minRA) > 12) {
 						minRA += 24;
 					}
-					let centerDec = (this.observerLatitude >= 0 ? 1 : -1) * (maxD + minD) / 2;
+					let centerDec = /* (this.observerLatitude >= 0 ? 1 : -1) * */ (maxD + minD) / 2;
 					let centerRA = (maxRA + minRA) / 2;
 					while (centerRA > 24) {
 						centerRA -= 24;
