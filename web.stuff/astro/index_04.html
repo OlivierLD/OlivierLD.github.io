@@ -39,6 +39,19 @@
 			--wandering-bodies-labels-color: limegreen;
 		}
 
+		h1, h2, h3 {
+            color: silver;
+            font-family: Verdana,sans-serif;
+            font-style: italic;
+        }
+
+        body {
+            font-family: Verdana,sans-serif;
+            /* color: cyan; */
+            color: white;
+            background-color: black;
+        }
+
 		.bg-img {
 			position: relative;
 			width: 100%;
@@ -1077,7 +1090,7 @@ function resetZoom(id) {
 }
 	</script>
 </head>
-<body class="bg-img">
+<body class="/*bg-img*/">
 	<dialog id="about-dialog" class="help-dialog" style="color: cyan;">
 		<div class="dialog-header">
 			<table width="100%">
@@ -1095,7 +1108,6 @@ function resetZoom(id) {
 				  </td>
 				</tr>
 			</table>
-
 		</div>
 		<hr/>
 		<div>
@@ -1119,7 +1131,7 @@ function resetZoom(id) {
 				<div style="display: grid; grid-template-columns: auto auto;">
 					<div>
 						<h1 id="title-01">Celestial Sphere widget at Work</h1>
-						<!--span id="sub-title-01">Check your observations and calculations</span-->
+						<span id="sub-title-01">See the star path in the Sky</span>
 					</div>
 					<img src="./pix/sextant.gif" alt="Sextant" style="background-color: white; padding: 10px; border-radius: 50%; border: 1px solid cyan;">
 				</div>
@@ -1174,7 +1186,7 @@ function resetZoom(id) {
                     class="tooltip"
 					onclick="updateFieldToNow()"
 					title="Set date value to current time"
-					style="margin-top: 3px; border-radius: 3px; box-shadow: 2px 2px silver;">
+					style="margin-top: 3px; /*border-radius: 3px; box-shadow: 2px 2px silver;*/">
 				Now
 				<span class="tooltiptext">Set current date-time value</span>
 			</button>
@@ -1427,7 +1439,7 @@ function resetZoom(id) {
 			<!-- Horizontal slider for LHA Aries -->
 			<input type="range" id="data-slider" value="0" min="0" max="360" style="width: 85%;"
 				oninput="onSlider.call(this, event); sliderValue01.value = decToSex(parseFloat(this.value)); updateLHA(this.value);"/>
-			<output name="padding" id="sliderValue01" style="color: black;">0</output>
+			<output name="padding" id="sliderValue01" style="/*color: black;*/">0</output>
 		</div>
 		<div style="margin: 20px;">
 			<button onclick="zoomIn('celestial-sphere-01');" title="Zoom In">+</button>
