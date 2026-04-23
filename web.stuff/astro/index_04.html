@@ -1448,16 +1448,16 @@ function resetZoom(id) {
 		</div>
 		<hr style="width: 100%;"/>
 		<div style="display: grid; grid-template-columns: auto auto auto auto;">
-			<span><input type="checkbox" id="cscb-01" onchange="setWithStars('celestial-sphere-01', this);" checked>Stars.</span>
-			<span><input type="checkbox" id="cscb-02" onchange="setWithConst('celestial-sphere-01', this);" checked>Constellations.</span>
-			<span><input type="checkbox" id="cscb-03" onchange="setStarNames('celestial-sphere-01', this);" checked>Star Names.</span>
-			<span><input type="checkbox" id="cscb-04" onchange="setConstNames('celestial-sphere-01', this);">Constellation Names.</span>
+			<span><input type="checkbox" id="cscb-01" onchange="setWithStars('celestial-sphere-01', this);" checked><span id="stars-label">Stars.</span></span>
+			<span><input type="checkbox" id="cscb-02" onchange="setWithConst('celestial-sphere-01', this);" checked><span id="constellations-label">Constellations.</span></span>
+			<span><input type="checkbox" id="cscb-03" onchange="setStarNames('celestial-sphere-01', this);" checked><span id="star-names-label">Star Names.</span></span>
+			<span><input type="checkbox" id="cscb-04" onchange="setConstNames('celestial-sphere-01', this);"><span id="const-names-label">Constellation Names.</span></span>
 
-			<span><input type="checkbox" id="cscb-05" onchange="setWanderingBodiesCS('celestial-sphere-01', this);">Wandering bodies.</span>
-			<span><input type="checkbox" onchange="setUseBoatHeadingCS('celestial-sphere-01', this); showHide('boat-shapes', this);">Show Boat Heading.</span>
-			<span><input type="checkbox" onchange="setCelestialEquatorCS('celestial-sphere-01', this);">Celestial Equator.</span>
-			<span><input type="checkbox" onchange="setAzimutalGridCS('celestial-sphere-01', this);" checked>Azimutal Grid.</span>
-			<span><input type="checkbox" onchange="setEquatorGridCS('celestial-sphere-01', this);">Equatorial Grid.</span>
+			<span><input type="checkbox" id="cscb-05" onchange="setWanderingBodiesCS('celestial-sphere-01', this);"><span id="wb-label">Wandering bodies.</span></span>
+			<span><input type="checkbox" onchange="setUseBoatHeadingCS('celestial-sphere-01', this); showHide('boat-shapes', this);"><span id="boat-heading-label">Show Boat Heading.</span></span>
+			<span><input type="checkbox" onchange="setCelestialEquatorCS('celestial-sphere-01', this);"><span id="ce-label">Celestial Equator.</span></span>
+			<span><input type="checkbox" onchange="setAzimutalGridCS('celestial-sphere-01', this);" checked><span id="az-label">Azimutal Grid.</span></span>
+			<span><input type="checkbox" onchange="setEquatorGridCS('celestial-sphere-01', this);"><span id="eq-label">Equatorial Grid.</span></span>
 		</div>
 		<div id="boat-shapes" style="display: none;">
 			Boat Shape:
@@ -1544,6 +1544,15 @@ let translate = (lang) => {
 	document.getElementById('button-reverse').title = (lang === 'FR') ? 'Calcule la hauteur du sextant à votre position pour la date donnée' : 'Calculate the Sextant elevation for your time and position';
 
 	// document.getElementById('chartless-title').innerHTML = (lang === 'FR') ? 'Canevas Mercator pour les droites de hauteur...' : 'Mercator Canvas for LOPs...';
+	document.getElementById('wb-label').innerHTML = (lang === 'FR') ? 'Astres errants.' : 'Wandering bodies.';
+	document.getElementById('stars-label').innerHTML = (lang === 'FR') ? '&Eacute;toiles.' : 'Stars.';
+	document.getElementById('constellations-label').innerHTML = (lang === 'FR') ? 'Constellations.' : 'Constellations.';
+	document.getElementById('star-names-label').innerHTML = (lang === 'FR') ? 'Noms des &eacute;toiles.' : 'Star Names.';
+	document.getElementById('const-names-label').innerHTML = (lang === 'FR') ? 'Noms des constellations.' : 'Constellation Names.';
+	document.getElementById('boat-heading-label').innerHTML = (lang === 'FR') ? 'Afficher le cap du bateau.' : 'Show Boat Heading.';
+	document.getElementById('ce-label').innerHTML = (lang === 'FR') ? '&Eacute;quateur C&eacute;leste.' : 'Celestial Equator.';
+	document.getElementById('az-label').innerHTML = (lang === 'FR') ? 'Grille Azimutale.' : 'Azimutal Grid.';
+	document.getElementById('eq-label').innerHTML = (lang === 'FR') ? 'Grille &Eacute;quatoriale.' : 'Equatorial Grid.';
 
 	// Lang swicth
 	document.getElementById('lang-flag').src = (lang === 'FR') ? "./pix/us_uk_flag.png" : "./pix/france.gif";
