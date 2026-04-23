@@ -948,7 +948,7 @@ let updateFromButton= (id) => {
 
 function onSlider(event) {
 	// Manage Slider change
-	console.log(`>> Slider: ${this.value}`);
+	// console.log(`>> Slider: ${this.value}`);
 	pathIdx = parseInt(this.value);
 	moveTo(pathIdx, true);
 
@@ -1136,7 +1136,7 @@ function resetZoom(id) {
 					<img src="./pix/sextant.gif" alt="Sextant" style="background-color: white; padding: 10px; border-radius: 50%; border: 1px solid cyan;">
 				</div>
 			</td>
-			<td><!--a href="javascript:void(0)" onclick="switchLanguage();"><image id="lang-flag" class="help-icon" src="./pix/france.gif" alt="French Flag" title="En Fran&ccedil;ais" style="width: 27px; margin-left: 30px;"></image></a--></td>
+			<td><a href="javascript:void(0)" onclick="switchLanguage();"><image id="lang-flag" class="help-icon" src="./pix/france.gif" alt="French Flag" title="En Fran&ccedil;ais" style="width: 27px; margin-left: 30px;"></image></a></td>
 			<td style="text-align: right; padding-right: 30px;">
 				<img src="./pix/drowning.svg" class="help-icon" style="width: 38px; border-radius: 50%;" id="whatzat" title="Heeeeeeelp !!" onclick="showAboutDialog();"/>
 			</td>
@@ -1187,8 +1187,8 @@ function resetZoom(id) {
 					onclick="updateFieldToNow()"
 					title="Set date value to current time"
 					style="margin-top: 3px; /*border-radius: 3px; box-shadow: 2px 2px silver;*/">
-				Now
-				<span class="tooltiptext">Set current date-time value</span>
+				<span id="now-label">Now</span>
+				<span id="now-tooltip" class="tooltiptext">Set current date-time value</span>
 			</button>
 		</div>
 		<div id="user-pos-widgets" style="display: block; padding: 10px;">
@@ -1504,11 +1504,11 @@ let getQueryParameterByName = (name, url) => {
 };
 
 let translate = (lang) => {
-	document.getElementById('title-01').innerHTML = (lang === 'FR') ? 'Correction des hauteurs' : 'Sight Reduction';
-	document.getElementById('sub-title-01').innerHTML = (lang === 'FR') ? 'V&eacute;rifiez vos observations et vos calculs' : 'Check your observations and calculations';
+	document.getElementById('title-01').innerHTML = (lang === 'FR') ? 'Widget Celestial Sphere' : 'Celestial Sphere widget at Work';
+	document.getElementById('sub-title-01').innerHTML = (lang === 'FR') ? 'Voir le chemin des &eacute;toiles dans le ciel' : 'See the star path in the Sky';
 	document.getElementById('label-02').innerHTML = (lang === 'FR') ? 'Date UTC de l\'observation&nbsp;:' : 'UTC Date of observation:';
-	document.getElementById('label-03').innerHTML = (lang === 'FR') ? 'Latitude Estim&eacute;e&nbsp;:' : 'Estimated Latitude:';
-	document.getElementById('label-04').innerHTML = (lang === 'FR') ? 'Longitude Estim&eacute;e&nbsp;:' : 'Estimated Longitude:';
+	document.getElementById('label-03').innerHTML = (lang === 'FR') ? 'Latitude de l\'observateur&nbsp;:' : 'Observer\'s Latitude:';
+	document.getElementById('label-04').innerHTML = (lang === 'FR') ? 'Longitude de l\'observateur&nbsp;:' : 'Observer\'s Longitude:';
 	document.getElementById('label-05').innerHTML = (lang === 'FR') ? 'G&eacute;oLocalisation' : 'Enable GeoLocation';
 	document.getElementById('label-06').innerHTML = (lang === 'FR') ? 'Astre&nbsp;:' : 'Body:';
 	document.getElementById('label-07').innerHTML = (lang === 'FR') ? 'Hauteur lue au sextant&nbsp;:' : 'Sextant Elevation:';
@@ -1536,14 +1536,14 @@ let translate = (lang) => {
 	document.getElementById('month-11').innerHTML = (lang === 'FR') ? 'Nov' : 'Nov';
 	document.getElementById('month-12').innerHTML = (lang === 'FR') ? 'D&eacute;c' : 'Dec';
 
-	document.getElementById('button-now').innerHTML = (lang === 'FR') ? 'Heure actuelle' : 'Now';
-	document.getElementById('button-now').title = (lang === 'FR') ? 'Met la valeur de la date à celle de la date actuelle' : 'Set date value to current time';
+	document.getElementById('now-label').innerHTML = (lang === 'FR') ? 'Heure actuelle' : 'Now';
+	document.getElementById('now-tooltip').innerHTML = (lang === 'FR') ? 'Met la valeur de la date à celle de la date actuelle' : 'Set date value to current time';
 	document.getElementById('button-calc').innerHTML = (lang === 'FR') ? 'Calcul' : 'Calculate';
 	document.getElementById('button-calc').title = (lang === 'FR') ? 'Correction de la hauteur' : 'Sight Reduction';
 	document.getElementById('button-reverse').innerHTML = (lang === 'FR') ? 'Inverse' : 'Reverse';
 	document.getElementById('button-reverse').title = (lang === 'FR') ? 'Calcule la hauteur du sextant à votre position pour la date donnée' : 'Calculate the Sextant elevation for your time and position';
 
-	document.getElementById('chartless-title').innerHTML = (lang === 'FR') ? 'Canevas Mercator pour les droites de hauteur...' : 'Mercator Canvas for LOPs...';
+	// document.getElementById('chartless-title').innerHTML = (lang === 'FR') ? 'Canevas Mercator pour les droites de hauteur...' : 'Mercator Canvas for LOPs...';
 
 	// Lang swicth
 	document.getElementById('lang-flag').src = (lang === 'FR') ? "./pix/us_uk_flag.png" : "./pix/france.gif";
@@ -1871,7 +1871,7 @@ window.onload = () => {
 		langToUse = userLang;
 		console.log(`Lang to use will be ${langToUse}`);
 	}
-	if (false && langToUse !== 'EN') { // Then switch to French, default is EN.
+	if (langToUse !== 'EN') { // Then switch to French, default is EN.
 		translate(langToUse);
 	}
 
