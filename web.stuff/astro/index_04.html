@@ -1274,14 +1274,14 @@ function resetZoom(id) {
 					<td colspan="4">
 						<span>
 							<button class="tooltip" onclick="updatePosition();">
-								Set Position
-								<span class="tooltiptext">Set User Position</span>
+								<span id="label-07">Set Position</span>
+								<span id="label-07-tooltip" class="tooltiptext">Set User Position</span>
 							</button>
 						</span>
 						<span>
 							<button class="tooltip" onclick="updateFromButton('data-slider');">
-								Set Aries LHA
-								<span class="tooltiptext">For the current date and time, at the user's position</span>
+								<span id="label-08">Set Aries LHA</span>
+								<span id="label-08-tooltip" class="tooltiptext">For the current date and time, at the user's position</span>
 							</button>
 						</span>
 					</td>
@@ -1547,6 +1547,12 @@ let translate = (lang) => {
 	document.getElementById('button-reverse').title = (lang === 'FR') ? 'Calcule la hauteur du sextant à votre position pour la date donnée' : 'Calculate the Sextant elevation for your time and position';
 
 	// document.getElementById('chartless-title').innerHTML = (lang === 'FR') ? 'Canevas Mercator pour les droites de hauteur...' : 'Mercator Canvas for LOPs...';
+	document.getElementById('label-07').innerHTML = (lang === 'FR') ? 'MAJ Position' : 'Set Position';
+	document.getElementById('label-07-tooltip').innerHTML = (lang === 'FR') ? 'Met la valeur de la date à celle de la date actuelle' : 'Set date value to current time';
+	document.getElementById('label-08').innerHTML = (lang === 'FR') ? 'MAJ AHL Pt Vernal' : 'Set Aries LHA';
+	document.getElementById('label-08-tooltip').innerHTML = (lang === 'FR') ? 'Pour la date et l\'heure actuelles, à la position de l\'utilisateur' : 'For the current date and time, at the user\'s position';
+
+
 	document.getElementById('wb-label').innerHTML = (lang === 'FR') ? 'Astres errants.' : 'Wandering bodies.';
 	document.getElementById('stars-label').innerHTML = (lang === 'FR') ? '&Eacute;toiles.' : 'Stars.';
 	document.getElementById('constellations-label').innerHTML = (lang === 'FR') ? 'Constellations.' : 'Constellations.';
