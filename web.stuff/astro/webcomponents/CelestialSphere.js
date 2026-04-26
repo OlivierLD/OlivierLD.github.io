@@ -1065,7 +1065,7 @@ class CelestialSphere extends HTMLElement {
 				}
 				if (this._constellationNames) {
 					// Calculate the center of the constellation. Pb with Pisces (a wide one, around RA=0, see below, Math.abs(maxRA - minRA) > 12)...
-					let localVerbose = false; // Debug
+					let localVerbose = false; // Debug. See below.
 					// if (constellations[i].name === 'Ursa Minor' || constellations[i].name === 'Cassiopeia' || constellations[i].name === 'Grus') {
 					// 	console.log("Debug constellation center calculation for " + constellations[i].name);
 					// 	localVerbose = true;
