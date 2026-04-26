@@ -1065,52 +1065,73 @@ class CelestialSphere extends HTMLElement {
 				}
 				if (this._constellationNames) {
 					// Calculate the center of the constellation. Pb with Pisces (a wide one, around RA=0, see below, Math.abs(maxRA - minRA) > 12)...
-					let minD = undefined, maxD = undefined, minRA = undefined, maxRA = undefined;
+					let localVerbose = false; // Debug
+					// if (constellations[i].name === 'Ursa Minor' || constellations[i].name === 'Cassiopeia' || constellations[i].name === 'Grus') {
+					// 	console.log("Debug constellation center calculation for " + constellations[i].name);
+					// 	localVerbose = true;
+					// }
+					// Calculate center pos with position on canvas (with sightReduction)
+					let finalP = undefined;
+					let minX = undefined, maxX = undefined, minY = undefined, maxY = undefined;
 					for (let s = 0; s < constellations[i].stars.length; s++) {
-						if (s === 0) {
-							minD = constellations[i].stars[s].d;
-							maxD = constellations[i].stars[s].d;
-							minRA = constellations[i].stars[s].ra;
-							maxRA = constellations[i].stars[s].ra;
-						} else {
-							minD = Math.min(constellations[i].stars[s].d, minD);
-							maxD = Math.max(constellations[i].stars[s].d, maxD);
-							minRA = Math.min(constellations[i].stars[s].ra, minRA);
-							maxRA = Math.max(constellations[i].stars[s].ra, maxRA);
+						if (localVerbose) {
+							console.log(`Star ${constellations[i].stars[s].name} - RA: ${constellations[i].stars[s].ra}, Dec: ${constellations[i].stars[s].d}`);
+						}
+						let _sr = CelestialSphere.sightReduction(this.observerLatitude, this.observerLongitude, (360 - (constellations[i].stars[s].ra * 360 / 24)) + (/*this._hemisphere * */this.LHAAries), constellations[i].stars[s].d);
+						let _p = this.plotOnSphere(_sr.alt, _sr.Z /* - (this.useHeading ? this.heading : 0)*/, radius);
+						if (minX === undefined || _p.x < minX) {
+							minX = _p.x;
+						}
+						if (maxX === undefined || _p.x > maxX) {
+							maxX = _p.x;
+						}
+						if (minY === undefined || _p.y < minY) {
+							minY = _p.y;
+						}
+						if (maxY === undefined || _p.y > maxY) {
+							maxY = _p.y;
 						}
 					}
-					if (Math.abs(maxRA - minRA) > 12) {
-						minRA += 24;
+					if ((maxX - minX) > (this.canvas.width / 2) || (maxY - minY) > (this.canvas.height / 2)) { // Constellation is split.
+						finalP = null;
+					} else {
+						finalP = {
+							x: (maxX + minX) / 2,
+							y: (maxY + minY) / 2
+						};
 					}
-					let centerDec = /* (this.observerLatitude >= 0 ? 1 : -1) * */ (maxD + minD) / 2;
-					let centerRA = (maxRA + minRA) / 2;
-					while (centerRA > 24) {
-						centerRA -= 24;
+					if (localVerbose) {
+						console.log(`Constellation ${constellations[i].name} - minX: ${minX}, maxX: ${maxX}, minY: ${minY}, maxY: ${maxY}, centerX: ${finalP.x}, centerY: ${finalP.y}`);
 					}
-					let lng = (360 - (centerRA * 360 / 24));
-					lng += (/*this._hemisphere * */this.LHAAries);
-					if (lng > 180) {
-						lng -= 360;
-					}
-        			let sr = CelestialSphere.sightReduction(this.observerLatitude, this.observerLongitude, lng, centerDec);
-					// let p = this.plotCoordinates(centerDec, lng, radius);
-					let p = this.plotOnSphere(sr.alt, sr.Z /* - (this.useHeading ? this.heading : 0)*/, radius);
+					if (finalP !== null) {
+						let p = finalP;
+						if (false) { // Center, for debug. Where to write the name.
+							context.beginPath();
+							context.fillStyle = 'cyan';
+							const dotRadius = 4;
+							context.arc((this.canvas.width / 2) - p.x, (this.canvas.height / 2) + p.y, dotRadius, 0, 2 * Math.PI, false);
+							context.fill();
+							context.strokeStyle = 'white';
+							context.lineWidth = 0.5;
+							context.stroke();
+						}
 
-					context.font = "bold " + Math.round(10 * this._zoom) + "px Arial"; // Like "bold 15px Arial"
-					context.fillStyle = this.celestialSphereColorConfig.constellationNameColor;
-					let str = constellations[i].name;
-					const found = zodiacMembers.find((element) => element === constellations[i].name);
-					if (found) {
-						// console.log(`${constellation.name} is in Zodiac`);
-						context.font = "bold " + Math.round(14 * this._zoom) + "px Arial";
-						context.fillStyle = 'lime'; // TODO A CSS entry ?
-					}
-					let len = context.measureText(str).width;
-					context.fillText(str, (this.canvas.width / 2) - p.x - (len / 2), (this.canvas.height / 2) + p.y - 2);
-					str = CelestialSphere.findZodiacSymbol(constellations[i].name);
-					if (str !== null) { // Zodiac symbol
-						len = context.measureText(str).width;
-						context.fillText(str, (this.canvas.width / 2) - p.x - (len / 2), (this.canvas.height / 2) + p.y - 2 + Math.round(16 * this._zoom));
+						context.font = "bold " + Math.round(10 * this._zoom) + "px Arial"; // Like "bold 15px Arial"
+						context.fillStyle = this.celestialSphereColorConfig.constellationNameColor;
+						let str = constellations[i].name;
+						const found = zodiacMembers.find((element) => element === constellations[i].name);
+						if (found) {
+							// console.log(`${constellation.name} is in Zodiac`);
+							context.font = "bold " + Math.round(14 * this._zoom) + "px Arial";
+							context.fillStyle = 'lime'; // TODO A CSS entry ?
+						}
+						let len = context.measureText(str).width;
+						context.fillText(str, (this.canvas.width / 2) - p.x - (len / 2), (this.canvas.height / 2) + p.y - 2);
+						str = CelestialSphere.findZodiacSymbol(constellations[i].name);
+						if (str !== null) { // Zodiac symbol
+							len = context.measureText(str).width;
+							context.fillText(str, (this.canvas.width / 2) - p.x - (len / 2), (this.canvas.height / 2) + p.y - 2 + Math.round(16 * this._zoom));
+						}
 					}
 				}
 			}
