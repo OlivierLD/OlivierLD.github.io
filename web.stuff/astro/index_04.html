@@ -1464,7 +1464,8 @@ function resetZoom(id) {
 			<div>
 				<!-- Horizontal slider for LHA Aries -->
 				<input type="range" id="data-slider" value="0" min="0" max="360" style="width: 85%;"
-					oninput="onSlider.call(this, event); sliderValue01.value = decToSex(parseFloat(this.value)); updateLHA(this.value);"/>
+					   oninput="onSlider.call(this, event); sliderValue01.value = decToSex(parseFloat(this.value)); updateLHA(this.value);"
+					   title="LHA Aries value"/>
 				<output name="padding" id="sliderValue01" style="/*color: black;*/">0</output>
 			</div>
 			<div style="margin: 20px;">
@@ -1570,6 +1571,8 @@ let translate = (lang) => {
 	document.getElementById('ce-label').innerHTML = (lang === 'FR') ? '&Eacute;quateur C&eacute;leste.' : 'Celestial Equator.';
 	document.getElementById('az-label').innerHTML = (lang === 'FR') ? 'Grille Azimutale.' : 'Azimutal Grid.';
 	document.getElementById('eq-label').innerHTML = (lang === 'FR') ? 'Grille &Eacute;quatoriale.' : 'Equatorial Grid.';
+
+	document.getElementById('data-slider').title = (lang === 'FR') ? 'Valeur de l\'angle horaire du Point Vernal' : 'LHA Aries value';
 
 	// Lang swicth
 	document.getElementById('lang-flag').src = (lang === 'FR') ? "./pix/us_uk_flag.png" : "./pix/france.gif";
