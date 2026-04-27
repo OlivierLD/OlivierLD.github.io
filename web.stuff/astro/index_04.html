@@ -1111,13 +1111,20 @@ function resetZoom(id) {
 		</div>
 		<hr/>
 		<div>
-			<div id="help-content-top" style="max-height: 390px; overflow-y: scroll;">
-				<!-- About content -->
+			<div id="help-content-top" style="max-height: 390px; overflow-y: scroll; padding: 15px;">
+				<!-- default About content, translatable -->
 				<div id="help-content" style="margin-top: 15px; font-size: 1.1em;">
 					This is a way to see how stars rotate around the celestial pole...<br/>
 					You can set your position and the time, set the Equatorial Grid, and then use the slider to adjust the Aries LHA.
 					<br/>
-					More help soon!...
+					<hr/>
+					<i>Example:</i><br/>
+					- Click the "Now" button to set the current time.<br/>
+					- Enter your position, or enable the GeoLocation (if your browser supports it).<br/>
+					- Enable the Equatorial Grid.<br/>
+					- Click the "Set Position" button.
+					- Click the "Set Aries LHA" button to set the Aries LHA to the correct value for the time and position you set.<br/>
+					- Use the slider to see how the stars rotate around the celestial pole.
 				</div>
 			</div>
 			<hr style="margin-top: 15px; margin-bottom: 5px;"/>
@@ -1484,13 +1491,27 @@ function resetZoom(id) {
 	This is a way to see how stars rotate around the celestial pole...<br/>
 	You can set your position and the time, set the Equatorial Grid, and then use the slider to adjust the Aries LHA.
 	<br/>
-	More help soon!...
+	<hr/>
+	<i>Example:</i><br/>
+	- Click the "Now" button to set the current time.<br/>
+	- Enter your position, or enable the GeoLocation (if your browser supports it).<br/>
+	- Enable the Equatorial Grid.<br/>
+	- Click the "Set Position" button.
+	- Click the "Set Aries LHA" button to set the Aries LHA to the correct value for the time and position you set.<br/>
+	- Use the slider to see how the stars rotate around the celestial pole.
 </div>
 <div id="fr-help-content" style="display: none;">
 	Ceci est fait pour voir comment les &eacute;toiles tournent autour du p&ocirc;le c&eacute;leste...<br/>
-	On peut r&eacute;gler sa position et le temps, afficher la grille &eacute;quatoriale, et ensuite utiliser le slider pour ajuster la l'angle horaire du Point Vernal.
+	On peut r&eacute;gler sa position et le temps, afficher la grille &eacute;quatoriale, et ensuite utiliser le slider pour ajuster l'angle horaire du Point Vernal.
 	<br/>
-	Plus bient&ocirc;t...
+	<hr/>
+	<i>Exemple :</i><br/>
+	- Cliquez le bouton "Heure Actuelle" pour d&eacute;finir l'heure actuelle.<br/>
+	- Saisissez votre position, ou activez la G&eacute;olocalisation (si votre navigateur le supporte).<br/>
+	- Activez la grille &eacute;quatoriale.<br/>
+	- Cliquez le bouton "MAJ Position".
+	- Cliquez le bouton "MAJ AHL Point Vernal" pour d&eacute;finir l'angle horaire du Point Vernal &agrave; la valeur correcte pour l'heure et la position que vous avez d&eacute;finies.<br/>
+	- Utilisez le curseur pour voir comment les &eacute;toiles tournent autour du p&ocirc;le c&eacute;leste.
 </div>
 
 
@@ -1552,7 +1573,7 @@ let translate = (lang) => {
 	document.getElementById('button-calc').innerHTML = (lang === 'FR') ? 'Calcul' : 'Calculate';
 	document.getElementById('button-calc').title = (lang === 'FR') ? 'Correction de la hauteur' : 'Sight Reduction';
 	document.getElementById('button-reverse').innerHTML = (lang === 'FR') ? 'Inverse' : 'Reverse';
-	document.getElementById('button-reverse').title = (lang === 'FR') ? 'Calcule la hauteur du sextant à votre position pour la date donnée' : 'Calculate the Sextant elevation for your time and position';
+	document.getElementById('button-reverse').title = (lang === 'FR') ? 'Calcule la hauteur du sextant à votre position pour la date donn&eacute;e' : 'Calculate the Sextant elevation for your time and position';
 
 	// document.getElementById('chartless-title').innerHTML = (lang === 'FR') ? 'Canevas Mercator pour les droites de hauteur...' : 'Mercator Canvas for LOPs...';
 	document.getElementById('label-07').innerHTML = (lang === 'FR') ? 'MAJ Position' : 'Set Position';
@@ -1871,7 +1892,7 @@ let updateMap = (elmt, context) => {
 		{ latitude: DRLat, longitude: DRLng, label: "DR" },
 		10, 20,
 		'red',
-		[(langToUse === 'FR' ? "Point estimé" : "Dead Reckoning Position")],
+		[(langToUse === 'FR' ? "Point estim&eacute;" : "Dead Reckoning Position")],
 		true);
 
 	// Plot LOPs
