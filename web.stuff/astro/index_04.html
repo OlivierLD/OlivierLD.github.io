@@ -169,6 +169,14 @@
             visibility: visible;
             opacity: 1;
         }
+
+		.cb-container {
+			background: green;
+			border: 1px solid white;
+			border-radius: 5px;
+			margin: 3px;
+			padding: 3px;
+		}
 	</style>
 	<!-- Scripts -->
     <!-- Main Module -->
@@ -1434,16 +1442,16 @@ function resetZoom(id) {
 			<div>
 				<h2 id="sphere-options">Sphere options</h2>
 				<div style="display: grid; grid-template-columns: auto auto;">
-					<span><input type="checkbox" id="cscb-01" onchange="setWithStars('celestial-sphere-01', this);" checked><span id="stars-label">Stars.</span></span>
-					<span><input type="checkbox" id="cscb-02" onchange="setWithConst('celestial-sphere-01', this);" checked><span id="constellations-label">Constellations.</span></span>
-					<span><input type="checkbox" id="cscb-03" onchange="setStarNames('celestial-sphere-01', this);" checked><span id="star-names-label">Star Names.</span></span>
-					<span><input type="checkbox" id="cscb-04" onchange="setConstNames('celestial-sphere-01', this);"><span id="const-names-label">Constellation Names.</span></span>
+					<span class="cb-container"><input type="checkbox" id="cscb-01" onchange="setWithStars('celestial-sphere-01', this);" checked><label for="cscb-01" id="stars-label">Stars.</label></span>
+					<span class="cb-container"><input type="checkbox" id="cscb-02" onchange="setWithConst('celestial-sphere-01', this);" checked><label for="cscb-02" id="constellations-label">Constellations.</label></span>
+					<span class="cb-container"><input type="checkbox" id="cscb-03" onchange="setStarNames('celestial-sphere-01', this);" checked><label for="cscb-03" id="star-names-label">Star Names.</label></span>
+					<span class="cb-container"><input type="checkbox" id="cscb-04" onchange="setConstNames('celestial-sphere-01', this);"><label for="cscb-04" id="const-names-label">Constellation Names.</label></span>
 
-					<span><input type="checkbox" id="cscb-05" onchange="setWanderingBodiesCS('celestial-sphere-01', this);"><span id="wb-label">Wandering bodies.</span></span>
-					<span><input type="checkbox" onchange="setUseBoatHeadingCS('celestial-sphere-01', this); showHide('boat-shapes', this);"><span id="boat-heading-label">Show Boat Heading.</span></span>
-					<span><input type="checkbox" onchange="setCelestialEquatorCS('celestial-sphere-01', this);"><span id="ce-label">Celestial Equator.</span></span>
-					<span><input type="checkbox" onchange="setAzimutalGridCS('celestial-sphere-01', this);" checked><span id="az-label">Azimutal Grid.</span></span>
-					<span><input type="checkbox" onchange="setEquatorGridCS('celestial-sphere-01', this);"><span id="eq-label">Equatorial Grid.</span></span>
+					<span class="cb-container"><input type="checkbox" id="cscb-05" onchange="setWanderingBodiesCS('celestial-sphere-01', this);"><label for="cscb-05" id="wb-label">Wandering bodies.</label></span>
+					<!--span class="cb-container"><input type="checkbox" id="cscb-06" onchange="setUseBoatHeadingCS('celestial-sphere-01', this); showHide('boat-shapes', this);"><label for="cscb-06" id="boat-heading-label">Show Boat Heading.</label></span-->
+					<span class="cb-container"><input type="checkbox" id="cscb-07" onchange="setCelestialEquatorCS('celestial-sphere-01', this);"><label for="cscb-07" id="ce-label">Celestial Equator.</label></span>
+					<span class="cb-container"><input type="checkbox" id="cscb-08" onchange="setAzimutalGridCS('celestial-sphere-01', this);" checked><label for="cscb-08" id="az-label">Azimutal Grid.</label></span>
+					<span class="cb-container"><input type="checkbox" id="cscb-09" onchange="setEquatorGridCS('celestial-sphere-01', this);"><label for="cscb-09" id="eq-label">Equatorial Grid.</label></span>
 				</div>
 				<div id="boat-shapes" style="display: none;">
 					Boat Shape:
