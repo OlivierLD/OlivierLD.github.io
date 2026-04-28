@@ -26,7 +26,7 @@
 			--hour-tick-label-color: blue;
 			--sky-grid-color: cyan;
 			--declination-color: cyan;
-			--aries-label-color: black;
+			--aries-label-color: silver;
 			--card-points-color: red;
 			--nsew-color: blue;
 			--equatorial-grid-color: white;
@@ -892,6 +892,80 @@ let updateLHA = (value) => {
 
 let globalAstroData;
 
+let increaseDate = (min) => {
+
+	let year = parseInt(document.getElementById('calendar-year-01').value);
+	let month = parseInt(document.getElementById('calendar-month-01').value) - 1;
+	let day = parseInt(document.getElementById('calendar-day-01').value);
+	let hours = parseInt(document.getElementById('watch-value-01').value.split(':')[0]);
+	let minutes = parseInt(document.getElementById('watch-value-01').value.split(':')[1]);
+	let seconds = parseInt(document.getElementById('watch-value-01').value.split(':')[2]);
+
+	let newDate = new Date(
+		year,
+		month,
+		day,
+		hours,
+		minutes,
+		seconds
+	);
+	let diff = newDate.getTimezoneOffset();
+	let dateTimeMS = newDate.getTime();
+
+	// Increase by 10 minutes
+	dateTimeMS += ((-diff * 60 * 1000) + (min * 60 * 1000)); // 10 minutes
+	let updatedDate = new Date(dateTimeMS);
+
+	year = updatedDate.getUTCFullYear();
+	month = updatedDate.getUTCMonth() + 1;
+	day = updatedDate.getUTCDate();
+	hours = updatedDate.getUTCHours();
+	minutes = updatedDate.getUTCMinutes();
+	seconds = updatedDate.getUTCSeconds();
+
+	document.getElementById('calendar-year-01').value = year;
+	document.getElementById('calendar-month-01').value = (month < 10 ? '0' + month : month);
+	document.getElementById('calendar-day-01').value = day;
+	document.getElementById('watch-value-01').value =
+			(hours < 10 ? '0' + hours : hours) + ':' +
+			(minutes < 10 ? '0' + minutes : minutes) + ':' +
+			(seconds < 10 ? '0' + seconds : seconds);
+}
+
+let play = () => {
+
+	document.getElementById('cscb-05').checked = false;
+	document.getElementById('celestial-sphere-01').wanderingBodies = false;
+
+	// Increase current date
+	increaseDate(1);
+	// Update sphere
+	updateFromButton('data-slider');
+}
+
+let playingProcessId;
+
+let startPlaying = () => {
+	// Enable/Disable required widgets
+	document.getElementById('play-button').disabled = true;
+	document.getElementById('stop-button').disabled = false;
+
+	document.getElementById('button-now').disabled = true;
+	document.getElementById('set-lha-button').disabled = true;
+
+	playingProcessId = window.setInterval(play, 100);
+}
+
+let stopPlaying = () => {
+	window.clearInterval(playingProcessId);
+	// Disabale/Enable required widgets
+	document.getElementById('play-button').disabled = false;
+	document.getElementById('stop-button').disabled = true;
+
+	document.getElementById('button-now').disabled = false;
+	document.getElementById('set-lha-button').disabled = false;
+}
+
 let updateFromButton= (id) => {
 
 	let day = document.getElementById('calendar-day-01').value;
@@ -1296,7 +1370,7 @@ function resetZoom(id) {
 									</button>
 								</span>
 								<span>
-									<button class="tooltip" onclick="updateFromButton('data-slider');">
+									<button id="set-lha-button" class="tooltip" onclick="updateFromButton('data-slider');">
 										<span id="label-08">Set Aries LHA</span>
 										<span id="label-08-tooltip" class="tooltiptext">For the current date and time, at the user's position</span>
 									</button>
@@ -1462,19 +1536,26 @@ function resetZoom(id) {
 				</div>
 
 			</div>
+			<hr/>
+			<div id="play-button-div">
+				<button id="play-button" onclick="startPlaying();" title="Play animation">Play</button>
+				<!-- button id="pause-button" onclick="stopPlaying();" title="Pause animation">Pause</button -->
+				<button id="stop-button" onclick="stopPlaying();" title="Stop animation" disabled>Stop</button>
+			</div>
+			<hr/>
 		</div>
 		<div style="display: grid; grid-template-columns: 840px;">
 			<div class="black-frame centered" style="width: 800px; height: 600px; overflow: scroll;">
 				<!-- Celestial Sphere goes here -->
 				<celestial-sphere id="celestial-sphere-01"
-									class="celestial-sphere-display-01"
-									width="800"
-									height="600"
-									latitude="35"
-									longitude="-3"
-									heading="0"
-									use-heading="false"
-									celestial-equator="false"/>
+								  class="celestial-sphere-display-01"
+								  width="800"
+								  height="600"
+								  latitude="35"
+								  longitude="-3"
+								  heading="0"
+								  use-heading="false"
+								  celestial-equator="false"/>
 			</div>
 			<div>
 				<!-- Horizontal slider for LHA Aries -->
@@ -1596,7 +1677,7 @@ let translate = (lang) => {
 	document.getElementById('constellations-label').innerHTML = (lang === 'FR') ? 'Constellations.' : 'Constellations.';
 	document.getElementById('star-names-label').innerHTML = (lang === 'FR') ? 'Noms des &eacute;toiles.' : 'Star Names.';
 	document.getElementById('const-names-label').innerHTML = (lang === 'FR') ? 'Noms des constellations.' : 'Constellation Names.';
-	document.getElementById('boat-heading-label').innerHTML = (lang === 'FR') ? 'Afficher le cap du bateau.' : 'Show Boat Heading.';
+	// document.getElementById('boat-heading-label').innerHTML = (lang === 'FR') ? 'Afficher le cap du bateau.' : 'Show Boat Heading.';
 	document.getElementById('ce-label').innerHTML = (lang === 'FR') ? '&Eacute;quateur C&eacute;leste.' : 'Celestial Equator.';
 	document.getElementById('az-label').innerHTML = (lang === 'FR') ? 'Grille Azimutale.' : 'Azimutal Grid.';
 	document.getElementById('eq-label').innerHTML = (lang === 'FR') ? 'Grille &Eacute;quatoriale.' : 'Equatorial Grid.';
