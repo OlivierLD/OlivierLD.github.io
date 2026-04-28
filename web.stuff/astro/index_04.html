@@ -953,6 +953,8 @@ let startPlaying = () => {
 	document.getElementById('button-now').disabled = true;
 	document.getElementById('set-lha-button').disabled = true;
 
+	document.getElementById('data-slider').disabled = true;
+
 	playingProcessId = window.setInterval(play, 100);
 }
 
@@ -964,6 +966,8 @@ let stopPlaying = () => {
 
 	document.getElementById('button-now').disabled = false;
 	document.getElementById('set-lha-button').disabled = false;
+
+	document.getElementById('data-slider').disabled = false;
 }
 
 let updateFromButton= (id) => {
