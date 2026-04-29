@@ -227,7 +227,7 @@ button {
 /* NOW STYLE THE BUTTON'S HOVER STATE */
 /*	button#rCoffee:hover, button#rCoffee:focus { */
 button:hover, button:focus {
-  border:2px solid #dad9d8;
+  border: 2px solid cyan;
 }
 
 button:disabled {
