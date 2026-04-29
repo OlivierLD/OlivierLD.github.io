@@ -1218,13 +1218,21 @@ function resetZoom(id) {
 					You can set your position and the time, set the Equatorial Grid, and then use the slider to adjust the Aries LHA.
 					<br/>
 					<hr/>
-					<i>Example:</i><br/>
-					- Click the "Now" button to set the current time.<br/>
-					- Enter your position, or enable the GeoLocation (if your browser supports it).<br/>
-					- Enable the Equatorial Grid.<br/>
-					- Click the "Set Position" button.
-					- Click the "Set Aries LHA" button to set the Aries LHA to the correct value for the time and position you set.<br/>
-					- Use the slider to see how the stars rotate around the celestial pole.
+					<i>Example:</i>
+					<ul>
+						<li>Click the "Now" button to set the current time.</li>
+						<li>Enter your position, or enable the GeoLocation (if your browser supports it).</li>
+						<li>Enable the Equatorial Grid.</li>
+						<li>Click the "Set Position" button.</li>
+						<li>Click the "Set Aries LHA" button to set the Aries LHA for the time and position you've set.</li>
+						<li>
+							To see how the stars rotate around the celestial pole:
+							<ul>
+								<li>Use the slider under the widget.</li>
+								<li>Use the "Play" button.</li>
+							</ul>
+						</li>
+					</ul>
 				</div>
 			</div>
 			<hr style="margin-top: 15px; margin-bottom: 5px;"/>
@@ -1612,26 +1620,42 @@ function resetZoom(id) {
 	You can set your position and the time, set the Equatorial Grid, and then use the slider to adjust the Aries LHA.
 	<br/>
 	<hr/>
-	<i>Example:</i><br/>
-	- Click the "Now" button to set the current time.<br/>
-	- Enter your position, or enable the GeoLocation (if your browser supports it).<br/>
-	- Enable the Equatorial Grid.<br/>
-	- Click the "Set Position" button.
-	- Click the "Set Aries LHA" button to set the Aries LHA to the correct value for the time and position you set.<br/>
-	- Use the slider to see how the stars rotate around the celestial pole.
+	<i>Example:</i>
+	<ul>
+		<li>Click the "Now" button to set the current time.</li>
+		<li>Enter your position, or enable the GeoLocation (if your browser supports it).</li>
+		<li>Enable the Equatorial Grid.</li>
+		<li>Click the "Set Position" button.</li>
+		<li>Click the "Set Aries LHA" button to set the Aries LHA for the time and position you've set.</li>
+		<li>
+			To see how the stars rotate around the celestial pole:
+			<ul>
+				<li>Use the slider under the widget.</li>
+				<li>Use the "Play" button.</li>
+			</ul>
+		</li>
+	</ul>
 </div>
 <div id="fr-help-content" style="display: none;">
 	Ceci est fait pour voir comment les &eacute;toiles tournent autour du p&ocirc;le c&eacute;leste...<br/>
 	On peut r&eacute;gler sa position et le temps, afficher la grille &eacute;quatoriale, et ensuite utiliser le slider pour ajuster l'angle horaire du Point Vernal.
 	<br/>
 	<hr/>
-	<i>Exemple :</i><br/>
-	- Cliquez le bouton "Heure Actuelle" pour d&eacute;finir l'heure actuelle.<br/>
-	- Saisissez votre position, ou activez la G&eacute;olocalisation (si votre navigateur le supporte).<br/>
-	- Activez la grille &eacute;quatoriale.<br/>
-	- Cliquez le bouton "MAJ Position".
-	- Cliquez le bouton "MAJ AHL Point Vernal" pour d&eacute;finir l'angle horaire du Point Vernal &agrave; la valeur correcte pour l'heure et la position que vous avez d&eacute;finies.<br/>
-	- Utilisez le curseur pour voir comment les &eacute;toiles tournent autour du p&ocirc;le c&eacute;leste.
+	<i>Exemple :</i>
+	<ul>
+		<li>Cliquez le bouton "Heure Actuelle" pour d&eacute;finir l'heure actuelle.</li>
+		<li>Saisissez votre position, ou activez la G&eacute;olocalisation (si votre navigateur le supporte).</li>
+		<li>Activez la grille &eacute;quatoriale.</li>
+		<li>Cliquez le bouton "MAJ Position".</li>
+		<li>Cliquez le bouton "MAJ AHL Point Vernal" pour mettre &agrave; jour l'angle horaire du Point Vernal pour la valeur de l'heure et de la position que vous avez d&eacute;finies.</li>
+		<li>
+			Pour voir comment les &eacute;toiles tournent autour du p&ocirc;le c&eacute;leste&nbsp;:
+			<ul>
+				<li>Utilisez le curseur sous le widget.</li>
+				<li>Utilisez le bouton "Play".</li>
+			</ul>
+		</li>
+	</ul>
 </div>
 
 
@@ -1697,7 +1721,7 @@ let translate = (lang) => {
 
 	// document.getElementById('chartless-title').innerHTML = (lang === 'FR') ? 'Canevas Mercator pour les droites de hauteur...' : 'Mercator Canvas for LOPs...';
 	document.getElementById('label-07').innerHTML = (lang === 'FR') ? 'MAJ Position' : 'Set Position';
-	document.getElementById('label-07-tooltip').innerHTML = (lang === 'FR') ? 'Met la valeur de la date à celle de la date actuelle' : 'Set date value to current time';
+	document.getElementById('label-07-tooltip').innerHTML = (lang === 'FR') ? 'Met Position &agrave; jour dans la sph&egrave;re' : 'Set the position in the sphere';
 	document.getElementById('label-08').innerHTML = (lang === 'FR') ? 'MAJ AHL Pt Vernal' : 'Set Aries LHA';
 	document.getElementById('label-08-tooltip').innerHTML = (lang === 'FR') ? 'Pour la date et l\'heure actuelles, à la position de l\'utilisateur' : 'For the current date and time, at the user\'s position';
 
