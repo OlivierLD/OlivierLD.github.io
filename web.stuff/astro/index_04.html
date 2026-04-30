@@ -1611,6 +1611,8 @@ function resetZoom(id) {
 		</div>
 	</div>
 	<hr/>
+	<div><span id="stellarium-link">See also:</span> <a href="https://stellarium-web.org/" target="_blank" style="color: cyan;">Stellarium</a>.</div>
+	<hr/>
 	<i>&copy; 2026, Oliv Cool Stuff Soft.</i>
 
 </body>
@@ -1745,6 +1747,8 @@ let translate = (lang) => {
 	document.getElementById('stop-tooltip').innerHTML = (lang === 'FR') ? 'Arr&ecirc;t de la simulation' : 'Stop simulation';
 
 	document.getElementById('celestial-sphere-01').title = (lang === 'FR') ? 'Le ciel étoilé au-dessus de vos têtes.' : 'The starry sky above your head';
+
+	document.getElementById('stellarium-link').innerHTML = (lang === 'FR') ? 'Voir aussi&nbsp;:' : 'See also:';
 
 	// Lang swicth
 	document.getElementById('lang-flag').src = (lang === 'FR') ? "./pix/us_uk_flag.png" : "./pix/france.gif";
@@ -2078,4 +2082,5 @@ window.onload = () => {
 
 };
 </script>
+
 </html>
