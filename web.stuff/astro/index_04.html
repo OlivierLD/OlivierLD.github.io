@@ -1563,19 +1563,20 @@ function resetZoom(id) {
 
 			</div>
 			<hr/>
-			<div id="play-button-div">
+			<div id="play-button-div" style="width: 100%; text-align: center;">
 				<button id="play-button"
 				        class="tooltip"
-				        onclick="startPlaying();"
-						title="Simulation.&#13;1 more minute every second.">
+				        onclick="startPlaying();">
+				<!-- 	title="Simulation.&#13;1 more minute every second."> -->
 					<span id="play-button-label">Play</span>
-					<span id="play-tooltip" class="tooltiptext">Simulation. 1 more minute every second.</span>
+					<span id="play-tooltip" class="tooltiptext">Simulation. One more minute every second.</span>
 				</button>
 				<!-- button id="pause-button" onclick="stopPlaying();" title="Pause animation">Pause</button -->
 				<button id="stop-button"
 				        class="tooltip"
 				        onclick="stopPlaying();"
-						title="Stop animation" disabled>
+						disabled>
+						<!-- title="Stop animation" disabled -->
 					<span id="stop-button-label">Stop</span>
 					<span id="stop-tooltip" class="tooltiptext">Stop simulation</span>
 				</button>
@@ -1742,7 +1743,7 @@ let translate = (lang) => {
 	document.getElementById('data-slider').title = (lang === 'FR') ? 'Valeur de l\'angle horaire du Point Vernal' : 'LHA Aries value';
 	document.getElementById('sliderValue01').title = (lang === 'FR') ? 'Valeur de l\'angle horaire du Point Vernal' : 'LHA Aries value';
 
-	document.getElementById('play-tooltip').innerHTML = (lang === 'FR') ? 'Simulation. 1 minute toutes les secondes.' : 'Simulation. 1 more minute every second.';
+	document.getElementById('play-tooltip').innerHTML = (lang === 'FR') ? 'Simulation. Une minute toutes les secondes.' : 'Simulation. One more minute every second.';
 	document.getElementById('play-button').title = (lang === 'FR') ? 'Simulation.\n1 minute toutes les secondes.' : 'Simulation.\n1 more minute every second.';
 	document.getElementById('stop-tooltip').innerHTML = (lang === 'FR') ? 'Arr&ecirc;t de la simulation' : 'Stop simulation';
 
