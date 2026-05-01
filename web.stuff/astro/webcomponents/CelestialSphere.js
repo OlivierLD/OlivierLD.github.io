@@ -1155,7 +1155,7 @@ class CelestialSphere extends HTMLElement {
 						console.log(`\t  RA: ${ra}, Dec: ${decToSex(dec, "NS")}, SHA: ${decToSex(sha)}, GHA: ${decToSex(sha + this.LHAAries)} (${decToSex(gha, "EW")})`);
 					}
 
-					if (sr.alt >= 0) {
+					if (/*true ||*/ sr.alt >= 0) {
 						// let p = this.plotCoordinates(dec, gha, radius);
 						let p = this.plotOnSphere(sr.alt, sr.Z /*- (this.useHeading ? this.heading : 0)*/, radius);
 						context.beginPath();
@@ -1326,6 +1326,12 @@ class CelestialSphere extends HTMLElement {
 			context.beginPath();
 			let r = Math.round((radius * 1.0) * (90 - i) / 90);
 			context.arc(this.canvas.width / 2, this.canvas.height / 2, r, 0, 2 * Math.PI, false);
+
+			context.fillStyle = this.celestialSphereColorConfig.declinationCircleColor;
+			let str = `${i}\xba`;
+			let len = context.measureText(str).width;
+			context.fillText(str, (this.canvas.width / 2) /*- p.x*/ - (len / 2), (this.canvas.height / 2) + r - 8);
+
 			context.stroke();
 			context.closePath();
 		}
