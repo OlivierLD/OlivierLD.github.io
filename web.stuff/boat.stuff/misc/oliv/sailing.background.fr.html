@@ -118,7 +118,7 @@ a.list-link:hover {
   text-shadow: 4px 4px 8px black, 0 0 25px white, 0 0 10px cyan;
 }
         </style>
-    </head>        
+    </head>
     <body>
         <dialog id="image-dialog" class="shadow-menu" style="/* position: absolute;*/ z-index: 10;">
             <div class="dialog-header">
@@ -128,7 +128,7 @@ a.list-link:hover {
             <div id="image-content" style="margin-top: 15px;">
             </div>
         </dialog>
-        
+
         <div style="height: 100%; overflow-y: scroll;">
           <div style="display: grid; grid-template-columns: auto auto;">
               <h1>Olivier LE DIOURIS - Voile &amp; Navigation</h1>
@@ -145,9 +145,9 @@ a.list-link:hover {
             <div id="2010-2011" class="sub-section">
               <ul>
                 <li>
-                    Huit mois, en double <a href="../../trip-2010-2011/index_fr.html" target="DP">autour du Pacifique</a> 
+                    Huit mois, en double <a href="../../trip-2010-2011/index_fr.html" target="DP">autour du Pacifique</a>
                     sur un ketch de 42'.<br>
-                    San Francisco CA, Nuku-Hiva (&Icirc;les Marquises), Ua Pou (&Icirc;les Marquises), Rangiroa (Tuamotu), Tahiti (&Icirc;les 
+                    San Francisco CA, Nuku-Hiva (&Icirc;les Marquises), Ua Pou (&Icirc;les Marquises), Rangiroa (Tuamotu), Tahiti (&Icirc;les
                     de la Soci&eacute;t&eacute;),
                     Moorea (&Icirc;les de la Soci&eacute;t&eacute;), Huahine (&Icirc;les de la Soci&eacute;t&eacute;), Taha'a (&Icirc;les de la Soci&eacute;t&eacute;), Raiatea (&Icirc;les de la Soci&eacute;t&eacute;),
                     Bora-Bora (&Icirc;les de la Soci&eacute;t&eacute;), Tongareva (&Icirc;les Cook), Kiritimati (Kiribati Republic), O'Ahu (Hawai'i Islands),
@@ -178,7 +178,7 @@ a.list-link:hover {
                 <ul>
                   <li>R&eacute;gate &agrave; bord de Kookaburra, <a href="http://www.sfj105.org" target="other">J105</a> dans la Baie de San Francisco.</li>
                 </ul>
-            </div>    
+            </div>
             <h3><a href="javascript:void(0)" class="list-link" title="Documents" onclick="showHideSection(this, '1988-2000');"><span class="expand-collapse">&#9660;&nbsp;</span>Entre 1988 et 2000</a></h3>
             <div id="1988-2000" class="sub-section">
                 <ul>
@@ -206,7 +206,7 @@ a.list-link:hover {
                     <li type="disc">Observer Singlehanded TransAtlantic Race (OSTAR) &agrave; bord de &quot;<a href="#" onclick="showImageDialog(this, 'Num&eacute;ro 5', './images/N5.jpg');"><b>Num&eacute;ro
                       Cinq</b></a>&quot;</li>
                     <li type="disc">
-                      Qu&eacute;bec - Saint-Malo, <i>navigateur</i> &agrave; bord de <b>Paul Ricard</b>. (<b><i>Vainqueur en Classe 2 !</i></b>)
+                      <a href="#" onclick="showImageDialog(this, '&Agrave; Qu&eacute;bec', './images/Quebec.1984.png');">Qu&eacute;bec</a> - Saint-Malo, <i>navigateur</i> &agrave; bord de <b>Paul Ricard</b>. (<b><i>Vainqueur en Classe 2 !</i></b>)
                       <br>
                       Pendant cette course, nous avons &eacute;t&eacute; le premier voilier &agrave; franchir le mur des 500 miles par jour,
                       en parcourant 508 miles en 24 heures.
@@ -316,10 +316,10 @@ a.list-link:hover {
                   <dt><a name="summer1977">&Eacute;t&eacute; 1977</a></dt>
                   <dd>Moniteur de voile &agrave; Beg Meil (Bretagne sud, France). D&eacute;riveur, croisi&egrave;re, planche &agrave; voile.</dd>
                   <dt><a name="summer1976">&Eacute;t&eacute; 1976</a></dt>
-                  <dd>Moniteur de voile &agrave; Beg Meil (Bretagne sud, France). D&eacute;riveur, croisi&egrave;re, planche &agrave; voile.</dd>
+                  <dd>Moniteur de voile &agrave; <a href="#" onclick="showImageDialog(this, 'Beg Meil, 1976', './images/Beg.Meil.1976.png');">Beg Meil</a> (Bretagne sud, France). D&eacute;riveur, croisi&egrave;re, planche &agrave; voile.</dd>
                 </dl>
               </div>
-          </div>  
+          </div>
         </div>
         <hr/>
         <i style="padding-left: 20px; text-shadow: 1px 1px 2px orange, 0 0 25px white, 0 0 5px silver;">OlivSoft never stops</i>
@@ -334,9 +334,9 @@ function showImageDialog(element, txt, img) {
 
     // left: `${evt.clientX + window.scrollX}px`,
     // top: `${evt.clientY + window.scrollY}px`,
-    
+
     document.getElementById('image-title').innerText = `${txt}`;
-    document.getElementById('image-content').innerHTML = `<img src="${img}">`;
+    document.getElementById('image-content').innerHTML = `<img src="${img}" style="max-width: 800px;">`;
 
     let aboutDialog = document.getElementById("image-dialog");
     // console.log(`Offset: ${offset}`);
