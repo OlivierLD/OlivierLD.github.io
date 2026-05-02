@@ -1683,7 +1683,8 @@ let getQueryParameterByName = (name, url) => {
 };
 
 let translate = (lang) => {
-	document.getElementById('title-01').innerHTML = (lang === 'FR') ? 'Widget Celestial Sphere' : 'Celestial Sphere widget at Work';
+	document.title = (lang === 'FR') ? 'Sphère Céleste, autonome.' : 'Standalone Celestial Sphere';
+	document.getElementById('title-01').innerHTML = (lang === 'FR') ? 'Widget Celestial Sphere au travail' : 'Celestial Sphere widget at Work';
 	document.getElementById('sub-title-01').innerHTML = (lang === 'FR') ? 'Voir le chemin des &eacute;toiles dans le ciel' : 'See the star path in the Sky';
 	document.getElementById('label-02').innerHTML = (lang === 'FR') ? 'Date UTC de l\'observation&nbsp;:' : 'UTC Date of observation:';
 	document.getElementById('label-03').innerHTML = (lang === 'FR') ? 'Latitude de l\'observateur&nbsp;:' : 'Observer\'s Latitude:';
