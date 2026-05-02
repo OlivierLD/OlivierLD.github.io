@@ -301,6 +301,31 @@
         }
     };
 
+	let realTimeThreadID;
+
+	let setRealTime = (cb) => {
+		if (cb.checked) {
+			// disable widgets
+			document.getElementById('button-now').disabled = true;
+			document.getElementById('play-button').disabled = true;
+			realTimeThreadID = setInterval(() => {
+				// console.log("Bing!");
+				updateFieldToNow();
+				updateFromButton('data-slider');
+				if (document.getElementById('cscb-05').checked) {
+					setWanderingBodiesCS('celestial-sphere-01', document.getElementById('cscb-05'));
+				}
+			}, 1000);
+		} else {
+			if (realTimeThreadID) {
+				clearInterval(realTimeThreadID);
+			}
+			// Reset disabled widgets
+			document.getElementById('button-now').disabled = false;
+			document.getElementById('play-button').disabled = false;
+		}
+	}
+
 	const LOWER_LIMB = 1;
 	const UPPER_LIMB = 2;
 
@@ -1267,11 +1292,11 @@ function resetZoom(id) {
 					<span id="label-02" style="margin: 5px;">UTC Date of observation:</span>
 					<br/>
 					<input type="number"
-								id="calendar-day-01"
-								placeholder="DD"
-								title="Day to set"
-								style="width: 45px; text-align: center;"
-								value="01"/>
+						   id="calendar-day-01"
+						   placeholder="DD"
+						   title="Day to set"
+						   style="width: 45px; text-align: center;"
+						   value="01"/>
 					<select id="calendar-month-01">
 						<option value="01" id="month-01" selected>Jan</option>
 						<option value="02" id="month-02">Feb</option>
@@ -1287,17 +1312,17 @@ function resetZoom(id) {
 						<option value="12" id="month-12">Dec</option>
 					</select>
 					<input type="number"
-						id="calendar-year-01"
-						placeholder="YYYY"
-						title="Year to set"
-						style="width: 70px; text-align: center;"
-						value="1970"/>
+						   id="calendar-year-01"
+						   placeholder="YYYY"
+						   title="Year to set"
+						   style="width: 70px; text-align: center;"
+						   value="1970"/>
 					<input type="text"
-						id="watch-value-01"
-						placeholder="00:00:00"
-						title="UTC Time to set"
-						style="width: 80px; text-align: center;"
-						value="00:00:00"/>
+						   id="watch-value-01"
+						   placeholder="00:00:00"
+						   title="UTC Time to set"
+						   style="width: 80px; text-align: center;"
+						   value="00:00:00"/>
 					&nbsp;&nbsp;
 					<button id="button-now"
 							class="tooltip"
@@ -1307,6 +1332,16 @@ function resetZoom(id) {
 						<span id="now-label">Now</span>
 						<span id="now-tooltip" class="tooltiptext">Set current date-time value</span>
 					</button>
+					<!--input type="checkbox" id="real-time-cb"/>
+					<label for="real-time-cb">Real Time</label-->
+					<div class="switch-container" style="margin-left: 30px;" title="Real Time Calculation">
+						<label class="switch switch-element" style="border: 2px solid blue; border-radius: 14px;">
+							<input id="realtime-slider" type="checkbox" onchange="setRealTime(this);">
+							<span class="slider round"></span>
+						</label>
+						<span id="label-15" class="switch-element">Real Time</span>
+					</div>
+				</input>
 				</div>
 				<div id="user-pos-widgets" style="display: block; padding: 10px;">
 					<table>
@@ -1320,14 +1355,14 @@ function resetZoom(id) {
 							</td>
 							<td>
 								<input type="number"
-										id="pos-lat-deg-01"
-										placeholder="Deg"
-										title="Lat degrees to set"
-										style="width: 40px; text-align: center;"
-										min="0"
-										max="90"
-										step="1"
-										value="35"/>
+									   id="pos-lat-deg-01"
+									   placeholder="Deg"
+									   title="Lat degrees to set"
+									   style="width: 40px; text-align: center;"
+									   min="0"
+									   max="90"
+									   step="1"
+									   value="35"/>
 								<span>&deg;</span>
 							</td>
 							<td>
@@ -1718,6 +1753,9 @@ let translate = (lang) => {
 
 	document.getElementById('now-label').innerHTML = (lang === 'FR') ? 'Heure actuelle' : 'Now';
 	document.getElementById('now-tooltip').innerHTML = (lang === 'FR') ? 'Met la valeur de la date à celle de la date actuelle' : 'Set date value to current time';
+
+	document.getElementById('label-15').innerHTML = (lang === 'FR') ? 'Temps R&eacute;el' : 'Real Time';
+
 	document.getElementById('button-calc').innerHTML = (lang === 'FR') ? 'Calcul' : 'Calculate';
 	document.getElementById('button-calc').title = (lang === 'FR') ? 'Correction de la hauteur' : 'Sight Reduction';
 	document.getElementById('button-reverse').innerHTML = (lang === 'FR') ? 'Inverse' : 'Reverse';
