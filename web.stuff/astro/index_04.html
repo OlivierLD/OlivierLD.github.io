@@ -311,7 +311,7 @@
 			realTimeThreadID = setInterval(() => {
 				// console.log("Bing!");
 				updateFieldToNow();
-				updateFromButton('data-slider');
+				updateToDateAndPos('data-slider');
 				if (document.getElementById('cscb-05').checked) {
 					setWanderingBodiesCS('celestial-sphere-01', document.getElementById('cscb-05'));
 				}
@@ -967,7 +967,7 @@ let play = () => {
 	// Increase current date
 	increaseDate(1);
 	// Update sphere
-	updateFromButton('data-slider');
+	updateToDateAndPos('data-slider');
 	if (document.getElementById('cscb-05').checked) {
 		setWanderingBodiesCS('celestial-sphere-01', document.getElementById('cscb-05'));
 	}
@@ -1000,7 +1000,7 @@ let stopPlaying = () => {
 	document.getElementById('data-slider').disabled = false;
 }
 
-let updateFromButton= (id) => {
+let updateToDateAndPos= (id) => {
 
 	let day = document.getElementById('calendar-day-01').value;
 	let utcDate =
@@ -1130,7 +1130,7 @@ function setWanderingBodiesCS(id, cb) {
     if (cb.checked === true) {
 
 		if (globalAstroData === undefined) {
-			updateFromButton('data-slider');
+			updateToDateAndPos('data-slider');
 		}
 
         document.getElementById(id).wanderingBodiesData = [
@@ -1332,9 +1332,7 @@ function resetZoom(id) {
 						<span id="now-label">Now</span>
 						<span id="now-tooltip" class="tooltiptext">Set current date-time value</span>
 					</button>
-					<!--input type="checkbox" id="real-time-cb"/>
-					<label for="real-time-cb">Real Time</label-->
-					<div class="switch-container" style="margin-left: 30px;" title="Real Time Calculation">
+					<div class="switch-container" style="margin-left: 30px;" title="Real Time Calculation&#13;Updated every second.">
 						<label class="switch switch-element" style="border: 2px solid blue; border-radius: 14px;">
 							<input id="realtime-slider" type="checkbox" onchange="setRealTime(this);">
 							<span class="slider round"></span>
@@ -1431,7 +1429,7 @@ function resetZoom(id) {
 									</button>
 								</span>
 								<span>
-									<button id="set-lha-button" class="tooltip" onclick="updateFromButton('data-slider');">
+									<button id="set-lha-button" class="tooltip" onclick="updateToDateAndPos('data-slider');">
 										<span id="label-08">Set Aries LHA</span>
 										<span id="label-08-tooltip" class="tooltiptext">For the current date and time, at the user's position</span>
 									</button>
