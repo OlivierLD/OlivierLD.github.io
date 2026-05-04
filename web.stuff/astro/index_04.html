@@ -425,13 +425,14 @@
 		console.log(payload);
 
 		let calculationData = {                                               // utcDate like 2025-03-31T14:16:31, duration format.
-			utcyear: parseInt(payload.utcDate.substring(0, 4)),               //              |    |  |  |  |  |
-			utcmonth: parseInt(payload.utcDate.substring(5, 7)),              //              0    |  |  |  |  |
-			utcday: parseInt(payload.utcDate.substring(8, 10)),               //                   5  |  |  |  |
-			utchour: parseInt(payload.utcDate.substring(11, 13)),             //                      8  |  |  |
-			utcminute: parseInt(payload.utcDate.substring(14, 16)),           //                         11 |  |
-			utcsecond: parseInt(payload.utcDate.substring(17, 19)),           //                            14 |
-			deltaT: DELTA_T,                                                  //                               17
+																			  //              |    |  |  |  |  |
+			utcyear: parseInt(payload.utcDate.substring(0, 4)),               //              0    |  |  |  |  |
+			utcmonth: parseInt(payload.utcDate.substring(5, 7)),              //                   5  |  |  |  |
+			utcday: parseInt(payload.utcDate.substring(8, 10)),               //                      8  |  |  |
+			utchour: parseInt(payload.utcDate.substring(11, 13)),             //                         11 |  |
+			utcminute: parseInt(payload.utcDate.substring(14, 16)),           //                            14 |
+			utcsecond: parseInt(payload.utcDate.substring(17, 19)),           //                               17
+			deltaT: DELTA_T,
 			noPlanets: false,
 			noStars: false
 		};
@@ -1365,14 +1366,14 @@ function resetZoom(id) {
 							</td>
 							<td>
 								<input type="number"
-										id="pos-lat-min-01"
-										placeholder="Minutes"
-										title="Lat minutes to set"
-										style="width: 70px; text-align: center;"
-										min="0"
-										max="59.99"
-										step="0.01"
-										value="00.00"/>
+									   id="pos-lat-min-01"
+									   placeholder="Minutes"
+									   title="Lat minutes to set"
+									   style="width: 70px; text-align: center;"
+									   min="0"
+									   max="59.99"
+									   step="0.01"
+									   value="00.00"/>
 								<span>'</span>
 							</td>
 						</tr>
@@ -1386,26 +1387,26 @@ function resetZoom(id) {
 							</td>
 							<td>
 								<input type="number"
-									id="pos-lng-deg-01"
-									placeholder="Deg"
-									title="Lng degrees to set"
-									style="width: 40px; text-align: center;"
-									min="0"
-									max="180"
-									step="1"
-									value="3"/>
+									   id="pos-lng-deg-01"
+									   placeholder="Deg"
+									   title="Lng degrees to set"
+									   style="width: 40px; text-align: center;"
+									   min="0"
+									   max="180"
+									   step="1"
+									   value="3"/>
 								<span>&deg;</span>
 							</td>
 							<td>
 								<input type="number"
-										id="pos-lng-min-01"
-										placeholder="Minutes"
-										title="Lng minutes to set"
-										style="width: 70px; text-align: center;"
-										min="0"
-										max="59.99"
-										step="0.01"
-										value="00.00"/>
+									   id="pos-lng-min-01"
+									   placeholder="Minutes"
+									   title="Lng minutes to set"
+									   style="width: 70px; text-align: center;"
+									   min="0"
+									   max="59.99"
+									   step="0.01"
+									   value="00.00"/>
 								<span>'</span>
 							</td>
 						</tr>
@@ -1525,24 +1526,24 @@ function resetZoom(id) {
 								<td id="label-07">Sextant Elevation:</td>
 								<td>
 									<input type="number"
-											id="sextant-degrees"
-											placeholder="Deg"
-											title="Elevation degrees"
-											style="width: 50px; text-align: center;"
-											min="0"
-											max="90"
-											step="1"
-											value="0"/>
+										   id="sextant-degrees"
+										   placeholder="Deg"
+										   title="Elevation degrees"
+										   style="width: 50px; text-align: center;"
+										   min="0"
+										   max="90"
+										   step="1"
+										   value="0"/>
 									<span>&deg;</span>
 									<input type="number"
-											id="sextant-minutes"
-											placeholder="Minutes"
-											title="Elevation minutes"
-											style="width: 70px; text-align: center;"
-											min="0"
-											max="59.99"
-											step="0.01"
-											value="00.00"/>
+										   id="sextant-minutes"
+										   placeholder="Minutes"
+										   title="Elevation minutes"
+										   style="width: 70px; text-align: center;"
+										   min="0"
+										   max="59.99"
+										   step="0.01"
+										   value="00.00"/>
 									<span>'</span>
 								</td>
 							</tr>
@@ -1550,13 +1551,13 @@ function resetZoom(id) {
 								<td id="label-08">Eye Height (meters):</td>
 								<td>
 									<input type="number"
-											id="eye-height"
-											placeholder="Meters"
-											title="Eye height above surface"
-											style="width: 60px; text-align: center;"
-											min="0"
-											step="0.1"
-											value="1.8"/>
+										   id="eye-height"
+										   placeholder="Meters"
+										   title="Eye height above surface"
+										   style="width: 60px; text-align: center;"
+										   min="0"
+										   step="0.1"
+										   value="1.8"/>
 									<span>m</span>
 								</td>
 							</tr>

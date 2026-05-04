@@ -489,7 +489,7 @@ class WorldMap extends HTMLElement {
 				while (lhaSun > 360) { lhaSun -= 360; }
 				while (lhaSun < 0) { lhaSun += 360; }
 				this.globeViewRightLeftRotation = -(data.sun.decl * Math.sin(Math.toRadians(lhaSun)));
-//			console.log("Tilt is now", globeViewRightLeftRotation);
+				//	console.log("Tilt is now", globeViewRightLeftRotation);
 			}
 		}
 	}

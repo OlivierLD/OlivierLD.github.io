@@ -1010,6 +1010,21 @@ Date.prototype.format = function (dateFormat) {
     </div>
   </div>
 
+  <div id="id00-4" class="w3-full-page-modal" style="width: 100%;">
+    <!-- An example of a modal FULL page -->
+    <div class="" style="background-color: black;">
+      <div class="" style="background: black;">
+        <span onclick="hidePage004();"
+              class="close-icon bigger-close-icon" style="margin-right: 20px;">&times;</span>
+        <div style="overflow-y: auto;">
+          <!-- Deferred load for ./misc.pix/2020.02.Hawaii/index.html, big pictures... -->
+          <iframe id="ria-2026" src="" width="100%" style="min-height: 1000px;"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
   <div id="id02" class="floating-menu no-shadow" onmouseleave="hideKebabMenu()" style="margin-top: 30px;">
     <div>
       <h4 style="margin-left: 10px;">More links</h4>
@@ -1355,6 +1370,7 @@ Date.prototype.format = function (dateFormat) {
       <a href="javascript:void(0)" class="active-link" onclick="showPage001()">A Full Modal Page, with an &lt;iframe&gt; (deferred loading)</a>
       <a href="javascript:void(0)" class="active-link" onclick="showPage002()">A Full Modal Page, with an &lt;iframe&gt;, (external not allowed... CORS)</a>
       <a href="javascript:void(0)" class="active-link" onclick="showPage003()">A Full Modal Page, with an &lt;iframe&gt;, linear regression</a>
+      <a href="javascript:void(0)" class="active-link" onclick="showPage004()">A Full Modal Page, with an &lt;iframe&gt;, Sunset in &Eacute;tel ria (deferred loading)</a>
     </div>
 
     <div> <!-- onmouseover="showSection('section-2.0');" onmouseleave="hideSection('section-2.0');"> -->
@@ -1651,6 +1667,18 @@ Date.prototype.format = function (dateFormat) {
   function hidePage003() {
     // document.getElementById('id01').style.display = 'none';
     document.getElementById('id00-3').style.transform = 'scaleY(0)';
+  }
+
+  function showPage004() {
+    let frameUrl = "./misc.pix/2026.05.ria.etel/index.html";
+    document.getElementById('ria-2026').src = frameUrl;
+    // document.getElementById('id01').style.display = 'block';
+    document.getElementById('id00-4').style.transform = 'scaleY(1)';
+  }
+
+  function hidePage004() {
+    // document.getElementById('id01').style.display = 'none';
+    document.getElementById('id00-4').style.transform = 'scaleY(0)';
   }
 
   function showKebabMenu() {
