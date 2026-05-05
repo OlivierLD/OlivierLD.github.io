@@ -209,6 +209,10 @@
 		return s;
 	}
 
+	let sexToDec = (deg, min) => {
+		return deg + ((min * 10 / 6) / 100);
+	};
+
 	function switchLanguage() {
 		let newURL = location.origin + location.pathname;
 		if (langToUse === 'FR') {
@@ -1002,6 +1006,16 @@ let stopPlaying = () => {
 }
 
 let updateToDateAndPos= (id) => {
+	// Check values here before going further
+	if (!checkLat()) {
+		return;
+	}
+	if (!checkLng()) {
+		return;
+	}
+	if (!checkDate()) {
+		return;
+	}
 
 	let day = document.getElementById('calendar-day-01').value;
 	let utcDate =
@@ -1017,6 +1031,7 @@ let updateToDateAndPos= (id) => {
 			(parseInt(document.getElementById('pos-lng-deg-01').value) +
 			(parseFloat(document.getElementById('pos-lng-min-01').value) / 60)) *
 			(document.getElementById('pos-lng-sign-01').value === 'W' ?  (-1) : 1);
+
 
 	let body;
 	let limb;
@@ -1078,11 +1093,100 @@ function onSlider(event) {
 	document.getElementById('celestial-sphere-01').wanderingBodies = false;
 }
 
+let checkDate = () => {
+	let day = document.getElementById('calendar-day-01').value;
+	let month = document.getElementById('calendar-month-01').value;
+	let year = document.getElementById('calendar-year-01').value;
+	let watch =	document.getElementById('watch-value-01').value;
+
+	let validDay = true, validYear = true, validHours = true, validMinutes = true, validSeconds = true;
+	let mess = '';
+
+	if (day > 31 || day < 1) {
+		// Invalid day
+		mess += (langToUse === 'FR') ? `Jour du mois invalide : ${day}\n` : `Wrong Day: ${day}\n`;
+		validDay = false;
+	}
+	if (year < 0) { // More checks here ?
+		// Invalid year
+		mess += (langToUse === 'FR') ? `Ann\xe9e invalide: ${year}\n` : `Wrong year: ${year}\n`;
+		validYear = false;
+	}
+	let watchValues = watch.split(':');
+	let hours = watchValues[0];
+	let minutes = watchValues[1];
+	let seconds = watchValues[2];
+	if (!hours || hours < 0 || hours > 23) {
+		// Invalid hours
+		mess += (langToUse === 'FR') ? `Heures invalides : ${hours}\n` : `Wrong Hours: ${hours}\n`;
+		validHours = false;
+	}
+	if (!minutes || minutes < 0 || minutes > 59) {
+		// Invalid minutes
+		mess += (langToUse === 'FR') ? `Minutes invalides : ${minutes}\n` : `Wrong Minutes: ${minutes}\n`;
+		validMinutes = false;
+	}
+	if (!seconds || seconds < 0 || seconds > 59) {
+		// Invalid seconds
+		mess += (langToUse === 'FR') ? `Secondes invalides : ${seconds}\n` : `Wrong Seconds: ${seconds}\n`;
+		validSeconds = false;
+	}
+	if (!validDay || !validYear || !validHours || !validMinutes || !validSeconds) {
+		mess += ((langToUse === 'FR') ?
+			   `Date invalide : ${day}-${month}-${year} ${hours}:${minutes}:${seconds}` :
+			   `Invalid Date: ${day}-${month}-${year} ${hours}:${minutes}:${seconds}`);
+		alert(mess);
+		return false;
+	} else {
+		return true;
+	}
+}
+
+let checkLat = () => {
+	let sgnLat = document.getElementById("pos-lat-sign-01").value;
+	let degLat = parseInt(document.getElementById("pos-lat-deg-01").value);
+	let minLat = parseFloat(document.getElementById("pos-lat-min-01").value);
+
+	let value = sexToDec(degLat, minLat);
+	if (value < 0 || value > 90) {
+		alert((langToUse === 'FR') ?
+		`Latitude invalide : ${sgnLat} ${degLat}\xba${minLat.toFixed(2)}'` :
+		`Invalid Latitude: ${sgnLat} ${degLat}\xba${minLat.toFixed(2)}'`);
+		return false;
+	} else {
+		return true;
+	}
+}
+
+let checkLng = () => {
+	let sgnLng = document.getElementById("pos-lng-sign-01").value;
+	let degLng = parseInt(document.getElementById("pos-lng-deg-01").value);
+	let minLng = parseFloat(document.getElementById("pos-lng-min-01").value);
+
+	let value = sexToDec(degLng, minLng);
+	if (value < 0 || value > 180) {
+		alert((langToUse === 'FR') ?
+		`Longitude invalide : ${sgnLng} ${degLng}\xba${minLng.toFixed(2)}'` :
+		`Invalid Longitude: ${sgnLng} ${degLng}\xba${minLng.toFixed(2)}'`);
+		return false;
+	} else {
+		return true;
+	}
+}
+
 let updatePosition = () => {
+
+	if (!checkLat()) {
+		return;
+	}
+	if (!checkLng()) {
+		return;
+	}
 
 	let sgnLat = document.getElementById("pos-lat-sign-01").value;
 	let degLat = parseInt(document.getElementById("pos-lat-deg-01").value);
 	let minLat = parseFloat(document.getElementById("pos-lat-min-01").value);
+
 	let lat = (degLat + (minLat / 60.0)) * (sgnLat === 'N' ? 1 : -1);
 
 	let sgnLng = document.getElementById("pos-lng-sign-01").value;
