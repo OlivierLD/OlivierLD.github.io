@@ -115,7 +115,13 @@ let calculate = () => {
 
     resultDiv.innerHTML += "<hr/>";
     let with15degResult = ahg1 + (15.0 * deltaTimeHours);
-    resultDiv.innerHTML += "<p>Avec 15°00.00' par heure, AHG &agrave; " + HH + "h" + MI + "m" + SS + "s serait " + with15degResult.toFixed(4) + "°, <b>" + decToSex(with15degResult) + "</b></p>";
+    let difference = Math.abs(with15degResult - ahgAtTime);
+
+    resultDiv.innerHTML +=
+      "<p>" +
+        "Avec 15°00.00' par heure, AHG &agrave; " + HH + "h" + MI + "m" + SS + "s serait " + with15degResult.toFixed(4) + "°, " +
+        "soit <b>" + decToSex(with15degResult) + "</b>" + ",<br/>ce qui constitue une diff&eacute;rence de " + difference.toFixed(4) + "°, soit <b>" + decToSex(difference) + "</b>" +
+      "</p>";
 
     console.log("End of Calculation");
 }
