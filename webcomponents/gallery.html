@@ -209,6 +209,50 @@
             place-self: center;
         }
 
+        .shadow-menu a:link, .shadow-menu a:visited {
+            color: darkblue;
+            text-decoration: none;
+        }
+        .shadow-menu a:hover {
+            color: navy;
+            text-shadow: 2px 2px 4px grey, 0 0 25px white, 0 0 7px cyan;
+        }
+        .shadow-menu a:active {
+            color: DarkOrange;
+            text-shadow: 2px 2px 4px grey, 0 0 25px white, 0 0 7px cyan;
+        }
+
+        .close-icon {
+            position: absolute;
+            right: 0;
+            top: 0;
+            margin-top: 2px;
+            margin-right: 7px;
+            cursor: pointer;
+        }
+
+        .close-icon:hover {
+            text-shadow: 2px 2px 4px grey, 0 0 25px white, 0 0 7px cyan;
+        }
+
+        .bigger-close-icon {
+            font-size: 40px;
+        }
+
+        .dialog-header {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .dialog-header-close {
+            float: right;
+        }
+        .dialog-header-close:hover {
+            color: cyan;
+            cursor: pointer;
+        }
+
+
         /* For the radio buttons */
         .wrapper {
             display: inline-flex;
@@ -284,6 +328,38 @@
     </style>
 
 	<script type="text/javascript">
+
+        let customAlertOpened = false;
+        let showCustomAlert = (content) => {
+            let customAlert = document.getElementById("custom-alert");
+
+            let topOfCard = window.scrollY; // pageYOffset; // who.getBoundingClientRect().top;
+            // window.scrollTo(0, 0); // Scroll on top, for Safari and others...
+            let marginTop = `${topOfCard.toFixed(0)}px`;
+            console.log(`Dialog top margin: ${marginTop}`);
+            customAlert.style.marginTop = marginTop;
+
+            document.getElementById('custom-alert-content').innerText = content;
+                if (customAlert.show !== undefined) {
+                    customAlert.show();
+                } else {
+                    customAlert.style.display = 'inline';
+                }
+            customAlertOpened = true;
+            window.setTimeout(closeCustomAlert, 5000);
+        };
+
+        let closeCustomAlert = () => {
+            let customAlert = document.getElementById("custom-alert");
+                if (customAlert.close !== undefined) {
+                    customAlert.close();
+                } else {
+                    customAlert.style.display = 'none';
+                }
+            customAlertOpened = false;
+        };
+
+        window.alert = showCustomAlert;  // Not in window.onload !
 
         function _showHide(id, cb) {
             let element = document.getElementById(id);
@@ -1660,6 +1736,17 @@
     </script>
 </head>
 <body>
+
+<dialog id="custom-alert" class="shadow-menu" style="z-index: 10; width: 800px; border: 2px solid cyan; margin-top: 50px; border: 1px solid red; border-radius: 5px;">
+    <div class="dialog-header">
+        <span>Alert</span>
+        <span class="dialog-header-close" onclick="closeCustomAlert();">&times;</span>
+    </div>
+    <hr/>
+    <div id="custom-alert-content">
+        <!-- Dynamic alert content -->
+    </div>
+</dialog>
 
 <table width="100%">
 	<tr>
@@ -3977,7 +4064,7 @@
 				</div>
 				<div class="black-frame centered">
 					<button onclick="simulateAstroData('world-map-01');"
-							title="Set Astro Data"
+							title="Move to San Francisco"
 							style="margin-top: 3px;">Pos to SF
 					</button>
 					<input type="checkbox" onchange="setTransparency('world-map-01', this);"/>Transparent
@@ -4018,7 +4105,7 @@
 				</div>
 				<div class="black-frame centered">
 					<button onclick="simulateAstroData('world-map-02');"
-							title="Set Astro Data"
+							title="Move to San Francisco"
 							style="margin-top: 3px;">Pos to SF
 					</button>
 					<input type="checkbox" onchange="setTransparency('world-map-02', this);"/>Transparent
@@ -4054,7 +4141,7 @@
 				</div>
 				<div class="black-frame centered">
 					<button onclick="simulateAstroData('world-map-03');"
-							title="Set Astro Data"
+							title="Move to San Francisco"
 							style="margin-top: 3px;">Pos to SF
 					</button>
 					<input type="checkbox" onchange="setTransparency('world-map-03', this);"/>Transparent
@@ -4070,9 +4157,9 @@
 					<input type="checkbox" onchange="setTropics('world-map-03', this);"/>Tropics
 					<br/>
 					<hr/>
-					<button onclick="flyTo('world-map-03', {lat: 37.7489, lng: -122.507}, 'SF');" title="Fly to SF">SF</button>&nbsp;&nbsp;
-					<button onclick="flyTo('world-map-03', {lat: 49.01500, lng: 2.5423080}, 'Paris');" title="Fly to Paris">Paris</button>&nbsp;&nbsp;
-					<button onclick="flyTo('world-map-03', {lat: 19.7373, lng: -155.0668648}, 'Hawai\'i');" title="Fly to Hawai'i">Hawai'i</button>
+					<button onclick="flyTo('world-map-03', {lat: 37.7489, lng: -122.507}, 'SF');" title="Fly to SF&#13;following Great Circle">SF</button>&nbsp;&nbsp;
+					<button onclick="flyTo('world-map-03', {lat: 49.01500, lng: 2.5423080}, 'Paris');" title="Fly to Paris&#13;following Great Circle">Paris</button>&nbsp;&nbsp;
+					<button onclick="flyTo('world-map-03', {lat: 19.7373, lng: -155.0668648}, 'Hawai\'i');" title="Fly to Hawai'i&#13;following Great Circle">Hawai'i</button>
 				</div>
 			</td>
         </tr>
@@ -4105,7 +4192,7 @@
              height="600">&lt;/world-map>
                     </pre>
                     <button onclick="simulateAstroData('world-map-04');"
-							title="Set Astro Data"
+							title="Plot San Francisco position"
 							style="margin-top: 3px;">Pos to SF
 					</button>
                     <button onclick="callAfter('world-map-04')" title="Satellites and Great Circle (Paris-Hawaii)">After</button>
@@ -6307,7 +6394,7 @@ map.addEventListener('mousemove', evt => {
 			</td>
 			<td style="text-align: left;">
 				<input type="range"
-					   style="-webkit-appearance: slider-vertical; width: 8px; height: 400px; margin-left: 0;" min="-90"
+					   style="writing-mode: vertical-lr; direction: rtl; width: 8px; height: 400px; margin-left: 0;" min="-90"
 					   max="90" value="-10" onchange="setNewTilt(this, 'sun-path-01');">
 			</td>
 			<td valign="top">
@@ -6322,7 +6409,7 @@ map.addEventListener('mousemove', evt => {
 			</td>
 			<td style="text-align: left;">
 				<input type="range"
-					   style="-webkit-appearance: slider-vertical; width: 8px; height: 400px; margin-left: 0;" min="-90"
+					   style="writing-mode: vertical-lr; direction: rtl; width: 8px; height: 400px; margin-left: 0;" min="-90"
 					   max="90" value="-10" onchange="setNewTilt(this, 'sun-path-02');">
 			</td>
 			<td valign="top">
@@ -6337,7 +6424,7 @@ map.addEventListener('mousemove', evt => {
 			</td>
 			<td style="text-align: left;">
 				<input type="range"
-					   style="-webkit-appearance: slider-vertical; width: 8px; height: 400px; margin-left: 0;" min="-90"
+					   style="writing-mode: vertical-lr; direction: rtl; width: 8px; height: 400px; margin-left: 0;" min="-90"
 					   max="90" value="-10" onchange="setNewTilt(this, 'sun-path-03');">
 			</td>
 		</tr>
