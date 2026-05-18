@@ -330,7 +330,7 @@
 	<script type="text/javascript">
 
         let customAlertOpened = false;
-        let showCustomAlert = (content) => {
+        let showCustomAlert = (content, header) => {
             let customAlert = document.getElementById("custom-alert");
 
             let topOfCard = window.scrollY; // pageYOffset; // who.getBoundingClientRect().top;
@@ -339,7 +339,10 @@
             console.log(`Dialog top margin: ${marginTop}`);
             customAlert.style.marginTop = marginTop;
 
-            document.getElementById('custom-alert-content').innerText = content;
+            if (header) {
+                document.getElementById('custom-alert-title').innerText = header;
+            }
+            document.getElementById('custom-alert-content').innerHTML = content;
                 if (customAlert.show !== undefined) {
                     customAlert.show();
                 } else {
@@ -1060,7 +1063,7 @@
             if (currentPos !== undefined && currentPos !== null && Object.keys(currentPos).length !== 0) {
                 if (pos.lat === currentPos.latitude && pos.lng === currentPos.longitude) {
                     console.log("Already at the position...");
-                    alert("Already at the position...");
+                    alert("Already at the position... <br/>Choose another destination", "Oops!");
                     return;
                 } else {
                     console.log(`Flying from ${currentPos.latitude},${currentPos.longitude} to ${pos.lat},${pos.lng}...`);
@@ -1075,11 +1078,11 @@
                     }, 50);
                 } else {
                     console.log("GC computation failed, no animation...");
-                    alert("GC computation failed, no animation...");
+                    alert("GC computation failed, no animation...", "Oops!");
                 }
             } else {
                 console.log("No current position yet...");
-                alert("No current position yet...");
+                alert("No current position yet...<br/>Please set a position first (Like SF...).", "Oops!");
             }
         }
 
@@ -1739,7 +1742,7 @@
 
 <dialog id="custom-alert" class="shadow-menu" style="z-index: 10; width: 800px; border: 2px solid cyan; margin-top: 50px; border: 1px solid red; border-radius: 5px;">
     <div class="dialog-header">
-        <span>Alert</span>
+        <span id="custom-alert-title">Alert</span>
         <span class="dialog-header-close" onclick="closeCustomAlert();">&times;</span>
     </div>
     <hr/>
@@ -4043,17 +4046,17 @@
 	<table>
 		<tr>
 			<td>
-                                        <pre style="font-weight: bold; text-align: left; color: white; vertical-align: top; margin-top: 6px;">
+                <pre style="font-weight: bold; text-align: left; color: white; vertical-align: top; margin-top: 6px;">
 &lt;world-map id="world-map-01"
            class="worldmap-display"
            title="World Map"
            width="500"
            height="500">&lt;/world-map>
-                                        </pre>
+                </pre>
 				<button onclick="showHideSiblingWidget(this);">Show/Hide widget</button>
 			</td>
 		</tr>
-		<tr style="display: none;">
+		<tr style="display: block;">
 			<td valign="top">
 				<div class="black-frame centered">
 					<world-map id="world-map-01"
@@ -4163,7 +4166,7 @@
 				</div>
 			</td>
         </tr>
-        <tr style="display: none;">
+        <tr style="display: block;">
 			<td valign="top">
                <div style="display: grid; grid-template-columns: auto auto;">
 				<div class="black-frame centered">
