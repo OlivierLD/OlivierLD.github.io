@@ -998,6 +998,7 @@
         }
 
         function setProjection(id, radio) {
+            // console.log(`Setting projection to ${radio.value} for map ${id}`);
             document.getElementById(id).projection = radio.value;
             document.getElementById(id).repaint();
         }
@@ -4022,6 +4023,12 @@
 							style="margin-top: 3px;">Pos to SF
 					</button>
                     <button onclick="callAfter('world-map-04')" title="Satellites and Great Circle (Paris-Hawaii)">After</button>
+                    <div style="margin: 10px 0 0 10px;">
+                        Projection
+                        <br/>
+                        <input type="radio" name="projection" value="MERCATOR" checked onchange="setProjection('world-map-04', this);">Mercator
+                        <input type="radio" name="projection" value="ANAXIMANDRE" onchange="setProjection('world-map-04', this);">Square - AKA Anaximandre
+                    </div>
                 </div>
             </div>
             Move the mouse on the map, and see its coordinates below.
