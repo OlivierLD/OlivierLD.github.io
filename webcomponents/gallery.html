@@ -985,9 +985,12 @@
                 // Calculate GC from currentPos to pos
                 let gc = wcComp.computeGreatCircle({lat: currentPos.latitude, lng: currentPos.longitude}, pos, 50); // 50 steps
                 // GC is an array of points
-                window.setTimeout(() => {
-                    moveToGCElement(wcComp, gc, 0, label);
-                }, 50);
+                if (!isNaN(gc[0].z)) {
+                    console.log("GC computed, starting animation...");
+                    window.setTimeout(() => {
+                        moveToGCElement(wcComp, gc, 0, label);
+                    }, 50);
+                }
             } else {
                 console.log("No current position yet...")
             }
