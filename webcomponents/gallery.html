@@ -209,6 +209,78 @@
             place-self: center;
         }
 
+        /* For the radio buttons */
+        .wrapper {
+            display: inline-flex;
+            background: #fff;
+            height: 60px;
+            width: 400px;
+            align-items: center;
+            justify-content: space-evenly;
+            border-radius: 5px;
+            padding: 20px 15px;
+            box-shadow: 5px 5px 30px rgba(0,0,0,0.2);
+        }
+        .wrapper .option {
+            background: #fff;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            margin: 0 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            padding: 0 10px;
+            border: 2px solid lightgrey;
+            transition: all 0.3s ease;
+        }
+        .wrapper .option .dot {
+            height: 20px;
+            width: 20px;
+            background: #d9d9d9;
+            border-radius: 50%;
+            position: relative;
+        }
+        .wrapper .option .dot::before {
+            position: absolute;
+            content: "";
+            top: 4px;
+            left: 4px;
+            width: 12px;
+            height: 12px;
+            background: #0069d9;
+            border-radius: 50%;
+            opacity: 0;
+            transform: scale(1.5);
+            transition: all 0.3s ease;
+        }
+        #option-1, #option-2 /*, input[type="radio"] */ {
+            display: none;
+        }
+        #option-1:checked:checked ~ .option-1,
+        #option-2:checked:checked ~ .option-2 {
+            border-color: #0069d9;
+            background: #0069d9;
+        }
+        #option-1:checked:checked ~ .option-1 .dot,
+        #option-2:checked:checked ~ .option-2 .dot {
+            background: #fff;
+        }
+        #option-1:checked:checked ~ .option-1 .dot::before,
+        #option-2:checked:checked ~ .option-2 .dot::before {
+            opacity: 1;
+            transform: scale(1);
+        }
+        .wrapper .option span {
+            font-size: 20px;
+            color: #808080;
+        }
+        #option-1:checked:checked ~ .option-1 span,
+        #option-2:checked:checked ~ .option-2 span {
+            color: #fff;
+        }
+
     </style>
 
 	<script type="text/javascript">
@@ -4026,8 +4098,18 @@
                     <div style="margin: 10px 0 0 10px;">
                         Projection
                         <br/>
-                        <input type="radio" name="projection" value="MERCATOR" checked onchange="setProjection('world-map-04', this);">Mercator
-                        <input type="radio" name="projection" value="ANAXIMANDRE" onchange="setProjection('world-map-04', this);">Square - AKA Anaximandre
+                        <div class="wrapper">
+                            <input type="radio" name="projection" value="MERCATOR" checked onchange="setProjection('world-map-04', this);" id="option-1">
+                            <label for="option-1" class="option option-1">
+                                <div class="dot"></div>
+                                <span>Mercator</span>
+                            </label>
+                            <input type="radio" name="projection" value="ANAXIMANDRE" onchange="setProjection('world-map-04', this);" id="option-2">
+                            <label for="option-2" class="option option-2">
+                                <div class="dot"></div>
+                                <span title="AKA Anaximandre">Square</span>
+                            </label>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -8133,7 +8215,9 @@ function plotBarographRC(graphId, recenter, lineColor='lime', graphLabel='Rework
          console.log("Chartless Map, on the doAfter method.");
 
          // let center = ChartlessMap.posToCanvas(this._centerLat, this._centerLng, this._projection, this._centerLat, this._centerLng, this._chartWidth, this._width, this._height);
-         let center = elmt.posToCanvas(elmt._centerLat, elmt._centerLng);
+         let centerLat = (elmt.north - elmt.south) / 2 + elmt.south;
+         let centerLng = (elmt.east - elmt.west) / 2 + elmt.west;
+         let center = elmt.posToCanvas(centerLat, centerLng);
          // Plot center
          context.save();
 
@@ -8157,6 +8241,7 @@ function plotBarographRC(graphId, recenter, lineColor='lime', graphLabel='Rework
 
          context.restore();
      });
+     chartLessMap.repaint();
  }
 
  const trackData = 'trackData.json';
