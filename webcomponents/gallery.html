@@ -982,6 +982,13 @@
             let wcComp = document.getElementById(wcId);
             let currentPos = wcComp.getUserPosition(); // SF: {latitude: 37.7489, longitude: -122.507});
             if (currentPos !== undefined && currentPos !== null && Object.keys(currentPos).length !== 0) {
+                if (pos.lat === currentPos.latitude && pos.lng === currentPos.longitude) {
+                    console.log("Already at the position...");
+                    alert("Already at the position...");
+                    return;
+                } else {
+                    console.log(`Flying from ${currentPos.latitude},${currentPos.longitude} to ${pos.lat},${pos.lng}...`);
+                }
                 // Calculate GC from currentPos to pos
                 let gc = wcComp.computeGreatCircle({lat: currentPos.latitude, lng: currentPos.longitude}, pos, 50); // 50 steps
                 // GC is an array of points
@@ -990,9 +997,13 @@
                     window.setTimeout(() => {
                         moveToGCElement(wcComp, gc, 0, label);
                     }, 50);
+                } else {
+                    console.log("GC computation failed, no animation...");
+                    alert("GC computation failed, no animation...");
                 }
             } else {
                 console.log("No current position yet...");
+                alert("No current position yet...");
             }
         }
 
