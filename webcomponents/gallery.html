@@ -981,7 +981,7 @@
         function flyTo(wcId, pos, label) {
             let wcComp = document.getElementById(wcId);
             let currentPos = wcComp.getUserPosition(); // SF: {latitude: 37.7489, longitude: -122.507});
-            if (currentPos !== undefined && currentPos !== null) {
+            if (currentPos !== undefined && currentPos !== null && Object.keys(currentPos).length !== 0) {
                 // Calculate GC from currentPos to pos
                 let gc = wcComp.computeGreatCircle({lat: currentPos.latitude, lng: currentPos.longitude}, pos, 50); // 50 steps
                 // GC is an array of points
@@ -992,7 +992,7 @@
                     }, 50);
                 }
             } else {
-                console.log("No current position yet...")
+                console.log("No current position yet...");
             }
         }
 
