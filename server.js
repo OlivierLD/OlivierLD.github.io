@@ -148,31 +148,31 @@ let handler = (req, res) => {
 							console.log("Read resource content:\n---------------\n" + data + "\n--------------");
 						}
 						let contentType = "text/plain"; // Default
-						if (resource.endsWith(".css") || resource.endsWith(".css.map")) {
+						if (resource.toLowerCase().endsWith(".css") || resource.toLowerCase().endsWith(".css.map")) {
 							contentType = "text/css";
-						} else if (resource.endsWith(".html")) {
+						} else if (resource.toLowerCase().endsWith(".html")) {
 							contentType = "text/html";
-						} else if (resource.endsWith(".xml")) {
+						} else if (resource.toLowerCase().endsWith(".xml")) {
 							contentType = "text/xml";
-						} else if (resource.endsWith(".js") || resource.endsWith(".js.map") || resource.endsWith(".map")) {
+						} else if (resource.toLowerCase().endsWith(".js") || resource.toLowerCase().endsWith(".js.map") || resource.toLowerCase().endsWith(".map")) {
 							contentType = "text/javascript";
-						} else if (resource.endsWith(".jpg") || resource.endsWith(".JPG")) {
+						} else if (resource.toLowerCase().endsWith(".jpg")) {
 							contentType = "image/jpg";
-						} else if (resource.endsWith(".jpeg")) {
+						} else if (resource.toLowerCase().endsWith(".jpeg")) {
 							contentType = "image/jpeg";
-						} else if (resource.endsWith(".gif")) {
+						} else if (resource.toLowerCase().endsWith(".gif")) {
 							contentType = "image/gif";
-						} else if (resource.endsWith(".png")) {
+						} else if (resource.toLowerCase().endsWith(".png")) {
 							contentType = "image/png";
-						} else if (resource.endsWith(".ico")) {
+						} else if (resource.toLowerCase().endsWith(".ico")) {
 							contentType = "image/x-icon";
-						} else if (resource.endsWith(".svg")) {
+						} else if (resource.toLowerCase().endsWith(".svg")) {
 							contentType = "image/svg+xml";
-						} else if (resource.endsWith(".woff")) {
+						} else if (resource.toLowerCase().endsWith(".woff")) {
 							contentType = "application/x-font-woff";
-						} else if (resource.endsWith(".ttf")) {
+						} else if (resource.toLowerCase().endsWith(".ttf")) {
 							contentType = "application/octet-stream";
-						} else if (resource.endsWith(".pdf")) {
+						} else if (resource.toLowerCase().endsWith(".pdf")) {
 							contentType = "application/pdf";
 						} else {
 							console.log("+-------------------------------------------")
@@ -183,14 +183,14 @@ let handler = (req, res) => {
 
 						res.writeHead(200, {'Content-Type': contentType});
 						//  console.log('Data is ' + typeof(data));
-						if (resource.endsWith(".jpg") ||
-								resource.endsWith(".jpeg") ||
-								resource.endsWith(".gif") ||
-								resource.endsWith(".ico") ||
-								resource.endsWith(".svg") ||
-								resource.endsWith(".woff") ||
-								resource.endsWith(".ttf") ||
-								resource.endsWith(".png")) {
+						if (resource.toLowerCase().endsWith(".jpg") ||
+							resource.toLowerCase().endsWith(".jpeg") ||
+							resource.toLowerCase().endsWith(".gif") ||
+							resource.toLowerCase().endsWith(".ico") ||
+							resource.toLowerCase().endsWith(".svg") ||
+							resource.toLowerCase().endsWith(".woff") ||
+							resource.toLowerCase().endsWith(".ttf") ||
+							resource.toLowerCase().endsWith(".png")) {
 							//  res.writeHead(200, {'Content-Type': 'image/gif' });
 							res.end(data, 'binary');
 						} else {
