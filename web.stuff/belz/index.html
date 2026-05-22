@@ -12,7 +12,11 @@
 	<link rel="stylesheet" href="../../css/stylesheet.css">
 	<script type="module" src="../../webcomponents/widgets/slideshow/SlideShow.js"></script>
 	<style type="text/css">
-		body {
+		:root {
+			--slider-scale: 0.5;
+		}
+
+        body {
 			background: black;
 			color: cyan;
             font-weight: normal;
@@ -144,9 +148,92 @@
         .sf-style {
             text-shadow: 2px 2px 4px black, 0 0 25px white, 0 0 10px orange;
         }
+
+		/* Switch sliders */
+		.switch {
+			position: relative;
+			display: inline-block;
+			width: calc(var(--slider-scale) * 60px);
+			height: calc(var(--slider-scale) * 34px);
+		}
+
+		.switch input {
+			opacity: 0;
+			width: 0;
+			height: 0;
+		}
+
+		.slider {
+			position: absolute;
+			cursor: pointer;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background-color: #ccc;
+			-webkit-transition: .4s;
+			transition: .4s;
+		}
+
+		.slider:before {
+			position: absolute;
+			content: "";
+			height: calc(var(--slider-scale) * 26px);
+			width: calc(var(--slider-scale) * 26px);
+			left: calc(var(--slider-scale) * 4px);
+			bottom: calc(var(--slider-scale) * 4px);
+			background-color: white;
+			-webkit-transition: .4s;
+			transition: .4s;
+		}
+
+		input:checked + .slider {
+			background-color: #2196f3;
+		}
+
+		input:focus + .slider {
+			box-shadow: 0 0 1px #2196f3;
+		}
+
+		input:checked + .slider:before {
+			-webkit-transform: translateX(calc(var(--slider-scale) * 26px));
+			-ms-transform: translateX(calc(var(--slider-scale) * 26px));
+			transform: translateX(calc(var(--slider-scale) * 26px));
+		}
+
+		/* Rounded sliders */
+		.slider.round {
+			border-radius: calc(var(--slider-scale) * 34px);
+		}
+
+		.slider.round:before {
+			border-radius: 50%;
+		}
+
+		/* Switch grid */
+		.switch-container {
+			display: grid;
+			grid-template-columns: calc(var(--slider-scale) * 80px) 200px;
+			width: 500px;
+		}
+		.switch-element {
+			font-weight: normal;
+			place-self: flex-start;
+		}
 	</style>
 
     <script type="text/javascript">
+
+    let interval = undefined;
+
+    function setAuto(id, cb) {
+        if (cb.checked) {
+            interval = setInterval(() => { document.getElementById(id)._forward(); }, 5000);
+        } else {
+            clearInterval(interval);
+        }
+    }
+
 
     let onSlideShowClick = (src) => {
         console.log(">> Client side!! Slide " + src + " was clicked.");
@@ -727,15 +814,53 @@
 
     </div>
 
-    <div id="2026" style="display: block; margin: 15px; height: 650px; overflow-y: scroll;">
+    <div id="2026" style="display: block; margin: 15px; height: 700px; overflow-y: scroll;">
         <ul>
             <li><a class="list-link" href="#jan-2026">Goretti !</a></li>
+            <li><a class="list-link" href="#mai-2026">La fresque</a></li>
         </ul>
 
         <h2><a name="jan-2026">8 janvier 2026</a></h2>
         <div>
             Temp&ecirc;te Goretti, &ccedil;a souffle !<br/>
             <img src="./images/goretti.2026.png" title="Goretti !" style="width: 800px; margin: 10px;"></img>
+        </div>
+
+        <h2><a name="mai-2026">fin mai 2026</a></h2>
+        <div>
+            Arthur fait une fresque sur le mur ouest<br/>
+            <img src="./images/fresque/fresque.01.jpeg" title="Le mur, avant nettoyage" style="width: 800px; margin: 10px;"></img>
+            <br/>Le mur, avant nettoyage...<br/>
+            <hr/>
+            Le mur est nettoy&eacute;, et Arthur commence &agrave; peindre...<br/>
+            <div class="switch-container" style="margin-left: 30px;" title="Flip the slides automatically.&#13;The slider is much nicer than&#13;a check box, right ? 😎">
+                <label class="switch switch-element">
+			    <input id="cloud-slider" type="checkbox" onchange="setAuto('slide-show-fresque', this);">
+                <span class="slider round"></span>
+                </label>
+                <span class="switch-element">Slides auto-scroll</span>
+            </div>
+
+            <slide-show id="slide-show-fresque"
+                        width="800"
+                        height="600"
+                        slideclick="onSlideShowClick">
+                <slide-show-image src="./images/fresque/01.jpeg" title="1" desc="Cliquer pour agrandir l'image"></slide-show-image>
+                <slide-show-image src="./images/fresque/02.jpeg" title="2" desc="Cliquer pour agrandir l'image"></slide-show-image>
+                <slide-show-image src="./images/fresque/03.jpeg" title="3" desc="Cliquer pour agrandir l'image"></slide-show-image>
+                <slide-show-image src="./images/fresque/04.jpeg" title="4" desc="Cliquer pour agrandir l'image"></slide-show-image>
+                <slide-show-image src="./images/fresque/05.jpeg" title="5" desc="Cliquer pour agrandir l'image"></slide-show-image>
+                <slide-show-image src="./images/fresque/06.jpeg" title="6" desc="Cliquer pour agrandir l'image"></slide-show-image>
+                <slide-show-image src="./images/fresque/07.jpeg" title="7" desc="Cliquer pour agrandir l'image"></slide-show-image>
+                <slide-show-image src="./images/fresque/08.jpeg" title="8" desc="Cliquer pour agrandir l'image"></slide-show-image>
+                <slide-show-image src="./images/fresque/09.jpeg" title="9" desc="Cliquer pour agrandir l'image"></slide-show-image>
+                <slide-show-image src="./images/fresque/10.jpeg" title="10" desc="Cliquer pour agrandir l'image"></slide-show-image>
+                <slide-show-image src="./images/fresque/11.jpeg" title="11" desc="Cliquer pour agrandir l'image"></slide-show-image>
+                <slide-show-image src="./images/fresque/12.jpeg" title="Fini !" desc="Cliquer pour agrandir l'image"></slide-show-image>
+                <slide-show-image src="./images/fresque/13.jpeg" title="Yeah !" desc="Cliquer pour agrandir l'image"></slide-show-image>
+            </slide-show>
+            <br/>
+            Cliquez sur les images pour les agrandir...
         </div>
 
     </div>
@@ -782,6 +907,7 @@
 
         document.getElementById("slide-show-ria").slideclick = onSlideShowClick;
         document.getElementById("slide-show-yellow").slideclick = onSlideShowClick;
+        document.getElementById("slide-show-fresque").slideclick = onSlideShowClick;
 
         let mbAttr = 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community';
         let mbUrl = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
