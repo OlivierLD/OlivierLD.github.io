@@ -455,7 +455,6 @@ class SlideShow extends HTMLElement {
 									console.log("this._onclick:" + this._onclick);
 								}
 							});
-
 							let textDiv = document.createElement('div');
 							textDiv.setAttribute('class', 'text');
 							textDiv.innerText = title;
@@ -493,6 +492,7 @@ class SlideShow extends HTMLElement {
 
 				this.slideIndex = 1;
 				this.showSlides(this.slideIndex); // First display, use the first slide.
+
 			}
 		}
 	}
