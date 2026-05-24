@@ -220,6 +220,19 @@
 			font-weight: normal;
 			place-self: flex-start;
 		}
+
+        .tab-div {
+            display: block;
+            margin: 15px;
+            height: 700px;
+            overflow-y: scroll;
+        }
+
+        @media only screen and (max-width: 600px) {
+            .tab-div {
+                height: 1000px;
+            }
+        }
 	</style>
 
     <script type="text/javascript">
@@ -377,7 +390,7 @@
         <span style="font-style: italic;">And more to come</span>
     </div>
 
-    <div id="2022" style="display: none; margin: 15px; height: 650px; overflow-y: scroll;">
+    <div id="2022"  class="tab-div">
         <h2><a name="signature">Jul 11, 2022</a></h2>
         <div>
             We signed !
@@ -441,7 +454,7 @@
         </div>
     </div>
 
-    <div id="2023" style="display: none; margin: 15px; height: 650px; overflow-y: scroll;">
+    <div id="2023"  class="tab-div">
 
         <ul>
             <li><a class="list-link" href="#new-planters">Nouveau bacs &agrave; plantes</a></li>
@@ -601,7 +614,7 @@
 
     </div>
 
-    <div id="2024" style="display: none; margin: 15px; height: 100vh; overflow-y: scroll;">
+    <div id="2024"  class="tab-div">
 
         <ul>
             <li><a class="list-link" href="#rainy-ria">Du vent dans la ria !</a></li>
@@ -683,7 +696,7 @@
 
     </div>
 
-    <div id="2025" style="display: none; margin: 15px; height: 650px; overflow-y: scroll;">
+    <div id="2025"  class="tab-div">
         <ul>
             <li><a class="list-link" href="#feb-mar">Tout jaune !</a></li>
             <li><a class="list-link" href="#sailing-03">Deux jours &agrave; Houat</a></li>
@@ -814,7 +827,7 @@
 
     </div>
 
-    <div id="2026" style="display: block; margin: 15px; height: 700px; overflow-y: scroll;">
+    <div id="2026" class="tab-div">
         <ul>
             <li><a class="list-link" href="#jan-2026">Goretti !</a></li>
             <li><a class="list-link" href="#mai-2026">La fresque</a></li>
@@ -857,7 +870,7 @@
                 <slide-show-image src="./images/fresque/10.jpeg" title="10" desc="Cliquer pour agrandir l'image"></slide-show-image>
                 <slide-show-image src="./images/fresque/11.jpeg" title="11" desc="Cliquer pour agrandir l'image"></slide-show-image>
                 <slide-show-image src="./images/fresque/12.jpeg" title="Fini !" desc="Cliquer pour agrandir l'image"></slide-show-image>
-                <slide-show-image src="./images/fresque/13.jpeg" title="Yeah ! Cherchez l'intru..." desc="Cliquer pour agrandir l'image"></slide-show-image>
+                <slide-show-image src="./images/fresque/13.jpeg" title="Yeah ! Cherchez l'intrus..." desc="Cliquer pour agrandir l'image"></slide-show-image>
             </slide-show>
             <br/>
             Cliquez sur les images pour les agrandir...
