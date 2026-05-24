@@ -108,6 +108,11 @@ class SlideShow extends HTMLElement {
 				'   transition: 0.6s ease;' +
 				'   border-radius: 24px;' +
 				'}' +
+				'@media only screen and (max-width: 600px) {' +
+				'	.prev, .next {' +
+				'		font-size: 40px;' +
+				'	}' +
+				'}' +
 				'\n' +
 				'/* Position the "next button" to the right */' +
 				'.next {' +
