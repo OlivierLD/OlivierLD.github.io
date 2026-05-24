@@ -1230,7 +1230,7 @@
 
             function startTouch(e) {
                 console.log("Touch start");
-                alert("Yes!!");
+                // alert("Yes!!");
                 initialX = e.touches[0].clientX;
                 initialY = e.touches[0].clientY;
             };
@@ -1249,6 +1249,10 @@
 
                 var diffX = initialX - currentX;
                 var diffY = initialY - currentY;
+
+                console.log("Touch Move: diffX=" + diffX + ", diffY=" + diffY);
+                // alert("Yes!!");
+                alert(`TouchMove: diffX=${diffX}, diffY=${diffY}`);
 
                 if (Math.abs(diffX) > Math.abs(diffY)) {
                     // sliding horizontally
