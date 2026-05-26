@@ -21,9 +21,16 @@
 			color: cyan;
             font-weight: normal;
 		}
+        a.anchor {
+            display: block;
+            position: relative;
+            top: -250px;
+            visibility: hidden;
+        }
         a:link {
             color: cyan;
         }
+
         .list-link {
             color: white;
             font-size: 20px;
@@ -224,7 +231,7 @@
         .tab-div {
             display: none;
             margin: 15px;
-            height: 1450px;
+            height: 760px;
             overflow-y: scroll;
         }
 
@@ -246,7 +253,6 @@
             clearInterval(interval);
         }
     }
-
 
     let onSlideShowClick = (src) => {
         console.log(">> Client side!! Slide " + src + " was clicked.");
@@ -300,7 +306,7 @@
     </div>
 
     <div id="kayak" style="display: none;">
-        <h2><a name="kayak">Kayaking in the Ria</a></h2>
+        <h2><a name="kayak" class="anchor"></a>Kayaking in the Ria</h2>
         <ul>
             <li>
                 <a class="list-link tooltip" href="https://www.google.com/maps/d/edit?mid=1HGimwWDpelTGRKgWL7jj9R2uva0uX1Q&usp=sharing" target="_blank">Aug 4, 2022 (Corine)
@@ -833,13 +839,13 @@
             <li><a class="list-link" href="#mai-2026">La fresque</a></li>
         </ul>
 
-        <h2><a name="jan-2026">8 janvier 2026</a></h2>
+        <h2><a name="jan-2026" class="anchor">8 janvier 2026</a></h2>
         <div>
             Temp&ecirc;te Goretti, &ccedil;a souffle !<br/>
             <img src="./images/goretti.2026.png" title="Goretti !" style="width: 800px; margin: 10px;"></img>
         </div>
 
-        <h2><a name="mai-2026">fin mai 2026</a></h2>
+        <h2><a name="mai-2026" class="anchor"></a>fin mai 2026</h2>
         <div>
             Arthur fait une fresque sur le mur ouest<br/>
             <img src="./images/fresque/fresque.01.jpeg" title="Le mur, avant nettoyage" style="width: 800px; margin: 10px;"></img>
