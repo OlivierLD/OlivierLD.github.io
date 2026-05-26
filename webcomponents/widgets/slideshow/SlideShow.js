@@ -108,9 +108,11 @@ class SlideShow extends HTMLElement {
 				'   transition: 0.6s ease;' +
 				'   border-radius: 24px;' +
 				'}' +
-				'@media only screen and (max-width: 600px) {' +
+				'\n' +
+				'@media screen and (width: 600px) {' +
 				'	.prev, .next {' +
 				'		font-size: 40px;' +
+				'       color: orange;' +
 				'	}' +
 				'}' +
 				'\n' +
@@ -217,7 +219,73 @@ class SlideShow extends HTMLElement {
 			console.log("Default onclick: nothing");
 		};
 
-	}
+		// Swipe, for draggable devices.
+		// For the swipe.
+		// Stolen from https://www.kirupa.com/html5/detecting_touch_swipe_gestures.htm
+		// console.log("Setting up swipe management for the fresque slideshow");
+		// For touch devices only...
+		this.addEventListener("touchstart", startTouch, false);
+		this.addEventListener("touchmove", moveTouch, false);
+
+		// Swipe Up / Down / Left / Right
+		var initialX = null;
+		var initialY = null;
+
+		function startTouch(e) {
+			console.log("Touch start");
+			// alert("Yes!!");
+			initialX = e.touches[0].clientX;
+			initialY = e.touches[0].clientY;
+		};
+
+		function moveTouch(e) {
+			if (initialX === null) {
+				return;
+			}
+
+			if (initialY === null) {
+				return;
+			}
+
+			var currentX = e.touches[0].clientX;
+			var currentY = e.touches[0].clientY;
+
+			var diffX = initialX - currentX;
+			var diffY = initialY - currentY;
+
+			// console.log("Touch Move: diffX=" + diffX + ", diffY=" + diffY);
+			// alert(`TouchMove: diffX=${diffX}, diffY=${diffY}`);
+
+			if (Math.abs(diffX) > Math.abs(diffY)) {
+				// sliding horizontally
+				if (diffX > 0) {
+					// swiped left
+					console.log("Swiped left");
+					this._forward();
+				} else {
+					// swiped right
+					console.log("Swiped right");
+					this._backward();
+				}
+			} else {
+				// sliding vertically
+				if (diffY > 0) {
+					// swiped up
+					console.log("Swiped up. Does nothing for now...");
+				} else {
+					// swiped down
+					console.log("Swiped down. Does nothing for now...");
+				}
+			}
+
+			initialX = null;
+			initialY = null;
+
+			e.preventDefault();
+		};
+		// End of Swipe management
+
+	} // End constructor
 
 	// Called whenever the custom element (Web Comp.) is inserted into the DOM.
 	connectedCallback() {
