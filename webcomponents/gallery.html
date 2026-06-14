@@ -1461,7 +1461,11 @@
             // May nit match the ecliptic data...
             document.getElementById(id).wanderingBodies = cb.checked;
             if (cb.checked === true) {
-                alert("Warning: The wandering bodies data are hard-coded, here.<br/>It may not match the other data. (like the LHA Aries if you modify it...)", "Wandering bodies warning");
+                alert("<b>Warning:</b><br/>" +
+                      "The wandering bodies data are hard-coded, here.<br/>" +
+                      "It may not match the other data. (like the LHA Aries if you modify it...).<br/>" +
+                      "See <a href='https://olivierld.github.io/web.stuff/astro/index_04.html' target='_blank'>here</a> for a more complete example.)",
+                      "Wandering bodies warning");
                 document.getElementById(id).wanderingBodiesData = [
                 {   "name": "sun",
                     "decl": -20.04044686148565,
