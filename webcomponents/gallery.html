@@ -1736,6 +1736,22 @@
             }
         }
 
+        let getQueryParameterByName = (name, url) => {
+            if (!url) {
+                url = window.location.href;
+            }
+            name = name.replace(/[\[\]]/g, "\\$&");
+            let regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) {
+                return null;
+            }
+            if (!results[2]) {
+                return '';
+            }
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        };
+
     </script>
 </head>
 <body>
@@ -8612,6 +8628,21 @@ function plotBarographRC(graphId, recenter, lineColor='lime', graphLabel='Rework
             return DAYS[i];
         });
         document.getElementById('chartless-map-01').setMouseMoveFeedback(chartMouseMoveFeedback);
+
+        // Use expand like http://.../gallery.html?expand=sky-map
+        let expand = getQueryParameterByName('expand');
+        if (expand) {
+            showHide(expand);
+            // Scroll to the element, if needed...
+            const element = document.getElementById(expand);
+            element.scrollIntoView();
+            // showHideSiblingWidget
+            let siblingWidget = element.querySelectorAll("tr")[1];
+            if (siblingWidget) {
+                siblingWidget.style.display = "block";
+            }
+        }
+
     }
 </script>
 
