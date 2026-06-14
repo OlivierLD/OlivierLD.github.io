@@ -1492,6 +1492,17 @@
             document.getElementById(id).repaint();
         }
 
+        function setEquatorGridCS(id, cb) {
+            document.getElementById(id).equGrid = cb.checked;
+            document.getElementById(id).repaint();
+        }
+
+        function setAzimutalGridCS(id, cb) {
+            document.getElementById(id).azimutalGrid = cb.checked;
+            document.getElementById(id).repaint();
+        }
+
+
         function setBoatShape(id, list) {
             document.getElementById(id).boatShape = list.value;
             document.getElementById(id).repaint();
@@ -4418,6 +4429,10 @@ map.addEventListener('mousemove', evt => {
                     <span><input type="checkbox" onchange="setWanderingBodiesCS('celestial-sphere-01', this);">Wandering bodies.</span>
                     <span><input type="checkbox" onchange="setUseBoatHeadingCS('celestial-sphere-01', this); _showHide('boat-shapes-1', this);">Show Boat Heading.</span>
                     <span><input type="checkbox" onchange="setCelestialEquatorCS('celestial-sphere-01', this);">With Celestial Equator.</span>
+
+                    <span><input type="checkbox" onchange="setAzimutalGridCS('celestial-sphere-01', this);" checked>With Azimutal Grid.</span>
+                    <span><input type="checkbox" onchange="setEquatorGridCS('celestial-sphere-01', this);">With Equatorial Grid.</span>
+
                     <!--span>
                         <select onchange="setBoatShape('celestial-sphere-01', this);" style="padding: 5px; border-radius: 5px;">
                             <option value="MONO" selected>Monohull</option>
@@ -4456,6 +4471,9 @@ map.addEventListener('mousemove', evt => {
                     <span><input type="checkbox" onchange="setWanderingBodiesCS('celestial-sphere-02', this);">Wandering bodies.</span>
                     <span><input type="checkbox" onchange="setUseBoatHeadingCS('celestial-sphere-02', this); _showHide('boat-shapes-2', this);">Show Boat Heading.</span>
                     <span><input type="checkbox" onchange="setCelestialEquatorCS('celestial-sphere-02', this);">With Celestial Equator.</span>
+
+                    <span><input type="checkbox" onchange="setAzimutalGridCS('celestial-sphere-02', this);" checked>With Azimutal Grid.</span>
+                    <span><input type="checkbox" onchange="setEquatorGridCS('celestial-sphere-02', this);">With Equatorial Grid.</span>
                     <!--span>
                         <select onchange="setBoatShape('celestial-sphere-01', this);" style="padding: 5px; border-radius: 5px;">
                             <option value="MONO" selected>Monohull</option>
