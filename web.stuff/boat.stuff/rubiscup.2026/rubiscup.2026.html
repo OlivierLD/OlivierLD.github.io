@@ -8,7 +8,7 @@
  +-->
 <head>
 
-  <title>Leaflet Analysis</title>
+  <title>Rubi's Cup 2026</title>
 
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -413,8 +413,8 @@ compass-rose .day {
 <div id="page-header">
     <div style="display: grid; grid-template-columns: auto auto auto;">
         <div>
-            <h1 style="padding-left: 10px;">Etel - St Phil - Replay Logged Data</h1>
-            On board Eh'Tak, Shipman 28. May 23, 2026.
+            <h1 style="padding-left: 10px;">Rubi's Cup 2026 - Replay Logged Data</h1>
+            On board Eh'Tak, Shipman 28. June 26 to 28, 2026.
         </div>
         <div style="text-align: right; padding-right: 20px;">
             <img src="../dives/drowning.gif"
@@ -530,19 +530,20 @@ compass-rose .day {
           </div>
       </div>
 
-      <!--div>
+      <div>
         <span style="margin-left: 10px;">Fly to:</span>
         <ul>
             <li><a class="list-link" href="#" onclick="flyToZoom(0);">Port-Tudy</a></li>
-            <li><a class="list-link" href="#" onclick="flyToZoom(1);">L'&icirc;le aux souris</a></li>
-            <li><a class="list-link" href="#" onclick="flyToZoom(2);">Port de G&acirc;vres</a></li>
+            <li><a class="list-link" href="#" onclick="flyToZoom(1);">Les Grands Sables</a></li>
+            <li><a class="list-link" href="#" onclick="flyToZoom(2);">Basse des Chats</a></li>
+            <li><a class="list-link" href="#" onclick="flyToZoom(3);">Pen Men</a></li>
         </ul>
-      </div-->
+      </div>
     </div>
 </div>
 
 <hr/>
-<!--span>Slide show - Images are clickable</span>
+<span>Slide show - Images are clickable</span>
 <div id="slide-show-container"
      class="body-pix">
     <slide-show id="slide-show-02"
@@ -550,18 +551,17 @@ compass-rose .day {
                 height="600"
                 slideclick="onSlideShowClick"
                 style="padding: 10px;">
-        <slide-show-image src="./images/gavres.01.jpeg" title="D&eacute;part de G&acirc;vres"></slide-show-image>
-        <slide-show-image src="./images/en.route.01.jpeg" title="En route"></slide-show-image>
-        <slide-show-image src="./images/en.route.02.jpeg" title="En route"></slide-show-image>
-        <slide-show-image src="./images/port.tudy.windy.jpeg" title="Jet&eacute;e nord de Port-Tudy"></slide-show-image>
-        <slide-show-image src="./images/locmaria.jpeg" title="Locmaria"></slide-show-image>
-        <slide-show-image src="./images/feu.de.la.croix.jpeg" title="Le feu de la Pointe de la Croix"></slide-show-image>
-        <slide-show-image src="./images/pointe.des.chats.jpeg" title="Le phare de la Pointe des Chats"></slide-show-image>
-        <slide-show-image src="./images/port-tudy.02.jpeg" title="Port-Tudy"></slide-show-image>
-        <slide-show-image src="./images/port-tudy.01.jpeg" title="Eh'Tak &agrave; Port-Tudy"></slide-show-image>
-        <slide-show-image src="./images/gavres.02.jpeg" title="Retour &agrave; G&acirc;vres"></slide-show-image>
+        <slide-show-image src="./images/breakfast.jpeg" title="Cockpit Brunch"></slide-show-image>
+        <slide-show-image src="./images/cockpit.01.jpeg" title="En route"></slide-show-image>
+        <slide-show-image src="./images/cockpit.02.jpeg" title="En route"></slide-show-image>
+        <slide-show-image src="./images/cockpit.03.jpeg" title="En route"></slide-show-image>
+        <slide-show-image src="./images/pen.duick.01.jpeg" title="Pen Duick, Basse des Chats"></slide-show-image>
+        <slide-show-image src="./images/pen.duick.02.jpeg" title="Pen Duick"></slide-show-image>
+        <slide-show-image src="./images/pen.duick.03.jpeg" title="Pen Duick"></slide-show-image>
+        <!--slide-show-image src="./images/pen.duick.04.jpeg" title="En route"></slide-show-image-->
+        <slide-show-image src="./images/seat.inside.jpeg" title="Cooking"></slide-show-image>
     </slide-show>
-</div-->
+</div>
 <hr/>
 
 <hr/>
@@ -628,19 +628,39 @@ compass-rose .day {
         return (getGCDistanceInDegrees(from, to) * 60);
     };
 
+    /*
     let map = L.map('mapid'); // .setView([currentLatitude, currentLongitude], 13);
 
     const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 		maxZoom: 19,
 		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 	}).addTo(map);
+    */
+    let map = L.map('mapid'); // .setView([currentLatitude, currentLongitude], 13);
+
+	let mbAttr = 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community';
+	let mbUrl = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
+
+    const tiles = L.tileLayer(mbUrl, {
+		maxZoom: 19,
+		attribution: mbAttr
+	}).addTo(map);
+
+    const tilesOSM = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		maxZoom: 19,
+		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        opacity: 0.5
+	}).addTo(map);
+
+
 
     let latlngs; // To be populated from JSON.
 
     const ZOOM_POSITIONS = [
         new L.LatLng(47.64386764, -3.44712982474), // Port-Tudy
-        new L.LatLng(47.70252172, -3.3581809011), // Ile aux souris
-        new L.LatLng(47.7005875080, -3.35065864163) // Gavres
+        new L.LatLng(47.63941392445314, -3.4239888796582822), // Les Grands Sables
+        new L.LatLng(47.61620525097698, -3.3688382460968573), // Basse des Chats
+        new L.LatLng(47.65144735167789, -3.5132844583131373) // Pen Men
     ];
 
     function flyToZoom(idx) {
@@ -649,8 +669,46 @@ compass-rose .day {
         map.flyTo(ZOOM_POSITIONS[idx]);
     }
 
+    const SLIDE_SHOW =
+    `<div style="background: silver;"><slide-show id="slide-show-02"
+					width="300"
+					height="210"
+                    slideclick="onSlideShowClick">
+		<slide-show-image src="./images/pen.duick.01.jpeg" title="Pen Duick"></slide-show-image>
+		<slide-show-image src="./images/pen.duick.02.jpeg" title="Pen Duick"></slide-show-image>
+		<slide-show-image src="./images/pen.duick.03.jpeg" title="Pen Duick"></slide-show-image>
+		<slide-show-image src="./images/pen.duick.04.jpeg" title="Pen Duick"></slide-show-image>
+	</slide-show></div>`;
+
     // Used as an example, See "// markers" below. Used to hold pictures.
-    const ALL_MARKERS = [[], [], []];
+    const ALL_MARKERS = [
+    [ { // One
+        "latitude": 47.64386764,
+        "longitude": -3.44712982474,
+        "name": "Brunch in Port-Tudy",
+        "content": "Brunch  (click to enlarge)\n<br/>\n<a href=\"./images/breakfast.jpeg\" target=\"_blank\"><img src=\"./images/breakfast.jpeg\" width=\"256\" height=\"auto\" alt=\"Click to enlarge\"/></a>"
+    }, {
+        "latitude": 47.61620525097698,
+        "longitude": -3.3688382460968573,
+        "name": "Basse des Chats",
+        "content": "<div style='width: 300px; height: 240px;'>" + "&Agrave; la basse des Chats (click to enlarge)\n<br/>\n" + SLIDE_SHOW + "</div>"
+    }, {
+        "latitude": 47.64211627559212,
+        "longitude": -3.4064483642578125,
+        "name": "C'est parti !",
+        "content": "D&eacute;part de la plage des Grands Sables... (click to enlarge)\n<br/>\n<a href=\"./images/cockpit.01.jpeg\" target=\"_blank\"><img src=\"./images/cockpit.01.jpeg\" width=\"256\" height=\"auto\" alt=\"Click to enlarge\"/></a>"
+    }, {
+        "latitude": 47.63679571529933,
+        "longitude": -3.392715454101563,
+        "name": "En route",
+        "content": "En route vers la Basse des Chats... (click to enlarge)\n<br/>\n<a href=\"./images/cockpit.02.jpeg\" target=\"_blank\"><img src=\"./images/cockpit.02.jpeg\" width=\"256\" height=\"auto\" alt=\"Click to enlarge\"/></a>"
+    }, {
+        "latitude": 47.609258944820546,
+        "longitude": -3.3872222900390625,
+        "name": "R&eacute;glage",
+        "content": "R&eacute;glage... (click to enlarge)\n<br/>\n<a href=\"./images/cockpit.03.jpeg\" target=\"_blank\"><img src=\"./images/cockpit.03.jpeg\" width=\"256\" height=\"auto\" alt=\"Click to enlarge\"/></a>"
+    } ],
+    [], []];
 
 
     // TODO Choose the track
