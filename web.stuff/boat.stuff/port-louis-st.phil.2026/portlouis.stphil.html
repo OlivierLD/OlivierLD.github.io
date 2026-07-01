@@ -17,6 +17,8 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 
+  <link rel="stylesheet" href="../../../webcomponents/css/web-components.css" />
+
   <script type="module" src="../../../webcomponents/widgets/slideshow/SlideShow.js"></script>
 
   <style type="text/css">
@@ -352,6 +354,7 @@ compass-rose .day {
   <script type="module" src="../../../webcomponents/widgets/analogdisplay/AnalogDisplay.js"></script>
   <script type="module" src="../../../webcomponents/widgets/compass/CompassRose.js"></script>
   <script type="module" src="../../../webcomponents/widgets/direction/DirectionDisplay.js"></script>
+  <script type="module" src="../../../webcomponents/widgets/jumbo/JumboDisplay.js"></script>
 
 </head>
 <body>
@@ -495,6 +498,15 @@ compass-rose .day {
                                             label="SOG"
                                             width="300"
                                             height="300"></analog-display>
+                            <br/>
+                            <!-- A Jumbo -->
+                            <jumbo-display id="jumbo-01"
+                                           title="Boat Speed"
+                                           class="jumbo-01 digital-font-orange one-decimal"
+                                           value="00.0"
+                                           label="SOG"
+                                           width="180"
+                                           height="80"></jumbo-display>
                         </td>
                         <td valign="top">
                             <direction-display class="directiondisplay-01"
@@ -855,6 +867,8 @@ compass-rose .day {
                 }
                 if (pos.cog && pos.cog != -1) {
                     document.getElementById('sog-01').value = pos.sog;
+                    document.getElementById('jumbo-01').value = pos.sog;
+
                     document.getElementById('cog-01').value = pos.cog;
                     document.getElementById('cog-02').value = pos.cog;
                 }
@@ -996,6 +1010,7 @@ compass-rose .day {
     window.onload = () => {
       console.log("Page Loaded!");
       loadPathData();
+      document.getElementById('jumbo-01').repaint(); // To load the font...
     };
 
 </script>

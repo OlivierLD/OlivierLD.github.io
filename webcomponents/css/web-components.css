@@ -176,6 +176,10 @@ jumbo-display .digital-font-green {
 	--value-font: DigiFont;
 }
 
+.one-decimal {
+	--value-nb-decimal: 1;
+}
+
 .analogdisplay-day {
 	--bg-color: rgba(0, 0, 0, 0);
 	--digit-color: black;
