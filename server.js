@@ -154,6 +154,8 @@ let handler = (req, res) => {
 							contentType = "text/html";
 						} else if (resource.toLowerCase().endsWith(".xml")) {
 							contentType = "text/xml";
+						} else if (resource.toLowerCase().endsWith(".json")) {
+							contentType = "application/json";
 						} else if (resource.toLowerCase().endsWith(".js") || resource.toLowerCase().endsWith(".js.map") || resource.toLowerCase().endsWith(".map")) {
 							contentType = "text/javascript";
 						} else if (resource.toLowerCase().endsWith(".jpg")) {
