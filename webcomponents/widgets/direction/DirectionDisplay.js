@@ -670,7 +670,8 @@ class DirectionDisplay extends HTMLElement {
 				let transom_left = { x: centerX + (transom * Math.sin(Math.toRadians(dv - TRANSOM_ANGLE))),
 									 y: centerY - (transom * Math.cos(Math.toRadians(dv - TRANSOM_ANGLE))) };
 
-				context.moveTo(bow.x, bow.y);
+				context.lineTo(bow.x, bow.y); // Center to bow.
+				// context.moveTo(bow.x, bow.y);
 				context.quadraticCurveTo(beam_right.x,
 										 beam_right.y,
 										 transom_right.x,
