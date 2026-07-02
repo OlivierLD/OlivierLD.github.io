@@ -650,9 +650,10 @@ class DirectionDisplay extends HTMLElement {
 				const BEAM_ANGLE = 90;
 				const TRANSOM_ANGLE = 165;
 
-				let boatRadius = radius * BOAT_FACT;
-				let beam       = 80 * BOAT_FACT;  // 90 degrees
-				let transom    = radius * BOAT_FACT * 1.05; // length from center to transom, 165 degrees
+				const SCALE = 0.8;
+				let boatRadius = radius * BOAT_FACT * SCALE;
+				let beam       = radius * 0.70 * BOAT_FACT * SCALE;  // 90 degrees
+				let transom    = radius * BOAT_FACT * 1.05 * SCALE; // length from center to transom, 165 degrees
 
 				let bow = { x: centerX + (boatRadius * Math.sin(Math.toRadians(dv))),
 							y: centerY - (boatRadius * Math.cos(Math.toRadians(dv))) };
