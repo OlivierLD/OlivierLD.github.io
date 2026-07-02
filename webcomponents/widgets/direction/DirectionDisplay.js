@@ -625,31 +625,69 @@ class DirectionDisplay extends HTMLElement {
 		} else if (this.hand === 'boat') {
 			// console.log("Drawing boat needle...")
 			const BOAT_FACT = 0.8;
-			let boatPoints = [
-				{ x: 0, y: - radius * BOAT_FACT * 0.6 },               // Bow
-				{ x: radius * BOAT_FACT * 0.22, y: - radius * BOAT_FACT * 0.3 },   // Starboard, point one
-				{ x: radius * BOAT_FACT * 0.30, y: - radius * BOAT_FACT * 0.0 },   // Starboard, point two
-				{ x: radius * BOAT_FACT * 0.28, y: + radius * BOAT_FACT * 0.3 },   // Starboard, point three
-				{ x: radius * BOAT_FACT * 0.20, y: + radius * BOAT_FACT * 0.6 },   // Starboard, point four
-				{ x: BOAT_FACT * 0, y: + radius * BOAT_FACT * 0.6 },               // Mid-transom
-				{ x: - radius * BOAT_FACT * 0.20, y: + radius * BOAT_FACT * 0.6 }, // Port, point four
-				{ x: - radius * BOAT_FACT * 0.28, y: + radius * BOAT_FACT * 0.3 }, // Port, point three
-				{ x: - radius * BOAT_FACT * 0.30, y: - radius * BOAT_FACT * 0.0 }, // Port, point two
-				{ x: - radius * BOAT_FACT * 0.22, y: - radius * BOAT_FACT * 0.3 }, // Port, point one
-				{ x: BOAT_FACT * 0, y: - radius * BOAT_FACT * 0.6 }                // Bow
-			];
-			let radAngle = Math.toRadians(dv); // + (Math.PI / 2);
-			// Apply rotation to the points of the needle
-			boatPoints.forEach(pt => {
-				x = centerX + ((pt.x * Math.cos(radAngle)) - (pt.y * Math.sin(radAngle)));
-				y = centerY + ((pt.x * Math.sin(radAngle)) + (pt.y * Math.cos(radAngle)));
-				context.lineTo(x, y);
-			});
+			if (false) {
+				let boatPoints = [
+					{ x: 0, y: - radius * BOAT_FACT * 0.6 },               // Bow
+					{ x: radius * BOAT_FACT * 0.22, y: - radius * BOAT_FACT * 0.3 },   // Starboard, point one
+					{ x: radius * BOAT_FACT * 0.30, y: - radius * BOAT_FACT * 0.0 },   // Starboard, point two
+					{ x: radius * BOAT_FACT * 0.28, y: + radius * BOAT_FACT * 0.3 },   // Starboard, point three
+					{ x: radius * BOAT_FACT * 0.20, y: + radius * BOAT_FACT * 0.6 },   // Starboard, point four
+					{ x: BOAT_FACT * 0, y: + radius * BOAT_FACT * 0.6 },               // Mid-transom
+					{ x: - radius * BOAT_FACT * 0.20, y: + radius * BOAT_FACT * 0.6 }, // Port, point four
+					{ x: - radius * BOAT_FACT * 0.28, y: + radius * BOAT_FACT * 0.3 }, // Port, point three
+					{ x: - radius * BOAT_FACT * 0.30, y: - radius * BOAT_FACT * 0.0 }, // Port, point two
+					{ x: - radius * BOAT_FACT * 0.22, y: - radius * BOAT_FACT * 0.3 }, // Port, point one
+					{ x: BOAT_FACT * 0, y: - radius * BOAT_FACT * 0.6 }                // Bow
+				];
+				let radAngle = Math.toRadians(dv); // + (Math.PI / 2);
+				// Apply rotation to the points of the needle
+				boatPoints.forEach(pt => {
+					x = centerX + ((pt.x * Math.cos(radAngle)) - (pt.y * Math.sin(radAngle)));
+					y = centerY + ((pt.x * Math.sin(radAngle)) + (pt.y * Math.cos(radAngle)));
+					context.lineTo(x, y);
+				});
+			} else {
+				const BEAM_ANGLE = 90;
+				const TRANSOM_ANGLE = 165;
+
+				let boatRadius = radius * BOAT_FACT;
+				let beam       = 80 * BOAT_FACT;  // 90 degrees
+				let transom    = radius * BOAT_FACT * 1.05; // length from center to transom, 165 degrees
+
+				let bow = { x: centerX + (boatRadius * Math.sin(Math.toRadians(dv))),
+							y: centerY - (boatRadius * Math.cos(Math.toRadians(dv))) };
+
+				let beam_right = { x: centerX + (beam * Math.sin(Math.toRadians(dv + BEAM_ANGLE))),
+								   y: centerY - (beam * Math.cos(Math.toRadians(dv + BEAM_ANGLE))) };
+
+				let transom_right = { x: centerX + (transom * Math.sin(Math.toRadians(dv + TRANSOM_ANGLE))),
+									  y: centerY - (transom * Math.cos(Math.toRadians(dv + TRANSOM_ANGLE))) };
+
+				let beam_left = { x: centerX + (beam * Math.sin(Math.toRadians(dv - BEAM_ANGLE))),
+								  y: centerY - (beam * Math.cos(Math.toRadians(dv - BEAM_ANGLE))) };
+
+				let transom_left = { x: centerX + (transom * Math.sin(Math.toRadians(dv - TRANSOM_ANGLE))),
+									 y: centerY - (transom * Math.cos(Math.toRadians(dv - TRANSOM_ANGLE))) };
+
+				context.moveTo(bow.x, bow.y);
+				context.quadraticCurveTo(beam_right.x,
+										 beam_right.y,
+										 transom_right.x,
+										 transom_right.y);
+
+				context.moveTo(bow.x, bow.y);
+				context.quadraticCurveTo(beam_left.x, beam_left.y,
+									     transom_left.x, transom_left.y);
+
+				// Transom
+				context.moveTo(transom_left.x, transom_left.y);
+				context.lineTo(transom_right.x, transom_right.y);
+			}
 		} else if (this.hand === 'cata') {
 			// console.log("Drawing cata needle...")
 			const BOAT_FACT = 0.8;
 			let cataPoints = [
-				{ x: 0, y: - radius * BOAT_FACT * 0.142 }, // Arm, front, center 
+				{ x: 0, y: - radius * BOAT_FACT * 0.142 }, // Arm, front, center
 				/* STARBOARD HULL */
 				// Starboard
 				{ x: radius * BOAT_FACT * 0.142,  y: - radius * BOAT_FACT * 0.142 },  // Arm starboard, hull side
@@ -662,7 +700,7 @@ class DirectionDisplay extends HTMLElement {
 				{ x: radius * BOAT_FACT * 0.142,  y: radius * BOAT_FACT * 0.142 },    // Arm, back, starboard, hull side
 				{ x: radius * BOAT_FACT * 0,      y: radius * BOAT_FACT * 0.142 },    // Arm, back, starboard, center
 				// Port
-				{ x: radius * BOAT_FACT * 0,      y: radius * BOAT_FACT * 0.142 },       
+				{ x: radius * BOAT_FACT * 0,      y: radius * BOAT_FACT * 0.142 },
 				{ x: radius * BOAT_FACT * 0.142,  y: radius * BOAT_FACT * 0.142 },
 				{ x: radius * BOAT_FACT * 0.1714, y: radius * BOAT_FACT * 0.4286 },
 				{ x: radius * BOAT_FACT * 0.2571, y: radius * BOAT_FACT * 0.4286 },
@@ -683,7 +721,7 @@ class DirectionDisplay extends HTMLElement {
 				{ x: - radius * BOAT_FACT * 0.142,  y: radius * BOAT_FACT * 0.142 },    // Arm, back, starboard, hull side
 				{ x: - radius * BOAT_FACT * 0,      y: radius * BOAT_FACT * 0.142 },    // Arm, back, starboard, center
 				// Port
-				{ x: - radius * BOAT_FACT * 0,      y: radius * BOAT_FACT * 0.142 },       
+				{ x: - radius * BOAT_FACT * 0,      y: radius * BOAT_FACT * 0.142 },
 				{ x: - radius * BOAT_FACT * 0.142,  y: radius * BOAT_FACT * 0.142 },
 				{ x: - radius * BOAT_FACT * 0.1714, y: radius * BOAT_FACT * 0.4286 },
 				{ x: - radius * BOAT_FACT * 0.2571, y: radius * BOAT_FACT * 0.4286 },
@@ -723,17 +761,17 @@ class DirectionDisplay extends HTMLElement {
 				{ x: - radius * BOAT_FACT * 0.04286, y: radius * BOAT_FACT * 0.4286 },
 				{ x: - radius * BOAT_FACT * 0.08571, y: radius * BOAT_FACT * 0.1429},
 				{ x: - radius * BOAT_FACT * 0.2286,  y: radius * BOAT_FACT * 0.1429},
-				{ x: - radius * BOAT_FACT * 0.2429,  y: radius * BOAT_FACT * 0.3571 }, 
+				{ x: - radius * BOAT_FACT * 0.2429,  y: radius * BOAT_FACT * 0.3571 },
 				{ x: - radius * BOAT_FACT * 0.2714,  y: radius * BOAT_FACT * 0.3571 },
 				{ x: - radius * BOAT_FACT * 0.2857,  y: radius * BOAT_FACT * 0.2143 },
 				{ x: - radius * BOAT_FACT * 0.2857,  y: - radius * BOAT_FACT * 0.2143 },
-				{ x: - radius * BOAT_FACT * 0.2571,  y: - radius * BOAT_FACT * 0.3714 }, 
+				{ x: - radius * BOAT_FACT * 0.2571,  y: - radius * BOAT_FACT * 0.3714 },
 				{ x: - radius * BOAT_FACT * 0.2286,  y: - radius * BOAT_FACT * 0.1429},
 				{ x: - radius * BOAT_FACT * 0.08571, y: - radius * BOAT_FACT * 0.1429},
 				{ x: - radius * BOAT_FACT * 0.04286, y: - radius * BOAT_FACT * 0.4286 },
 
 				{ x: 0, y: - radius * BOAT_FACT * 0.5714}, // Bow, center hull
-			];			
+			];
 			let radAngle = Math.toRadians(dv); // + (Math.PI / 2);
 			// Apply rotation to the points of the needle
 			triPoints.forEach(pt => {
@@ -768,7 +806,7 @@ class DirectionDisplay extends HTMLElement {
 				{ x: - radius * BOAT_FACT * 0.04286, y: - radius * BOAT_FACT * 0.4286 },
 
 				{ x: 0, y: - radius * BOAT_FACT *  0.5714 }
-			];			
+			];
 			let radAngle = Math.toRadians(dv); // + (Math.PI / 2);
 			// Apply rotation to the points of the needle
 			planePoints.forEach(pt => {
@@ -791,7 +829,7 @@ class DirectionDisplay extends HTMLElement {
 				{ x: - radius * BOAT_FACT * 0.25, y: - radius * BOAT_FACT * 0.4 },
 
 				{ x: 0, y: - radius * BOAT_FACT *  0.7 }
-			];			
+			];
 			let radAngle = Math.toRadians(dv); // + (Math.PI / 2);
 			// Apply rotation to the points of the needle
 			arrowPoints.forEach(pt => {
@@ -799,7 +837,7 @@ class DirectionDisplay extends HTMLElement {
 				y = centerY + ((pt.x * Math.sin(radAngle)) + (pt.y * Math.cos(radAngle)));
 				context.lineTo(x, y);
 			});
-		} 
+		}
 		// Right
 		if (this.hand === 'regular' || this.hand === 'wind') {
 			x = centerX - ((radius * 0.05) * Math.cos(Math.toRadians(dv) + (2 * Math.PI / 2)));
