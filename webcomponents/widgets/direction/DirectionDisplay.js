@@ -647,13 +647,13 @@ class DirectionDisplay extends HTMLElement {
 					context.lineTo(x, y);
 				});
 			} else {
-				const BEAM_ANGLE = 90;
+				const BEAM_ANGLE    =  90;
 				const TRANSOM_ANGLE = 165;
 
 				const SCALE = 0.8;
 				let boatRadius = radius * BOAT_FACT * SCALE;
 				let beam       = radius * 0.70 * BOAT_FACT * SCALE;  // 90 degrees
-				let transom    = radius * BOAT_FACT * 1.05 * SCALE; // length from center to transom, 165 degrees
+				let transom    = radius * BOAT_FACT * 1.05 * SCALE;  // length from center to transom, 165 degrees
 
 				let bow = { x: centerX + (boatRadius * Math.sin(Math.toRadians(dv))),
 							y: centerY - (boatRadius * Math.cos(Math.toRadians(dv))) };
@@ -670,8 +670,8 @@ class DirectionDisplay extends HTMLElement {
 				let transom_left = { x: centerX + (transom * Math.sin(Math.toRadians(dv - TRANSOM_ANGLE))),
 									 y: centerY - (transom * Math.cos(Math.toRadians(dv - TRANSOM_ANGLE))) };
 
-				context.lineTo(bow.x, bow.y); // Center to bow.
-				// context.moveTo(bow.x, bow.y);
+				context.lineTo(bow.x, bow.y);    // Center to bow.
+				// context.moveTo(bow.x, bow.y); // Bow
 				context.quadraticCurveTo(beam_right.x,
 										 beam_right.y,
 										 transom_right.x,
@@ -877,7 +877,6 @@ class DirectionDisplay extends HTMLElement {
 		context.moveTo(xFrom, yFrom);
 		context.lineTo(xTo, yTo);
 	}
-
 }
 
 // Associate the tag and the class

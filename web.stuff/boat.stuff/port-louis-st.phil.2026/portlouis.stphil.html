@@ -355,6 +355,8 @@ compass-rose .day {
   <script type="module" src="../../../webcomponents/widgets/compass/CompassRose.js"></script>
   <script type="module" src="../../../webcomponents/widgets/direction/DirectionDisplay.js"></script>
   <script type="module" src="../../../webcomponents/widgets/jumbo/JumboDisplay.js"></script>
+  <script type="module" src="../../../webcomponents/widgets/compassglobe/CompassGlobe.js"></script>
+
 
 </head>
 <body>
@@ -485,7 +487,9 @@ compass-rose .day {
                 <table width="100%">
                     <tr>
                         <td valign="top">
+                            <!-- SOG -->
                             <analog-display class="analogdisplay-day"
+                                            style="display: none;"
                                             title="Speed Over Ground&#13;in knots"
                                             id="sog-01"
                                             min-value="0"
@@ -499,7 +503,7 @@ compass-rose .day {
                                             width="300"
                                             height="300"></analog-display>
                             <br/>
-                            <!-- A Jumbo -->
+                            <!-- A Jumbo. SOG -->
                             <jumbo-display id="jumbo-01"
                                            title="Boat Speed"
                                            class="jumbo-01 digital-font-orange one-decimal"
@@ -507,6 +511,16 @@ compass-rose .day {
                                            label="SOG"
                                            width="180"
                                            height="80"></jumbo-display>
+                            <!-- COG -->
+                            <compass-globe id="compass-globe-01"
+                                           class="globe-compass-02"
+                                           style="--bg-color: transparent;"
+                                           width="300"
+                                           height="300"
+                                           value="180"
+                                           label=""
+                                           title="COG"/>
+
                         </td>
                         <td valign="top">
                             <direction-display class="directiondisplay-01"
@@ -529,6 +543,7 @@ compass-rose .day {
                                 <input type="radio" name="needle-shape" value="plane" onchange="setNeedleShape('cog-02', this);">Plane
                                 <input type="radio" name="needle-shape" value="arrow" onchange="setNeedleShape('cog-02', this);" checked>Arrow
                             </div>
+                            <!-- COG -->
                             <compass-rose id="cog-01"
                                             class="day"
                                             title="Course Over Ground"
@@ -871,6 +886,9 @@ compass-rose .day {
 
                     document.getElementById('cog-01').value = pos.cog;
                     document.getElementById('cog-02').value = pos.cog;
+
+                    document.getElementById('compass-globe-01').value = parseInt(pos.cog);
+                    // document.getElementById('compass-globe-01').repaint();
                 }
 
                 document.getElementById('curr-pos').innerHTML = displayPos;

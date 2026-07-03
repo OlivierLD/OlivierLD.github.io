@@ -4,11 +4,11 @@
  * They have default values, respectively: 250, 100, 0, 'VAL'
  * Attributes are exposed and can be modified externally (from JavaScript)
  * In addition, there is a CSS colors management as well.
- * 
+ *
  * Colors: See https://htmlcolorcodes.com/color-names/
  */
 
-const compassGlobeVerbose = false;
+const compassGlobeVerbose = true;
 const COMPASS_GLOBE_TAG_NAME = 'compass-globe';
 
 const compassGlobeDefaultColorConfig = {
@@ -33,13 +33,13 @@ const compassGlobeDefaultColorConfig = {
 	valueColor: 'cyan'
 };
 
-const MAJOR_TICK_SIZE = 20;    
-const MINOR_TICK_SIZE = 10;    
+const MAJOR_TICK_SIZE = 20;
+const MINOR_TICK_SIZE = 10;
 const BASE_FONT_SIZE = 30;
-const CYLINDER_HALF_SIZE = 60; 
+const CYLINDER_HALF_SIZE = 60;
 
 function convertToHexColor(color) {
-    // create a temporary div. 
+    // create a temporary div.
 	let tempDiv = document.createElement('div');
     tempDiv.style.color = color;
 	document.body.appendChild(tempDiv); // Must be added for getComputedStyle to work...
@@ -50,8 +50,8 @@ function convertToHexColor(color) {
 
 /**
  * Enforce transparency
- * @param {*} color 
- * @param {*} transparency 
+ * @param {*} color
+ * @param {*} transparency
  * @returns the rgba with enforced transparency
  */
 function setTransparency(color, transparency) {
@@ -333,7 +333,7 @@ class CompassGlobeDisplay extends HTMLElement {
 		// 1 - Background, the sphere.
 		let radius = Math.min(this.canvas.height, this.canvas.width) / 2;
 		let globeGrd = context.createRadialGradient(
-			this.canvas.width / 4, this.canvas.height / 4, 5, 
+			this.canvas.width / 4, this.canvas.height / 4, 5,
 			this.canvas.width / 4, this.canvas.height / 4, radius);
 		globeGrd.addColorStop(0, this.compassGlobeColorConfig.displayGlobeGradient.from);  // 0  Beginning
 		globeGrd.addColorStop(1, this.compassGlobeColorConfig.displayGlobeGradient.to);    // 1  End
@@ -345,7 +345,7 @@ class CompassGlobeDisplay extends HTMLElement {
 		// 2 - The reflection on top
 		if (false) {
 			globeGrd = context.createRadialGradient(
-				this.canvas.width / 4, this.canvas.height / 4, 5, 
+				this.canvas.width / 4, this.canvas.height / 4, 5,
 				this.canvas.width / 4, this.canvas.height / 4, radius);
 			globeGrd.addColorStop(0, 'rgba(211, 211, 211, 0.25)');  // 0  Beginning
 			globeGrd.addColorStop(1, 'rgba(255, 255, 255, 0.25)');  // 1  End
@@ -385,16 +385,16 @@ class CompassGlobeDisplay extends HTMLElement {
 				// For memo: Index position:
 				// context.moveTo((this.canvas.width / 2) + xOffset, (this.canvas.height / 2) - Math.round(scale * 100));
 				// context.lineTo((this.canvas.width / 2) + xOffset, (this.canvas.height / 2) + Math.round(scale * 100));
-				
+
 				// Draw an arc, with perspective.
 				for (let y = yOrigin; y <= -yOrigin; y+=5) {
 					let xCoeff = Math.cos(Math.toRadians(y));
 					let yOffset = Math.round(radius /*(this.canvas.height / 2)*/ * Math.sin(Math.toRadians(y)));
 					if (y == -yOrigin) { // First point
-						context.moveTo((this.canvas.width / 2) + (xOffset * xCoeff), 
+						context.moveTo((this.canvas.width / 2) + (xOffset * xCoeff),
 									   (this.canvas.height / 2) + yOffset);
 					} else {
-						context.lineTo((this.canvas.width / 2) + (xOffset * xCoeff), 
+						context.lineTo((this.canvas.width / 2) + (xOffset * xCoeff),
 					                   (this.canvas.height / 2) + yOffset);
 					}
 				}
@@ -406,24 +406,24 @@ class CompassGlobeDisplay extends HTMLElement {
 		let fontSize = Math.round(scale * BASE_FONT_SIZE);
 		context.font = "bold " + fontSize + "px " + this.compassGlobeColorConfig.valueFont;
 
-		// The rose, oriented. 
+		// The rose, oriented.
 		// A - The cylinder
 		globeGrd = context.createLinearGradient(
-			this.canvas.width / 2, (this.canvas.height / 2) - Math.round(scale * CYLINDER_HALF_SIZE), 
+			this.canvas.width / 2, (this.canvas.height / 2) - Math.round(scale * CYLINDER_HALF_SIZE),
 			this.canvas.width / 2, (this.canvas.height / 2) + Math.round(scale * CYLINDER_HALF_SIZE));
 		globeGrd.addColorStop(0, this.compassGlobeColorConfig.displayCylinderGradient.from);  // 0  Beginning
 		globeGrd.addColorStop(1, this.compassGlobeColorConfig.displayCylinderGradient.to);    // 1  End
 		context.fillStyle = globeGrd;
 
 		context.beginPath();
-		// context.fillRect(0, 
-		// 	             (this.canvas.height / 2) - Math.round(scale * CYLINDER_HALF_SIZE), 
-		//                  this.canvas.width, 
+		// context.fillRect(0,
+		// 	             (this.canvas.height / 2) - Math.round(scale * CYLINDER_HALF_SIZE),
+		//                  this.canvas.width,
 		// 				 Math.round(scale * (2 * CYLINDER_HALF_SIZE)));
-		CompassGlobeDisplay.roundRect(context, 0, 
-			(this.canvas.height / 2) - Math.round(scale * CYLINDER_HALF_SIZE), 
-			this.canvas.width, 
-			Math.round(scale * (2 * CYLINDER_HALF_SIZE)), 10, true, false);	 
+		CompassGlobeDisplay.roundRect(context, 0,
+			(this.canvas.height / 2) - Math.round(scale * CYLINDER_HALF_SIZE),
+			this.canvas.width,
+			Math.round(scale * (2 * CYLINDER_HALF_SIZE)), 10, true, false);
 		context.closePath();
 		context.fill();
 
@@ -488,7 +488,7 @@ class CompassGlobeDisplay extends HTMLElement {
 							context.font = "bold " + _fontSize + "px " + this.compassGlobeColorConfig.valueFont;
 							let metrics = context.measureText(str);
 							let len = metrics.width;
-					
+
 							context.save();
 							let newX = (this.canvas.width / 2) + xOffset - (len / 2);
 							let newY = (this.canvas.height / 2) + Math.round(scale * MAJOR_TICK_SIZE) + (_fontSize / 1);
@@ -498,7 +498,7 @@ class CompassGlobeDisplay extends HTMLElement {
  							// context.rotate(-Math.sin(Math.toRadians(rot / 9)));  // horizontal rotation: 10 degrees max (9 = 90 / 10)
 							context.fillText(str, 0, 0,); // newX, newY);
 							context.restore();
-						}				
+						}
 					}
 					context.beginPath();
 					if (notch % 15 === 0) { // ticks: Major / Minor
