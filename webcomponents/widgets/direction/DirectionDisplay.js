@@ -649,7 +649,6 @@ class DirectionDisplay extends HTMLElement {
 			} else {
 				const BEAM_ANGLE    =  90;
 				const TRANSOM_ANGLE = 165;
-
 				const SCALE = 0.8;
 				let boatRadius = radius * BOAT_FACT * SCALE;
 				let beam       = radius * 0.70 * BOAT_FACT * SCALE;  // 90 degrees

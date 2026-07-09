@@ -282,6 +282,31 @@ jumbo-display .digital-font-green {
 	--value-font-size-factor: 1
 }
 
+.cyan-hand-analog {
+	--hand-outline-color: cyan;
+	--knob-color: cyan;
+	--knob-outline-color: cyan;
+}
+.lime-hand-analog {
+	--hand-outline-color: lime;
+	--knob-color: lime;
+	--knob-outline-color: lime;}
+.red-hand-analog {
+	--hand-outline-color: red;
+	--knob-color: red;
+	--knob-outline-color: red;
+}
+.limegreen-hand-analog {
+	--hand-outline-color: limegreen;
+	--knob-color: limegreen;
+	--knob-outline-color: limegreen;
+}
+.silver-hand-analog {
+	--hand-outline-color: white;
+	--knob-color: white;
+	--knob-outline-color: white;
+}
+
 .decreased-label-font {
 	--value-font-size-factor: 0.75;
 }
