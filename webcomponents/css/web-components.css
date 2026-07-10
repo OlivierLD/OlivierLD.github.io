@@ -296,10 +296,10 @@ jumbo-display .digital-font-green {
 	--knob-color: red;
 	--knob-outline-color: red;
 }
-.limegreen-hand-analog {
-	--hand-outline-color: limegreen;
-	--knob-color: limegreen;
-	--knob-outline-color: limegreen;
+.yellow-hand-analog {
+	--hand-outline-color: yellow;
+	--knob-color: yellow;
+	--knob-outline-color: yellow;
 }
 .silver-hand-analog {
 	--hand-outline-color: white;
@@ -868,6 +868,10 @@ compass-display .green {
 	--label-font: 'Courier New';
 	--value-font: Verdana;
 	--value-color: lime;
+}
+
+.red-index {
+	--index-color: red;
 }
 
 .beaufort-01 {
