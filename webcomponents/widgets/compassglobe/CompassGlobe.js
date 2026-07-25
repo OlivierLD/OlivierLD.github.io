@@ -35,7 +35,7 @@ const compassGlobeDefaultColorConfig = {
 
 const MAJOR_TICK_SIZE = 20;
 const MINOR_TICK_SIZE = 10;
-const BASE_FONT_SIZE = 30;
+const BASE_FONT_SIZE = 36; // 30;
 const CYLINDER_HALF_SIZE = 60;
 
 function convertToHexColor(color) {

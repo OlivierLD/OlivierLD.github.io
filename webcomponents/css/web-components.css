@@ -867,11 +867,11 @@ compass-display .green {
 	--value-nb-decimal: 0;
 	--label-font: 'Courier New';
 	--value-font: Verdana;
-	--value-color: lime;
+	--value-color: limegreen;
 }
 
-.red-index {
-	--index-color: red;
+.globe-index {
+	--index-color: orangered;
 }
 
 .beaufort-01 {
