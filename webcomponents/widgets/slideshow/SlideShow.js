@@ -49,7 +49,8 @@ class SlideShow extends HTMLElement {
 		return [
 			"width",
 			"height",
-			"slideclick"
+			"slideclick",
+			"justify"
 		];
 	}
 
@@ -219,6 +220,8 @@ class SlideShow extends HTMLElement {
 			console.log("Default onclick: nothing");
 		};
 
+		this._justify = 'true'; // Default,. Can be set to 'false' to disable justification of the images in the slides.
+
 		// Swipe, for draggable devices.
 		// For the swipe.
 		// Stolen from https://www.kirupa.com/html5/detecting_touch_swipe_gestures.htm
@@ -343,6 +346,9 @@ class SlideShow extends HTMLElement {
 			case "height":
 				this._height = parseInt(newVal);
 				break;
+			case "justify":
+				this._justify = newVal;
+				break;
 			case "slideclick":
 				this._onclick = window[newVal];
 				// this._onclick = newVal;
@@ -370,6 +376,9 @@ class SlideShow extends HTMLElement {
 	set height(val) {
 		this.setAttribute("height", val);
 	}
+	set justify(val) {
+		this.setAttribute("justify", val);
+	}
 
 	set shadowRoot(val) {
 		this._shadowRoot = val;
@@ -383,6 +392,9 @@ class SlideShow extends HTMLElement {
 	}
 	get height() {
 		return this._height;
+	}
+	get justify() {
+		return this._justify;
 	}
 
 	get shadowRoot() {
@@ -501,7 +513,9 @@ class SlideShow extends HTMLElement {
 										// Margin left
 										let margin = (self._width / 2) - (self._width * factor / 2);
 										// console.log('Margin top:' + margin);
-										image.style.marginLeft = margin.toFixed(0) + 'px';
+										if (this._justify === 'true') {
+											image.style.marginLeft = margin.toFixed(0) + 'px';
+										}
 									}
 								} else {
 									image.setAttribute('width', self._width);

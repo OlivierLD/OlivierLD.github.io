@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+ | WiP.
+ | Available from http://leafletjs.com/
+ | Tutorials and examples at https://leafletjs.com/examples.html
+ | Note: No native way to change orientation
+ +-->
+<head>
+
+  <title>B&eacute;mol III</title>
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="../small.boat.png">
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+  <link rel="stylesheet" href="../../../webcomponents/css/web-components.css" />
+
+  <style type="text/css">
+
+.list-link {
+  color: white;
+  font-size: 20px;
+  text-shadow: 2px 2px 4px black, 0 0 25px white, 0 0 10px orange;
+  text-decoration: none;
+}
+a.list-link:hover {
+  color: cyan;
+  font-weight: bold;
+  cursor: pointer;
+  text-shadow: 4px 4px 8px black, 0 0 25px white, 0 0 10px cyan;
+}
+
+dialog[open] {
+    -webkit-animation: myFadeIn 3.0s ease normal;
+}
+
+@-webkit-keyframes myFadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+}
+
+.right {
+    float: right;
+}
+.left {
+    float: left;
+}
+
+.body-pix {
+    /*display: table-cell;*/
+    /*text-align: center;*/
+    color: silver;
+    font-family: Verdana, Arial, Helvetica, Geneva;
+    font-size: 20pt;
+    vertical-align: top;
+    background: radial-gradient(at top, DarkGrey -8%, black 55%);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.custom-select {
+    font-family:'Courier New', Courier, monospace;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.help-dialog {
+	background-color: rgba(0, 0, 0, 0.75);
+	padding: 2em;
+	color: silver;
+	border: 2px solid silver;
+	border-radius: 10px;
+	/*width: 800px;*/
+	margin-left: 30px;
+	margin-top: 10px;
+    position: absolute;
+	z-index: 1001;
+	box-shadow: 2px 2px 4px grey, 0 0 25px white, 0 0 7px cyan;
+}
+
+.dialog-header {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.dialog-header-close {
+  float: right;
+}
+.dialog-header-close:hover {
+  color: cyan;
+  cursor: pointer;
+  text-shadow: 5px 5px 10px rgb(78, 39, 39), 0 0 25px white, 0 0 7px cyan;
+}
+
+#whatzat {
+    width: 40px;
+    border: 2px solid silver;
+    border-radius: 50%;
+}
+
+#whatzat:hover {
+    box-shadow: 5px 5px 10px rgb(78, 39, 39), 0 0 25px white, 0 0 7px cyan;
+    cursor: pointer;
+    transform: scale3d(1.2, 1.2, 1.2);
+}
+
+html {
+    width: fit-content;
+}
+
+body {
+    font-family: "Source Code Pro", "Courier New", Helvetica, Geneva;
+    font-weight: bold;
+    background-color: rgba(192, 192, 192, 0.35);
+}
+
+button {
+  padding: 4px 20px;
+  /* give the background a gradient */
+  background: #ffae00; /* fallback for browsers that don't support gradients */
+  background: -webkit-linear-gradient(top, #ffae00, #d67600);
+  background: -moz-linear-gradient(top, #ffae00, #d67600);
+  background: -o-linear-gradient(top, #ffae00, #d67600);
+  background: linear-gradient(top, #ffae00, #d67600);
+  border: 2px outset #dad9d8;
+  /* style the text */
+  font-family: Lato, Verdana, Andika, Arial, sans-serif; /* Andkia is available at http://www.google.com/webfonts/specimen/Andika */
+  font-size: 0.8em;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #fff;
+  text-shadow: 0 1px 10px #000;
+  /* add to small curve to the corners of the button */
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  border-radius: 15px;
+  /* give the button a drop shadow */
+  -webkit-box-shadow: rgba(0, 0, 0, .55) 0 1px 6px;
+  -moz-box-shadow: rgba(0, 0, 0, .55) 0 1px 6px;
+  box-shadow: rgba(0, 0, 0, .55) 0 1px 6px;
+}
+
+button:hover, button:focus {
+  border: 2px solid #dad9d8;
+}
+
+button:disabled {
+    background: silver;
+}
+
+compass-rose .day {
+  --bg-color: white;
+  --digit-color: #404040;
+  --with-gradient: true;
+  --display-background-gradient-from: gray;
+  --display-background-gradient-to: white;
+  --tick-color: darkGray;
+  --index-color: red;
+  --font: Arial;
+}
+
+.analogdisplay-day {
+	--bg-color: rgba(0, 0, 0, 0);
+	--digit-color: black;
+	--with-gradient: true;
+	--display-background-gradient-from: LightGrey;
+	--display-background-gradient-to: white; /* used if --withGradient: false */
+	--display-line-color: rgba(255, 255, 255, 0.5);
+	--label-fill-color: rgba(255, 255, 255, 0.5);
+	--with-display-shadow: true;
+	--shadow-color: rgba(0, 0, 0, 0.75);
+	--outline-color: DarkGrey;
+	--major-tick-color: black;
+	--minor-tick-color: black;
+	--value-color: grey;
+	--value-outline-color: black;
+	--value-nb-decimal: 1;
+	--hand-color: red;
+	--hand-outline-color: black;
+	--with-hand-shadow: true;
+	--knob-color: DarkGrey;
+	--knob-outline-color: black;
+	--font: Arial;
+	--value-font-size-factor: 1
+}
+
+.directiondisplay-01 {
+	--value-nb-decimal: 0;
+	--hand-color: rgba(192, 192, 192, 0.25);
+    --hand-outline-color: lime;
+}
+.directiondisplay-02 {
+	--value-nb-decimal: 0;
+	--hand-color: rgba(255, 0, 0, 0.5);
+    --hand-outline-color: red;
+}
+
+.arrow {
+    /*position: absolute;
+    top: 50%;
+    left: 50%;*/
+    margin-top: 0px;
+    transform: translate(-50%, -50%);
+    transform: rotate(90deg);
+    cursor: pointer;
+}
+
+.arrow span {
+    display: block;
+    width: 1.5vw;
+    height: 1.5vw;
+    border-bottom: 5px solid white;
+    border-right: 5px solid white;
+    transform: rotate(45deg);
+    margin: -10px;
+    margin-left: 15px;
+    animation: animate 2s infinite;
+    color: orange;
+}
+
+.arrow span:nth-child(2) {
+    animation-delay: -0.2s;
+}
+
+.arrow span:nth-child(3) {
+    animation-delay: -0.4s;
+}
+
+@keyframes animate {
+    0% {
+        opacity: 0;
+        transform: rotate(45deg) translate(-20px, -20px);
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: rotate(45deg) translate(20px, 20px);
+    }
+}
+
+.thermometer-day {
+  --bg-color: rgba(0, 0, 0, 0);
+  --digit-color: DarkGrey;
+  --with-gradient: true;
+  --display-background-gradient-from: black;
+  --display-background-gradient-to: LightGrey;
+  --with-display-shadow: true;
+  --shadow-color: rgba(0, 0, 0, 0.75);
+  --major-tick-color: DarkGrey;
+  --minor-tick-color: DarkGrey;
+  --value-color: LightRed;
+  --value-outline-color: black;
+  --value-nb-decimal: 2;
+  --font: 'Arial'; /* 'Source Code Pro' */
+}
+
+/*td {
+    border: 1px solid silver;
+    border-radius: 5px;
+}*/
+
+#top-div button {
+    margin-left: 10px;
+}
+
+.tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: rgba(241, 241, 241, 0.5);
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+    background: silver; /*rgb(101, 99, 99);*/
+    color: rgb(63, 54, 54);
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 12px;
+    text-shadow: 1px 1px 2px rgba(0, 255, 255, 0.5), 0 0 25px white, 0 0 5px silver;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+    background: #ddd;
+    color: black;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+    background: #ffae00; /* fallback for browsers that don't support gradients */
+    background: -webkit-linear-gradient(top, #ffae00, #d67600);
+    background: -moz-linear-gradient(top, #ffae00, #d67600);
+    background: -o-linear-gradient(top, #ffae00, #d67600);
+    background: linear-gradient(top, #ffae00, #d67600);
+}
+
+.tab .mess {
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+    text-shadow: 1px 1px 2px rgba(0, 255, 255, 0.5), 0 0 25px white, 0 0 5px orange;
+    color: black;
+    text-align: right;
+}
+
+.data-container {
+    max-height: 600px;
+    overflow-y: scroll;
+}
+
+.page-content {
+    display: grid;
+    grid-template-columns: 58% 42%;
+}
+
+.map-content {
+    width: 50vw;
+    height: 50vw;
+}
+
+/* "Small" screens */
+@media screen and (width <= 800px) {
+    .page-content {
+        display: grid;
+        grid-template-columns: 100%;
+    }
+    .map-content {
+        width: 170vw;
+        height: 170vw;
+    }
+    .arrow {
+        margin-top: 2vh;
+    }
+}
+
+div.the-slides img {
+    margin-left: 0;
+}
+  </style>
+
+  <script type="module" src="../../../webcomponents/widgets/slideshow/SlideShow.js"></script>
+
+</head>
+<body>
+
+<dialog id="about-dialog" class="help-dialog" style="color: cyan;">
+    <div class="dialog-header">
+        <table width="100%">
+            <tr>
+              <td>Help !...</td>
+              <td style="padding-left: 20px;">
+                <span>
+                    <img src="../n.gif" width="48" title="NC" style="vertical-align: middle; padding: 5px;">
+                    <br/>
+                    <img src="../c.gif" width="48" title="NC" style="vertical-align: middle; padding: 5px;">
+                </span>
+              </td>
+              <td>
+                <span class="dialog-header-close" onclick="closeAboutDialog();">&times</span>
+              </td>
+            </tr>
+        </table>
+    </div>
+    <hr/>
+    <div>
+        <div id="help-content" style="max-height: 390px; overflow-y: scroll;">
+            <!-- About content -->
+            <div style="margin-top: 15px;">
+                A simple Leaflet and WebComponents interface to visualize and replay data logged when sailing.<br/><br/>
+                <i>Featuring</i>:
+                <ul>
+                    <li>LeafLet Map API</li>
+                    <li>WebComponents</li>
+                    <li>HTML5/CSS3/ES6</li>
+                    <li>...and so on!</li>
+                </ul>
+            </div>
+            <hr/>
+            <div style="margin-top: 15px;">
+                Map is draggable.
+                <br/>
+                Zoom in and out using the +/- on the chart (or double-click, and shift + double-click)
+                <br/>
+                Use the links at the bottom (Fly to) to move from place to place (experimental).
+                <br/>
+            </div>
+        </div>
+        <hr style="margin-top: 15px; margin-bottom: 5px;"/>
+        <i>OlivSoft never stops</i>
+    </div>
+</dialog>
+
+<div id="page-header">
+    <div style="display: grid; grid-template-columns: auto auto auto;">
+        <div>
+            <h1 style="padding-left: 10px;">De La Trinit&eacute; sur Mer &agrave; Viana do Castelo,<br/>&agrave; bord de B&eacute;mol III, Sun Rise 35</h1>
+            Du 13 au 20 juillet 2026.
+        </div>
+        <div style="text-align: right; padding-right: 20px;">
+            <img src="../dives/drowning.gif"
+                 id="whatzat"
+                 title="Heeeeeeelp !!"
+                 onclick="showAboutDialog();"/>
+        </div>
+        <div>
+            <div class="arrow" title="Try this!" style="margin-top: 90px;">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Map, displays, and controls -->
+<div style="width: 100%;">
+  <div class="page-content"> <!-- style="display: grid; grid-template-columns: 50% 50%;" -->
+    <div style="vertical-align: top;">
+      <!-- Column 1 -->
+      <div id="mapid" class="map-content" style="box-shadow: 4px 4px 8px grey, 0 0 25px white, 0 0 7px cyan;"></div>
+      <!--div id="mapid" style="width: 40vw; height: 40vw; box-shadow: 4px 4px 8px grey, 0 0 25px white, 0 0 7px cyan;"></div-->
+      <!--div id="mapid" style="width: 90%; height: 90%; box-shadow: 4px 4px 8px grey, 0 0 25px white, 0 0 7px cyan;"></div-->
+    </div>
+    <div style="vertical-align: top; margin-left: 40px; min-width: 612px;">
+      <!-- Column 2 -->
+      <div style="border: 2px solid black; border-radius: 5px;">
+        <div style="padding-left: 10px; color: black; text-align: left; font-style: italic;">Mouse Position</div>
+        <div id="curr-pos" style="width: 98%; height: 80px; padding: 2px; margin-top: -0px;" title="Cursor's position">&nbsp;<br/>&nbsp;</div>
+      </div>
+      <div id="displays" style="text-align: center; border: 2px solid rgba(0, 0, 255, 0.5); border-radius: 5px;" title="All data below&#13;available when REPLAYing">
+          <div style="padding-left: 10px; color: blue; text-align: left; font-style: italic;">Slide shows - Images are clickable</div>
+          <div id="UTC-date" style="text-align: center;" title="UTC Date">&nbsp;</div>
+          <div id="display-container" style="/*min-width: 600px;*/">
+            <div id="one" class="data-container" style="display: block;">
+                <!-- The tabs. Add them here on demand -->
+                <div class="tab" style="margin-top: 10px; display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto;"> <!-- TODO Improve the grid-template... -->
+                    <button class="tablinks active" onclick="openTab(event, 0);" title="Etape 1">1&egrave;re &eacute;tape</button>
+                    <button class="tablinks" onclick="openTab(event, 1);">Ferrol</button>
+                    <button class="tablinks" onclick="openTab(event, 2);">2&egrave;me &eacute;tape</button>
+                    <!--button class="tablinks" onclick="openTab(event, 3);">Viana do Castelo</button-->
+                </div>
+
+                <div id="etape-1" class="body-pix" style="display: block;">
+                    <slide-show id="slide-show-01"
+                                width="600"
+                                height="450"
+                                slideclick="onSlideShowClick"
+                                justify="false"
+                                style="padding: 10px; margin-left: 0;">
+                        <slide-show-image src="./images/01.jpeg" title="Tiago &agrave; la tambouille !"></slide-show-image>
+                        <slide-show-image src="./images/02.jpeg" title="Quart dans le cockpit"></slide-show-image>
+                        <slide-show-image src="./images/00.jpeg" title="Sunset"></slide-show-image>
+                        <slide-show-image src="./images/03.jpeg" title="Cockpit Lunch"></slide-show-image>
+                        <slide-show-image src="./images/04.jpeg" title="A la nav"></slide-show-image>
+                        <slide-show-image src="./images/05.jpeg" title="Golfe de Gascogne"></slide-show-image>
+                        <slide-show-image src="./images/06.jpeg" title="Sailing"></slide-show-image>
+                        <slide-show-image src="./images/09.jpeg" title="On deck"></slide-show-image>
+                        <slide-show-image src="./images/10.jpeg" title="Nav again"></slide-show-image>
+                        <slide-show-image src="./images/11.jpeg" title="Yyyyyes !"></slide-show-image>
+                        <slide-show-image src="./images/12.jpeg" title="Bizh"></slide-show-image>
+                        <slide-show-image src="./images/13.jpeg" title="Bizh"></slide-show-image>
+                        <slide-show-image src="./images/14.jpeg" title="Deck"></slide-show-image>
+                        <slide-show-image src="./images/15.jpeg" title="The crew"></slide-show-image>
+                        <slide-show-image src="./images/16.jpeg" title="Tiago"></slide-show-image>
+                        <slide-show-image src="./images/17.jpeg" title="Sailing"></slide-show-image>
+                        <slide-show-image src="./images/18.jpeg" title="Selfie"></slide-show-image>
+                        <slide-show-image src="./images/19.jpeg" title="Heading!"></slide-show-image>
+                        <slide-show-image src="./images/20.jpeg" title="Miko &agrave; la barre"></slide-show-image>
+                        <slide-show-image src="./images/21.jpeg" title="Sailing"></slide-show-image>
+                        <slide-show-image src="./images/22.jpeg" title="Ferrol"></slide-show-image>
+                    </slide-show>
+                </div>
+
+                <div id="ferrol" class="body-pix" style="display: none;">
+                    <slide-show id="slide-show-02"
+                                width="600"
+                                height="450"
+                                slideclick="onSlideShowClick"
+                                justify="false"
+                                style="padding: 10px;">
+                        <slide-show-image src="./images/23.jpeg" title="On arrive &agrave; Ferrol"></slide-show-image>
+                        <slide-show-image src="./images/24.jpeg" title="P&ecirc;che"></slide-show-image>
+                        <slide-show-image src="./images/25.jpeg" title="Le chenal dans la rivi&egrave;re"></slide-show-image>
+                        <slide-show-image src="./images/26.jpeg" title="Fortifications"></slide-show-image>
+                        <slide-show-image src="./images/27.jpeg" title="Phare dans la rivi&egrave;re"></slide-show-image>
+                        <slide-show-image src="./images/28.jpeg" title="P&ecirc;che"></slide-show-image>
+                        <slide-show-image src="./images/29.jpeg" title="La rivi&egrave;re"></slide-show-image>
+                        <slide-show-image src="./images/40.jpeg" title="Ferrol"></slide-show-image>
+                        <slide-show-image src="./images/41.jpeg" title="Ponton vaisselle"></slide-show-image>
+                        <slide-show-image src="./images/42.jpeg" title="Vue sur la ville"></slide-show-image>
+                        <slide-show-image src="./images/43.jpeg" title="Fontaine"></slide-show-image>
+                        <slide-show-image src="./images/44.jpeg" title="Fontaine"></slide-show-image>
+                        <slide-show-image src="./images/45.jpeg" title="Vue sur Ferrol"></slide-show-image>
+                        <slide-show-image src="./images/46.jpeg" title="On sort !"></slide-show-image>
+                        <slide-show-image src="./images/49.jpeg" title="On sort !"></slide-show-image>
+                    </slide-show>
+                </div>
+
+                <div id="etape-2" class="body-pix" style="display: none;">
+                    <slide-show id="slide-show-03"
+                                width="600"
+                                height="450"
+                                slideclick="onSlideShowClick"
+                                justify="false"
+                                style="padding: 10px;">
+                        <slide-show-image src="./images/30.jpeg" title="Sisarga Grande"></slide-show-image>
+                        <slide-show-image src="./images/31.jpeg" title="Caillasse"></slide-show-image>
+                        <slide-show-image src="./images/32.jpeg" title="Caillasse"></slide-show-image>
+                        <slide-show-image src="./images/33.jpeg" title="Caillasse"></slide-show-image>
+                        <slide-show-image src="./images/34.jpeg" title="Caillasse"></slide-show-image>
+                        <slide-show-image src="./images/35.jpeg" title="Avec un phare"></slide-show-image>
+                        <slide-show-image src="./images/36.jpeg" title="Phare"></slide-show-image>
+                        <slide-show-image src="./images/37.jpeg" title="Phare"></slide-show-image>
+                        <slide-show-image src="./images/38.jpeg" title="Phare"></slide-show-image>
+                        <slide-show-image src="./images/39.jpeg" title="&Eacute;olienne"></slide-show-image>
+                        <slide-show-image src="./images/47.jpeg" title="&Eacute;oliennes"></slide-show-image>
+                        <slide-show-image src="./images/48.jpeg" title="Cockpit"></slide-show-image>
+                        <slide-show-image src="./images/50.jpeg" title="Cockpit"></slide-show-image>
+                    </slide-show>
+                </div>
+
+            </div>
+          </div>
+      </div>
+
+      <div>
+        <span style="margin-left: 10px;">Fly to:</span>
+        <ul>
+            <li><a class="list-link" href="#" onclick="flyToZoom(0);">La Trinit&eacute; sur Mer</a></li>
+            <li><a class="list-link" href="#" onclick="flyToZoom(1);">Les Grands Cardinaux</a></li>
+            <li><a class="list-link" href="#" onclick="flyToZoom(2);">Ferrol</a></li>
+            <li><a class="list-link" href="#" onclick="flyToZoom(3);">Sisarga Grande</a></li>
+            <li><a class="list-link" href="#" onclick="flyToZoom(4);">Cabo Finisterre</a></li>
+            <li><a class="list-link" href="#" onclick="flyToZoom(5);">Viana do Castelo</a></li>
+            <li><a class="list-link" href="#" onclick="flyToZoom(6);">Cascais</a></li>
+        </ul>
+      </div>
+    </div>
+</div>
+
+<hr/>
+
+<div style="color: silver;">
+  OpenSource JavaScript map API at <a href="https://leafletjs.com/" target="leaflet">leafletjs.com</a>. Zoom for details...<br/>
+  <i style="color: silver;">OlivSoft never stops</i>
+</div>
+
+<script type="text/javascript">
+
+    const VERBOSE = false;
+
+    if (Math.toDegrees === undefined) {
+        Math.toDegrees = (rad) => {
+            return rad * (180 / Math.PI);
+        }
+    }
+
+    if (Math.toRadians === undefined) {
+        Math.toRadians = (deg) => {
+            return deg * (Math.PI / 180);
+        }
+    }
+
+    function setNeedleShape(id, radio) {
+        // debugger;
+        document.getElementById(id).hand = radio.value;
+    }
+
+    function decToSex(val, ns_ew) {
+        let absVal = Math.abs(val);
+        let intValue = Math.floor(absVal);
+        let dec = absVal - intValue;
+        let i = intValue;
+        dec *= 60;
+        let min = dec.toFixed(4);
+        while (min.length < 7) {
+            min = '0' + min;
+        }
+        let s = i + "°" + min + "'";
+
+        if (val < 0) {
+            s += (ns_ew === 'NS' ? 'S' : 'W');
+        } else {
+            s += (ns_ew === 'NS' ? 'N' : 'E');
+        }
+        return s;
+    }
+
+    let getGCDistance = (from, to) => {
+        if (from === undefined || to === undefined) {
+            throw ({err: "From and To are required"});
+        }
+        let cos = Math.sin(Math.toRadians(from.lat)) * Math.sin(Math.toRadians(to.lat)) + Math.cos(Math.toRadians(from.lat)) * Math.cos(Math.toRadians(to.lat)) * Math.cos(Math.toRadians(to.lng - from.lng));
+        return Math.acos(cos);
+    };
+
+    let getGCDistanceInDegrees = (from, to) => {
+        return Math.toDegrees(getGCDistance(from, to));
+    };
+
+    let getGCDistanceInNM = (from, to) => {
+        return (getGCDistanceInDegrees(from, to) * 60);
+    };
+
+    // Add tabs here  at will,as needed, by div id.
+    const TABS = ['etape-1', 'ferrol', 'etape-2']; //, 'viana'];
+
+    let openTab = (evt, tabNum) => {
+        let tabLinks = document.getElementsByClassName("tablinks");
+        for (let i=0; i<tabLinks.length; i++) {
+            tabLinks[i].className = tabLinks[i].className.replace(" active", ""); // Reset
+        }
+        for (let i=0; i<TABS.length; i++) {
+            document.getElementById(TABS[i]).style.display = (i === tabNum) ? 'block' : 'none';
+        }
+        evt.currentTarget.className += " active";
+    };
+
+    /*
+    let map = L.map('mapid'); // .setView([currentLatitude, currentLongitude], 13);
+
+    const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		maxZoom: 19,
+		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+	}).addTo(map);
+    */
+    let map = L.map('mapid'); // .setView([currentLatitude, currentLongitude], 13);
+
+	let mbAttr = 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community';
+	let mbUrl = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
+
+    const tiles = L.tileLayer(mbUrl, {
+		maxZoom: 20,
+		attribution: mbAttr
+	}).addTo(map);
+
+    const tilesOSM = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		maxZoom: 20,
+		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        opacity: 0.5
+	}).addTo(map);
+
+    // map.fitBounds(polyline.getBounds());
+    let currentLatitude = 47.587700079218514; // La Trinite
+    let currentLongitude = -3.0257962148137545;
+    map.setView([currentLatitude, currentLongitude], 6);
+
+
+    let latlngs; // To be populated from JSON.
+
+    const ZOOM_POSITIONS = [
+        new L.LatLng(47.587700079218514, -3.0257962148137545), // La Trinite
+        new L.LatLng(47.31982077245023, -2.8295349981733913),  // Les Grands Cardinaux
+        new L.LatLng(43.47751274117573, -8.244251092558578),   // Ferrol
+        new L.LatLng(43.358884319119035, -8.841467505282333),  // Sisarga Grande
+        new L.LatLng(42.88006993761915, -9.273489512794859),   // Cabo Finisterre
+        new L.LatLng(41.69412223081366, -8.82181405444401),    // Viana do Castelo
+        new L.LatLng(38.693866827511584, -9.414090907590518),  // Cascais
+    ];
+
+    function flyToZoom(idx) {
+        // map.panTo(ZOOM_POSITIONS[idx]);
+        // map.setView(ZOOM_POSITIONS[idx], 18);
+        map.flyTo(ZOOM_POSITIONS[idx]);
+    }
+
+    const SLIDE_SHOW =
+    `<div style="background: silver;"><slide-show id="slide-show-02"
+					width="300"
+					height="230"
+                    slideclick="onSlideShowClick">
+        <slide-show-image src="./images/23.jpeg" title="On arrive &agrave; Ferrol"></slide-show-image>
+        <slide-show-image src="./images/24.jpeg" title="P&ecirc;che"></slide-show-image>
+        <slide-show-image src="./images/25.jpeg" title="Le chenal dans la rivi&egrave;re"></slide-show-image>
+        <slide-show-image src="./images/26.jpeg" title="Fortifications"></slide-show-image>
+        <slide-show-image src="./images/27.jpeg" title="Phare dans la rivi&egrave;re"></slide-show-image>
+        <slide-show-image src="./images/28.jpeg" title="P&ecirc;che"></slide-show-image>
+        <slide-show-image src="./images/29.jpeg" title="La rivi&egrave;re"></slide-show-image>
+        <slide-show-image src="./images/40.jpeg" title="Ferrol"></slide-show-image>
+        <slide-show-image src="./images/41.jpeg" title="Ponton vaisselle"></slide-show-image>
+        <slide-show-image src="./images/42.jpeg" title="Vue sur la ville"></slide-show-image>
+        <slide-show-image src="./images/43.jpeg" title="Fontaine"></slide-show-image>
+        <slide-show-image src="./images/44.jpeg" title="Fontaine"></slide-show-image>
+        <slide-show-image src="./images/45.jpeg" title="Vue sur Ferrol"></slide-show-image>
+        <slide-show-image src="./images/46.jpeg" title="On sort !"></slide-show-image>
+        <slide-show-image src="./images/49.jpeg" title="On sort !"></slide-show-image>
+	</slide-show></div>`;
+
+    // Used as an example, See "// markers" below. Used to hold pictures.
+    const ALL_MARKERS = [
+    [ { // One
+        "latitude": 47.587700079218514,
+        "longitude": -3.0257962148137545,
+        "name": "La Trinité sur Mer",
+        "content": ""
+    }, {
+        "latitude": 47.31982077245023,
+        "longitude": -2.8295349981733913,
+        "name": "Les Grands Cardinaux",
+        "content": ""
+    }, {
+        "latitude": 43.47751274117573,
+        "longitude": -8.244251092558578,
+        "name": "Port de Ferrol",
+        "content": "Ferrol (click to enlarge)\n<br/>\n" + SLIDE_SHOW
+    }, {
+        "latitude": 43.358884319119035,
+        "longitude": -8.841467505282333,
+        "name": "Sisarga Grande",
+        "content": "(click to enlarge)\n<br/>\n<a href=\"./images/30.jpeg\" target=\"_blank\"><img src=\"./images/30.jpeg\" width=\"256\" height=\"auto\" alt=\"Click to enlarge\"/></a>"
+    }, {
+        "latitude": 42.88006993761915,
+        "longitude": -9.273489512794859,
+        "name": "Cabo Finisterre",
+        "content": ""
+    }, {
+        "latitude": 41.69412223081366,
+        "longitude": -8.82181405444401,
+        "name": "Viana do Castelo",
+        "content": ""
+    }, {
+        "latitude": 38.693866827511584,
+        "longitude": -9.414090907590518,
+        "name": "Cascais",
+        "content": "Dom Pedro d'Alfaroubeira (click to enlarge)\n<br/>\n<a href=\"./images/dp.jpeg\" target=\"_blank\"><img src=\"./images/dp.jpeg\" width=\"256\" height=\"auto\" alt=\"Click to enlarge\"/></a>"
+    } ],
+    [], []];
+
+    let markers = ALL_MARKERS[0];
+
+    let currentMarkers = [];
+
+    let polyline = null;
+
+    // To draw in pixels, see https://leafletjs.com/examples/extending/extending-2-layers.html
+    // Also https://codepen.io/adelaide01/pen/EXMwbY
+
+    const INIT_PATH_IDX = 0; // 950; // 0;
+
+    let pathIdx = INIT_PATH_IDX;
+    let circle = null;
+    let marker = null;
+    let tooltip = null;
+
+    map.addEventListener('mousemove', (event) => {
+        // let lat = Math.round(event.latlng.lat * 100000) / 100000;
+        // let lng = Math.round(event.latlng.lng * 100000) / 100000;
+        let lat = event.latlng.lat;
+        let lng = event.latlng.lng;
+        while (lng > 180) {
+            lng -= 360;
+        }
+        while (lng < -180) {
+            lng += 360;
+        }
+        if (true) {
+            document.getElementById('curr-pos').innerHTML = `<span class="left">${decToSex(lat, "NS")}</span><span class="right">(${lat})</span><br/><span class="left">${decToSex(lng, "EW")}</span><span class="right">(${lng})</span>`;
+        }
+
+        if (tooltip != null) {
+            map.removeLayer(tooltip);
+        }
+        tooltip = L.tooltip()
+                        .setLatLng(L.latLng([lat, lng]))
+                        .setContent(`${decToSex(lat, "NS")}<br/>${decToSex(lng, "EW")}`)
+                        .addTo(map);
+
+    });
+
+    // markers on the chart
+    if (true) {
+        markers.forEach(mark => {
+            oneMark = L.marker([(mark.latitude), (mark.longitude)], { title: mark.name });
+            currentMarkers.push(oneMark);
+            oneMark.addTo(map)
+                    .bindPopup('<b>' + mark.name + '</b><br/>' + mark.content); // .openPopup();
+        });
+    }
+
+    function lpad(s, w, len) {
+        let str = s;
+        while (str.length < len) {
+            str = w + str;
+        }
+        return str;
+    }
+
+    // Recurse in that one.
+    function moveTo(j, justMove) {
+    if (j < latlngs.length && (!cancelDriving || (justMove !== undefined && justMove === true) )) {
+        let pos = latlngs[j];
+        if (keepDriving || (justMove !== undefined && justMove === true)) {
+            window.setTimeout(() => {
+                if (VERBOSE) {
+                    // 0 - Dump all values
+                    console.log(`Read from data file: ${JSON.stringify(pos, null, 2)}`);
+                }
+                // 1 - Data
+                // let displayPos = `${decToSex(pos.lat, "NS")}<br/>${decToSex(pos.lng, "EW")}`;
+                let displayPos = `${decToSex(pos.lat, "NS")}<br/>${decToSex(pos.lng, "EW")}<br/><span title="GRID Square">${pos.gridSquare}</span><br/><span title="Google Plus.&#13;Use to search GoogleMap">${pos.googlePlusCode}</span>`;
+                if (pos.rmcDate) {
+                    displayDate = `${pos.rmcDate}`;
+                    document.getElementById('UTC-date').innerHTML = displayDate;
+                }
+                if (pos.cog && pos.cog != -1) {
+                    document.getElementById('sog-01').value = pos.sog;
+                    document.getElementById('jumbo-01').value = pos.sog;
+
+                    document.getElementById('cog-01').value = pos.cog;
+                    document.getElementById('cog-02').value = pos.cog;
+
+                    document.getElementById('compass-globe-01').value = parseInt(pos.cog);
+                    // document.getElementById('compass-globe-01').repaint();
+                }
+
+                document.getElementById('curr-pos').innerHTML = displayPos;
+                document.getElementById('curr-point').innerText = `${j} /`;
+                document.getElementById('data-slider').value = j;
+                document.getElementById('sliderValue01').value = j;
+
+                // 2 - Chart (centered on pos) and graphic
+                // map.setZoom(20);
+                map.panTo(new L.LatLng(pos.lat, pos.lng));
+
+                if (circle !== null) {
+                    map.removeLayer(circle);
+                }
+                if (marker !== null) {
+                    map.removeLayer(marker);
+                }
+                circle = L.circle([pos.lat, pos.lng], 50, {
+                    color: 'green',
+                    fillColor: '#30f',
+                    fillOpacity: 0.25
+                });
+                marker = L.marker([pos.lat, pos.lng]);
+                circle.addTo(map);
+                marker.addTo(map)
+
+                if (justMove === undefined || justMove === false) {
+                    pathIdx += 1; // 5;
+                    moveTo(pathIdx);
+                }
+            }, 50);
+        }
+    } else {
+        document.getElementById('start-path').disabled = false;
+        document.getElementById('cancel-path').disabled = true;
+        document.getElementById('stop-path').disabled = true;
+        document.getElementById('resume-path').disabled = true;
+
+        document.getElementById('data-slider').disabled = false;
+
+        document.getElementById('curr-point').innerText = "";
+        document.getElementById('curr-pos').innerHTML = "&nbsp;<br/>&nbsp;";
+        cancelDriving = true;
+        if (circle !== null) {
+            map.removeLayer(circle);
+        }
+        if (marker !== null) {
+            map.removeLayer(marker);
+        }
+        pathIdx = INIT_PATH_IDX; // 0;
+    }
+}
+
+    // on "REPLAY" button click
+    let showAboutDialog = () => {
+        let aboutDialog = document.getElementById("about-dialog");
+        if (aboutDialog.show !== undefined) {
+            aboutDialog.show();
+        } else {
+            alert(NO_DIALOG_MESSAGE);
+            aboutDialog.style.display = 'inline';
+        }
+    };
+
+    let closeAboutDialog = () => {
+        let aboutDialog = document.getElementById("about-dialog");
+        if (aboutDialog.close !== undefined) {
+            aboutDialog.close();
+        } else {
+            // alert(NO_DIALOG_MESSAGE);
+            aboutDialog.style.display = 'none';
+        }
+    };
+
+    function onSlideShowClick(src) {
+        console.log(">> Client side!! Slide " + src + " was clicked.");
+        window.open(src, '_blank'); // This is an example
+    }
+
+    window.onload = () => {
+      console.log("Page Loaded!");
+      // loadPathData();
+      // document.getElementById('jumbo-01').repaint(); // To load the font...
+    };
+
+</script>
+
+</body>
+</html>
