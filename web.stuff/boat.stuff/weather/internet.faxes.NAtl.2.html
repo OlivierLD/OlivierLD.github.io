@@ -21,7 +21,7 @@
       /* margin: auto; */
     }
 
-    /*  Tests... 
+    /*  Tests...
     .image-1 {
         filter: invert(100%);
         -webkit-filter: invert(100%);
@@ -69,7 +69,7 @@
       let surfaceFaxesVisible = () => {
           let sfc = document.getElementById("surface");
           return !(sfc.style.display === 'none');
-      };  
+      };
       let set500mbOpacity = val => {
         let fax500mb = document.getElementById("500mb");
         fax500mb.style.opacity = val;
@@ -80,7 +80,7 @@
           let sfc = document.getElementById("surface");
           sfc.style.display = cb.checked ? 'inline' : 'none';
           let fax500mb = document.getElementById("500mb");
-          fax500mb.style.marginTop = cb.checked ? '-764px' : '28px';
+          fax500mb.style.marginTop = cb.checked ? '-767px' : '28px';
           // if (!cb.checked) {
           //   set500mbOpacity('1.0');
           // } else {
@@ -139,7 +139,7 @@
       /* fax500mb.style.filter = 'opacity(0.5)'; */    // Foreground, not opaque (see z-index)
       // fax500mb.style.opacity = '0.5';     // Foreground, not opaque (see z-index)
       fax500mb.style.marginLeft = '15px';
-      fax500mb.style.marginTop = '-764px';
+      fax500mb.style.marginTop = '-767px';
       fax500mb.style.zIndex = '1';
     };
 </script>
