@@ -537,18 +537,22 @@ compass-rose .day {
 
       <div>
         <span style="margin-left: 10px;">Fly to:</span>
-        <ul>
-            <li><a class="list-link" href="#" onclick="flyToZoom(0);">La Trinit&eacute; sur Mer</a></li>
-            <li><a class="list-link" href="#" onclick="flyToZoom(1);">Les Grands Cardinaux</a></li>
-            <li><a class="list-link" href="#" onclick="flyToZoom(2);">Ferrol</a></li>
-            <li><a class="list-link" href="#" onclick="flyToZoom(3);">Sisarga Grande</a></li>
-            <li><a class="list-link" href="#" onclick="flyToZoom(7);">Cabo Villano</a></li>
-            <li><a class="list-link" href="#" onclick="flyToZoom(8);">Cabo Tori&ntilde;ana</a></li>
-            <li><a class="list-link" href="#" onclick="flyToZoom(4);">Cabo Finisterre</a></li>
-            <li><a class="list-link" href="#" onclick="flyToZoom(5);">Viana do Castelo</a></li>
-            <li><a class="list-link" href="#" onclick="flyToZoom(6);">Cascais</a></li>
-            <li><a class="list-link" href="#" onclick="flyToZoom(9);">Longitude 0&deg;</a></li>
-        </ul>
+        <div style="display: grid; grid-template-columns: 50% 50%;">
+            <ul>
+                <li><a class="list-link" href="#" onclick="flyToZoom(0);">La Trinit&eacute; sur Mer</a></li>
+                <li><a class="list-link" href="#" onclick="flyToZoom(1);">Les Grands Cardinaux</a></li>
+                <li><a class="list-link" href="#" onclick="flyToZoom(2);">Ferrol</a></li>
+                <li><a class="list-link" href="#" onclick="flyToZoom(3);">Sisarga Grande</a></li>
+                <li><a class="list-link" href="#" onclick="flyToZoom(7);">Cabo Villano</a></li>
+            </ul>
+            <ul>
+                <li><a class="list-link" href="#" onclick="flyToZoom(8);">Cabo Tori&ntilde;ana</a></li>
+                <li><a class="list-link" href="#" onclick="flyToZoom(4);">Cabo Finisterre</a></li>
+                <li><a class="list-link" href="#" onclick="flyToZoom(5);">Viana do Castelo</a></li>
+                <li><a class="list-link" href="#" onclick="flyToZoom(6);">Cascais</a></li>
+                <li><a class="list-link" href="#" onclick="flyToZoom(9);">Longitude 0&deg;</a></li>
+            </ul>
+        </div>
       </div>
     </div>
 </div>
@@ -820,82 +824,82 @@ compass-rose .day {
 
     // Recurse in that one.
     function moveTo(j, justMove) {
-    if (j < latlngs.length && (!cancelDriving || (justMove !== undefined && justMove === true) )) {
-        let pos = latlngs[j];
-        if (keepDriving || (justMove !== undefined && justMove === true)) {
-            window.setTimeout(() => {
-                if (VERBOSE) {
-                    // 0 - Dump all values
-                    console.log(`Read from data file: ${JSON.stringify(pos, null, 2)}`);
-                }
-                // 1 - Data
-                // let displayPos = `${decToSex(pos.lat, "NS")}<br/>${decToSex(pos.lng, "EW")}`;
-                let displayPos = `${decToSex(pos.lat, "NS")}<br/>${decToSex(pos.lng, "EW")}<br/><span title="GRID Square">${pos.gridSquare}</span><br/><span title="Google Plus.&#13;Use to search GoogleMap">${pos.googlePlusCode}</span>`;
-                if (pos.rmcDate) {
-                    displayDate = `${pos.rmcDate}`;
-                    document.getElementById('UTC-date').innerHTML = displayDate;
-                }
-                if (pos.cog && pos.cog != -1) {
-                    document.getElementById('sog-01').value = pos.sog;
-                    document.getElementById('jumbo-01').value = pos.sog;
+        if (j < latlngs.length && (!cancelDriving || (justMove !== undefined && justMove === true) )) {
+            let pos = latlngs[j];
+            if (keepDriving || (justMove !== undefined && justMove === true)) {
+                window.setTimeout(() => {
+                    if (VERBOSE) {
+                        // 0 - Dump all values
+                        console.log(`Read from data file: ${JSON.stringify(pos, null, 2)}`);
+                    }
+                    // 1 - Data
+                    // let displayPos = `${decToSex(pos.lat, "NS")}<br/>${decToSex(pos.lng, "EW")}`;
+                    let displayPos = `${decToSex(pos.lat, "NS")}<br/>${decToSex(pos.lng, "EW")}<br/><span title="GRID Square">${pos.gridSquare}</span><br/><span title="Google Plus.&#13;Use to search GoogleMap">${pos.googlePlusCode}</span>`;
+                    if (pos.rmcDate) {
+                        displayDate = `${pos.rmcDate}`;
+                        document.getElementById('UTC-date').innerHTML = displayDate;
+                    }
+                    if (pos.cog && pos.cog != -1) {
+                        document.getElementById('sog-01').value = pos.sog;
+                        document.getElementById('jumbo-01').value = pos.sog;
 
-                    document.getElementById('cog-01').value = pos.cog;
-                    document.getElementById('cog-02').value = pos.cog;
+                        document.getElementById('cog-01').value = pos.cog;
+                        document.getElementById('cog-02').value = pos.cog;
 
-                    document.getElementById('compass-globe-01').value = parseInt(pos.cog);
-                    // document.getElementById('compass-globe-01').repaint();
-                }
+                        document.getElementById('compass-globe-01').value = parseInt(pos.cog);
+                        // document.getElementById('compass-globe-01').repaint();
+                    }
 
-                document.getElementById('curr-pos').innerHTML = displayPos;
-                document.getElementById('curr-point').innerText = `${j} /`;
-                document.getElementById('data-slider').value = j;
-                document.getElementById('sliderValue01').value = j;
+                    document.getElementById('curr-pos').innerHTML = displayPos;
+                    document.getElementById('curr-point').innerText = `${j} /`;
+                    document.getElementById('data-slider').value = j;
+                    document.getElementById('sliderValue01').value = j;
 
-                // 2 - Chart (centered on pos) and graphic
-                // map.setZoom(20);
-                map.panTo(new L.LatLng(pos.lat, pos.lng));
+                    // 2 - Chart (centered on pos) and graphic
+                    // map.setZoom(20);
+                    map.panTo(new L.LatLng(pos.lat, pos.lng));
 
-                if (circle !== null) {
-                    map.removeLayer(circle);
-                }
-                if (marker !== null) {
-                    map.removeLayer(marker);
-                }
-                circle = L.circle([pos.lat, pos.lng], 50, {
-                    color: 'green',
-                    fillColor: '#30f',
-                    fillOpacity: 0.25
-                });
-                marker = L.marker([pos.lat, pos.lng]);
-                circle.addTo(map);
-                marker.addTo(map)
+                    if (circle !== null) {
+                        map.removeLayer(circle);
+                    }
+                    if (marker !== null) {
+                        map.removeLayer(marker);
+                    }
+                    circle = L.circle([pos.lat, pos.lng], 50, {
+                        color: 'green',
+                        fillColor: '#30f',
+                        fillOpacity: 0.25
+                    });
+                    marker = L.marker([pos.lat, pos.lng]);
+                    circle.addTo(map);
+                    marker.addTo(map)
 
-                if (justMove === undefined || justMove === false) {
-                    pathIdx += 1; // 5;
-                    moveTo(pathIdx);
-                }
-            }, 50);
+                    if (justMove === undefined || justMove === false) {
+                        pathIdx += 1; // 5;
+                        moveTo(pathIdx);
+                    }
+                }, 50);
+            }
+        } else {
+            document.getElementById('start-path').disabled = false;
+            document.getElementById('cancel-path').disabled = true;
+            document.getElementById('stop-path').disabled = true;
+            document.getElementById('resume-path').disabled = true;
+
+            document.getElementById('data-slider').disabled = false;
+
+            document.getElementById('curr-point').innerText = "";
+            document.getElementById('curr-pos').innerHTML = "&nbsp;<br/>&nbsp;";
+            cancelDriving = true;
+            if (circle !== null) {
+                map.removeLayer(circle);
+            }
+            if (marker !== null) {
+                map.removeLayer(marker);
+            }
+            pathIdx = INIT_PATH_IDX; // 0;
         }
-    } else {
-        document.getElementById('start-path').disabled = false;
-        document.getElementById('cancel-path').disabled = true;
-        document.getElementById('stop-path').disabled = true;
-        document.getElementById('resume-path').disabled = true;
-
-        document.getElementById('data-slider').disabled = false;
-
-        document.getElementById('curr-point').innerText = "";
-        document.getElementById('curr-pos').innerHTML = "&nbsp;<br/>&nbsp;";
-        cancelDriving = true;
-        if (circle !== null) {
-            map.removeLayer(circle);
-        }
-        if (marker !== null) {
-            map.removeLayer(marker);
-        }
-        pathIdx = INIT_PATH_IDX; // 0;
-    }
-}
+    };
 
     // on "REPLAY" button click
     let showAboutDialog = () => {
