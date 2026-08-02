@@ -547,6 +547,7 @@ compass-rose .day {
             <li><a class="list-link" href="#" onclick="flyToZoom(4);">Cabo Finisterre</a></li>
             <li><a class="list-link" href="#" onclick="flyToZoom(5);">Viana do Castelo</a></li>
             <li><a class="list-link" href="#" onclick="flyToZoom(6);">Cascais</a></li>
+            <li><a class="list-link" href="#" onclick="flyToZoom(9);">Longitude 0&deg;</a></li>
         </ul>
       </div>
     </div>
@@ -672,6 +673,7 @@ compass-rose .day {
         new L.LatLng(38.693866827511584, -9.414090907590518),  // Cascais
         new L.LatLng(43.16437302484718, -9.214279984197159),   // Cabo Villano
         new L.LatLng(43.05821097761245, -9.296762021731604),   // Cabo Toriñana
+        new L.LatLng(49.325939364242956, 0),  // Additional position, longitude 0
     ];
 
     function flyToZoom(idx) {
@@ -749,6 +751,11 @@ compass-rose .day {
         "longitude": -9.414090907590518,
         "name": "Cascais",
         "content": "Dom Pedro d'Alfaroubeira (click to enlarge)\n<br/>\n<a href=\"./images/dp.jpeg\" target=\"_blank\"><img src=\"./images/dp.jpeg\" width=\"256\" height=\"auto\" alt=\"Click to enlarge\"/></a>"
+    }, {
+        "latitude": 49.325939364242956,
+        "longitude": 0,
+        "name": "Longitude 0° !",
+        "content": ""
     } ],
     [], []];
 
