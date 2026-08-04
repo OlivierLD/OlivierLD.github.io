@@ -2705,7 +2705,7 @@
 	<table cellpadding="10">
 		<tr>
 			<td valign="top">
-                                        <pre style="font-weight: bold; text-align: left; color: white; vertical-align: top; margin-top: 6px;">
+                <pre style="font-weight: bold; text-align: left; color: white; vertical-align: top; margin-top: 6px;">
 &lt;analog-display class="analogdisplay-day"
                 title="Boat Speed in Knots"
                 id="bsp-01"
@@ -4194,6 +4194,7 @@
 					<input type="checkbox" onchange="setTropics('world-map-03', this);"/>Tropics
 					<br/>
 					<hr/>
+                    Fly to:
 					<button onclick="flyTo('world-map-03', {lat: 37.7489, lng: -122.507}, 'SF');" title="Fly to SF&#13;following Great Circle">SF</button>&nbsp;&nbsp;
 					<button onclick="flyTo('world-map-03', {lat: 49.01500, lng: 2.5423080}, 'Paris');" title="Fly to Paris&#13;following Great Circle">Paris</button>&nbsp;&nbsp;
 					<button onclick="flyTo('world-map-03', {lat: 19.7373, lng: -155.0668648}, 'Hawai\'i');" title="Fly to Hawai'i&#13;following Great Circle">Hawai'i</button>
@@ -4210,8 +4211,8 @@
                                projection="MERCATOR"
                                east="40"
                                west="180"
-                               north="60"
-                               south="-60"
+                               north="65"
+                               south="-65"
 							   width="800"
 							   height="600"></world-map>
                 </div>
@@ -4223,8 +4224,8 @@
              projection="MERCATOR"
              east="40"
              west="180"
-             north="60"
-             south="-60"
+             north="65"
+             south="-65"
              width="800"
              height="600">&lt;/world-map>
                     </pre>
@@ -4320,7 +4321,7 @@ map.addEventListener('mousemove', evt => {
 				<button onclick="showHideSiblingWidget(this);">Show/Hide widget</button>
 			</td>
 		</tr>
-		<tr style="display: none;">
+		<tr style="display: block;">
 			<td valign="top">
 				<div class="black-frame centered">
 					<sky-map id="sky-map-01"
@@ -4414,7 +4415,7 @@ map.addEventListener('mousemove', evt => {
 				<button onclick="showHideSiblingWidget(this);">Show/Hide widget</button>
 			</td>
 		</tr>
-		<tr style="display: none;">
+		<tr style="display: block;">
 			<td valign="top">
 				<div class="black-frame centered">
                     <celestial-sphere id="celestial-sphere-01"
