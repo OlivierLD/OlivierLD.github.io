@@ -8361,8 +8361,8 @@ function plotBarographRC(graphId, recenter, lineColor='lime', graphLabel='Rework
          console.log("Chartless Map, on the doAfter method.");
 
          // let center = ChartlessMap.posToCanvas(this._centerLat, this._centerLng, this._projection, this._centerLat, this._centerLng, this._chartWidth, this._width, this._height);
-         let centerLat = (elmt.north - elmt.south) / 2 + elmt.south;
-         let centerLng = (elmt.east - elmt.west) / 2 + elmt.west;
+         let centerLat = elmt.centerLat; // (elmt.north - elmt.south) / 2 + elmt.south;
+         let centerLng = elmt.centerLng; // (elmt.east - elmt.west) / 2 + elmt.west;
          let center = elmt.posToCanvas(centerLat, centerLng);
          // Plot center
          context.save();
@@ -8384,6 +8384,12 @@ function plotBarographRC(graphId, recenter, lineColor='lime', graphLabel='Rework
          context.arc(center.x, center.y, 10, 0, 2 * Math.PI, false);
          context.stroke();
          context.closePath();
+
+         context.fillStyle = 'orangered';
+         let fontBackup = context.font;
+         context.font = "bold 24px Verdana";
+         context.fillText('After!', center.x, center.y - 24);
+         context.font = fontBackup;
 
          context.restore();
      });

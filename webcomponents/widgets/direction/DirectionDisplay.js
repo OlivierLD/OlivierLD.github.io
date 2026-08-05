@@ -80,7 +80,7 @@ class DirectionDisplay extends HTMLElement {
 			"with-rose",    // Boolean, draw the rose or not
 			"with-border",  // Boolean
 			"label",        // String
-			"hand",         // String. 'regular' (default) or 'wind', "boat"
+			"hand",         // String. 'regular' (default, needle) or 'wind', "boat", "cata", "tri", "plane", "arrow"
 			"value"         // Float. Heading to display
 		];
 	}
