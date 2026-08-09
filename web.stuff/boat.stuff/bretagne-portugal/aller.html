@@ -517,7 +517,7 @@ input:checked + .slider:before {
   <div class="page-content"> <!-- style="display: grid; grid-template-columns: 50% 50%;" -->
     <div style="vertical-align: top;">
       <!-- Column 1 -->
-      <div id="mapid" class="map-content" style="height: 100%; box-shadow: 4px 4px 8px grey, 0 0 25px white, 0 0 7px cyan;"></div>
+      <div id="mapid" class="map-content" style="/*height: 100%;*/ box-shadow: 4px 4px 8px grey, 0 0 25px white, 0 0 7px cyan;"></div>
       <!--div id="mapid" style="width: 40vw; height: 40vw; box-shadow: 4px 4px 8px grey, 0 0 25px white, 0 0 7px cyan;"></div-->
       <!--div id="mapid" style="width: 90%; height: 90%; box-shadow: 4px 4px 8px grey, 0 0 25px white, 0 0 7px cyan;"></div-->
     </div>
@@ -628,22 +628,25 @@ input:checked + .slider:before {
 
     <div style="border: 1px solid silver; border-radius: 5px; margin-top: 10px; padding: 5px; text-align: left;">
         <span style="margin-left: 10px;">Fly to:</span>
-        <div style="display: grid; grid-template-columns: auto auto auto;">
+        <div style="display: grid; grid-template-columns: auto auto auto auto;">
             <ul>
                 <li><a class="list-link" href="#" onclick="flyToZoom(0);">La Trinit&eacute; sur Mer</a></li>
                 <li><a class="list-link" href="#" onclick="flyToZoom(1);">Les Grands Cardinaux</a></li>
                 <li><a class="list-link" href="#" onclick="flyToZoom(2);">Ferrol</a></li>
-                <li><a class="list-link" href="#" onclick="flyToZoom(3);">Sisarga Grande</a></li>
             </ul>
             <ul>
+                <li><a class="list-link" href="#" onclick="flyToZoom(3);">Sisarga Grande</a></li>
                 <li><a class="list-link" href="#" onclick="flyToZoom(7);">Cabo Villano</a></li>
                 <li><a class="list-link" href="#" onclick="flyToZoom(8);">Cabo Tori&ntilde;ana</a></li>
-                <li><a class="list-link" href="#" onclick="flyToZoom(4);">Cabo Finisterre</a></li>
-                <li><a class="list-link" href="#" onclick="flyToZoom(5);">Viana do Castelo</a></li>
             </ul>
             <ul>
+                <li><a class="list-link" href="#" onclick="flyToZoom(4);">Cabo Finisterre</a></li>
+                <li><a class="list-link" href="#" onclick="flyToZoom(5);">Viana do Castelo</a></li>
                 <li><a class="list-link" href="#" onclick="flyToZoom(6);">Cascais</a></li>
-                <li><a class="list-link" href="#" onclick="flyToZoom(9);">Longitude 0&deg;</a></li>
+            </ul>
+            <ul>
+                <li><a class="list-link" href="#" onclick="flyToZoom(9);">Longitude 0&deg; North!</a></li>
+                <li><a class="list-link" href="#" onclick="flyToZoom(10);">Longitude 0&deg; South!</a></li>
             </ul>
         </div>
     </div>
@@ -771,6 +774,7 @@ input:checked + .slider:before {
         new L.LatLng(43.16437302484718, -9.214279984197159),   // Cabo Villano
         new L.LatLng(43.05821097761245, -9.296762021731604),   // Cabo Toriñana
         new L.LatLng(49.325939364242956, 0),  // Additional position, longitude 0
+        new L.LatLng(39.965154419306266, 0),  // Additional position, longitude 0
     ];
 
     function flyToZoom(idx) {
@@ -861,6 +865,11 @@ input:checked + .slider:before {
         "content": "Dom Pedro d'Alfaroubeira (click to enlarge)\n<br/>\n<a href=\"./images/dp.jpeg\" target=\"_blank\"><img src=\"./images/dp.jpeg\" width=\"256\" height=\"auto\" alt=\"Click to enlarge\"/></a>"
     }, {
         "latitude": 49.325939364242956,
+        "longitude": 0,
+        "name": "Longitude 0° !",
+        "content": ""
+    }, {
+        "latitude": 39.965154419306266,
         "longitude": 0,
         "name": "Longitude 0° !",
         "content": ""
