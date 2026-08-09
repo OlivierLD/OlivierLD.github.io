@@ -490,7 +490,7 @@ input:checked + .slider:before {
                         <input id="slide-slider" type="checkbox" onchange="showSurface(this);" checked>
                         <span class="slider round"></span>
                     </label>
-                    <span class="switch-element">With Cartography</span>
+                    <span class="switch-element" id="carto-label">With Cartography</span>
                 </div>
 
             </div>
@@ -778,8 +778,10 @@ input:checked + .slider:before {
     function showSurface(checkbox) {
         if (checkbox.checked) {
             tilesOSM.addTo(map);
+            document.getElementById("carto-label").innerHTML = "With Cartography";
         } else {
             map.removeLayer(tilesOSM);
+            document.getElementById("carto-label").innerHTML = "Sat Pic only";
         }
     }
 
