@@ -775,6 +775,7 @@ input:checked + .slider:before {
         new L.LatLng(43.05821097761245, -9.296762021731604),   // Cabo Toriñana
         new L.LatLng(49.325939364242956, 0),  // Additional position, longitude 0
         new L.LatLng(39.965154419306266, 0),  // Additional position, longitude 0
+        new L.LatLng(37.817450272476776, -122.47969792802982), // SF, Golden Gate
     ];
 
     function flyToZoom(idx) {
@@ -862,7 +863,9 @@ input:checked + .slider:before {
         "latitude": 38.693866827511584,
         "longitude": -9.414090907590518,
         "name": "Cascais",
-        "content": "Dom Pedro d'Alfaroubeira (click to enlarge)\n<br/>\n<a href=\"./images/dp.jpeg\" target=\"_blank\"><img src=\"./images/dp.jpeg\" width=\"256\" height=\"auto\" alt=\"Click to enlarge\"/></a>"
+        "content": "Dom Pedro d'Alfaroubeira (click to enlarge)\n<br/>\n" +
+                   "<a href=\"./images/dp.jpeg\" target=\"_blank\"><img src=\"./images/dp.jpeg\" width=\"256\" height=\"auto\" alt=\"Click to enlarge\"/></a>" +
+                   "<br/>\n<a href=\"#\" onclick=\"flyToZoom(11);\">Another red bridge...</a>"
     }, {
         "latitude": 49.325939364242956,
         "longitude": 0,
@@ -872,6 +875,11 @@ input:checked + .slider:before {
         "latitude": 39.965154419306266,
         "longitude": 0,
         "name": "Longitude 0° !",
+        "content": ""
+    }, {
+        "latitude": 37.817450272476776,
+        "longitude": -122.47969792802982,
+        "name": "San Francisco, Golden Gate",
         "content": ""
     } ],
     [], []];
