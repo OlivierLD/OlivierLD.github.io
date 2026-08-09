@@ -407,7 +407,15 @@ compass-rose .day {
     <div style="display: grid; grid-template-columns: auto auto auto;">
         <div>
             <h1 style="padding-left: 10px;">De La Trinit&eacute; sur Mer &agrave; Viana do Castelo,<br/>&agrave; bord de B&eacute;mol III, Sun Rise 35</h1>
-            Du 13 au 20 juillet 2026.
+            <div>
+                <span style="text-align: left;">
+                    Du 13 au 20 juillet 2026.
+                </span>
+                <span style="margin-left: 50px;text-align: right;">
+                    <input type="checkbox" id="show-surface" onchange="showSurface(this);" checked>With  Names &amp; Co
+                </span>
+            </div>
+
         </div>
         <div style="text-align: right; padding-right: 20px;">
             <img src="../dives/drowning.gif"
@@ -649,6 +657,7 @@ compass-rose .day {
 	let mbAttr = 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community';
 	let mbUrl = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
 
+
     const tiles = L.tileLayer(mbUrl, {
 		maxZoom: 20,
 		attribution: mbAttr
@@ -685,6 +694,14 @@ compass-rose .day {
         // map.panTo(ZOOM_POSITIONS[idx]);
         // map.setView(ZOOM_POSITIONS[idx], 18);
         map.flyTo(ZOOM_POSITIONS[idx]);
+    }
+
+    function showSurface(checkbox) {
+        if (checkbox.checked) {
+            tilesOSM.addTo(map);
+        } else {
+            map.removeLayer(tilesOSM);
+        }
     }
 
     const SLIDE_SHOW =
