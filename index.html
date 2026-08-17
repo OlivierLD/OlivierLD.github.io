@@ -1083,12 +1083,19 @@ Date.prototype.format = function (dateFormat) {
     <span class="switch-element">Random BG order</span>
   </div>
 
-  <div class="switch-container" style="margin-left: 30px;" title="Two minutes, or one minute">
+  <!-- div class="switch-container" style="margin-left: 30px;" title="Two minutes, or one minute">
     <label class="switch switch-element">
       <input id="fast-bg-slider" type="checkbox" onchange="manageFastBGClick(this);">
       <span class="slider round"></span>
     </label>
     <span class="switch-element">Change BG faster</span>
+  </div -->
+
+  <div style="margin-left: 30px;" title="Two minutes, one minute, 5 seconds...">
+    <span>Change BG</span>
+    <input type="radio" name="bg-change-speed" value="slowly" onchange="manageFastBGClick(this);" checked title="2 minutes"/>Slowly
+    <input type="radio" name="bg-change-speed" value="fast" onchange="manageFastBGClick(this);" title="1 minutes"/>Fast
+    <input type="radio" name="bg-change-speed" value="faster" onchange="manageFastBGClick(this);" title="5 seconds">Faster
   </div>
 
   <div class="switch-container" style="margin-left: 30px;" title="On or off">
@@ -1753,8 +1760,9 @@ Date.prototype.format = function (dateFormat) {
     return color;
   }
 
-  const SLOW_BG_INTERVAL = ((2 * 60) + 1) * 1000; // in ms.
-  const FAST_BG_INTERVAL = ((/*1 * */ 60) + 1) * 1000; // in ms.
+  const SLOW_BG_INTERVAL   = ((2 * 60) + 1) * 1000; // in ms.
+  const FAST_BG_INTERVAL   = ((/*1 * */ 60) + 1) * 1000; // in ms.
+  const FASTER_BG_INTERVAL = ((/*1 * */ 5) + 1) * 1000; // in ms.
   let BG_INTERVAL = SLOW_BG_INTERVAL;
   const BG_IMAGES = [
     { name: "overcast.jpg", title: "Overcast",                                 cat: "clouds" },
@@ -1779,7 +1787,7 @@ Date.prototype.format = function (dateFormat) {
     { name: "cave_sky.jpeg", title: "From a cave",                             cat: "clouds" },
     { name: "sky.roumania.jpg", title: "Sky above Roumania",                   cat: "clouds" },
     { name: "sky.jpg", title: "Sky and sunset",                                cat: "clouds" },
-    { name: "en.ciseaux.jpeg", title: "Ready to gybe?",                        cat: "misc" },
+ // { name: "en.ciseaux.jpeg", title: "Ready to gybe?",                        cat: "misc" },
     { name: "snowflake.01.jpeg", title: "Snow Flake",                          cat: "flakes" },  // From https://wall.alphacoders.com/by_sub_category.php?id=202451&name=Snowflake+Wallpapers
     { name: "la.licorne.jpeg", title: "La Licorne",                            cat: "misc" },
     { name: "planking.jpg", title: "Woody!",                                   cat: "misc" },
@@ -1790,7 +1798,8 @@ Date.prototype.format = function (dateFormat) {
     { name: "himalaya.jpeg", title: "Himalaya, Nepal",                         cat: "misc" },
     { name: "china.cove.jpeg", title: "China Cove, CA",                        cat: "misc" },
     { name: "torres.del.paine.jpeg", title: "Torres del Paine, Chile",         cat: "misc" },
-    { name: "morocco.dromaderies.jpeg", title: "Erg Chigaga, Morocco",         cat: "misc" }
+    { name: "morocco.dromaderies.jpeg", title: "Erg Chigaga, Morocco",         cat: "misc" },
+    { name: "laguna.de.los.tres.jpeg", title: "Laguna de los Tres, Argentina", cat: "misc" }
   ];
 
   let BG_CLOUDS_ONLY = [];
@@ -1906,8 +1915,26 @@ Date.prototype.format = function (dateFormat) {
     randomOrder = cb.checked;
   }
 
-  function manageFastBGClick(cb) {
-    BG_INTERVAL = (cb.checked ? FAST_BG_INTERVAL : SLOW_BG_INTERVAL);
+  // function manageFastBGClick(cb) {
+  //   BG_INTERVAL = (cb.checked ? FAST_BG_INTERVAL : SLOW_BG_INTERVAL);
+  // }
+
+  function manageFastBGClick(rb) {
+    switch (rb.value) {
+      case 'slow':
+        BG_INTERVAL = SLOW_BG_INTERVAL;
+        break;
+      case 'fast':
+        BG_INTERVAL = FAST_BG_INTERVAL;
+        break;
+      case 'faster':
+        BG_INTERVAL = FASTER_BG_INTERVAL;
+        break;
+      default:
+        BG_INTERVAL = SLOW_BG_INTERVAL;
+        break;
+    }
+    changeBGNow();
   }
 
   function manageTimeBGClick(cb) {
