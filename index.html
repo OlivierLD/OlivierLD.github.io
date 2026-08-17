@@ -1934,7 +1934,9 @@ Date.prototype.format = function (dateFormat) {
         BG_INTERVAL = SLOW_BG_INTERVAL;
         break;
     }
-    changeBGNow();
+    if (bgAnimation !== undefined) { // ie if BG Sc roll is not stopped.
+      changeBGNow();
+    }
   }
 
   function manageTimeBGClick(cb) {
