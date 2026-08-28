@@ -530,7 +530,7 @@ input:checked + .slider:before {
       <div id="displays" style="text-align: center; border: 2px solid rgba(0, 0, 255, 0.5); border-radius: 5px;">
           <div style="padding-left: 10px; color: blue; text-align: left; font-style: italic;">Slide shows - Images are clickable</div>
           <div id="UTC-date" style="text-align: center;" title="UTC Date">&nbsp;</div>
-          <div id="display-container" style="/*min-width: 600px;*/">
+          <div id="display-container">
             <div id="one" class="data-container" style="display: block;">
                 <!-- The tabs. Add them here on demand -->
                 <div class="tab" style="margin-top: 10px; display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto;"> <!-- TODO Improve the grid-template... -->
@@ -626,30 +626,30 @@ input:checked + .slider:before {
   </div>
 </div>
 
-    <div style="border: 1px solid silver; border-radius: 5px; margin-top: 10px; padding: 5px; text-align: left;">
-        <span style="margin-left: 10px;">Fly to:</span>
-        <div style="display: grid; grid-template-columns: auto auto auto auto;">
-            <ul>
-                <li><a class="list-link" href="#" onclick="flyToZoom(0);">La Trinit&eacute; sur Mer</a></li>
-                <li><a class="list-link" href="#" onclick="flyToZoom(1);">Les Grands Cardinaux</a></li>
-                <li><a class="list-link" href="#" onclick="flyToZoom(2);">Ferrol</a></li>
-            </ul>
-            <ul>
-                <li><a class="list-link" href="#" onclick="flyToZoom(3);">Sisarga Grande</a></li>
-                <li><a class="list-link" href="#" onclick="flyToZoom(7);">Cabo Villano</a></li>
-                <li><a class="list-link" href="#" onclick="flyToZoom(8);">Cabo Tori&ntilde;ana</a></li>
-            </ul>
-            <ul>
-                <li><a class="list-link" href="#" onclick="flyToZoom(4);">Cabo Finisterre</a></li>
-                <li><a class="list-link" href="#" onclick="flyToZoom(5);">Viana do Castelo</a></li>
-                <li><a class="list-link" href="#" onclick="flyToZoom(6);">Cascais</a></li>
-            </ul>
-            <ul>
-                <li><a class="list-link" href="#" onclick="flyToZoom(9);">Longitude 0&deg; North!</a></li>
-                <li><a class="list-link" href="#" onclick="flyToZoom(10);">Longitude 0&deg; South!</a></li>
-            </ul>
-        </div>
+<div style="border: 1px solid silver; border-radius: 5px; margin-top: 10px; padding: 5px; text-align: left;">
+    <span style="margin-left: 10px;">Fly to:</span>
+    <div style="display: grid; grid-template-columns: auto auto auto auto;">
+        <ul>
+            <li><a class="list-link" href="#" onclick="flyToZoom(0);">La Trinit&eacute; sur Mer</a></li>
+            <li><a class="list-link" href="#" onclick="flyToZoom(1);">Les Grands Cardinaux</a></li>
+            <li><a class="list-link" href="#" onclick="flyToZoom(2);">Ferrol</a></li>
+        </ul>
+        <ul>
+            <li><a class="list-link" href="#" onclick="flyToZoom(3);">Sisarga Grande</a></li>
+            <li><a class="list-link" href="#" onclick="flyToZoom(7);">Cabo Villano</a></li>
+            <li><a class="list-link" href="#" onclick="flyToZoom(8);">Cabo Tori&ntilde;ana</a></li>
+        </ul>
+        <ul>
+            <li><a class="list-link" href="#" onclick="flyToZoom(4);">Cabo Finisterre</a></li>
+            <li><a class="list-link" href="#" onclick="flyToZoom(5);">Viana do Castelo</a></li>
+            <li><a class="list-link" href="#" onclick="flyToZoom(6);">Cascais</a></li>
+        </ul>
+        <ul>
+            <li><a class="list-link" href="#" onclick="flyToZoom(9);">Longitude 0&deg; North!</a></li>
+            <li><a class="list-link" href="#" onclick="flyToZoom(10);">Longitude 0&deg; South!</a></li>
+        </ul>
     </div>
+</div>
 
 
 <hr/>
@@ -795,7 +795,7 @@ input:checked + .slider:before {
         }
     }
 
-    const SLIDE_SHOW =
+    const SLIDE_SHOW =     // Hard-coded, to be re-used in markers.
     `<div style="background: silver;"><slide-show id="slide-show-02"
 					width="300"
 					height="230"
