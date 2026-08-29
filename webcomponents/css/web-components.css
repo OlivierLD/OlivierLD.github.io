@@ -196,7 +196,7 @@ jumbo-display .digital-font-green {
 	--value-color: grey;
 	--value-outline-color: black;
 	--value-nb-decimal: 1;
-	--hand-color: red;
+	--hand-color: rgba(255, 0, 0, 0.4);
 	--hand-outline-color: black;
 	--with-hand-shadow: true;
 	--knob-color: DarkGrey;
