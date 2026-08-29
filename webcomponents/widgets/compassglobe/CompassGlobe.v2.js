@@ -33,7 +33,7 @@ const compassGlobeDefaultColorConfig = {
 	valueColor: 'cyan'
 };
 
-const BIGGEST_TICK_SIZE = 60;
+const BIGGEST_TICK_SIZE = 30;
 const MAJOR_TICK_SIZE = 20;
 const MINOR_TICK_SIZE = 10;
 const BASE_FONT_SIZE = 36; // 30;
@@ -484,7 +484,56 @@ class CompassGlobeDisplay extends HTMLElement {
 							console.log(`>> Notch is ${notch} => ${str} (i: ${i})`);
 						}
 
+						// if (i > 290 || i < 70) { // +/- 20 degs on each side.
+						// 	// Set fontSize, constant
+						// 	let _fontSize = Math.round(scale * BASE_FONT_SIZE * 1); // Math.cos(Math.toRadians(i)));
+						// 	context.font = "bold " + _fontSize + "px " + this.compassGlobeColorConfig.valueFont;
+						// 	let metrics = context.measureText(str);
+
+						// 	context.save();
+						// 	// We need some 'matrix' transformation here, to change text width, NOT height.
+						// 	let localRot = this._value - notch; // i; // notch - this._value; 240 - 330
+						// 	if (localRot > 180) {
+						// 		localRot -= 360;
+						// 	}
+						// 	let rot = i - this._value; // localRot; // (i > 270) ? i - 360 : i;
+						// 	if (rot > 180) {
+						// 		rot -= 360;
+						// 	}
+						// 	// let rotation = Math.sin(Math.toRadians((90 + rot) / 1)); // [0..1]
+						// 	let rotation = Math.cos(Math.toRadians((rot) / 1)); // [0..1]
+						// 	let len = (metrics.width * Math.abs(rotation));
+
+						// 	// context.moveTo((this.canvas.width / 2) + xOffset,
+						// 	//                (this.canvas.height / 2) - Math.round(scale * BIGGEST_TICK_SIZE));
+
+						// 	let xOffsetForIndex = (this.canvas.width / 2) + xOffset; // (radius * Math.sin(Math.toRadians(localRot))) / 1; // From the center
+						// 	let newX = /*(this.canvas.width / 2) + */ xOffsetForIndex - (Math.sign(localRot) * (len / 2));
+						// 	// (this.canvas.width / 2) - (len / 2)
+						// 	let newY = (this.canvas.height / 2) + Math.round(scale * MAJOR_TICK_SIZE) + (_fontSize / 1);
+						// 	// context.translate(newX, newY);
+
+						// 	if (this._value === 240) { // Debug
+						// 		console.log(`Writing ${str} => i: ${i}, radius: ${radius}, notch: ${notch}, localRot: ${localRot}, rot: ${rot}, rotation: ${rotation}`);
+						// 		console.log(`\t\txOffset: ${xOffsetForIndex}, str width: ${metrics.width}, len: ${len}`);
+						// 		console.log(`\t\tnewX: ${newX}, newY: ${newY} (value: ${this._value})`);
+						// 	}
+
+						// 	context.setTransform(Math.abs(rotation), 0, 0, 1, 0, 0);
+						// 	// newX newY taken care of by the translate above
+						// 	context.fillText(str, newX, newY); // Write here on the compass rose
+						// 	context.restore();
+						// }
+					}
+					context.beginPath();
+					if (notch % 90 === 0) { // ticks: Major / Minor
+						context.moveTo((this.canvas.width / 2) + xOffset, (this.canvas.height / 2) - Math.round(scale * BIGGEST_TICK_SIZE));
+						context.lineTo((this.canvas.width / 2) + xOffset, (this.canvas.height / 2) + Math.round(scale * BIGGEST_TICK_SIZE));
+					} else if (notch % 10 === 0) { // ticks: Major / Minor
+						context.moveTo((this.canvas.width / 2) + xOffset, (this.canvas.height / 2) - Math.round(scale * MAJOR_TICK_SIZE));
+						context.lineTo((this.canvas.width / 2) + xOffset, (this.canvas.height / 2) + Math.round(scale * MAJOR_TICK_SIZE));
 						if (i > 290 || i < 70) { // +/- 20 degs on each side.
+							let str = ((notch + 360) % 360).toFixed(0);
 							// Set fontSize, constant
 							let _fontSize = Math.round(scale * BASE_FONT_SIZE * 1); // Math.cos(Math.toRadians(i)));
 							context.font = "bold " + _fontSize + "px " + this.compassGlobeColorConfig.valueFont;
@@ -504,31 +553,29 @@ class CompassGlobeDisplay extends HTMLElement {
 							let rotation = Math.cos(Math.toRadians((rot) / 1)); // [0..1]
 							let len = (metrics.width * Math.abs(rotation));
 
-							let xOffsetForIndex = (radius * Math.sin(Math.toRadians(localRot))) / 1; // From the center
-							let newX = (this.canvas.width / 2) + xOffsetForIndex - (Math.sign(localRot) * (len / 2));
+							let newX = (this.canvas.width / 2) + xOffset;
+
+							// let xOffsetForIndex = (this.canvas.width / 2) + xOffset; // (radius * Math.sin(Math.toRadians(localRot))) / 1; // From the center
+							// let newX = /*(this.canvas.width / 2) + */ xOffsetForIndex - (Math.sign(localRot) * (len / 2));
 							// (this.canvas.width / 2) - (len / 2)
 							let newY = (this.canvas.height / 2) + Math.round(scale * MAJOR_TICK_SIZE) + (_fontSize / 1);
+
 							// context.translate(newX, newY);
 
 							if (this._value === 240) { // Debug
-								console.log(`Writing ${str} => i: ${i}, notch: ${notch}, localRot: ${localRot}, rot: ${rot}, rotation: ${rotation}`);
-								console.log(`\t\txOffset: ${xOffsetForIndex}, str width: ${metrics.width}, len: ${len}`);
+								console.log(`Writing ${str} => i: ${i}, radius: ${radius}, notch: ${notch}, localRot: ${localRot}, rot: ${rot}, rotation: ${rotation}`);
+								console.log(`\t\tstr width: ${metrics.width}, len: ${len}`);
 								console.log(`\t\tnewX: ${newX}, newY: ${newY} (value: ${this._value})`);
 							}
 
-							context.setTransform(Math.abs(rotation), 0, 0, 1, 0, 0);
+							context.setTransform(Math.abs(rotation), 0,
+							                     0, 1,
+												 0, 0);
 							// newX newY taken care of by the translate above
 							context.fillText(str, newX, newY); // Write here on the compass rose
+							// context.fillText(str, 0, 0); // Write here on the compass rose
 							context.restore();
 						}
-					}
-					context.beginPath();
-					if (notch % 90 === 0) { // ticks: Major / Minor
-						context.moveTo((this.canvas.width / 2) + xOffset, (this.canvas.height / 2) - Math.round(scale * BIGGEST_TICK_SIZE));
-						context.lineTo((this.canvas.width / 2) + xOffset, (this.canvas.height / 2) + Math.round(scale * BIGGEST_TICK_SIZE));
-					} else if (notch % 10 === 0) { // ticks: Major / Minor
-						context.moveTo((this.canvas.width / 2) + xOffset, (this.canvas.height / 2) - Math.round(scale * MAJOR_TICK_SIZE));
-						context.lineTo((this.canvas.width / 2) + xOffset, (this.canvas.height / 2) + Math.round(scale * MAJOR_TICK_SIZE));
 					} else {
 						context.moveTo((this.canvas.width / 2) + xOffset, (this.canvas.height / 2) - Math.round(scale * MINOR_TICK_SIZE));
 						context.lineTo((this.canvas.width / 2) + xOffset, (this.canvas.height / 2) + Math.round(scale * MINOR_TICK_SIZE));
@@ -546,7 +593,9 @@ class CompassGlobeDisplay extends HTMLElement {
 		let len = metrics.width;
 
 		context.fillStyle = this.compassGlobeColorConfig.valueColor;
-		context.fillText(strVal, (this.canvas.width / 2) - (len / 2), (this.canvas.height / 2) - Math.round(scale * MAJOR_TICK_SIZE) - 2); // (0 * fontSize / 2));
+		context.fillText(strVal,
+			             (this.canvas.width / 2) - (len / 2),
+						 (this.canvas.height / 2) - Math.round(scale * MAJOR_TICK_SIZE) - 2 - 40); // (0 * fontSize / 2));
 
 		// 'red' Axis
 		context.lineWidth = 1;

@@ -484,19 +484,39 @@ class CompassGlobeDisplay extends HTMLElement {
 
 						if (i > 290 || i < 70) { // 20 degs on each side.
 							// Set fontSize, smaller on the sides, bigger in the middle
-							let _fontSize = Math.round(scale * BASE_FONT_SIZE * Math.cos(Math.toRadians(i)));
+							// let _fontSize = Math.round(scale * BASE_FONT_SIZE * Math.cos(Math.toRadians(i)));
+							let _fontSize = Math.round(scale * BASE_FONT_SIZE * 1); // Math.cos(Math.toRadians(i)));
+
 							context.font = "bold " + _fontSize + "px " + this.compassGlobeColorConfig.valueFont;
 							let metrics = context.measureText(str);
-							let len = metrics.width;
+							// let len = metrics.width;
 
 							context.save();
-							let newX = (this.canvas.width / 2) + xOffset - (len / 2);
-							let newY = (this.canvas.height / 2) + Math.round(scale * MAJOR_TICK_SIZE) + (_fontSize / 1);
-							context.translate(newX, newY);
 							let rot = (i > 270) ? i - 360 : i;
-							// TODO We need some 'matrix' transformation here, to change text width, NOT height.
+							// We need some 'matrix' transformation here, to change text width, NOT height.
  							// context.rotate(-Math.sin(Math.toRadians(rot / 9)));  // horizontal rotation: 10 degrees max (9 = 90 / 10)
-							context.fillText(str, 0, 0,); // newX, newY);
+							let rotation = Math.cos(Math.toRadians((rot) / 1)); // [0..1]
+
+							if (true) {  // no transform
+								let len = metrics.width;
+
+								let newX = (this.canvas.width / 2) + xOffset - (len / 2);
+								let newY = (this.canvas.height / 2) + Math.round(scale * MAJOR_TICK_SIZE) + (_fontSize / 1);
+								context.translate(newX, newY);
+								context.fillText(str, 0, 0,); // newX, newY);
+
+							} else {      // with setTransform (WiP)
+								let len = (metrics.width * Math.abs(rotation));
+
+								let newX = (this.canvas.width / 2) + xOffset - (len / 2);
+								let newY = (this.canvas.height / 2) + Math.round(scale * MAJOR_TICK_SIZE) + (_fontSize / 1);
+								context.setTransform(Math.abs(rotation), 0,
+													0, 1,
+													0, 0);
+								context.translate(newX, newY);
+								// context.fillText(str, newX, newY); // Write here on the compass rose
+								context.fillText(str, 0, 0,); // newX, newY);
+							}
 							context.restore();
 						}
 					}
