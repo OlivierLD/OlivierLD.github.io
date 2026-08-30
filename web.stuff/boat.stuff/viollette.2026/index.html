@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+ | WiP.
+ | Available from http://leafletjs.com/
+ | Tutorials and examples at https://leafletjs.com/examples.html
+ | Note: No native way to change orientation
+ +-->
+<head>
+
+  <title>Id&eacute;fix IV</title>
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="../small.boat.png">
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+  <link rel="stylesheet" href="../../../webcomponents/css/web-components.css" />
+
+  <style type="text/css">
+:root {
+  --slider-scale: 0.5;
+}
+
+.list-link {
+  color: white;
+  font-size: 20px;
+  text-shadow: 2px 2px 4px black, 0 0 25px white, 0 0 10px orange;
+  text-decoration: none;
+}
+a.list-link:hover {
+  color: cyan;
+  font-weight: bold;
+  cursor: pointer;
+  text-shadow: 4px 4px 8px black, 0 0 25px white, 0 0 10px cyan;
+}
+
+dialog[open] {
+    -webkit-animation: myFadeIn 3.0s ease normal;
+}
+
+@-webkit-keyframes myFadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+}
+
+.right {
+    float: right;
+}
+.left {
+    float: left;
+}
+
+.body-pix {
+    /*display: table-cell;*/
+    /*text-align: center;*/
+    color: silver;
+    font-family: Verdana, Arial, Helvetica, Geneva;
+    font-size: 20pt;
+    vertical-align: top;
+    background: radial-gradient(at top, DarkGrey -8%, black 55%);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.custom-select {
+    font-family:'Courier New', Courier, monospace;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.help-dialog {
+	background-color: rgba(0, 0, 0, 0.75);
+	padding: 2em;
+	color: silver;
+	border: 2px solid silver;
+	border-radius: 10px;
+	/*width: 800px;*/
+	margin-left: 30px;
+	margin-top: 10px;
+    position: absolute;
+	z-index: 1001;
+	box-shadow: 2px 2px 4px grey, 0 0 25px white, 0 0 7px cyan;
+}
+
+.dialog-header {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.dialog-header-close {
+  float: right;
+}
+.dialog-header-close:hover {
+  color: cyan;
+  cursor: pointer;
+  text-shadow: 5px 5px 10px rgb(78, 39, 39), 0 0 25px white, 0 0 7px cyan;
+}
+
+#whatzat {
+    width: 40px;
+    border: 2px solid silver;
+    border-radius: 50%;
+}
+
+#whatzat:hover {
+    box-shadow: 5px 5px 10px rgb(78, 39, 39), 0 0 25px white, 0 0 7px cyan;
+    cursor: pointer;
+    transform: scale3d(1.2, 1.2, 1.2);
+}
+
+html {
+    width: fit-content;
+}
+
+body {
+    font-family: "Source Code Pro", "Courier New", Helvetica, Geneva;
+    font-weight: bold;
+    background-color: rgba(192, 192, 192, 0.35);
+}
+
+button {
+  padding: 4px 20px;
+  /* give the background a gradient */
+  background: #ffae00; /* fallback for browsers that don't support gradients */
+  background: -webkit-linear-gradient(top, #ffae00, #d67600);
+  background: -moz-linear-gradient(top, #ffae00, #d67600);
+  background: -o-linear-gradient(top, #ffae00, #d67600);
+  background: linear-gradient(top, #ffae00, #d67600);
+  border: 2px outset #dad9d8;
+  /* style the text */
+  font-family: Lato, Verdana, Andika, Arial, sans-serif; /* Andkia is available at http://www.google.com/webfonts/specimen/Andika */
+  font-size: 0.8em;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #fff;
+  text-shadow: 0 1px 10px #000;
+  /* add to small curve to the corners of the button */
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  border-radius: 15px;
+  /* give the button a drop shadow */
+  -webkit-box-shadow: rgba(0, 0, 0, .55) 0 1px 6px;
+  -moz-box-shadow: rgba(0, 0, 0, .55) 0 1px 6px;
+  box-shadow: rgba(0, 0, 0, .55) 0 1px 6px;
+}
+
+button:hover, button:focus {
+  border: 2px solid #dad9d8;
+}
+
+button:disabled {
+    background: silver;
+}
+
+compass-rose .day {
+  --bg-color: white;
+  --digit-color: #404040;
+  --with-gradient: true;
+  --display-background-gradient-from: gray;
+  --display-background-gradient-to: white;
+  --tick-color: darkGray;
+  --index-color: red;
+  --font: Arial;
+}
+
+.analogdisplay-day {
+	--bg-color: rgba(0, 0, 0, 0);
+	--digit-color: black;
+	--with-gradient: true;
+	--display-background-gradient-from: LightGrey;
+	--display-background-gradient-to: white; /* used if --withGradient: false */
+	--display-line-color: rgba(255, 255, 255, 0.5);
+	--label-fill-color: rgba(255, 255, 255, 0.5);
+	--with-display-shadow: true;
+	--shadow-color: rgba(0, 0, 0, 0.75);
+	--outline-color: DarkGrey;
+	--major-tick-color: black;
+	--minor-tick-color: black;
+	--value-color: grey;
+	--value-outline-color: black;
+	--value-nb-decimal: 1;
+	--hand-color: red;
+	--hand-outline-color: black;
+	--with-hand-shadow: true;
+	--knob-color: DarkGrey;
+	--knob-outline-color: black;
+	--font: Arial;
+	--value-font-size-factor: 1
+}
+
+.directiondisplay-01 {
+	--value-nb-decimal: 0;
+	--hand-color: rgba(192, 192, 192, 0.25);
+    --hand-outline-color: lime;
+}
+.directiondisplay-02 {
+	--value-nb-decimal: 0;
+	--hand-color: rgba(255, 0, 0, 0.5);
+    --hand-outline-color: red;
+}
+
+.arrow {
+    /*position: absolute;
+    top: 50%;
+    left: 50%;*/
+    margin-top: 0px;
+    transform: translate(-50%, -50%);
+    transform: rotate(90deg);
+    cursor: pointer;
+}
+
+.arrow span {
+    display: block;
+    width: 1.5vw;
+    height: 1.5vw;
+    border-bottom: 5px solid white;
+    border-right: 5px solid white;
+    transform: rotate(45deg);
+    margin: -10px;
+    margin-left: 15px;
+    animation: animate 2s infinite;
+    color: orange;
+}
+
+.arrow span:nth-child(2) {
+    animation-delay: -0.2s;
+}
+
+.arrow span:nth-child(3) {
+    animation-delay: -0.4s;
+}
+
+@keyframes animate {
+    0% {
+        opacity: 0;
+        transform: rotate(45deg) translate(-20px, -20px);
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: rotate(45deg) translate(20px, 20px);
+    }
+}
+
+.thermometer-day {
+  --bg-color: rgba(0, 0, 0, 0);
+  --digit-color: DarkGrey;
+  --with-gradient: true;
+  --display-background-gradient-from: black;
+  --display-background-gradient-to: LightGrey;
+  --with-display-shadow: true;
+  --shadow-color: rgba(0, 0, 0, 0.75);
+  --major-tick-color: DarkGrey;
+  --minor-tick-color: DarkGrey;
+  --value-color: LightRed;
+  --value-outline-color: black;
+  --value-nb-decimal: 2;
+  --font: 'Arial'; /* 'Source Code Pro' */
+}
+
+/*td {
+    border: 1px solid silver;
+    border-radius: 5px;
+}*/
+
+#top-div button {
+    margin-left: 10px;
+}
+
+.tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: rgba(241, 241, 241, 0.5);
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+    background: silver; /*rgb(101, 99, 99);*/
+    color: rgb(63, 54, 54);
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 12px;
+    text-shadow: 1px 1px 2px rgba(0, 255, 255, 0.5), 0 0 25px white, 0 0 5px silver;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+    background: #ddd;
+    color: black;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+    background: #ffae00; /* fallback for browsers that don't support gradients */
+    background: -webkit-linear-gradient(top, #ffae00, #d67600);
+    background: -moz-linear-gradient(top, #ffae00, #d67600);
+    background: -o-linear-gradient(top, #ffae00, #d67600);
+    background: linear-gradient(top, #ffae00, #d67600);
+}
+
+.tab .mess {
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+    text-shadow: 1px 1px 2px rgba(0, 255, 255, 0.5), 0 0 25px white, 0 0 5px orange;
+    color: black;
+    text-align: right;
+}
+
+.data-container {
+    max-height: 600px;
+    overflow-y: scroll;
+}
+
+.page-content {
+    display: grid;
+    /* grid-template-columns: 58% 42%; */
+    grid-template-columns: auto auto;
+
+}
+
+.map-content {
+    width: 50vw;
+    height: 50vw;
+}
+
+/* "Small" screens */
+@media screen and (width <= 800px) {
+    .page-content {
+        display: grid;
+        grid-template-columns: 100%;
+    }
+    .map-content {
+        width: 170vw;
+        height: 170vw;
+    }
+    .arrow {
+        display: none;
+        /* margin-top: 2vh; */
+    }
+}
+
+/* For the switch (slider) */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: calc(var(--slider-scale) * 60px);
+  height: calc(var(--slider-scale) * 34px);
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: calc(var(--slider-scale) * 26px);
+  width: calc(var(--slider-scale) * 26px);
+  left: calc(var(--slider-scale) * 4px);
+  bottom: calc(var(--slider-scale) * 4px);
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196f3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196f3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(calc(var(--slider-scale) * 26px));
+  -ms-transform: translateX(calc(var(--slider-scale) * 26px));
+  transform: translateX(calc(var(--slider-scale) * 26px));
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: calc(var(--slider-scale) * 34px);
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+/* Switch grid */
+.switch-container {
+  display: grid;
+  grid-template-columns: calc(var(--slider-scale) * 64px) 200px;
+}
+.switch-element {
+  place-self: center;
+}
+
+  </style>
+
+  <script type="module" src="../../../webcomponents/widgets/slideshow/SlideShow.js"></script>
+
+</head>
+<body>
+
+<dialog id="about-dialog" class="help-dialog" style="color: cyan;">
+    <div class="dialog-header">
+        <table width="100%">
+            <tr>
+              <td>Help !...</td>
+              <td style="padding-left: 20px;">
+                <span>
+                    <img src="../n.gif" width="48" title="NC" style="vertical-align: middle; padding: 5px;">
+                    <br/>
+                    <img src="../c.gif" width="48" title="NC" style="vertical-align: middle; padding: 5px;">
+                </span>
+              </td>
+              <td>
+                <span class="dialog-header-close" onclick="closeAboutDialog();">&times</span>
+              </td>
+            </tr>
+        </table>
+    </div>
+    <hr/>
+    <div>
+        <div id="help-content" style="max-height: 390px; overflow-y: scroll;">
+            <!-- About content -->
+            <div style="margin-top: 15px;">
+                A simple Leaflet and WebComponents interface to visualize and replay data logged when sailing.<br/><br/>
+                <i>Featuring</i>:
+                <ul>
+                    <li>LeafLet Map API</li>
+                    <li>WebComponents</li>
+                    <li>HTML5/CSS3/ES6</li>
+                    <li>...and so on!</li>
+                </ul>
+            </div>
+            <hr/>
+            <div style="margin-top: 15px;">
+                Map is draggable.
+                <br/>
+                Zoom in and out using the +/- on the chart (or double-click, and shift + double-click)
+                <br/>
+                Use the links at the bottom (Fly to) to move from place to place (experimental).
+                <br/>
+            </div>
+        </div>
+        <hr style="margin-top: 15px; margin-bottom: 5px;"/>
+        <i>OlivSoft never stops</i>
+    </div>
+</dialog>
+
+<div id="page-header">
+    <div style="display: grid; grid-template-columns: auto auto auto;">
+        <div>
+            <h1 style="padding-left: 10px;">Bretagne Sud<br/>&agrave; bord d'Id&eacute;fix IV, RM 1050</h1>
+            <div style="display: grid; grid-template-columns: auto auto; margin: 10px 0 5px 0;">
+                <span style="text-align: left;">Du 10 au 16 juillet 2026.</span>
+                <!-- input type="checkbox" id="show-surface" onchange="showSurface(this);" checked>With  Names &amp; Co -->
+                <div class="switch-container" style="margin-left: 30px; text-align: right;" title="Chart layers">
+                    <label class="switch switch-element">
+                        <input id="slide-slider" type="checkbox" onchange="showSurface(this);" checked>
+                        <span class="slider round"></span>
+                    </label>
+                    <span class="switch-element" id="carto-label">With Cartography</span>
+                </div>
+
+            </div>
+
+        </div>
+        <div style="text-align: right; padding-right: 20px;">
+            <img src="../dives/drowning.gif"
+                 id="whatzat"
+                 title="Heeeeeeelp !!"
+                 onclick="showAboutDialog();"/>
+        </div>
+        <div>
+            <div class="arrow" title="Try this!" style="margin-top: 76px;">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Map, displays, and controls -->
+<div style="width: 100%;">
+  <div class="page-content"> <!-- style="display: grid; grid-template-columns: 50% 50%;" -->
+    <div style="vertical-align: top;">
+      <!-- Column 1 -->
+      <div id="mapid" class="map-content" style="/*height: 100%;*/ box-shadow: 4px 4px 8px grey, 0 0 25px white, 0 0 7px cyan;"></div>
+      <!--div id="mapid" style="width: 40vw; height: 40vw; box-shadow: 4px 4px 8px grey, 0 0 25px white, 0 0 7px cyan;"></div-->
+      <!--div id="mapid" style="width: 90%; height: 90%; box-shadow: 4px 4px 8px grey, 0 0 25px white, 0 0 7px cyan;"></div-->
+    </div>
+    <div style="vertical-align: top; margin-left: 40px; min-width: 612px;">
+      <!-- Column 2 -->
+      <div style="border: 2px solid black; border-radius: 5px;">
+        <div style="padding-left: 10px; color: black; text-align: left; font-style: italic;">Mouse Position</div>
+        <div id="curr-pos" style="width: 98%; height: 50px; padding: 2px; margin-top: -0px;" title="Cursor's position">&nbsp;<br/>&nbsp;</div>
+      </div>
+      <div id="displays" style="text-align: center; border: 2px solid rgba(0, 0, 255, 0.5); border-radius: 5px;">
+          <div style="padding-left: 10px; color: blue; text-align: left; font-style: italic;">Slide shows - Images are clickable</div>
+          <div id="UTC-date" style="text-align: center;" title="UTC Date">&nbsp;</div>
+          <div id="display-container">
+            <div id="one" class="data-container" style="display: block;">
+                <!-- The tabs. Add them here on demand -->
+                <div class="tab" style="margin-top: 10px; display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto;"> <!-- TODO Improve the grid-template... -->
+                    <button class="tablinks active" onclick="openTab(event, 0);">Hoedic</button>
+                    <button class="tablinks" onclick="openTab(event, 1);">Sauzon</button>
+                    <button class="tablinks" onclick="openTab(event, 2);">&Eacute;clipse</button>
+                    <button class="tablinks" onclick="openTab(event, 3);">Belon</button>
+                    <button class="tablinks" onclick="openTab(event, 4);">Glenan</button>
+                </div>
+
+                <div id="hoedic" class="body-pix" style="display: block;">
+                    <slide-show id="slide-show-01"
+                                width="600"
+                                height="450"
+                                slideclick="onSlideShowClick"
+                                justify="false"
+                                style="padding: 10px; margin-left: 0;">
+                        <slide-show-image src="./images/01.jpeg" title="Mouill&eacute; &agrave; Portz-Gwen"></slide-show-image>
+                        <slide-show-image src="./images/03.jpeg" title="Ado &amp; cell phone"></slide-show-image>
+                        <slide-show-image src="./images/04.jpeg" title="Port de la Croix"></slide-show-image>
+                        <slide-show-image src="./images/05.jpeg" title="Sunset"></slide-show-image>
+                        <slide-show-image src="./images/06.jpeg" title="Sunset"></slide-show-image>
+                        <slide-show-image src="./images/07.jpeg" title="Sunset"></slide-show-image>
+                        <slide-show-image src="./images/08.jpeg" title="Sunset"></slide-show-image>
+                    </slide-show>
+                </div>
+
+                <div id="sauzon" class="body-pix" style="display: none;">
+                    <slide-show id="slide-show-02"
+                                width="600"
+                                height="450"
+                                slideclick="onSlideShowClick"
+                                justify="false"
+                                style="padding: 10px;">
+                        <slide-show-image src="./images/10.jpeg" title="Sauzon, tout au fond"></slide-show-image>
+                    </slide-show>
+                </div>
+
+                <div id="eclipse" class="body-pix" style="display: none;">
+                    <slide-show id="slide-show-03"
+                                width="600"
+                                height="450"
+                                slideclick="onSlideShowClick"
+                                justify="false"
+                                style="padding: 10px;">
+                        <slide-show-image src="./images/02.jpeg" title="Premi&egrave;re escale... Deuborh."></slide-show-image>
+                        <slide-show-image src="./images/11.jpeg" title="Mouill&eacute; &agrave; la Pointe des Poulains"></slide-show-image>
+                        <slide-show-image src="./images/12.jpeg" title="Le phare des Poulains"></slide-show-image>
+                        <slide-show-image src="./images/13.jpeg" title="L'heure approche"></slide-show-image>
+                        <slide-show-image src="./images/14.jpeg" title="Avec les lunettes"></slide-show-image>
+                        <slide-show-image src="./images/15.jpeg" title="Apr&egrave;s l'&eacute;clipse"></slide-show-image>
+                        <slide-show-image src="./images/16.jpeg" title="En route vers Port-Louis"></slide-show-image>
+                    </slide-show>
+                </div>
+
+                <div id="belon" class="body-pix" style="display: none;">
+                    <slide-show id="slide-show-03"
+                                width="600"
+                                height="450"
+                                slideclick="onSlideShowClick"
+                                justify="false"
+                                style="padding: 10px;">
+                        <slide-show-image src="./images/09.jpeg" title="Remonter le Belon"></slide-show-image>
+                        <slide-show-image src="./images/18.jpeg" title="Remonter le Belon"></slide-show-image>
+                        <slide-show-image src="./images/19.jpeg" title="Remonter le Belon"></slide-show-image>
+                        <slide-show-image src="./images/20.jpeg" title="Au coffre dans le Belon"></slide-show-image>
+                    </slide-show>
+                </div>
+
+                <div id="glenan" class="body-pix" style="display: none;">
+                    <slide-show id="slide-show-03"
+                                width="600"
+                                height="450"
+                                slideclick="onSlideShowClick"
+                                justify="false"
+                                style="padding: 10px;">
+                        <slide-show-image src="./images/17.jpeg" title="Les moutons &agrave; Bollo"></slide-show-image>
+                        <slide-show-image src="./images/21.jpeg" title="Penfret"></slide-show-image>
+                        <slide-show-image src="./images/22.jpeg" title="Les moutons &agrave; Bollo"></slide-show-image>
+                        <slide-show-image src="./images/23.jpeg" title="Mouill&eacute; au Loch"></slide-show-image>
+                        <slide-show-image src="./images/24.jpeg" title="Le Loch"></slide-show-image>
+                        <slide-show-image src="./images/25.jpeg" title="Penfret"></slide-show-image>
+                        <slide-show-image src="./images/26.jpeg" title="Driving Tata"></slide-show-image>
+                        <slide-show-image src="./images/27.jpeg" title="Les moutons &agrave; Bollo"></slide-show-image>
+                        <slide-show-image src="./images/28.jpeg" title="Les moutons &agrave; Bollo"></slide-show-image>
+                        <slide-show-image src="./images/29.jpeg" title="Gou&euml;lle"></slide-show-image>
+                        <slide-show-image src="./images/30.jpeg" title="Tata goes ashore"></slide-show-image>
+                        <slide-show-image src="./images/31.jpeg" title="Cheese !"></slide-show-image>
+                    </slide-show>
+                </div>
+
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="border: 1px solid silver; border-radius: 5px; margin-top: 10px; padding: 5px; text-align: left;">
+    <span style="margin-left: 10px;">Fly to:</span>
+    <div style="display: grid; grid-template-columns: auto auto auto auto;">
+        <ul>
+            <li><a class="list-link" href="#" onclick="flyToZoom(0);">L'&Icirc;le Longue</a></li>
+            <li><a class="list-link" href="#" onclick="flyToZoom(1);">Porz Gwen</a></li>
+            <li><a class="list-link" href="#" onclick="flyToZoom(2);">Port de la Croix</a></li>
+        </ul>
+        <ul>
+            <li><a class="list-link" href="#" onclick="flyToZoom(3);">Sauzon</a></li>
+            <li><a class="list-link" href="#" onclick="flyToZoom(4);">Port de Deuborh</a></li>
+            <li><a class="list-link" href="#" onclick="flyToZoom(5);">Plage des Poulains</a></li>
+        </ul>
+        <ul>
+            <li><a class="list-link" href="#" onclick="flyToZoom(6);">Port-Louis</a></li>
+            <li><a class="list-link" href="#" onclick="flyToZoom(7);">Port de Belon</a></li>
+            <li><a class="list-link" href="#" onclick="flyToZoom(8);">&Icirc;le du Loch</a></li>
+        </ul>
+        <ul>
+            <li><a class="list-link" href="#" onclick="flyToZoom(9);">Beg Meil</a></li>
+        </ul>
+    </div>
+</div>
+
+
+<hr/>
+
+<div style="color: silver;">
+  OpenSource JavaScript map API at <a href="https://leafletjs.com/" target="leaflet">leafletjs.com</a>. Zoom for details...<br/>
+  <i style="color: silver;">OlivSoft never stops</i>
+</div>
+
+<script type="text/javascript">
+
+    const VERBOSE = false;
+
+    if (Math.toDegrees === undefined) {
+        Math.toDegrees = (rad) => {
+            return rad * (180 / Math.PI);
+        }
+    }
+
+    if (Math.toRadians === undefined) {
+        Math.toRadians = (deg) => {
+            return deg * (Math.PI / 180);
+        }
+    }
+
+    function setNeedleShape(id, radio) {
+        // debugger;
+        document.getElementById(id).hand = radio.value;
+    }
+
+    function decToSex(val, ns_ew) {
+        let absVal = Math.abs(val);
+        let intValue = Math.floor(absVal);
+        let dec = absVal - intValue;
+        let i = intValue;
+        dec *= 60;
+        let min = dec.toFixed(4);
+        while (min.length < 7) {
+            min = '0' + min;
+        }
+        let s = i + "°" + min + "'";
+
+        if (val < 0) {
+            s += (ns_ew === 'NS' ? 'S' : 'W');
+        } else {
+            s += (ns_ew === 'NS' ? 'N' : 'E');
+        }
+        return s;
+    }
+
+    let getGCDistance = (from, to) => {
+        if (from === undefined || to === undefined) {
+            throw ({err: "From and To are required"});
+        }
+        let cos = Math.sin(Math.toRadians(from.lat)) * Math.sin(Math.toRadians(to.lat)) + Math.cos(Math.toRadians(from.lat)) * Math.cos(Math.toRadians(to.lat)) * Math.cos(Math.toRadians(to.lng - from.lng));
+        return Math.acos(cos);
+    };
+
+    let getGCDistanceInDegrees = (from, to) => {
+        return Math.toDegrees(getGCDistance(from, to));
+    };
+
+    let getGCDistanceInNM = (from, to) => {
+        return (getGCDistanceInDegrees(from, to) * 60);
+    };
+
+    // Add tabs here  at will,as needed, by div id.
+    const TABS = ['hoedic', 'sauzon', 'eclipse', 'belon', 'glenan'];
+
+    let openTab = (evt, tabNum) => {
+        let tabLinks = document.getElementsByClassName("tablinks");
+        for (let i=0; i<tabLinks.length; i++) {
+            tabLinks[i].className = tabLinks[i].className.replace(" active", ""); // Reset
+        }
+        for (let i=0; i<TABS.length; i++) {
+            document.getElementById(TABS[i]).style.display = (i === tabNum) ? 'block' : 'none';
+        }
+        evt.currentTarget.className += " active";
+    };
+
+    /*
+    let map = L.map('mapid'); // .setView([currentLatitude, currentLongitude], 13);
+
+    const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		maxZoom: 19,
+		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+	}).addTo(map);
+    */
+    let map = L.map('mapid'); // .setView([currentLatitude, currentLongitude], 13);
+
+	let mbAttr = 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community';
+	let mbUrl = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
+
+
+    const tiles = L.tileLayer(mbUrl, {
+		maxZoom: 20,
+		attribution: mbAttr
+	}).addTo(map);
+
+    const tilesOSM = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		maxZoom: 20,
+		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        opacity: 0.5
+	}).addTo(map);
+
+    // map.fitBounds(polyline.getBounds());
+    let currentLatitude = 47.63367676483503; // Groix
+    let currentLongitude = -3.4435655342969067;
+    map.setView([currentLatitude, currentLongitude], 9);
+
+
+    let latlngs; // To be populated from JSON.
+
+    const ZOOM_POSITIONS = [
+        new L.LatLng(47.57024110996358, -2.9066533315514125),  // L'Ile Longue
+        new L.LatLng(47.34125343082814, -2.889354741541723),   // Porz Gwen
+        new L.LatLng(47.33410997936815, -2.8750196913737613),  // Port de la Croix
+        new L.LatLng(47.37002489644139, -3.2205583568268064),  // Sauzon, au fond
+        new L.LatLng(47.379627639284195, -3.2354295640667674), // Premiere escale, Deuborh
+        new L.LatLng(47.38819314840678, -3.2489042310490928),  // Plage des Poulains
+        new L.LatLng(47.71089086088106, -3.3552457482811224),  // Port-Louis
+        new L.LatLng(47.81331607015859, -3.704537009690381),   // Port de Belon
+        new L.LatLng(47.705418193664926, -3.990658527170095),  // Ile du Loch
+        new L.LatLng(47.863019193809116, -3.9823127885398173)  // Beg Meil
+    ];
+
+    function flyToZoom(idx) {
+        // map.panTo(ZOOM_POSITIONS[idx]);
+        // map.setView(ZOOM_POSITIONS[idx], 18);
+        map.flyTo(ZOOM_POSITIONS[idx]);
+    }
+
+    // Switch to show/hide the OpenStreetMap layer on top of the satellite imagery.
+    function showSurface(checkbox) {
+        if (checkbox.checked) {
+            tilesOSM.addTo(map);
+            document.getElementById("carto-label").innerHTML = "With Cartography";
+        } else {
+            map.removeLayer(tilesOSM);
+            document.getElementById("carto-label").innerHTML = "Sat Pic only";
+        }
+    }
+
+    // Used as an example, See "// markers" below. Used to hold pictures.
+    const ALL_MARKERS = [
+    [ { // One
+        "latitude": 47.57024110996358,
+        "longitude": -2.9066533315514125,
+        "name": "L'&Icirc;le Longue'",
+        "content": ""
+    }, {
+        "latitude": 47.34125343082814,
+        "longitude": -2.889354741541723,
+        "name": "Porz Gwen",
+        "content": ""
+    }, {
+        "latitude": 47.33410997936815,
+        "longitude": -2.8750196913737613,
+        "name": "Port de la Croix",
+        "content": ""
+    }, {
+        "latitude": 47.37002489644139,
+        "longitude": -3.2205583568268064,
+        "name": "Sauzon, au fond.",
+        "content": "Ici, on &eacute;choue &agrave; mar&eacute;e basse."
+    }, {
+        "latitude": 47.379627639284195,
+        "longitude":  -3.2354295640667674,
+        "name": "Premi&egrave;re escale...",
+        "content": "Port de Deuborh"
+    }, {
+        "latitude": 47.38819314840678,
+        "longitude": -3.2489042310490928,
+        "name": "Plage des Poulains",
+        "content": ""
+    }, {
+        "latitude": 47.71089086088106,
+        "longitude":  -3.3552457482811224,
+        "name": "Port-Louis",
+        "content": ""
+    }, {
+        "latitude": 47.81331607015859,
+        "longitude":  -3.704537009690381,
+        "name": "Port de Belon",
+        "content": ""
+    }, {
+        "latitude": 47.705418193664926,
+        "longitude":  -3.990658527170095,
+        "name": "Ile du Loch",
+        "content": ""
+    }, {
+        "latitude": 47.863019193809116,
+        "longitude": -3.9823127885398173,
+        "name": "Beg Meil",
+        "content": ""
+    } ],
+    [], []];
+
+    let markers = ALL_MARKERS[0];
+
+    let currentMarkers = [];
+
+    let polyline = null;
+
+    // To draw in pixels, see https://leafletjs.com/examples/extending/extending-2-layers.html
+    // Also https://codepen.io/adelaide01/pen/EXMwbY
+
+    const INIT_PATH_IDX = 0; // 950; // 0;
+
+    let pathIdx = INIT_PATH_IDX;
+    let circle = null;
+    let marker = null;
+    let tooltip = null;
+
+    map.addEventListener('mousemove', (event) => {
+        // let lat = Math.round(event.latlng.lat * 100000) / 100000;
+        // let lng = Math.round(event.latlng.lng * 100000) / 100000;
+        let lat = event.latlng.lat;
+        let lng = event.latlng.lng;
+        while (lng > 180) {
+            lng -= 360;
+        }
+        while (lng < -180) {
+            lng += 360;
+        }
+        if (true) {
+            document.getElementById('curr-pos').innerHTML = `<span class="left">${decToSex(lat, "NS")}</span><span class="right">(${lat})</span><br/><span class="left">${decToSex(lng, "EW")}</span><span class="right">(${lng})</span>`;
+        }
+
+        if (tooltip != null) {
+            map.removeLayer(tooltip);
+        }
+        tooltip = L.tooltip()
+                        .setLatLng(L.latLng([lat, lng]))
+                        .setContent(`${decToSex(lat, "NS")}<br/>${decToSex(lng, "EW")}`)
+                        .addTo(map);
+
+    });
+
+    // markers on the chart
+    if (true) {
+        markers.forEach(mark => {
+            oneMark = L.marker([(mark.latitude), (mark.longitude)], { title: mark.name });
+            currentMarkers.push(oneMark);
+            oneMark.addTo(map)
+                    .bindPopup('<b>' + mark.name + '</b><br/>' + mark.content); // .openPopup();
+        });
+    }
+
+    function lpad(s, w, len) {
+        let str = s;
+        while (str.length < len) {
+            str = w + str;
+        }
+        return str;
+    }
+
+    // Recurse in that one.
+    function moveTo(j, justMove) {
+        if (j < latlngs.length && (!cancelDriving || (justMove !== undefined && justMove === true) )) {
+            let pos = latlngs[j];
+            if (keepDriving || (justMove !== undefined && justMove === true)) {
+                window.setTimeout(() => {
+                    if (VERBOSE) {
+                        // 0 - Dump all values
+                        console.log(`Read from data file: ${JSON.stringify(pos, null, 2)}`);
+                    }
+                    // 1 - Data
+                    // let displayPos = `${decToSex(pos.lat, "NS")}<br/>${decToSex(pos.lng, "EW")}`;
+                    let displayPos = `${decToSex(pos.lat, "NS")}<br/>${decToSex(pos.lng, "EW")}<br/><span title="GRID Square">${pos.gridSquare}</span><br/><span title="Google Plus.&#13;Use to search GoogleMap">${pos.googlePlusCode}</span>`;
+                    if (pos.rmcDate) {
+                        displayDate = `${pos.rmcDate}`;
+                        document.getElementById('UTC-date').innerHTML = displayDate;
+                    }
+                    if (pos.cog && pos.cog != -1) {
+                        document.getElementById('sog-01').value = pos.sog;
+                        document.getElementById('jumbo-01').value = pos.sog;
+
+                        document.getElementById('cog-01').value = pos.cog;
+                        document.getElementById('cog-02').value = pos.cog;
+
+                        document.getElementById('compass-globe-01').value = parseInt(pos.cog);
+                        // document.getElementById('compass-globe-01').repaint();
+                    }
+
+                    document.getElementById('curr-pos').innerHTML = displayPos;
+                    document.getElementById('curr-point').innerText = `${j} /`;
+                    document.getElementById('data-slider').value = j;
+                    document.getElementById('sliderValue01').value = j;
+
+                    // 2 - Chart (centered on pos) and graphic
+                    // map.setZoom(20);
+                    map.panTo(new L.LatLng(pos.lat, pos.lng));
+
+                    if (circle !== null) {
+                        map.removeLayer(circle);
+                    }
+                    if (marker !== null) {
+                        map.removeLayer(marker);
+                    }
+                    circle = L.circle([pos.lat, pos.lng], 50, {
+                        color: 'green',
+                        fillColor: '#30f',
+                        fillOpacity: 0.25
+                    });
+                    marker = L.marker([pos.lat, pos.lng]);
+                    circle.addTo(map);
+                    marker.addTo(map)
+
+                    if (justMove === undefined || justMove === false) {
+                        pathIdx += 1; // 5;
+                        moveTo(pathIdx);
+                    }
+                }, 50);
+            }
+        } else {
+            document.getElementById('start-path').disabled = false;
+            document.getElementById('cancel-path').disabled = true;
+            document.getElementById('stop-path').disabled = true;
+            document.getElementById('resume-path').disabled = true;
+
+            document.getElementById('data-slider').disabled = false;
+
+            document.getElementById('curr-point').innerText = "";
+            document.getElementById('curr-pos').innerHTML = "&nbsp;<br/>&nbsp;";
+            cancelDriving = true;
+            if (circle !== null) {
+                map.removeLayer(circle);
+            }
+            if (marker !== null) {
+                map.removeLayer(marker);
+            }
+            pathIdx = INIT_PATH_IDX; // 0;
+        }
+    };
+
+    // on "REPLAY" button click
+    let showAboutDialog = () => {
+        let aboutDialog = document.getElementById("about-dialog");
+        if (aboutDialog.show !== undefined) {
+            aboutDialog.show();
+        } else {
+            alert(NO_DIALOG_MESSAGE);
+            aboutDialog.style.display = 'inline';
+        }
+    };
+
+    let closeAboutDialog = () => {
+        let aboutDialog = document.getElementById("about-dialog");
+        if (aboutDialog.close !== undefined) {
+            aboutDialog.close();
+        } else {
+            // alert(NO_DIALOG_MESSAGE);
+            aboutDialog.style.display = 'none';
+        }
+    };
+
+    function onSlideShowClick(src) {
+        console.log(">> Client side!! Slide " + src + " was clicked.");
+        window.open(src, '_blank'); // This is an example
+    }
+
+    window.onload = () => {
+      console.log("Page Loaded!");
+      // loadPathData();
+      // document.getElementById('jumbo-01').repaint(); // To load the font...
+    };
+
+</script>
+
+</body>
+</html>

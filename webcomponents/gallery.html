@@ -3466,14 +3466,14 @@
 						   onchange="applyBackground('top-cell-aw-2', this.value);">None</input>
 					<hr/>
 					<wind-angle-display class="analogdisplay-day"
-										title="Apparent Wind Speed in Knots"
+										title="True Wind Speed in Knots"
 										id="aw-02"
 										value="{ &quot;wa&quot;: -60, &quot;ws&quot;: 13.4 }"
 										major-ticks="45"
 										minor-ticks="5"
 										with-border="true"
 										with-digits="true"
-										label="App Wind"
+										label="TWA"
 										hand="wind"
 										width="300"
 										height="300"></wind-angle-display>
@@ -3489,7 +3489,7 @@
                     </script>
 					<input type="text" id="json-aw-2" style="display: none;"
 						   value="{ &quot;awa&quot;: -60, &quot;aws&quot;: 13.4 }">
-					AWA:
+					TWA:
 					<input type="number"
 						   id="awa-02"
 						   onchange="updateJsonAw2();"
@@ -3536,13 +3536,13 @@
 					<wind-angle-display class="analogdisplay-day"
 										title="Apparent Wind Speed in Knots"
 										id="aw-03"
-                                        hand="wind"
+                                        hand="droplet"
 										value="{ &quot;wa&quot;: 100, &quot;ws&quot;: 12.3 }"
 										major-ticks="45"
 										minor-ticks="5"
 										with-border="true"
 										with-digits="true"
-										label="AWA 60&deg;"
+										label="100&deg; S"
 										width="300"
 										height="300"></wind-angle-display>
 				</div>
@@ -3553,7 +3553,7 @@
                             let awa = document.getElementById('awa-03').value;
                             document.getElementById('json-aw').value = '{ "wa":' + awa + ', "ws":' + aws + '}';
                             document.getElementById('aw-03').value = '{ "wa":' + awa + ', "ws":' + aws + '}';
-                            document.getElementById('aw-03').label = 'AWA ' + awa + '°';
+                            document.getElementById('aw-03').label = Math.abs(awa) + '°' + (awa < 0 ? ' P' : ' S');
                         }
                     </script>
 					<input type="text" id="json-aw" style="display: none;"
