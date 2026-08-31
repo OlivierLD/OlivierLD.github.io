@@ -3375,6 +3375,7 @@
                     with-border="true"
                     with-digits="true"
                     label="App Wind"
+                    hand="regular|wind|droplet"
                     width="300"
                     height="300">&lt;/wind-angle-display>
                 </pre>
@@ -3545,7 +3546,7 @@
 										minor-ticks="5"
 										with-border="true"
 										with-digits="true"
-										label="100&deg; S"
+										label="100&deg; Stbd"
 										width="300"
 										height="300"></wind-angle-display>
 				</div>
@@ -3556,7 +3557,7 @@
                             let awa = document.getElementById('awa-03').value;
                             document.getElementById('json-aw').value = '{ "wa":' + awa + ', "ws":' + aws + '}';
                             document.getElementById('aw-03').value = '{ "wa":' + awa + ', "ws":' + aws + '}';
-                            document.getElementById('aw-03').label = Math.abs(awa) + '°' + (awa < 0 ? ' P' : ' S');
+                            document.getElementById('aw-03').label = Math.abs(awa) + '°' + (awa < 0 ? ' Port' : ' Stbd');
                         }
                     </script>
 					<input type="text" id="json-aw" style="display: none;"
