@@ -658,7 +658,7 @@ class WindAngleDisplay extends HTMLElement {
 							centerY + ((dropletCenter.x * Math.sin(radAngle)) + (dropletCenter.y * Math.cos(radAngle))),
 							dropletRadius, 0, 2 * Math.PI, false);
 
-				if (false) { // Replaced by evenodd
+				if (false) { // Replaced by evenodd, below
 					context.moveTo(centerX + ((dropletCenter.x * Math.cos(radAngle)) - (dropletCenter.y * Math.sin(radAngle))),
 								   centerY + ((dropletCenter.x * Math.sin(radAngle)) + (dropletCenter.y * Math.cos(radAngle))));
 					context.globalAlpha = 0.20;
@@ -684,11 +684,11 @@ class WindAngleDisplay extends HTMLElement {
 		context.fill('evenodd');
 
 		// Draw line around figure
-		// if (this.hand !== 'droplet') { // Regular or wind needle
+		if (this.hand !== 'droplet') { // Regular or wind needle
 			context.lineWidth = 2;
 			context.strokeStyle = this.analogDisplayColorConfig.handOutlineColor;
 			context.stroke();
-		// }
+		}
 		context.closePath();
 
 		// Knob
