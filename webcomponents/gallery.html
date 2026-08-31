@@ -1593,10 +1593,13 @@
             }
         }
 
-        function applyClass(id, classList) {
+        function applyClass(id, classList, extra) {
             let widget = document.getElementById(id);
             let cssClass = classList.value;
             widget.className = cssClass;
+            if (extra) {
+                widget.classList.add(extra);
+            }
             widget.repaint();
         }
 
@@ -3514,10 +3517,10 @@
 			</td>
 
 			<td valign="top">
-				<div id="top-cell-aw" class="black-frame centered" style="background-color: white;">
+				<div id="top-cell-aw-3" class="black-frame centered" style="background-color: white;">
 					<small>Try to combine Style, BG, border.</small><br/>
 					Style:
-					<select onchange="applyClass('aw-03', this);">
+					<select onchange="applyClass('aw-03', this, 'yellow-droplet');">
 						<option value="analogdisplay-day" selected>Day</option>
 						<option value="analogdisplay-night">Night</option>
 						<option value="analogdisplay-monochrome-cyan">Cyan</option>
@@ -3527,14 +3530,14 @@
 					</select>
 					<br/>
 					BG:
-					<input type="radio" name="bg4" value="black" onchange="applyBackground('top-cell-aw', this.value);">Black</input>
-					<input type="radio" name="bg4" value="white" onchange="applyBackground('top-cell-aw', this.value);"
+					<input type="radio" name="bg4" value="black" onchange="applyBackground('top-cell-aw-3', this.value);">Black</input>
+					<input type="radio" name="bg4" value="white" onchange="applyBackground('top-cell-aw-3', this.value);"
 						   checked>White</input>
 					<input type="radio" name="bg4" value="transparent"
-						   onchange="applyBackground('top-cell-aw', this.value);">None</input>
+						   onchange="applyBackground('top-cell-aw-3', this.value);">None</input>
 					<hr/>
-					<wind-angle-display class="analogdisplay-day"
-										title="Apparent Wind Speed in Knots"
+					<wind-angle-display class="analogdisplay-day yellow-droplet"
+										title="WiP&#13;Apparent Wind Speed in Knots"
 										id="aw-03"
                                         hand="droplet"
 										value="{ &quot;wa&quot;: 100, &quot;ws&quot;: 12.3 }"
