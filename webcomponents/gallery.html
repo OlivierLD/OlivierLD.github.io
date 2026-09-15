@@ -4309,8 +4309,11 @@
 							style="margin-top: 3px;">Pos to SF
 					</button>
                     <button onclick="callAfter('world-map-04')" title="Satellites and Great Circle (Paris-Hawaii)">After</button>
+                    <!--
+                    Increasing latitude: https://olivierld.github.io/web.stuff/nse/nse.html#mercator
+                    -->
                     <div style="margin: 10px 0 0 10px;">
-                        Projection
+                        Projection:
                         <br/>
                         <div class="wrapper">
                             <input type="radio" name="projection" value="MERCATOR" checked onchange="setProjection('world-map-04', this);" id="option-1">
@@ -4323,6 +4326,11 @@
                                 <div class="dot"></div>
                                 <span title="AKA Anaximandre">Square</span>
                             </label>
+                        </div>
+                        <div style="margin-top: 5px;">
+                            For Mercator's foundation - the increasing latitude (&lambda;) concept - see <a href="/web.stuff/nse/nse.html#mercator" target="_blank">Here</a>.
+                            <br/>
+                            <code>&lambda; = ln tan((&Pi; / 4) + (&phi; / 2))</code>
                         </div>
                     </div>
                 </div>
@@ -8436,8 +8444,15 @@ function plotBarographRC(graphId, recenter, lineColor='lime', graphLabel='Rework
          console.log("Chartless Map, on the doAfter method.");
 
          // let center = ChartlessMap.posToCanvas(this._centerLat, this._centerLng, this._projection, this._centerLat, this._centerLng, this._chartWidth, this._width, this._height);
-         let centerLat = elmt.centerLat; // (elmt.north - elmt.south) / 2 + elmt.south;
-         let centerLng = elmt.centerLng; // (elmt.east - elmt.west) / 2 + elmt.west;
+         let centerLat;
+         let centerLng;
+         if (elmt.centerLat && elmt.centerLng) {
+            centerLat = elmt.centerLat; // (elmt.north - elmt.south) / 2 + elmt.south;
+            centerLng = elmt.centerLng; // (elmt.east - elmt.west) / 2 + elmt.west;
+         } else {
+            centerLat = ((elmt.north - elmt.south) / 2) + elmt.south;
+            centerLng = ((elmt.east - elmt.west) / 2) + elmt.west;
+         }
          let center = elmt.posToCanvas(centerLat, centerLng);
          // Plot center
          context.save();
