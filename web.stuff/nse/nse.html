@@ -2552,13 +2552,13 @@
     </p>
     <p>
         <i>Exemple&nbsp;:</i>
-        <b>Latitude croissante de &phi;=45&deg;</b>.
-        (&Pi; / 4) rad = 45&deg;. Donc (&Pi; / 4)&deg; + (&phi;/2)&deg; = 67.5&deg;.
-        Dans la formule ci-dessus, on a donc φ=45&deg;. On cherche d'abord tan(67.5&deg;), on trouve 2.41421.
+        <b>Latitude croissante de 45&deg;</b>.<br/>
+        &phi;=45&deg;, donc (&Pi;/4)&deg; + (&phi;/2)&deg; = 67.5&deg;.
+        On cherche d'abord tan(67.5&deg;), on trouve 2.41421.
         Le logarithme n&eacute;p&eacute;rien de cette valeur est 0.88137, qu'on convertit de radians en degr&eacute;s pour trouver 50.498986&deg;, soit <b>50&deg;29.94'</b>.
     </p>
     <p>
-        <i>Ceci signifie qu'&agrave; une latitude de 45&deg;, la repr&eacute;sentation sur une carte Mercator de cette valeur &agrave; la taille de 50&deg;29.94' de longitude.</i>
+        <i>Ceci signifie qu'&agrave; une latitude de 45&deg;, la repr&eacute;sentation sur une carte Mercator de cette valeur &agrave; la taille de 50&deg;29.94' de longitude &agrave; l'&eacute;quateur.</i>
     </p>
     <p>
         La figure suivante illustre le calcul pr&eacute;c&eacute;dent.<br/>
@@ -2568,8 +2568,16 @@
 
         L'arc de cercle repr&eacute;sent&eacute; sur la carte est centr&eacute; sur le point de coordonn&eacute;es 0,0.<br/>
         On voit que la m&ecirc;me distance correspond &agrave; 45&deg;N, et &agrave; 50&deg;29,9'W.
-        </p>
-        <p>
+    </p>
+    <p>
+        La figure ci-dessus illustre aussi un autre d&eacute;tail &agrave; ne pas n&eacute;gliger.<br/>
+        Par d&eacute;finition, le mille marin est une minute d'arc au centre de la Terre projet&eacute;e &agrave; sa surface. &Agrave; prendre donc sur un "grand cercle",
+        comme les m&eacute;ridiens (les m&eacute;ridiens ont tous la m&ecirc;me taille, &agrave; l'inverse des parall&egrave;les dont la taille diminue au fur et &agrave; mesure que la latitude augmente,
+        qu'on s'approche du p&ocirc;le). Pour mesurer une distance sur une carte Mercator, on utilise le compas &agrave; pointes s&egrave;ches pour prendre une r&eacute;f&eacute;rence
+        sur les bords verticaux de la carte, l'&eacute;chelle des latitudes. Cette &eacute;chelle - comme d&eacute;j&agrave; dit - se dilate quand on va vers les p&ocirc;les.<br/>
+        <i>Il est imp&eacute;ratif de prendre cette r&eacute;f&eacute;rence au plus pr&egrave;s de la latitude de la distance qu'on veut mesurer !</i>
+    </p>
+    <p>
         Les canevas Mercator sont des cartes vides, mais qui respectent - pour une latitude donn&eacute;e - cette notion de "Latitude Croissante".
         &Agrave; l'&eacute;quateur, la projection est presque carr&eacute;e, &agrave; 50&deg; de latitude, ces "carr&eacute;s" sont nettement plus hauts que larges.
         <br/>
