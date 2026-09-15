@@ -2512,44 +2512,55 @@
 
 <div class="content">
     <h2><a name="mercator">Mercator et Latitude Croissante</a></h2>
-    <p>
-        La "Latitude Croissante" est le fondement de la construction des cartes Mercator.
-        <br/>
-        On rappelle que l'int&eacute;r&ecirc;t majeur de la projection de Mercator est de repr&eacute;senter un cap constant
-        entre deux points de la carte par une droite (loxodromie), ce qui n'est <i>pas vrai</i> pour les autres projections.
-        <br/>
-        C'est fort loin d'&ecirc;tre aussi trivial que &ccedil;a en a l'air... Une carte est plate, la Terre est sph&eacute;rique...
-        Mercator &eacute;tait un g&eacute;ographe flamand n&eacute; le 5 mars 1512.
-        <br/>
-        Pour la latitude &phi;, &lambda; est la latitude croissante de &phi; (ou &Phi;), exprim&eacute;e en radians.
-        <div class="postit">
-            $$ \lambda = \ln  \tan \left( \dfrac{\pi}{4} + \dfrac{\phi}{2} \right) $$
+    <div style="display: grid; grid-template-columns: 70% 30%;">
+        <div>
+            <p>
+                La "Latitude Croissante" est le fondement de la construction des cartes Mercator.
+                <br/>
+                On rappelle que l'int&eacute;r&ecirc;t majeur de la projection de Mercator est de repr&eacute;senter un cap constant
+                entre deux points de la carte par une droite (loxodromie), ce qui n'est <i>pas vrai</i> pour les autres projections.
+                <br/>
+                C'est fort loin d'&ecirc;tre aussi trivial que &ccedil;a en a l'air... Une carte est plate, la Terre est sph&eacute;rique...
+                Mercator &eacute;tait un g&eacute;ographe flamand n&eacute; le 5 mars 1512.
+                <br/>
+                Pour la latitude &phi;, &lambda; est la latitude croissante de &phi; (ou &Phi;), exprim&eacute;e en radians.
+                <div class="postit">
+                    $$ \lambda = \ln  \tan \left( \dfrac{\pi}{4} + \dfrac{\phi}{2} \right) $$
+                </div>
+            <i>Attention</i>&nbsp;: On utilise ici les logarithmes n&eacute;p&eacute;riens (ln), et non d&eacute;cimaux (log),
+            et la valeur trouv&eacute;e est exprim&eacute;e en radians.
+            </p>
+            <p>
+            On rappelle que&nbsp;:
+            <div class="postit">
+                <ul style="list-style-type: none;">
+                    <li>$$ \dfrac{\pi}{4} rad = 45&deg; $$</li>
+                    <li>$$ \tan \left( \dfrac{\pi}{4} \right) = 1 $$</li>
+                    <li>$$ \ln(1) = 0 $$</li>
+                </ul>
+            </div>
+            </p>
+            <p>
+            C'est donc la formule qu'on utilise pour construire les cartes Mercator.
+            <br/>
+                &Agrave; nouveau, ces cartes pr&eacute;sentent l'int&eacute;r&ecirc;t majeur de repr&eacute;senter les loxodromies <i>par des lignes droites</i>.
+                Quand bien m&ecirc;me le probl&egrave;me paraitrait simple, la solution n'est pas compl&egrave;tement triviale (voir ci-dessus)&nbsp;!
+            </p>
+            <p>
+                &Agrave; l'aide de cette formule, il est possible de r&eacute;aliser des canevas Mercator, fort commodes lorsqu'on fait un point par droites de hauteur. De tels canevas, r&eacute;alis&eacute;s &agrave; l'aide de cette formule sont fournis dans un document s&eacute;par&eacute;.
+            </p>
+            <p>
+                Les cartes de Mercator ne peuvent pas repr&eacute;senter les p&ocirc;les, qui ont du fait de la formule utilis&eacute;e une latitude croissante infinie (tan(90&deg;)=∞). La latitude croissante exprime en fait l'&eacute;chelle &agrave; consid&eacute;rer - le rapport entre un degr&eacute; de latitude et un degr&eacute; de longitude - &agrave; une latitude donn&eacute;e.
+            </p>
         </div>
-       <i>Attention</i>&nbsp;: On utilise ici les logarithmes n&eacute;p&eacute;riens (ln), et non d&eacute;cimaux (log),
-       et la valeur trouv&eacute;e est exprim&eacute;e en radians.
-    </p>
-    <p>
-       On rappelle que&nbsp;:
-       <div class="postit">
-        <ul style="list-style-type: none;">
-            <li>$$ \dfrac{\pi}{4} rad = 45&deg; $$</li>
-            <li>$$ \tan \left( \dfrac{\pi}{4} \right) = 1 $$</li>
-            <li>$$ \ln(1) = 0 $$</li>
-        </ul>
-       </div>
-    </p>
-    <p>
-       C'est donc la formule qu'on utilise pour construire les cartes Mercator.
-       <br/>
-        &Agrave; nouveau, ces cartes pr&eacute;sentent l'int&eacute;r&ecirc;t majeur de repr&eacute;senter les loxodromies <i>par des lignes droites</i>.
-        Quand bien m&ecirc;me le probl&egrave;me paraitrait simple, la solution n'est pas compl&egrave;tement triviale (voir ci-dessus)&nbsp;!
-    </p>
-    <p>
-        &Agrave; l'aide de cette formule, il est possible de r&eacute;aliser des canevas Mercator, fort commodes lorsqu'on fait un point par droites de hauteur. De tels canevas, r&eacute;alis&eacute;s &agrave; l'aide de cette formule sont fournis dans un document s&eacute;par&eacute;.
-    </p>
-    <p>
-        Les cartes de Mercator ne peuvent pas repr&eacute;senter les p&ocirc;les, qui ont du fait de la formule utilis&eacute;e une latitude croissante infinie (tan(90&deg;)=∞). La latitude croissante exprime en fait l'&eacute;chelle &agrave; consid&eacute;rer - le rapport entre un degr&eacute; de latitude et un degr&eacute; de longitude - &agrave; une latitude donn&eacute;e.
-    </p>
+        <div style="border: 1px solid black; border-radius: 5px; padding: 10px; margin: 10px;">
+            <img src="images/mercator.png" height="500px" style="display: block; margin: auto;">
+            <br/>
+            On peut <i>approximativement</i> consid&eacute;rer que la projection Mercator est la projection de la surface de la Terre
+            sur un cylindre qui aurait le m&ecirc;me diam&egrave;tre. Ainsi, les p&ocirc;les sont &agrave; l'infini...<br/>
+            Encore une fois, <i>ceci est une approximation</i> ! La figure ci-dessus ne fait intervenir <i>que</i> la tangente de la latitude &phi;...
+        </div>
+    </div>
     <p>
         <i>Exemple&nbsp;:</i>
         <b>Latitude croissante de 45&deg;</b>.<br/>
