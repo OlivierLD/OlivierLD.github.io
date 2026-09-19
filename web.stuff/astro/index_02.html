@@ -2434,6 +2434,7 @@ let toggleForeground = () => {
         let autoUpdate = document.getElementById('auto-geoloc-slider').checked;
 
         if (simulatePressureAndHeading) {
+            // Heading here
             let diff = (Math.random() - 0.5) * 2.0; // [-1..1]
             hdg += diff;
             let _hdg = Math.trunc(hdg);
@@ -2460,6 +2461,7 @@ let toggleForeground = () => {
 
     let prmslUpdater = () => { // Simulator
         if (simulatePressureAndHeading) {
+            // Pressure here
             let prmslDiff = (Math.random() - 0.5) * 0.2; // [-0.1..0.1]
             prmsl += prmslDiff;
             if (prmsl > 1040) {
