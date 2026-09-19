@@ -4743,6 +4743,33 @@ map.addEventListener('mousemove', evt => {
 				</div>
 			</td>
 		</tr>
+		<tr>
+			<td valign="top" style="background-color: silver; color: black; border-radius: 5px; padding: 5px; margin-top: 10px;">
+                OLED-like display:
+				<div class="black-frame centered">
+					<marquee-panel id="marquee-panel-04"
+								   class="marquee-03"
+								   width="500"
+								   height="250"
+								   nb-cols="128"
+								   nb-lines="64"
+								   display-data='{ "text-array": ["       Network Name:",
+                                                                  "        NMEANetwork",
+                                                                  "        IP address:",
+                                                                  "         10.42.0.1"], "x": 4, "y": 20 }'/>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<div class="black-frame">
+					<button onclick="marqueeScrollUp('marquee-panel-04');"
+							title="Go!"
+							style="margin-top: 3px;">Scroll Up
+					</button>
+				</div>
+			</td>
+		</tr>
 	</table>
 </div>
 <hr/>

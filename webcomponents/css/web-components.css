@@ -550,6 +550,13 @@ compass-display .green {
 	--fg-color-to: yellow;
 }
 
+.marquee-03 {
+	--bg-color-from: black;
+	--bg-color-to: black;
+	--fg-color-from: white;
+	--fg-color-to: silver;
+}
+
 .dir-16-day {
 	--bg-color: rgba(0, 0, 0, 0);
 	--with-gradient: true;
