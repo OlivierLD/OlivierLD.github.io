@@ -2,6 +2,7 @@
 
 /*
  * Inspired by Navigator (www.tecepe.com.br/nav), tab StarFinder, on Android
+ * Also look at Stellarium: https://stellarium-web.org/
  */
 
 const celestialSphereVerbose = false;
