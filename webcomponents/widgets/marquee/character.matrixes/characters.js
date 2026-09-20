@@ -1224,4 +1224,17 @@ characters.push({
 		"     "]
 });
 
+characters.push({ // À (&Agrave;), full dot.
+	key: "À", matrix: ["XXXXX",
+		"XXXXX",
+		"XXXXX",
+		"XXXXX",
+		"XXXXX",
+		"XXXXX",
+		"XXXXX",
+		"XXXXX",
+		"XXXXX",
+		"XXXXX"]
+});
+
 export default characters;
