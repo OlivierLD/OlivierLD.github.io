@@ -621,19 +621,19 @@ input:checked + .slider:before {
                         <slide-show-image src="./images/42.jpeg" title="Marble"></slide-show-image>
                         <slide-show-image src="./images/43.jpeg" title="Marble"></slide-show-image>
                         <slide-show-image src="./images/44.jpeg" title="Marble"></slide-show-image>
-                        <slide-show-image src="./images/45.jpeg" title="..."></slide-show-image>
-                        <slide-show-image src="./images/46.jpeg" title="..."></slide-show-image>
-                        <slide-show-image src="./images/49.jpeg" title="..."></slide-show-image>
-                        <slide-show-image src="./images/50.jpeg" title="..."></slide-show-image>
-                        <slide-show-image src="./images/51.jpeg" title="..."></slide-show-image>
-                        <slide-show-image src="./images/52.jpeg" title="..."></slide-show-image>
-                        <slide-show-image src="./images/53.jpeg" title="..."></slide-show-image>
-                        <slide-show-image src="./images/54.jpeg" title="..."></slide-show-image>
-                        <slide-show-image src="./images/55.jpeg" title="..."></slide-show-image>
-                        <slide-show-image src="./images/56.jpeg" title="..."></slide-show-image>
-                        <slide-show-image src="./images/58.jpeg" title="..."></slide-show-image>
-                        <slide-show-image src="./images/61.jpeg" title="..."></slide-show-image>
-                        <slide-show-image src="./images/62.jpeg" title="..."></slide-show-image>
+                        <slide-show-image src="./images/45.jpeg" title="The Grottos trail"></slide-show-image>
+                        <slide-show-image src="./images/46.jpeg" title="The Grottos trail"></slide-show-image>
+                        <slide-show-image src="./images/49.jpeg" title="The Grottos trail"></slide-show-image>
+                        <slide-show-image src="./images/50.jpeg" title="The Grottos trail"></slide-show-image>
+                        <slide-show-image src="./images/51.jpeg" title="The Grottos trail"></slide-show-image>
+                        <slide-show-image src="./images/52.jpeg" title="The Grottos trail"></slide-show-image>
+                        <slide-show-image src="./images/53.jpeg" title="The Grottos trail"></slide-show-image>
+                        <slide-show-image src="./images/54.jpeg" title="The Grottos trail"></slide-show-image>
+                        <slide-show-image src="./images/55.jpeg" title="The Grottos trail"></slide-show-image>
+                        <slide-show-image src="./images/56.jpeg" title="The Grottos trail"></slide-show-image>
+                        <slide-show-image src="./images/58.jpeg" title="The Grottos trail"></slide-show-image>
+                        <slide-show-image src="./images/61.jpeg" title="The Grottos trail"></slide-show-image>
+                        <slide-show-image src="./images/62.jpeg" title="The Grottos trail"></slide-show-image>
                     </slide-show>
                 </div>
 
@@ -670,6 +670,7 @@ input:checked + .slider:before {
         <ul>
             <li><a class="list-link" href="#" onclick="flyToZoom(3);">95 Chair Mountain Drive</a></li>
             <li><a class="list-link" href="#" onclick="flyToZoom(4);">Leadville</a></li>
+            <li><a class="list-link" href="#" onclick="flyToZoom(5);">The Grottos trail</a></li>
         </ul>
     </div>
 </div>
@@ -796,7 +797,8 @@ input:checked + .slider:before {
         new L.LatLng(39.24790238683046, -107.23742139846564),   // Avalanche Ranch
         new L.LatLng(39.184974377003954, -107.23600868756942),  // Redstone, Amanda's hideout
         new L.LatLng(39.16739027550386, -107.247511249239),     // 95 Chair Mountain Drive
-        new L.LatLng(39.25021356334499, -106.29221471597151)    // Melanzana, Leadville
+        new L.LatLng(39.25021356334499, -106.29221471597151),   // Melanzana, Leadville
+        new L.LatLng(39.25021356334499, -106.70052664503632)    // Grottos trail
     ];
 
     function flyToZoom(idx) {
@@ -849,12 +851,20 @@ input:checked + .slider:before {
         "name": "95 Chair Mountain Drive.",
         "content": ""
     }, {
-        "latitude": 39.25021356334499,
+        "latitude": 39.11757712378154,
         "longitude": -106.29221471597151,
         "name": "Leadville.",
         "content": "Home of Melanzana"
-    }],
-    [], []];
+    }, {
+        "latitude": 39.25021356334499,
+        "longitude": -106.70052664503632,
+        "name": "Grottos trail.",
+        "content": ""
+    }], [
+        // Two
+    ], [
+        // Three
+    ]];
 
     let markers = ALL_MARKERS[0];
 
@@ -891,9 +901,9 @@ input:checked + .slider:before {
             map.removeLayer(tooltip);
         }
         tooltip = L.tooltip()
-                        .setLatLng(L.latLng([lat, lng]))
-                        .setContent(`${decToSex(lat, "NS")}<br/>${decToSex(lng, "EW")}`)
-                        .addTo(map);
+                   .setLatLng(L.latLng([lat, lng]))
+                   .setContent(`${decToSex(lat, "NS")}<br/>${decToSex(lng, "EW")}`)
+                   .addTo(map);
 
     });
 
@@ -907,7 +917,7 @@ input:checked + .slider:before {
         });
     }
 
-    function lpad(s, w, len) {
+    function lpad(s, w, len) {    // TODO replace with padStart
         let str = s;
         while (str.length < len) {
             str = w + str;
