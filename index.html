@@ -2147,7 +2147,7 @@ Date.prototype.format = function (dateFormat) {
     }
 
     console.log(`Detected ${browserName}`);
-    if (browserName !== "chrome") {
+    if (browserName !== "chrome" && browserName !== "firefox") {
       document.getElementById('browser-name').innerText = browserName;
       window.setTimeout(() => {
         document.getElementById("browser-warning").classList.toggle('visible-div'); // style.display = 'block';
