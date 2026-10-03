@@ -951,3 +951,16 @@ compass-display .green {
 	--value-color: limegreen;
 	--value-nb-decimal: 2;
 }
+
+
+.vertical-gauge-03 {
+	--display-background-gradient-from: rgba(0, 0, 0, 0.5);
+	--display-background-gradient-to: rgba(0, 0, 0, 0.5);
+	--grid-color: silver;
+	--display-color: yellow;
+	--value-frame-color: yellow;
+	--value-color: yellow;
+	--value-nb-decimal: 2;
+	--label-font: DigiFont;
+	--value-font: DigiFont;
+}

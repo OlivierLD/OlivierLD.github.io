@@ -2032,6 +2032,34 @@
 					</button>
 				</div>
 			</td>
+			<td valign="top">
+				<div class="black-frame centered">
+					<vertical-gauge id="vertical-gauge-03"
+                                    class="vertical-gauge-03"
+                                    width="180"
+                                    height="400"
+                                    value="17.89"
+                                    majortick="1"
+                                    minortick="0.25"
+                                    fork="6"
+                                    label="Knots"
+									title="Vertical Gauge&#13;Speed in knots."/>
+				</div>
+				<div class="black-frame centered">
+					Value:
+					<input type="number"
+						   id="altimeter-value-03"
+						   placeholder="Value"
+						   title="No unit"
+						   style="width: 50px; text-align: right;"
+						   value="17.89"/>
+					<br/>
+					<button onclick="setData('altimeter-value-03', 'vertical-gauge-03', true);"
+							title="Set Vertical Gauge value above"
+							style="margin-top: 3px;">Set value
+					</button>
+				</div>
+			</td>
 		</tr>
 	</table>
 </div>
