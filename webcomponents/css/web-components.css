@@ -940,8 +940,8 @@ compass-display .green {
 	--value-frame-color: orange;
 	--value-color: white;
 	--value-nb-decimal: 2;
-	--label-font: Arial;
-	--value-font: 'Courier New';
+	--label-font: 'American Typewriter',  'Courier New';
+	--value-font: 'American Typewriter',  'Courier New';
 }
 
 .vertical-gauge-02 {
