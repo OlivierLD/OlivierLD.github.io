@@ -17,6 +17,7 @@
 	<link rel="stylesheet" href="css/web-components.css">
 
 	<script type="module" src="widgets/skeleton/Skeleton.js"></script>
+	<script type="module" src="widgets/verticalgauge/VerticalGauge.js"></script>
 	<script type="module" src="widgets/rain/Pluviometer.js"></script>
 	<script type="module" src="widgets/temperature/Thermometer.js"></script>
 	<script type="module" src="widgets/jumbo/JumboDisplay.js"></script>
@@ -521,9 +522,12 @@
          * @param from The field containing the value to set
          * @param to The WebComponent to set the value to
          */
-        function setData(from, to) {
+        function setData(from, to, smooth) {
             let elem = document.getElementById(to);
             let value = document.getElementById(from).value; // Field to read to get the value
+            if (smooth !== undefined && smooth === true) {
+                doAnimate(from, to);
+            } else
             if (value.length !== 0) {
                 elem.value = value;                            // value corresponds to the 'set value(val) { ...', invokes the setter in the HTMLElement class
             }
@@ -1944,6 +1948,86 @@
 					<br/>
 					<button onclick="setData('skeleton-value-01', 'skeleton-01');"
 							title="Set Skeleton value above"
+							style="margin-top: 3px;">Set value
+					</button>
+				</div>
+			</td>
+		</tr>
+	</table>
+</div>
+<hr/>
+<!--
+    ALTIMETER, VERTICAL GAUGE
+ +-->
+<div style="cursor: pointer;" onclick="showHide('altimeter');" tabindex="0"><b><u><a id="a-altimeter" href="#a-altimeter">Vertical Gauge</a></u></b></div>
+<div id="altimeter" class="smooth">
+                <pre style="font-weight: bold; text-align: left; color: white; vertical-align: top; margin-top: 6px;">
+&lt;vertical-gauge id="vertical-gauge-01"
+                class="vertical-gauge-01"
+                width="200"
+                height="400"
+                value="0"
+                majortick="5"
+                minortick="1"
+                fork="12"
+                label="Stuff (unit)"
+                title="Vertical Gauge"/>
+                </pre>
+
+	<table>
+		<tr>
+			<td valign="top">
+				<div class="black-frame centered">
+					<vertical-gauge id="vertical-gauge-01"
+                                    class="vertical-gauge-01"
+                                    width="200"
+                                    height="400"
+                                    value="2.34"
+                                    majortick="5"
+                                    minortick="1"
+                                    fork="12"
+                                    label="Stuff (unit)"
+									title="Vertical Gauge"/>
+				</div>
+				<div class="black-frame centered">
+					Value:
+					<input type="number"
+						   id="altimeter-value-01"
+						   placeholder="Value"
+						   title="No unit"
+						   style="width: 50px; text-align: right;"
+						   value="2.34"/>
+					<br/>
+					<button onclick="setData('altimeter-value-01', 'vertical-gauge-01', true);"
+							title="Set Vertical Gauge value above"
+							style="margin-top: 3px;">Set value
+					</button>
+				</div>
+			</td>
+			<td valign="top">
+				<div class="black-frame centered">
+					<vertical-gauge id="vertical-gauge-02"
+                                    class="vertical-gauge-02"
+                                    width="200"
+                                    height="400"
+                                    value="7.89"
+                                    majortick="1"
+                                    minortick="0.25"
+                                    fork="6"
+                                    label="Knots"
+									title="Vertical Gauge&#13;Speed in knots."/>
+				</div>
+				<div class="black-frame centered">
+					Value:
+					<input type="number"
+						   id="altimeter-value-02"
+						   placeholder="Value"
+						   title="No unit"
+						   style="width: 50px; text-align: right;"
+						   value="7.89"/>
+					<br/>
+					<button onclick="setData('altimeter-value-02', 'vertical-gauge-02', true);"
+							title="Set Vertical Gauge value above"
 							style="margin-top: 3px;">Set value
 					</button>
 				</div>

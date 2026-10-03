@@ -931,3 +931,23 @@ compass-display .green {
 	--fg-color: cyan;
 	--value-font: 'Courier New';
 }
+
+.vertical-gauge-01 {
+	--display-background-gradient-from: gray;
+	--display-background-gradient-to: darkgray;
+	--grid-color: black;
+	--display-color: white;
+	--value-frame-color: orange;
+	--value-color: white;
+	--value-nb-decimal: 2;
+}
+
+.vertical-gauge-02 {
+	--display-background-gradient-from: rgba(0, 0, 0, 0.75);
+	--display-background-gradient-to: rgba(128, 0, 0, 0.75);
+	--grid-color: silver;
+	--display-color: yellow;
+	--value-frame-color: cyan;
+	--value-color: limegreen;
+	--value-nb-decimal: 2;
+}
