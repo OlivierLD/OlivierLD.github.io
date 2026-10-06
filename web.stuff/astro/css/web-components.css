@@ -116,6 +116,17 @@
 	--font: 'Arial'; /* 'Source Code Pro' */
 }
 
+.jumbo-00 {
+	--bg-color: white;
+	--display-background-gradient-from: black;
+	--display-background-gradient-to: gray;
+	--grid-color: rgba(255, 255, 255, 0.7);
+	--display-color: cyan;
+	--value-nb-decimal: 0;
+	--label-font: 'Courier New';
+	--value-font: Arial;
+}
+
 .jumbo-01 {
 	--bg-color: white;
 	--display-background-gradient-from: black;
@@ -161,6 +172,9 @@
 
 .one-decimal {
 	--value-nb-decimal: 1;
+}
+.no-decimal {
+	--value-nb-decimal: 0;
 }
 
 @font-face {
