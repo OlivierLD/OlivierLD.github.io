@@ -5149,6 +5149,17 @@ map.addEventListener('mousemove', evt => {
                             document.getElementById('calendar-01').value = d + '-' + m + '-' + y + '-' + WEEK_DAYS[date.getDay()];
                             document.getElementById('calendar-01').repaint();
                         }
+
+                        function setToNow() {
+                            let now = new Date();
+                            let d = now.getDate();
+                            let m = now.getMonth() + 1;
+                            let y = now.getFullYear();
+                            document.getElementById('calendar-day-01').value = d;
+                            document.getElementById('calendar-month-01').value = m < 10 ? '0' + m : m;
+                            document.getElementById('calendar-year-01').value = y;
+                            updateCalendar();
+                        }
                     </script>
 					<input type="number"
 						   id="calendar-day-01"
@@ -5180,6 +5191,7 @@ map.addEventListener('mousemove', evt => {
 							title="Set date value"
 							style="margin-top: 3px;">Set
 					</button>
+                    <button onclick="setToNow();" title="Set current date">Now!</button>
 				</div>
 			</td>
 			<td valign="top">
