@@ -372,7 +372,7 @@
         }
 
         function expandAll() {
-            let expandableNodes = document.querySelectorAll("div[onclick][tabindex]");
+            let expandableNodes = document.querySelectorAll("span[onclick][tabindex]");
             expandableNodes.forEach(node => {
                 let nodeId = node.onclick;
                 let fullCall = nodeId.toString();
@@ -400,7 +400,7 @@
         }
 
         function collapseAll() {
-            let expandableNodes = document.querySelectorAll("div[onclick][tabindex]");
+            let expandableNodes = document.querySelectorAll("span[onclick][tabindex]");
             expandableNodes.forEach(node => {
                 let nodeId = node.onclick;
                 let fullCall = nodeId.toString();
@@ -1987,8 +1987,8 @@
 <hr/>
 
 <div style="margin: 10px; padding: 10px;">
-    <a name="" style="padding: 5px; border: 1px solid orange; border-radius: 5px;" onclick="expandAll()">Expand All</a>
-    <a name="" style="padding: 5px; border: 1px solid orange; border-radius: 5px;" onclick="collapseAll()">Collapse All</a>
+    <a name="" style="cursor: pointer; padding: 5px; border: 1px solid orange; border-radius: 5px;" onclick="expandAll()">Expand All</a>
+    <a name="" style="cursor: pointer; padding: 5px; border: 1px solid orange; border-radius: 5px;" onclick="collapseAll()">Collapse All</a>
 </div>
 
 <div id="overall-container"
