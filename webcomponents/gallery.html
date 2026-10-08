@@ -6901,8 +6901,34 @@ map.addEventListener('mousemove', evt => {
 			</td>
 		</tr>
 		<tr>
-			<td colspan="1"><input type="checkbox" onchange="setAuto('slide-show-01', this);">Auto</input></td>
-			<td colspan="1"><input type="checkbox" onchange="setAuto('slide-show-02', this);">Auto</input></td>
+			<td colspan="1">
+                <!--input type="checkbox" onchange="setAuto('slide-show-01', this);">Auto</input-->
+
+                <div>   <!-- class="switch-container" -->
+                    <span class="switch-element"
+                          style="font-size: 16px; font-weight: bold; padding-bottom: 0px;"><!-- Nope --></span>
+                    <label class="switch switch-element">
+                        <input id="sh-auto-1" type="checkbox" onchange="setAuto('slide-show-01', this);">
+                        <span class="slider round"></span>
+                    </label>
+                    <span class="switch-element" style="/*font-size: 16px;*/ font-weight: bold; margin: 5px;">Auto Scroll</span>
+                </div>
+
+            </td>
+			<td colspan="1">
+                <!--input type="checkbox" onchange="setAuto('slide-show-02', this);">Auto</input-->
+
+                <div>   <!-- class="switch-container" -->
+                    <span class="switch-element"
+                          style="font-size: 16px; font-weight: bold; padding-bottom: 0px;"><!-- Nope --></span>
+                    <label class="switch switch-element">
+                        <input id="sh-auto-2" type="checkbox" onchange="setAuto('slide-show-02', this);">
+                        <span class="slider round"></span>
+                    </label>
+                    <span class="switch-element" style="/*font-size: 16px;*/ font-weight: bold; margin: 5px;">Auto Scroll</span>
+                </div>
+
+            </td>
 		</tr>
 	</table>
 </div>
