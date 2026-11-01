@@ -207,13 +207,16 @@ class CelestialSphere extends HTMLElement {
 		this._heading = 0;
 		this._use_heading = false;
 
+		this._north_up = true; // if false, bow is up (used if _use_heading is true)
+
 		this.majorTicks = 45; // prm ?
 		this.haValueStep = 15; // prm ?
 		this.minorTicks =  5; // prm ?
 
-		this.LHAAries = 0;    // "Hidden" attribute.
+		this.LHAAries = 0; // "Hidden" attribute.
 		this.GHAAries = null; // "Hidden" attribute.
 
+        // 2 default values
 		this.observerLatitude = 45;
 		this.observerLongitude = -3;
 
@@ -293,6 +296,9 @@ class CelestialSphere extends HTMLElement {
 			case "use-heading":
 				this._use_heading = (newVal === 'true');
 				break;
+			case "north-up":
+				this._north_up = (newVal === 'true');
+				break;
 			case "azimutal-grid":
 				this._withAzimutalGrid = (newVal === 'true');
 				break;
@@ -361,8 +367,14 @@ class CelestialSphere extends HTMLElement {
 	set heading(val) {
 		this._heading = val;
 	}
-	set useHeading(val) {
+	set useHeading(val) { // Will show boat heading true|false
 		this._use_heading = val;
+	}
+	set northUp(val) {
+	    this._north_up = val;
+	    if (celestialSphereVerbose) {
+	        console.log(`Setting NorthUp to ${val}`);
+	    }
 	}
 	set azimutalGrid(val) {
 		this._withAzimutalGrid = val;
@@ -419,6 +431,9 @@ class CelestialSphere extends HTMLElement {
 	}
 	get useHeading() {
 		return this._use_heading;
+	}
+	get northUp() {
+	    return this._north_up;
 	}
 	get azimutalGrid() {
 		return this._withAzimutalGrid;
@@ -906,6 +921,11 @@ class CelestialSphere extends HTMLElement {
 		context.stroke();
 		context.closePath();
 
+        let headingOffset = 0.0;
+        if (! this._north_up) {
+            // console.log("Will set the bow UP.");
+            headingOffset = this._heading;
+        }
 
 		if (true) { // this._type === MapType.STARFINDER_TYPE) { // OPTION StarFinder
 			context.save();
@@ -914,7 +934,7 @@ class CelestialSphere extends HTMLElement {
 			context.beginPath();
 			for (let i = 0; i < 360; i++) {
 				if (i % this.majorTicks === 0) {
-					let currentAngle = - Math.toRadians(i - ((this.observerLatitude >= 0 ? 1 : -1) * this.LHAAries));
+					let currentAngle = - Math.toRadians((i - headingOffset) - ((this.observerLatitude >= 0 ? 1 : -1) * this.LHAAries));
 					let xFrom = (this.canvas.width / 2) - ((radius * 0.98) * Math.cos(currentAngle));
 					let yFrom = (this.canvas.height / 2) - ((radius * 0.98) * Math.sin(currentAngle));
 					let xTo = (this.canvas.width / 2) - ((radius * 0.92) * Math.cos(currentAngle));
@@ -934,7 +954,7 @@ class CelestialSphere extends HTMLElement {
 			if (this.minorTicks > 0) {
 				context.beginPath();
 				for (let i = 0; i < 360; i += this.minorTicks) {
-					let _currentAngle = - Math.toRadians(i - ((this.observerLatitude >= 0 ? 1 : -1) * this.LHAAries));
+					let _currentAngle = - Math.toRadians((i - headingOffset) - ((this.observerLatitude >= 0 ? 1 : -1) * this.LHAAries));
 
 					let xFrom = (this.canvas.width / 2) - ((radius * 0.98) * Math.cos(_currentAngle));
 					let yFrom = (this.canvas.height / 2) - ((radius * 0.98) * Math.sin(_currentAngle));
@@ -955,7 +975,7 @@ class CelestialSphere extends HTMLElement {
 				if (i % this.haValueStep === 0) {
 					context.save();
 					context.translate(this.canvas.width / 2, (this.canvas.height / 2)); // canvas.height);
-					let __currentAngle = - Math.toRadians(i - ((this.observerLatitude >= 0 ? 1 : -1) * this.LHAAries));
+					let __currentAngle = - Math.toRadians((i + headingOffset) - ((this.observerLatitude >= 0 ? 1 : -1) * this.LHAAries));
 					context.rotate(__currentAngle - Math.PI);
 					context.font = "bold " + Math.round(10 * this._zoom) + "px Arial"; // Like "bold 15px Arial"
 					context.fillStyle = this.celestialSphereColorConfig.tickLabelsColor;
@@ -984,7 +1004,7 @@ class CelestialSphere extends HTMLElement {
 		// Compass / Heading
 		context.beginPath();
 		for (let i = 0; i < 360; i+=11.25) { // N, NNE, NE ,etc
-			let currentAngle = Math.toRadians(i /* - (this._use_heading ? this._heading : 0)*/);
+			let currentAngle = Math.toRadians((i - headingOffset) /* - (this._use_heading ? this._heading : 0)*/);
 			let xFrom = (this.canvas.width / 2) + ((radius * 0.92) * Math.cos(currentAngle));
 			let yFrom = (this.canvas.height / 2) + ((radius * 0.92) * Math.sin(currentAngle));
 			let xTo = (this.canvas.width / 2) + ((radius * 0.88) * Math.cos(currentAngle));
@@ -997,12 +1017,12 @@ class CelestialSphere extends HTMLElement {
 		context.stroke();
 		context.closePath();
 
-		// Compass Values
+		// Compass Values, cardinal points
 		context.beginPath();
 		for (let i = 0; i < 360; i+=22.5) {
 			context.save();
 			context.translate(this.canvas.width / 2, (this.canvas.height / 2)); // canvas.height);
-			let __currentAngle = /*-*/ Math.toRadians(i /* - (this._use_heading ? this._heading : 0)*/);
+			let __currentAngle = /*-*/ Math.toRadians((i - headingOffset) /* - (this._use_heading ? this._heading : 0)*/);
 			context.rotate(__currentAngle); //  - Math.PI);
 			context.font = "bold " + Math.round(12 * this._zoom) + "px Arial"; // Like "bold 15px Arial"
 			context.fillStyle = this.celestialSphereColorConfig.cardPointLabelsColor;
@@ -1018,7 +1038,7 @@ class CelestialSphere extends HTMLElement {
 		}
 		context.closePath();
 
-		// Full Sphere Celestial Horizon
+		// Full Sphere Celestial Horizon, the outside (horizon) circle
 		context.beginPath();
 		context.lineWidth = 2;
 		context.strokeStyle = this.celestialSphereColorConfig.skyGridColor;
@@ -1028,28 +1048,28 @@ class CelestialSphere extends HTMLElement {
 
 		// Declinations circles, Azimuthal grid (Zenith centered).
 		if (this._withAzimutalGrid) {
-			this.drawAzimutalGrid(context, radius * 0.92);
+			this.drawAzimutalGrid(context, radius * 0.92); // That one does not change with north or bow up
 		}
 
-		// Equatorial grid option.
+		// Equatorial grid option (celestial poe centered).
 		if (this._withEquatorialGrid) {
-			this.drawEquatorialGrid(context, radius * 0.92);
+			this.drawEquatorialGrid(context, radius * 0.92, headingOffset);
 		}
 
 		if (this._use_heading) {
-			this.drawBoat(context, this._heading);
+			this.drawBoat(context, this._heading - headingOffset);
 		}
 
 		if (this._withStars || this._withConstellations) {
-			this.drawStars(context, radius * 0.92);
+			this.drawStars(context, radius * 0.92, headingOffset);
 		}
 
 		if (this._withWanderingBodies) {
-			this.drawWanderingBodies(context, radius * 0.92);
+			this.drawWanderingBodies(context, radius * 0.92, headingOffset);
 		}
 
 		if (this._withCelestialEquator) {
-			this.drawCelestialEquator(context, radius * 0.92);
+			this.drawCelestialEquator(context, radius * 0.92, headingOffset);
 		}
 
 		// Display LHA Aries as text, and position
@@ -1095,7 +1115,7 @@ class CelestialSphere extends HTMLElement {
 		return star;
 	}
 
-	drawStars(context, radius) {
+	drawStars(context, radius, ho) {
 		for (let i=0; i<constellations.length; i++) {
 			// Constellation?
 			if (this._withConstellations) {
@@ -1108,23 +1128,23 @@ class CelestialSphere extends HTMLElement {
 						let dec = starFrom.d; // * (this.observerLatitude >= 0 ? 1 : -1);
 						let ra = starFrom.ra;
 						let lng = (360 - (ra * 360 / 24));
-						lng += (/*this._hemisphere * */(this.GHAAries !== null ? this.GHAAries : this.LHAAries));
+						lng += (/*this._hemisphere * */this.GHAAries);
 						if (lng > 180) {
 							lng -= 360;
 						}
 						// Sight Reduction
 						let sr1 = CelestialSphere.sightReduction(this.observerLatitude, this.observerLongitude, lng, dec);
-						let p1 = this.plotOnSphere(sr1.alt, sr1.Z /* - (this.useHeading ? this.heading : 0)*/, radius);
+						let p1 = this.plotOnSphere(sr1.alt, (sr1.Z - ho)/* - (this.useHeading ? this.heading : 0)*/, radius);
 						dec = starTo.d; // * (this.observerLatitude >= 0 ? 1 : -1);
 						ra = starTo.ra;
 						lng = (360 - (ra * 360 / 24));
-						lng += (/*this._hemisphere * */(this.GHAAries !== null ? this.GHAAries : this.LHAAries));
+						lng += (/*this._hemisphere * */this.GHAAries);
 						if (lng > 180) {
 							lng -= 360;
 						}
 						// Sight Reduction
 						let sr2 = CelestialSphere.sightReduction(this.observerLatitude, this.observerLongitude, lng, dec);
-						let p2 = this.plotOnSphere(sr2.alt, sr2.Z /*- (this.useHeading ? this.heading : 0)*/, radius); // this.plotCoordinates(dec, lng, radius);
+						let p2 = this.plotOnSphere(sr2.alt, (sr2.Z - ho) /*- (this.useHeading ? this.heading : 0)*/, radius); // this.plotCoordinates(dec, lng, radius);
 						context.strokeStyle = this.celestialSphereColorConfig.constellationLineColor;
 						context.lineWidth = 0.5;
 						if (Math.abs(p2.x - p1.x) < 100 && Math.abs(p2.y - p1.y) < 100) { // To avoid big strikes accross the screen...
@@ -1149,8 +1169,8 @@ class CelestialSphere extends HTMLElement {
 						if (localVerbose) {
 							console.log(`Star ${constellations[i].stars[s].name} - RA: ${constellations[i].stars[s].ra}, Dec: ${constellations[i].stars[s].d}`);
 						}
-						let _sr = CelestialSphere.sightReduction(this.observerLatitude, this.observerLongitude, (360 - (constellations[i].stars[s].ra * 360 / 24)) + (/*this._hemisphere * */(this.GHAAries !== null ? this.GHAAries : this.LHAAries)), constellations[i].stars[s].d);
-						let _p = this.plotOnSphere(_sr.alt, _sr.Z /* - (this.useHeading ? this.heading : 0)*/, radius);
+						let _sr = CelestialSphere.sightReduction(this.observerLatitude, this.observerLongitude, (360 - (constellations[i].stars[s].ra * 360 / 24)) + (/*this._hemisphere * */this.GHAAries), constellations[i].stars[s].d);
+						let _p = this.plotOnSphere(_sr.alt, (_sr.Z - ho) /* - (this.useHeading ? this.heading : 0)*/, radius);
 						if (minX === undefined || _p.x < minX) {
 							minX = _p.x;
 						}
@@ -1215,7 +1235,7 @@ class CelestialSphere extends HTMLElement {
 					let ra = constellations[i].stars[s].ra;
 					let sha = (360 - (ra * 360 / 24)); //
 					// GHA(Star) = GHA(Aries) + SHA(Star).
-					let gha = sha + (/*this._hemisphere * */ (this.GHAAries !== null ? this.GHAAries : this.LHAAries));
+					let gha = sha + (/*this._hemisphere * */ this.GHAAries);
 
 					// if (gha > 180) {
 					// 	gha -= 360;
@@ -1226,18 +1246,24 @@ class CelestialSphere extends HTMLElement {
 					while (gha > 360) {
 						gha -= 360;
 					}
+
+					if (false && constellations[i].stars[s].name === 'Aldebaran') {
+						let lng = haToLongitude(gha); // Longitude of the PG of the body
+						console.log(`CelestialSphere: Positioning body ${constellations[i].stars[s].name} at decl ${dec} and gha ${gha} (lng ${lng}, GHAAries ${this.GHAAries}) for observer at lat ${this.observerLatitude} and long ${this.observerLongitude}, ra ${ra}, sha ${sha}`);
+					}
+
 					// Sight Reduction !
         			let sr = CelestialSphere.sightReduction(this.observerLatitude, this.observerLongitude, gha, dec);
 
 					if (false) {
 						console.log(`${constellations[i].name} - ${constellations[i].stars[s].name} = He: ${sr.alt}, Z: ${sr.Z}`); //  { he: srSun.alt, z: srSun.Z };
 						// RA, Dec, SHA (AHso)
-						console.log(`\t  RA: ${ra}, Dec: ${decToSex(dec, "NS")}, SHA: ${decToSex(sha)}, GHA: ${decToSex(sha + (this.GHAAries !== null ? this.GHAAries : this.LHAAries))} (${decToSex(gha, "EW")})`);
+						console.log(`\t  RA: ${ra}, Dec: ${decToSex(dec, "NS")}, SHA: ${decToSex(sha)}, GHA: ${decToSex(sha + this.GHAAries)} (${decToSex(gha, "EW")})`);
 					}
 
 					if (/*true ||*/ sr.alt >= 0) {
 						// let p = this.plotCoordinates(dec, gha, radius);
-						let p = this.plotOnSphere(sr.alt, sr.Z /*- (this.useHeading ? this.heading : 0)*/, radius);
+						let p = this.plotOnSphere(sr.alt, (sr.Z - ho) /*- (this.useHeading ? this.heading : 0)*/, radius);
 						context.beginPath();
 						context.fillStyle = this.celestialSphereColorConfig.starColor;
 						const starRadius = 2;
@@ -1337,7 +1363,7 @@ class CelestialSphere extends HTMLElement {
 		}
 	}
 
-	drawCelestialEquator(context, radius) {
+	drawCelestialEquator(context, radius, ho) {
 		context.fillStyle = this.celestialSphereColorConfig.equatorColor; // 'lime';
 		for (let hdg=0; hdg<360; hdg++) {
 			let _lat = 0;
@@ -1351,9 +1377,10 @@ class CelestialSphere extends HTMLElement {
 
 			let sr = CelestialSphere.sightReduction(this.observerLatitude, this.observerLongitude, _lng, _lat);
 			if (/*true || */sr.alt >= 0) {
-				let p = this.plotOnSphere(sr.alt, sr.Z, radius);
+				let p = this.plotOnSphere(sr.alt, (sr.Z - ho), radius);
 				context.beginPath();
 				const bodyRadius = 1.5;
+				// context.lineWidth = 2.5;
 				context.arc((this.width * this._zoom / 2) - p.x, (this.height * this._zoom / 2) + p.y, bodyRadius, 0, 2 * Math.PI, false);
 				context.fill();
 				context.closePath();
@@ -1361,7 +1388,7 @@ class CelestialSphere extends HTMLElement {
 		}
 	}
 
-	drawEcliptic(context, ariesGHA, obl, radius) {
+	drawEcliptic(context, ariesGHA, obl, radius, ho) {
 		let longitude = (ariesGHA < 180) ? -ariesGHA : 360 - ariesGHA;
 		// console.log(`Arie GHA ${ariesGHA} becomes ${longitude}`);
 		longitude += 90; // Extremum, max depth.
@@ -1380,7 +1407,7 @@ class CelestialSphere extends HTMLElement {
 			// console.log(`Ecliptic point #${hdg}: ${Utilities.decToSex(_lat, "NS")}, ${Utilities.decToSex(_lng, "EW")}`);
 			let sr = CelestialSphere.sightReduction(this.observerLatitude, this.observerLongitude, _lng, _lat);
 			if (/*true || */sr.alt >= 0) {
-				let p = this.plotOnSphere(sr.alt, sr.Z, radius);
+				let p = this.plotOnSphere(sr.alt, (sr.Z - ho), radius);
 				context.beginPath();
 				const bodyRadius = 1.5; // 0.75;
 				context.arc((this.width * this._zoom / 2) - (p.x/* * this._zoom*/), (this.height * this._zoom / 2) + (p.y /* * this._zoom*/), bodyRadius, 0, 2 * Math.PI, false);
@@ -1418,13 +1445,13 @@ class CelestialSphere extends HTMLElement {
 		context.restore();
 	}
 
-	drawEquatorialGrid(context, radius) {
+	drawEquatorialGrid(context, radius, ho) {
 		context.save();
 		context.lineWidth = 0.5;
 		context.strokeStyle = this.celestialSphereColorConfig.equatorialGridColor; // 'white';
 
 		// let maxDeltaX = 0, maxDeltaY = 0;
-		for (let i=80; i>-90; i-=10) { // Dec. [80..-80], circles diams, from pole to equator.
+		for (let i=80; i>-90; i-=10) { // Dec. [80..-80], circles diams, from celestial pole to celestial equator.
 			// if (i == 0) {
 			// 	context.strokeStyle = 'cyan';
 			// } else {
@@ -1437,7 +1464,7 @@ class CelestialSphere extends HTMLElement {
 				// Sight Reduction !
 				let sr = CelestialSphere.sightReduction(this.observerLatitude, this.observerLongitude, gha, dec);
 				if (sr.alt >= 0) {
-					let p = this.plotOnSphere(sr.alt, sr.Z /*- (this.useHeading ? this.heading : 0)*/, radius);
+					let p = this.plotOnSphere(sr.alt, (sr.Z - ho) /*- (this.useHeading ? this.heading : 0)*/, radius); // Heading Offset here!
 					if (prevPoint === undefined) {
 						context.moveTo((this.width * this._zoom / 2) - p.x, (this.height * this._zoom / 2) + p.y);
 					} else {
@@ -1445,7 +1472,7 @@ class CelestialSphere extends HTMLElement {
 						// console.log(`Plotting : deltaX = ${p.x - prevPoint.x}, deltaY = ${p.y - prevPoint.y}`);
 						// maxDeltaX = Math.max(maxDeltaX, Math.abs(p.x - prevPoint.x));
 						// maxDeltaY = Math.max(maxDeltaY, Math.abs(p.y - prevPoint.y));
-						if (Math.abs(p.x - prevPoint.x) > 100) { // To avoid big strikes accross the globe...
+						if (Math.abs(p.x - prevPoint.x) > 100) { // To avoid big strikes across the globe...
 							context.moveTo((this.width * this._zoom / 2) - p.x, (this.height * this._zoom / 2) + p.y);
 						} else {
 							context.lineTo((this.width * this._zoom / 2) - p.x, (this.height * this._zoom / 2) + p.y);
@@ -1461,7 +1488,7 @@ class CelestialSphere extends HTMLElement {
 		context.restore();
 	}
 
-	drawWanderingBodies(context, radius) {
+	drawWanderingBodies(context, radius, ho) {
 		if (this._wanderingBodiesData !== undefined) {
 			let self = this;
 			let ghaAries = CelestialSphere.findGHAAries(this._wanderingBodiesData);
@@ -1477,7 +1504,7 @@ class CelestialSphere extends HTMLElement {
 					let sr = CelestialSphere.sightReduction(this.observerLatitude, this.observerLongitude, lng, dec);
 					// console.log(`${body.name} = He: ${sr.alt}, Z: ${sr.Z}`); //  { he: srSun.alt, z: srSun.Z };
 					if (true || sr.alt >= 0) {
-						let p = this.plotOnSphere(sr.alt, sr.Z, radius);
+						let p = this.plotOnSphere(sr.alt, (sr.Z - ho), radius);
 						if (body.name !== 'sun') {
 							context.beginPath();
 							context.fillStyle = this.celestialSphereColorConfig.wanderingBodiesColor;
@@ -1513,7 +1540,7 @@ class CelestialSphere extends HTMLElement {
 					if (body.obliq) {
 						// console.log(`Obliquity !! ${body.obliq}`);
 						// Draw ecliptique
-						this.drawEcliptic(context, ghaAries, body.obliq, radius);
+						this.drawEcliptic(context, ghaAries, body.obliq, radius, ho);
 					} else {
 						console.log(`What ?? ${JSON.stringify(body)}`);
 					}
