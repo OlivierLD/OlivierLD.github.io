@@ -535,98 +535,47 @@ input:checked + .slider:before {
                 <!-- The tabs. Add them here on demand -->
                 <div class="tab" style="margin-top: 10px; display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto;"> <!-- TODO Improve the grid-template... -->
                     <button class="tablinks active" onclick="openTab(event, 0);">Norderney</button>
-                    <button class="tablinks" onclick="openTab(event, 1);">Amanda's Hideaway</button>
-                    <button class="tablinks" onclick="openTab(event, 2);">Chair Mountain Drive</button>
-                    <button class="tablinks" onclick="openTab(event, 3);">Hiking</button>
-                    <button class="tablinks" onclick="openTab(event, 4);">Home!</button>
+                    <button class="tablinks" onclick="openTab(event, 1);">En Route</button>
+                    <button class="tablinks" onclick="openTab(event, 2);">Home!</button>
                 </div>
 
-                <div id="avalanch-ranch" class="body-pix" style="display: block;">
-                    <slide-show id="slide-show-01"
+                <div id="norderney" class="body-pix" style="display: block;">
+                    <slide-show id="norderney-ss"
                                 width="600"
                                 height="450"
                                 slideclick="onSlideShowClick"
                                 justify="false"
                                 style="padding: 10px; margin-left: 0;">
                         <slide-show-image src="pix/01.jpg" title="Norderney from Nordern"></slide-show-image>
-                        <slide-show-image src="pix/02.jpg" title="Extra guest..."></slide-show-image>
-                        <slide-show-image src="pix/03.jpg" title="Sky &amp; chips"></slide-show-image>
+                        <slide-show-image src="pix/02.jpg" title="The channel..."></slide-show-image>
+                        <slide-show-image src="pix/03.jpg" title="Norderney fuel dock"></slide-show-image>
                     </slide-show>
                 </div>
 
-                <div id="amandas-hideout" class="body-pix" style="display: none;">
-                    <slide-show id="slide-show-02"
+                <div id="en-route" class="body-pix" style="display: none;">
+                    <slide-show id="en-route-ss"
+                                width="600"
+                                height="450"
+                                slideclick="onSlideShowClick"
+                                justify="false"
+                                style="padding: 10px; margin-left: 0;">
+                        <slide-show-image src="pix/04.jpg" title="En route"></slide-show-image>
+                        <slide-show-image src="pix/05.jpg" title="En route !"></slide-show-image>
+                        <slide-show-image src="pix/06.jpg" title="Greenwich LightShip"></slide-show-image>
+                        <slide-show-image src="pix/07.jpg" title="Greenwich LightShip"></slide-show-image>
+                        <slide-show-image src="pix/08.jpg" title="Greenwich LightShip"></slide-show-image>
+                    </slide-show>
+                </div>
+
+                <div id="home" class="body-pix" style="display: none;">
+                    <slide-show id="home-ss"
                                 width="600"
                                 height="450"
                                 slideclick="onSlideShowClick"
                                 justify="false"
                                 style="padding: 10px;">
-                        <slide-show-image src="./pix/47.jpg" title="Soaking"></slide-show-image>
-                        <slide-show-image src="./pix/48.jpg" title="Soaking"></slide-show-image>
-                    </slide-show>
-                </div>
-
-                <div id="chair-mountain" class="body-pix" style="display: none;">
-                    <slide-show id="slide-show-03"
-                                width="600"
-                                height="450"
-                                slideclick="onSlideShowClick"
-                                justify="false"
-                                style="padding: 10px;">
-                        <slide-show-image src="./images/03.jpeg" title="Sky at work, at Prop"></slide-show-image>
-                        <slide-show-image src="./images/36.jpeg" title="Playing chess"></slide-show-image>
-                        <slide-show-image src="./images/37.jpeg" title="Spinning towels"></slide-show-image>
-                        <slide-show-image src="./images/38.jpeg" title="Spinning towels"></slide-show-image>
-                    </slide-show>
-                </div>
-
-                <div id="misc-1" class="body-pix" style="display: none;">
-                    <slide-show id="slide-show-03"
-                                width="600"
-                                height="450"
-                                slideclick="onSlideShowClick"
-                                justify="false"
-                                style="padding: 10px;">
-                        <slide-show-image src="./images/04.jpeg" title="Big rock"></slide-show-image>
-                        <slide-show-image src="./images/05.jpeg" title="Big rock"></slide-show-image>
-                        <slide-show-image src="./images/06.jpeg" title="Big rock"></slide-show-image>
-                        <slide-show-image src="./images/07.jpeg" title="Crystal River"></slide-show-image>
-                        <slide-show-image src="./images/08.jpeg" title="Crystal River"></slide-show-image>
-                        <slide-show-image src="./images/09.jpeg" title="Crystal River"></slide-show-image>
-                        <slide-show-image src="./images/10.jpeg" title="Crystal River"></slide-show-image>
-                        <slide-show-image src="./images/11.jpeg" title="Crystal River"></slide-show-image>
-                        <slide-show-image src="./images/20.jpeg" title="Walking"></slide-show-image>
-                        <slide-show-image src="./images/21.jpeg" title="Miko &amp; Sky"></slide-show-image>
-                        <slide-show-image src="./images/39.jpeg" title="Marble"></slide-show-image>
-                        <slide-show-image src="./images/41.jpeg" title="Marble"></slide-show-image>
-                        <slide-show-image src="./images/42.jpeg" title="Marble"></slide-show-image>
-                        <slide-show-image src="./images/43.jpeg" title="Marble"></slide-show-image>
-                        <slide-show-image src="./images/44.jpeg" title="Marble"></slide-show-image>
-                        <slide-show-image src="./images/45.jpeg" title="The Grottos trail"></slide-show-image>
-                        <slide-show-image src="./images/46.jpeg" title="The Grottos trail"></slide-show-image>
-                        <slide-show-image src="./images/49.jpeg" title="The Grottos trail"></slide-show-image>
-                        <slide-show-image src="./images/50.jpeg" title="The Grottos trail"></slide-show-image>
-                        <slide-show-image src="./images/51.jpeg" title="The Grottos trail"></slide-show-image>
-                        <slide-show-image src="./images/52.jpeg" title="The Grottos trail"></slide-show-image>
-                        <slide-show-image src="./images/53.jpeg" title="The Grottos trail"></slide-show-image>
-                        <slide-show-image src="./images/54.jpeg" title="The Grottos trail"></slide-show-image>
-                        <slide-show-image src="./images/55.jpeg" title="The Grottos trail"></slide-show-image>
-                        <slide-show-image src="./images/56.jpeg" title="The Grottos trail"></slide-show-image>
-                        <slide-show-image src="./images/58.jpeg" title="The Grottos trail"></slide-show-image>
-                        <slide-show-image src="./images/61.jpeg" title="The Grottos trail"></slide-show-image>
-                        <slide-show-image src="./images/62.jpeg" title="The Grottos trail"></slide-show-image>
-                    </slide-show>
-                </div>
-
-                <div id="misc-2" class="body-pix" style="display: none;">
-                    <slide-show id="slide-show-03"
-                                width="600"
-                                height="450"
-                                slideclick="onSlideShowClick"
-                                justify="false"
-                                style="padding: 10px;">
-                        <slide-show-image src="pix/09.jpg" title="Ponton Romeo"></slide-show-image>
-                        <slide-show-image src="pix/10.jpg" title="Yeah "></slide-show-image>
+                        <slide-show-image src="./pix/09.jpg" title="Home"></slide-show-image>
+                        <slide-show-image src="./pix/10.jpg" title="Dock R"></slide-show-image>
                     </slide-show>
                 </div>
 
@@ -727,7 +676,7 @@ input:checked + .slider:before {
     };
 
     // Add tabs here  at will,as needed, by div id.
-    const TABS = ['avalanch-ranch', 'amandas-hideout', 'chair-mountain', 'misc-1', 'misc-2']; // , 'belon', 'glenan'];
+    const TABS = ['norderney', 'en-route', 'home'];
 
     let openTab = (evt, tabNum) => {
         let tabLinks = document.getElementsByClassName("tablinks");
