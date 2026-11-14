@@ -503,7 +503,7 @@ input:checked + .slider:before {
                  onclick="showAboutDialog();"/>
         </div>
         <div>
-            <div class="arrow" title="Try this!" style="margin-top: 160px; margin-bottom: -100px;">
+            <div class="arrow" title="Try this!" style="margin-top: 80px; margin-bottom: -100px;">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -559,11 +559,21 @@ input:checked + .slider:before {
                                 slideclick="onSlideShowClick"
                                 justify="false"
                                 style="padding: 10px; margin-left: 0;">
+                        <slide-show-image src="pix/17.jpg" title="On quitte Norderney"></slide-show-image>
                         <slide-show-image src="pix/04.jpg" title="En route"></slide-show-image>
                         <slide-show-image src="pix/05.jpg" title="En route !"></slide-show-image>
+
+                        <slide-show-image src="pix/18.jpg" title="&Eacute;oliennes hollandaises"></slide-show-image>
+                        <slide-show-image src="pix/19.jpg" title="Channel sunset"></slide-show-image>
+
                         <slide-show-image src="pix/06.jpg" title="Greenwich LightShip"></slide-show-image>
                         <slide-show-image src="pix/07.jpg" title="Greenwich LightShip"></slide-show-image>
                         <slide-show-image src="pix/08.jpg" title="Greenwich LightShip"></slide-show-image>
+                        <slide-show-image src="pix/16.jpg" title="Breakfast"></slide-show-image>
+
+                        <slide-show-image src="pix/13.jpg" title="Le Raz de Sein"></slide-show-image>
+
+                        <slide-show-image src="pix/11.jpg" title="La Teignouse"></slide-show-image>
                     </slide-show>
                 </div>
 
@@ -574,6 +584,7 @@ input:checked + .slider:before {
                                 slideclick="onSlideShowClick"
                                 justify="false"
                                 style="padding: 10px;">
+                        <slide-show-image src="./pix/12.jpg" title="On arrive !"></slide-show-image>
                         <slide-show-image src="./pix/09.jpg" title="Home"></slide-show-image>
                         <slide-show-image src="./pix/10.jpg" title="Dock R"></slide-show-image>
                     </slide-show>
@@ -609,8 +620,10 @@ input:checked + .slider:before {
         </ul>
     </div>
 </div>
-
-
+<hr/>
+Convoyage de "La R&ecirc;veuse", novembre 2026, de Norderney (en Allemagne) &agrave; La Trinit&eacute; sur mer (en Bretagne),
+via le chenal du Four et le Raz de Sein, en passant par le Pas de Calais, la mer du Nord, et la Manche. Le tout en 7 jours.<br/>
+Patrick, &Eacute;ric, et Olivier &agrave; bord !
 <hr/>
 
 <div style="color: silver;">
@@ -825,7 +838,7 @@ input:checked + .slider:before {
 
     // Used as an example, See "// markers" below. Used to hold pictures.
     const ALL_MARKERS = [
-    [ { // One
+    [ {
         "latitude": 53.70270266018541,
         "longitude": 7.166024342400719,
         "name": "Norderney",
@@ -851,11 +864,11 @@ input:checked + .slider:before {
         "name": "Le Nord du Chenal du Four",
         "content": ""
     }, {
-        "latitude": 48.03944865821487,
-        "longitude": -4.759930116247564,
-        "name": "Raz de Sein",
-        "content": ""
-    }, {
+    //     "latitude": 48.03944865821487,
+    //     "longitude": -4.759930116247564,
+    //     "name": "Raz de Sein",
+    //     "content": ""
+    // }, {
         "latitude": 47.7902880605545,
         "longitude": -4.391933905782877,
         "name": "Penmarc'h",
@@ -925,11 +938,42 @@ input:checked + .slider:before {
     // markers on the chart
     if (true) {
         markers.forEach(mark => {
-            oneMark = L.marker([(mark.latitude), (mark.longitude)], { title: mark.name });
+            let oneMark = L.marker([(mark.latitude), (mark.longitude)], { title: mark.name });
             currentMarkers.push(oneMark);
             oneMark.addTo(map)
-                    .bindPopup('<b>' + mark.name + '</b><br/>' + mark.content); // .openPopup();
+                   .bindPopup('<b>' + mark.name + '</b><br/>' + mark.content); // .openPopup();
         });
+
+        // Extra markers
+
+        // Leaving Norderney
+        let imgSrc = "./pix/17.jpg";
+        let lat = 53.69899967474361;
+        let lng = 7.136927851242946;
+        let legend = "Let's go!";
+        L.marker([lat, lng])
+                .addTo(map)
+                .bindPopup(`<b>${legend}</b><br/><small>Click to enlarge</small><br/><a href="${imgSrc}" target="_blank"><img src='${imgSrc}' width='200' title='Click to enlarge'></a>`)
+                .bindTooltip(`${legend}`);
+        // LightShip
+        imgSrc = "./pix/08.jpg";
+        lat = 50.48470525997945;
+        lng = 0.000000;
+        legend = "Greenwich Lightship";
+        L.marker([lat, lng])
+                .addTo(map)
+                .bindPopup(`<b>${legend}</b><br/><small>Click to enlarge</small><br/><a href="${imgSrc}" target="_blank"><img src='${imgSrc}' width='200' title='Click to enlarge'></a>`)
+                .bindTooltip(`${legend}`);
+        // Raz de Sein
+        imgSrc = "./pix/13.jpg";
+        lat = 48.03944865821487;
+        lng = -4.759930116247564;
+        legend = "Raz de Sein, foggy.";
+        L.marker([lat, lng])
+                .addTo(map)
+                .bindPopup(`<b>${legend}</b><br/><small>Click to enlarge</small><br/><a href="${imgSrc}" target="_blank"><img src='${imgSrc}' width='200' title='Click to enlarge'></a>`)
+                .bindTooltip(`${legend}`);
+
     }
 
     function lpad(s, w, len) {    // TODO replace with padStart
