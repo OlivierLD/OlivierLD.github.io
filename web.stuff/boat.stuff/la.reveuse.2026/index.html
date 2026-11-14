@@ -503,7 +503,7 @@ input:checked + .slider:before {
                  onclick="showAboutDialog();"/>
         </div>
         <div>
-            <div class="arrow" title="Try this!" style="margin-top: 80px; margin-bottom: -100px;">
+            <div class="arrow" title="Try this!" style="margin-top: 120px; margin-bottom: -100px;">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -879,12 +879,12 @@ Patrick, &Eacute;ric, et Olivier &agrave; bord !
         "name": "Sud Glénan",
         "content": ""
     },
-    {
-        "latitude": 47.456961654257114,
-        "longitude": -3.045353173593495,
-        "name": "La Teignouse",
-        "content": ""
-    },
+    // {
+    //     "latitude": 47.456961654257114,
+    //     "longitude": -3.045353173593495,
+    //     "name": "La Teignouse",
+    //     "content": ""
+    // },
     {
         "latitude": 47.59019484247023,
         "longitude": -3.0249632196366187,
@@ -969,6 +969,15 @@ Patrick, &Eacute;ric, et Olivier &agrave; bord !
         lat = 48.03944865821487;
         lng = -4.759930116247564;
         legend = "Raz de Sein, foggy.";
+        L.marker([lat, lng])
+                .addTo(map)
+                .bindPopup(`<b>${legend}</b><br/><small>Click to enlarge</small><br/><a href="${imgSrc}" target="_blank"><img src='${imgSrc}' width='200' title='Click to enlarge'></a>`)
+                .bindTooltip(`${legend}`);
+        // La Teignouse
+        imgSrc = "./pix/11.jpg";
+        lat = 47.456961654257114;
+        lng = -3.045353173593495;
+        legend = "La Teignouse, on y est presque !";
         L.marker([lat, lng])
                 .addTo(map)
                 .bindPopup(`<b>${legend}</b><br/><small>Click to enlarge</small><br/><a href="${imgSrc}" target="_blank"><img src='${imgSrc}' width='200' title='Click to enlarge'></a>`)
