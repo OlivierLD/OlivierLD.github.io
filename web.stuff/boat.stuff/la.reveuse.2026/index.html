@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <!--
- | Wiith Leaflets.
+ | Wiith Leaflets, and Open Sea Map
  | Available from http://leafletjs.com/
  | Tutorials and examples at https://leafletjs.com/examples.html
  | Note: No native way to change orientation
@@ -485,14 +485,37 @@ input:checked + .slider:before {
             <div style="display: grid; grid-template-columns: auto auto; margin: 10px 0 5px 0;">
                 <span style="text-align: left;">&Agrave; bord de La R&ecirc;veuse</span>
                 <!-- input type="checkbox" id="show-surface" onchange="showSurface(this);" checked>With  Names &amp; Co -->
-                <div class="switch-container" style="margin-left: 30px; text-align: right;" title="Chart layers">
+                <!--div class="switch-container" style="margin-left: 30px; text-align: right;" title="Chart layers">
                     <label class="switch switch-element">
                         <input id="slide-slider" type="checkbox" onchange="showSurface(this);" checked>
                         <span class="slider round"></span>
                     </label>
                     <span class="switch-element" id="carto-label">With Cartography</span>
+                </div-->
+                <br/>
+                <div style="display: grid; grid-template-columns: auto auto auto; margin: 10px 0 5px 0;">
+                    <div class="switch-container" style="text-align: left;" title="Chart layers">
+                        <label class="switch switch-element">
+                            <input id="slide-slider-1" type="checkbox" onchange="showSurface(this, 1);">
+                            <span class="slider round"></span>
+                        </label>
+                        <span class="switch-element" id="carto-label-1">Sat Pix</span>
+                    </div>
+                    <!--div class="switch-container" style="text-align: right;" title="Chart layers">
+                        <label class="switch switch-element">
+                            <input id="slide-slider-2" type="checkbox" onchange="showSurface(this, 2);" checked>
+                            <span class="slider round"></span>
+                        </label>
+                        <span class="switch-element" id="carto-label-2">Street Maps</span>
+                    </div-->
+                    <div class="switch-container" style="text-align: right;" title="Chart layers">
+                        <label class="switch switch-element">
+                            <input id="slide-slider-3" type="checkbox" onchange="showSurface(this, 3);">
+                            <span class="slider round"></span>
+                        </label>
+                        <span class="switch-element" id="carto-label-3"><a href="https://map.openseamap.org/" target="_blank">OpenSeaMap</a></span>
+                    </div>
                 </div>
-
             </div>
 
         </div>
@@ -714,23 +737,29 @@ Le <a href="./journal.pdf" target="_new">journal de bord</a>.
     */
     let map = L.map('mapid'); // .setView([currentLatitude, currentLongitude], 13);
 
-	let mbAttr = 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community';
-	let mbUrl = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
+    // Sat Pic
+    let mbAttr = 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community';
+    let mbUrl = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
 
+    const satTiles = L.tileLayer(mbUrl, {
+        maxZoom: 19,
+        attribution: mbAttr
+    }).addTo(map);
 
-    const tiles = L.tileLayer(mbUrl, {
-		maxZoom: 19,
-		attribution: mbAttr
-	}).addTo(map);
-
+    // Open Street Map
     const tilesOSM = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-		maxZoom: 19,
-		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-        opacity: 0.5
-	}).addTo(map);
+        maxZoom: 19,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        opacity: 1 // 0.5
+    }).addTo(map);
+
+    // Open Sea Map
+    const tileOpenSeaMap = L.tileLayer('https://tiles.openseamap.org/seamark/{z}/{x}/{y}.png', {
+        attribution: 'Map data: &copy; <a href="https://www.openseamap.org">OpenSeaMap</a> contributors'
+    }); // .addTo(map);
 
     // map.fitBounds(polyline.getBounds());
-    // Carbondale
+    // Nord le la Manche
     let currentLatitude = 50.476687523787454;
     let currentLongitude = 2.3155607246771086;
     map.setView([currentLatitude, currentLongitude], 6);
@@ -828,13 +857,29 @@ Le <a href="./journal.pdf" target="_new">journal de bord</a>.
     }
 
     // Switch to show/hide the OpenStreetMap layer on top of the satellite imagery.
-    function showSurface(checkbox) {
-        if (checkbox.checked) {
-            tilesOSM.addTo(map);
-            document.getElementById("carto-label").innerHTML = "With Cartography";
-        } else {
-            map.removeLayer(tilesOSM);
-            document.getElementById("carto-label").innerHTML = "Sat Pic only";
+    function showSurface(checkbox, option) {
+        switch (option) {
+            case 1:
+                if (checkbox.checked) {
+                    satTiles.addTo(map);
+                } else {
+                    map.removeLayer(satTiles);
+                }
+                break;
+            case 2:
+                if (checkbox.checked) {
+                    mbUrl.addTo(map);
+                } else {
+                    map.removeLayer(mbUrl);
+                }
+                break;
+            case 3:
+                if (checkbox.checked) {
+                    tileOpenSeaMap.addTo(map);
+                } else {
+                    map.removeLayer(tileOpenSeaMap);
+                }
+                break;
         }
     }
 
