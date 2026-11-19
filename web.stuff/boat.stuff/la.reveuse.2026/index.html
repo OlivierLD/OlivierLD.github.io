@@ -828,7 +828,7 @@ Voir ici le <a href="./journal.pdf" target="_new">journal de bord</a>.
     }); // .addTo(map);
 
     // map.fitBounds(polyline.getBounds());
-    // Nord le la Manche
+    // Nord le la Manche...
     let currentLatitude = 50.476687523787454;
     let currentLongitude = 2.3155607246771086;
     map.setView([currentLatitude, currentLongitude], 6);
@@ -905,9 +905,9 @@ Voir ici le <a href="./journal.pdf" target="_new">journal de bord</a>.
     }];
 
     if (false) {
-        polyline = L.polyline(latlngs, {color: 'red'}).addTo(map);
+        polyline = L.polyline(latlngs, {color: 'red'}).addTo(map); // The track above.
     } else {
-        loadPathData();
+        loadPathData(); // from the.track.json
     }
 
     const ZOOM_POSITIONS = [
@@ -1077,7 +1077,7 @@ Voir ici le <a href="./journal.pdf" target="_new">journal de bord</a>.
                 .bindTooltip(`${legend}`);
         // LightShip
         imgSrc = "./pix/08.jpg";
-        lat = 50.41726883571082; // 50.48470525997945;
+        lat = 50.4088735056504; // 50.48470525997945;
         lng = 0.000000;
         legend = "Greenwich Lightship";
         L.marker([lat, lng])
