@@ -489,7 +489,7 @@ input:checked + .slider:before {
                 <br/>
                 <div>
                     Convoyage de "La R&ecirc;veuse", du 6 au 12 novembre 2026, de Norderney (en Allemagne) &agrave; La Trinit&eacute; sur mer (en Bretagne),
-                    via le chenal du Four et le Raz de Sein, en passant par le Pas de Calais, la mer du Nord, et la Manche. Le tout en 7 jours, sans escale.<br/>
+                    via le chenal du Four et le Raz de Sein, en passant par le Pas de Calais, la mer du Nord, et la Manche. Le tout (~690 nm) en 7 jours, sans escale.<br/>
                     Patrick, &Eacute;ric (<span style="color: orange;">&#9733;&#9733;&#9733;</span>, <img src="./toque.png" alt="Toque" width="16" height="16"/><img src="./toque.png" alt="Toque" width="16" height="16"/><img src="./toque.png" alt="Toque" width="16" height="16"/>), et Olivier &agrave; bord !<br/>
                     On a eu de la chance avec la m&eacute;t&eacute;o, la Mer du Nord au mois de novembre, c'est pas forc&eacute;ment le Club Med !
                     <hr/>
@@ -711,6 +711,77 @@ Voir ici le <a href="./journal.pdf" target="_new">journal de bord</a>.
         return (getGCDistanceInDegrees(from, to) * 60);
     };
 
+    const TRACK_DATA = './the.track.json';
+
+    let polyline = null;
+
+    let loadPathData = () => {
+        fetch(TRACK_DATA)
+            .then(response => {
+                console.log(`Data Response: ${response.status} - ${response.statusText}`);
+                response.json().then(doc => {
+                    latlngs = doc;
+                    console.log(`Path data loaded, ${doc.length} elements`);
+
+                    if (polyline !== null) { // Remove if there was one already
+                        map.removeLayer(polyline);
+                    }
+                    let fullDist = 0.0;
+                    let previousPos = null;
+                    latlngs.forEach((el, idx) => {
+                        let newPos = { lat: el.lat, lng: el.lng };
+                        if (previousPos !== null) {
+                            let delta = getGCDistanceInNM(previousPos, newPos);
+                            if (!isNaN(delta)) {
+                                fullDist += delta;
+                            }
+                            // console.log(`Dist: ${fullDist.toFixed(2)}, delta ${delta.toFixed(4)} nm`);
+                        }
+                        previousPos = newPos;
+                    });
+                    console.log(`Total distance: ${fullDist.toFixed(2)} nm`);
+
+                    // Process it here if needed
+                    // document.getElementById('point-card').innerText = `${latlngs.length} data points. Min SOG ${minSog.toFixed(2)} kts, Max SOG ${maxSog.toFixed(2)} kts, Avg SOG ${avgSog.toFixed(2)} kts`;
+                    polyline = L.polyline(latlngs, {color: 'red'}).addTo(map);
+
+                    // zoom the map to the polyline
+                    map.fitBounds(polyline.getBounds());
+
+                    // let tooltip = L.tooltip()
+                    //                 .setLatLng(L.latLng([0.0, 0.0]))
+                    //                 .setContent('Hello world!<br />This is a nice tooltip.')
+                    //                 .addTo(map);
+                    // Tooltips
+                    if (false) {
+                        let nb = 0;
+                        // debugger;
+                        latlngs.forEach(elmt => {
+                            // let latlng = L.latLng([elmt.lat, elmt.lng]);
+                            console.log(`At ${elmt.latInDegMinDec} / ${elmt.lngInDegMinDec}`);
+                            nb++;
+                            // let tooltip = L.tooltip()
+                            //                .setLatLng(L.latLng([elmt.lat, elmt.lng]))
+                            //                .setContent(elmt.latInDegMinDec + "<br/>" + elmt.lngInDegMinDec)
+                            //                .addTo(map);
+                        });
+                        console.log(`${nb} elements`);
+                    }
+                });
+            },
+            (error, errmess) => {
+                console.log("Ooch");
+                let message;
+                if (errmess) {
+                    let mess = JSON.parse(errmess);
+                    if (mess.message) {
+                        message = mess.message;
+                    }
+                }
+                console.debug("Failed to get Path data..." + (error ? JSON.stringify(error, null, 2) : ' - ') + ', ' + (message ? message : ' - '));
+            });
+    };
+
     // Add tabs here  at will,as needed, by div id.
     const TABS = ['norderney', 'en-route', 'home'];
 
@@ -833,7 +904,11 @@ Voir ici le <a href="./journal.pdf" target="_new">journal de bord</a>.
         "lng": -3.0249632196366187
     }];
 
-    let polyline = L.polyline(latlngs, {color: 'red'}).addTo(map);
+    if (false) {
+        polyline = L.polyline(latlngs, {color: 'red'}).addTo(map);
+    } else {
+        loadPathData();
+    }
 
     const ZOOM_POSITIONS = [
         new L.LatLng(53.70270266018541, 7.166024342400719),   // Norderney
@@ -1002,7 +1077,7 @@ Voir ici le <a href="./journal.pdf" target="_new">journal de bord</a>.
                 .bindTooltip(`${legend}`);
         // LightShip
         imgSrc = "./pix/08.jpg";
-        lat = 50.48470525997945;
+        lat = 50.41726883571082; // 50.48470525997945;
         lng = 0.000000;
         legend = "Greenwich Lightship";
         L.marker([lat, lng])
