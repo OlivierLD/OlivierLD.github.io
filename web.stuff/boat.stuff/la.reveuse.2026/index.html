@@ -421,7 +421,7 @@ input:checked + .slider:before {
   grid-template-columns: calc(var(--slider-scale) * 64px) 200px;
 }
 .switch-element {
-  place-self: center;
+  place-self: flex-start; /* center; */
 }
 
   </style>
@@ -481,7 +481,7 @@ input:checked + .slider:before {
 </dialog>
 
 <div id="page-header">
-    <div style="display: grid; grid-template-columns: auto auto auto;">
+    <div style="display: grid; grid-template-columns: auto auto auto auto;">
         <div>
             <h1 style="padding-left: 10px;">November 2026, Norderney - La Trinit&eacute;</h1>
             <div style="display: grid; grid-template-columns: auto; margin: 10px 0 5px 0;">
@@ -493,30 +493,6 @@ input:checked + .slider:before {
                     Patrick, &Eacute;ric (<span style="color: orange;">&#9733;&#9733;&#9733;</span>, <img src="./toque.png" alt="Toque" width="16" height="16"/><img src="./toque.png" alt="Toque" width="16" height="16"/><img src="./toque.png" alt="Toque" width="16" height="16"/>), et Olivier &agrave; bord !<br/>
                     On a eu de la chance avec la m&eacute;t&eacute;o, la Mer du Nord au mois de novembre, c'est pas forc&eacute;ment le Club Med !
                     <hr/>
-                </div>
-
-                <div style="display: grid; grid-template-columns: auto auto auto; margin: 10px 0 5px 0;">
-                    <div class="switch-container" style="text-align: left;" title="Chart layers">
-                        <label class="switch switch-element">
-                            <input id="slide-slider-1" type="checkbox" onchange="showSurface(this, 1);">
-                            <span class="slider round"></span>
-                        </label>
-                        <span class="switch-element" id="carto-label-1">Sat Pix</span>
-                    </div>
-                    <!--div class="switch-container" style="text-align: right;" title="Chart layers">
-                        <label class="switch switch-element">
-                            <input id="slide-slider-2" type="checkbox" onchange="showSurface(this, 2);" checked>
-                            <span class="slider round"></span>
-                        </label>
-                        <span class="switch-element" id="carto-label-2">Street Maps</span>
-                    </div-->
-                    <div class="switch-container" style="text-align: right;" title="Chart layers">
-                        <label class="switch switch-element">
-                            <input id="slide-slider-3" type="checkbox" onchange="showSurface(this, 3);">
-                            <span class="slider round"></span>
-                        </label>
-                        <span class="switch-element" id="carto-label-3"><a href="https://map.openseamap.org/" target="_blank">OpenSeaMap</a></span>
-                    </div>
                 </div>
             </div>
 
@@ -541,10 +517,44 @@ input:checked + .slider:before {
 <div style="width: 100%;">
   <div class="page-content"> <!-- style="display: grid; grid-template-columns: 50% 50%;" -->
     <div style="vertical-align: top;">
-      <!-- Column 1 -->
-      <div id="mapid" class="map-content" style="/*height: 100%;*/ box-shadow: 4px 4px 8px grey, 0 0 25px white, 0 0 7px cyan;"></div>
-      <!--div id="mapid" style="width: 40vw; height: 40vw; box-shadow: 4px 4px 8px grey, 0 0 25px white, 0 0 7px cyan;"></div-->
-      <!--div id="mapid" style="width: 90%; height: 90%; box-shadow: 4px 4px 8px grey, 0 0 25px white, 0 0 7px cyan;"></div-->
+
+
+        <div style="display: grid; grid-template-columns: auto auto auto; margin: 10px 0 5px 0;">
+            <div class="switch-container" style="text-align: left;" title="Chart layers">
+                <label class="switch switch-element">
+                    <input id="slide-slider-1" type="checkbox" onchange="showSurface(this, 1);">
+                    <span class="slider round"></span>
+                </label>
+                <span class="switch-element" id="carto-label-1">Sat Pix</span>
+            </div>
+            <!--div class="switch-container" style="text-align: right;" title="Chart layers">
+                <label class="switch switch-element">
+                    <input id="slide-slider-2" type="checkbox" onchange="showSurface(this, 2);" checked>
+                    <span class="slider round"></span>
+                </label>
+                <span class="switch-element" id="carto-label-2">Street Maps</span>
+            </div-->
+            <div class="switch-container" style="text-align: right;" title="Chart layers">
+                <label class="switch switch-element">
+                    <input id="slide-slider-3" type="checkbox" onchange="showSurface(this, 3);">
+                    <span class="slider round"></span>
+                </label>
+                <span class="switch-element" id="carto-label-3"><a href="https://map.openseamap.org/" target="_blank">OpenSeaMap</a></span>
+            </div>
+            <div class="switch-container" style="text-align: right;" title="Chart layers">
+                <label class="switch switch-element">
+                    <input id="slide-slider-4" type="checkbox" onchange="showSurface(this, 4);">
+                    <span class="slider round"></span>
+                </label>
+                <span class="switch-element" id="carto-label-4">Sounding, <a href="https://map.openseamap.org/" target="_blank">OpenSeaMap</a></span>
+            </div>
+        </div>
+
+
+        <!-- Column 1 -->
+        <div id="mapid" class="map-content" style="/*height: 100%;*/ box-shadow: 4px 4px 8px grey, 0 0 25px white, 0 0 7px cyan;"></div>
+        <!--div id="mapid" style="width: 40vw; height: 40vw; box-shadow: 4px 4px 8px grey, 0 0 25px white, 0 0 7px cyan;"></div-->
+        <!--div id="mapid" style="width: 90%; height: 90%; box-shadow: 4px 4px 8px grey, 0 0 25px white, 0 0 7px cyan;"></div-->
     </div>
     <div style="vertical-align: top; margin-left: 40px; min-width: 612px;">
       <!-- Column 2 -->
@@ -827,6 +837,15 @@ Voir ici le <a href="./journal.pdf" target="_new">journal de bord</a>.
         attribution: 'Map data: &copy; <a href="https://www.openseamap.org">OpenSeaMap</a> contributors'
     }); // .addTo(map);
 
+    // Marine Profile Layer, depth
+    const tileMarineProfile = L.tileLayer.wms('https://geoserver.openseamap.org/geoserver/gwc/service/wms', {
+        layers: 'gebco2021:gebco_2021',
+        format: 'image/png',
+        transparent: true,
+        version: '1.1.1',
+        attribution: 'Marine Profile Data &copy; OpenSeaMap'
+    }); // .addTo(map);
+
     // map.fitBounds(polyline.getBounds());
     // Nord le la Manche...
     let currentLatitude = 50.476687523787454;
@@ -953,6 +972,16 @@ Voir ici le <a href="./journal.pdf" target="_new">journal de bord</a>.
                     map.removeLayer(tileOpenSeaMap);
                 }
                 break;
+            case 4:
+                if (checkbox.checked) {
+                    tileMarineProfile.addTo(map);
+                } else {
+                    map.removeLayer(tileMarineProfile);
+                }
+                break;
+            default:
+                console.log(`Un-managed option ${option}`);
+                break;
         }
     }
 
@@ -1009,7 +1038,7 @@ Voir ici le <a href="./journal.pdf" target="_new">journal de bord</a>.
         "latitude": 47.59019484247023,
         "longitude": -3.0249632196366187,
         "name": "La Trinité",
-        "content": ""
+        "content": "Dock R !"
     }], [
         // Two
     ], [
